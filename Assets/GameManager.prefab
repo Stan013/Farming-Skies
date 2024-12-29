@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 8413217863709316356}
   - component: {fileID: 1358575054586937321}
   - component: {fileID: 1400595849194010781}
+  - component: {fileID: 3526104866198300902}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -269,6 +270,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: Save.game
+--- !u!114 &3526104866198300902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058410201537961943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb62049769bf654bb442328740d4fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialMenu: {fileID: 0}
+  questText: {fileID: 0}
+  questInfoText: {fileID: 0}
+  nextButton: {fileID: 0}
+  tutorial: 0
 --- !u!1 &2920807843289148939
 GameObject:
   m_ObjectHideFlags: 0

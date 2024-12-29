@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static MarketManager MM { get; private set; }
     public static PlantManager PM { get; private set; }
     public static EndRoundManager ERM { get; private set; }
+    public static TutorialManager TTM { get; private set; }
     public static DataPersistenceManager DPM { get; private set; }
     public static Camera cam { get; private set; }
     public static Vector3 staticPos;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         MM = GetComponent<MarketManager>();
         INM = GetComponent<InventoryManager>();
         PM = GetComponent<PlantManager>();
+        TTM = GetComponent<TutorialManager>();
         DPM = GetComponent<DataPersistenceManager>();
         cam = FindAnyObjectByType<Camera>();
         staticPos = cam.transform.position;
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void StartGame(string gameAction)
     {
-        SetState(GameState.Default);
+        SetState(GameState.MenuMode);
         if (gameAction == "LoadGame")
         {
             DPM.LoadGame();
@@ -77,11 +79,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             if (gameAction == "NewGame")
             {
-                HM.SetStartingHand();
+                TTM.StartTutorial();
                 cam.transform.position = new Vector3(0, 10, 0);
                 UM.tax = 1000;
                 UM.balance = 500;
-                UM.water = 0;
+                UM.water = 3;
                 DPM.NewGame();
             }
         }
@@ -129,6 +131,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
             case GameState.ManageMode:
                 break;
             case GameState.MenuMode:
+                Cursor.visible = true;
+                staticPos = cam.transform.position;
                 break;
             case GameState.BuildMode:
                 break;

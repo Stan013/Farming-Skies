@@ -41,7 +41,7 @@ public class GameData
     {
         tax = 1000f;
         balance = 500f;
-        water = 0f;
+        water = 3f;
         playerPosition = new Vector3(0, 0, 0);
         cameraDirection = new Vector3(0, 10, 0);
     }

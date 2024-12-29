@@ -12,6 +12,11 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     public void AddIslandToBought(Island reconstructedIsland)
     {
+        if(reconstructedIsland.name == "0,0")
+        {
+            GameManager.UM.QuestCompleted = true;
+            GameManager.TTM.NextQuest();
+        }
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
         boughtIslands.Add(reconstructedIsland);
         unboughtIslands.Remove(reconstructedIsland);

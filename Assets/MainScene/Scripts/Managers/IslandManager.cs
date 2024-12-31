@@ -14,8 +14,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     {
         if(reconstructedIsland.name == "0,0")
         {
-            GameManager.UM.QuestCompleted = true;
-            GameManager.TTM.NextQuest();
+            GameManager.TTM.QuestCompleted = true;
         }
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
         boughtIslands.Add(reconstructedIsland);

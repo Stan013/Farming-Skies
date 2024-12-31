@@ -7,13 +7,13 @@ using TMPro;
 public class UIManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private GameObject UIMenu;
-    [SerializeField] private GameObject questMenu;
     [SerializeField] private Button openUIButton;
     [SerializeField] private Button openQuestButton;
+    [SerializeField] private Button openSettingsButton;
+    [SerializeField] private Button openMarketButton;
+    [SerializeField] private Button openInventoryButton;
     [SerializeField] private TMP_Text openUIText;
     [SerializeField] private TMP_Text openQuestText;
-    [SerializeField] private TMP_Text questTitleText;
-    [SerializeField] private TMP_Text questInfoText;
     [SerializeField] private TMP_Text taxAmountText;
     [SerializeField] private TMP_Text balanceAmountText;
     [SerializeField] private TMP_Text waterAmountText;
@@ -30,54 +30,31 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private bool UIActive = false;
     private bool questActive = false;
     private float rentPercentage;
-    private bool questCompleted;
-    public bool QuestCompleted
-    {
-        get { return questCompleted; }
-        set
-        {
-            if (questCompleted != value)
-            {
-                questCompleted = value;
-                OnQuestCompletedChanged();
-            }
-        }
-    }
 
     //UI Island Build
     [SerializeField] private Slider transparencySlider;
     public Image constructionLabel;
 
-    private void OnQuestCompletedChanged()
+    public void SetUIButtons(bool active, string buttonName)
     {
-        if (questMenu != null)
+        switch (buttonName)
         {
-            Image questMenuImage = questMenu.GetComponent<Image>();
-            if (questMenuImage != null)
-            {
-                if (questCompleted)
-                {
-                    questMenuImage.color = new Color(0.8f, 1.0f, 0.4f, 0.8f);
-                    StartCoroutine(ResetQuestCompletedAfterDelay(2f));
-                }
-                else
-                {
-                    questMenuImage.color = new Color(0.9f, 0.9f, 0.9f, 0.8f);
-                }
-            }
+            case "UI":
+                openUIButton.interactable = active;
+                break;
+            case "Quest":
+                openQuestButton.interactable = active;
+                break;
+            case "Settings":
+                openSettingsButton.interactable = active;
+                break;
+            case "Market":
+                openMarketButton.interactable = active;
+                break;
+            case "Inventory":
+                openInventoryButton.interactable = active;
+                break;
         }
-    }
-
-    private IEnumerator ResetQuestCompletedAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        QuestCompleted = false;
-    }
-
-    public void SetUIActive()
-    {
-        UIMenu.SetActive(true);
-        questMenu.SetActive(true);
     }
 
     public void OpenUIMenu()
@@ -104,14 +81,14 @@ public class UIManager : MonoBehaviour, IDataPersistence
         {
             openQuestText.SetText("ʌ");
             openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 88);
-            questMenu.SetActive(true);
+            GameManager.TTM.questMenu.SetActive(true);
             questActive = true;
         }
         else
         {
             openQuestText.SetText("v");
             openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 505);
-            questMenu.SetActive(false);
+            GameManager.TTM.questMenu.SetActive(false);
             questActive = false;
         }
     }
@@ -123,12 +100,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
         balanceAmountText.SetText(balance.ToString() + " ₴");
         waterAmountText.SetText(water.ToString() + " L");
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
-    }
-
-    public void UpdateQuest(string questTitle, string questInfo)
-    {
-        questTitleText.SetText(questTitle);
-        questInfoText.SetText(questInfo);
     }
 
     public void SetBuildIslandSlider()

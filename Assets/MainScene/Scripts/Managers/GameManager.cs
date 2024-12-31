@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene")
+        if (CurrentState != GameState.MainMenuMode) 
         {
             IPM.HandleGameStatesSwitchInput();
             IPM.HandleKeyboard(CurrentState);
@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private static void EnterState(GameState state)
     {
+        UM.UpdateUI();
         switch (state)
         {
             case GameState.MainMenuMode:
@@ -126,7 +127,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 staticPos = cam.transform.position;
                 break;
             case GameState.Default:
-                UM.UpdateUI();
                 break;
             case GameState.ManageMode:
                 break;

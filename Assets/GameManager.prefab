@@ -188,8 +188,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIMenu: {fileID: 0}
-  OpenUIButton: {fileID: 0}
-  OpenUIText: {fileID: 0}
+  openUIButton: {fileID: 0}
+  openQuestButton: {fileID: 0}
+  openUIText: {fileID: 0}
+  openQuestText: {fileID: 0}
   taxAmountText: {fileID: 0}
   balanceAmountText: {fileID: 0}
   waterAmountText: {fileID: 0}
@@ -282,11 +284,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb62049769bf654bb442328740d4fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMenu: {fileID: 0}
-  questText: {fileID: 0}
+  questMenu: {fileID: 0}
+  questTitleText: {fileID: 0}
   questInfoText: {fileID: 0}
+  questCompletedIcon: {fileID: 0}
+  tutorialMenu: {fileID: 0}
   nextButton: {fileID: 0}
   tutorial: 0
+  tutorialCount: 0
 --- !u!1 &2920807843289148939
 GameObject:
   m_ObjectHideFlags: 0

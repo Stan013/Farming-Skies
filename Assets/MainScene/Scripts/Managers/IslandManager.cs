@@ -14,7 +14,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     {
         if(reconstructedIsland.name == "0,0")
         {
-            GameManager.TTM.QuestCompleted = true;
+            GameManager.TTM.QuestCompleted = true; 
         }
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
         boughtIslands.Add(reconstructedIsland);
@@ -26,13 +26,13 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         switch (cardType)
         {
             case "Utility":
-                foreach (Island island in GameManager.ISM.boughtIslands)
+                foreach (Island island in boughtIslands)
                 {
                     island.GetComponent<BoxCollider>().enabled = true;
                 }
                 break;
             case "PlantSmall":
-                foreach (Island island in GameManager.ISM.boughtIslands)
+                foreach (Island island in boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Watered)
                     {
@@ -44,7 +44,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 }
                 break;
             case "PlantMedium":
-                foreach (Island island in GameManager.ISM.boughtIslands)
+                foreach (Island island in boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Watered)
                     {
@@ -56,7 +56,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 }
                 break;
             case "PlantBig":
-                foreach (Island island in GameManager.ISM.boughtIslands)
+                foreach (Island island in boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Watered)
                     {
@@ -68,7 +68,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 }
                 break;
             case "Machine":
-                foreach (Island island in GameManager.ISM.boughtIslands)
+                foreach (Island island in boughtIslands)
                 {
                     island.GetComponent<BoxCollider>().enabled = false;
                     foreach (GameObject plot in island.plotsMediumPlants)
@@ -78,7 +78,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 }
                 break;
             default:
-                foreach (Island island in GameManager.ISM.boughtIslands)
+                foreach (Island island in boughtIslands)
                 {
                     island.GetComponent<BoxCollider>().enabled = false;
                     foreach (GameObject plot in island.plotsSmallPlants)
@@ -107,7 +107,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         {
             if (hit.collider.TryGetComponent(out Island island))
             {
-                if (island.islandStatus.Equals("Bought"))
+                if (island.islandBoughtStatus)
                 {
                     return island;
                 }
@@ -121,6 +121,14 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         return availableIslands.Find(island => island.islandId == id);
     }
 
+    public void SetPurchasableIslands(bool purchasable)
+    {
+        foreach(Island island in unboughtIslands)
+        {
+            island.islandCanBought = purchasable;
+        }
+    }
+
     public void LoadData(GameData data)
     {
         boughtIslands.Clear();
@@ -130,7 +138,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
             var island = FindIslandById(islandID);
             unboughtIslands.Remove(island);
             boughtIslands.Add(island);
-            island.islandStatus = "Bought";
+            island.islandBoughtStatus = true;
             island.islandBottom.GetComponent<Renderer>().material = island.bottomDefaultMat;
             island.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
             island.usedPlots.Clear();

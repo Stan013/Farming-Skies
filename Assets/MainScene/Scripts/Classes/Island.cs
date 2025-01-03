@@ -7,8 +7,11 @@ public class Island : MonoBehaviour
     public Material islandMat;
     public IslandState currentState = IslandState.Sowed;
     public IslandState potentialState = IslandState.Sowed;
-    public string islandStatus = "Unbought";
+    
+    public bool islandBoughtStatus;
     public float islandBuildCost;
+    public bool islandCanBought; 
+
     public List<GameObject> plotsSmallPlants;
     public List<GameObject> plotsMediumPlants;
     public List<GameObject> plotsBigPlants;

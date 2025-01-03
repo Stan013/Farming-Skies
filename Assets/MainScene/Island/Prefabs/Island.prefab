@@ -2294,8 +2294,9 @@ MonoBehaviour:
   islandMat: {fileID: 0}
   currentState: 0
   potentialState: 2
-  islandStatus: Unbought
+  islandBoughtStatus: 0
   islandBuildCost: 0
+  islandCanBought: 0
   plotsSmallPlants:
   - {fileID: 7938958760340876345}
   - {fileID: 9074272155846697336}

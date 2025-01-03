@@ -6,20 +6,22 @@ using TMPro;
 
 public class UIManager : MonoBehaviour, IDataPersistence
 {
-    [SerializeField] private GameObject UIMenu;
-    [SerializeField] private Button openUIButton;
-    [SerializeField] private Button openQuestButton;
-    [SerializeField] private Button openSettingsButton;
-    [SerializeField] private Button openMarketButton;
-    [SerializeField] private Button openInventoryButton;
-    [SerializeField] private TMP_Text openUIText;
-    [SerializeField] private TMP_Text openQuestText;
-    [SerializeField] private TMP_Text taxAmountText;
-    [SerializeField] private TMP_Text balanceAmountText;
-    [SerializeField] private TMP_Text waterAmountText;
-    [SerializeField] private TMP_Text cardAmountText;
-    [SerializeField] private TMP_Text islandBuildCostText;
-    [SerializeField] private TMP_Text dateAmountText;
+    public GameObject UIMenu;
+    public Button openUIButton;
+    public Button openQuestButton;
+    public Button openSettingsButton;
+    public Button openMarketButton;
+    public Button openInventoryButton;
+    public TMP_Text openUIText;
+    public TMP_Text openQuestText;
+    public TMP_Text taxAmountText;
+    public Image taxLabel;
+    public TMP_Text balanceAmountText;
+    public Image balanceLabel;
+    public TMP_Text waterAmountText;
+    public TMP_Text cardAmountText;
+    public TMP_Text islandBuildCostText;
+    public TMP_Text dateAmountText;
 
     //UI On-screen
     public float tax;
@@ -62,7 +64,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (!UIActive)
         {
             openUIText.SetText("<");
-            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-500, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
+            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-503, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
             UIMenu.SetActive(true);
             UIActive = true;
         }
@@ -120,12 +122,12 @@ public class UIManager : MonoBehaviour, IDataPersistence
         {
             float alphaValue = Mathf.Clamp01(island.topMat.color.a);
             transparencySlider.value = alphaValue;
-            if (alphaValue == 1f && island.islandStatus == "Unbought")
+            if (alphaValue == 1f && island.islandBoughtStatus == false)
             {
                 balance -= island.islandBuildCost;
                 tax += (island.islandBuildCost / 100 * rentPercentage);
                 GameManager.ISM.AddIslandToBought(island);
-                island.islandStatus = "Bought";
+                island.islandBoughtStatus = true;
                 constructionLabel.gameObject.SetActive(false);
                 GameManager.UM.UpdateUI();
             }

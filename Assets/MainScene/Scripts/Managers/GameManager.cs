@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     public void StartGame(string gameAction)
     {
-        SetState(GameState.MenuMode);
+        IPM.ToggleState(GameState.MenuMode, GameState.Default);
         if (gameAction == "LoadGame")
         {
             DPM.LoadGame();
@@ -135,6 +135,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 staticPos = cam.transform.position;
                 break;
             case GameState.BuildMode:
+                if(!TTM.tutorial)
+                {
+                    ISM.SetPurchasableIslands(true);
+                }
+                else
+                {
+                    ISM.availableIslands[0].islandCanBought = true;
+                    ISM.availableIslands[0].topMat.
+                    ISM.availableIslands[0].bottomMat.
+                }
+                Cursor.visible = true;
                 break;
             case GameState.EndRoundMode:
                 HM.ClearCardsInHand();
@@ -143,7 +154,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.ShopMode:
                 staticPos = cam.transform.position;
-                break;
+                break; 
             case GameState.InventoryMode:
                 INM.UpdateInventoryItems();
                 staticPos = cam.transform.position;
@@ -151,7 +162,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
             case GameState.MarketMode:
                 CM.SetupMarketItems();
                 MM.UpdateMarketItems();
-                
                 break;
         }
     }
@@ -162,11 +172,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             case GameState.MainMenuMode:
                 MainMenuStatus(false);
-                Cursor.visible = false;
                 break;
             case GameState.Default:
-                Cursor.visible = true;
-                staticPos = cam.transform.position;
                 break;
             case GameState.ManageMode:
                 break;
@@ -174,6 +181,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 //SM.CloseWindow();
                 break;
             case GameState.BuildMode:
+                ISM.SetPurchasableIslands(false);
                 break;
             case GameState.EndRoundMode:
                 break;

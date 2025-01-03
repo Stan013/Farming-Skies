@@ -160,7 +160,7 @@ public class InputManager : MonoBehaviour
             && hit.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
         {
             clickedIsland = GetClickedIsland();
-            if (GameManager.UM.balance >= clickedIsland.islandBuildCost && clickedIsland.islandStatus == "Unbought")
+            if (GameManager.UM.balance >= clickedIsland.islandBuildCost && clickedIsland.islandBoughtStatus == false && clickedIsland.islandCanBought)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 GameManager.UM.constructionLabel.gameObject.SetActive(true);

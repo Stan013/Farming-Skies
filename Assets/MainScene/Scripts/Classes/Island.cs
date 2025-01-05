@@ -34,6 +34,7 @@ public class Island : MonoBehaviour
 
     public enum IslandState
     {
+        Highlighted,
         Default,
         Watered,
         Sowed,
@@ -59,7 +60,15 @@ public class Island : MonoBehaviour
         GetIslandComponents();
         switch (state)
         {
+            case IslandState.Highlighted:
+                topMat.EnableKeyword("_EMISSION");
+                topMat.SetColor("_EmissionColor", Color.blue * 2.0f);
+                bottomMat.EnableKeyword("_EMISSION");
+                bottomMat.SetColor("_EmissionColor", Color.blue * 2.0f);
+                break;
             case IslandState.Default:
+                topMat.DisableKeyword("_EMISSION");
+                bottomMat.DisableKeyword("_EMISSION");
                 Color topColor = topMat.color;
                 topColor.a = 0f;
                 topMat.color = topColor;

@@ -78,6 +78,7 @@ public class TutorialManager : MonoBehaviour
             tutorialMenu.SetActive(false);
             GameManager.UM.OpenQuestMenu();
             GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.MenuMode);
+            GameManager.ISM.availableIslands[0].ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
         }
         tutorialCount++;
         switch (tutorialCount)

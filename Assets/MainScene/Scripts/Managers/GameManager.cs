@@ -119,12 +119,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private static void EnterState(GameState state)
     {
         UM.UpdateUI();
+        staticPos = cam.transform.position;
         switch (state)
         {
             case GameState.MainMenuMode:
                 MainMenuStatus(true);
                 Cursor.visible = true;
-                staticPos = cam.transform.position;
                 break;
             case GameState.Default:
                 break;
@@ -132,7 +132,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.MenuMode:
                 Cursor.visible = true;
-                staticPos = cam.transform.position;
                 break;
             case GameState.BuildMode:
                 if(!TTM.tutorial)
@@ -142,22 +141,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 else
                 {
                     ISM.availableIslands[0].islandCanBought = true;
-                    ISM.availableIslands[0].topMat.
-                    ISM.availableIslands[0].bottomMat.
                 }
                 Cursor.visible = true;
                 break;
             case GameState.EndRoundMode:
                 HM.ClearCardsInHand();
                 ERM.GeneratePickWindow();
-                staticPos = cam.transform.position;
                 break;
             case GameState.ShopMode:
-                staticPos = cam.transform.position;
                 break; 
             case GameState.InventoryMode:
                 INM.UpdateInventoryItems();
-                staticPos = cam.transform.position;
                 break;
             case GameState.MarketMode:
                 CM.SetupMarketItems();

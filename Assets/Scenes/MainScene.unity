@@ -17448,22 +17448,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5381510357002664144, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381510357002664144, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381510357002664144, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 47ba3d495c324504489e198ddf2e5a9a, type: 2}
-    - target: {fileID: 5381510357002664144, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: c03ac127f34efe54fbd0eb6755a981bb, type: 2}
     - target: {fileID: 5383755366205039522, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: gm
       value: 

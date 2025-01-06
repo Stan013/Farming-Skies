@@ -194,43 +194,49 @@ public class Island : MonoBehaviour
     public void ChangeMaterial(float alphaChangeSpeed)
     {
         GetIslandComponents();
-        if (topMat != null)
-        {
-            UpdateMaterialAlpha(topMat, alphaChangeSpeed);
-        }
-        if (bottomMat != null)
-        {
-            UpdateMaterialAlpha(bottomMat, alphaChangeSpeed);
-        }
+        UpdateMaterialAlpha(topMat, alphaChangeSpeed);
+        UpdateMaterialAlpha(bottomMat, alphaChangeSpeed);
     }
 
     private void UpdateMaterialAlpha(Material material, float alphaChangeSpeed)
     {
-        if (material == null)
-        {
-            return;
-        }
+        if (material == null) return;
         Color color = material.color;
         color.a += alphaChangeSpeed * Time.deltaTime;
         color.a = Mathf.Clamp01(color.a);
         material.color = color;
-
         if (Mathf.Approximately(color.a, 1.0f))
         {
-            ToOpaqueMode(material);
+            ToOpaqueMode(material, false);
         }
     }
 
-    public void ToOpaqueMode(Material material)
+    public void ToOpaqueMode(Material material, bool transparent)
     {
-        material.SetOverrideTag("RenderType", "");
-        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-        material.SetInt("_ZWrite", 1);
-        material.DisableKeyword("_ALPHATEST_ON");
-        material.DisableKeyword("_ALPHABLEND_ON");
-        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        material.renderQueue = -1;
+        if(transparent)
+        {
+            Color color = material.color;
+            color.a = 0f;
+            material.color = color;
+        }
+        else
+        {
+            material.SetOverrideTag("RenderType", "");
+            material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            material.SetInt("_ZWrite", 1);
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.DisableKeyword("_ALPHABLEND_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            material.renderQueue = -1;
+        }
+    }
+
+    public void ResetMaterials()
+    {
+        GetIslandComponents();
+        ToOpaqueMode(topMat, true);
+        ToOpaqueMode(bottomMat, true);
     }
 
     public void SetMaterial(Material changeMaterial)

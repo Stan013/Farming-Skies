@@ -177,9 +177,15 @@ public class InputManager : MonoBehaviour
             if (GameManager.UM.constructionLabel.gameObject.activeSelf)
             {
                 GameManager.UM.constructionLabel.gameObject.SetActive(false);
-                if(!GameManager.TTM.tutorial)
+                clickedIsland.ResetMaterials();
+                if (!GameManager.TTM.tutorial)
                 {
                     clickedIsland.ToggleState(Island.IslandState.Default, Island.IslandState.Default);
+                }
+                else
+                {
+                    clickedIsland.topMat.SetColor("_EmissionColor", Color.blue * 2.0f);
+                    clickedIsland.bottomMat.SetColor("_EmissionColor", Color.blue * 2.0f);
                 }
             }
         }

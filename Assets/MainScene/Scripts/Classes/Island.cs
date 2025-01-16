@@ -23,9 +23,9 @@ public class Island : MonoBehaviour
     public GameObject islandBottom;
     public Material bottomMat;
 
-    private float nitrogen;
-    private float phosphorus;
-    private float potassium;
+    public float nitrogen;
+    public float phosphorus;
+    public float potassium;
 
     public Material sowedMat;
     public Material cultivatedMat;
@@ -39,9 +39,7 @@ public class Island : MonoBehaviour
         Watered,
         Sowed,
         Cultivated,
-        NeedsNitrogen,
-        NeedsPhosphor,
-        NeedsPotassium,
+        NeedsNPK,
     }
 
     public void ToggleState(IslandState targetState, IslandState fallbackState)
@@ -77,19 +75,23 @@ public class Island : MonoBehaviour
                 bottomMat.color = bottomColor;
                 break;
             case IslandState.Watered:
+                if (islandId == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 4)
+                {
+                    GameManager.TTM.QuestCompleted = true;
+                }
                 islandMat = wateredMat;
                 break;
             case IslandState.Sowed:
                 islandMat = sowedMat;
                 break;
             case IslandState.Cultivated:
+                if(islandId == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 3)
+                {
+                    GameManager.TTM.QuestCompleted = true;
+                }
                 islandMat = cultivatedMat;
                 break;
-            case IslandState.NeedsNitrogen:
-                break;
-            case IslandState.NeedsPhosphor:
-                break;
-            case IslandState.NeedsPotassium:
+            case IslandState.NeedsNPK:
                 break;
         }
         if (islandMat != null)
@@ -122,11 +124,7 @@ public class Island : MonoBehaviour
             case IslandState.Cultivated:
                 islandMat = cultivatedMat;
                 break;
-            case IslandState.NeedsNitrogen:
-                break;
-            case IslandState.NeedsPhosphor:
-                break;
-            case IslandState.NeedsPotassium:
+            case IslandState.NeedsNPK:
                 break;
         }
         SetMaterial(islandMat);

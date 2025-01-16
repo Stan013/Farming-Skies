@@ -49,6 +49,7 @@ public class Card : MonoBehaviour
         Destroy,
         Hidden,
         Available,
+        Inspect,
     }
 
     public void ToggleState(CardState targetState, CardState fallbackState)
@@ -99,6 +100,10 @@ public class Card : MonoBehaviour
             case CardState.InDrag:
                 this.transform.GetChild(0).gameObject.SetActive(false);
                 break;
+            case CardState.Inspect:
+                GetComponent<RectTransform>().anchoredPosition = new Vector2(transform.parent.GetComponent<RectTransform>().anchoredPosition.x*2*-1, 1250);
+                transform.localScale = new Vector3(1.5f, 1.5f, 1f);
+                break;
             case CardState.Destroy:
                 Destroy(this.gameObject);
                 break;
@@ -136,6 +141,10 @@ public class Card : MonoBehaviour
                 {
                     this.transform.GetChild(0).gameObject.SetActive(true);
                 }
+                break;
+            case CardState.Inspect:
+                GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                transform.localScale = Vector3.one;
                 break;
             case CardState.Destroy:
                 Debug.LogWarning("Wasn't able to destroy " + cardId);

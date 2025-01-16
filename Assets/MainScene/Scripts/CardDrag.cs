@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
-public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
 {
     public GameObject dragModel;
     private float adjustZ = 5f;
@@ -13,6 +14,26 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public GameObject hoverPlot;
     private bool collisionOn = false;
     private Quaternion dragInstanceRotation;
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (GameManager.CM.inspectCard == null)
+            {
+                GameManager.CM.inspectCard = GetComponent<Card>();
+                GameManager.CM.inspectCard.ToggleState(Card.CardState.Inspect, Card.CardState.InHand);
+            }
+            else
+            {
+                if(GameManager.CM.inspectCard == GetComponent<Card>())
+                {
+                    GameManager.CM.inspectCard.ToggleState(Card.CardState.InHand, Card.CardState.Inspect);
+                    GameManager.CM.inspectCard = null;
+                }
+            }
+        }
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -141,7 +162,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             card.GetComponent<CardDrag>().enabled = true;
         }
-        if (hoverIsland != null && hoverIsland.currentState != hoverIsland.potentialState)
+        if (hoverIsland != null && hoverIsland.currentState != hoverIsland.potentialState && GameManager.ISM.CheckPotentialIsland() != null)
         {
             GameManager.ISM.CheckPotentialIsland().ToggleState(hoverIsland.potentialState, hoverIsland.currentState);
             GameManager.HM.dragCard.dragSucces = true;

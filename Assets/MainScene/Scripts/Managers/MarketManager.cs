@@ -12,8 +12,8 @@ public class MarketManager : MonoBehaviour
     private float increaseX = 450f;
     private int[] marketChanges = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
     private float[] marketWeights = {1f, 1.2f, 1.4f, 1.6f, 1.7f, 1.8f, 1.7f, 1.6f, 1.4f, 1.2f, 1f};
-    private int[] marketChangesDecimal = { 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    private float[] marketWeightsDecimal = { 2.5f, 2.4f, 2.3f, 2.1f, 1.8f, 1.6f, 1.4f, 1.2f, 1f};
+    private int[] marketChangesDecimal = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private float[] marketWeightsDecimal = {2.5f, 2.4f, 2.3f, 2.1f, 1.8f, 1.6f, 1.4f, 1.2f, 1f};
 
     public void UpdateMarketItems()
     {

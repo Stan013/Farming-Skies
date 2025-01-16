@@ -15,9 +15,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public TMP_Text openUIText;
     public TMP_Text openQuestText;
     public TMP_Text taxAmountText;
-    public Image taxLabel;
     public TMP_Text balanceAmountText;
-    public Image balanceLabel;
     public TMP_Text waterAmountText;
     public TMP_Text cardAmountText;
     public TMP_Text islandBuildCostText;
@@ -37,26 +35,9 @@ public class UIManager : MonoBehaviour, IDataPersistence
     [SerializeField] private Slider transparencySlider;
     public Image constructionLabel;
 
-    public void SetUIButtons(bool active, string buttonName)
+    public void SetUIButtons(bool active, Button button)
     {
-        switch (buttonName)
-        {
-            case "UI":
-                openUIButton.interactable = active;
-                break;
-            case "Quest":
-                openQuestButton.interactable = active;
-                break;
-            case "Settings":
-                openSettingsButton.interactable = active;
-                break;
-            case "Market":
-                openMarketButton.interactable = active;
-                break;
-            case "Inventory":
-                openInventoryButton.interactable = active;
-                break;
-        }
+        button.interactable = active;
     }
 
     public void OpenUIMenu()
@@ -82,7 +63,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (!questActive)
         {
             openQuestText.SetText("ʌ");
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 88);
+            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 178);
             GameManager.TTM.questMenu.SetActive(true);
             questActive = true;
         }

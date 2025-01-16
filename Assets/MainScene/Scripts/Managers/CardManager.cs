@@ -5,6 +5,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
 {
     public List<Card> starterCards = new List<Card>();
     public List<Card> availableCards = new List<Card>();
+    public Card inspectCard;
 
     public void SetupMarketItems()
     {

@@ -39,14 +39,13 @@ public class TutorialManager : MonoBehaviour
                 {
                     questCompletedIcon.gameObject.SetActive(true);
                     questMenuImage.color = new Color(0.8f, 1.0f, 0.4f, 0.8f);
-                    GameManager.UM.taxLabel.color = new Color(0.6f, 1f, 0.75f, 1f);
                     StartCoroutine(ResetQuestCompletedAfterDelay());
                 }
                 else
                 {
                     questCompletedIcon.gameObject.SetActive(false);
                     questMenuImage.color = new Color(0.9f, 0.9f, 0.9f, 0.8f);
-                    GameManager.UM.taxLabel.color = new Color(1f, 1f, 1f, 1f);
+                    GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 }
             }
         }
@@ -84,16 +83,24 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialCount)
         {
             case 1:
-                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press your B key to go into build mode and hover over an island. Now hold down your left mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
+                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press space to go into build mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
                 break;
             case 2:
                 GameManager.UM.OpenUIMenu();
-                GameManager.UM.SetUIButtons(true, "UI");
-                UpdateQuest("Watch your expenses!", "As you can see your expenses go up by having more land and by building machines. If you click on your expenses you can see how much you will need to pay and for what. Then if you press on the date you can see when you need to pay so make sure you cna cover your expenses at the end of the month or your farm won't survive.");
+                GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
+                GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building machines. If you click on your expenses you can see how much you will need to pay and for what. Then if you press on the date you can see when you need to pay so make sure you can cover your expenses at the end of the month or your farm won't survive.");
                 break;
             case 3:
                 GameManager.HM.SetStartingHand();
-                UpdateQuest("Cultivated your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and crops to help you out. Now in order to plant crops you land will have to be cultivated. This is done by pressing your M key to go into manage mode and by using your mouse drag the cultivator card to your uncultivated land.");
+                UpdateQuest("Cultivated your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and seeds to help you out. To plant your seeds your land will have to be cultivated first. This is done by pressing your M key to go into manage mode and by using your mouse to drag the cultivator card to your uncultivated land.");
+                break;
+            case 4:
+                UpdateQuest("Water your island!", "As you can see your land has now been cultivated. We however need to do one more thing before we can plant some seeds. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
+                break;
+            case 5:
+                UpdateQuest("Choose a plant!", "You are ready to make put your first plant into the ground. The plants I gave you are all good starter plants so you can plant whichever one you want. The difference between some of the p");
                 break;
         }
     }

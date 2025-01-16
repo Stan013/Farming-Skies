@@ -18,18 +18,13 @@ public class InputManager : MonoBehaviour
     private float verticalRotation = 0f;
     private Vector2 smoothMouseInput;
     private Vector3 smoothMoveDirection;
-    private Island m_ClickedIsland;
-    public Island clickedIsland { get { return m_ClickedIsland; } set { m_ClickedIsland = value; } }
+    public Island clickedIsland;
     private bool buildIslandPress = false;
     private float holdTimer = 0.0f;
 
     public void HandleGameStatesSwitchInput()
     {
-        if (Input.GetKeyDown(KeyCode.B)) // No movement only mouse clicking
-        {
-            ToggleState(GameManager.GameState.BuildMode, GameManager.GameState.Default);
-        }
-        if (Input.GetKeyDown(KeyCode.M)) // Limited movement and mouse clicking
+        if (Input.GetKeyDown(KeyCode.Space)) // Limited movement and mouse clicking
         {
             ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default);
         }
@@ -78,8 +73,6 @@ public class InputManager : MonoBehaviour
                 DefaultKeyboard();
                 break;
             case GameManager.GameState.ManageMode:
-                break;
-            case GameManager.GameState.BuildMode:
                 mainCamera.transform.position = GameManager.staticPos;
                 break;
             case GameManager.GameState.EndRoundMode:
@@ -121,15 +114,15 @@ public class InputManager : MonoBehaviour
                 MouseZoom();
                 break;
             case GameManager.GameState.ManageMode:
-                break;
-            case GameManager.GameState.BuildMode:
-                BuildMouse();
+                ManageMouse();
                 break;
             case GameManager.GameState.EndRoundMode:
                 break;
             case GameManager.GameState.InventoryMode:
+                DefaultMouse();
                 break;
             case GameManager.GameState.MarketMode:
+                DefaultMouse();
                 break;
         }
     }
@@ -154,9 +147,9 @@ public class InputManager : MonoBehaviour
         mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, minFOV, maxFOV);
     }
 
-    private void BuildMouse()
+    private void ManageMouse()
     {
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit)
+        if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit)
             && hit.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
         {
             clickedIsland = GetClickedIsland();
@@ -169,7 +162,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (!Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(1))
         {
             Cursor.lockState = CursorLockMode.None;
             buildIslandPress = false;
@@ -197,7 +190,6 @@ public class InputManager : MonoBehaviour
             GameManager.UM.UpdateBuildIslandSlider(clickedIsland);
             clickedIsland.ChangeMaterial(alphaChangeSpeed);
         }
-
     }
 
     private bool IsFacingWall(Vector3 direction)

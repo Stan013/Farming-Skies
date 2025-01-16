@@ -2232,7 +2232,7 @@ GameObject:
   - component: {fileID: 5559014494902376027}
   m_Layer: 0
   m_Name: Island
-  m_TagString: Untagged
+  m_TagString: Island
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2352,6 +2352,9 @@ MonoBehaviour:
   topMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
   islandBottom: {fileID: 6957661963711365696}
   bottomMat: {fileID: 2100000, guid: 47ba3d495c324504489e198ddf2e5a9a, type: 2}
+  nitrogen: 0
+  phosphorus: 0
+  potassium: 0
   sowedMat: {fileID: 2100000, guid: a01d16d3d44a79341b9d95acf8dbd6c9, type: 2}
   cultivatedMat: {fileID: 2100000, guid: bb434eed192f86a4791a883a0eff6144, type: 2}
   wateredMat: {fileID: 2100000, guid: 06d64f0686a621c4b9d02b42e257051f, type: 2}

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour, IDataPersistence
 {
@@ -16,6 +17,12 @@ public class CardManager : MonoBehaviour, IDataPersistence
                 GameManager.MM.UnlockMarketItem(card);
             }
         }
+    }
+
+    public void SetupCard(Card card)
+    {
+        card.cardImage.GetComponent<Image>().sprite = card.cardSprite;
+        card.cardNameText.SetText(card.cardName);
     }
 
     public Card FindCardById(string id)

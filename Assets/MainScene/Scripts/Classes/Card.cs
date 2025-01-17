@@ -7,38 +7,53 @@ using TMPro;
 
 public class Card : MonoBehaviour
 {
-    // Display card information
-    [SerializeField] private TMP_Text cardNameText;
-    [SerializeField] private TMP_Text cardDescriptionText;
-    [SerializeField] private TMP_Text cardAmountText;
-
-    // Unique identifier for saving
+    [Header("Invisible card properties")] 
     public string cardId;
-
-    // Card properties
-    public string cardName;
+    public bool cardSetup;
     public string cardType;
-    public Sprite cardSprite;
-    public VideoClip cardClip;
-    public GameObject cardPickButton;
+    public CardState CurrentState;
+    public int cardIndex;
+    public bool dragSucces;
+
+    [Header("Visible card properties")]
+    public string cardName;
+    public TMP_Text cardNameText;
+
+    [Header("Card in-hand properties")]
     public GameObject cardImage;
+    public Sprite cardSprite;
+
+    [Header("Card in-choosing properties")]
+    public TMP_Text cardAmountText;
+    public int cardAmount;
+    public GameObject cardPickButton;
     public GameObject cardAnimation;
+    public VideoClip cardClip;
 
-    // Associated inventory and market items
-    public InventoryItem inventoryItem;
-    public MarketItem marketItem;
-
-    // Market item and inventory item properties
+    [Header("Associated item properties")]
     public string itemName;
+
+    [Header("Associated inventory item properties")]
+    public InventoryItem inventoryItem;
+    public int itemQuantity;
+    public bool cardUnlocked;
+
+    [Header("Associated market item properties")]
+    public MarketItem marketItem;
+    public bool cardAddedToMarket;
     public float itemPrice;
     public float itemDemand;
     public float itemSupply;
-    public int cardAmount;
-    public int cardIndex;
-    public CardState CurrentState;
-    public bool cardUnlocked = false;
-    public bool cardAddedToMarket = false;
-    public bool dragSucces = false;
+
+    [Header("Associated plant properties")]
+    public int plantTier;
+    public int yield;
+    public int nitrogen;
+    public TMP_Text nitrogenText;
+    public int phosphorus;
+    public TMP_Text phosphorusText;
+    public int potassium;
+    public TMP_Text potassiumText;
 
     public enum CardState
     {
@@ -81,9 +96,10 @@ public class Card : MonoBehaviour
                     GameManager.HM.cardsInHand.Add(this);
                     cardIndex = GameManager.HM.cardsInHand.Count;
                 }
-                cardImage.GetComponent<Image>().sprite = cardSprite;
-                cardNameText.SetText(cardName);
-                cardDescriptionText.SetText("");
+                if(cardSetup)
+                {
+                    GameManager.CM.SetupCard(GetComponent<Card>());
+                }
                 this.gameObject.SetActive(true);
                 break;
             case CardState.InChoosing:
@@ -95,7 +111,6 @@ public class Card : MonoBehaviour
                 cardAmount = Random.Range(1, 3);
                 cardAmountText.SetText($"X{cardAmount}");
                 cardNameText.SetText(cardName);
-                cardDescriptionText.SetText("");
                 break;
             case CardState.InDrag:
                 this.transform.GetChild(0).gameObject.SetActive(false);

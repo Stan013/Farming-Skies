@@ -23,6 +23,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
     {
         card.cardImage.GetComponent<Image>().sprite = card.cardSprite;
         card.cardNameText.SetText(card.cardName);
+        card.cardSetup = true;
     }
 
     public Card FindCardById(string id)

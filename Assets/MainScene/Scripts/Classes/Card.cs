@@ -93,12 +93,12 @@ public class Card : MonoBehaviour
             case CardState.InHand:
                 if(GameManager.HM.needsCard)
                 {
+                    if (!cardSetup)
+                    {
+                        GameManager.CM.SetupCard(GetComponent<Card>());
+                    }
                     GameManager.HM.cardsInHand.Add(this);
                     cardIndex = GameManager.HM.cardsInHand.Count;
-                }
-                if(cardSetup)
-                {
-                    GameManager.CM.SetupCard(GetComponent<Card>());
                 }
                 this.gameObject.SetActive(true);
                 break;

@@ -6,33 +6,36 @@ using TMPro;
 
 public class UIManager : MonoBehaviour, IDataPersistence
 {
+    [Header("Menu objects")]
     public GameObject UIMenu;
+
+    [Header("UI Buttons")]
+    public bool UIActive = false;
     public Button openUIButton;
+    public TMP_Text openUIText;
+    public bool questActive = false;
     public Button openQuestButton;
+    public TMP_Text openQuestText;
     public Button openSettingsButton;
     public Button openMarketButton;
     public Button openInventoryButton;
-    public TMP_Text openUIText;
-    public TMP_Text openQuestText;
-    public TMP_Text taxAmountText;
-    public TMP_Text balanceAmountText;
-    public TMP_Text waterAmountText;
-    public TMP_Text cardAmountText;
-    public TMP_Text islandBuildCostText;
-    public TMP_Text dateAmountText;
 
-    //UI On-screen
+    [Header("Game variables")]
     public float tax;
     public float balance;
     public float water;
 
-    //UI Off-screen
-    private bool UIActive = false;
-    private bool questActive = false;
-    private float rentPercentage;
+    [Header("Game variables text")]
+    public TMP_Text taxAmountText;
+    public TMP_Text balanceAmountText;
+    public TMP_Text waterAmountText;
+    public TMP_Text cardAmountText;
+    public TMP_Text dateAmountText;
 
-    //UI Island Build
-    [SerializeField] private Slider transparencySlider;
+    [Header("UI Island builder")]
+    public TMP_Text buildCostText;
+    public TMP_Text taxCostText;
+    public Slider transparencySlider;
     public Image constructionLabel;
 
     public void SetUIButtons(bool active, Button button)
@@ -87,7 +90,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void SetBuildIslandSlider()
     {
-        islandBuildCostText.SetText(GameManager.IPM.clickedIsland.islandBuildCost.ToString());
+        buildCostText.SetText(GameManager.IPM.clickedIsland.islandBuildCost.ToString());
+        taxCostText.SetText(GameManager.IPM.clickedIsland.islandTaxCost.ToString());
         if (constructionLabel != null)
         {
             Vector2 mousePosition = Input.mousePosition;
@@ -107,7 +111,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             {
                 island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
                 balance -= island.islandBuildCost;
-                tax += (island.islandBuildCost / 100 * rentPercentage);
+                tax += 10; //ADD TAX COST
                 GameManager.ISM.AddIslandToBought(island);
                 island.islandBoughtStatus = true;
                 constructionLabel.gameObject.SetActive(false);

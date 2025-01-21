@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 UM.balance = 500;
                 UM.water = 3;
                 DPM.NewGame();
+                SetState(GameState.MenuMode);
             }
         }
     }

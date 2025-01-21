@@ -10,6 +10,7 @@ public class Island : MonoBehaviour
     
     public bool islandBoughtStatus;
     public float islandBuildCost;
+    public float islandTaxCost;
     public bool islandCanBought; 
 
     public List<GameObject> plotsSmallPlants;

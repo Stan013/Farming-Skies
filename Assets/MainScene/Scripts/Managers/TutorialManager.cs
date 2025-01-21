@@ -90,16 +90,26 @@ public class TutorialManager : MonoBehaviour
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
                 GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building machines. If you click on your expenses you can see how much you will need to pay and for what. Then if you press on the date you can see when you need to pay so make sure you can cover your expenses at the end of the month or your farm won't survive.");
+                UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building things. If you click on your expenses you can see how much you will need to pay and for what. Then if you press on the date you can see when you need to pay so make sure you can cover your expenses at the end of the month or your farm won't survive.");
                 break;
             case 3:
                 GameManager.HM.SetStartingHand();
-                UpdateQuest("Cultivated your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and seeds to help you out. To plant your seeds your land will have to be cultivated first. This is done by pressing your M key to go into manage mode and by using your mouse to drag the cultivator card to your uncultivated land.");
+                UpdateQuest("Cultivated your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use the plant cards your land will have to be cultivated first. This is done by pressing SPACE to go into managed mode and then by using your mouse to drag the cultivator card to your uncultivated land.");
                 break;
             case 4:
-                UpdateQuest("Water your island!", "As you can see your land has now been cultivated. We however need to do one more thing before we can plant some seeds. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
+                UpdateQuest("Water your island!", "As you can see your island has now been cultivated. We however need to do some more things before we can plant some seeds. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
                 break;
             case 5:
+                UpdateQuest("Maintain your water supply!", "Of course your land won't stay watered forever after each month your land will dry up. This is when you need to use a watering can again however throughout the month all you have to do is store enough water. If you press on your water storage you can see how much each day takes and how much you are collecting.");
+                GameManager.UM.waterAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                break;
+            case 7:
+                UpdateQuest("Check your plant needs!", "Besides water your lands will need to have the right minerals for your plants. These minerals are nitrogen, phosphorus and potassium each plant has a different need so make sure your land has that. Use your mouse and right click on one of your plant cards to see what this plant needs. Right click again to put the plant back in your hand.");
+                break;
+            case 8:
+                UpdateQuest("Choose a plant!", "You are ready to make put your first plant into the ground. The plants I gave you are all good starter plants so you can plant whichever one you want. The difference between some of the p");
+                break;
+            case 9:
                 UpdateQuest("Choose a plant!", "You are ready to make put your first plant into the ground. The plants I gave you are all good starter plants so you can plant whichever one you want. The difference between some of the p");
                 break;
         }

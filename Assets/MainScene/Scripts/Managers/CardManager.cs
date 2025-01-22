@@ -6,7 +6,25 @@ public class CardManager : MonoBehaviour, IDataPersistence
 {
     public List<Card> starterCards = new List<Card>();
     public List<Card> availableCards = new List<Card>();
+    public List<Card> inspectedCards = new List<Card>();
     public Card inspectCard;
+
+    public void CheckCardInspectTutorial(Card card)
+    {
+        if(GameManager.TTM.tutorialCount == 6)
+        {
+            if (!card.hasBeenInspected)
+            {
+                card.hasBeenInspected = true;
+                inspectedCards.Add(card);
+                card.cardBackground.GetComponent<Image>().color = Color.gray;
+            }
+            if (inspectedCards.Count == 4)
+            {
+                GameManager.TTM.QuestCompleted = true;
+            }
+        }
+    }
 
     public void SetupMarketItems()
     {
@@ -23,6 +41,18 @@ public class CardManager : MonoBehaviour, IDataPersistence
     {
         card.cardImage.GetComponent<Image>().sprite = card.cardSprite;
         card.cardNameText.SetText(card.cardName);
+        if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
+        {
+            card.nitrogenText.SetText(card.nitrogen.ToString() + " L");
+            card.phosphorusText.SetText(card.phosphorus.ToString() + " L");
+            card.potassiumText.SetText(card.potassium.ToString() + " L");
+        }
+        else
+        {
+            card.nitrogenText.transform.parent.gameObject.SetActive(false);
+            card.phosphorusText.transform.parent.gameObject.SetActive(false);
+            card.potassiumText.transform.parent.gameObject.SetActive(false);
+        }
         card.cardSetup = true;
     }
 

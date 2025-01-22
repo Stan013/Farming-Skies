@@ -7,45 +7,46 @@ using TMPro;
 
 public class Card : MonoBehaviour
 {
-    [Header("Invisible card properties")] 
+    [Header("Invisible card variables")] 
     public string cardId;
     public bool cardSetup;
     public string cardType;
     public CardState CurrentState;
     public int cardIndex;
     public bool dragSucces;
+    public GameObject cardBackground;
 
-    [Header("Visible card properties")]
+    [Header("Visible card variables")]
     public string cardName;
     public TMP_Text cardNameText;
 
-    [Header("Card in-hand properties")]
+    [Header("Card in-hand variables")]
     public GameObject cardImage;
     public Sprite cardSprite;
 
-    [Header("Card in-choosing properties")]
+    [Header("Card in-choosing variables")]
     public TMP_Text cardAmountText;
     public int cardAmount;
     public GameObject cardPickButton;
     public GameObject cardAnimation;
     public VideoClip cardClip;
 
-    [Header("Associated item properties")]
+    [Header("Associated item variables")]
     public string itemName;
 
-    [Header("Associated inventory item properties")]
+    [Header("Associated inventory item variables")]
     public InventoryItem inventoryItem;
     public int itemQuantity;
     public bool cardUnlocked;
 
-    [Header("Associated market item properties")]
+    [Header("Associated market item variables")]
     public MarketItem marketItem;
     public bool cardAddedToMarket;
     public float itemPrice;
     public float itemDemand;
     public float itemSupply;
 
-    [Header("Associated plant properties")]
+    [Header("Associated plant variables")]
     public int plantTier;
     public int yield;
     public int nitrogen;
@@ -54,6 +55,9 @@ public class Card : MonoBehaviour
     public TMP_Text phosphorusText;
     public int potassium;
     public TMP_Text potassiumText;
+
+    [Header("Tutorial card variables")]
+    public bool hasBeenInspected;
 
     public enum CardState
     {
@@ -96,6 +100,7 @@ public class Card : MonoBehaviour
                     if (!cardSetup)
                     {
                         GameManager.CM.SetupCard(GetComponent<Card>());
+                        cardSetup = true;
                     }
                     GameManager.HM.cardsInHand.Add(this);
                     cardIndex = GameManager.HM.cardsInHand.Count;

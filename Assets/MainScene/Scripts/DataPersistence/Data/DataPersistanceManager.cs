@@ -34,6 +34,14 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
+        InitializeGame();
+    }
+
+    public void InitializeGame()
+    {
+        GameManager.UM.tax = this.gameData.tax;
+        GameManager.UM.balance = this.gameData.balance;
+        GameManager.UM.water = this.gameData.water;
     }
 
     public void LoadGame()

@@ -88,10 +88,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                     UM.SetUIButtons(true, UM.openUIButton);
                     ISM.SetPurchasableIslands(true);
                 }
-                cam.transform.position = new Vector3(0, 10, 0);
-                UM.tax = 1000;
-                UM.balance = 500;
-                UM.water = 3;
                 DPM.NewGame();
                 SetState(GameState.MenuMode);
             }

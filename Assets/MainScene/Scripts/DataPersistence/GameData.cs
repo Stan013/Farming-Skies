@@ -39,9 +39,9 @@ public class GameData
 
     public GameData()
     {
-        tax = 1000f;
+        tax = 0f;
         balance = 500f;
-        water = 3f;
+        water = 10f;
         playerPosition = new Vector3(0, 0, 0);
         cameraDirection = new Vector3(0, 10, 0);
     }

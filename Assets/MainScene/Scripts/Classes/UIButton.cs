@@ -13,7 +13,11 @@ public class UIButton : MonoBehaviour
         {
             hasPressed = true;
             GetComponent<Image>().color = Color.white;
-            if (GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color == Color.white && GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color == Color.white)
+            if (GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color == Color.white && GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color == Color.white & GameManager.TTM.tutorialCount == 2)
+            {
+                GameManager.TTM.QuestCompleted = true;
+            }
+            if (GameManager.UM.waterAmountText.transform.parent.GetComponent<Image>().color == Color.white && GameManager.TTM.tutorialCount == 5)
             {
                 GameManager.TTM.QuestCompleted = true;
             }

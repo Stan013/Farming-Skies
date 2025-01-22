@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             {
                 island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
                 balance -= island.islandBuildCost;
-                tax += 10; //ADD TAX COST
+                tax += island.islandTaxCost;
                 GameManager.ISM.AddIslandToBought(island);
                 island.islandBoughtStatus = true;
                 constructionLabel.gameObject.SetActive(false);

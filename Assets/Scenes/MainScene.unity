@@ -596,6 +596,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandBuildCost
       value: 100
       objectReference: {fileID: 0}
@@ -6781,6 +6785,10 @@ PrefabInstance:
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandBuildCost
       value: 100
       objectReference: {fileID: 0}
@@ -8149,6 +8157,10 @@ PrefabInstance:
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: currentState
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: potentialState
@@ -10605,6 +10617,10 @@ PrefabInstance:
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: _islandStatus
       value: Unbought
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandBuildCost
@@ -15353,6 +15369,10 @@ PrefabInstance:
       value: Bought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: m_IslandStatus
       value: Bought
       objectReference: {fileID: 0}
@@ -19314,6 +19334,10 @@ PrefabInstance:
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandBuildCost
       value: 100
       objectReference: {fileID: 0}
@@ -20684,6 +20708,10 @@ PrefabInstance:
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandBuildCost
       value: 100
       objectReference: {fileID: 0}
@@ -21635,6 +21663,18 @@ PrefabInstance:
       propertyPath: 'm_UnboughtIslands.Array.data[8]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7748780180067978288, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
+      propertyPath: starterCards.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748780180067978288, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
+      propertyPath: 'availableCards.Array.data[6]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748780180067978288, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
+      propertyPath: 'availableCards.Array.data[11]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8332988646387919364, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
       propertyPath: rb
       value: 
@@ -21651,6 +21691,8 @@ PrefabInstance:
     - {fileID: 7520319277233610965, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
     - {fileID: 8901757741574811820, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
     - {fileID: 5842726258048199975, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
+    - {fileID: 4023440485641856407, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
+    - {fileID: 1257115075718941247, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
@@ -28140,6 +28182,10 @@ PrefabInstance:
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandBuildCost
       value: 100
       objectReference: {fileID: 0}
@@ -28509,6 +28555,10 @@ PrefabInstance:
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: _islandStatus
       value: Unbought
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: islandTaxCost
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandBuildCost

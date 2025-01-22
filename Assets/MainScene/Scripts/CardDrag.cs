@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
-public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
+public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public GameObject dragModel;
     private float adjustZ = 5f;
@@ -14,26 +13,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public GameObject hoverPlot;
     private bool collisionOn = false;
     private Quaternion dragInstanceRotation;
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (GameManager.CM.inspectCard == null)
-            {
-                GameManager.CM.inspectCard = GetComponent<Card>();
-                GameManager.CM.inspectCard.ToggleState(Card.CardState.Inspect, Card.CardState.InHand);
-            }
-            else
-            {
-                if(GameManager.CM.inspectCard == GetComponent<Card>())
-                {
-                    GameManager.CM.inspectCard.ToggleState(Card.CardState.InHand, Card.CardState.Inspect);
-                    GameManager.CM.inspectCard = null;
-                }
-            }
-        }
-    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {

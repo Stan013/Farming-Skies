@@ -53,7 +53,7 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator ResetQuestCompletedAfterDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         QuestCompleted = false;
         NextQuest();
     }
@@ -83,7 +83,7 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialCount)
         {
             case 1:
-                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press space to go into build mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
+                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press SPACE to go into build mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
                 break;
             case 2:
                 GameManager.UM.OpenUIMenu();
@@ -100,16 +100,24 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Water your island!", "As you can see your island has now been cultivated. We however need to do some more things before we can plant some seeds. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
                 break;
             case 5:
-                UpdateQuest("Maintain your water supply!", "Of course your land won't stay watered forever after each month your land will dry up. This is when you need to use a watering can again however throughout the month all you have to do is store enough water. If you press on your water storage you can see how much each day takes and how much you are collecting.");
                 GameManager.UM.waterAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                UpdateQuest("Maintain your water supply!", "Of course your land won't stay watered forever after each month your land will dry up. This is when you need to use a watering can again however throughout the month all you have to do is store enough water. If you press on your water storage you can see how much each land takes and how much you are collecting.");
                 break;
-            case 7:
+            case 6:
+                foreach(Card card in GameManager.HM.cardsInHand)
+                {
+                    if(card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
+                    {
+                        card.cardBackground.GetComponent<Image>().color = Color.green;
+                    }
+                    else
+                    {
+                        card.GetComponent<CardDrag>().enabled = false;
+                    }
+                }
                 UpdateQuest("Check your plant needs!", "Besides water your lands will need to have the right minerals for your plants. These minerals are nitrogen, phosphorus and potassium each plant has a different need so make sure your land has that. Use your mouse and right click on one of your plant cards to see what this plant needs. Right click again to put the plant back in your hand.");
                 break;
-            case 8:
-                UpdateQuest("Choose a plant!", "You are ready to make put your first plant into the ground. The plants I gave you are all good starter plants so you can plant whichever one you want. The difference between some of the p");
-                break;
-            case 9:
+            case 7:
                 UpdateQuest("Choose a plant!", "You are ready to make put your first plant into the ground. The plants I gave you are all good starter plants so you can plant whichever one you want. The difference between some of the p");
                 break;
         }

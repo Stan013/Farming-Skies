@@ -7,21 +7,21 @@ public class CardInspect : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right && GameManager.HM.dragging != true)
         {
             if (GameManager.CM.inspectCard == null)
             {
                 GameManager.CM.inspectCard = GetComponent<Card>();
-                GameManager.CM.inspectCard.ToggleState(Card.CardState.Inspect, Card.CardState.InHand);
-                GameManager.CM.inspectCard.GetComponent<CardDrag>().enabled = false;
+                GameManager.CM.inspectCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(transform.parent.GetComponent<RectTransform>().anchoredPosition.x * 2 * -1, 1250);
+                GameManager.CM.inspectCard.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
             }
             else
             {
                 if (GameManager.CM.inspectCard == GetComponent<Card>())
                 {
                     GameManager.CM.CheckCardInspectTutorial(GameManager.CM.inspectCard);
-                    GameManager.CM.inspectCard.ToggleState(Card.CardState.InHand, Card.CardState.Inspect);
-                    GameManager.CM.inspectCard.GetComponent<CardDrag>().enabled = true;
+                    GameManager.CM.inspectCard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                    GameManager.CM.inspectCard.transform.localScale = Vector3.one;
                     GameManager.CM.inspectCard = null;
                 }
             }

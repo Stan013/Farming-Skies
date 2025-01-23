@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
                     ISM.SetPurchasableIslands(true);
                 }
                 DPM.NewGame();
-                SetState(GameState.MenuMode);
+                SetState(GameState.Default);
             }
         }
     }

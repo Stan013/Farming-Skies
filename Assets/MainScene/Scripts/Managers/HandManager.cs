@@ -79,51 +79,59 @@ public class HandManager : MonoBehaviour, IDataPersistence
         foreach (Card card in cardsInHand)
         {
             card.ToggleState(Card.CardState.InDeck, Card.CardState.Destroy);
-            RemoveCardSlot(card);
+            RemoveEmptyCardSlot();
         }
     }
 
-    public void RemoveCardSlot(Card card)
+    public void RemoveEmptyCardSlot()
     {
-        handSlots.Remove(card.transform.parent.GetComponent<CardSlot>());
-        Destroy(card.transform.parent.GetComponent<CardSlot>().gameObject);
+        CardSlot emptySlot = handSlots[cardsInHand.Count];
+        handSlots.Remove(emptySlot);
+        Destroy(emptySlot.gameObject);
     }
 
     public void MoveCardsInHand(Card usedCard)
     {
         foreach (Card card in cardsInHand)
         {
-            if(card.cardIndex > usedCard.cardIndex)
+            if (card.cardIndex > usedCard.cardIndex)
             {
                 card.cardIndex--;
+                Transform originalParent = card.transform.parent;
+                card.transform.SetParent(null);
                 RectTransform cardRectTransform = card.GetComponent<RectTransform>();
-                Vector2 offScreenPosition = cardRectTransform.anchoredPosition + new Vector2(0, -Screen.height);
-                Vector2 newPosition = cardRectTransform.anchoredPosition + new Vector2(-offsetX*2, 0);
-                StartCoroutine(MoveCardCoroutine(cardRectTransform, offScreenPosition, newPosition));
+                Vector3 offScreenPosition = cardRectTransform.position - new Vector3(0, 100, 0);
+                Vector3 newPosition = handSlots[card.cardIndex-1].transform.position;
+                StartCoroutine(MoveCardCoroutine(cardRectTransform, offScreenPosition, newPosition, () =>
+                {
+                    card.transform.SetParent(handSlots[card.cardIndex-1].transform);
+                    cardRectTransform.anchoredPosition = Vector2.zero;
+                }));
             }
         }
     }
 
-    private IEnumerator MoveCardCoroutine(RectTransform cardRectTransform, Vector3 offScreenPosition, Vector3 newPosition)
+    private IEnumerator MoveCardCoroutine(RectTransform cardRectTransform, Vector3 offScreenPosition, Vector3 newPosition, System.Action onComplete = null)
     {
-        Vector3 startPosition = cardRectTransform.anchoredPosition;
-        float elapsedTime = 0;
+        Vector3 startPosition = cardRectTransform.position;
+        float elapsedTime = 0f;
         while (elapsedTime < cardMoveDurationBoth)
         {
-            cardRectTransform.anchoredPosition = Vector3.Lerp(startPosition, offScreenPosition, elapsedTime / cardMoveDurationBoth);
+            cardRectTransform.anchoredPosition = Vector2.Lerp(startPosition, offScreenPosition, elapsedTime / cardMoveDurationBoth);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        cardRectTransform.anchoredPosition = offScreenPosition;
-        elapsedTime = 0;
+        cardRectTransform.position = offScreenPosition;
+        elapsedTime = 0f;
         startPosition = offScreenPosition;
         while (elapsedTime < cardMoveDurationBoth)
         {
-            cardRectTransform.anchoredPosition = Vector3.Lerp(startPosition, newPosition, elapsedTime / cardMoveDurationBoth);
+            cardRectTransform.anchoredPosition = Vector2.Lerp(startPosition, newPosition, elapsedTime / cardMoveDurationBoth);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        cardRectTransform.anchoredPosition = newPosition;
+        cardRectTransform.position = newPosition;
+        onComplete?.Invoke();
     }
 
     public void LoadData(GameData data)

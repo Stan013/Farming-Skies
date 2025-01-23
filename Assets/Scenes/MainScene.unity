@@ -21467,17 +21467,9 @@ PrefabInstance:
       propertyPath: cardsInDeckParent
       value: 
       objectReference: {fileID: 651150050}
-    - target: {fileID: 7134738159530925897, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
-      propertyPath: boughtIslands.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7134738159530925897, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
-      propertyPath: unboughtIslands.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7134738159530925897, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
-      propertyPath: availableIslands.Array.size
-      value: 25
+    - target: {fileID: 6813182582891258015, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
+      propertyPath: m_Name
+      value: BrusselSproutCard
       objectReference: {fileID: 0}
     - target: {fileID: 7134738159530925897, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
       propertyPath: 'boughtIslands.Array.data[0]'
@@ -21661,18 +21653,6 @@ PrefabInstance:
       objectReference: {fileID: 2116629984}
     - target: {fileID: 7134738159530925897, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
       propertyPath: 'm_UnboughtIslands.Array.data[8]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7748780180067978288, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
-      propertyPath: starterCards.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7748780180067978288, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
-      propertyPath: 'availableCards.Array.data[6]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7748780180067978288, guid: 308f70a759e35f341926e69d250aafd4, type: 3}
-      propertyPath: 'availableCards.Array.data[11]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8332988646387919364, guid: 308f70a759e35f341926e69d250aafd4, type: 3}

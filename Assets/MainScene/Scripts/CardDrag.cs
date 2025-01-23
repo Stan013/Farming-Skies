@@ -16,19 +16,16 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (GameManager.HM.dragging == false)
+        if (GameManager.HM.dragging == false && GameManager.CM.inspectCard == null)
         {
             GameManager.HM.dragging = true;
             GameManager.HM.dragCard = gameObject.GetComponent<Card>();
             GameManager.HM.dragCard.ToggleState(Card.CardState.InDrag, Card.CardState.InHand);
             dragInstance = Instantiate(dragModel, SetMousePosition(), Quaternion.identity);
-            foreach (Card card in GameManager.HM.cardsInHand)
-            {
-                if (card.cardId != GameManager.HM.dragCard.cardId)
-                {
-                    card.GetComponent<CardDrag>().enabled = false;
-                }
-            }
+        }
+        else
+        {
+            eventData.pointerDrag = null;
         }
     }
 
@@ -137,15 +134,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         GameManager.HM.dragging = false;
         collisionOn = false;
-        foreach (Card card in GameManager.HM.cardsInHand)
-        {
-            card.GetComponent<CardDrag>().enabled = true;
-        }
         if (hoverIsland != null && hoverIsland.currentState != hoverIsland.potentialState && GameManager.ISM.CheckPotentialIsland() != null)
         {
             GameManager.ISM.CheckPotentialIsland().ToggleState(hoverIsland.potentialState, hoverIsland.currentState);
             GameManager.HM.dragCard.dragSucces = true;
-            GameManager.HM.RemoveCardSlot(GameManager.HM.dragCard);
             GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
         }
         else
@@ -157,7 +149,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 plant.transform.localPosition = new Vector3(0, -0.25f, 0);
                 hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
                 GameManager.HM.dragCard.dragSucces = true;
-                GameManager.HM.RemoveCardSlot(GameManager.HM.dragCard);
                 GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
             }
             else

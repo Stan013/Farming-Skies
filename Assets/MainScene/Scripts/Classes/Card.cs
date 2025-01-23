@@ -68,7 +68,6 @@ public class Card : MonoBehaviour
         Destroy,
         Hidden,
         Available,
-        Inspect,
     }
 
     public void ToggleState(CardState targetState, CardState fallbackState)
@@ -118,11 +117,10 @@ public class Card : MonoBehaviour
                 cardNameText.SetText(cardName);
                 break;
             case CardState.InDrag:
-                this.transform.GetChild(0).gameObject.SetActive(false);
-                break;
-            case CardState.Inspect:
-                GetComponent<RectTransform>().anchoredPosition = new Vector2(transform.parent.GetComponent<RectTransform>().anchoredPosition.x*2*-1, 1250);
-                transform.localScale = new Vector3(1.5f, 1.5f, 1f);
+                foreach (Transform child in this.transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
                 break;
             case CardState.Destroy:
                 Destroy(this.gameObject);
@@ -154,17 +152,20 @@ public class Card : MonoBehaviour
                     GameManager.HM.needsCard = true;
                     GameManager.HM.cardsInHand.Remove(this);
                     GameManager.HM.MoveCardsInHand(this);
+                    GameManager.HM.RemoveEmptyCardSlot();
                     GameManager.HM.SetCardsInHand();
                     dragSucces = false;
                 }
                 else
                 {
-                    this.transform.GetChild(0).gameObject.SetActive(true);
+                    foreach (Transform child in this.transform)
+                    {
+                        if(child.gameObject.name != "CardAnimation" && child.gameObject.name != "CardPickButton")
+                        {
+                            child.gameObject.SetActive(true);
+                        }
+                    }
                 }
-                break;
-            case CardState.Inspect:
-                GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-                transform.localScale = Vector3.one;
                 break;
             case CardState.Destroy:
                 Debug.LogWarning("Wasn't able to destroy " + cardId);

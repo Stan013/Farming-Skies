@@ -83,7 +83,7 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialCount)
         {
             case 1:
-                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press SPACE to go into build mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
+                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press SPACE to go into manage mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
                 break;
             case 2:
                 GameManager.UM.OpenUIMenu();
@@ -94,10 +94,10 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 3:
                 GameManager.HM.SetStartingHand();
-                UpdateQuest("Cultivated your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use the plant cards your land will have to be cultivated first. This is done by pressing SPACE to go into managed mode and then by using your mouse to drag the cultivator card to your uncultivated land.");
+                UpdateQuest("Cultivated your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use the plant cards your land will have to be cultivated first. This is done by making sure you are in manage mode and then by using your mouse to drag the cultivator card to your uncultivated land.");
                 break;
             case 4:
-                UpdateQuest("Water your island!", "As you can see your island has now been cultivated. We however need to do some more things before we can plant some seeds. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
+                UpdateQuest("Water your island!", "As you can see your island has now been cultivated. We however need to do some more things before we can plant. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
                 break;
             case 5:
                 GameManager.UM.waterAmountText.transform.parent.GetComponent<Image>().color = Color.green;
@@ -115,10 +115,25 @@ public class TutorialManager : MonoBehaviour
                         card.GetComponent<CardDrag>().enabled = false;
                     }
                 }
-                UpdateQuest("Check your plant needs!", "Besides water your lands will need to have the right minerals for your plants. These minerals are nitrogen, phosphorus and potassium each plant has a different need so make sure your land has that. Use your mouse and right click on one of your plant cards to see what this plant needs. Right click again to put the plant back in your hand.");
+                UpdateQuest("Check your plants needs!", "Besides water your lands will need to have the right minerals for your plants. These minerals are nitrogen, phosphorus and potassium each plant has a different need so make sure your land has that. Use your mouse and right click on one of your plant cards to see what this plant needs and also check how big it is. Right click again to put the plant back in your hand.");
                 break;
             case 7:
-                UpdateQuest("Choose a plant!", "You are ready to make put your first plant into the ground. The plants I gave you are all good starter plants so you can plant whichever one you want. The difference between some of the p");
+                UpdateQuest("Plant your first plant!", "Now that you have got your land ready and know what each plant needs and how big they are, it is time to plant. Hover over the plant card you have chosen and hold left mouse button. Now move your mouse to whichever spot you want to plant there a 36 spaces for small plants, 9 for medium plants and 1 space for a big plant. So make sure your plant snaps to the right spot.");
+                break;
+            case 8:
+                UpdateQuest("Plant everything you have!", "It seems like you know what you are doing so how about you plant some more. This time you will see that some spots are already taken by the plant you previously used. Don't worry though if you don't have enough space you can always buy more land. You can also rotate your plants by moving your mouse around the spot your plant has snapped to. ");
+                break;
+            case 9:
+                UpdateQuest("It is time to advance!", "Good job farmer all your plants are in the ground and your land is looking healthy. Press the next day button and watch the harvest from that day go into your storage. You will of course also see you water storage and your fertilizer storage go down but no worries this will be the next thing I will tell you about.");
+                break;
+            case 10:
+                UpdateQuest("Look at your harvest!", "");
+                break;
+            case 11:
+                UpdateQuest("Check your land health!", "");
+                break;
+            case 12:
+                UpdateQuest("Improve your yield!", "");
                 break;
         }
     }

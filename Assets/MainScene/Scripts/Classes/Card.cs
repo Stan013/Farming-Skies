@@ -10,7 +10,6 @@ public class Card : MonoBehaviour
     [Header("Invisible card variables")] 
     public string cardId;
     public bool cardSetup;
-    public string cardType;
     public CardState CurrentState;
     public int cardIndex;
     public bool dragSucces;
@@ -49,6 +48,10 @@ public class Card : MonoBehaviour
     [Header("Associated plant variables")]
     public int plantTier;
     public int yield;
+    public string cardType;
+    public TMP_Text plantSizeText;
+    public int water;
+    public TMP_Text waterText;
     public int nitrogen;
     public TMP_Text nitrogenText;
     public int phosphorus;

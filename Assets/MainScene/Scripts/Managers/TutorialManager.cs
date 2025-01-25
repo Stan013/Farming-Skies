@@ -93,10 +93,16 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building things. If you click on your expenses you can see how much you will need to pay and for what. Then if you press on the date you can see when you need to pay so make sure you can cover your expenses at the end of the month or your farm won't survive.");
                 break;
             case 3:
+                Card cardCultivator = GameManager.CM.FindCardById("CardCultivatorUtility");
+                cardCultivator.cardBackground.GetComponent<Image>().color = Color.green;
+                cardCultivator.GetComponent<CardDrag>().enabled = true;
                 GameManager.HM.SetStartingHand();
-                UpdateQuest("Cultivated your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use the plant cards your land will have to be cultivated first. This is done by making sure you are in manage mode and then by using your mouse to drag the cultivator card to your uncultivated land.");
+                UpdateQuest("Cultivate your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use the plant cards your land will have to be cultivated first. This is done by making sure you are in manage mode and then by using your mouse to drag the cultivator card to your uncultivated land.");
                 break;
             case 4:
+                Card cardWateringCan = GameManager.CM.FindCardById("CardWateringCanUtility");
+                cardWateringCan.cardBackground.GetComponent<Image>().color = Color.green;
+                cardWateringCan.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Water your island!", "As you can see your island has now been cultivated. We however need to do some more things before we can plant. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
                 break;
             case 5:
@@ -110,14 +116,13 @@ public class TutorialManager : MonoBehaviour
                     {
                         card.cardBackground.GetComponent<Image>().color = Color.green;
                     }
-                    else
-                    {
-                        card.GetComponent<CardDrag>().enabled = false;
-                    }
                 }
                 UpdateQuest("Check your plants needs!", "Besides water your lands will need to have the right minerals for your plants. These minerals are nitrogen, phosphorus and potassium each plant has a different need so make sure your land has that. Use your mouse and right click on one of your plant cards to see what this plant needs and also check how big it is. Right click again to put the plant back in your hand.");
                 break;
             case 7:
+                Card cardPeanut = GameManager.CM.FindCardById("CardPeanutPlant");
+                cardPeanut.cardBackground.GetComponent<Image>().color = Color.green;
+                cardPeanut.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Plant your first plant!", "Now that you have got your land ready and know what each plant needs and how big they are, it is time to plant. Hover over the plant card you have chosen and hold left mouse button. Now move your mouse to whichever spot you want to plant there a 36 spaces for small plants, 9 for medium plants and 1 space for a big plant. So make sure your plant snaps to the right spot.");
                 break;
             case 8:

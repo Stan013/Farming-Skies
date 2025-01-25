@@ -17,7 +17,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
             {
                 card.hasBeenInspected = true;
                 inspectedCards.Add(card);
-                card.cardBackground.GetComponent<Image>().color = Color.gray;
+                card.cardBackground.GetComponent<Image>().color = new Color(0.735f, 0.735f, 0.735f);
             }
             if (inspectedCards.Count == 4)
             {
@@ -46,12 +46,16 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.nitrogenText.SetText(card.nitrogen.ToString() + " L");
             card.phosphorusText.SetText(card.phosphorus.ToString() + " L");
             card.potassiumText.SetText(card.potassium.ToString() + " L");
+            card.waterText.SetText(card.water.ToString() + " L");
+            card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
         }
         else
         {
             card.nitrogenText.transform.parent.gameObject.SetActive(false);
             card.phosphorusText.transform.parent.gameObject.SetActive(false);
             card.potassiumText.transform.parent.gameObject.SetActive(false);
+            card.waterText.transform.parent.gameObject.SetActive(false);
+            card.plantSizeText.transform.parent.gameObject.SetActive(false);
         }
         card.cardSetup = true;
     }

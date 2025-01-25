@@ -32,7 +32,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
         {
             while (handSlots.Count < 9 && GameManager.DM.cardsInDeck.Count > 0)
             {
-                CardSlot newSlot = Instantiate(cardSlotPrefab, new Vector3(-700f + (handSlots.Count * offsetX), -550f, 0f), Quaternion.identity);
+                CardSlot newSlot = Instantiate(cardSlotPrefab, new Vector3(-700f + (handSlots.Count * offsetX), -525f, 0f), Quaternion.identity);
                 newSlot.transform.SetParent(handSlotParent.transform, false);
                 handSlots.Add(newSlot);
                 Card originalCard = GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)];

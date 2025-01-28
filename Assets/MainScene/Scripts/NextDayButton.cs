@@ -12,6 +12,10 @@ public class NextDayButton : MonoBehaviour
     }
     private void OnButtonClick()
     {
+        if (GameManager.TTM.tutorialCount == 9)
+        {
+            GameManager.TTM.QuestCompleted = true;
+        }
         GameManager.TM.NextDay();
         GameManager.PM.Harvest();
         GameManager.MM.UpdatePrices();

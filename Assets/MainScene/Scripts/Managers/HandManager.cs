@@ -90,6 +90,11 @@ public class HandManager : MonoBehaviour, IDataPersistence
         Destroy(emptySlot.gameObject);
     }
 
+    public Card FindCardInHandById(string id)
+    {
+        return cardsInHand.Find(card => card.cardId == id);
+    }
+
     public void MoveCardsInHand(Card usedCard)
     {
         foreach (Card card in cardsInHand)

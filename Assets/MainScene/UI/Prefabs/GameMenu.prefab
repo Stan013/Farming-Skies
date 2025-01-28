@@ -5093,12 +5093,12 @@ GameObject:
   - component: {fileID: 3549003406816068419}
   - component: {fileID: 3939781354296490574}
   m_Layer: 0
-  m_Name: TurnButton
+  m_Name: NextDayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &613254365174066277
 RectTransform:
   m_ObjectHideFlags: 0

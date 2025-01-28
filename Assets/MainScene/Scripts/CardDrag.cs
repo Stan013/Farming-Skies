@@ -150,6 +150,14 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
                 GameManager.HM.dragCard.dragSucces = true;
                 GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
+                if (GameManager.TTM.tutorialCount == 7)
+                {
+                    GameManager.TTM.QuestCompleted = true;
+                }
+                if (GameManager.TTM.tutorialCount == 8 && !GameManager.HM.cardsInHand.Contains(GameManager.CM.FindCardById("CardRadishPlant")) && !GameManager.HM.cardsInHand.Contains(GameManager.CM.FindCardById("CardPotatoPlant")) && !GameManager.HM.cardsInHand.Contains(GameManager.CM.FindCardById("CardSpringOnionPlant")))
+                {
+                    GameManager.TTM.QuestCompleted = true;
+                }
             }
             else
             {

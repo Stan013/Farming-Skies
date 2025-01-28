@@ -30808,6 +30808,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8955687320731931228, guid: 29538158951cfb24cbd8019ce6b1f1c5, type: 3}
+      propertyPath: m_Name
+      value: NextDayButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955687320731931228, guid: 29538158951cfb24cbd8019ce6b1f1c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -17,6 +17,10 @@ public class OpenButton : MonoBehaviour
         switch(openButton.name)
         {
             case "InventoryButton":
+                if(GameManager.TTM.tutorialCount == 10)
+                {
+                    GameManager.TTM.QuestCompleted = true;
+                }
                 GameManager.IPM.ToggleState(GameManager.GameState.InventoryMode, GameManager.GameState.Default);
                 openWindow.SetActive(true);
                 break;

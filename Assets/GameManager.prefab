@@ -261,6 +261,7 @@ MonoBehaviour:
   openSettingsButton: {fileID: 0}
   openMarketButton: {fileID: 0}
   openInventoryButton: {fileID: 0}
+  nextdayButton: {fileID: 0}
   tax: 0
   balance: 0
   water: 0
@@ -3906,6 +3907,10 @@ PrefabInstance:
       propertyPath: cardUnlocked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: dragModel
+      value: 
+      objectReference: {fileID: 5916350435189257538, guid: a2d99509b0427d24b90e43f2fddffcaa, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5069,6 +5074,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WateringCanCard
       objectReference: {fileID: 0}
+    - target: {fileID: 1921602048528338584, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_text
+      value: A tool that can be used to water your land. Your land needs to be cultivated
+        and watered before you can plant things on it.
+      objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardId
       value: CardWateringCanUtility
@@ -5094,6 +5104,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: plantSizeText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
       value: 1
       objectReference: {fileID: 0}
@@ -5102,7 +5116,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5831054420211141045, guid: 1e49513e3e2314245ab7627ce93c5bd3, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1400835723480340730, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
@@ -5564,6 +5579,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CultivatorCard
       objectReference: {fileID: 0}
+    - target: {fileID: 1921602048528338584, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_text
+      value: A tool that can be used to cultivate your land. Your land needs to be
+        cultivated and watered before you can plant things on it.
+      objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardId
       value: CardCultivatorUtility
@@ -5589,6 +5609,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: plantSizeText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
       value: 1
       objectReference: {fileID: 0}
@@ -5597,7 +5621,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1570436495116664669, guid: a773ef161fd659441a404bdb6ddf3a25, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1400835723480340730, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}

@@ -154,7 +154,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }
-                if (GameManager.TTM.tutorialCount == 8 && !GameManager.HM.cardsInHand.Contains(GameManager.CM.FindCardById("CardRadishPlant")) && !GameManager.HM.cardsInHand.Contains(GameManager.CM.FindCardById("CardPotatoPlant")) && !GameManager.HM.cardsInHand.Contains(GameManager.CM.FindCardById("CardSpringOnionPlant")))
+                if (GameManager.TTM.tutorialCount == 8 && GameManager.HM.FindCardInHandById("CardRadishPlant") == null && GameManager.HM.FindCardInHandById("CardPotatoPlant") == null && GameManager.HM.FindCardInHandById("CardChivesPlant") == null)
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }

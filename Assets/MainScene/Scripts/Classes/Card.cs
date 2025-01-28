@@ -18,6 +18,8 @@ public class Card : MonoBehaviour
     [Header("Visible card variables")]
     public string cardName;
     public TMP_Text cardNameText;
+    public string cardDescription;
+    public TMP_Text cardDescriptionText;
 
     [Header("Card in-hand variables")]
     public GameObject cardImage;

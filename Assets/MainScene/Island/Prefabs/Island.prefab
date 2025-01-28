@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7576334441170664915}
   - component: {fileID: 2008096997643028709}
   m_Layer: 0
-  m_Name: 3.1
+  m_Name: PlotSmall(3.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 8973752165771687163}
   - component: {fileID: 6823411636504385036}
   m_Layer: 0
-  m_Name: 4.2
+  m_Name: PlotSmall(4.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 2019869833695215696}
   - component: {fileID: 2447089842943093878}
   m_Layer: 0
-  m_Name: 6.3
+  m_Name: PlotSmall(6.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 575017973391280213}
   - component: {fileID: 2285864020338045593}
   m_Layer: 0
-  m_Name: 0,1
+  m_Name: PlotMedium(1.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5925827298347205877}
   - component: {fileID: 154298039524507027}
   m_Layer: 0
-  m_Name: 4.4
+  m_Name: PlotSmall(4.4)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 7537762381948626482}
   - component: {fileID: 4596176538877677058}
   m_Layer: 0
-  m_Name: 1,-1
+  m_Name: PlotMedium(3.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 2927535446636108285}
   - component: {fileID: 4295257110649685887}
   m_Layer: 0
-  m_Name: 1,1
+  m_Name: PlotMedium(1.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 8555171529099094029}
   - component: {fileID: 9131896556135513953}
   m_Layer: 0
-  m_Name: 6.1
+  m_Name: PlotSmall(6.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 3055060674731906602}
   - component: {fileID: 766336081976104108}
   m_Layer: 0
-  m_Name: 1.4
+  m_Name: PlotSmall(1.4)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 4246206976409142671}
   - component: {fileID: 6623402188476250303}
   m_Layer: 0
-  m_Name: 6.6
+  m_Name: PlotSmall(6.6)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 8027239685225593929}
   - component: {fileID: 4571523953404682691}
   m_Layer: 0
-  m_Name: 3.4
+  m_Name: PlotSmall(3.4)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 1805993496947697046}
   - component: {fileID: 8296864195821009425}
   m_Layer: 0
-  m_Name: 6.4
+  m_Name: PlotSmall(6.4)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 4904269117554482597}
   - component: {fileID: 9212433597824153042}
   m_Layer: 0
-  m_Name: 6.2
+  m_Name: PlotSmall(6.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 1615247330159530198}
   - component: {fileID: 363720272981009660}
   m_Layer: 0
-  m_Name: 5.3
+  m_Name: PlotSmall(5.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 8307157814228674075}
   - component: {fileID: 3853295432222881919}
   m_Layer: 0
-  m_Name: 5.1
+  m_Name: PlotSmall(5.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -838,7 +838,7 @@ GameObject:
   - component: {fileID: 5861562381108070073}
   - component: {fileID: 3290376583115178111}
   m_Layer: 0
-  m_Name: 2.3
+  m_Name: PlotSmall(2.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 2198151346677412146}
   - component: {fileID: 6067697330443644612}
   m_Layer: 0
-  m_Name: 5.6
+  m_Name: PlotSmall(5.6)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 4679800552176119033}
   - component: {fileID: 5753367160710502037}
   m_Layer: 0
-  m_Name: 4.6
+  m_Name: PlotSmall(4.6)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,7 +997,7 @@ GameObject:
   - component: {fileID: 3020353702398663248}
   - component: {fileID: 164273765381842325}
   m_Layer: 0
-  m_Name: 3.3
+  m_Name: PlotSmall(3.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1050,7 +1050,7 @@ GameObject:
   - component: {fileID: 1995352801020413205}
   - component: {fileID: 6631810475768600685}
   m_Layer: 0
-  m_Name: 2.2
+  m_Name: PlotSmall(2.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 2007053418084975810}
   - component: {fileID: 6252540321022439606}
   m_Layer: 0
-  m_Name: 5.2
+  m_Name: PlotSmall(5.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 4473747977490179801}
   - component: {fileID: 3054965692072368290}
   m_Layer: 0
-  m_Name: 1.3
+  m_Name: PlotSmall(1.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1276,7 +1276,7 @@ GameObject:
   - component: {fileID: 7809580985206160598}
   - component: {fileID: 2566840285675632489}
   m_Layer: 0
-  m_Name: 2.1
+  m_Name: PlotSmall(2.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 4368481225562046116}
   - component: {fileID: 2396154321284891053}
   m_Layer: 0
-  m_Name: PlotBig(0,0)
+  m_Name: PlotBig(1.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1382,7 +1382,7 @@ GameObject:
   - component: {fileID: 4637982001837828319}
   - component: {fileID: 264180785904218239}
   m_Layer: 0
-  m_Name: 3.2
+  m_Name: PlotSmall(3.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1435,7 +1435,7 @@ GameObject:
   - component: {fileID: 2073965195708404036}
   - component: {fileID: 1553251527806710864}
   m_Layer: 0
-  m_Name: -1,1
+  m_Name: PlotMedium(1.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1488,7 +1488,7 @@ GameObject:
   - component: {fileID: 8992764429462392799}
   - component: {fileID: 925282613129989248}
   m_Layer: 0
-  m_Name: 0,-1
+  m_Name: PlotMedium(3.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1581,7 +1581,7 @@ GameObject:
   - component: {fileID: 4506523363360185433}
   - component: {fileID: 6330672380818436799}
   m_Layer: 0
-  m_Name: 0,0
+  m_Name: PlotMedium(2.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,7 +1634,7 @@ GameObject:
   - component: {fileID: 3918963531379441670}
   - component: {fileID: 5417235611508758884}
   m_Layer: 0
-  m_Name: 2.5
+  m_Name: PlotSmall(2.5)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 3398428896578433155}
   - component: {fileID: 4197082774216970392}
   m_Layer: 0
-  m_Name: -1,0
+  m_Name: PlotMedium(2.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1740,7 +1740,7 @@ GameObject:
   - component: {fileID: 2112341090205822611}
   - component: {fileID: 8378487898095632574}
   m_Layer: 0
-  m_Name: 1.5
+  m_Name: PlotSmall(1.5)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1879,7 +1879,7 @@ GameObject:
   - component: {fileID: 1886782849364590937}
   - component: {fileID: 451365899017220725}
   m_Layer: 0
-  m_Name: 2.4
+  m_Name: PlotSmall(2.4)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2018,7 +2018,7 @@ GameObject:
   - component: {fileID: 8410648537007500245}
   - component: {fileID: 532917355241478041}
   m_Layer: 0
-  m_Name: 5.5
+  m_Name: PlotSmall(5.5)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2071,7 +2071,7 @@ GameObject:
   - component: {fileID: 5675858678429386491}
   - component: {fileID: 2676515900038747182}
   m_Layer: 0
-  m_Name: 5.4
+  m_Name: PlotSmall(5.4)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2124,7 +2124,7 @@ GameObject:
   - component: {fileID: 6635952729270368682}
   - component: {fileID: 6071609021128020765}
   m_Layer: 0
-  m_Name: 4.1
+  m_Name: PlotSmall(4.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2177,7 +2177,7 @@ GameObject:
   - component: {fileID: 6972395565178902125}
   - component: {fileID: 4906754045483569310}
   m_Layer: 0
-  m_Name: 1.6
+  m_Name: PlotSmall(1.6)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2296,6 +2296,7 @@ MonoBehaviour:
   potentialState: 2
   islandBoughtStatus: 0
   islandBuildCost: 0
+  islandTaxCost: 0
   islandCanBought: 0
   plotsSmallPlants:
   - {fileID: 7938958760340876345}
@@ -2370,7 +2371,7 @@ GameObject:
   - component: {fileID: 2601137245426801952}
   - component: {fileID: 5778358967642075128}
   m_Layer: 0
-  m_Name: 3.5
+  m_Name: PlotSmall(3.5)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2423,7 +2424,7 @@ GameObject:
   - component: {fileID: 7921382914781691826}
   - component: {fileID: 1275534384674657307}
   m_Layer: 0
-  m_Name: 1,0
+  m_Name: PlotMedium(2.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2529,7 +2530,7 @@ GameObject:
   - component: {fileID: 428145748177045404}
   - component: {fileID: 2797553406662847631}
   m_Layer: 0
-  m_Name: 2.6
+  m_Name: PlotSmall(2.6)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2582,7 +2583,7 @@ GameObject:
   - component: {fileID: 3616640933169830717}
   - component: {fileID: 1373992545210340685}
   m_Layer: 0
-  m_Name: 6.5
+  m_Name: PlotSmall(6.5)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2635,7 +2636,7 @@ GameObject:
   - component: {fileID: 2350923539313295394}
   - component: {fileID: 8135654494607203855}
   m_Layer: 0
-  m_Name: 4.5
+  m_Name: PlotSmall(4.5)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2688,7 +2689,7 @@ GameObject:
   - component: {fileID: 7487600978195254362}
   - component: {fileID: 3895298396097943991}
   m_Layer: 0
-  m_Name: -1,-1
+  m_Name: PlotMedium(3.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2741,7 +2742,7 @@ GameObject:
   - component: {fileID: 4923474969917754356}
   - component: {fileID: 5975438999986956432}
   m_Layer: 0
-  m_Name: 4.3
+  m_Name: PlotSmall(4.3)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2794,7 +2795,7 @@ GameObject:
   - component: {fileID: 4416131695066931426}
   - component: {fileID: 791657114833635829}
   m_Layer: 0
-  m_Name: PlottSmall(1.2)
+  m_Name: PlotSmall(1.2)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2847,7 +2848,7 @@ GameObject:
   - component: {fileID: 6788680229288533372}
   - component: {fileID: 6983552994136426877}
   m_Layer: 0
-  m_Name: 3.6
+  m_Name: PlotSmall(3.6)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

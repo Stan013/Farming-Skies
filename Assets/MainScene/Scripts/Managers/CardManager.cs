@@ -43,6 +43,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
         card.cardNameText.SetText(card.cardName);
         if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
         {
+            card.cardDescriptionText.gameObject.SetActive(false);
             card.nitrogenText.SetText(card.nitrogen.ToString() + " L");
             card.phosphorusText.SetText(card.phosphorus.ToString() + " L");
             card.potassiumText.SetText(card.potassium.ToString() + " L");
@@ -51,11 +52,12 @@ public class CardManager : MonoBehaviour, IDataPersistence
         }
         else
         {
+            card.cardDescriptionText.gameObject.SetActive(true);
+            card.cardDescriptionText.SetText(card.cardDescription);
             card.nitrogenText.transform.parent.gameObject.SetActive(false);
             card.phosphorusText.transform.parent.gameObject.SetActive(false);
             card.potassiumText.transform.parent.gameObject.SetActive(false);
             card.waterText.transform.parent.gameObject.SetActive(false);
-            card.plantSizeText.transform.parent.gameObject.SetActive(false);
         }
         card.cardSetup = true;
     }

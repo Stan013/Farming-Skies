@@ -137,8 +137,9 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Plant everything you have!", "It seems like you know what you are doing so how about you plant some more. This time you will see that some spots are already taken by the plant you previously used. Don't worry though if you don't have enough space you can always buy more land. You can also rotate your plants by moving your mouse around the spot your plant has snapped to. ");
                 break;
             case 9:
-                GameManager.UM.SetUIButtons(true, GameManager.UM.nextdayButton);
+                GameManager.UM.SetUIButtons(true, GameManager.UM.nextDayButton);
                 UpdateQuest("It is time to advance!", "Good job farmer all your plants are in the ground and your land is looking healthy. Press the next day button and watch the harvest from that day go into your storage. You will of course also see you water storage and your fertilizer storage go down but no worries this will be the next thing I will tell you about.");
+                GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.green;
                 break;
             case 10:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openInventoryButton);

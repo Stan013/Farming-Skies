@@ -43,11 +43,13 @@ public class CardManager : MonoBehaviour, IDataPersistence
         card.cardNameText.SetText(card.cardName);
         if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
         {
+            CardDrag cardDrag = card.GetComponent<CardDrag>();
+            Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();
             card.cardDescriptionText.gameObject.SetActive(false);
-            card.nitrogenText.SetText(card.nitrogen.ToString() + " L");
-            card.phosphorusText.SetText(card.phosphorus.ToString() + " L");
-            card.potassiumText.SetText(card.potassium.ToString() + " L");
-            card.waterText.SetText(card.water.ToString() + " L");
+            card.nitrogenText.SetText(dragPlant.nitrogen.ToString() + " L");
+            card.phosphorusText.SetText(dragPlant.phosphorus.ToString() + " L");
+            card.potassiumText.SetText(dragPlant.potassium.ToString() + " L");
+            card.waterText.SetText(dragPlant.water.ToString() + " L");
             card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
         }
         else

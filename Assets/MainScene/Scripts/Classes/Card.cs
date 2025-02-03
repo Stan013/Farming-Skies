@@ -48,17 +48,11 @@ public class Card : MonoBehaviour
     public float itemSupply;
 
     [Header("Associated plant variables")]
-    public int plantTier;
-    public int yield;
     public string cardType;
     public TMP_Text plantSizeText;
-    public int water;
     public TMP_Text waterText;
-    public int nitrogen;
     public TMP_Text nitrogenText;
-    public int phosphorus;
     public TMP_Text phosphorusText;
-    public int potassium;
     public TMP_Text potassiumText;
 
     [Header("Tutorial card variables")]

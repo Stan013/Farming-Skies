@@ -15,6 +15,7 @@ public class NextDayButton : MonoBehaviour
         if (GameManager.TTM.tutorialCount == 9)
         {
             GameManager.TTM.QuestCompleted = true;
+            GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.white;
         }
         GameManager.TM.NextDay();
         GameManager.PM.Harvest();

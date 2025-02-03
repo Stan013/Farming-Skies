@@ -11,8 +11,18 @@ public class PlantManager : MonoBehaviour
         {
             foreach (Plant plant in island.itemsOnIsland)
             {
-                    plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
+                CalculateDropAmount(island, plant);
+                plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
             }
         }
+    }
+
+    public void CalculateDropAmount(Island island, Plant plant)
+    {
+        if(island.nitrogen >= plant.nitrogen)
+        {
+            plant.yield++;
+        }
+        //if(island.nitrogen >= plant)
     }
 }

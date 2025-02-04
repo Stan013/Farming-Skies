@@ -100,4 +100,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4334627a857684da9c6e76163bd5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ItemCard: {fileID: 4821129451274835709, guid: ac722aca4bbb28642ab642ad9c20935c, type: 3}
+  dropType: Plant
+  plantCardID: CardOnionPlant

@@ -100,5 +100,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4334627a857684da9c6e76163bd5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ItemCard: {fileID: 0}
-  DropType: 
+  dropType: Plant
+  plantCardID: CardRadishPlant

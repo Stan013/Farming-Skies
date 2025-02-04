@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,5 +101,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4334627a857684da9c6e76163bd5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ItemCard: {fileID: 0}
-  DropType: 
+  dropType: Plant
+  plantCardID: CardChivePlant

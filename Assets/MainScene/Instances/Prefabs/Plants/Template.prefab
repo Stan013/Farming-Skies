@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1270490443457611575}
   - component: {fileID: 8946416990395637792}
   - component: {fileID: 6427239176535588756}
+  - component: {fileID: 880088736490083709}
   - component: {fileID: 6846091476340966412}
   m_Layer: 0
   m_Name: Template
@@ -86,6 +87,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &880088736490083709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5008466887595670994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dcb929937df8724e80a38e3453e52f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drop: {fileID: 8888020177096995588, guid: 6a4baeb7ad6ffbd42932176451de9e4f, type: 3}
+  plantCardID: 
+  yield: 12
+  water: 1
+  nitrogen: 1
+  phosphorus: 1
+  potassium: 1
+  magnesium: 1
+  sulfur: 1
+  calcium: 1
 --- !u!65 &6846091476340966412
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -11,7 +11,10 @@ public class PlantManager : MonoBehaviour
         {
             foreach (Plant plant in island.itemsOnIsland)
             {
-                CalculateDropAmount(island, plant);
+                if(!GameManager.TTM.tutorial)
+                {
+                    CalculateDropAmount(island, plant);
+                }
                 plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
             }
         }

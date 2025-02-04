@@ -5,33 +5,31 @@ using UnityEngine;
 
 public class Drop : MonoBehaviour
 {
-    [SerializeField] private Card m_ItemCard;
-    [SerializeField] private string DropType;
-    public Card itemCard { get { return m_ItemCard; } }
+    public string dropType;
+    public string plantCardID;
     private float moveSpeed = 5f;
-    private Drop plantDrop;
+    private float rotationSpeed = 500f;
 
-    public void MoveToInventory()
+    public void AddDropToInventoryMarket(Drop plantDrop)
     {
-        plantDrop = GetComponent<Drop>();
-        StartCoroutine(MoveDrop());
-    }
-
-    private IEnumerator MoveDrop()
-    {
-        if(plantDrop != null && itemCard != null)
+        if (plantDrop != null)
         {
-            switch (DropType)
+            switch (dropType)
             {
                 case "Machine":
-                    if(plantDrop.name == "WaterDrop")
+                    if (plantDrop.name == "WaterDrop")
                     {
                         GameManager.UM.water += 1;
+                    }
+                    if (plantDrop.name == "FertilizerDrop")
+                    {
+                        GameManager.UM.fertilizer += 1;
                     }
                     break;
                 case "Product":
                     break;
                 default:
+                    Card itemCard = GameManager.CM.FindCardById(plantDrop.plantCardID);
                     InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.itemName == itemCard.itemName);
                     if (existingInventoryItem == null)
                     {
@@ -55,16 +53,28 @@ public class Drop : MonoBehaviour
                     }
                     break;
             }
-            Vector3 targetPosition = new Vector3(plantDrop.transform.position.x, 15f, plantDrop.transform.position.z);
-            while (Vector3.Distance(plantDrop.transform.position, targetPosition) > 0.1f)
-            {
-                plantDrop.transform.position = Vector3.MoveTowards(plantDrop.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-                yield return null;
-            }
-            if (plantDrop.transform.position.y > 10f)
-            {
-                Destroy(plantDrop.gameObject);
-            }
+            MoveDrop(plantDrop);
+        }
+    }
+
+    public void MoveDrop(Drop plantDrop)
+    {
+        StartCoroutine(MoveDropCoroutine(plantDrop));
+    }
+
+    private IEnumerator MoveDropCoroutine(Drop plantDrop)
+    {
+        Vector3 targetPosition = new Vector3(plantDrop.transform.position.x, 15f, plantDrop.transform.position.z);
+
+        while (Vector3.Distance(plantDrop.transform.position, targetPosition) > 0.1f)
+        {
+            plantDrop.transform.position = Vector3.MoveTowards(plantDrop.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            plantDrop.transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
+            yield return null;
+        }
+        if (plantDrop.transform.position.y > 10f)
+        {
+            Destroy(plantDrop.gameObject);
         }
     }
 }

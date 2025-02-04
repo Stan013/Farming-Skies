@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public float tax;
     public float balance;
     public float water;
+    public float fertilizer;
 
     [Header("Game variables text")]
     public TMP_Text taxAmountText;
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public TMP_Text waterAmountText;
     public TMP_Text cardAmountText;
     public TMP_Text dateAmountText;
+    public TMP_Text fertilizerAmountText;
 
     [Header("UI Island builder")]
     public TMP_Text buildCostText;

@@ -120,9 +120,9 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Check your plants needs!", "Besides water your lands will need to have the right minerals for your plants. These minerals are nitrogen, phosphorus and potassium each plant has a different need so make sure your land has that. Use your mouse and right click on one of your plant cards to see what this plant needs and also check how big it is. Right click again to put the plant back in your hand.");
                 break;
             case 7:
-                Card cardPeanut = GameManager.HM.FindCardInHandById("CardPeanutPlant");
-                cardPeanut.cardBackground.GetComponent<Image>().color = Color.green;
-                cardPeanut.GetComponent<CardDrag>().enabled = true;
+                Card cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
+                cardGreenBean.cardBackground.GetComponent<Image>().color = Color.green;
+                cardGreenBean.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Plant your first plant!", "Now that you have got your land ready and know what each plant needs and how big they are, it is time to plant. Hover over the plant card you have chosen and hold left mouse button. Now move your mouse to whichever spot you want to plant there a 36 spaces for small plants, 9 for medium plants and 1 space for a big plant. So make sure your plant snaps to the right spot.");
                 break;
             case 8:

@@ -86,7 +86,6 @@ public class Card : MonoBehaviour
         switch (state)
         {
             case CardState.InDeck:
-                GameManager.UM.UpdateUI();
                 GameManager.DM.cardsInDeck.Add(this);
                 this.gameObject.transform.SetParent(GameManager.DM.cardsInDeckParent.transform);
                 cardIndex = GameManager.DM.cardsInDeck.Count;
@@ -136,7 +135,6 @@ public class Card : MonoBehaviour
         switch (state)
         {
             case CardState.InDeck:
-                GameManager.UM.UpdateUI();
                 GameManager.DM.cardsInDeck.Remove(this);
                 break;
             case CardState.InHand:

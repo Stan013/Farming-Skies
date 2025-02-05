@@ -167,6 +167,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
         Destroy(dragInstance);
         GameManager.ISM.SetCollisions("Reset");
+        GameManager.DM.CheckSlotDuplicate();
     }
 
     public GameObject CheckPotentialPlot()

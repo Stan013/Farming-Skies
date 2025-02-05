@@ -9,6 +9,12 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public List<Island> boughtIslands = new List<Island>();
     public List<Island> unboughtIslands = new List<Island>();
 
+    public Material sowedMat;
+    public Material sowedNeedsNPKMat;
+    public Material cultivatedMat;
+    public Material cultivatedNeedsNPKMat;
+    public Material wateredMat;
+    public Material wateredNeedsNPKMat;
 
     public void AddIslandToBought(Island reconstructedIsland)
     {
@@ -126,6 +132,43 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         foreach(Island island in unboughtIslands)
         {
             island.islandCanBought = purchasable;
+        }
+    }
+
+    public void IslandNutrients()
+    {
+        foreach(Island island in boughtIslands)
+        {
+            GameManager.UM.water -= island.totalWater;
+            island.totalWater = 0;
+            island.nitrogen -= island.totalNitrogen;
+            island.totalNitrogen = 0;
+            island.phosphorus -= island.totalPhosphorus;
+            island.totalPhosphorus = 0;
+            island.potassium -= island.totalPotassium;
+            island.totalPotassium = 0;
+            island.magnesium -= island.totalMagnesium;
+            island.totalMagnesium = 0;
+            island.sulfur -= island.totalSulfur;
+            island.totalSulfur = 0;
+            island.calcium -= island.totalCalcium;
+            island.totalCalcium = 0;
+            if (island.nitrogen <= 0 || island.phosphorus <= 0 || island.potassium <= 0)
+            {
+                island.needsNPK = true;
+                switch (island.currentState)
+                {
+                    case Island.IslandState.Sowed:
+                        island.SetMaterial(sowedNeedsNPKMat);
+                        break;
+                    case Island.IslandState.Watered:
+                        island.SetMaterial(wateredNeedsNPKMat);
+                        break;
+                    case Island.IslandState.Cultivated:
+                        island.SetMaterial(cultivatedNeedsNPKMat);
+                        break;
+                }
+            }
         }
     }
 

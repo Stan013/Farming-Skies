@@ -22,6 +22,7 @@ public class Plant : MonoBehaviour
         Drop plantDrop = Instantiate(drop, Vector3.zero, Quaternion.identity);
         plantDrop.transform.localScale = new Vector3(plantDrop.transform.localScale.x * plantScale, plantDrop.transform.localScale.y * plantScale, plantDrop.transform.localScale.z * plantScale);
         plantDrop.transform.localPosition = new Vector3(plot.position.x, 5f, plot.position.z);
+        plantDrop.dropAmount = yield;
         plantDrop.AddDropToInventoryMarket(plantDrop);
     }
 }

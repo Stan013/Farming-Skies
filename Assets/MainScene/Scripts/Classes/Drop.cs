@@ -6,9 +6,10 @@ using UnityEngine;
 public class Drop : MonoBehaviour
 {
     public string dropType;
+    public int dropAmount;
     public string plantCardID;
-    private float moveSpeed = 5f;
-    private float rotationSpeed = 500f;
+    private int moveSpeed = 5;
+    private int rotationSpeed = 500;
 
     public void AddDropToInventoryMarket(Drop plantDrop)
     {
@@ -34,13 +35,13 @@ public class Drop : MonoBehaviour
                     if (existingInventoryItem == null)
                     {
                         InventoryItem inventoryItem = Instantiate(itemCard.inventoryItem, Vector3.zero, Quaternion.identity);
-                        inventoryItem.SetInventoryItem(itemCard);
+                        inventoryItem.SetInventoryItem(itemCard, dropAmount);
                         GameManager.INM.AddItemToInventory(inventoryItem);
                         MarketItem matchingMarketItem = GameManager.MM.itemsInMarket.FirstOrDefault(m => m.itemName == inventoryItem.itemName);
                         if (matchingMarketItem != null)
                         {
                             inventoryItem.marketItem = matchingMarketItem;
-                            matchingMarketItem.itemQuantity = 1;
+                            matchingMarketItem.itemQuantity += dropAmount;
                         }
                     }
                     else
@@ -48,7 +49,7 @@ public class Drop : MonoBehaviour
                         MarketItem matchingMarketItem = GameManager.MM.itemsInMarket.FirstOrDefault(m => m.itemName == existingInventoryItem.itemName);
                         if (matchingMarketItem != null)
                         {
-                            matchingMarketItem.itemQuantity += 1;
+                            matchingMarketItem.itemQuantity += plantDrop.dropAmount;
                         }
                     }
                     break;

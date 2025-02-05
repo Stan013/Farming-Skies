@@ -9,8 +9,8 @@ public class Island : MonoBehaviour
     public IslandState potentialState = IslandState.Sowed;
     
     public bool islandBoughtStatus;
-    public float islandBuildCost;
-    public float islandTaxCost;
+    public int islandBuildCost;
+    public int islandTaxCost;
     public bool islandCanBought; 
 
     public List<GameObject> plotsSmallPlants;
@@ -24,13 +24,22 @@ public class Island : MonoBehaviour
     public GameObject islandBottom;
     public Material bottomMat;
 
-    public float nitrogen;
-    public float phosphorus;
-    public float potassium;
+    public int nitrogen;
+    public int phosphorus;
+    public int potassium;
+    public int magnesium;
+    public int sulfur;
+    public int calcium;
 
-    public Material sowedMat;
-    public Material cultivatedMat;
-    public Material wateredMat;
+    public int totalWater;
+    public int totalNitrogen;
+    public int totalPhosphorus;
+    public int totalPotassium;
+    public int totalMagnesium;
+    public int totalSulfur;
+    public int totalCalcium;
+
+    public bool needsNPK;
     public Material bottomDefaultMat;
 
     public enum IslandState
@@ -40,7 +49,6 @@ public class Island : MonoBehaviour
         Watered,
         Sowed,
         Cultivated,
-        NeedsNPK,
     }
 
     public void ToggleState(IslandState targetState, IslandState fallbackState)
@@ -80,19 +88,38 @@ public class Island : MonoBehaviour
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }
-                islandMat = wateredMat;
+                if (needsNPK)
+                {
+                    islandMat = GameManager.ISM.wateredNeedsNPKMat;
+                }
+                else
+                {
+                    islandMat = GameManager.ISM.wateredMat;
+                }
                 break;
             case IslandState.Sowed:
-                islandMat = sowedMat;
+                if (needsNPK)
+                {
+                    islandMat = GameManager.ISM.sowedNeedsNPKMat;
+                }
+                else
+                {
+                    islandMat = GameManager.ISM.sowedMat;
+                }
                 break;
             case IslandState.Cultivated:
                 if(islandId == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 3)
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }
-                islandMat = cultivatedMat;
-                break;
-            case IslandState.NeedsNPK:
+                if (needsNPK)
+                {
+                    islandMat = GameManager.ISM.cultivatedNeedsNPKMat;
+                }
+                else
+                {
+                    islandMat = GameManager.ISM.cultivatedMat;
+                }
                 break;
         }
         if (islandMat != null)
@@ -117,15 +144,34 @@ public class Island : MonoBehaviour
         switch (state)
         {
             case IslandState.Watered:
-                islandMat = wateredMat;
+                if (needsNPK)
+                {
+                    islandMat = GameManager.ISM.wateredNeedsNPKMat;
+                }
+                else
+                {
+                    islandMat = GameManager.ISM.wateredMat;
+                }
                 break;
             case IslandState.Sowed:
-                islandMat = sowedMat;
+                if (needsNPK)
+                {
+                    islandMat = GameManager.ISM.sowedMat;
+                }
+                else
+                {
+                    islandMat = GameManager.ISM.sowedNeedsNPKMat;
+                }
                 break;
             case IslandState.Cultivated:
-                islandMat = cultivatedMat;
-                break;
-            case IslandState.NeedsNPK:
+                if(needsNPK)
+                {
+                    islandMat = GameManager.ISM.cultivatedNeedsNPKMat;
+                }
+                else
+                {
+                    islandMat = GameManager.ISM.cultivatedMat;
+                }
                 break;
         }
         SetMaterial(islandMat);

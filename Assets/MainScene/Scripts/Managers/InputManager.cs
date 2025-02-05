@@ -26,7 +26,14 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) // Limited movement and mouse clicking
         {
-            ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default);
+            if (GameManager.CurrentState == GameManager.GameState.ManageMode)
+            {
+                ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
+            }
+            else
+            {
+                ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default);
+            }
         }
         if (Input.GetKeyDown(KeyCode.E)) // Payment and card picking (no building or dragging)
         {
@@ -36,15 +43,18 @@ public class InputManager : MonoBehaviour
         {
             ToggleState(GameManager.GameState.ShopMode, GameManager.GameState.Default);
         }
-        if (Input.GetKeyDown(KeyCode.I)) // Open Inventory (no building, dragging or cards)
+        if (Input.GetKeyDown(KeyCode.Tab)) // Open Inventory (no building, dragging or cards)
         {
-            if(GameManager.CurrentState == GameManager.GameState.InventoryMode)
+            if(GameManager.UM.openInventoryButton.IsInteractable())
             {
-                ToggleState(GameManager.GameState.Default, GameManager.GameState.InventoryMode);
-            }
-            else
-            {
-                ToggleState(GameManager.GameState.InventoryMode, GameManager.GameState.Default);
+                if(GameManager.CurrentState == GameManager.GameState.InventoryMode)
+                {
+                    GameManager.UM.closeButton.onClick.Invoke();
+                }
+                else
+                {
+                    GameManager.UM.openInventoryButton.onClick.Invoke();
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.M)) // Open Market (no building, dragging or cards)
@@ -73,16 +83,16 @@ public class InputManager : MonoBehaviour
                 DefaultKeyboard();
                 break;
             case GameManager.GameState.ManageMode:
-                mainCamera.transform.position = GameManager.staticPos;
+                GameManager.staticPos = mainCamera.transform.position;
                 break;
             case GameManager.GameState.EndRoundMode:
-                mainCamera.transform.position = GameManager.staticPos;
+                GameManager.staticPos = mainCamera.transform.position;
                 break;
             case GameManager.GameState.InventoryMode:
-                mainCamera.transform.position = GameManager.staticPos;
+                GameManager.staticPos = mainCamera.transform.position;
                 break;
             case GameManager.GameState.MarketMode:
-                mainCamera.transform.position = GameManager.staticPos;
+                GameManager.staticPos = mainCamera.transform.position;
                 break;
         }
     }
@@ -119,10 +129,8 @@ public class InputManager : MonoBehaviour
             case GameManager.GameState.EndRoundMode:
                 break;
             case GameManager.GameState.InventoryMode:
-                DefaultMouse();
                 break;
             case GameManager.GameState.MarketMode:
-                DefaultMouse();
                 break;
         }
     }

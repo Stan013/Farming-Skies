@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public Button openMarketButton;
     public Button openInventoryButton;
     public Button nextDayButton;
+    public Button closeButton;
 
     [Header("Game variables")]
     public float tax;

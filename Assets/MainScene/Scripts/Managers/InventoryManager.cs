@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] private List<InventoryItem> m_ItemsInInventory;
-    public List<InventoryItem> itemsInInventory { get { return m_ItemsInInventory; } }
-    [SerializeField] private GameObject inventoryWindow;
-    private float increaseX = 450f;
+    public List<InventoryItem> itemsInInventory;
+    public GameObject inventoryWindow;
+    public GameObject inventoryContentArea;
 
     public void UpdateInventoryItems()
     {
@@ -19,22 +19,17 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItemToInventory(InventoryItem inventoryItem)
     {
+        inventoryItem.transform.SetParent(inventoryContentArea.transform, false);
         itemsInInventory.Add(inventoryItem);
-        inventoryItem.transform.SetParent(inventoryWindow.transform);
-        inventoryItem.transform.localRotation = Quaternion.identity;
-        inventoryItem.transform.localScale = Vector3.one;
-        if (inventoryItem.itemIndex <= 4)
-        {
-            inventoryItem.transform.localPosition = new Vector3(-675f + increaseX * (inventoryItem.itemIndex), 160f, 0);
-        }
-        else
-        {
-            inventoryItem.transform.localPosition = new Vector3(-675f + increaseX * (inventoryItem.itemIndex-4), -270f, 0);
-        }
     }
 
     public void CloseWindow()
     {
+        if(GameManager.TTM.tutorialCount == 10)
+        {
+            GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
+            GameManager.TTM.QuestCompleted = true;
+        }
         inventoryWindow.SetActive(false);
     }
 }

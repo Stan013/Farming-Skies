@@ -143,10 +143,11 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 10:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openInventoryButton);
+                GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.green;
                 UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what rewards you got. As you might have seen it is a new day so press TAB to go into inventory mode and see at what you got from your plants. You can sort these drops by using the tabs at the top of the window. You can also sell these drops if you want or use them to make more plants or products.");
                 break;
             case 11:
-                UpdateQuest("Check your land health!", "");
+                UpdateQuest("Check your land health!", "As you can see after that harvest your land is looking a bit rough. This is because the plants on top of the land used all of it's nutrients. If your land has the right amount of nutrients you have a change that your yield will increase. So lets make sure your land is in good condition again by going into manage mode and left clicking your land.");
                 break;
             case 12:
                 UpdateQuest("Improve your yield!", "");

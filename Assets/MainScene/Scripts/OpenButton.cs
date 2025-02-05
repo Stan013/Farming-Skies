@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class OpenButton : MonoBehaviour
 {
@@ -33,5 +34,6 @@ public class OpenButton : MonoBehaviour
                 openWindow.SetActive(true);
                 break;
         }
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

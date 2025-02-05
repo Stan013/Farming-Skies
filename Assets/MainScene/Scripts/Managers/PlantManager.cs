@@ -16,6 +16,13 @@ public class PlantManager : MonoBehaviour
                     CalculateDropAmount(island, plant);
                 }
                 plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
+                island.totalWater += plant.water;
+                island.totalNitrogen += plant.nitrogen;
+                island.totalPhosphorus += plant.phosphorus;
+                island.totalPotassium += plant.potassium;
+                island.totalMagnesium += plant.magnesium;
+                island.totalSulfur += plant.sulfur;
+                island.totalCalcium += plant.calcium;
             }
         }
     }

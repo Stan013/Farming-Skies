@@ -21,6 +21,7 @@ public class NextDayButton : MonoBehaviour
         GameManager.TM.NextDay();
         GameManager.PM.Harvest();
         GameManager.MM.UpdatePrices();
+        GameManager.ISM.IslandNutrients();
         EventSystem.current.SetSelectedGameObject(null);
     }
 }

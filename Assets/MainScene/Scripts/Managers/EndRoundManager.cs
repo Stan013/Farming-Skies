@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class EndRoundManager : MonoBehaviour
 {
-    [SerializeField] private GameObject m_CardPickWindow;
-    public GameObject cardPickWindow => m_CardPickWindow;
+    public GameObject cardPickWindow;
     [SerializeField] private GameObject pickSlotParent;
-    [SerializeField] private List<CardSlot> m_PickSlots;
-    public List<CardSlot> pickSlots { get { return m_PickSlots; } }
+    public List<CardSlot> pickSlots;
 
     public void GeneratePickWindow()
     {

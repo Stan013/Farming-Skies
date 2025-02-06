@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlantManager : MonoBehaviour
 {
+    private System.Random random = new System.Random();
+
     public void Harvest()
     {
         foreach (Island island in GameManager.ISM.boughtIslands)
@@ -15,14 +17,15 @@ public class PlantManager : MonoBehaviour
                 {
                     CalculateDropAmount(island, plant);
                 }
-                plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
-                island.totalWater += plant.water;
-                island.totalNitrogen += plant.nitrogen;
-                island.totalPhosphorus += plant.phosphorus;
-                island.totalPotassium += plant.potassium;
-                island.totalMagnesium += plant.magnesium;
-                island.totalSulfur += plant.sulfur;
-                island.totalCalcium += plant.calcium;
+                if (GameManager.ISM.CheckWater(plant))
+                {
+                    island.water -= plant.water;
+                    plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
+                }
+                else
+                {
+                    island.ToggleState(Island.IslandState.Cultivated, Island.IslandState.Sowed);
+                }
             }
         }
     }
@@ -31,8 +34,45 @@ public class PlantManager : MonoBehaviour
     {
         if(island.nitrogen >= plant.nitrogen)
         {
-            plant.yield++;
+            if (random.NextDouble() <= 0.75)
+            {
+                plant.yield++;
+            }
         }
-        //if(island.nitrogen >= plant)
+        else
+        {
+            if (random.NextDouble() <= 0.75)
+            {
+                plant.yield--;
+            }
+        }
+        if (island.phosphorus >= plant.phosphorus)
+        {
+            if (random.NextDouble() <= 0.75)
+            {
+                plant.yield++;
+            }
+        }
+        else
+        {
+            if (random.NextDouble() <= 0.75)
+            {
+                plant.yield--;
+            }
+        }
+        if (island.potassium >= plant.potassium)
+        {
+            if (random.NextDouble() <= 0.75)
+            {
+                plant.yield++;
+            }
+        }
+        else
+        {
+            if (random.NextDouble() <= 0.75)
+            {
+                plant.yield--;
+            }
+        }
     }
 }

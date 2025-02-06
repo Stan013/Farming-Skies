@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class MarketManager : MonoBehaviour
 {
-    [SerializeField] private List<MarketItem> m_ItemsInMarket;
-    public List<MarketItem> itemsInMarket { get { return m_ItemsInMarket; } }
-    [SerializeField] private GameObject marketWindow;
-    private float increaseX = 450f;
+    public List<MarketItem> itemsInMarket;
+    public GameObject marketWindow;
+    public GameObject marketContentArea;
+
     private int[] marketChanges = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
     private float[] marketWeights = {1f, 1.2f, 1.4f, 1.6f, 1.7f, 1.8f, 1.7f, 1.6f, 1.4f, 1.2f, 1f};
     private int[] marketChangesDecimal = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -19,7 +19,7 @@ public class MarketManager : MonoBehaviour
     {
         foreach(MarketItem marketItem in itemsInMarket)
         {
-            marketItem.SetItemQuantity();
+            marketItem.itemQuantityText.SetText(marketItem.attachedItemCard.itemQuantity.ToString());
             marketItem.sellButton.inputAmount.text = "";
             marketItem.buyButton.inputAmount.text = "";
         }
@@ -29,18 +29,8 @@ public class MarketManager : MonoBehaviour
     {
         MarketItem marketItem = Instantiate(itemCard.marketItem, Vector3.zero, Quaternion.identity);
         marketItem.SetMarketItem(itemCard);
+        marketItem.transform.SetParent(marketContentArea.transform, false);
         itemsInMarket.Add(marketItem);
-        marketItem.transform.SetParent(marketWindow.transform);
-        marketItem.transform.localRotation = Quaternion.identity;
-        marketItem.transform.localScale = Vector3.one;
-        if (marketItem.itemIndex < 4)
-        {
-            marketItem.transform.localPosition = new Vector3(-675f + increaseX * (marketItem.itemIndex), 160f, 0);
-        }
-        else
-        {
-            marketItem.transform.localPosition = new Vector3(-675f + increaseX * (marketItem.itemIndex-4), -270f, 0);
-        }
         itemCard.cardAddedToMarket = true;
     }
 
@@ -49,19 +39,19 @@ public class MarketManager : MonoBehaviour
         foreach (MarketItem item in itemsInMarket)
         {
             float currentPrice = item.priceCurrent;
-            float baseDemand = item.itemDemand;
-            float baseSupply = item.itemSupply;
+            float baseDemand = item.attachedItemCard.itemDemand;
+            float baseSupply = item.attachedItemCard.itemSupply;
             int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
             int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
             int priceChange = randomDemand - randomSupply;
             float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
             float totalPriceChangePercentage = priceChange + (randomDecimal / 10);
-            item.itemDemand = (float)Math.Round(baseDemand * (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
-            item.itemSupply = (float)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
+            item.attachedItemCard.itemDemand = (float)Math.Round(baseDemand * (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
+            item.attachedItemCard.itemSupply = (float)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
             item.priceCurrent = (float)Math.Round(currentPrice * (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
             item.allItemPrices.Add(item.priceCurrent);
             item.UpdateLowHighPrices();
-            item.UpdateMarketItem();
+            item.UpdateMarketItem(item.attachedItemCard);
         }
     }
 
@@ -95,8 +85,8 @@ public class MarketManager : MonoBehaviour
         }
         if (isSelling)
         {
-            amount = Mathf.Min(amount, marketItem.itemQuantity);
-            marketItem.itemQuantity -= amount;
+            amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
+            marketItem.attachedItemCard.itemQuantity -= amount;
             float totalEarned = amount * marketItem.priceCurrent;
             GameManager.UM.balance += totalEarned;
         }
@@ -105,7 +95,7 @@ public class MarketManager : MonoBehaviour
             float itemPrice = marketItem.priceCurrent;
             int affordableAmount = (int)(GameManager.UM.balance / itemPrice);
             amount = Mathf.Min(amount, affordableAmount);
-            marketItem.itemQuantity += amount;
+            marketItem.attachedItemCard.itemQuantity += amount;
             GameManager.UM.balance -= amount * itemPrice;
         }
         UpdateMarketItems();

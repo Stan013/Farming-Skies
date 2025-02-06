@@ -27,7 +27,8 @@ public class GameData
 
     public float tax;
     public float balance;
-    public float water;
+    public int water;
+    public int fertilizer;
     public List<int> date = new List<int> { 1, 1, 2025 };
 
     public List<string> starterCards = new List<string>();
@@ -41,7 +42,8 @@ public class GameData
     {
         tax = 0f;
         balance = 500f;
-        water = 10f;
+        water = 50;
+        fertilizer = 50;
         playerPosition = new Vector3(0, 0, 0);
         cameraDirection = new Vector3(0, 10, 0);
     }

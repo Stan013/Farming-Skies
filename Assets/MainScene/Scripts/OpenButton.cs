@@ -21,6 +21,7 @@ public class OpenButton : MonoBehaviour
                 if(GameManager.TTM.tutorialCount == 10)
                 {
                     GameManager.TTM.QuestCompleted = true;
+                    GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
                 }
                 GameManager.IPM.ToggleState(GameManager.GameState.InventoryMode, GameManager.GameState.Default);
                 openWindow.SetActive(true);

@@ -31,26 +31,17 @@ public class Drop : MonoBehaviour
                     break;
                 default:
                     Card itemCard = GameManager.CM.FindCardById(plantDrop.plantCardID);
-                    InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.itemName == itemCard.itemName);
+                    InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == itemCard.itemName);
                     if (existingInventoryItem == null)
                     {
                         InventoryItem inventoryItem = Instantiate(itemCard.inventoryItem, Vector3.zero, Quaternion.identity);
                         inventoryItem.SetInventoryItem(itemCard, dropAmount);
                         GameManager.INM.AddItemToInventory(inventoryItem);
-                        MarketItem matchingMarketItem = GameManager.MM.itemsInMarket.FirstOrDefault(m => m.itemName == inventoryItem.itemName);
-                        if (matchingMarketItem != null)
-                        {
-                            inventoryItem.marketItem = matchingMarketItem;
-                            matchingMarketItem.itemQuantity += dropAmount;
-                        }
+                        GameManager.MM.UnlockMarketItem(itemCard);
                     }
                     else
                     {
-                        MarketItem matchingMarketItem = GameManager.MM.itemsInMarket.FirstOrDefault(m => m.itemName == existingInventoryItem.itemName);
-                        if (matchingMarketItem != null)
-                        {
-                            matchingMarketItem.itemQuantity += plantDrop.dropAmount;
-                        }
+                        existingInventoryItem.attachedItemCard.itemQuantity += dropAmount;
                     }
                     break;
             }

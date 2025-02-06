@@ -6,29 +6,21 @@ using TMPro;
 
 public class InventoryItem : MonoBehaviour
 {
-    [SerializeField] private TMP_Text itemNameText;
-    [SerializeField] private TMP_Text itemQuantityText;
-    [SerializeField] private Image itemImage;
-    public MarketItem marketItem;
+    public TMP_Text itemNameText;
+    public TMP_Text itemQuantityText;
+    public Image itemImage;
     public int itemIndex;
-    public string itemName;
-    public Sprite itemSprite;
-
-    public void SetItemQuantity()
-    {
-        itemQuantityText.SetText(marketItem.itemQuantity.ToString());
-    }
+    public Card attachedItemCard;
 
     public void SetInventoryItem(Card itemCard, int dropAmount)
     {
         if(itemCard != null)
         {
-            itemCard.marketItem.itemQuantity = dropAmount;
-            itemName = itemCard.itemName;
-            marketItem = itemCard.marketItem;
-            itemNameText.SetText(itemName);
-            itemQuantityText.SetText(dropAmount.ToString());
-            itemImage.sprite = itemCard.cardSprite;
+            attachedItemCard = itemCard;
+            attachedItemCard.itemQuantity = dropAmount;
+            itemNameText.SetText(attachedItemCard.itemName);
+            itemQuantityText.SetText(attachedItemCard.itemQuantity.ToString());
+            itemImage.sprite = attachedItemCard.cardSprite;
             itemIndex = GameManager.INM.itemsInInventory.Count;
         }
     }

@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (InventoryItem inventoryItem in itemsInInventory)
         {
-            inventoryItem.SetItemQuantity();
+            inventoryItem.itemQuantityText.SetText(inventoryItem.attachedItemCard.itemQuantity.ToString());
         }
     }
 

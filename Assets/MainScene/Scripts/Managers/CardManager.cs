@@ -26,17 +26,6 @@ public class CardManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void SetupMarketItems()
-    {
-        foreach (Card card in availableCards)
-        {
-            if (card.cardType != "Utility" && card.cardUnlocked && !card.cardAddedToMarket)
-            {
-                GameManager.MM.UnlockMarketItem(card);
-            }
-        }
-    }
-
     public void SetupCard(Card card)
     {
         card.cardImage.GetComponent<Image>().sprite = card.cardSprite;

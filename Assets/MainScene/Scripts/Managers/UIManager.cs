@@ -25,8 +25,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
     [Header("Game variables")]
     public float tax;
     public float balance;
-    public float water;
-    public float fertilizer;
+    public int water;
+    public int fertilizer;
 
     [Header("Game variables text")]
     public TMP_Text taxAmountText;
@@ -89,6 +89,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         taxAmountText.SetText(tax.ToString() + " ₴");
         balanceAmountText.SetText(balance.ToString() + " ₴");
         waterAmountText.SetText(water.ToString() + " L");
+        fertilizerAmountText.SetText(fertilizer.ToString() + " L");
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
     }
 
@@ -129,6 +130,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         tax = data.tax;
         balance = data.balance;
         water = data.water;
+        fertilizer = data.fertilizer;
     }
 
     public void SaveData(ref GameData data)
@@ -136,5 +138,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
         data.tax = tax;
         data.balance = balance;
         data.water = water;
+        data.fertilizer = fertilizer;
     }
 }

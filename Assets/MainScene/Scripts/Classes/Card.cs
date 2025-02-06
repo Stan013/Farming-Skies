@@ -34,10 +34,11 @@ public class Card : MonoBehaviour
 
     [Header("Associated item variables")]
     public string itemName;
+    public Sprite itemSprite;
+    public int itemQuantity;
 
     [Header("Associated inventory item variables")]
     public InventoryItem inventoryItem;
-    public int itemQuantity;
     public bool cardUnlocked;
 
     [Header("Associated market item variables")]

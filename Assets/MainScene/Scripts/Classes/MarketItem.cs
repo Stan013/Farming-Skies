@@ -7,38 +7,26 @@ using TMPro;
 
 public class MarketItem : MonoBehaviour
 {
-    //Generate id for saving
-    [SerializeField] private string id;
-    private void GenerateGuid()
-    {
-        id = System.Guid.NewGuid().ToString();
-    }
-
-    [SerializeField] private TMP_Text itemQuantityText;
-    [SerializeField] private TMP_Text itemNameText;
-    [SerializeField] private Image itemImage;
-    [SerializeField] private Image changeIcon;
-    [SerializeField] private Sprite upIcon;
-    [SerializeField] private Sprite downIcon;
-    [SerializeField] private TMP_Text priceText;
-    [SerializeField] private TMP_Text pricehigh3dText;
-    [SerializeField] private TMP_Text pricelow3dText;
-    [SerializeField] private TMP_Text pricehigh5dText;
-    [SerializeField] private TMP_Text pricelow5dText;
-    [SerializeField] private TMP_Text pricehigh7dText;
-    [SerializeField] private TMP_Text pricelow7dText;
-    [SerializeField] private TMP_Text demandText;
-    [SerializeField] private TMP_Text supplyText;
-    [SerializeField] private MarketButton m_SellButton;
-    public MarketButton sellButton { get { return m_SellButton; } }
-    [SerializeField] private MarketButton m_BuyButton;
-    public MarketButton buyButton { get { return m_BuyButton; } }
-    [SerializeField] private List<float> m_AllItemPrices;
-    public List<float> allItemPrices { get { return m_AllItemPrices; } }
-    public int itemQuantity;
+    public TMP_Text itemQuantityText;
+    public TMP_Text itemNameText;
+    public Image itemImage;
+    public Image changeIcon;
+    public Sprite upIcon;
+    public Sprite downIcon;
+    public TMP_Text priceText;
+    public TMP_Text pricehigh3dText;
+    public TMP_Text pricelow3dText;
+    public TMP_Text pricehigh5dText;
+    public TMP_Text pricelow5dText;
+    public TMP_Text pricehigh7dText;
+    public TMP_Text pricelow7dText;
+    public TMP_Text demandText;
+    public TMP_Text supplyText;
+    public MarketButton sellButton;
+    public MarketButton buyButton;
+    public List<float> allItemPrices;
     public int itemIndex;
-    public string itemName;
-    public Sprite itemSprite;
+    public Card attachedItemCard;
     public float priceCurrent;
     private float pricehigh3d;
     private float pricelow3d;
@@ -46,34 +34,23 @@ public class MarketItem : MonoBehaviour
     private float pricelow5d;
     private float pricehigh7d;
     private float pricelow7d;
-    public float itemDemand;
-    public float itemSupply;
-
-    public void SetItemQuantity()
-    {
-        itemQuantityText.SetText(itemQuantity.ToString());
-    }
 
     public void SetMarketItem(Card itemCard)
     {
         if(itemCard != null)
         {
-            itemName = itemCard.itemName;
-            itemNameText.SetText(itemName);
-            itemImage.sprite = itemCard.cardSprite;
+            attachedItemCard = itemCard;
+            itemNameText.SetText(attachedItemCard.itemName);
+            itemQuantityText.SetText(attachedItemCard.itemQuantity.ToString());
             itemIndex = GameManager.MM.itemsInMarket.Count;
-            itemDemand = itemCard.itemDemand;
-            itemSupply = itemCard.itemSupply;
-            priceCurrent = itemCard.itemPrice;
-            itemQuantity = 0;
-            itemQuantityText.SetText(itemQuantity.ToString());
+            itemImage.sprite = attachedItemCard.cardSprite;
             allItemPrices.Add(priceCurrent);
+            UpdateMarketItem(attachedItemCard);
             UpdateLowHighPrices();
-            UpdateMarketItem();
         }
     }
 
-    public void UpdateMarketItem()
+    public void UpdateMarketItem(Card itemCard)
     {
         priceText.SetText("₴ " + priceCurrent.ToString());
         pricelow3dText.SetText("₴ " + pricelow3d.ToString());
@@ -82,8 +59,8 @@ public class MarketItem : MonoBehaviour
         pricehigh5dText.SetText("₴ " + pricehigh5d.ToString());
         pricelow7dText.SetText("₴ " + pricelow7d.ToString());
         pricehigh7dText.SetText("₴ " + pricehigh7d.ToString());
-        demandText.SetText(FormatNumber(itemDemand));
-        supplyText.SetText(FormatNumber(itemSupply));
+        demandText.SetText(FormatNumber(itemCard.itemDemand));
+        supplyText.SetText(FormatNumber(itemCard.itemSupply));
         if (allItemPrices.Count != 1)
         {
             if (priceCurrent < allItemPrices[allItemPrices.Count - 1])

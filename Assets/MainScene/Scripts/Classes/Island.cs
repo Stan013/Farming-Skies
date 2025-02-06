@@ -24,20 +24,13 @@ public class Island : MonoBehaviour
     public GameObject islandBottom;
     public Material bottomMat;
 
+    public int water;
     public int nitrogen;
     public int phosphorus;
     public int potassium;
     public int magnesium;
     public int sulfur;
     public int calcium;
-
-    public int totalWater;
-    public int totalNitrogen;
-    public int totalPhosphorus;
-    public int totalPotassium;
-    public int totalMagnesium;
-    public int totalSulfur;
-    public int totalCalcium;
 
     public bool needsNPK;
     public Material bottomDefaultMat;

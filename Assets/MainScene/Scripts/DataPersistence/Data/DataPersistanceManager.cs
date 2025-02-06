@@ -42,6 +42,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.UM.tax = this.gameData.tax;
         GameManager.UM.balance = this.gameData.balance;
         GameManager.UM.water = this.gameData.water;
+        GameManager.UM.fertilizer = this.gameData.fertilizer;
     }
 
     public void LoadGame()

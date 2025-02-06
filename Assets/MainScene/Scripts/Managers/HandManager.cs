@@ -11,7 +11,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
     public Card dragCard;
     public bool dragging;
     public string placement;
-    private float offsetX = 175f;
+    private int offsetX = 175;
     private float cardMoveDurationBottom = 0.25f;
     private float cardMoveDurationBoth = 0.125f;
     public bool needsCard = true;
@@ -32,7 +32,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
         {
             while (handSlots.Count < 9 && GameManager.DM.cardsInDeck.Count > 0)
             {
-                CardSlot newSlot = Instantiate(cardSlotPrefab, new Vector3(-700f + (handSlots.Count * offsetX), -525f, 0f), Quaternion.identity);
+                CardSlot newSlot = Instantiate(cardSlotPrefab, new Vector3(-700 + (handSlots.Count * offsetX), -525, 0), Quaternion.identity);
                 newSlot.transform.SetParent(handSlotParent.transform, false);
                 handSlots.Add(newSlot);
                 Card originalCard = GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)];
@@ -51,7 +51,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
     public void AddCardToHand(string cardId)
     {
         Card newCard = Instantiate(GameManager.CM.FindCardById(cardId), Vector3.zero, Quaternion.identity);
-        CardSlot newSlot = Instantiate(cardSlotPrefab, new Vector3(-700f + (handSlots.Count * offsetX), -550f, 0f), Quaternion.identity);
+        CardSlot newSlot = Instantiate(cardSlotPrefab, new Vector3(-700 + (handSlots.Count * offsetX), -550, 0f), Quaternion.identity);
         newSlot.transform.SetParent(handSlotParent.transform, false);
         handSlots.Add(newSlot);
         newSlot.AddCardToSlot(handSlots.Count, newCard);

@@ -5,17 +5,17 @@ using TMPro;
 
 public class InputManager : MonoBehaviour
 {
-    private float holdDuration = 2f;
-    private float inventoryHeight = 200f;
+    private int holdDuration = 2;
+    private int inventoryHeight = 200;
     [SerializeField] private float mouseSensitivity;
     [SerializeField] private float moveSpeed;
-    private float zoomSpeed = 50;
-    private float minFOV = 50f;
-    private float maxFOV = 100f;
-    [SerializeField] private Camera mainCamera;
-    [SerializeField] private Rigidbody rb;
+    private int zoomSpeed = 50;
+    private int minFOV = 50;
+    private int maxFOV = 100;
+    public Camera mainCamera;
+    public Rigidbody rb;
 
-    private float verticalRotation = 0f;
+    private float verticalRotation = 0.0f;
     private Vector2 smoothMouseInput;
     private Vector3 smoothMoveDirection;
     public Island clickedIsland;
@@ -82,17 +82,7 @@ public class InputManager : MonoBehaviour
             case GameManager.GameState.Default:
                 DefaultKeyboard();
                 break;
-            case GameManager.GameState.ManageMode:
-                GameManager.staticPos = mainCamera.transform.position;
-                break;
-            case GameManager.GameState.EndRoundMode:
-                GameManager.staticPos = mainCamera.transform.position;
-                break;
-            case GameManager.GameState.InventoryMode:
-                GameManager.staticPos = mainCamera.transform.position;
-                break;
-            case GameManager.GameState.MarketMode:
-                GameManager.staticPos = mainCamera.transform.position;
+            default:
                 break;
         }
     }

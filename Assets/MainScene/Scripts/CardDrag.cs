@@ -137,6 +137,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (hoverIsland != null && hoverIsland.currentState != hoverIsland.potentialState && GameManager.ISM.CheckPotentialIsland() != null)
         {
             GameManager.ISM.CheckPotentialIsland().ToggleState(hoverIsland.potentialState, hoverIsland.currentState);
+            if (GameManager.HM.dragCard.name.Contains("WateringCanCard"))
+            {
+                GameManager.ISM.CheckPotentialIsland().water += 50;
+            }
             GameManager.HM.dragCard.dragSucces = true;
             GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
         }

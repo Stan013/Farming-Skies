@@ -131,6 +131,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.ManageMode:
                 Cursor.visible = true;
+                IPM.rb.velocity = Vector3.zero;
+                IPM.rb.angularVelocity = Vector3.zero;
                 if (!TTM.tutorial)
                 {
                     ISM.SetPurchasableIslands(true);
@@ -159,7 +161,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 UM.openMarketButton.onClick.Invoke();
                 UM.openQuestButton.transform.gameObject.SetActive(false);
                 UM.openUIButton.transform.gameObject.SetActive(false);
-                CM.SetupMarketItems();
                 MM.UpdateMarketItems();
                 break;
         }

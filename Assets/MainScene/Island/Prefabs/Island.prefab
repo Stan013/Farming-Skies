@@ -2353,19 +2353,13 @@ MonoBehaviour:
   topMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
   islandBottom: {fileID: 6957661963711365696}
   bottomMat: {fileID: 2100000, guid: 47ba3d495c324504489e198ddf2e5a9a, type: 2}
-  nitrogen: 0
-  phosphorus: 0
-  potassium: 0
-  magnesium: 0
-  sulfur: 0
-  calcium: 0
-  totalWater: 0
-  totalNitrogen: 0
-  totalPhosphorus: 0
-  totalPotassium: 0
-  totalMagnesium: 0
-  totalSulfur: 0
-  totalCalcium: 0
+  water: 50
+  nitrogen: 50
+  phosphorus: 50
+  potassium: 50
+  magnesium: 50
+  sulfur: 50
+  calcium: 50
   needsNPK: 0
   bottomDefaultMat: {fileID: 2100000, guid: c03ac127f34efe54fbd0eb6755a981bb, type: 2}
 --- !u!1 &7618935844727798640

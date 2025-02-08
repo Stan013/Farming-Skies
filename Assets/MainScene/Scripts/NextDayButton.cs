@@ -18,11 +18,9 @@ public class NextDayButton : MonoBehaviour
             GameManager.TTM.QuestCompleted = true;
             GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.white;
         }
-        GameManager.TM.NextDay();
-        GameManager.PM.Harvest();
-        GameManager.MM.UpdatePrices();
-        GameManager.ISM.IslandNutrients();
-        GameManager.UM.UpdateUI();
+        GameManager.PM.Harvest(); //Includes Water and nutrients Check
+        GameManager.MM.UpdatePrices(); // Includes Market Update
+        GameManager.TM.NextDay(); //Includes Update UI
         EventSystem.current.SetSelectedGameObject(null);
     }
 }

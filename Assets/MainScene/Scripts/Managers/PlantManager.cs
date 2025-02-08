@@ -13,20 +13,19 @@ public class PlantManager : MonoBehaviour
         {
             foreach (Plant plant in island.itemsOnIsland)
             {
-                if(!GameManager.TTM.tutorial)
-                {
-                    CalculateDropAmount(island, plant);
-                }
-                if (GameManager.ISM.CheckWater(plant))
+                if (GameManager.ISM.CheckIslandWater(plant))
                 {
                     island.water -= plant.water;
                     plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
+                    CalculateDropAmount(island, plant);
                 }
                 else
                 {
                     island.ToggleState(Island.IslandState.Cultivated, Island.IslandState.Sowed);
                 }
             }
+            GameManager.ISM.CheckIslandNutrients(island);
+            island.UpdateIslandStats();
         }
     }
 
@@ -74,5 +73,8 @@ public class PlantManager : MonoBehaviour
                 plant.yield--;
             }
         }
+        island.nitrogen -= plant.nitrogen;
+        island.phosphorus -= plant.phosphorus;
+        island.potassium -= plant.potassium;
     }
 }

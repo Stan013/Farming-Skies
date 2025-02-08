@@ -114,6 +114,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             transparencySlider.value = alphaValue;
             if (alphaValue == 1f && island.islandBoughtStatus == false)
             {
+                island.sign.SetActive(true);
                 island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
                 balance -= island.islandBuildCost;
                 tax += island.islandTaxCost;

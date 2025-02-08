@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class InputManager : MonoBehaviour
@@ -10,8 +11,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float mouseSensitivity;
     [SerializeField] private float moveSpeed;
     private int zoomSpeed = 50;
-    private int minFOV = 50;
-    private int maxFOV = 100;
+    private int minFOV = 25;
+    private int maxFOV = 125;
     public Camera mainCamera;
     public Rigidbody rb;
 
@@ -21,6 +22,11 @@ public class InputManager : MonoBehaviour
     public Island clickedIsland;
     private bool buildIslandPress = false;
     private float holdTimer = 0.0f;
+
+    public float doubleClickTime = 0.3f;
+    private float lastClickTime;
+
+    public UnityEvent onDoubleClick;
 
     public void HandleGameStatesSwitchInput()
     {
@@ -115,6 +121,7 @@ public class InputManager : MonoBehaviour
                 break;
             case GameManager.GameState.ManageMode:
                 ManageMouse();
+                MouseZoom();
                 break;
             case GameManager.GameState.EndRoundMode:
                 break;
@@ -147,7 +154,7 @@ public class InputManager : MonoBehaviour
 
     private void ManageMouse()
     {
-        if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit)
+        if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit) //Hold to build island
             && hit.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
         {
             clickedIsland = GetClickedIsland();
@@ -160,7 +167,20 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (!Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitIsland) //Double click for island stats
+            && hitIsland.transform.GetComponent<Island>() != null)
+        {
+            if(hitIsland.transform.GetComponent<Island>().islandBoughtStatus)
+            {
+                if (Time.time - lastClickTime < doubleClickTime)
+                {
+                    MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
+                }
+                lastClickTime = Time.time;
+            }
+        }
+
+        if (!Input.GetMouseButton(1)) //Unsuccesfull island build
         {
             Cursor.lockState = CursorLockMode.None;
             buildIslandPress = false;
@@ -188,6 +208,34 @@ public class InputManager : MonoBehaviour
             GameManager.UM.UpdateBuildIslandSlider(clickedIsland);
             clickedIsland.ChangeMaterial(alphaChangeSpeed);
         }
+    }
+
+    private void MoveCameraToIsland(Island island)
+    {
+        if (island == null) return;
+        Vector3 targetPosition = new Vector3(island.transform.position.x + 4, 5, island.transform.position.z + 4);
+        Quaternion targetRotation = Quaternion.Euler(5, 225, 0);
+        StartCoroutine(SmoothMoveAndRotate(mainCamera.transform, targetPosition, targetRotation, 5f));
+    }
+
+    private IEnumerator SmoothMoveAndRotate(Transform cameraTransform, Vector3 targetPos, Quaternion targetRot, float speed)
+    {
+        Vector3 startPos = cameraTransform.position;
+        Quaternion startRot = cameraTransform.rotation;
+        float journey = 0f;
+        float duration = Vector3.Distance(startPos, targetPos) / speed;
+        while (journey < duration)
+        {
+            journey += Time.deltaTime;
+            float t = journey / duration;
+
+            cameraTransform.position = Vector3.Lerp(startPos, targetPos, t);
+            cameraTransform.rotation = Quaternion.Lerp(startRot, targetRot, t);
+
+            yield return null;
+        }
+        cameraTransform.position = targetPos;
+        cameraTransform.rotation = targetRot;
     }
 
     private bool IsFacingWall(Vector3 direction)

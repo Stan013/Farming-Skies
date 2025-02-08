@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Island : MonoBehaviour
 {
@@ -11,14 +12,14 @@ public class Island : MonoBehaviour
     public bool islandBoughtStatus;
     public int islandBuildCost;
     public int islandTaxCost;
-    public bool islandCanBought; 
+    public bool islandCanBought;
 
+    public GameObject sign;
     public List<GameObject> plotsSmallPlants;
     public List<GameObject> plotsMediumPlants;
     public List<GameObject> plotsBigPlants;
     public List<GameObject> usedPlots = new List<GameObject>();
     public List<Plant> itemsOnIsland = new List<Plant>();
-
     public GameObject islandTop;
     public Material topMat;
     public GameObject islandBottom;
@@ -31,6 +32,15 @@ public class Island : MonoBehaviour
     public int magnesium;
     public int sulfur;
     public int calcium;
+
+    public TMP_Text waterUsageText;
+    public TMP_Text nitrogenUsageText;
+    public TMP_Text phosphorusUsageText;
+    public TMP_Text potassiumUsageText;
+    public int waterUsage;
+    public int nitrogenUsage;
+    public int phosphorusUsage;
+    public int potassiumUsage;
 
     public bool needsNPK;
     public Material bottomDefaultMat;
@@ -300,5 +310,24 @@ public class Island : MonoBehaviour
     public Card FindItemOnIslandByCardId(string plantCardId)
     {
         return GameManager.CM.FindCardById("Card" + plantCardId);
+    }
+
+    public void UpdateIslandStats()
+    {
+        waterUsage = 0;
+        nitrogenUsage = 0;
+        phosphorusUsage = 0;
+        potassiumUsage = 0;
+        foreach (Plant plant in itemsOnIsland)
+        {
+            waterUsage += plant.water;
+            nitrogenUsage += plant.nitrogen;
+            phosphorusUsage += plant.phosphorus;
+            potassiumUsage += plant.potassium;
+        }
+        waterUsageText.SetText(waterUsage.ToString() + " L");
+        nitrogenUsageText.SetText(nitrogenUsage.ToString() + " L");
+        phosphorusUsageText.SetText(phosphorusUsage.ToString() + " L");
+        potassiumUsageText.SetText(potassiumUsage.ToString() + " L");
     }
 }

@@ -152,6 +152,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 plant.transform.SetParent(hoverPlot.transform);
                 plant.transform.localPosition = new Vector3(0, -0.25f, 0);
                 hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
+                hoverIsland.UpdateIslandStats();
                 GameManager.HM.dragCard.dragSucces = true;
                 GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
                 if (GameManager.TTM.tutorialCount == 7)

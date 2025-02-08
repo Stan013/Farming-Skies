@@ -52,7 +52,7 @@ public class TimeManager : MonoBehaviour
                 date[2] += 1;
             }
         }
-         GameManager.UM.UpdateUI();
+        GameManager.UM.UpdateUI();
     }
     public void LoadData(GameData data)
     {

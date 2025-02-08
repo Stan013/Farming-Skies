@@ -135,30 +135,27 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void IslandNutrients()
+    public void CheckIslandNutrients(Island island)
     {
-        foreach(Island island in boughtIslands)
+        if (island.nitrogen <= 0 || island.phosphorus <= 0 || island.potassium <= 0)
         {
-            if (island.nitrogen <= 0 || island.phosphorus <= 0 || island.potassium <= 0)
+            island.needsNPK = true;
+            switch (island.currentState)
             {
-                island.needsNPK = true;
-                switch (island.currentState)
-                {
-                    case Island.IslandState.Sowed:
-                        island.SetMaterial(sowedNeedsNPKMat);
-                        break;
-                    case Island.IslandState.Watered:
-                        island.SetMaterial(wateredNeedsNPKMat);
-                        break;
-                    case Island.IslandState.Cultivated:
-                        island.SetMaterial(cultivatedNeedsNPKMat);
-                        break;
-                }
+                case Island.IslandState.Sowed:
+                    island.SetMaterial(sowedNeedsNPKMat);
+                    break;
+                case Island.IslandState.Watered:
+                    island.SetMaterial(wateredNeedsNPKMat);
+                    break;
+                case Island.IslandState.Cultivated:
+                    island.SetMaterial(cultivatedNeedsNPKMat);
+                    break;
             }
         }
     }
 
-    public bool CheckWater(Plant plant)
+    public bool CheckIslandWater(Plant plant)
     {
         if(GameManager.UM.water >= plant.water)
         {

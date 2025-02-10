@@ -4,14 +4,34 @@ using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour, IDataPersistence
 {
+    public Transform availableCardsParent;
     public List<Card> starterCards = new List<Card>();
     public List<Card> availableCards = new List<Card>();
     public List<Card> inspectedCards = new List<Card>();
     public Card inspectCard;
 
+    public void SetupCards()
+    {
+        foreach(Transform cardCategory in availableCardsParent)
+        {
+            foreach(Card childCard in cardCategory.GetComponentsInChildren<Card>())
+            {
+                if(childCard.cardType == "Utility" && childCard.cardUnlocked)
+                {
+                    GameManager.CRM.craftableCards.Add(childCard);
+                }
+                if(childCard.cardStarter)
+                {
+                    GameManager.CM.starterCards.Add(childCard);
+                }
+                availableCards.Add(childCard);
+            }
+        }
+    }
+
     public void CheckCardInspectTutorial(Card card)
     {
-        if(GameManager.TTM.tutorialCount == 6)
+        if(GameManager.TTM.tutorialCount == 5)
         {
             if (!card.hasBeenInspected)
             {
@@ -42,13 +62,14 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
         }
         else
-        {
+        {   
             card.cardDescriptionText.gameObject.SetActive(true);
             card.cardDescriptionText.SetText(card.cardDescription);
             card.nitrogenText.transform.parent.gameObject.SetActive(false);
             card.phosphorusText.transform.parent.gameObject.SetActive(false);
             card.potassiumText.transform.parent.gameObject.SetActive(false);
             card.waterText.transform.parent.gameObject.SetActive(false);
+            card.plantSizeText.transform.parent.gameObject.SetActive(false);
         }
         card.cardSetup = true;
     }

@@ -17,10 +17,6 @@ public class UIButton : MonoBehaviour
             {
                 GameManager.TTM.QuestCompleted = true;
             }
-            if (GameManager.UM.waterAmountText.transform.parent.GetComponent<Image>().color == Color.white && GameManager.TTM.tutorialCount == 5)
-            {
-                GameManager.TTM.QuestCompleted = true;
-            }
         }
     }
 }

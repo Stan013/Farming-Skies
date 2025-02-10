@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class InputManager : MonoBehaviour
@@ -30,49 +31,56 @@ public class InputManager : MonoBehaviour
 
     public void HandleGameStatesSwitchInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // Limited movement and mouse clicking
+        if(!GameManager.HM.dragging)
         {
-            if (GameManager.CurrentState == GameManager.GameState.ManageMode)
+            if (Input.GetKeyDown(KeyCode.Tab)) //No WASD movement and visible mouse
             {
-                ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
-            }
-            else
-            {
-                ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.E)) // Payment and card picking (no building or dragging)
-        {
-            ToggleState(GameManager.GameState.EndRoundMode, GameManager.GameState.Default);
-        }
-        if (Input.GetKeyDown(KeyCode.H)) // Open Shop (no building or dragging)
-        {
-            ToggleState(GameManager.GameState.ShopMode, GameManager.GameState.Default);
-        }
-        if (Input.GetKeyDown(KeyCode.Tab)) // Open Inventory (no building, dragging or cards)
-        {
-            if(GameManager.UM.openInventoryButton.IsInteractable())
-            {
-                if(GameManager.CurrentState == GameManager.GameState.InventoryMode)
+                if (GameManager.CurrentState == GameManager.GameState.ManageMode)
                 {
-                    GameManager.UM.closeButton.onClick.Invoke();
+                    ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode); //Switch back to default
                 }
                 else
                 {
-                    GameManager.UM.openInventoryButton.onClick.Invoke();
+                    ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default); //Switch to manage mode
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Escape)) //No WASD movement and only settings window
+            {
+                if (GameManager.CurrentState == GameManager.GameState.SettingsMode)
+                {
+                    ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode); //Switch back to default
+                }
+                else
+                {
+                    ToggleState(GameManager.GameState.SettingsMode, GameManager.GameState.Default); //Switch to settings mode
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Q) && GameManager.UM.openInventoryButton.IsInteractable()) //No WASD movement and only inventory window
+            {
+                if (GameManager.CurrentState == GameManager.GameState.InventoryMode)
+                {
+                    ToggleState(GameManager.GameState.Default, GameManager.GameState.InventoryMode); //Switch back to default
+                }
+                else
+                {
+                    ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default); //Switch to inventory mode
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.E) && GameManager.UM.openMarketButton.IsInteractable()) //No WASD movement and only market window
+            {
+                if (GameManager.CurrentState == GameManager.GameState.MarketMode)
+                {
+                    ToggleState(GameManager.GameState.Default, GameManager.GameState.MarketMode); //Switch back to default
+                }
+                else
+                {
+                    ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default); //Switch to market mode
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.M)) // Open Market (no building, dragging or cards)
+        else
         {
-            if (GameManager.CurrentState == GameManager.GameState.MarketMode)
-            {
-                ToggleState(GameManager.GameState.Default, GameManager.GameState.MarketMode);
-            }
-            else
-            {
-                ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default);
-            }
+            return; //Can't switch GameState when dragging a card
         }
     }
 
@@ -81,19 +89,19 @@ public class InputManager : MonoBehaviour
         GameManager.SetState(GameManager.CurrentState == targetState ? fallbackState : targetState);
     }
 
-    public void HandleKeyboard(GameManager.GameState state)
+    public void HandleKeyboardInput(GameManager.GameState state)
     {
         switch (state)
         {
             case GameManager.GameState.Default:
-                DefaultKeyboard();
+                MovemementKeyboard();
                 break;
             default:
                 break;
         }
     }
 
-    private void DefaultKeyboard()
+    private void MovemementKeyboard()
     {
         Vector3 moveDirection = Vector3.zero;
         Vector3 forward = mainCamera.transform.forward;
@@ -111,54 +119,38 @@ public class InputManager : MonoBehaviour
         rb.velocity = smoothMoveDirection * moveSpeed;
     }
 
-    public void HandleMouse(GameManager.GameState state)
+    public void HandleMouseInput(GameManager.GameState state)
     {
         switch (state)
         {
+            case GameManager.GameState.SettingsMode:
+                break;
             case GameManager.GameState.Default:
-                DefaultMouse();
+                MovementMouse();
                 MouseZoom();
                 break;
             case GameManager.GameState.ManageMode:
-                ManageMouse();
+                DefaultMouse();
                 MouseZoom();
-                break;
-            case GameManager.GameState.EndRoundMode:
                 break;
             case GameManager.GameState.InventoryMode:
                 break;
             case GameManager.GameState.MarketMode:
+                break;
+            case GameManager.GameState.CraftMode:
+                break;
+            case GameManager.GameState.SelectionMode:
                 break;
         }
     }
 
     private void DefaultMouse()
     {
-        Vector2 mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        smoothMouseInput = Vector2.Lerp(smoothMouseInput, mouseInput, Time.deltaTime * mouseSensitivity);
-
-        float horizontalRotation = smoothMouseInput.x * mouseSensitivity;
-        mainCamera.transform.Rotate(Vector3.up * horizontalRotation, Space.World);
-
-        verticalRotation -= smoothMouseInput.y * mouseSensitivity;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-        mainCamera.transform.localEulerAngles = new Vector3(verticalRotation, mainCamera.transform.localEulerAngles.y, 0f);
-    }
-
-    private void MouseZoom()
-    {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        mainCamera.fieldOfView -= scroll * zoomSpeed;
-        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, minFOV, maxFOV);
-    }
-
-    private void ManageMouse()
-    {
         if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit) //Hold to build island
             && hit.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
         {
-            clickedIsland = GetClickedIsland();
-            if (GameManager.UM.balance >= clickedIsland.islandBuildCost && clickedIsland.islandBoughtStatus == false && clickedIsland.islandCanBought)
+            clickedIsland = GameManager.ISM.GetClickedIsland();
+            if (GameManager.UM.balance >= clickedIsland.islandBuildCost && clickedIsland.islandBought == false && clickedIsland.islandAvailable)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 GameManager.UM.constructionLabel.gameObject.SetActive(true);
@@ -167,10 +159,10 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitIsland) //Double click for island stats
-            && hitIsland.transform.GetComponent<Island>() != null)
+        if (Input.GetMouseButton(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitIsland) //Island nutrients inspection
+           && hitIsland.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
         {
-            if(hitIsland.transform.GetComponent<Island>().islandBoughtStatus)
+            if (hitIsland.transform.GetComponent<Island>().islandBought)
             {
                 if (Time.time - lastClickTime < doubleClickTime)
                 {
@@ -210,11 +202,33 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void MovementMouse()
+    {
+        Vector2 mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        smoothMouseInput = Vector2.Lerp(smoothMouseInput, mouseInput, Time.deltaTime * mouseSensitivity);
+
+        float horizontalRotation = smoothMouseInput.x * mouseSensitivity;
+        mainCamera.transform.Rotate(Vector3.up * horizontalRotation, Space.World);
+
+        verticalRotation -= smoothMouseInput.y * mouseSensitivity;
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+        mainCamera.transform.localEulerAngles = new Vector3(verticalRotation, mainCamera.transform.localEulerAngles.y, 0f);
+    }
+
+    private void MouseZoom()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        mainCamera.fieldOfView -= scroll * zoomSpeed;
+        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, minFOV, maxFOV);
+    }
+
     private void MoveCameraToIsland(Island island)
     {
         if (island == null) return;
+
         Vector3 targetPosition = new Vector3(island.transform.position.x + 4, 5, island.transform.position.z + 4);
-        Quaternion targetRotation = Quaternion.Euler(5, 225, 0);
+        Quaternion targetRotation = Quaternion.Euler(5, -135, 0);
+
         StartCoroutine(SmoothMoveAndRotate(mainCamera.transform, targetPosition, targetRotation, 5f));
     }
 
@@ -222,8 +236,10 @@ public class InputManager : MonoBehaviour
     {
         Vector3 startPos = cameraTransform.position;
         Quaternion startRot = cameraTransform.rotation;
+
         float journey = 0f;
         float duration = Vector3.Distance(startPos, targetPos) / speed;
+
         while (journey < duration)
         {
             journey += Time.deltaTime;
@@ -234,6 +250,7 @@ public class InputManager : MonoBehaviour
 
             yield return null;
         }
+
         cameraTransform.position = targetPos;
         cameraTransform.rotation = targetRot;
     }
@@ -241,11 +258,5 @@ public class InputManager : MonoBehaviour
     private bool IsFacingWall(Vector3 direction)
     {
         return Physics.Raycast(transform.position, direction, 1f);
-    }
-
-    private Island GetClickedIsland()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out var hit) ? hit.collider.gameObject.GetComponent<Island>() : null;
     }
 }

@@ -4,15 +4,16 @@ using TMPro;
 
 public class Island : MonoBehaviour
 {
-    public string islandId;
+    public string islandID;
     public Material islandMat;
     public IslandState currentState = IslandState.Sowed;
     public IslandState potentialState = IslandState.Sowed;
-    
-    public bool islandBoughtStatus;
+
+    public bool islandAvailable;
     public int islandBuildCost;
     public int islandTaxCost;
-    public bool islandCanBought;
+    public bool islandBought;
+    public bool islandStarter;
 
     public GameObject sign;
     public List<GameObject> plotsSmallPlants;
@@ -87,7 +88,7 @@ public class Island : MonoBehaviour
                 bottomMat.color = bottomColor;
                 break;
             case IslandState.Watered:
-                if (islandId == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 4)
+                if (islandID == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 4)
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }
@@ -111,7 +112,7 @@ public class Island : MonoBehaviour
                 }
                 break;
             case IslandState.Cultivated:
-                if(islandId == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 3)
+                if(islandID == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 3)
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }

@@ -83,6 +83,16 @@ public class UIManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void CloseWindow(GameObject window)
+    {
+        if (GameManager.TTM.tutorialCount == 9 && window == GameManager.INM.inventoryWindow)
+        {
+            GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
+            GameManager.TTM.QuestCompleted = true;
+        }
+        window.SetActive(false);
+    }
+
     public void UpdateUI()
     {
         dateAmountText.SetText(GameManager.TM.UpdateDate());
@@ -112,14 +122,14 @@ public class UIManager : MonoBehaviour, IDataPersistence
         {
             float alphaValue = Mathf.Clamp01(island.topMat.color.a);
             transparencySlider.value = alphaValue;
-            if (alphaValue == 1f && island.islandBoughtStatus == false)
+            if (alphaValue == 1f && island.islandBought == false)
             {
                 island.sign.SetActive(true);
                 island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
                 balance -= island.islandBuildCost;
                 tax += island.islandTaxCost;
                 GameManager.ISM.AddIslandToBought(island);
-                island.islandBoughtStatus = true;
+                island.islandBought = true;
                 constructionLabel.gameObject.SetActive(false);
                 GameManager.UM.UpdateUI();
             }

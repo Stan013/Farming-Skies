@@ -155,11 +155,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 hoverIsland.UpdateIslandStats();
                 GameManager.HM.dragCard.dragSucces = true;
                 GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
-                if (GameManager.TTM.tutorialCount == 7)
+                if (GameManager.TTM.tutorialCount == 6)
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }
-                if (GameManager.TTM.tutorialCount == 8 && GameManager.HM.cardsInHand.Count == 0)
+                if (GameManager.TTM.tutorialCount == 7 && GameManager.HM.cardsInHand.Count == 0)
                 {
                     GameManager.TTM.QuestCompleted = true;
                 }

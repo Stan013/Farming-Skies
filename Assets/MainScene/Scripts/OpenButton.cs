@@ -18,7 +18,7 @@ public class OpenButton : MonoBehaviour
         switch(openButton.name)
         {
             case "InventoryButton":
-                if(GameManager.TTM.tutorialCount == 10)
+                if(GameManager.TTM.tutorialCount == 9)
                 {
                     GameManager.TTM.QuestCompleted = true;
                     GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
@@ -31,7 +31,7 @@ public class OpenButton : MonoBehaviour
                 openWindow.SetActive(true);
                 break;
             case "SettingsButton":
-                GameManager.IPM.ToggleState(GameManager.GameState.MenuMode, GameManager.GameState.Default);
+                GameManager.IPM.ToggleState(GameManager.GameState.SettingsMode, GameManager.GameState.Default);
                 openWindow.SetActive(true);
                 break;
         }

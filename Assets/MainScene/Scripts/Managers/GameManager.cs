@@ -16,9 +16,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static InputManager IPM { get; private set; }
     public static MarketManager MM { get; private set; }
     public static PlantManager PM { get; private set; }
-    public static EndRoundManager ERM { get; private set; }
+    public static SelectionManager SM { get; private set; }
     public static TutorialManager TTM { get; private set; }
     public static DataPersistenceManager DPM { get; private set; }
+    public static CraftManager CRM { get; private set; }
     public static Camera cam { get; private set; }
     public static Vector3 staticPos;
     public GameObject mainMenu;
@@ -35,20 +36,20 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public enum GameState
     {
         MainMenuMode,
+        SettingsMode,
         Default,
         ManageMode,
-        MenuMode,
-        EndRoundMode,
-        ShopMode,
         InventoryMode,
         MarketMode,
+        CraftMode,
+        SelectionMode,
     }
     public static GameState CurrentState { get; private set; }
 
     private void Awake()
     {
         HM = GetComponent<HandManager>();
-        ERM = GetComponent<EndRoundManager>();
+        SM = GetComponent<SelectionManager>();
         CM = GetComponent<CardManager>();
         DM = GetComponent<DeckManager>();
         ISM = GetComponent<IslandManager>();
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         PM = GetComponent<PlantManager>();
         TTM = GetComponent<TutorialManager>();
         DPM = GetComponent<DataPersistenceManager>();
+        CRM = GetComponent<CraftManager>();
         cam = FindAnyObjectByType<Camera>();
         staticPos = cam.transform.position;
         CurrentState = GameState.MainMenuMode;
@@ -67,30 +69,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
         staticGameMenu = gameMenu;
     }
 
-    public void StartGame(string gameAction)
+    private void StartGame(string gameAction)
     {
-        IPM.ToggleState(GameState.Default, GameState.Default);
+        IPM.ToggleState(GameState.ManageMode, GameState.Default);
         if (gameAction == "LoadGame")
         {
             DPM.LoadGame();
         }
         else
         {
-            if (gameAction == "NewGame")
-            {
-                if(TTM.tutorial)
-                {
-                    TTM.StartTutorial();
-                }
-                else
-                {
-                    HM.SetStartingHand();
-                    UM.SetUIButtons(true, UM.openUIButton);
-                    ISM.SetPurchasableIslands(true);
-                }
-                DPM.NewGame();
-                SetState(GameState.ManageMode);
-            }
+            DPM.NewGame();
         }
     }
 
@@ -105,8 +93,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
         if (CurrentState != GameState.MainMenuMode) 
         {
             IPM.HandleGameStatesSwitchInput();
-            IPM.HandleKeyboard(CurrentState);
-            IPM.HandleMouse(CurrentState);
+            IPM.HandleKeyboardInput(CurrentState);
+            IPM.HandleMouseInput(CurrentState);
         }
     }
 
@@ -127,31 +115,22 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 MainMenuStatus(true);
                 Cursor.visible = true;
                 break;
+            case GameState.SettingsMode:
+                Cursor.visible = true;
+                break;
             case GameState.Default:
                 break;
             case GameState.ManageMode:
                 Cursor.visible = true;
                 IPM.rb.velocity = Vector3.zero;
                 IPM.rb.angularVelocity = Vector3.zero;
-                if (!TTM.tutorial)
-                {
-                    ISM.SetPurchasableIslands(true);
-                }
-                else
-                {
-                    ISM.availableIslands[0].islandCanBought = true;
-                }
                 break;
-            case GameState.MenuMode:
-                Cursor.visible = true;
-                break;
-            case GameState.EndRoundMode:
+            case GameState.SelectionMode:
                 HM.ClearCardsInHand();
-                ERM.GeneratePickWindow();
+                SM.GeneratePickWindow();
                 break;
-            case GameState.ShopMode:
-                break; 
             case GameState.InventoryMode:
+                UM.openInventoryButton.onClick.Invoke();
                 Cursor.visible = true;
                 UM.openQuestButton.transform.gameObject.SetActive(false);
                 UM.openUIButton.transform.gameObject.SetActive(false);
@@ -162,6 +141,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 UM.openQuestButton.transform.gameObject.SetActive(false);
                 UM.openUIButton.transform.gameObject.SetActive(false);
                 MM.UpdateMarketItems();
+                break;
+            case GameState.CraftMode:
+                Cursor.visible = true;
+                UM.openQuestButton.transform.gameObject.SetActive(false);
+                UM.openUIButton.transform.gameObject.SetActive(false);
+                CRM.UpdateCraftingItems();
                 break;
         }
     }
@@ -177,25 +162,29 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.ManageMode:
                 Cursor.visible = false;
-                ISM.SetPurchasableIslands(false);
                 break;
-            case GameState.MenuMode:
+            case GameState.SettingsMode:
                 break;
-            case GameState.EndRoundMode:
-                break;
-            case GameState.ShopMode:
+            case GameState.SelectionMode:
                 break;
             case GameState.InventoryMode:
+                UM.closeButton.onClick.Invoke();
                 Cursor.visible = false;
                 UM.openQuestButton.transform.gameObject.SetActive(true);
                 UM.openUIButton.transform.gameObject.SetActive(true);
-                INM.CloseWindow();
+                UM.CloseWindow(INM.inventoryWindow);
                 break;
             case GameState.MarketMode:
                 Cursor.visible = false;
                 UM.openQuestButton.transform.gameObject.SetActive(true);
                 UM.openUIButton.transform.gameObject.SetActive(true);
-                MM.CloseWindow();
+                UM.CloseWindow(MM.marketWindow);
+                break;
+            case GameState.CraftMode:
+                Cursor.visible = false;
+                UM.openQuestButton.transform.gameObject.SetActive(true);
+                UM.openUIButton.transform.gameObject.SetActive(true);
+                UM.CloseWindow(CRM.craftWindow);
                 break;
         }
     }

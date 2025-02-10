@@ -100,9 +100,4 @@ public class MarketManager : MonoBehaviour
         }
         UpdateMarketItems();
     }
-
-    public void CloseWindow()
-    {
-        marketWindow.SetActive(false);
-    }
 }

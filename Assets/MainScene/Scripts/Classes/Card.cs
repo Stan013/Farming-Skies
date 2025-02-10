@@ -9,6 +9,7 @@ public class Card : MonoBehaviour
 {
     [Header("Invisible card variables")] 
     public string cardId;
+    public bool cardStarter;
     public bool cardSetup;
     public CardState CurrentState;
     public int cardIndex;
@@ -158,9 +159,19 @@ public class Card : MonoBehaviour
                 {
                     foreach (Transform child in this.transform)
                     {
-                        if(child.gameObject.name != "CardAnimation" && child.gameObject.name != "CardPickButton")
+                        if (cardType == "PlantSmall" || cardType == "PlantMedium" || cardType == "PlantBig")
                         {
-                            child.gameObject.SetActive(true);
+                            if (child.gameObject.name != "CardAnimation" && child.gameObject.name != "CardPickButton")
+                            {
+                                child.gameObject.SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            if (child.gameObject.name != "CardAnimation" && child.gameObject.name != "CardPickButton" && child.gameObject.name != "PlantSize")
+                            {
+                                child.gameObject.SetActive(true);
+                            }
                         }
                     }
                 }

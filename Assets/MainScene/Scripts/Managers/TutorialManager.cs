@@ -76,8 +76,8 @@ public class TutorialManager : MonoBehaviour
             GameManager.UM.UpdateUI();
             tutorialMenu.SetActive(false);
             GameManager.UM.OpenQuestMenu();
-            GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.MenuMode);
-            GameManager.ISM.availableIslands[0].ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
+            GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode);
+            GameManager.ISM.boughtIslands[0].ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
         }
         tutorialCount++;
         switch (tutorialCount)
@@ -97,19 +97,15 @@ public class TutorialManager : MonoBehaviour
                 Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
                 cardCultivator.cardBackground.GetComponent<Image>().color = Color.green;
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Cultivate your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use the plant cards your land will have to be cultivated first. This is done by making sure you are in manage mode and then by using your mouse to drag the cultivator card to your uncultivated land.");
+                UpdateQuest("Cultivate your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use these plant cards your land will have to be cultivated and watered first. This is done by making sure you are in manage mode and then by holding down your left mouse button to drag it towards your land.");
                 break;
             case 4:
                 Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
                 cardWateringCan.cardBackground.GetComponent<Image>().color = Color.green;
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Water your island!", "As you can see your island has now been cultivated. We however need to do some more things before we can plant. Use your mouse again and this time drag your watering can card over your cultivated land. Make sure to keep your plants watered otherwise they won't make it. The more plants you have and the bigger they are the more water the land needs.");
+                UpdateQuest("Water your island!", "As you can see your land has now been cultivated. Now we go onto the second step making sure your land is watered. Use your mouse again and this time drag your watering can card over your cultivated land. Using this card will add 50 water to the soil make sure this number doesn't run out our the soil will dry up and your crops will die.");
                 break;
             case 5:
-                GameManager.UM.waterAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Maintain your water supply!", "Of course your land won't stay watered forever after each month your land will dry up. This is when you need to use a watering can again however throughout the month all you have to do is store enough water. If you press on your water storage you can see how much each land takes and how much you are collecting.");
-                break;
-            case 6:
                 foreach(Card card in GameManager.HM.cardsInHand)
                 {
                     if(card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
@@ -117,15 +113,15 @@ public class TutorialManager : MonoBehaviour
                         card.cardBackground.GetComponent<Image>().color = Color.green;
                     }
                 }
-                UpdateQuest("Check your plants needs!", "Besides water your lands will need to have the right minerals for your plants. These minerals are nitrogen, phosphorus and potassium each plant has a different need so make sure your land has that. Use your mouse and right click on one of your plant cards to see what this plant needs and also check how big it is. Right click again to put the plant back in your hand.");
+                UpdateQuest("Check your crop needs!", "Besides water your lands will need to have the right nutrients for your crops. These nutrients are nitrogen, phosphorus and potassium each crop has a different need so make sure your soil has plenty of nutrients. Use your mouse and right click on one of your plant cards to see what this crop needs and also check how big it is. Right click again to put the plant card back in your hand.");
                 break;
-            case 7:
+            case 6:
                 Card cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
                 cardGreenBean.cardBackground.GetComponent<Image>().color = Color.green;
                 cardGreenBean.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Plant your first plant!", "Now that you have got your land ready and know what each plant needs and how big they are, it is time to plant. Hover over the plant card you have chosen and hold left mouse button. Now move your mouse to whichever spot you want to plant there a 36 spaces for small plants, 9 for medium plants and 1 space for a big plant. So make sure your plant snaps to the right spot.");
+                UpdateQuest("Plant your first crop!", "Now that you have got your land ready and know what each crop needs and how big they are, it is time to plant. Hover over the highlighted plant card and drag that card over your soil. Now move your mouse to whichever spot and the crop should snap into place. Each land has space for 36 small plots, 9 medium plots or 1 big plot. So be sure to plan your placement carefully");
                 break;
-            case 8:
+            case 7:
                 foreach (Card card in GameManager.HM.cardsInHand)
                 {
                     if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
@@ -134,23 +130,30 @@ public class TutorialManager : MonoBehaviour
                         card.GetComponent<CardDrag>().enabled = true;
                     }
                 }
-                UpdateQuest("Plant everything you have!", "It seems like you know what you are doing so how about you plant some more. This time you will see that some spots are already taken by the plant you previously used. Don't worry though if you don't have enough space you can always buy more land. You can also rotate your plants by moving your mouse around the spot your plant has snapped to. ");
+                UpdateQuest("Plant everything you have!", "It seems like you know what you are doing so how about you plant some more. This time you will see that some spots are already taken by the crop you previously used. Don't worry though if you don't have enough space you can always buy more land. You can also rotate your crops by moving your mouse around the spot it has snapped to. But this is just purely for the aesthetic.");
                 break;
-            case 9:
+            case 8:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.nextDayButton);
-                UpdateQuest("It is time to advance!", "Good job farmer all your plants are in the ground and your land is looking healthy. Press the next day button and watch the harvest from that day go into your storage. You will of course also see you water storage and your fertilizer storage go down but no worries this will be the next thing I will tell you about.");
+                UpdateQuest("It is time to advance!", "Good job farmer all your crops are in the ground and your land is looking healthy. Press the next day button and watch the harvest from the day go right into your storage. You might see that some of your crops give a different yield this is depending on the size of crop, the plant itself but also the soil quality. Don't worry though the prices of the drops of each crop are adjusted accordingly.");
                 GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.green;
                 break;
-            case 10:
+            case 9:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openInventoryButton);
                 GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what rewards you got. As you might have seen it is a new day so press TAB to go into inventory mode and see at what you got from your plants. You can sort these drops by using the tabs at the top of the window. You can also sell these drops if you want or use them to make more plants or products.");
+                UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what rewards you got. As you might have seen it is a new day so press TAB to go into inventory mode and see what drops you got from your crops. You can sort these drops by using the tabs at the top of the window. You can also sell these drops if you want or use them to make more plant cards or products.");
+                break;
+            case 10:
+                UpdateQuest("Check your soil health!", "As you can see after that harvest your land is looking a bit rough. This is because the crops you planted are taking nutrients out of the soil. There also might be a warning icon if your soil doesn't have enough nutrients or water for the next day. By double clicking on your land with your left mouse button you will be taken to this sign. And by using your scroll wheel you can zoom in and see the total amount of nutrients and water all the crops are using each day.");
                 break;
             case 11:
-                UpdateQuest("Check your land health!", "As you can see after that harvest your land is looking a bit rough. This is because the plants on top of the land used all of it's nutrients. If your land has the right amount of nutrients you have a change that your yield will increase. So lets make sure your land is in good condition again by going into manage mode and left clicking your land.");
+                UpdateQuest("Move back to your land!", "In order to improve the nutrients in your soil we will have to move above your land again and use some cards on it. Press SPACE to go out of manage mode and now you can freely move around your farm with WASD. You can also move UP by pressing SHIFT and DOWN by pressing CTRL. Your WASD movement is based on the direction you are looking in. So try to get above your land so we can improve your soil.");
                 break;
             case 12:
-                UpdateQuest("Improve your yield!", "");
+                GameManager.UM.fertilizerAmountText.GetComponent<Image>().color = Color.green;
+                UpdateQuest("Craft some fertilizer!", "To add nutrients to the soil we need to use the appropriate fertilizer card. But we first need to craft these cards you already got some fertilizer saved up so you can craft some fertilizer cards. In manage mode double click with your left mouse button on your stored fertilizer or press your C key to go into crafting mode. Now you can select which card you want and craft them.");
+                break;
+            case 13:
+                UpdateQuest("Improve your yield!", " If your land has the right amount of nutrients you have a change that your yield will increase. This is 75% for the primary and 25% for the secundary nutrients.");
                 break;
         }
     }

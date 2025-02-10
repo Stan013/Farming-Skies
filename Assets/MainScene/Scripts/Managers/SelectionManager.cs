@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndRoundManager : MonoBehaviour
+public class SelectionManager : MonoBehaviour
 {
     public GameObject cardPickWindow;
     [SerializeField] private GameObject pickSlotParent;
@@ -10,7 +10,7 @@ public class EndRoundManager : MonoBehaviour
 
     public void GeneratePickWindow()
     {
-        if (GameManager.CurrentState == GameManager.GameState.EndRoundMode)
+        if (GameManager.CurrentState == GameManager.GameState.SelectionMode)
         {
             cardPickWindow.SetActive(true);
             while (pickSlots.Count < 3)

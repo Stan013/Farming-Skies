@@ -39,6 +39,17 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void InitializeGame()
     {
+        if (GameManager.TTM.tutorial)
+        {
+            GameManager.TTM.StartTutorial();
+        }
+        else
+        {
+            GameManager.HM.SetStartingHand();
+            GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
+            GameManager.ISM.SetIslands();
+        }
+        GameManager.CM.SetupCards();
         GameManager.UM.tax = this.gameData.tax;
         GameManager.UM.balance = this.gameData.balance;
         GameManager.UM.water = this.gameData.water;

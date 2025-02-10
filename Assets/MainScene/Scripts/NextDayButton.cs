@@ -13,7 +13,7 @@ public class NextDayButton : MonoBehaviour
     }
     private void OnButtonClick()
     {
-        if (GameManager.TTM.tutorialCount == 9)
+        if (GameManager.TTM.tutorialCount == 8)
         {
             GameManager.TTM.QuestCompleted = true;
             GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.white;

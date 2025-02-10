@@ -18,6 +18,6 @@ public class PickCardButton : MonoBehaviour
         {
             GameManager.DM.AddCardToDeck(card.cardId);
         }
-        GameManager.ERM.ClosePickWindow();
+        GameManager.SM.ClosePickWindow();
     }
 }

@@ -22,14 +22,4 @@ public class InventoryManager : MonoBehaviour
         inventoryItem.transform.SetParent(inventoryContentArea.transform, false);
         itemsInInventory.Add(inventoryItem);
     }
-
-    public void CloseWindow()
-    {
-        if(GameManager.TTM.tutorialCount == 10)
-        {
-            GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
-            GameManager.TTM.QuestCompleted = true;
-        }
-        inventoryWindow.SetActive(false);
-    }
 }

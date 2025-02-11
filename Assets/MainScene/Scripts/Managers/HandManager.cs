@@ -38,7 +38,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
                 Card originalCard = GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)];
                 newSlot.AddCardToSlot(handSlots.Count, originalCard);
                 originalCard.ToggleState(Card.CardState.InHand, Card.CardState.InDeck);
-                StartCoroutine(MoveCardFromBottom(originalCard));
+                StartCoroutine(MoveCardsFromBottom(originalCard));
             }
             needsCard = false;
         }
@@ -56,10 +56,10 @@ public class HandManager : MonoBehaviour, IDataPersistence
         handSlots.Add(newSlot);
         newSlot.AddCardToSlot(handSlots.Count, newCard);
         newCard.ToggleState(Card.CardState.InHand, Card.CardState.InDeck);
-        StartCoroutine(MoveCardFromBottom(newCard));
+        StartCoroutine(MoveCardsFromBottom(newCard));
     }
 
-    private IEnumerator MoveCardFromBottom(Card card)
+    private IEnumerator MoveCardsFromBottom(Card card)
     {
         RectTransform cardRectTransform = card.GetComponent<RectTransform>();
         Vector2 startPosition = new Vector2(cardRectTransform.anchoredPosition.x, -Screen.height);
@@ -137,6 +137,14 @@ public class HandManager : MonoBehaviour, IDataPersistence
         }
         cardRectTransform.position = newPosition;
         onComplete?.Invoke();
+    }
+
+    public void HideCardsInHand()
+    {
+        foreach(Card card in cardsInHand)
+        {
+            card.transform.gameObject.SetActive(true);
+        }
     }
 
     public void LoadData(GameData data)

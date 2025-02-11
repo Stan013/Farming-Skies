@@ -141,6 +141,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             {
                 GameManager.ISM.CheckPotentialIsland().water += 50;
             }
+            if (GameManager.TTM.tutorialCount == 3 || GameManager.TTM.tutorialCount == 4)
+            {
+                GameManager.TTM.QuestCompleted = true;
+            }
             GameManager.HM.dragCard.dragSucces = true;
             GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
         }

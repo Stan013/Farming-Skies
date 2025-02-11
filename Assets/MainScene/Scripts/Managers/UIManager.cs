@@ -16,9 +16,11 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public bool questActive = false;
     public Button openQuestButton;
     public TMP_Text openQuestText;
+
     public Button openSettingsButton;
     public Button openMarketButton;
     public Button openInventoryButton;
+    public Button openCraftButton;
     public Button nextDayButton;
     public Button closeButton;
 
@@ -81,16 +83,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
             GameManager.TTM.questMenu.SetActive(false);
             questActive = false;
         }
-    }
-
-    public void CloseWindow(GameObject window)
-    {
-        if (GameManager.TTM.tutorialCount == 9 && window == GameManager.INM.inventoryWindow)
-        {
-            GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
-            GameManager.TTM.QuestCompleted = true;
-        }
-        window.SetActive(false);
     }
 
     public void UpdateUI()

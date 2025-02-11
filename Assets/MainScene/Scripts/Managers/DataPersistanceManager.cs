@@ -47,8 +47,8 @@ public class DataPersistenceManager : MonoBehaviour
         {
             GameManager.HM.SetStartingHand();
             GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
-            GameManager.ISM.SetIslands();
         }
+        GameManager.ISM.SetIslands();
         GameManager.CM.SetupCards();
         GameManager.UM.tax = this.gameData.tax;
         GameManager.UM.balance = this.gameData.balance;

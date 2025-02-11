@@ -116,12 +116,11 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 Cursor.visible = true;
                 break;
             case GameState.SettingsMode:
-                Cursor.visible = true;
                 break;
             case GameState.Default:
+                Cursor.visible = false;
                 break;
             case GameState.ManageMode:
-                Cursor.visible = true;
                 IPM.rb.velocity = Vector3.zero;
                 IPM.rb.angularVelocity = Vector3.zero;
                 break;
@@ -131,9 +130,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.InventoryMode:
                 UM.openInventoryButton.onClick.Invoke();
-                Cursor.visible = true;
                 UM.openQuestButton.transform.gameObject.SetActive(false);
                 UM.openUIButton.transform.gameObject.SetActive(false);
+                HM.HideCardsInHand();
                 INM.UpdateInventoryItems();
                 break;
             case GameState.MarketMode:
@@ -143,9 +142,10 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 MM.UpdateMarketItems();
                 break;
             case GameState.CraftMode:
-                Cursor.visible = true;
+                UM.openCraftButton.onClick.Invoke();
                 UM.openQuestButton.transform.gameObject.SetActive(false);
                 UM.openUIButton.transform.gameObject.SetActive(false);
+                HM.HideCardsInHand();
                 CRM.UpdateCraftingItems();
                 break;
         }
@@ -159,9 +159,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 MainMenuStatus(false);
                 break;
             case GameState.Default:
+                Cursor.visible = true;
                 break;
             case GameState.ManageMode:
-                Cursor.visible = false;
                 break;
             case GameState.SettingsMode:
                 break;
@@ -169,22 +169,18 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.InventoryMode:
                 UM.closeButton.onClick.Invoke();
-                Cursor.visible = false;
                 UM.openQuestButton.transform.gameObject.SetActive(true);
                 UM.openUIButton.transform.gameObject.SetActive(true);
-                UM.CloseWindow(INM.inventoryWindow);
                 break;
             case GameState.MarketMode:
-                Cursor.visible = false;
+                UM.closeButton.onClick.Invoke();
                 UM.openQuestButton.transform.gameObject.SetActive(true);
                 UM.openUIButton.transform.gameObject.SetActive(true);
-                UM.CloseWindow(MM.marketWindow);
                 break;
             case GameState.CraftMode:
-                Cursor.visible = false;
+                UM.closeButton.onClick.Invoke();
                 UM.openQuestButton.transform.gameObject.SetActive(true);
                 UM.openUIButton.transform.gameObject.SetActive(true);
-                UM.CloseWindow(CRM.craftWindow);
                 break;
         }
     }

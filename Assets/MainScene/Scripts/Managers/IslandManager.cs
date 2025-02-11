@@ -9,6 +9,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public List<Island> availableIsland;
     public List<Island> boughtIslands;
     public List<Island> unboughtIslands;
+    public Island starterIsland;
 
     public Material sowedMat;
     public Material sowedNeedsNPKMat;
@@ -26,13 +27,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 if(childIsland.islandAvailable)
                 {
                     availableIsland.Add(childIsland);
-                    if(GameManager.TTM.tutorial)
-                    {
-                       if(childIsland.islandStarter)
-                        {
-                            childIsland.islandBought = false;
-                        }
-                    }
                     if (childIsland.islandBought)
                     {
                         boughtIslands.Add(childIsland);
@@ -43,6 +37,10 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                     }
                 }
             }
+        }
+        if (GameManager.TTM.tutorial)
+        {
+            starterIsland.ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
         }
     }
 

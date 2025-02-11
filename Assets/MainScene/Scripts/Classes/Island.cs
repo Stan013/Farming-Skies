@@ -13,7 +13,6 @@ public class Island : MonoBehaviour
     public int islandBuildCost;
     public int islandTaxCost;
     public bool islandBought;
-    public bool islandStarter;
 
     public GameObject sign;
     public List<GameObject> plotsSmallPlants;

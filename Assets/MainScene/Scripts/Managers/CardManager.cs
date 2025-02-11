@@ -39,7 +39,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
                 inspectedCards.Add(card);
                 card.cardBackground.GetComponent<Image>().color = new Color(0.735f, 0.735f, 0.735f);
             }
-            if (inspectedCards.Count == 7)
+            if (inspectedCards.Count == 4)
             {
                 GameManager.TTM.QuestCompleted = true;
             }

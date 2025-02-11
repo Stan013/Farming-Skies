@@ -55,7 +55,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.SettingsMode, GameManager.GameState.Default); //Switch to settings mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Q) && GameManager.UM.openInventoryButton.IsInteractable()) //No WASD movement and only inventory window
+            if (Input.GetKeyDown(KeyCode.E) && !GameManager.UM.openInventoryButton.IsInteractable()) //No WASD movement and only inventory window
             {
                 if (GameManager.CurrentState == GameManager.GameState.InventoryMode)
                 {
@@ -63,10 +63,10 @@ public class InputManager : MonoBehaviour
                 }
                 else
                 {
-                    ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default); //Switch to inventory mode
+                    ToggleState(GameManager.GameState.InventoryMode, GameManager.GameState.Default); //Switch to inventory mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E) && GameManager.UM.openMarketButton.IsInteractable()) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.Q) && GameManager.UM.openMarketButton.IsInteractable()) //No WASD movement and only market window
             {
                 if (GameManager.CurrentState == GameManager.GameState.MarketMode)
                 {
@@ -75,6 +75,17 @@ public class InputManager : MonoBehaviour
                 else
                 {
                     ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default); //Switch to market mode
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.C) && !GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
+            {
+                if (GameManager.CurrentState == GameManager.GameState.CraftMode)
+                {
+                    ToggleState(GameManager.GameState.Default, GameManager.GameState.CraftMode); //Switch back to default
+                }
+                else
+                {
+                    ToggleState(GameManager.GameState.CraftMode, GameManager.GameState.Default); //Switch to craft mode
                 }
             }
         }
@@ -159,7 +170,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitIsland) //Island nutrients inspection
+        if (Input.GetMouseButtonUp(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitIsland) //Island nutrients inspection
            && hitIsland.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
         {
             if (hitIsland.transform.GetComponent<Island>().islandBought)

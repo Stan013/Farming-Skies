@@ -77,13 +77,12 @@ public class TutorialManager : MonoBehaviour
             tutorialMenu.SetActive(false);
             GameManager.UM.OpenQuestMenu();
             GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode);
-            GameManager.ISM.boughtIslands[0].ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
         }
         tutorialCount++;
         switch (tutorialCount)
         {
             case 1:
-                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press SPACE to go into manage mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
+                UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press TAB to go into manage mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
                 break;
             case 2:
                 GameManager.UM.OpenUIMenu();
@@ -140,13 +139,13 @@ public class TutorialManager : MonoBehaviour
             case 9:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openInventoryButton);
                 GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what rewards you got. As you might have seen it is a new day so press TAB to go into inventory mode and see what drops you got from your crops. You can sort these drops by using the tabs at the top of the window. You can also sell these drops if you want or use them to make more plant cards or products.");
+                UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what rewards you got. As you might have seen it is a new day so press E to go into inventory mode and see what drops you got from your crops. You can sort these drops by using the tabs at the top of the window. You can also sell these drops if you want or use them to make more plant cards or products.");
                 break;
             case 10:
                 UpdateQuest("Check your soil health!", "As you can see after that harvest your land is looking a bit rough. This is because the crops you planted are taking nutrients out of the soil. There also might be a warning icon if your soil doesn't have enough nutrients or water for the next day. By double clicking on your land with your left mouse button you will be taken to this sign. And by using your scroll wheel you can zoom in and see the total amount of nutrients and water all the crops are using each day.");
                 break;
             case 11:
-                UpdateQuest("Move back to your land!", "In order to improve the nutrients in your soil we will have to move above your land again and use some cards on it. Press SPACE to go out of manage mode and now you can freely move around your farm with WASD. You can also move UP by pressing SHIFT and DOWN by pressing CTRL. Your WASD movement is based on the direction you are looking in. So try to get above your land so we can improve your soil.");
+                UpdateQuest("Move back to your land!", "In order to improve the nutrients in your soil we will have to move above your land again and use some cards on it. Press TAB to go out of manage mode and now you can freely move around your farm with WASD. You can also move UP by pressing SHIFT and DOWN by pressing CTRL. Your WASD movement is based on the direction you are looking in. So try to get above your land so we can improve your soil.");
                 break;
             case 12:
                 GameManager.UM.fertilizerAmountText.GetComponent<Image>().color = Color.green;

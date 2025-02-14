@@ -139,20 +139,20 @@ public class TutorialManager : MonoBehaviour
             case 9:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openInventoryButton);
                 GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what rewards you got. As you might have seen it is a new day so press E to go into inventory mode and see what drops you got from your crops. You can sort these drops by using the tabs at the top of the window. You can also sell these drops if you want or use them to make more plant cards or products.");
+                UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what rewards you got. As you might have seen it is a new day so press E to go into inventory mode or click on the highlighted icon and see what drops you got from your crops. You can sort these drops by using the tabs at the top of the window. You can also sell these drops if you want or use them to make more plant cards or products.");
                 break;
             case 10:
-                UpdateQuest("Check your soil health!", "As you can see after that harvest your land is looking a bit rough. This is because the crops you planted are taking nutrients out of the soil. There also might be a warning icon if your soil doesn't have enough nutrients or water for the next day. By double clicking on your land with your left mouse button you will be taken to this sign. And by using your scroll wheel you can zoom in and see the total amount of nutrients and water all the crops are using each day.");
+                UpdateQuest("Check your soil health!", "As you can see after that harvest your land is looking a bit rough. This is because the crops you planted are taking nutrients from the soil. There also might be a warning icon if your soil doesn't have enough nutrients or water for the next day. By double clicking on your land with your left mouse button and by using your scroll wheel to zoom in on the sign. You can see the total amount of nutrients and water all the crops are using each day.");
                 break;
             case 11:
                 UpdateQuest("Move back to your land!", "In order to improve the nutrients in your soil we will have to move above your land again and use some cards on it. Press TAB to go out of manage mode and now you can freely move around your farm with WASD. You can also move UP by pressing SHIFT and DOWN by pressing CTRL. Your WASD movement is based on the direction you are looking in. So try to get above your land so we can improve your soil.");
                 break;
             case 12:
-                GameManager.UM.fertilizerAmountText.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Craft some fertilizer!", "To add nutrients to the soil we need to use the appropriate fertilizer card. But we first need to craft these cards you already got some fertilizer saved up so you can craft some fertilizer cards. In manage mode double click with your left mouse button on your stored fertilizer or press your C key to go into crafting mode. Now you can select which card you want and craft them.");
+                GameManager.UM.openCraftButton.GetComponent<Image>().color = Color.green;
+                UpdateQuest("Make some cards!", "To add nutrients to the soil we need to use the appropriate fertilizer card. But we first need to craft these cards you already got some fertilizer saved up so you can craft some fertilizer cards. In manage mode click with your left mouse button on the highlighted icon or press your C key to go into crafting mode. Now you can select which card you want and craft them. Each card will cost a certain amount of resources to craft.");
                 break;
             case 13:
-                UpdateQuest("Improve your yield!", " If your land has the right amount of nutrients you have a change that your yield will increase. This is 75% for the primary and 25% for the secundary nutrients.");
+                UpdateQuest("Craft all the fertilizers!", "As you noticed when inspecting your soil the nutrients Nitrogen, Phosphorus and Potassium where low. So now that your are in crafting mode select each fertilizer and craft 1 of each fertilizer card. Then go back to manage mode and with your left mouse button drag these fertilizer card onto your soil. This should make the warning icon go away and up the yield of your crops again.");
                 break;
         }
     }

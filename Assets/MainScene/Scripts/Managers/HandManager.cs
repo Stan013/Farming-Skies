@@ -139,11 +139,18 @@ public class HandManager : MonoBehaviour, IDataPersistence
         onComplete?.Invoke();
     }
 
-    public void HideCardsInHand()
+    public void HideCardsInHand(bool hidden)
     {
         foreach(Card card in cardsInHand)
         {
-            card.transform.gameObject.SetActive(true);
+            if(hidden)
+            {
+                card.transform.gameObject.SetActive(false);
+            }
+            else
+            {
+                card.transform.gameObject.SetActive(true);
+            }
         }
     }
 

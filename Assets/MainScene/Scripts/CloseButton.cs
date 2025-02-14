@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class CloseButton : MonoBehaviour
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private GameObject closeWindow;
+    public Button closeButton;
+    public GameObject closeWindow;
 
     public void Start()
     {
@@ -17,16 +17,9 @@ public class CloseButton : MonoBehaviour
     public void OnButtonClick()
     {
         closeWindow.SetActive(false);
-        switch (closeButton.name)
-        {
-            case "InventoryButton":
-                if (GameManager.TTM.tutorialCount == 9)
-                {
-                    GameManager.TTM.QuestCompleted = true;
-                    GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
-                }
-                break;
-        }
+        GameManager.UM.openQuestButton.transform.gameObject.SetActive(true);
+        GameManager.UM.openUIButton.transform.gameObject.SetActive(true);
+        GameManager.HM.HideCardsInHand(false);
         EventSystem.current.SetSelectedGameObject(null);
     }
 }

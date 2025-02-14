@@ -69,6 +69,7 @@ public class Card : MonoBehaviour
         Destroy,
         Hidden,
         Available,
+        InCraft,
     }
 
     public void ToggleState(CardState targetState, CardState fallbackState)
@@ -98,7 +99,7 @@ public class Card : MonoBehaviour
                 {
                     if (!cardSetup)
                     {
-                        GameManager.CM.SetupCard(GetComponent<Card>());
+                        GameManager.CM.InitializeCard(GetComponent<Card>());
                         cardSetup = true;
                     }
                     GameManager.HM.cardsInHand.Add(this);
@@ -120,6 +121,13 @@ public class Card : MonoBehaviour
                 foreach (Transform child in this.transform)
                 {
                     child.gameObject.SetActive(false);
+                }
+                break;
+            case CardState.InCraft:
+                if (!cardSetup)
+                {
+                    GameManager.CM.InitializeCard(GetComponent<Card>());
+                    cardSetup = true;
                 }
                 break;
             case CardState.Destroy:

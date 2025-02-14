@@ -95,6 +95,13 @@ public class GameManager : MonoBehaviour, IDataPersistence
             IPM.HandleGameStatesSwitchInput();
             IPM.HandleKeyboardInput(CurrentState);
             IPM.HandleMouseInput(CurrentState);
+            if(TTM.tutorialCount == 11)
+            {
+                if(cam.transform.position.y >= 6)
+                {
+                    TTM.QuestCompleted = true;
+                }
+            }
         }
     }
 
@@ -130,23 +137,15 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.InventoryMode:
                 UM.openInventoryButton.onClick.Invoke();
-                UM.openQuestButton.transform.gameObject.SetActive(false);
-                UM.openUIButton.transform.gameObject.SetActive(false);
-                HM.HideCardsInHand();
                 INM.UpdateInventoryItems();
                 break;
             case GameState.MarketMode:
                 UM.openMarketButton.onClick.Invoke();
-                UM.openQuestButton.transform.gameObject.SetActive(false);
-                UM.openUIButton.transform.gameObject.SetActive(false);
                 MM.UpdateMarketItems();
                 break;
             case GameState.CraftMode:
                 UM.openCraftButton.onClick.Invoke();
-                UM.openQuestButton.transform.gameObject.SetActive(false);
-                UM.openUIButton.transform.gameObject.SetActive(false);
-                HM.HideCardsInHand();
-                CRM.UpdateCraftingItems();
+                CRM.UpdateCraftingItems(true);
                 break;
         }
     }
@@ -168,19 +167,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
             case GameState.SelectionMode:
                 break;
             case GameState.InventoryMode:
-                UM.closeButton.onClick.Invoke();
-                UM.openQuestButton.transform.gameObject.SetActive(true);
-                UM.openUIButton.transform.gameObject.SetActive(true);
+                UM.closeButton.GetComponent<CloseButton>().closeWindow = INM.inventoryWindow;
+                UM.closeButton.GetComponent<CloseButton>().OnButtonClick();
                 break;
             case GameState.MarketMode:
-                UM.closeButton.onClick.Invoke();
-                UM.openQuestButton.transform.gameObject.SetActive(true);
-                UM.openUIButton.transform.gameObject.SetActive(true);
+                UM.closeButton.GetComponent<CloseButton>().closeWindow = MM.marketWindow;
+                UM.closeButton.GetComponent<CloseButton>().OnButtonClick();
                 break;
             case GameState.CraftMode:
-                UM.closeButton.onClick.Invoke();
-                UM.openQuestButton.transform.gameObject.SetActive(true);
-                UM.openUIButton.transform.gameObject.SetActive(true);
+                UM.closeButton.GetComponent<CloseButton>().closeWindow = CRM.craftWindow;
+                UM.closeButton.GetComponent<CloseButton>().OnButtonClick();
                 break;
         }
     }

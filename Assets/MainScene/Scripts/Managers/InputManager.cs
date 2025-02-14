@@ -163,10 +163,13 @@ public class InputManager : MonoBehaviour
             clickedIsland = GameManager.ISM.GetClickedIsland();
             if (GameManager.UM.balance >= clickedIsland.islandBuildCost && clickedIsland.islandBought == false && clickedIsland.islandAvailable)
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                GameManager.UM.constructionLabel.gameObject.SetActive(true);
-                buildIslandPress = true;
-                GameManager.UM.SetBuildIslandSlider();
+                if (!GameManager.TTM.tutorial || clickedIsland.name == "0,0")
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    GameManager.UM.constructionLabel.gameObject.SetActive(true);
+                    buildIslandPress = true;
+                    GameManager.UM.SetBuildIslandSlider();
+                }
             }
         }
 
@@ -178,6 +181,10 @@ public class InputManager : MonoBehaviour
                 if (Time.time - lastClickTime < doubleClickTime)
                 {
                     MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
+                    if(GameManager.TTM.tutorialCount == 10)
+                    {
+                        GameManager.TTM.QuestCompleted = true;
+                    }
                 }
                 lastClickTime = Time.time;
             }

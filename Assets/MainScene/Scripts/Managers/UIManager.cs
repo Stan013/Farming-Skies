@@ -54,14 +54,14 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (!UIActive)
         {
             openUIText.SetText("<");
-            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-503, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
+            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-470, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
             UIMenu.SetActive(true);
             UIActive = true;
         }
         else
         {
             openUIText.SetText(">");
-            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-925, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
+            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-930, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
             UIMenu.SetActive(false);
             UIActive = false;
         }
@@ -72,14 +72,14 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (!questActive)
         {
             openQuestText.SetText("ʌ");
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 178);
+            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 140);
             GameManager.TTM.questMenu.SetActive(true);
             questActive = true;
         }
         else
         {
             openQuestText.SetText("v");
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 505);
+            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 510);
             GameManager.TTM.questMenu.SetActive(false);
             questActive = false;
         }

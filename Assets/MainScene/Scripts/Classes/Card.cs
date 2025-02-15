@@ -33,6 +33,10 @@ public class Card : MonoBehaviour
     public GameObject cardAnimation;
     public VideoClip cardClip;
 
+    [Header("Card in-craft variables")]
+    public string cardCraftRequirementsText;
+    public int[] cardCraftResources;
+
     [Header("Associated item variables")]
     public string itemName;
     public Sprite itemSprite;
@@ -59,6 +63,8 @@ public class Card : MonoBehaviour
 
     [Header("Tutorial card variables")]
     public bool hasBeenInspected;
+
+
 
     public enum CardState
     {

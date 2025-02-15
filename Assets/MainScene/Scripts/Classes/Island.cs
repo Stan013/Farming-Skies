@@ -25,6 +25,10 @@ public class Island : MonoBehaviour
     public GameObject islandBottom;
     public Material bottomMat;
 
+    public TMP_Text waterAvailableText;
+    public TMP_Text nitrogenAvailableText;
+    public TMP_Text phosphorusAvailableText;
+    public TMP_Text potassiumAvailableText;
     public int water;
     public int nitrogen;
     public int phosphorus;
@@ -324,10 +328,14 @@ public class Island : MonoBehaviour
             nitrogenUsage += plant.nitrogen;
             phosphorusUsage += plant.phosphorus;
             potassiumUsage += plant.potassium;
-        }
+        } 
         waterUsageText.SetText(waterUsage.ToString() + " L");
         nitrogenUsageText.SetText(nitrogenUsage.ToString() + " L");
         phosphorusUsageText.SetText(phosphorusUsage.ToString() + " L");
         potassiumUsageText.SetText(potassiumUsage.ToString() + " L");
+        waterAvailableText.SetText(water.ToString() + " L");
+        nitrogenAvailableText.SetText(nitrogen.ToString() + " L");
+        phosphorusAvailableText.SetText(phosphorus.ToString() + " L");
+        potassiumAvailableText.SetText(potassium.ToString() + " L");
     }
 }

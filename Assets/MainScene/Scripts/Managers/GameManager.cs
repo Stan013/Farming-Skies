@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             IPM.HandleMouseInput(CurrentState);
             if(TTM.tutorialCount == 11)
             {
-                if(cam.transform.position.y >= 6)
+                if(cam.transform.position.y > 7)
                 {
                     TTM.QuestCompleted = true;
                 }

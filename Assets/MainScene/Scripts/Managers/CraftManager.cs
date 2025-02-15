@@ -9,6 +9,9 @@ public class CraftManager : MonoBehaviour
     public int currentCardIndex = 0;
     public List<Card> craftableCards;
     public List<GameObject> selectionSlots;
+    public Card selectedCard;
+    public Button selectCardButton;
+    public int cardCraftAmount;
 
     // Card scales & positions
     private readonly Vector3 centerScale = new Vector3(0.6f, 0.6f, 1f);
@@ -35,6 +38,7 @@ public class CraftManager : MonoBehaviour
 
         int[] indices = { leftIndex, currentCardIndex, rightIndex };
         Vector3[] scales = { sideScale, centerScale, sideScale };
+        selectedCard = craftableCards[currentCardIndex];
 
         for (int i = 0; i < 3; i++)
         {
@@ -73,6 +77,14 @@ public class CraftManager : MonoBehaviour
 
         // Instantiate the new card
         Card newCard = Instantiate(card, slot.transform);
+        if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 13)
+        {
+            if (newCard.cardName == "Nitrogen Fertilizer" || newCard.cardName == "Phosphorus Fertilizer" || newCard.cardName == "Potassium Fertilizer")
+            {
+                newCard.GetComponent<Image>().color = Color.green;
+            }
+        }
+        newCard.GetComponent<CardInspect>().enabled = false;
         newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
         newCard.transform.localScale = animate ? sideScale : scale;
         newCard.transform.localPosition = animate ? new Vector3(position.x + (position.x > 0 ? 100f : -100f), position.y, position.z) : position;

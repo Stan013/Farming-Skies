@@ -26,7 +26,6 @@ public class InputManager : MonoBehaviour
 
     public float doubleClickTime = 0.3f;
     private float lastClickTime;
-
     public UnityEvent onDoubleClick;
 
     public void HandleGameStatesSwitchInput()
@@ -55,7 +54,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.SettingsMode, GameManager.GameState.Default); //Switch to settings mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E) && !GameManager.UM.openInventoryButton.IsInteractable()) //No WASD movement and only inventory window
+            if (Input.GetKeyDown(KeyCode.E) && GameManager.UM.openInventoryButton.IsInteractable()) //No WASD movement and only inventory window
             {
                 if (GameManager.CurrentState == GameManager.GameState.InventoryMode)
                 {
@@ -77,7 +76,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default); //Switch to market mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.C) && !GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.C) && GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
             {
                 if (GameManager.CurrentState == GameManager.GameState.CraftMode)
                 {
@@ -180,10 +179,20 @@ public class InputManager : MonoBehaviour
             {
                 if (Time.time - lastClickTime < doubleClickTime)
                 {
-                    MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
-                    if(GameManager.TTM.tutorialCount == 10)
+                    if(GameManager.TTM.tutorial)
                     {
-                        GameManager.TTM.QuestCompleted = true;
+                        if(GameManager.TTM.tutorialCount > 9)
+                        {
+                            MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
+                        }
+                        if (GameManager.TTM.tutorialCount == 10)
+                        {
+                            GameManager.TTM.QuestCompleted = true;
+                        }
+                    }
+                    else
+                    {
+                        MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
                     }
                 }
                 lastClickTime = Time.time;

@@ -15,6 +15,7 @@ public class Island : MonoBehaviour
     public bool islandBought;
 
     public GameObject sign;
+    public GameObject signWarningIcon;
     public List<GameObject> plotsSmallPlants;
     public List<GameObject> plotsMediumPlants;
     public List<GameObject> plotsBigPlants;
@@ -322,13 +323,15 @@ public class Island : MonoBehaviour
         nitrogenUsage = 0;
         phosphorusUsage = 0;
         potassiumUsage = 0;
+
         foreach (Plant plant in itemsOnIsland)
         {
             waterUsage += plant.water;
             nitrogenUsage += plant.nitrogen;
             phosphorusUsage += plant.phosphorus;
             potassiumUsage += plant.potassium;
-        } 
+        }
+        CheckWarningIcon();
         waterUsageText.SetText(waterUsage.ToString() + " L");
         nitrogenUsageText.SetText(nitrogenUsage.ToString() + " L");
         phosphorusUsageText.SetText(phosphorusUsage.ToString() + " L");
@@ -337,5 +340,17 @@ public class Island : MonoBehaviour
         nitrogenAvailableText.SetText(nitrogen.ToString() + " L");
         phosphorusAvailableText.SetText(phosphorus.ToString() + " L");
         potassiumAvailableText.SetText(potassium.ToString() + " L");
+    }
+
+    public void CheckWarningIcon()
+    {
+        if (waterUsage > water || nitrogenUsage > nitrogen || phosphorusUsage > phosphorus || potassiumUsage > potassium)
+        {
+            signWarningIcon.SetActive(true);
+        }
+        else
+        {
+            signWarningIcon.SetActive(false);
+        }
     }
 }

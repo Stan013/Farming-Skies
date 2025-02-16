@@ -65,6 +65,10 @@ public class UIManager : MonoBehaviour, IDataPersistence
             UIMenu.SetActive(false);
             UIActive = false;
         }
+        if (openUIButton.GetComponent<Image>().color == Color.green)
+        {
+            openUIButton.GetComponent<Image>().color = Color.white;
+        }
     }
 
     public void OpenQuestMenu()
@@ -82,6 +86,10 @@ public class UIManager : MonoBehaviour, IDataPersistence
             openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 510);
             GameManager.TTM.questMenu.SetActive(false);
             questActive = false;
+        }
+        if (openQuestButton.GetComponent<Image>().color == Color.green)
+        {
+            openQuestButton.GetComponent<Image>().color = Color.white;
         }
     }
 

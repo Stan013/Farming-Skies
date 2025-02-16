@@ -34,8 +34,8 @@ public class Card : MonoBehaviour
     public VideoClip cardClip;
 
     [Header("Card in-craft variables")]
-    public string cardCraftRequirementsText;
     public int[] cardCraftResources;
+    public int cardDropsRequired;
 
     [Header("Associated item variables")]
     public string itemName;

@@ -24,7 +24,7 @@ public class PlantManager : MonoBehaviour
                     island.ToggleState(Island.IslandState.Cultivated, Island.IslandState.Sowed);
                 }
             }
-            GameManager.ISM.CheckIslandNutrients(island);
+            GameManager.ISM.UpdateIslandMaterial(island);
             island.UpdateIslandStats();
         }
     }
@@ -76,5 +76,6 @@ public class PlantManager : MonoBehaviour
         island.nitrogen -= plant.nitrogen;
         island.phosphorus -= plant.phosphorus;
         island.potassium -= plant.potassium;
+        island.CheckWarningIcon();
     }
 }

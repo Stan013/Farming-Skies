@@ -6,41 +6,54 @@ using UnityEngine.UI;
 public class CraftManager : MonoBehaviour
 {
     public GameObject craftWindow;
+    public GameObject craftingUI;
+
     public int currentCardIndex = 0;
     public List<Card> craftableCards;
     public List<GameObject> selectionSlots;
     public Card selectedCard;
-    public Button selectCardButton;
+
     public int cardCraftAmount;
+    public int maxCraftableAmount;
 
     // Card scales & positions
     private readonly Vector3 centerScale = new Vector3(0.6f, 0.6f, 1f);
-    private readonly Vector3 sideScale = new Vector3(0.45f, 0.45f, 1f);
+    private readonly Vector3 sideScale = new Vector3(0.4f, 0.4f, 1f);
+    private readonly Vector3 farSideScale = new Vector3(0.30f, 0.30f, 1f);
     private readonly Vector3[] cardPositions =
     {
-        new Vector3(-325f, 0f, 0f),  // Left card
-        Vector3.zero,   // Center card
-        new Vector3(325f, 0f, 0f)    // Right card
+        new Vector3(-515f, 0f, 0f),  // Far-left card
+        new Vector3(-300f, 0f, 0f),  // Left card
+        Vector3.zero,                // Center card
+        new Vector3(300f, 0f, 0f),   // Right card
+        new Vector3(515f, 0f, 0f)    // Far-right card
     };
 
     private bool isTransitioning = false;
 
     public void UpdateCraftingItems(bool animate)
     {
-        if (craftableCards == null || craftableCards.Count == 0 || selectionSlots == null || selectionSlots.Count < 3)
+        if (craftableCards == null || craftableCards.Count == 0 || selectionSlots == null || selectionSlots.Count < 5)
         {
             Debug.LogWarning("CraftManager: Missing card data or slots.");
             return;
         }
 
-        int leftIndex = (currentCardIndex - 1 + craftableCards.Count) % craftableCards.Count;
-        int rightIndex = (currentCardIndex + 1) % craftableCards.Count;
+        int[] indices = new int[5];
+        for (int i = -2; i <= 2; i++)
+        {
+            indices[i + 2] = (currentCardIndex + i + craftableCards.Count) % craftableCards.Count;
+        }
 
-        int[] indices = { leftIndex, currentCardIndex, rightIndex };
-        Vector3[] scales = { sideScale, centerScale, sideScale };
+        Vector3[] scales = { farSideScale, sideScale, centerScale, sideScale, farSideScale };
         selectedCard = craftableCards[currentCardIndex];
 
-        for (int i = 0; i < 3; i++)
+        if (selectedCard.cardName == "Nitrogen Fertilizer" || selectedCard.cardName == "Phosphorus Fertilizer" || selectedCard.cardName == "Potassium Fertilizer" && GameManager.TTM.tutorialCount == 13)
+        {
+            craftingUI.GetComponent<CraftUI>().plusButton.GetComponent<Image>().color = Color.green;
+        }
+
+        for (int i = 0; i < 5; i++)
         {
             AssignCardToSlot(selectionSlots[i], craftableCards[indices[i]], scales[i], cardPositions[i], animate);
         }
@@ -54,6 +67,7 @@ public class CraftManager : MonoBehaviour
         currentCardIndex = (currentCardIndex + direction + craftableCards.Count) % craftableCards.Count;
 
         UpdateCraftingItems(true);
+        CalculateMaxCraftableAmount();
         StartCoroutine(ResetTransitionAfterDelay(0.3f));
     }
 
@@ -63,7 +77,7 @@ public class CraftManager : MonoBehaviour
         isTransitioning = false;
     }
 
-    private void AssignCardToSlot(GameObject slot, Card card, Vector3 scale, Vector3 position, bool animate)
+    public void AssignCardToSlot(GameObject slot, Card card, Vector3 scale, Vector3 position, bool animate)
     {
         if (slot == null || card == null)
         {
@@ -71,17 +85,15 @@ public class CraftManager : MonoBehaviour
             return;
         }
 
-        // Destroy existing card in slot
         if (slot.transform.childCount > 0)
             Destroy(slot.transform.GetChild(0).gameObject);
 
-        // Instantiate the new card
         Card newCard = Instantiate(card, slot.transform);
-        if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 13)
+        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 12)
         {
             if (newCard.cardName == "Nitrogen Fertilizer" || newCard.cardName == "Phosphorus Fertilizer" || newCard.cardName == "Potassium Fertilizer")
             {
-                newCard.GetComponent<Image>().color = Color.green;
+                newCard.cardBackground.GetComponent<Image>().color = Color.green;
             }
         }
         newCard.GetComponent<CardInspect>().enabled = false;
@@ -115,5 +127,41 @@ public class CraftManager : MonoBehaviour
 
         cardTransform.localPosition = targetPosition;
         cardTransform.localScale = targetScale;
+    }
+
+    public void CalculateMaxCraftableAmount()
+    {
+        if (selectedCard == null) return;
+        if (selectedCard.cardCraftResources.Length < 3)
+        {
+            Debug.LogError("CraftManager: selectedCard's cardCraftResources array is not properly defined.");
+            return;
+        }
+
+        List<int> validMaxValues = new List<int>();
+        if (selectedCard.cardCraftResources[0] > 0f)
+        {
+            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.balance / selectedCard.cardCraftResources[0]));
+        }
+        if (selectedCard.cardCraftResources[1] > 0)
+        {
+            validMaxValues.Add(GameManager.UM.water / selectedCard.cardCraftResources[1]);
+        }
+        if (selectedCard.cardCraftResources[2] > 0)
+        {
+            validMaxValues.Add(GameManager.UM.fertilizer / selectedCard.cardCraftResources[2]);
+        }
+        if (selectedCard.cardType != "Utility" && selectedCard.itemQuantity > 0)
+        {
+            validMaxValues.Add(selectedCard.itemQuantity / selectedCard.cardDropsRequired);
+        }
+        if (validMaxValues.Count > 0)
+        {
+            maxCraftableAmount = Mathf.Min(validMaxValues.ToArray());
+        }
+        else
+        {
+            maxCraftableAmount = 0;
+        }
     }
 }

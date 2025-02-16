@@ -85,8 +85,8 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press TAB to go into manage mode and hover over an island. Now hold down your right mouse button and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
                 break;
             case 2:
-                GameManager.UM.OpenUIMenu();
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
+                GameManager.UM.openUIButton.GetComponent<Image>().color = Color.green;
                 GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building things. If you click on your expenses you can see how much you will need to pay and for what. Then if you press on the date you can see when you need to pay so make sure you can cover your expenses at the end of the month or your farm won't survive.");
@@ -148,11 +148,14 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Move back to your land!", "In order to improve the nutrients in your soil we will have to move above your land again and use some cards on it. Press TAB to go out of manage mode and now you can freely move around your farm with WASD. You can also move UP by pressing SHIFT and DOWN by pressing CTRL. Your WASD movement is based on the direction you are looking in. So try to get above your land so we can improve your soil.");
                 break;
             case 12:
+                GameManager.UM.SetUIButtons(true, GameManager.UM.openCraftButton);
                 GameManager.UM.openCraftButton.GetComponent<Image>().color = Color.green;
                 UpdateQuest("Make some cards!", "To add nutrients to the soil we need to use the appropriate fertilizer card. But we first need to craft these cards you already got some fertilizer saved up so you can craft some fertilizer cards. In manage mode click with your left mouse button on the highlighted icon or press your C key to go into crafting mode. Now you can select which card you want and craft them. Each card will cost a certain amount of resources to craft.");
                 break;
             case 13:
-                UpdateQuest("Craft all the fertilizers!", "As you noticed when inspecting your soil the nutrients Nitrogen, Phosphorus and Potassium where low. So now that your are in crafting mode select each fertilizer and craft 1 of each fertilizer card. Then go back to manage mode and with your left mouse button drag these fertilizer card onto your soil. This should make the warning icon go away and up the yield of your crops again.");
+                GameManager.UM.SetUIButtons(true, GameManager.UM.openQuestButton);
+                GameManager.UM.openQuestButton.GetComponent<Image>().color = Color.green;
+                UpdateQuest("Craft all the fertilizers!", "As you noticed when inspecting your soil the follwing nutrients where scarce: Nitrogen, Phosphorus and Potassium. So now that your are in crafting mode select each fertilizer and craft 1 of each fertilizer card. Then go back to manage mode and with your left mouse button drag these fertilizer card onto your soil. This should make the warning icon go away and up the yield of your crops again.");
                 break;
         }
     }

@@ -2300,6 +2300,7 @@ MonoBehaviour:
   islandTaxCost: 0
   islandBought: 0
   sign: {fileID: 1049946876205490626}
+  signWarningIcon: {fileID: 2350613078917365213}
   plotsSmallPlants:
   - {fileID: 7938958760340876345}
   - {fileID: 9074272155846697336}
@@ -2994,6 +2995,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2350613078917365213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 246094400166409080, guid: ef8c5c9009ef8be469214ca56e17487b, type: 3}
+  m_PrefabInstance: {fileID: 2591051556742762149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2967537510007234807 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 782372948676767314, guid: ef8c5c9009ef8be469214ca56e17487b, type: 3}

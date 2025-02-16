@@ -16,10 +16,13 @@ public class CloseButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        closeWindow.SetActive(false);
-        GameManager.UM.openQuestButton.transform.gameObject.SetActive(true);
-        GameManager.UM.openUIButton.transform.gameObject.SetActive(true);
-        GameManager.HM.HideCardsInHand(false);
-        EventSystem.current.SetSelectedGameObject(null);
+        if (closeWindow.transform.gameObject.activeSelf)
+        {
+            closeWindow.SetActive(false);
+            GameManager.UM.OpenQuestMenu();
+            GameManager.UM.OpenUIMenu();
+            GameManager.HM.HideCardsInHand(false);
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 }

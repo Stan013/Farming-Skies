@@ -156,7 +156,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         return null;
     }
 
-    public void CheckIslandNutrients(Island island)
+    public void UpdateIslandMaterial(Island island)
     {
         float totalNPK = island.nitrogen + island.phosphorus + island.potassium;
         float blendFactor = Mathf.Clamp01(totalNPK / 100f);
@@ -216,7 +216,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
         return blendedTex;
     }
-
 
     public bool CheckIslandWater(Plant plant)
     {

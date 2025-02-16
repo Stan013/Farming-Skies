@@ -54,7 +54,7 @@ public class MarketButton : MonoBehaviour
 
     private void UpdateMaxAmount()
     {
-        if (isSelling)
+        if (isSelling && marketItem.attachedItemCard != null)
         {
             maxAmount = marketItem.attachedItemCard.itemQuantity;
         }

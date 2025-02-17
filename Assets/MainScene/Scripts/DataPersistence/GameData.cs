@@ -40,10 +40,10 @@ public class GameData
 
     public GameData()
     {
-        tax = 0f;
+        tax = 100f;
         balance = 500f;
-        water = 50;
-        fertilizer = 50;
+        water = 100;
+        fertilizer = 100;
         playerPosition = new Vector3(0, 0, 0);
         cameraDirection = new Vector3(0, 10, 0);
     }

@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
     private bool buildIslandPress = false;
     private float holdTimer = 0.0f;
 
-    public float doubleClickTime = 0.3f;
+    public float doubleClickTime = 0.5f;
     private float lastClickTime;
     public UnityEvent onDoubleClick;
 
@@ -76,7 +76,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default); //Switch to market mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.C) && GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.C) && !GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
             {
                 if (GameManager.CurrentState == GameManager.GameState.CraftMode)
                 {

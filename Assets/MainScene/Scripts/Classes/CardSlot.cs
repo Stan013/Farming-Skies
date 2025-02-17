@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CardSlot : MonoBehaviour
 {
-    public int index { get; set; }
-    public Card cardInSlot { get; set; }
+    public int index;
+    public Card cardInSlot;
 
     public void AddCardToSlot(int slotIndex, Card card)
     {

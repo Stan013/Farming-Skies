@@ -15,27 +15,6 @@ public class DeckManager : MonoBehaviour, IDataPersistence
         newCard.ToggleState(Card.CardState.InDeck, Card.CardState.Destroy);
     }
 
-    public void CheckSlotDuplicate()
-    {
-        foreach(CardSlot cardSlot in GameManager.HM.handSlots)
-        {
-            if (cardSlot.transform.childCount == 2)
-            {
-                Transform secondChild = cardSlot.transform.GetChild(1);
-                Card card = secondChild.GetComponent<Card>();
-                if (card != null)
-                {
-                    GameManager.HM.MoveCardsInHand(card);
-                    Debug.LogWarning(cardSlot.index + "cardslot has duplicate card: " + card);
-                }
-                else
-                {
-                    Debug.LogWarning("The second child does not have a Card component!");
-                }
-            }
-        }
-    }
-
     public void LoadData(GameData data)
     {
         cardsInDeck.Clear();

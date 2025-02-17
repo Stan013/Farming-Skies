@@ -75,7 +75,7 @@ public class Island : MonoBehaviour
         GetIslandComponents();
         switch (state)
         {
-            case IslandState.Highlighted:
+            case IslandState.Highlighted: //Rework
                 topMat.EnableKeyword("_EMISSION");
                 topMat.SetColor("_EmissionColor", Color.blue * 2.0f);
                 bottomMat.EnableKeyword("_EMISSION");

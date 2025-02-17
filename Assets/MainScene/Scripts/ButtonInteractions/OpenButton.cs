@@ -29,7 +29,7 @@ public class OpenButton : MonoBehaviour
                     GameManager.TTM.QuestCompleted = true;
                     GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.white;
                 }
-                if (openWindow.name == "CraftWindow" && GameManager.TTM.tutorialCount == 12)
+                if (openWindow.name == "CraftingWindow" && GameManager.TTM.tutorialCount == 12)
                 {
                     GameManager.TTM.QuestCompleted = true;
                     GameManager.UM.openCraftButton.GetComponent<Image>().color = Color.white;

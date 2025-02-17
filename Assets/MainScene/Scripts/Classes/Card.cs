@@ -12,7 +12,6 @@ public class Card : MonoBehaviour
     public bool cardStarter;
     public bool cardSetup;
     public CardState CurrentState;
-    public int cardIndex;
     public bool dragSucces;
     public GameObject cardBackground;
 
@@ -97,7 +96,6 @@ public class Card : MonoBehaviour
             case CardState.InDeck:
                 GameManager.DM.cardsInDeck.Add(this);
                 this.gameObject.transform.SetParent(GameManager.DM.cardsInDeckParent.transform);
-                cardIndex = GameManager.DM.cardsInDeck.Count;
                 this.gameObject.SetActive(false);
                 break;
             case CardState.InHand:
@@ -109,7 +107,6 @@ public class Card : MonoBehaviour
                         cardSetup = true;
                     }
                     GameManager.HM.cardsInHand.Add(this);
-                    cardIndex = GameManager.HM.cardsInHand.Count;
                 }
                 this.gameObject.SetActive(true);
                 break;
@@ -154,10 +151,7 @@ public class Card : MonoBehaviour
                 GameManager.DM.cardsInDeck.Remove(this);
                 break;
             case CardState.InHand:
-                if(GameManager.HM.needsCard)
-                {
-                    GameManager.HM.cardsInHand.Remove(this);
-                }
+                GameManager.HM.cardsInHand.Remove(this);
                 break;
             case CardState.InDrag:
                 if(dragSucces)
@@ -165,7 +159,6 @@ public class Card : MonoBehaviour
                     GameManager.HM.needsCard = true;
                     GameManager.HM.cardsInHand.Remove(this);
                     GameManager.HM.MoveCardsInHand(this);
-                    GameManager.HM.RemoveEmptyCardSlot();
                     GameManager.HM.SetCardsInHand();
                     dragSucces = false;
                 }

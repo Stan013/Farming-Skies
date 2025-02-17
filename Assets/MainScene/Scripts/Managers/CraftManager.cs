@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CraftManager : MonoBehaviour
 {
     public GameObject craftWindow;
-    public GameObject craftingUI;
+    public CraftUI craftingUI;
 
     public int currentCardIndex = 0;
     public List<Card> craftableCards;
@@ -48,11 +48,6 @@ public class CraftManager : MonoBehaviour
         Vector3[] scales = { farSideScale, sideScale, centerScale, sideScale, farSideScale };
         selectedCard = craftableCards[currentCardIndex];
 
-        if (selectedCard.cardName == "Nitrogen Fertilizer" || selectedCard.cardName == "Phosphorus Fertilizer" || selectedCard.cardName == "Potassium Fertilizer" && GameManager.TTM.tutorialCount == 13)
-        {
-            craftingUI.GetComponent<CraftUI>().plusButton.GetComponent<Image>().color = Color.green;
-        }
-
         for (int i = 0; i < 5; i++)
         {
             AssignCardToSlot(selectionSlots[i], craftableCards[indices[i]], scales[i], cardPositions[i], animate);
@@ -89,17 +84,15 @@ public class CraftManager : MonoBehaviour
             Destroy(slot.transform.GetChild(0).gameObject);
 
         Card newCard = Instantiate(card, slot.transform);
-        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 12)
-        {
-            if (newCard.cardName == "Nitrogen Fertilizer" || newCard.cardName == "Phosphorus Fertilizer" || newCard.cardName == "Potassium Fertilizer")
-            {
-                newCard.cardBackground.GetComponent<Image>().color = Color.green;
-            }
-        }
         newCard.GetComponent<CardInspect>().enabled = false;
         newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
         newCard.transform.localScale = animate ? sideScale : scale;
         newCard.transform.localPosition = animate ? new Vector3(position.x + (position.x > 0 ? 100f : -100f), position.y, position.z) : position;
+        
+        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 12)
+        {
+            craftingUI.CheckSelectedCard(newCard);
+        }
 
         if (animate)
             StartCoroutine(AnimateCard(newCard.transform, position, scale, 0.3f));

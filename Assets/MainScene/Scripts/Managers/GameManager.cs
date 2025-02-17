@@ -128,8 +128,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 Cursor.visible = false;
                 break;
             case GameState.ManageMode:
-                IPM.rb.velocity = Vector3.zero;
-                IPM.rb.angularVelocity = Vector3.zero;
                 break;
             case GameState.SelectionMode:
                 HM.ClearCardsInHand();
@@ -158,6 +156,8 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 MainMenuStatus(false);
                 break;
             case GameState.Default:
+                IPM.rb.velocity = Vector3.zero;
+                IPM.rb.angularVelocity = Vector3.zero;
                 Cursor.visible = true;
                 break;
             case GameState.ManageMode:

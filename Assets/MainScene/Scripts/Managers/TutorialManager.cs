@@ -94,13 +94,13 @@ public class TutorialManager : MonoBehaviour
             case 3:
                 GameManager.HM.SetStartingHand();
                 Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
-                cardCultivator.cardBackground.GetComponent<Image>().color = Color.green;
+                cardCultivator.GetComponent<Image>().color = Color.green;
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Cultivate your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use these plant cards your land will have to be cultivated and watered first. This is done by making sure you are in manage mode and then by holding down your <b>left mouse button</b> over the highlighted card to drag it towards your land.");
                 break;
             case 4:
                 Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
-                cardWateringCan.cardBackground.GetComponent<Image>().color = Color.green;
+                cardWateringCan.GetComponent<Image>().color = Color.green;
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Water your island!", "As you can see your land has now been cultivated. Now we go onto the second step making sure your land is watered. Use your <b>left mouse button</b> again and this time drag your watering can card over your cultivated land. Using this card will add <color=blue><b>50 water</b></color> to the soil make sure this number doesn't run out our the soil will dry up and your crops will die.");
                 break;
@@ -109,14 +109,14 @@ public class TutorialManager : MonoBehaviour
                 {
                     if(card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
                     {
-                        card.cardBackground.GetComponent<Image>().color = Color.green;
+                        card.GetComponent<Image>().color = Color.green;
                     }
                 }
                 UpdateQuest("Check your crop needs!", "Besides water your lands will need to have the right nutrients for your crops. These nutrients are <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color> each crop has a different need so make sure your soil has plenty of nutrients. Use your mouse and <b>right click</B> on one of your plant cards to see what this crop needs and also check how big it is. <b>Right click</> again to put the plant card back in your hand.");
                 break;
             case 6:
                 Card cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
-                cardGreenBean.cardBackground.GetComponent<Image>().color = Color.green;
+                cardGreenBean.GetComponent<Image>().color = Color.green;
                 cardGreenBean.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Plant your first crop!", "Now that you have got your land ready and know what each crop needs and how big they are, it is time to plant. Hover over the highlighted plant card and by holding <b>left mouse button</b> you can drag that card over your soil. Now move your mouse to whichever spot and the crop should snap into place. Each land has space for <b>36 small plots, 9 medium plots or 1 big plot</b>. So be sure to plan your placement carefully");
                 break;
@@ -125,7 +125,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
                     {
-                        card.cardBackground.GetComponent<Image>().color = Color.green;
+                        card.GetComponent<Image>().color = Color.green;
                         card.GetComponent<CardDrag>().enabled = true;
                     }
                 }

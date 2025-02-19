@@ -13,7 +13,6 @@ public class Card : MonoBehaviour
     public bool cardSetup;
     public CardState CurrentState;
     public bool dragSucces;
-    public GameObject cardBackground;
 
     [Header("Visible card variables")]
     public string cardName;

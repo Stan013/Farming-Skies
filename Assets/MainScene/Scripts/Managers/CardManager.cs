@@ -37,7 +37,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
             {
                 card.hasBeenInspected = true;
                 inspectedCards.Add(card);
-                card.cardBackground.GetComponent<Image>().color = new Color(0.735f, 0.735f, 0.735f);
+                card.GetComponent<Image>().color = new Color(0.735f, 0.735f, 0.735f);
             }
             if (inspectedCards.Count == 4)
             {

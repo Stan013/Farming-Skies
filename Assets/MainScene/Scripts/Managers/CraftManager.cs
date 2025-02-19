@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class CraftManager : MonoBehaviour
 {
     public GameObject craftWindow;
-    public CraftUI craftingUI;
-
     public int currentCardIndex = 0;
     public List<Card> craftableCards;
     public List<GameObject> selectionSlots;
@@ -91,7 +89,7 @@ public class CraftManager : MonoBehaviour
         
         if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 12)
         {
-            craftingUI.CheckSelectedCard(newCard);
+            CheckSelectedCard(newCard);
         }
 
         if (animate)
@@ -155,6 +153,14 @@ public class CraftManager : MonoBehaviour
         else
         {
             maxCraftableAmount = 0;
+        }
+    }
+
+    public void CheckSelectedCard(Card card)
+    {
+        if (card.cardName == "Nitrogen Fertilizer" || card.cardName == "Phosphorus Fertilizer" || card.cardName == "Potassium Fertilizer")
+        {
+            card.GetComponent<Image>().color = Color.green;
         }
     }
 }

@@ -120,6 +120,7 @@ public class Card : MonoBehaviour
                 cardNameText.SetText(cardName);
                 break;
             case CardState.InDrag:
+                GetComponent<Image>().enabled = false;
                 foreach (Transform child in this.transform)
                 {
                     child.gameObject.SetActive(false);
@@ -163,6 +164,7 @@ public class Card : MonoBehaviour
                 }
                 else
                 {
+                    GetComponent<Image>().enabled = true;
                     foreach (Transform child in this.transform)
                     {
                         if (cardType == "PlantSmall" || cardType == "PlantMedium" || cardType == "PlantBig")

@@ -112,7 +112,7 @@ public class TutorialManager : MonoBehaviour
                         card.GetComponent<Image>().color = Color.green;
                     }
                 }
-                UpdateQuest("Check your crop needs!", "Besides water your lands will need to have the right nutrients for your crops. These nutrients are <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color> each crop has a different need so make sure your soil has plenty of nutrients. Use your mouse and <b>right click</B> on one of your plant cards to see what this crop needs and also check how big it is. <b>Right click</> again to put the plant card back in your hand.");
+                UpdateQuest("Check your crop needs!", "Besides water your lands will need to have the right nutrients for your crops. These nutrients are <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color> each crop has a different need so make sure your soil has plenty of nutrients. Use your mouse and <b>right click</b> on one of your plant cards to see what this crop needs and also check how big it is. <b>Right click</> again to put the plant card back in your hand.");
                 break;
             case 6:
                 Card cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");

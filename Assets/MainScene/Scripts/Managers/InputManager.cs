@@ -76,7 +76,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default); //Switch to market mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.C) && !GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.C) && GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
             {
                 if (GameManager.CurrentState == GameManager.GameState.CraftMode)
                 {

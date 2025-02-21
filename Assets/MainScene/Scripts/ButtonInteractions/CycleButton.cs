@@ -14,13 +14,14 @@ public class CycleButton : MonoBehaviour
 
     public void OnButtonClick()
     {
+        GameManager.CRM.SetCardCraftAmount(0);
         if (cycleButton.name == "LeftArrow")
         {
-            GameManager.CRM.ChangeCraftingCard(-1);
+            GameManager.CRM.ChangeSelectedCard(-1);
         }
         else
         {
-            GameManager.CRM.ChangeCraftingCard(1);
+            GameManager.CRM.ChangeSelectedCard(1);
         }
     }
 }

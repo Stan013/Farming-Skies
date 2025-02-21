@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CraftManager : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class CraftManager : MonoBehaviour
     public List<Card> craftableCards;
     public List<GameObject> selectionSlots;
     public Card selectedCard;
+    public CraftUI craftUI;
+
+    public Button craftButton;
+    public TMP_Text craftButtonText;
+    public bool isCrafting;
+    public int biggestResourceCost;
+    public bool craftSuccess;
+    public float craftSpeed;
 
     public int cardCraftAmount;
     public int maxCraftableAmount;
@@ -31,12 +40,6 @@ public class CraftManager : MonoBehaviour
 
     public void UpdateCraftingItems(bool animate)
     {
-        if (craftableCards == null || craftableCards.Count == 0 || selectionSlots == null || selectionSlots.Count < 5)
-        {
-            Debug.LogWarning("CraftManager: Missing card data or slots.");
-            return;
-        }
-
         int[] indices = new int[5];
         for (int i = -2; i <= 2; i++)
         {
@@ -52,7 +55,7 @@ public class CraftManager : MonoBehaviour
         }
     }
 
-    public void ChangeCraftingCard(int direction)
+    public void ChangeSelectedCard(int direction)
     {
         if (isTransitioning) return;
 
@@ -93,7 +96,7 @@ public class CraftManager : MonoBehaviour
         }
 
         if (animate)
-            StartCoroutine(AnimateCard(newCard.transform, position, scale, 0.3f));
+            StartCoroutine(AnimateCraftingCards(newCard.transform, position, scale, 0.3f));
         else
         {
             newCard.transform.localPosition = position;
@@ -101,7 +104,7 @@ public class CraftManager : MonoBehaviour
         }
     }
 
-    private IEnumerator AnimateCard(Transform cardTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
+    private IEnumerator AnimateCraftingCards(Transform cardTransform, Vector3 targetPosition, Vector3 targetScale, float duration)
     {
         float elapsedTime = 0f;
         Vector3 startPos = cardTransform.localPosition;
@@ -122,13 +125,6 @@ public class CraftManager : MonoBehaviour
 
     public void CalculateMaxCraftableAmount()
     {
-        if (selectedCard == null) return;
-        if (selectedCard.cardCraftResources.Length < 3)
-        {
-            Debug.LogError("CraftManager: selectedCard's cardCraftResources array is not properly defined.");
-            return;
-        }
-
         List<int> validMaxValues = new List<int>();
         if (selectedCard.cardCraftResources[0] > 0f)
         {
@@ -156,11 +152,47 @@ public class CraftManager : MonoBehaviour
         }
     }
 
+    public void SetCardCraftAmount(int amount)
+    {
+        cardCraftAmount = Mathf.Clamp(amount, 0, maxCraftableAmount);
+        craftUI.craftAmountInput.text = cardCraftAmount.ToString();
+        craftUI.UpdateCostDisplay();
+    }
+
     public void CheckSelectedCard(Card card)
     {
         if (card.cardName == "Nitrogen Fertilizer" || card.cardName == "Phosphorus Fertilizer" || card.cardName == "Potassium Fertilizer")
         {
             card.GetComponent<Image>().color = Color.green;
         }
+    }
+
+    public bool CheckValidCraft()
+    {
+        if (GameManager.CRM.cardCraftAmount != 0)
+        {
+            craftButton.GetComponent<Image>().color = new Color(0.24f, 0.6f, 1f);
+            craftButtonText.SetText("Craft card");
+            return true;
+        }
+        else
+        {
+            craftButton.GetComponent<Image>().color = Color.red;
+            craftButtonText.SetText("Invalid amount");
+            return false;
+        }
+    }
+
+    public void ResetCraftCard()
+    {
+        foreach (var slot in GameManager.CRM.selectionSlots)
+        {
+            slot.SetActive(true);
+        }
+        selectedCard.cardCraftResources[0] = craftUI.coinCost;
+        selectedCard.cardCraftResources[1] = craftUI.waterCost;
+        selectedCard.cardCraftResources[2] = craftUI.fertilizerCost;
+        craftUI.craftCardCover.SetActive(false);
+        isCrafting = false;
     }
 }

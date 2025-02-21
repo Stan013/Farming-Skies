@@ -154,6 +154,7 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 13:
                 UpdateQuest("Select fertilizer card!", "As you noticed when inspecting your soil the following nutrients where scarce: <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color>. So now that your are in crafting mode select each highlighted fertilizer card with the use of the arrow keys and select 1 one of them by pressing the plus button. You can see how much each card will cost to craft so make sure you don't craft too many.");
+                
                 break;
             case 14:
                 UpdateQuest("Craft all the fertilizers!", "");

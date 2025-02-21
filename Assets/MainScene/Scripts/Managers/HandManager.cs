@@ -49,7 +49,6 @@ public class HandManager : MonoBehaviour, IDataPersistence
     public void AddCardToHand(string cardId)
     {
         Card newCard = Instantiate(GameManager.CM.FindCardById(cardId), Vector3.zero, Quaternion.identity);
-
         handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, newCard);
         lastFilledSlotIndex++;
         newCard.ToggleState(Card.CardState.InHand, Card.CardState.InDeck);

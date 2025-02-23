@@ -17,18 +17,24 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             float spawnInterval = (5f / GameManager.CRM.biggestResourceCost);
             if (fillAmount <= nextSpawnTime)
             {
-                nextSpawnTime -= spawnInterval;
                 GameManager.CRM.craftUI.SpawnResources(GameManager.CRM.selectedCard.cardCraftResources);
-                if (nextSpawnTime <= 0)
+                nextSpawnTime -= spawnInterval;
+            }
+            if (fillAmount == 0)
+            {
+                GameManager.CRM.isCrafting = false;
+                GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
+                GameManager.CRM.craftButtonText.SetText("Card crafted");
+                GameManager.CRM.craftSuccess = true;
+                if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 14)
                 {
-                    GameManager.CRM.isCrafting = false;
-                    GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
-                    GameManager.CRM.craftButtonText.SetText("Card crafted");
-                    GameManager.CRM.craftSuccess = true;
+                    GameManager.CRM.selectedCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f);
+                    GameManager.TTM.QuestCompleted = true;
                 }
             }
         }
     }
+
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -48,12 +54,8 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             GameObject centerSlot = GameManager.CRM.selectionSlots[2];
             centerSlot.SetActive(true);
             GameManager.CRM.craftUI.craftCardCover.SetActive(true);
-            GameManager.CRM.AssignCardToSlot(centerSlot, craftCard, new Vector3(0.6f, 0.6f, 1f), Vector3.zero, false);
+            GameManager.CRM.UpdateCardSlot(craftCard, new Vector3(0.6f, 0.6f, 1f), Vector3.zero, false);
             GameManager.CRM.biggestResourceCost = Mathf.Max(craftCard.cardCraftResources[0], craftCard.cardCraftResources[1], craftCard.cardCraftResources[2]);
-        }
-        else
-        {
-
         }
     }
 
@@ -63,20 +65,29 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             if (!GameManager.CRM.craftSuccess)
             {
-                foreach (GameObject resource in GameManager.CRM.craftUI.craftResources)
+                foreach (Resource resource in GameManager.CRM.craftUI.craftResources)
                 {
                     Destroy(resource.gameObject);
                 }
                 GameManager.CRM.craftUI.craftResources.Clear();
                 GameManager.CRM.craftButton.GetComponent<Image>().color = Color.red;
                 GameManager.CRM.craftButtonText.SetText("Unsuccessful");
+                if (GameManager.TTM.tutorialCount == 14)
+                {
+                    GameManager.CRM.SetCardCraftAmount(1);
+                    GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
+                }
             }
-            GameManager.UM.balance -= GameManager.CRM.craftUI.coinCost;
-            GameManager.UM.water -= GameManager.CRM.craftUI.waterCost;
-            GameManager.UM.fertilizer -= GameManager.CRM.craftUI.fertilizerCost;
-            GameManager.DM.AddCardToDeck(GameManager.CRM.selectedCard.cardId);
+            else
+            {
+                GameManager.UM.balance -= GameManager.CRM.selectedCard.cardCraftResources[0];
+                GameManager.UM.water -= GameManager.CRM.selectedCard.cardCraftResources[1];
+                GameManager.UM.fertilizer -= GameManager.CRM.selectedCard.cardCraftResources[2];
+                GameManager.DM.AddCardToDeck(GameManager.CRM.selectedCard.cardId);
+                GameManager.CRM.SetCardCraftAmount(0);
+                GameManager.UM.UpdateUI();
+            }
             GameManager.CRM.ResetCraftCard();
-            GameManager.CRM.SetCardCraftAmount(0);
         }
     }
 }

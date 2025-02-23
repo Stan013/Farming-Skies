@@ -42,8 +42,8 @@ public class GameData
     {
         tax = 100f;
         balance = 500f;
-        water = 100;
-        fertilizer = 100;
+        water = 25;
+        fertilizer = 25;
         playerPosition = new Vector3(0, 0, 0);
         cameraDirection = new Vector3(0, 10, 0);
     }

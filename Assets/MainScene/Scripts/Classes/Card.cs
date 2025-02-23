@@ -34,6 +34,7 @@ public class Card : MonoBehaviour
     [Header("Card in-craft variables")]
     public int[] cardCraftResources;
     public int cardDropsRequired;
+    public int cardCraftIndex;
 
     [Header("Associated item variables")]
     public string itemName;

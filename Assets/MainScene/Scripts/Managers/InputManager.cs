@@ -185,10 +185,6 @@ public class InputManager : MonoBehaviour
                         {
                             MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
                         }
-                        if (GameManager.TTM.tutorialCount == 10)
-                        {
-                            GameManager.TTM.QuestCompleted = true;
-                        }
                     }
                     else
                     {
@@ -251,7 +247,10 @@ public class InputManager : MonoBehaviour
 
     private void MoveCameraToIsland(Island island)
     {
-        if (island == null) return;
+        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 10)
+        {
+            GameManager.TTM.QuestCompleted = true;
+        }
 
         Vector3 targetPosition = new Vector3(island.transform.position.x + 4, 5, island.transform.position.z + 4);
         Quaternion targetRotation = Quaternion.Euler(5, -135, 0);

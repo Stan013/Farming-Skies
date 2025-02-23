@@ -134,16 +134,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 SM.GeneratePickWindow();
                 break;
             case GameState.InventoryMode:
-                UM.openInventoryButton.onClick.Invoke();
+                UM.openInventoryButton.GetComponent<OpenButton>().OnKeyboardButtonClick("Inventory");
                 INM.UpdateInventoryItems();
                 break;
             case GameState.MarketMode:
-                UM.openMarketButton.onClick.Invoke();
+                UM.openMarketButton.GetComponent<OpenButton>().OnKeyboardButtonClick("Market");
                 MM.UpdateMarketItems();
                 break;
             case GameState.CraftMode:
-                UM.openCraftButton.onClick.Invoke();
-                CRM.UpdateCraftingItems(true);
+                UM.openCraftButton.GetComponent<OpenButton>().OnKeyboardButtonClick("Craft");
+                CRM.SetupCraftingMode();
                 break;
         }
     }

@@ -77,6 +77,7 @@ public class TutorialManager : MonoBehaviour
             tutorialMenu.SetActive(false);
             GameManager.UM.OpenQuestMenu();
             GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode);
+            tutorialCount = 11; //Testing
         }
         tutorialCount++;
         switch (tutorialCount)
@@ -112,7 +113,7 @@ public class TutorialManager : MonoBehaviour
                         card.GetComponent<Image>().color = Color.green;
                     }
                 }
-                UpdateQuest("Check your crop needs!", "Besides water your lands will need to have the right nutrients for your crops. These nutrients are <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color> each crop has a different need so make sure your soil has plenty of nutrients. Use your mouse and <b>right click</b> on one of your plant cards to see what this crop needs and also check how big it is. <b>Right click</> again to put the plant card back in your hand.");
+                UpdateQuest("Check your crop needs!", "Besides water your lands will need to have the right nutrients for your crops. These nutrients are <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color> each crop has a different need so make sure your soil has plenty of nutrients. Use your mouse and <b>right click</b> on one of your plant cards to see what this crop needs and also check how big it is. <b>Right click</b> again to put the plant card back in your hand.");
                 break;
             case 6:
                 Card cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
@@ -150,18 +151,21 @@ public class TutorialManager : MonoBehaviour
             case 12:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openCraftButton);
                 GameManager.UM.openCraftButton.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Make some cards!", "To add nutrients to the soil we need to use the appropriate fertilizer card. But we first need to craft these cards you already got some fertilizer saved up so you can craft some fertilizer cards. In manage mode click on the highlighted icon or press your <b>C key</b> to go into crafting mode. Open up your quest menu again by pressing the highlighted button and start crafting the cards that you need.");
+                UpdateQuest("It is crafting time!", "To add nutrients to the soil we need to use the appropriate fertilizer card. But we first need to craft these cards you already got some fertilizer saved up so you can craft some fertilizer cards. In manage mode click on the highlighted icon or press your <b>C key</b> to go into crafting mode. Open up your quest menu again by pressing the highlighted button and start crafting the cards that you need.");
                 break;
             case 13:
-                UpdateQuest("Select fertilizer card!", "As you noticed when inspecting your soil the following nutrients where scarce: <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color>. So now that your are in crafting mode select each highlighted fertilizer card with the use of the arrow keys and select 1 one of them by pressing the plus button. You can see how much each card will cost to craft so make sure you don't craft too many.");
-                
+                GameManager.UM.SetUIButtons(true, GameManager.UM.openQuestButton);
+                GameManager.UM.openQuestButton.GetComponent<Image>().color = Color.green;
+                UpdateQuest("Select nitrogen fertilizer!", "As you noticed when inspecting your soil the following nutrient was scarce <color=orange><b>Nitrogen (N)</b></color>. So now that your are in crafting mode select the highlighted fertilizer card with the use of the left and right buttons. Once you have selected the right card the craft button will show up as invalid amount. This is because you need to press the plus button so you set how many cards you want to craft.");
                 break;
             case 14:
-                UpdateQuest("Craft all the fertilizers!", "");
+                UpdateQuest("Craft the fertilizer card!", "Now that you have selected the right card and put in the right crafting amount the craft button should show up. You can only craft 1 nitrogen fertilizer card currently however when you are craftinf more cards your cost will update to the total crafting cost. To fully craft a card you will have to <b>hold down</b> the craft button and watch as the card gets made. Once finished the card should be fully revealed and the craft button should say <b>card crafted.</b>");
                 break;
             case 15:
-
-                UpdateQuest("Use those fertilizers!", "");
+                GameManager.UM.water += 50;
+                GameManager.UM.fertilizer += 50;
+                GameManager.CRM.HighlightCards();
+                UpdateQuest("Craft some more!", "Okay lets craft the other fertilizer cards you will need as well. I gave you some extra resoucres so you should be able to craft them now. Selected the other fertilizer cards <color=green><b>Phosphorus (P)</b></color> plus <color=red><b>Potassium (K)</b></color> and craft 1 of each. Once you have crafted these card exit crafting mode and you should have all the cards needed to fix your soil and get the yield of your crops up again.");
                 break;
         }
     }

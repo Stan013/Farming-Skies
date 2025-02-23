@@ -9,6 +9,7 @@ public class CraftManager : MonoBehaviour
     public GameObject craftWindow;
     public int currentCardIndex = 0;
     public List<Card> craftableCards;
+    public List<Card> cardsInCrafting;
     public List<GameObject> selectionSlots;
     public Card selectedCard;
     public CraftUI craftUI;
@@ -38,69 +39,153 @@ public class CraftManager : MonoBehaviour
 
     private bool isTransitioning = false;
 
-    public void UpdateCraftingItems(bool animate)
+    public void SetupCraftingMode()
     {
-        int[] indices = new int[5];
-        for (int i = -2; i <= 2; i++)
+        if (cardsInCrafting.Count == 0)
         {
-            indices[i + 2] = (currentCardIndex + i + craftableCards.Count) % craftableCards.Count;
+            for (int i = 0; i < selectionSlots.Count; i++)
+            {
+                Card newCard = Instantiate(craftableCards[i]);
+                newCard.GetComponent<CardInspect>().enabled = false;
+                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
+                newCard.transform.SetParent(selectionSlots[i].transform);
+                newCard.transform.localPosition = cardPositions[i];
+                newCard.transform.localScale = (i == 2) ? centerScale : (i == 1 || i == 3) ? sideScale : farSideScale;
+                newCard.transform.localRotation = Quaternion.identity;
+                newCard.cardCraftIndex = i;
+                cardsInCrafting.Add(newCard);
+                if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 12)
+                {
+                    if (newCard.cardName == "Nitrogen Fertilizer")
+                    {
+                        newCard.GetComponent<Image>().color = Color.green;
+                    }
+                }
+            }
         }
-
-        Vector3[] scales = { farSideScale, sideScale, centerScale, sideScale, farSideScale };
-        selectedCard = craftableCards[currentCardIndex];
-
-        for (int i = 0; i < 5; i++)
-        {
-            AssignCardToSlot(selectionSlots[i], craftableCards[indices[i]], scales[i], cardPositions[i], animate);
-        }
+        selectedCard = cardsInCrafting[2];
+        craftUI.SetupCraftingUI();
+        CalculateMaxCraftableAmount();
+        CheckValidCraft();
+        SetCardCraftAmount(0);
     }
+
 
     public void ChangeSelectedCard(int direction)
     {
         if (isTransitioning) return;
-
         isTransitioning = true;
-        currentCardIndex = (currentCardIndex + direction + craftableCards.Count) % craftableCards.Count;
-
-        UpdateCraftingItems(true);
+        Card newCard = null;
+        if (direction == -1)
+        {
+            if (craftableCards.Count > 5)
+            {
+                Card firstCard = cardsInCrafting[0];
+                if (firstCard.cardCraftIndex + 5 >= craftableCards.Count)
+                {
+                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex - 1]);
+                    newCard.cardCraftIndex = firstCard.cardCraftIndex - 1;
+                }
+                else
+                {
+                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex + 5]);
+                    newCard.cardCraftIndex = firstCard.cardCraftIndex + 5;
+                }
+                newCard.GetComponent<CardInspect>().enabled = false;
+                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
+                newCard.transform.SetParent(selectionSlots[4].transform);
+                newCard.transform.localPosition = cardPositions[4];
+                newCard.transform.localScale = farSideScale;
+                newCard.transform.localRotation = Quaternion.identity;
+                cardsInCrafting.RemoveAt(0);
+                cardsInCrafting.Add(newCard);
+                Destroy(firstCard.gameObject);
+            }
+            else
+            {
+                Card firstCard = cardsInCrafting[0];
+                cardsInCrafting.RemoveAt(0);
+                cardsInCrafting.Add(firstCard);
+            }
+        }
+        else if (direction == 1)
+        {
+            if (craftableCards.Count > 5)
+            {
+                Card lastCard = cardsInCrafting[4];
+                if (lastCard.cardCraftIndex + 1 >= craftableCards.Count)
+                {
+                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex - 5]);
+                    newCard.cardCraftIndex = lastCard.cardCraftIndex - 5;
+                }
+                else
+                {
+                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex + 1]);
+                    newCard.cardCraftIndex = lastCard.cardCraftIndex + 1;
+                }
+                newCard.GetComponent<CardInspect>().enabled = false;
+                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
+                newCard.transform.SetParent(selectionSlots[0].transform);
+                newCard.transform.localPosition = cardPositions[0];
+                newCard.transform.localScale = farSideScale;
+                newCard.transform.localRotation = Quaternion.identity;
+                cardsInCrafting.RemoveAt(cardsInCrafting.Count - 1);
+                cardsInCrafting.Insert(0, newCard);
+                Destroy(lastCard.gameObject);
+            }
+            else
+            {
+                Card lastCard = cardsInCrafting[cardsInCrafting.Count - 1];
+                cardsInCrafting.RemoveAt(cardsInCrafting.Count - 1);
+                cardsInCrafting.Insert(0, lastCard);
+            }
+        }
+        if (GameManager.TTM.tutorial)
+        {
+            if (GameManager.TTM.tutorialCount == 13)
+            {
+                if (newCard.cardName == "Nitrogen Fertilizer")
+                {
+                    newCard.GetComponent<Image>().color = Color.green;
+                }
+            }
+            if (GameManager.TTM.tutorialCount == 15)
+            {
+                if (newCard.cardName == "Phosphorus Fertilizer" || newCard.cardName == "Potassium Fertilizer")
+                {
+                    newCard.GetComponent<Image>().color = Color.green;
+                }
+            }
+        }
+        UpdateCraftingCards(true);
         CalculateMaxCraftableAmount();
+        SetCardCraftAmount(0);
+        CheckValidCraft();
         StartCoroutine(ResetTransitionAfterDelay(0.3f));
     }
 
-    private IEnumerator ResetTransitionAfterDelay(float delay)
+    public void UpdateCraftingCards(bool animate)
     {
-        yield return new WaitForSeconds(delay);
-        isTransitioning = false;
+        Vector3[] scales = { farSideScale, sideScale, centerScale, sideScale, farSideScale };
+        for (int i = 0; i < cardsInCrafting.Count; i++)
+        {
+            cardsInCrafting[i].transform.SetParent(selectionSlots[i].transform);
+            cardsInCrafting[i].transform.SetAsLastSibling();
+            UpdateCardSlot(cardsInCrafting[i], scales[i], cardPositions[i], animate);
+        }
+        selectedCard = cardsInCrafting[2];
     }
 
-    public void AssignCardToSlot(GameObject slot, Card card, Vector3 scale, Vector3 position, bool animate)
+    public void UpdateCardSlot(Card card, Vector3 scale, Vector3 position, bool animate)
     {
-        if (slot == null || card == null)
-        {
-            Debug.LogWarning("CraftManager: Invalid slot or card.");
-            return;
-        }
-
-        if (slot.transform.childCount > 0)
-            Destroy(slot.transform.GetChild(0).gameObject);
-
-        Card newCard = Instantiate(card, slot.transform);
-        newCard.GetComponent<CardInspect>().enabled = false;
-        newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
-        newCard.transform.localScale = animate ? sideScale : scale;
-        newCard.transform.localPosition = animate ? new Vector3(position.x + (position.x > 0 ? 100f : -100f), position.y, position.z) : position;
-        
-        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 12)
-        {
-            CheckSelectedCard(newCard);
-        }
-
         if (animate)
-            StartCoroutine(AnimateCraftingCards(newCard.transform, position, scale, 0.3f));
+        {
+            StartCoroutine(AnimateCraftingCards(card.transform, position, scale, 0.3f));
+        }
         else
         {
-            newCard.transform.localPosition = position;
-            newCard.transform.localScale = scale;
+            card.transform.localPosition = position;
+            card.transform.localScale = scale;
         }
     }
 
@@ -121,6 +206,12 @@ public class CraftManager : MonoBehaviour
 
         cardTransform.localPosition = targetPosition;
         cardTransform.localScale = targetScale;
+    }
+
+    private IEnumerator ResetTransitionAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isTransitioning = false;
     }
 
     public void CalculateMaxCraftableAmount()
@@ -159,28 +250,26 @@ public class CraftManager : MonoBehaviour
         craftUI.UpdateCostDisplay();
     }
 
-    public void CheckSelectedCard(Card card)
-    {
-        if (card.cardName == "Nitrogen Fertilizer" || card.cardName == "Phosphorus Fertilizer" || card.cardName == "Potassium Fertilizer")
-        {
-            card.GetComponent<Image>().color = Color.green;
-        }
-    }
-
     public bool CheckValidCraft()
     {
+        bool valid = false;
         if (GameManager.CRM.cardCraftAmount != 0)
         {
             craftButton.GetComponent<Image>().color = new Color(0.24f, 0.6f, 1f);
             craftButtonText.SetText("Craft card");
-            return true;
+            valid = true;
         }
         else
         {
             craftButton.GetComponent<Image>().color = Color.red;
             craftButtonText.SetText("Invalid amount");
-            return false;
+            valid = false;
         }
+        if (GameManager.TTM.tutorial)
+        {
+            CheckTutorialCard();
+        }
+        return valid;
     }
 
     public void ResetCraftCard()
@@ -189,10 +278,89 @@ public class CraftManager : MonoBehaviour
         {
             slot.SetActive(true);
         }
-        selectedCard.cardCraftResources[0] = craftUI.coinCost;
-        selectedCard.cardCraftResources[1] = craftUI.waterCost;
-        selectedCard.cardCraftResources[2] = craftUI.fertilizerCost;
         craftUI.craftCardCover.SetActive(false);
         isCrafting = false;
+    }
+
+    public void HighlightCards()
+    {
+        foreach(Card card in cardsInCrafting)
+        {
+            if(card.cardName == "Phosphorus Fertilizer" || card.cardName == "Potassium Fertilizer")
+            {
+                card.GetComponent<Image>().color = Color.green;
+            }
+        }
+    }
+
+    public void CheckTutorialCard()
+    {
+        if (GameManager.TTM.tutorialCount == 12 || GameManager.TTM.tutorialCount == 13)
+        {
+            craftUI.leftButton.GetComponent<Image>().color = Color.green;
+            craftUI.rightButton.GetComponent<Image>().color = Color.green;
+            if (selectedCard.cardName == "Nitrogen Fertilizer")
+            {
+                craftUI.leftButton.GetComponent<Image>().color = Color.white;
+                craftUI.rightButton.GetComponent<Image>().color = Color.white;
+                craftUI.plusButton.GetComponent<Image>().color = Color.green;
+                GameManager.CRM.craftUI.leftButton.enabled = false;
+                GameManager.CRM.craftUI.rightButton.enabled = false;
+                if (GameManager.CRM.cardCraftAmount == 1)
+                {
+                    craftUI.plusButton.GetComponent<Image>().color = Color.white;
+                    GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
+                    GameManager.CRM.craftUI.minButton.enabled = false;
+                    GameManager.CRM.craftUI.minusButton.enabled = false;
+                    GameManager.CRM.craftUI.craftAmountInput.enabled = false;
+                    GameManager.TTM.QuestCompleted = true;
+                }
+            }
+        }
+        if (GameManager.TTM.tutorialCount == 15)
+        {
+            GameManager.CRM.craftUI.leftButton.enabled = true;
+            GameManager.CRM.craftUI.rightButton.enabled = true;
+            GameManager.CRM.craftUI.minButton.enabled = true;
+            GameManager.CRM.craftUI.minusButton.enabled = true;
+            GameManager.CRM.craftUI.craftAmountInput.enabled = true;
+            craftUI.leftButton.GetComponent<Image>().color = Color.green;
+            craftUI.rightButton.GetComponent<Image>().color = Color.green;
+            if (selectedCard.cardName == "Phosphorus Fertilizer" && !GameManager.DM.cardsInDeck.Exists(card => card.cardId == selectedCard.cardId))
+            {
+                craftUI.leftButton.GetComponent<Image>().color = Color.white;
+                craftUI.rightButton.GetComponent<Image>().color = Color.white;
+                craftUI.plusButton.GetComponent<Image>().color = Color.green;
+                GameManager.CRM.craftUI.leftButton.enabled = false;
+                GameManager.CRM.craftUI.rightButton.enabled = false;
+                if (GameManager.CRM.cardCraftAmount == 1)
+                {
+                    craftUI.plusButton.GetComponent<Image>().color = Color.white;
+                    GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
+                    GameManager.CRM.craftUI.minButton.enabled = false;
+                    GameManager.CRM.craftUI.minusButton.enabled = false;
+                    GameManager.CRM.craftUI.craftAmountInput.enabled = false;
+                }
+            }
+            else
+            {
+                if (selectedCard.cardName == "Potassium Fertilizer" && !GameManager.DM.cardsInDeck.Exists(card => card.cardId == selectedCard.cardId))
+                {
+                    craftUI.leftButton.GetComponent<Image>().color = Color.white;
+                    craftUI.rightButton.GetComponent<Image>().color = Color.white;
+                    craftUI.plusButton.GetComponent<Image>().color = Color.green;
+                    GameManager.CRM.craftUI.leftButton.enabled = false;
+                    GameManager.CRM.craftUI.rightButton.enabled = false;
+                    if (GameManager.CRM.cardCraftAmount == 1)
+                    {
+                        craftUI.plusButton.GetComponent<Image>().color = Color.white;
+                        GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
+                        GameManager.CRM.craftUI.minButton.enabled = false;
+                        GameManager.CRM.craftUI.minusButton.enabled = false;
+                        GameManager.CRM.craftUI.craftAmountInput.enabled = false;
+                    }
+                }
+            }
+        }
     }
 }

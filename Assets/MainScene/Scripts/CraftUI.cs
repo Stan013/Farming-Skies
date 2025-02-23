@@ -12,22 +12,20 @@ public class CraftUI : MonoBehaviour
     public TMP_Text balanceCostText, waterCostText, fertilizerCostText;
     public GameObject craftCardCover;
     public Sprite waterCraftIcon, coinCraftIcon, fertilizerCraftIcon;
-    public Transform cardTargetPosition;
     public RectTransform spawnArea1, spawnArea2;
-    public GameObject resourceIcon;
-    public List<GameObject> craftResources;
+    public Resource resource;
+    public List<Resource> craftResources;
     public int spawnAreaIndex;
     public int coinCost, waterCost, fertilizerCost;
+    public Button leftButton, rightButton;
 
-    void Start()
+    public void SetupCraftingUI()
     {
         minButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(0));
         minusButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(GameManager.CRM.cardCraftAmount - 1));
         plusButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(GameManager.CRM.cardCraftAmount + 1));
         maxButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(GameManager.CRM.maxCraftableAmount));
         craftAmountInput.onValueChanged.AddListener(OnCraftAmountInputChanged);
-        GameManager.CRM.CalculateMaxCraftableAmount();
-        GameManager.CRM.CheckValidCraft();
     }
 
     private void OnCraftAmountInputChanged(string input)
@@ -63,28 +61,28 @@ public class CraftUI : MonoBehaviour
             {
                 spawnAreaIndex++;
                 SpawnSingleResource(spawnAreaIndex, "Coin");
-                neededResources[0] -= 5;
+                coinCost -= 5;
             }
 
             if (neededResources[1] > 0)
             {
                 spawnAreaIndex++;
                 SpawnSingleResource(spawnAreaIndex, "Water");
-                neededResources[1] -= 5;
+                waterCost -= 5;
             }
 
             if (neededResources[2] > 0)
             {
                 spawnAreaIndex++;
                 SpawnSingleResource(spawnAreaIndex, "Fertilizer");
-                neededResources[2] -= 5;
+                fertilizerCost -= 5;
             }
         }
     }
 
     private void SpawnSingleResource(int index, string type)
     {
-        GameObject newResource = Instantiate(resourceIcon, Vector3.zero, Quaternion.identity);
+        Resource newResource = Instantiate(resource, Vector3.zero, Quaternion.identity);
         craftResources.Add(newResource);
         if (index % 2 == 0)
         {
@@ -99,8 +97,9 @@ public class CraftUI : MonoBehaviour
         }
         newResource.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
         newResource.transform.localRotation = Quaternion.identity;
-        newResource.GetComponent<Image>().sprite = GetResourceSprite(type);
-        StartCoroutine(MoveResource(newResource.transform, newResource.GetComponent<Image>(), cardTargetPosition.position, 0.8f));
+        newResource.resourceImage.sprite = GetResourceSprite(type);
+        newResource.targetPosition = craftCardCover.transform.position;
+        newResource.moving = true;
     }
 
 
@@ -120,29 +119,5 @@ public class CraftUI : MonoBehaviour
         if (type == "Coin") return coinCraftIcon;
         if (type == "Water") return waterCraftIcon;
         return fertilizerCraftIcon;
-    }
-
-    private IEnumerator MoveResource(Transform resourceTransform, Image resourceImage, Vector3 targetPosition, float duration)
-    {
-        Vector3 startPosition = resourceTransform.position;
-        Color startColor = resourceImage.color;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            if (!GameManager.CRM.isCrafting)
-            {
-                yield break;
-            }
-            resourceTransform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            float alpha = Mathf.Clamp01(1f - (elapsedTime / duration));
-            resourceImage.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        resourceTransform.position = targetPosition;
-        resourceImage.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
-        craftResources.Remove(resourceTransform.gameObject);
-        Destroy(resourceTransform.gameObject);
     }
 }

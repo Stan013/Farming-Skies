@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8667320414473299987}
   - component: {fileID: 1501267449403527450}
   - component: {fileID: 3924595449333296297}
+  - component: {fileID: 641564309574764276}
   m_Layer: 0
   m_Name: Cultivator
   m_TagString: Utility
@@ -88,3 +89,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &641564309574764276
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570436495116664669}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.5666914, y: 4.083344, z: 28.687809}
+  m_Center: {x: -0.00006461144, y: -0.46534824, z: 0.40609747}

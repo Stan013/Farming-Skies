@@ -119,7 +119,7 @@ public class TutorialManager : MonoBehaviour
                 Card cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
                 cardGreenBean.GetComponent<Image>().color = Color.green;
                 cardGreenBean.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Plant your first crop!", "Now that you have got your land ready and know what each crop needs and how big they are, it is time to plant. Hover over the highlighted plant card and by holding <b>left mouse button</b> you can drag that card over your soil. Now move your mouse to whichever spot and the crop should snap into place. Each land has space for <b>36 small plots, 9 medium plots or 1 big plot</b>. So be sure to plan your placement carefully");
+                UpdateQuest("Plant your first crop!", "Now that you have got your land ready and know what each crop needs and how big they are, it is time to plant. Hover over the highlighted plant card and by holding <b>left mouse button</b> you can <b>drag</b> that card over your soil. Now move your mouse to whichever spot and the crop should snap into place. Each land has space for <b>36 small plots, 9 medium plots or 1 big plot</b>. So be sure to plan your placement carefully");
                 break;
             case 7:
                 foreach (Card card in GameManager.HM.cardsInHand)
@@ -155,30 +155,25 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 13:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openQuestButton);
-                GameManager.UM.openQuestButton.GetComponent<Image>().color = Color.green;
                 UpdateQuest("Select nitrogen fertilizer!", "As you noticed when inspecting your soil the following nutrient was scarce <color=orange><b>Nitrogen (N)</b></color>. So now that your are in crafting mode select the highlighted fertilizer card with the use of the left and right buttons. Once you have selected the right card the craft button will show up as invalid amount. This is because you need to press the plus button so you set how many cards you want to craft.");
                 break;
             case 14:
-                UpdateQuest("Craft the fertilizer card!", "Now that you have selected the right card and put in the right crafting amount the craft button should show up. You can only craft 1 nitrogen fertilizer card currently however when you are craftinf more cards your cost will update to the total crafting cost. To fully craft a card you will have to <b>hold down</b> the craft button and watch as the card gets made. Once finished the card should be fully revealed and the craft button should say <b>card crafted.</b>");
+                UpdateQuest("Craft the fertilizer card!", "Now that you have selected the right card and put in the right crafting amount the craft button should show up. You can only craft 1 <color=orange><b>Nitrogen (N)</b></color> fertilizer card currently however when you are crafting more cards your cost will update to the total crafting cost. To fully craft a card you will have to <b>hold down</b> the craft button and watch as the card gets made. Once finished the card should be fully revealed and the craft button should say <b>card crafted.</b>");
                 break;
             case 15:
-                GameManager.UM.water += 50;
+                GameManager.UM.water += 5;
                 GameManager.UM.fertilizer += 50;
                 GameManager.CRM.HighlightCards();
-                UpdateQuest("Craft some more!", "Okay lets craft the other fertilizer cards you will need as well. I gave you some extra resoucres so you should be able to craft them now. Selected the other fertilizer cards <color=green><b>Phosphorus (P)</b></color> plus <color=red><b>Potassium (K)</b></color> and craft 1 of each. Once you have crafted these card exit crafting mode and you should have all the cards needed to fix your soil and get the yield of your crops up again.");
+                UpdateQuest("Craft some more!", "Okay lets craft the other fertilizer cards you will need as well. I gave you some extra resoucres so you should be able to craft them now. <b>Selected</b> the other fertilizer cards <color=green><b>Phosphorus (P)</b></color> plus <color=red><b>Potassium (K)</b></color> and craft 1 of each. Once you have crafted these card <b>exit</b> crafting mode and you should have all the cards needed to fix your soil and get the yield of your crops up again.");
                 break;
             case 16:
-                foreach (Card card in GameManager.HM.cardsInHand)
-                {
-                    card.GetComponent<Image>().color = Color.green;
-                }
-                UpdateQuest("Fix your soil", "Now that you crafted the needed cards it is time to fix your soil. Drag each of your crafted fertilizer cards towards the soil and it will add 50 of the needed nutrients. After that go inspect your island again and you should see that the available nutrients are more then the what the crops on your island require. The warning icon on top of the sign should also dissapear and this in turn should up your yield again.");
-                break;
-            case 17:
-                UpdateQuest("Let's expand!", "Because of the craf");
+                UpdateQuest("Fix your soil", "Now that you crafted the needed cards it is time to fix your soil. <b>Drag</b> each of your crafted fertilizer cards towards the soil and it will add <b>50</b> of the needed nutrients. After that <b>inspect</b> your island again and you should see that the available nutrients are more then what the crops on your island require. The warning icon on top of the sign should also dissapear and this in turn should up your yield again.");
                 break;
             case 18:
-                UpdateQuest("Let's expand!", "Because of the craf");
+                UpdateQuest("Let's expand!", "Because of the cards you have crafted your fertilizer and your water storage is low so lets try to fill those up again. First of buy another island by going into manage mode and <b>holding right click.</b>. Now ");
+                break;
+            case 17:
+                UpdateQuest("Well done!", "End of current tutorial more will come soon!");
                 break;
         }
     }

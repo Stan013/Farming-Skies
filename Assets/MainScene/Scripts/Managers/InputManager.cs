@@ -247,7 +247,7 @@ public class InputManager : MonoBehaviour
 
     private void MoveCameraToIsland(Island island)
     {
-        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 10)
+        if (GameManager.TTM.tutorialCount == 10 || GameManager.TTM.tutorialCount == 16)
         {
             GameManager.TTM.QuestCompleted = true;
         }

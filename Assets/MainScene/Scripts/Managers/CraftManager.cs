@@ -352,7 +352,7 @@ public class CraftManager : MonoBehaviour
             GameManager.CRM.craftUI.craftAmountInput.enabled = true;
             GameManager.CRM.craftUI.plusButton.GetComponent<Image>().color = Color.white;
         }
-        if(craftedPhosphorus && craftedPotassium)
+        if(craftedPhosphorus && craftedPotassium && GameManager.TTM.tutorialCount == 15)
         {
             GameManager.TTM.QuestCompleted = true;
         }

@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
             case GameState.CraftMode:
                 UM.closeButton.GetComponent<CloseButton>().closeWindow = CRM.craftWindow;
                 UM.closeButton.GetComponent<CloseButton>().OnButtonClick();
+                DM.CheckRefillHand();
                 break;
         }
     }

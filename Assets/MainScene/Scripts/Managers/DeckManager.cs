@@ -1,13 +1,27 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class DeckManager : MonoBehaviour, IDataPersistence
 {
     public GameObject cardsInDeckParent;
     public List<Card> cardsInDeck = new List<Card>();
+
+    public void CheckRefillHand()
+    {
+        if (GameManager.HM.needsCard)
+        {
+            GameManager.HM.SetCardsInHand();
+            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 16)
+            {
+                foreach (Card card in GameManager.HM.cardsInHand)
+                {
+                    card.GetComponent<Image>().color = Color.green;
+                }
+            }
+        }
+    }
 
     public void AddCardToDeck(string cardId)
     {

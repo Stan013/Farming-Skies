@@ -20,6 +20,7 @@ public class CloseButton : MonoBehaviour
         {
             closeWindow.SetActive(false);
             GameManager.HM.HideCardsInHand(false);
+            GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
             EventSystem.current.SetSelectedGameObject(null);
         }
     }
@@ -29,7 +30,7 @@ public class CloseButton : MonoBehaviour
         closeWindow = windowMode;
         closeWindow.SetActive(false);
         GameManager.HM.HideCardsInHand(false);
-        GameManager.IPM.ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.Default);
+        GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
         EventSystem.current.SetSelectedGameObject(null);
     }
 }

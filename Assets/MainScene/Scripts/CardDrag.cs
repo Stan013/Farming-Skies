@@ -146,6 +146,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 GameManager.TTM.QuestCompleted = true;
             }
             GameManager.HM.dragCard.dragSucces = true;
+            GameManager.HM.lastFilledSlotIndex--;
             GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
         }
         else
@@ -158,6 +159,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
                 hoverIsland.UpdateIslandStats();
                 GameManager.HM.dragCard.dragSucces = true;
+                GameManager.HM.lastFilledSlotIndex--;
                 GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
                 if (GameManager.TTM.tutorialCount == 6)
                 {

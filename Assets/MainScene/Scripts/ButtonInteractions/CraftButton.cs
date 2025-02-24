@@ -72,7 +72,7 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 GameManager.CRM.craftUI.craftResources.Clear();
                 GameManager.CRM.craftButton.GetComponent<Image>().color = Color.red;
                 GameManager.CRM.craftButtonText.SetText("Unsuccessful");
-                if (GameManager.TTM.tutorialCount == 14)
+                if (GameManager.TTM.tutorialCount == 14 || GameManager.TTM.tutorialCount == 15)
                 {
                     GameManager.CRM.SetCardCraftAmount(1);
                     GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
@@ -86,6 +86,15 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 GameManager.DM.AddCardToDeck(GameManager.CRM.selectedCard.cardId);
                 GameManager.CRM.SetCardCraftAmount(0);
                 GameManager.UM.UpdateUI();
+                if(GameManager.TTM.tutorial)
+                {
+                    if(GameManager.CRM.selectedCard.cardName == "Phosphorus Fertilizer" || GameManager.CRM.selectedCard.cardName == "Potassium Fertilizer" || GameManager.CRM.selectedCard.cardName == "Nitrogen Fertilizer")
+                    {
+                        GameManager.CRM.selectedCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f);
+                        GameManager.CRM.matchingCard = false;
+                        GameManager.CRM.CheckSelectedCard();
+                    }
+                }
             }
             GameManager.CRM.ResetCraftCard();
         }

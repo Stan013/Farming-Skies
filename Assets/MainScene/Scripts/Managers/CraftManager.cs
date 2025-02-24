@@ -23,6 +23,9 @@ public class CraftManager : MonoBehaviour
 
     public int cardCraftAmount;
     public int maxCraftableAmount;
+    public bool matchingCard;
+    public bool craftedPotassium;
+    public bool craftedPhosphorus;
 
     // Card scales & positions
     private readonly Vector3 centerScale = new Vector3(0.6f, 0.6f, 1f);
@@ -43,6 +46,8 @@ public class CraftManager : MonoBehaviour
     {
         if (cardsInCrafting.Count == 0)
         {
+            GameManager.CRM.craftUI.leftButton.GetComponent<Image>().color = Color.green;
+            GameManager.CRM.craftUI.rightButton.GetComponent<Image>().color = Color.green;
             for (int i = 0; i < selectionSlots.Count; i++)
             {
                 Card newCard = Instantiate(craftableCards[i]);
@@ -151,7 +156,11 @@ public class CraftManager : MonoBehaviour
             }
             if (GameManager.TTM.tutorialCount == 15)
             {
-                if (newCard.cardName == "Phosphorus Fertilizer" || newCard.cardName == "Potassium Fertilizer")
+                if (newCard.cardName == "Phosphorus Fertilizer" && !craftedPhosphorus)
+                {
+                    newCard.GetComponent<Image>().color = Color.green;
+                }
+                if (newCard.cardName == "Potassium Fertilizer" && !craftedPotassium)
                 {
                     newCard.GetComponent<Image>().color = Color.green;
                 }
@@ -265,9 +274,9 @@ public class CraftManager : MonoBehaviour
             craftButtonText.SetText("Invalid amount");
             valid = false;
         }
-        if (GameManager.TTM.tutorial)
+        if(GameManager.TTM.tutorial)
         {
-            CheckTutorialCard();
+            CheckSelectedCard();
         }
         return valid;
     }
@@ -293,74 +302,59 @@ public class CraftManager : MonoBehaviour
         }
     }
 
-    public void CheckTutorialCard()
+    public void CheckSelectedCard()
     {
-        if (GameManager.TTM.tutorialCount == 12 || GameManager.TTM.tutorialCount == 13)
+        if (selectedCard.cardName == "Nitrogen Fertilizer" && GameManager.TTM.tutorialCount == 13)
         {
-            craftUI.leftButton.GetComponent<Image>().color = Color.green;
-            craftUI.rightButton.GetComponent<Image>().color = Color.green;
-            if (selectedCard.cardName == "Nitrogen Fertilizer")
+            matchingCard = true;
+        }
+        if(selectedCard.cardName == "Potassium Fertilizer" && GameManager.TTM.tutorialCount == 15 && !craftedPotassium)
+        {
+            if (GameManager.DM.cardsInDeck.Exists(card => card.cardId == selectedCard.cardId))
             {
-                craftUI.leftButton.GetComponent<Image>().color = Color.white;
-                craftUI.rightButton.GetComponent<Image>().color = Color.white;
-                craftUI.plusButton.GetComponent<Image>().color = Color.green;
-                GameManager.CRM.craftUI.leftButton.enabled = false;
-                GameManager.CRM.craftUI.rightButton.enabled = false;
-                if (GameManager.CRM.cardCraftAmount == 1)
+                craftedPotassium = true;
+            }
+            matchingCard = true;
+        }
+        if (selectedCard.cardName == "Phosphorus Fertilizer" && GameManager.TTM.tutorialCount == 15 && !craftedPhosphorus)
+        {
+            if (GameManager.DM.cardsInDeck.Exists(card => card.cardId == selectedCard.cardId))
+            {
+                craftedPhosphorus = true;
+            }
+            matchingCard = true;
+        }
+        if (matchingCard)
+        {
+            GameManager.CRM.craftUI.leftButton.enabled = false;
+            GameManager.CRM.craftUI.rightButton.enabled = false;
+            GameManager.CRM.craftUI.leftButton.GetComponent<Image>().color = Color.white;
+            GameManager.CRM.craftUI.rightButton.GetComponent<Image>().color = Color.white;
+            GameManager.CRM.craftUI.plusButton.GetComponent<Image>().color = Color.green;
+            if (GameManager.CRM.cardCraftAmount == 1)
+            {
+                GameManager.CRM.craftUI.minButton.enabled = false;
+                GameManager.CRM.craftUI.minusButton.enabled = false;
+                GameManager.CRM.craftUI.craftAmountInput.enabled = false;
+                GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
+                if(GameManager.TTM.tutorialCount == 13)
                 {
-                    craftUI.plusButton.GetComponent<Image>().color = Color.white;
-                    GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
-                    GameManager.CRM.craftUI.minButton.enabled = false;
-                    GameManager.CRM.craftUI.minusButton.enabled = false;
-                    GameManager.CRM.craftUI.craftAmountInput.enabled = false;
                     GameManager.TTM.QuestCompleted = true;
                 }
             }
         }
-        if (GameManager.TTM.tutorialCount == 15)
+        else
         {
             GameManager.CRM.craftUI.leftButton.enabled = true;
             GameManager.CRM.craftUI.rightButton.enabled = true;
             GameManager.CRM.craftUI.minButton.enabled = true;
             GameManager.CRM.craftUI.minusButton.enabled = true;
             GameManager.CRM.craftUI.craftAmountInput.enabled = true;
-            craftUI.leftButton.GetComponent<Image>().color = Color.green;
-            craftUI.rightButton.GetComponent<Image>().color = Color.green;
-            if (selectedCard.cardName == "Phosphorus Fertilizer" && !GameManager.DM.cardsInDeck.Exists(card => card.cardId == selectedCard.cardId))
-            {
-                craftUI.leftButton.GetComponent<Image>().color = Color.white;
-                craftUI.rightButton.GetComponent<Image>().color = Color.white;
-                craftUI.plusButton.GetComponent<Image>().color = Color.green;
-                GameManager.CRM.craftUI.leftButton.enabled = false;
-                GameManager.CRM.craftUI.rightButton.enabled = false;
-                if (GameManager.CRM.cardCraftAmount == 1)
-                {
-                    craftUI.plusButton.GetComponent<Image>().color = Color.white;
-                    GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
-                    GameManager.CRM.craftUI.minButton.enabled = false;
-                    GameManager.CRM.craftUI.minusButton.enabled = false;
-                    GameManager.CRM.craftUI.craftAmountInput.enabled = false;
-                }
-            }
-            else
-            {
-                if (selectedCard.cardName == "Potassium Fertilizer" && !GameManager.DM.cardsInDeck.Exists(card => card.cardId == selectedCard.cardId))
-                {
-                    craftUI.leftButton.GetComponent<Image>().color = Color.white;
-                    craftUI.rightButton.GetComponent<Image>().color = Color.white;
-                    craftUI.plusButton.GetComponent<Image>().color = Color.green;
-                    GameManager.CRM.craftUI.leftButton.enabled = false;
-                    GameManager.CRM.craftUI.rightButton.enabled = false;
-                    if (GameManager.CRM.cardCraftAmount == 1)
-                    {
-                        craftUI.plusButton.GetComponent<Image>().color = Color.white;
-                        GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
-                        GameManager.CRM.craftUI.minButton.enabled = false;
-                        GameManager.CRM.craftUI.minusButton.enabled = false;
-                        GameManager.CRM.craftUI.craftAmountInput.enabled = false;
-                    }
-                }
-            }
+            GameManager.CRM.craftUI.plusButton.GetComponent<Image>().color = Color.white;
+        }
+        if(craftedPhosphorus && craftedPotassium)
+        {
+            GameManager.TTM.QuestCompleted = true;
         }
     }
 }

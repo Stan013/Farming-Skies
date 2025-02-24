@@ -77,7 +77,7 @@ public class TutorialManager : MonoBehaviour
             tutorialMenu.SetActive(false);
             GameManager.UM.OpenQuestMenu();
             GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode);
-            tutorialCount = 11; //Testing
+            //tutorialCount = 11; //Testing
         }
         tutorialCount++;
         switch (tutorialCount)
@@ -166,6 +166,19 @@ public class TutorialManager : MonoBehaviour
                 GameManager.UM.fertilizer += 50;
                 GameManager.CRM.HighlightCards();
                 UpdateQuest("Craft some more!", "Okay lets craft the other fertilizer cards you will need as well. I gave you some extra resoucres so you should be able to craft them now. Selected the other fertilizer cards <color=green><b>Phosphorus (P)</b></color> plus <color=red><b>Potassium (K)</b></color> and craft 1 of each. Once you have crafted these card exit crafting mode and you should have all the cards needed to fix your soil and get the yield of your crops up again.");
+                break;
+            case 16:
+                foreach (Card card in GameManager.HM.cardsInHand)
+                {
+                    card.GetComponent<Image>().color = Color.green;
+                }
+                UpdateQuest("Fix your soil", "Now that you crafted the needed cards it is time to fix your soil. Drag each of your crafted fertilizer cards towards the soil and it will add 50 of the needed nutrients. After that go inspect your island again and you should see that the available nutrients are more then the what the crops on your island require. The warning icon on top of the sign should also dissapear and this in turn should up your yield again.");
+                break;
+            case 17:
+                UpdateQuest("Let's expand!", "Because of the craf");
+                break;
+            case 18:
+                UpdateQuest("Let's expand!", "Because of the craf");
                 break;
         }
     }

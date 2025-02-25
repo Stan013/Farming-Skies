@@ -20,7 +20,7 @@ public class SelectionManager : MonoBehaviour
                 newSlot.transform.localScale = Vector3.one;
                 pickSlots.Add(newSlot);
                 Card randomCard = Instantiate(GameManager.CM.availableCards[Random.Range(0, GameManager.CM.availableCards.Count)], Vector3.zero, Quaternion.identity);
-                randomCard.ToggleState(Card.CardState.InChoosing, Card.CardState.Destroy);
+                randomCard.ToggleState(Card.CardState.InChoosing, Card.CardState.Hidden);
                 newSlot.AddCardToSlot(pickSlots.Count, randomCard);
             }
         }

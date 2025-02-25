@@ -30,13 +30,34 @@ public class Island : MonoBehaviour
     public TMP_Text nitrogenAvailableText;
     public TMP_Text phosphorusAvailableText;
     public TMP_Text potassiumAvailableText;
-    public int water;
-    public int nitrogen;
-    public int phosphorus;
-    public int potassium;
+    public int _water;
+    public int _nitrogen;
+    public int _phosphorus;
+    public int _potassium;
     public int magnesium;
     public int sulfur;
     public int calcium;
+
+    public int Water
+    {
+        get => _water;
+        set { _water = value; OnNutrientChanged(); }
+    }
+    public int Nitrogen
+    {
+        get => _nitrogen;
+        set { _nitrogen = value; OnNutrientChanged(); }
+    }
+    public int Phosphorus
+    {
+        get => _phosphorus;
+        set { _phosphorus = value; OnNutrientChanged(); }
+    }
+    public int Potassium
+    {
+        get => _potassium;
+        set { _potassium = value; OnNutrientChanged(); }
+    }
 
     public TMP_Text waterUsageText;
     public TMP_Text nitrogenUsageText;
@@ -59,6 +80,12 @@ public class Island : MonoBehaviour
         Cultivated,
     }
 
+    public void OnNutrientChanged()
+    {
+        GameManager.ISM.UpdateIslandMaterial(this);
+        UpdateIslandStats();
+    }
+
     public void ToggleState(IslandState targetState, IslandState fallbackState)
     {
         SetState(currentState == targetState ? fallbackState : targetState);
@@ -76,14 +103,8 @@ public class Island : MonoBehaviour
         switch (state)
         {
             case IslandState.Highlighted: //Rework
-                topMat.EnableKeyword("_EMISSION");
-                topMat.SetColor("_EmissionColor", Color.blue * 2.0f);
-                bottomMat.EnableKeyword("_EMISSION");
-                bottomMat.SetColor("_EmissionColor", Color.blue * 2.0f);
                 break;
             case IslandState.Default:
-                topMat.DisableKeyword("_EMISSION");
-                bottomMat.DisableKeyword("_EMISSION");
                 Color topColor = topMat.color;
                 topColor.a = 0f;
                 topMat.color = topColor;
@@ -336,15 +357,15 @@ public class Island : MonoBehaviour
         nitrogenUsageText.SetText(nitrogenUsage.ToString() + " L");
         phosphorusUsageText.SetText(phosphorusUsage.ToString() + " L");
         potassiumUsageText.SetText(potassiumUsage.ToString() + " L");
-        waterAvailableText.SetText(water.ToString() + " L");
-        nitrogenAvailableText.SetText(nitrogen.ToString() + " L");
-        phosphorusAvailableText.SetText(phosphorus.ToString() + " L");
-        potassiumAvailableText.SetText(potassium.ToString() + " L");
+        waterAvailableText.SetText(_water.ToString() + " L");
+        nitrogenAvailableText.SetText(_nitrogen.ToString() + " L");
+        phosphorusAvailableText.SetText(_phosphorus.ToString() + " L");
+        potassiumAvailableText.SetText(_potassium.ToString() + " L");
     }
 
     public void CheckWarningIcon()
     {
-        if (waterUsage > water || nitrogenUsage > nitrogen || phosphorusUsage > phosphorus || potassiumUsage > potassium)
+        if (waterUsage > _water || nitrogenUsage > _nitrogen || phosphorusUsage > _phosphorus || potassiumUsage > _potassium)
         {
             signWarningIcon.SetActive(true);
         }

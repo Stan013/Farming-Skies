@@ -77,7 +77,7 @@ public class TutorialManager : MonoBehaviour
             tutorialMenu.SetActive(false);
             GameManager.UM.OpenQuestMenu();
             GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode);
-            //tutorialCount = 11; //Testing
+            tutorialCount = 15; //Testing
         }
         tutorialCount++;
         switch (tutorialCount)
@@ -90,7 +90,7 @@ public class TutorialManager : MonoBehaviour
                 GameManager.UM.openUIButton.GetComponent<Image>().color = Color.green;
                 GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building things. Open your UI menu by clicking on the highlighted button at left of your screen. Now click on your expenses and you will be able to see how much you need to pay and for what. Then if you click on the date you can see when you need to pay so make sure you can cover your expenses at the end of the month or your farm won't survive.");
+                UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building things. Open your UI menu by <b>clicking</b> on the highlighted button at left of your screen. Now <b>click</b> on your expenses and you will be able to see how much you need to pay and for what. Then if you click on the date you can see when you need to pay so make sure you can cover your expenses at the end of the month or your farm won't survive.");
                 break;
             case 3:
                 GameManager.HM.SetStartingHand();
@@ -167,6 +167,13 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Craft some more!", "Okay lets craft the other fertilizer cards you will need as well. I gave you some extra resoucres so you should be able to craft them now. <b>Selected</b> the other fertilizer cards <color=green><b>Phosphorus (P)</b></color> plus <color=red><b>Potassium (K)</b></color> and craft 1 of each. Once you have crafted these card <b>exit</b> crafting mode and you should have all the cards needed to fix your soil and get the yield of your crops up again.");
                 break;
             case 16:
+                GameManager.DM.AddCardToDeck("CardCultivatorUtility");
+                GameManager.DM.AddCardToDeck("CardWateringCanUtility");
+                GameManager.DM.AddCardToDeck("CardNitrogenFertilizerUtility");
+                GameManager.DM.AddCardToDeck("CardPhosphorusFertilizerUtility");
+                GameManager.DM.AddCardToDeck("CardPotassiumFertilizerUtility");
+                GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
+                GameManager.DM.CheckRefillHand();
                 UpdateQuest("Fix your soil", "Now that you crafted the needed cards it is time to fix your soil. <b>Drag</b> each of your crafted fertilizer cards towards the soil and it will add <b>50</b> of the needed nutrients. After that <b>inspect</b> your island again and you should see that the available nutrients are more then what the crops on your island require. The warning icon on top of the sign should also dissapear and this in turn should up your yield again.");
                 break;
             case 18:

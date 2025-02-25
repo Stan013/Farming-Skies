@@ -15,7 +15,7 @@ public class PlantManager : MonoBehaviour
             {
                 if (GameManager.ISM.CheckIslandWater(plant))
                 {
-                    island.water -= plant.water;
+                    island.Water -= plant.water;
                     plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
                     CalculateDropAmount(island, plant);
                 }
@@ -24,14 +24,12 @@ public class PlantManager : MonoBehaviour
                     island.ToggleState(Island.IslandState.Cultivated, Island.IslandState.Sowed);
                 }
             }
-            GameManager.ISM.UpdateIslandMaterial(island);
-            island.UpdateIslandStats();
         }
     }
 
     public void CalculateDropAmount(Island island, Plant plant)
     {
-        if(island.nitrogen >= plant.nitrogen)
+        if(island.Nitrogen >= plant.nitrogen)
         {
             if (random.NextDouble() <= 0.75)
             {
@@ -45,7 +43,7 @@ public class PlantManager : MonoBehaviour
                 plant.yield--;
             }
         }
-        if (island.phosphorus >= plant.phosphorus)
+        if (island.Phosphorus >= plant.phosphorus)
         {
             if (random.NextDouble() <= 0.75)
             {
@@ -59,7 +57,7 @@ public class PlantManager : MonoBehaviour
                 plant.yield--;
             }
         }
-        if (island.potassium >= plant.potassium)
+        if (island.Potassium >= plant.potassium)
         {
             if (random.NextDouble() <= 0.75)
             {
@@ -73,9 +71,9 @@ public class PlantManager : MonoBehaviour
                 plant.yield--;
             }
         }
-        island.nitrogen -= plant.nitrogen;
-        island.phosphorus -= plant.phosphorus;
-        island.potassium -= plant.potassium;
+        island.Nitrogen -= plant.nitrogen;
+        island.Phosphorus -= plant.phosphorus;
+        island.Potassium -= plant.potassium;
         island.CheckWarningIcon();
     }
 }

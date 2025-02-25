@@ -14,7 +14,6 @@ public class HandManager : MonoBehaviour, IDataPersistence
     public bool dragging;
     public string placement;
     private float cardMoveDuration = 0.125f;
-    public bool needsCard = true;
 
     public void SetStartingHand()
     {
@@ -23,7 +22,6 @@ public class HandManager : MonoBehaviour, IDataPersistence
             GameManager.DM.AddCardToDeck(card.cardId);
         }
         SetCardsInHand();
-        needsCard = false;
     }
 
     public void SetCardsInHand()
@@ -35,14 +33,9 @@ public class HandManager : MonoBehaviour, IDataPersistence
                 Card originalCard = GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)];
                 handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, originalCard);
                 lastFilledSlotIndex++;
-                originalCard.ToggleState(Card.CardState.InHand, Card.CardState.InDeck);
+                originalCard.ToggleState(Card.CardState.InHand, Card.CardState.Hidden);
                 StartCoroutine(MoveCardsFromBottom(originalCard));
             }
-            needsCard = false;
-        }
-        else
-        {
-            return;
         }
     }
 
@@ -51,7 +44,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
         Card newCard = Instantiate(GameManager.CM.FindCardById(cardId), Vector3.zero, Quaternion.identity);
         handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, newCard);
         lastFilledSlotIndex++;
-        newCard.ToggleState(Card.CardState.InHand, Card.CardState.InDeck);
+        newCard.ToggleState(Card.CardState.InHand, Card.CardState.Hidden);
         StartCoroutine(MoveCardsFromBottom(newCard));
     }
 
@@ -74,7 +67,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
     {
         foreach (Card card in cardsInHand)
         {
-            card.ToggleState(Card.CardState.InDeck, Card.CardState.Destroy);
+            card.ToggleState(Card.CardState.InDeck, Card.CardState.Hidden);
         }
     }
 

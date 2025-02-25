@@ -71,7 +71,6 @@ public class Card : MonoBehaviour
         InHand,
         InChoosing,
         InDrag,
-        Destroy,
         Hidden,
         Available,
         InCraft,
@@ -99,14 +98,9 @@ public class Card : MonoBehaviour
                 this.gameObject.SetActive(false);
                 break;
             case CardState.InHand:
-                if(GameManager.HM.needsCard)
+                if (!cardSetup)
                 {
-                    if (!cardSetup)
-                    {
-                        GameManager.CM.InitializeCard(GetComponent<Card>());
-                        cardSetup = true;
-                    }
-                    GameManager.HM.cardsInHand.Add(this);
+                    GameManager.CM.InitializeCard(GetComponent<Card>());
                 }
                 this.gameObject.SetActive(true);
                 break;
@@ -131,11 +125,7 @@ public class Card : MonoBehaviour
                 if (!cardSetup)
                 {
                     GameManager.CM.InitializeCard(GetComponent<Card>());
-                    cardSetup = true;
                 }
-                break;
-            case CardState.Destroy:
-                Destroy(this.gameObject);
                 break;
             case CardState.Hidden:
                 this.gameObject.SetActive(false);
@@ -150,17 +140,19 @@ public class Card : MonoBehaviour
         {
             case CardState.InDeck:
                 GameManager.DM.cardsInDeck.Remove(this);
+                GameManager.HM.cardsInHand.Add(this);
                 break;
             case CardState.InHand:
-                GameManager.HM.cardsInHand.Remove(this);
                 break;
             case CardState.InDrag:
                 if(dragSucces)
                 {
-                    GameManager.HM.needsCard = true;
+                    GameManager.HM.lastFilledSlotIndex--;
                     GameManager.HM.cardsInHand.Remove(this);
                     GameManager.HM.MoveCardsInHand(this);
-                    GameManager.HM.SetCardsInHand();
+                    GameManager.DM.CheckRefillHand();
+                    GetComponent<CardDrag>().hoverIsland.UpdateIslandStats();
+                    Destroy(this.gameObject);
                     dragSucces = false;
                 }
                 else
@@ -184,9 +176,6 @@ public class Card : MonoBehaviour
                         }
                     }
                 }
-                break;
-            case CardState.Destroy:
-                Debug.LogWarning("Wasn't able to destroy " + cardId);
                 break;
             case CardState.Hidden:
                 this.gameObject.SetActive(true);

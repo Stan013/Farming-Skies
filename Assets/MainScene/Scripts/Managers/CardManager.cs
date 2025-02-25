@@ -60,6 +60,15 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.potassiumText.SetText(dragPlant.potassium.ToString() + " L");
             card.waterText.SetText(dragPlant.water.ToString() + " L");
             card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
+
+            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount > 6)
+            {
+                card.GetComponent<CardDrag>().enabled = true;
+            }
+            else
+            {
+                card.GetComponent<CardDrag>().enabled = false;
+            }
         }
         else
         {   
@@ -70,8 +79,8 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.potassiumText.transform.parent.gameObject.SetActive(false);
             card.waterText.transform.parent.gameObject.SetActive(false);
             card.plantSizeText.transform.parent.gameObject.SetActive(false);
+            card.GetComponent<CardDrag>().enabled = true;
         }
-        card.GetComponent<CardDrag>().enabled = true;
         card.cardSetup = true;
     }
 

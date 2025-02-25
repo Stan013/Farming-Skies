@@ -10,7 +10,7 @@ public class DeckManager : MonoBehaviour, IDataPersistence
 
     public void CheckRefillHand()
     {
-        if (GameManager.HM.needsCard)
+        if (GameManager.HM.lastFilledSlotIndex < 9)
         {
             GameManager.HM.SetCardsInHand();
             if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 16)
@@ -26,7 +26,7 @@ public class DeckManager : MonoBehaviour, IDataPersistence
     public void AddCardToDeck(string cardId)
     {
         Card newCard = Instantiate(GameManager.CM.FindCardById(cardId), Vector3.zero, Quaternion.identity);
-        newCard.ToggleState(Card.CardState.InDeck, Card.CardState.Destroy);
+        newCard.ToggleState(Card.CardState.InDeck, Card.CardState.Hidden);
     }
 
     public void LoadData(GameData data)

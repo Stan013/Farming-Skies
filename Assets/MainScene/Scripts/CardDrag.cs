@@ -118,16 +118,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     break;
             }
         }
-        else
-        {
-            Debug.LogWarning("Drag instance got destroyed while dragging!");
-            Card dragCard = GetComponent<Card>();
-            dragCard.dragSucces = false;
-            dragCard.ToggleState(Card.CardState.InHand, Card.CardState.Destroy);
-            GameManager.HM.dragging = false;
-            collisionOn = false;
-            GameManager.ISM.SetCollisions("Reset");
-        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -137,30 +127,51 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (hoverIsland != null && hoverIsland.currentState != hoverIsland.potentialState && GameManager.ISM.CheckPotentialIsland() != null)
         {
             GameManager.ISM.CheckPotentialIsland().ToggleState(hoverIsland.potentialState, hoverIsland.currentState);
-            if (GameManager.HM.dragCard.name.Contains("WateringCanCard"))
+            if (GameManager.HM.dragCard.cardName == "Watering Can")
             {
-                GameManager.ISM.CheckPotentialIsland().water += 50;
+                GameManager.ISM.CheckPotentialIsland().Water += 50;
             }
             if (GameManager.TTM.tutorialCount == 3 || GameManager.TTM.tutorialCount == 4)
             {
                 GameManager.TTM.QuestCompleted = true;
             }
             GameManager.HM.dragCard.dragSucces = true;
-            GameManager.HM.lastFilledSlotIndex--;
-            GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
+            GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
         }
         else
         {
+            if (GameManager.ISM.CheckPotentialIsland() != null)
+            {
+                switch (GameManager.HM.dragCard.cardName)
+                {
+                    case "Nitrogen Fertilizer":
+                        GameManager.ISM.CheckPotentialIsland().Nitrogen += 50;
+                        GameManager.HM.dragCard.dragSucces = true;
+                        GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+                        break;
+                    case "Phosphorus Fertilizer":
+                        GameManager.ISM.CheckPotentialIsland().Phosphorus += 50;
+                        GameManager.HM.dragCard.dragSucces = true;
+                        GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+                        break;
+                    case "Potassium Fertilizer":
+                        GameManager.ISM.CheckPotentialIsland().Potassium += 50;
+                        GameManager.HM.dragCard.dragSucces = true;
+                        GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+                        break;
+                    default:
+                        break;
+                }
+            }
             if (CheckPotentialPlot() != null)
             {
                 GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity);
                 plant.transform.SetParent(hoverPlot.transform);
                 plant.transform.localPosition = new Vector3(0, -0.25f, 0);
                 hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
-                hoverIsland.UpdateIslandStats();
                 GameManager.HM.dragCard.dragSucces = true;
-                GameManager.HM.lastFilledSlotIndex--;
-                GameManager.HM.dragCard.ToggleState(Card.CardState.Destroy, Card.CardState.Hidden);
+                GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+
                 if (GameManager.TTM.tutorialCount == 6)
                 {
                     GameManager.TTM.QuestCompleted = true;

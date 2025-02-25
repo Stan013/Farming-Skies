@@ -52,7 +52,7 @@ public class CraftManager : MonoBehaviour
             {
                 Card newCard = Instantiate(craftableCards[i]);
                 newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
+                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
                 newCard.transform.SetParent(selectionSlots[i].transform);
                 newCard.transform.localPosition = cardPositions[i];
                 newCard.transform.localScale = (i == 2) ? centerScale : (i == 1 || i == 3) ? sideScale : farSideScale;
@@ -97,7 +97,7 @@ public class CraftManager : MonoBehaviour
                     newCard.cardCraftIndex = firstCard.cardCraftIndex + 5;
                 }
                 newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
+                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
                 newCard.transform.SetParent(selectionSlots[4].transform);
                 newCard.transform.localPosition = cardPositions[4];
                 newCard.transform.localScale = farSideScale;
@@ -129,7 +129,7 @@ public class CraftManager : MonoBehaviour
                     newCard.cardCraftIndex = lastCard.cardCraftIndex + 1;
                 }
                 newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Destroy);
+                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
                 newCard.transform.SetParent(selectionSlots[0].transform);
                 newCard.transform.localPosition = cardPositions[0];
                 newCard.transform.localScale = farSideScale;

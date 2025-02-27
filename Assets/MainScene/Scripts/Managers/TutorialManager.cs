@@ -174,7 +174,7 @@ public class TutorialManager : MonoBehaviour
                 GameManager.DM.AddCardToDeck("CardPotassiumFertilizerUtility");
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
                 GameManager.DM.CheckRefillHand();
-                UpdateQuest("Improve your soil!", "With these newly crafted fertilizer cards it is time to improve your soil. <b>Drag</b> each of your crafted fertilizer cards towards the soil and it will add <b>50</b> of that nutrient to it. After that inspect your land again by <b>double clicking</b> on check if all nutrients are available again. The warning icon should also disappear since your crops needs are met for the next day. If you don't meet these needs the same as previously you have a <b>80%</b> chance to lose 1,2,3 or 4 drops based on the plants base yield.");
+                UpdateQuest("Improve your soil!", "With these newly crafted fertilizer cards it is time to improve your soil. <b>Drag</b> each of your crafted fertilizer cards towards the soil and it will add <b>50</b> of that nutrient to it. Than inspect your land by <b>double clicking</b> and check if all the nutrients are available again. The warning icon should also disappear since your crops needs are met for the next day. If you don't meet these needs the same as previously you have a <b>80%</b> chance to lose 1,2,3 or 4 drops based on the plants base yield.");
                 break;
             case 17:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openMarketButton);

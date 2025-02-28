@@ -36,22 +36,24 @@ public class MarketManager : MonoBehaviour
 
     public void UpdatePrices()
     {
-        foreach (MarketItem item in itemsInMarket)
+        if(GameManager.TM.UpdateDate() != "01-01-2025")
         {
-            float currentPrice = item.priceCurrent;
-            float baseDemand = item.attachedItemCard.itemDemand;
-            float baseSupply = item.attachedItemCard.itemSupply;
-            int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
-            int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
-            int priceChange = randomDemand - randomSupply;
-            float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
-            float totalPriceChangePercentage = priceChange + (randomDecimal / 10);
-            item.attachedItemCard.itemDemand = (float)Math.Round(baseDemand * (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
-            item.attachedItemCard.itemSupply = (float)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
-            item.priceCurrent = (float)Math.Round(currentPrice * (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
-            item.allItemPrices.Add(item.priceCurrent);
-            item.UpdateLowHighPrices();
-            item.UpdateMarketItem(item.attachedItemCard);
+            foreach (MarketItem item in itemsInMarket)
+            {
+                float currentPrice = item.priceCurrent;
+                float baseDemand = item.attachedItemCard.itemDemand;
+                float baseSupply = item.attachedItemCard.itemSupply;
+                int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
+                int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
+                int priceChange = randomDemand - randomSupply;
+                float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
+                float totalPriceChangePercentage = priceChange + (randomDecimal / 10 * Mathf.Sign(priceChange));
+                item.attachedItemCard.itemDemand = (float)Math.Round(baseDemand * (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
+                item.attachedItemCard.itemSupply = (float)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
+                item.priceCurrent = (float)Math.Round(currentPrice * (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
+                item.UpdateLowHighPrices();
+                item.UpdateMarketItem(item.attachedItemCard);
+            }
         }
     }
 

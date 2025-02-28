@@ -77,13 +77,13 @@ public class TutorialManager : MonoBehaviour
             tutorialMenu.SetActive(false);
             GameManager.UM.OpenQuestMenu();
             GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode);
-            tutorialCount = 15; //Testing
         }
         tutorialCount++;
         switch (tutorialCount)
         {
             case 1:
                 UpdateQuest("Construct a floating island!", "Lets start off with getting some land up here since crops don't grow in the clouds. Press <b>TAB</b> to go into manage mode and hover over an island. Now hold down your <b>right mouse button</b> and wait until the island is constructed. Your first island will be free but even up here buying land cost money so you better save up.");
+                tutorialCount = 15; //Testing
                 break;
             case 2:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
@@ -167,12 +167,12 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Craft some more!", "Okay lets craft the other fertilizer cards you will need as well. I gave you some extra resoucres so you should be able to craft them now. Selected the other green fertilizer cards <color=green><b>Phosphorus (P)</b></color> plus <color=red><b>Potassium (K)</b></color> and craft 1 of each. Once you have crafted these card exit crafting mode by <b>pressing C</b> again or <b>click</b> the red close button. Now you should have all the cards needed to improve your soil and get the yield of your crops up again.");
                 break;
             case 16:
-                GameManager.DM.AddCardToDeck("CardCultivatorUtility");
-                GameManager.DM.AddCardToDeck("CardWateringCanUtility");
-                GameManager.DM.AddCardToDeck("CardNitrogenFertilizerUtility");
-                GameManager.DM.AddCardToDeck("CardPhosphorusFertilizerUtility");
-                GameManager.DM.AddCardToDeck("CardPotassiumFertilizerUtility");
-                GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
+                GameManager.DM.AddCardToDeck("CardCultivatorUtility"); //Testing
+                GameManager.DM.AddCardToDeck("CardWateringCanUtility"); //Testing
+                GameManager.DM.AddCardToDeck("CardGreenBeanPlant"); //Testing
+                GameManager.DM.AddCardToDeck("CardChivePlant"); //Testing
+                GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton); //Testing
+                GameManager.UM.SetUIButtons(true, GameManager.UM.nextDayButton); //Testing
                 GameManager.DM.CheckRefillHand();
                 UpdateQuest("Improve your soil!", "With these newly crafted fertilizer cards it is time to improve your soil. <b>Drag</b> each of your crafted fertilizer cards towards the soil and it will add <b>50</b> of that nutrient to it. Than inspect your land by <b>double clicking</b> and check if all the nutrients are available again. The warning icon should also disappear since your crops needs are met for the next day. If you don't meet these needs the same as previously you have a <b>80%</b> chance to lose 1,2,3 or 4 drops based on the plants base yield.");
                 break;
@@ -182,10 +182,10 @@ public class TutorialManager : MonoBehaviour
                 UpdateQuest("Time to earn!", "Your soil has been improved and is ready for another harvest but lets first see what we can do with the previous harvest. In manage mode <b>click</b> on the green icon again or press your <b>Q key</b> to go into market mode. Here you will see all the drops you can sell, the demand and supply and the prices of this drop in the last few days. Each day the supply and demand can change which will of course result into a different price. So sometimes waiting to sell some of your harvest might turn out to be more profitable.");
                 break;
             case 18:
-                UpdateQuest("Lets start selling!", "In order to buy a new island we will need some money so how about for today you sell everything you harvested. Start of by selecting");
+                UpdateQuest("Learn the market!", "To earn money you will need to sell your harvest from today. As you can see the prices are currently all the same but this will change each day. A new day means a new demand and supply which correlates to a different price. More demand equals a higher price but more supply means a lower price. You can also see what the lowest and highest price was each week. Let's start off with scrolling down and try to find the market for <b>Rice</b>. Then <b>click</b> the highlighted max button or input the max amount of rice you have.");
                 break;
             case 19:
-                UpdateQuest("Well done!", "End of current tutorial more will come soon!");
+                UpdateQuest("Let's make so money!", "Later on you can of course sell and buy however much you want. You can even buy when the price is low and sell when the price is high. But who knows what the next day will hold big supply and demand changes are less likely to happen. But if they do happen the price can change quite a bit so for now let's just take some guaranteed profit. Sell all the rice your have harvest by <b>clicking</b> the sell button and watch your money go up.");
                 break;
             case 20:
                 UpdateQuest("Let's expand!", "Because of the cards you have crafted your fertilizer and your water storage is low so lets try to fill those up again. First of buy another island by going into manage mode and <b>holding right click.</b>. Now ");

@@ -6,9 +6,9 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] private List<int> date;
-    private string dayText;
-    private string monthText;
+    public List<int> date;
+    public string dayText;
+    public string monthText;
 
     public string UpdateDate()
     {

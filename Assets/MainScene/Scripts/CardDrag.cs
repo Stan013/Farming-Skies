@@ -129,7 +129,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             GameManager.ISM.CheckPotentialIsland().ToggleState(hoverIsland.potentialState, hoverIsland.currentState);
             if (GameManager.HM.dragCard.cardName == "Watering Can")
             {
-                GameManager.ISM.CheckPotentialIsland().Water += 50;
+                GameManager.ISM.CheckPotentialIsland().water += 50;
             }
             if (GameManager.TTM.tutorialCount == 3 || GameManager.TTM.tutorialCount == 4)
             {

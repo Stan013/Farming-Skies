@@ -15,7 +15,7 @@ public class PlantManager : MonoBehaviour
             {
                 if (GameManager.ISM.CheckIslandWater(plant))
                 {
-                    island.Water -= plant.water;
+                    island.water -= plant.water;
                     plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
                     CalculateDropAmount(island, plant);
                 }

@@ -159,7 +159,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public void UpdateIslandMaterial(Island island)
     {
         float totalNPK = island.Nitrogen + island.Phosphorus + island.Potassium;
-        float blendFactor = Mathf.Clamp01(totalNPK / 100f);
+        float blendFactor = Mathf.Clamp01(totalNPK / 50f);
         Material defaultMat = null;
         Material needsNPKMat = null;
 

@@ -15,7 +15,7 @@ public class Drop : MonoBehaviour
     {
         switch (dropType)
         {
-            case "Machine":
+            case "Buildable":
                 if (name == "WaterDrop")
                 {
                     GameManager.UM.water += 1;
@@ -27,7 +27,7 @@ public class Drop : MonoBehaviour
                 break;
             case "Product":
                 break;
-            default:
+            case "Plant":
                 Card itemCard = GameManager.CM.FindCardById(plantCardID);
                 InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == itemCard.itemName);
                 if (existingInventoryItem == null)

@@ -44,9 +44,13 @@ public class MarketItem : MonoBehaviour
             itemQuantityText.SetText(attachedItemCard.itemQuantity.ToString());
             itemIndex = GameManager.MM.itemsInMarket.Count;
             itemImage.sprite = attachedItemCard.cardSprite;
-            allItemPrices.Add(priceCurrent);
-            UpdateMarketItem(attachedItemCard);
+            priceCurrent = attachedItemCard.itemPrice;
+            for (int i = 0; i < 7; i++)
+            {
+                allItemPrices.Add(priceCurrent);
+            }
             UpdateLowHighPrices();
+            UpdateMarketItem(attachedItemCard);
         }
     }
 
@@ -69,7 +73,15 @@ public class MarketItem : MonoBehaviour
             }
             else
             {
-                changeIcon.sprite = downIcon;
+                if(priceCurrent == allItemPrices[allItemPrices.Count - 1])
+                {
+                    //Add no market change icon
+                }
+                else
+                {
+                    changeIcon.sprite = downIcon;
+
+                }
             }
         }
     }
@@ -95,17 +107,16 @@ public class MarketItem : MonoBehaviour
     }
     public void UpdateLowHighPrices()
     {
-        if (allItemPrices.Count > 7 && allItemPrices[6] != 0)
+        if (priceCurrent != allItemPrices[0])
         {
+            allItemPrices.Insert(1, priceCurrent);
             allItemPrices.RemoveAt(0);
         }
-        pricehigh3d = allItemPrices.Where(price => price > 0).Take(3).DefaultIfEmpty(0).Max();
-        pricelow3d = allItemPrices.Where(price => price > 0).Take(3).DefaultIfEmpty(float.MaxValue).Min();
-
-        pricehigh5d = allItemPrices.Where(price => price > 0).Take(5).DefaultIfEmpty(0).Max();
-        pricelow5d = allItemPrices.Where(price => price > 0).Take(5).DefaultIfEmpty(float.MaxValue).Min();
-
-        pricehigh7d = allItemPrices.Where(price => price > 0).Take(7).DefaultIfEmpty(0).Max();
-        pricelow7d = allItemPrices.Where(price => price > 0).Take(7).DefaultIfEmpty(float.MaxValue).Min();
+        pricehigh3d = allItemPrices.Take(3).DefaultIfEmpty(0).Max();
+        pricelow3d = allItemPrices.Take(3).DefaultIfEmpty(float.MaxValue).Min();
+        pricehigh5d = allItemPrices.Take(5).DefaultIfEmpty(0).Max();
+        pricelow5d = allItemPrices.Take(5).DefaultIfEmpty(float.MaxValue).Min();
+        pricehigh7d = allItemPrices.Take(7).DefaultIfEmpty(0).Max();
+        pricelow7d = allItemPrices.Take(7).DefaultIfEmpty(float.MaxValue).Min();
     }
 }

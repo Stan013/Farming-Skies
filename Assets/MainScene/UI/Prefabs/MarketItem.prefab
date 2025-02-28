@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 5804339663871312486}
   - component: {fileID: 8696893076109485903}
   m_Layer: 0
-  m_Name: PriceHigh5DText
+  m_Name: PriceHigh5D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 5710204549967607923}
   - component: {fileID: 2933317342088828306}
   m_Layer: 0
-  m_Name: PriceHigh3D
+  m_Name: PriceHigh3DValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1160,7 +1160,7 @@ GameObject:
   - component: {fileID: 1312557561986467154}
   - component: {fileID: 4671769062659604940}
   m_Layer: 0
-  m_Name: PriceHigh5D
+  m_Name: PriceHigh5DValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3053,7 +3053,7 @@ GameObject:
   - component: {fileID: 8728631506890152424}
   - component: {fileID: 6514374346563003738}
   m_Layer: 0
-  m_Name: PriceHigh7D
+  m_Name: PriceHigh7DValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3438,12 +3438,12 @@ MonoBehaviour:
   upIcon: {fileID: 21300000, guid: 24afd1bf014ee504f9194b8f36abd496, type: 3}
   downIcon: {fileID: 21300000, guid: b4944f9ddd0c3904ab8952a6b151f924, type: 3}
   priceText: {fileID: 4887851963021156628}
-  pricehigh3dText: {fileID: 0}
-  pricelow3dText: {fileID: 0}
-  pricehigh5dText: {fileID: 0}
-  pricelow5dText: {fileID: 0}
-  pricehigh7dText: {fileID: 0}
-  pricelow7dText: {fileID: 0}
+  pricehigh3dText: {fileID: 2933317342088828306}
+  pricelow3dText: {fileID: 2223459157892978949}
+  pricehigh5dText: {fileID: 4671769062659604940}
+  pricelow5dText: {fileID: 3062569236596222815}
+  pricehigh7dText: {fileID: 6514374346563003738}
+  pricelow7dText: {fileID: 8389852780128502671}
   demandText: {fileID: 1700534454074281098}
   supplyText: {fileID: 3393199721905419886}
   sellButton: {fileID: 7220060980456438539}
@@ -4125,7 +4125,7 @@ GameObject:
   - component: {fileID: 3853403739463990130}
   - component: {fileID: 5761812967313684835}
   m_Layer: 0
-  m_Name: PriceHigh7DText
+  m_Name: PriceHigh7D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4641,7 +4641,7 @@ GameObject:
   - component: {fileID: 1739815066325188658}
   - component: {fileID: 8389852780128502671}
   m_Layer: 0
-  m_Name: PriceLow7D
+  m_Name: PriceLow7DValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5034,7 +5034,7 @@ GameObject:
   - component: {fileID: 8940300781089596146}
   - component: {fileID: 6604051431110595042}
   m_Layer: 0
-  m_Name: PriceHigh3DText
+  m_Name: PriceHigh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5348,7 +5348,7 @@ GameObject:
   - component: {fileID: 6909060681326122062}
   - component: {fileID: 3062569236596222815}
   m_Layer: 0
-  m_Name: PriceLow5D
+  m_Name: PriceLow5DValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6092,7 +6092,7 @@ GameObject:
   - component: {fileID: 2019904644753984951}
   - component: {fileID: 2223459157892978949}
   m_Layer: 0
-  m_Name: PriceLow3D
+  m_Name: PriceLow3DValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6624,7 +6624,7 @@ GameObject:
   - component: {fileID: 413617855050348091}
   - component: {fileID: 192719065286271061}
   m_Layer: 0
-  m_Name: PriceLow3DText
+  m_Name: PriceLow3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6762,7 +6762,7 @@ GameObject:
   - component: {fileID: 297492365923738311}
   - component: {fileID: 5927430503476891187}
   m_Layer: 0
-  m_Name: PriceLow5DText
+  m_Name: PriceLow5D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6898,7 +6898,7 @@ GameObject:
   - component: {fileID: 477422480410657442}
   - component: {fileID: 6862244201320253490}
   m_Layer: 0
-  m_Name: PriceLow7DText
+  m_Name: PriceLow7D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

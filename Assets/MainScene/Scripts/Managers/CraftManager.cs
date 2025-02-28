@@ -335,6 +335,8 @@ public class CraftManager : MonoBehaviour
             {
                 GameManager.CRM.craftUI.minButton.enabled = false;
                 GameManager.CRM.craftUI.minusButton.enabled = false;
+                GameManager.CRM.craftUI.plusButton.enabled = false;
+                GameManager.CRM.craftUI.maxButton.enabled = false;
                 GameManager.CRM.craftUI.craftAmountInput.enabled = false;
                 GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
                 if(GameManager.TTM.tutorialCount == 13)
@@ -349,6 +351,8 @@ public class CraftManager : MonoBehaviour
             GameManager.CRM.craftUI.rightButton.enabled = true;
             GameManager.CRM.craftUI.minButton.enabled = true;
             GameManager.CRM.craftUI.minusButton.enabled = true;
+            GameManager.CRM.craftUI.plusButton.enabled = true;
+            GameManager.CRM.craftUI.maxButton.enabled = true;
             GameManager.CRM.craftUI.craftAmountInput.enabled = true;
             GameManager.CRM.craftUI.plusButton.GetComponent<Image>().color = Color.white;
         }

@@ -291,7 +291,7 @@ MonoBehaviour:
   cardId: 
   cardStarter: 0
   cardSetup: 0
-  CurrentState: 6
+  CurrentState: 5
   dragSucces: 0
   cardName: 
   cardNameText: {fileID: 1921602048528338584}
@@ -306,6 +306,7 @@ MonoBehaviour:
   cardClip: {fileID: 0}
   cardCraftResources: 
   cardDropsRequired: 0
+  cardCraftIndex: 0
   itemName: 
   itemSprite: {fileID: 0}
   itemQuantity: 0

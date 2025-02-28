@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openButton: {fileID: 19053909}
-  openWindow: {fileID: 0}
+  openWindow: {fileID: 1626127580}
 --- !u!114 &19053909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24870,6 +24870,14 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: sulfur
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: calcium
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandId
       value: Island(0,0)Ring1
       objectReference: {fileID: 0}
@@ -24878,16 +24886,32 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: _nitrogen
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: magnesium
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: potassium
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: _potassium
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: phosphorus
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: _phosphorus
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: holdDuration
@@ -56901,7 +56925,7 @@ MonoBehaviour:
   openInventoryButton: {fileID: 1529495821271673814}
   openCraftButton: {fileID: 19053909}
   nextDayButton: {fileID: 1577276188018295766}
-  closeButton: {fileID: 0}
+  closeButton: {fileID: 627471845}
   tax: 0
   balance: 0
   water: 0
@@ -61080,7 +61104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openButton: {fileID: 526926559605762785}
-  openWindow: {fileID: 0}
+  openWindow: {fileID: 89339859}
 --- !u!114 &7629843876264444424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61751,7 +61775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openButton: {fileID: 1529495821271673814}
-  openWindow: {fileID: 0}
+  openWindow: {fileID: 1860583189}
 --- !u!222 &8055914958655082697
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -62191,11 +62215,11 @@ MonoBehaviour:
   craftableCards: []
   cardsInCrafting: []
   selectionSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 242812925}
+  - {fileID: 50106809}
+  - {fileID: 132163054}
+  - {fileID: 2027290766}
+  - {fileID: 32616212}
   selectedCard: {fileID: 0}
   craftUI: {fileID: 2073053639}
   craftButton: {fileID: 814792657}

@@ -30,19 +30,13 @@ public class Island : MonoBehaviour
     public TMP_Text nitrogenAvailableText;
     public TMP_Text phosphorusAvailableText;
     public TMP_Text potassiumAvailableText;
-    public int _water;
+    public int water;
     public int _nitrogen;
     public int _phosphorus;
     public int _potassium;
     public int magnesium;
     public int sulfur;
     public int calcium;
-
-    public int Water
-    {
-        get => _water;
-        set { _water = value; OnNutrientChanged(); }
-    }
     public int Nitrogen
     {
         get => _nitrogen;
@@ -357,7 +351,7 @@ public class Island : MonoBehaviour
         nitrogenUsageText.SetText(nitrogenUsage.ToString() + " L");
         phosphorusUsageText.SetText(phosphorusUsage.ToString() + " L");
         potassiumUsageText.SetText(potassiumUsage.ToString() + " L");
-        waterAvailableText.SetText(_water.ToString() + " L");
+        waterAvailableText.SetText(water.ToString() + " L");
         nitrogenAvailableText.SetText(_nitrogen.ToString() + " L");
         phosphorusAvailableText.SetText(_phosphorus.ToString() + " L");
         potassiumAvailableText.SetText(_potassium.ToString() + " L");
@@ -365,7 +359,7 @@ public class Island : MonoBehaviour
 
     public void CheckWarningIcon()
     {
-        if (waterUsage > _water || nitrogenUsage > _nitrogen || phosphorusUsage > _phosphorus || potassiumUsage > _potassium)
+        if (waterUsage > water || nitrogenUsage > _nitrogen || phosphorusUsage > _phosphorus || potassiumUsage > _potassium)
         {
             signWarningIcon.SetActive(true);
         }

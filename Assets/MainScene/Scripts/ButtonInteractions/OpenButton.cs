@@ -40,7 +40,7 @@ public class OpenButton : MonoBehaviour
                     break;
                 case "MarketWindow":
                     GameManager.IPM.ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default);
-                    if (GameManager.TTM.tutorialCount == 22)
+                    if (GameManager.TTM.tutorialCount == 17)
                     {
                         GameManager.TTM.QuestCompleted = true;
                         GameManager.UM.openMarketButton.GetComponent<Image>().color = Color.white;

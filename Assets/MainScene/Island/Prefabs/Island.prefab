@@ -2360,10 +2360,10 @@ MonoBehaviour:
   nitrogenAvailableText: {fileID: 1474768541882063131}
   phosphorusAvailableText: {fileID: 3588788488473726943}
   potassiumAvailableText: {fileID: 1316268861610522217}
-  water: 50
-  nitrogen: 50
-  phosphorus: 50
-  potassium: 50
+  _water: 0
+  _nitrogen: 50
+  _phosphorus: 50
+  _potassium: 50
   magnesium: 50
   sulfur: 50
   calcium: 50

@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dcb929937df8724e80a38e3453e52f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drop: {fileID: 8888020177096995588, guid: 6a4baeb7ad6ffbd42932176451de9e4f, type: 3}
+  drop: {fileID: -687025822387607979, guid: f8580d77c2192664e94959c4a20eb1f6, type: 3}
   plantScale: 0.0075
   plantCardID: 
   yield: 18

@@ -56683,6 +56683,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   date: 0100000001000000e9070000
+  dayText: 
+  monthText: 
 --- !u!222 &4662970784423544471
 CanvasRenderer:
   m_ObjectHideFlags: 0

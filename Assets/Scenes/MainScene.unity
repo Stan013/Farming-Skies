@@ -27760,7 +27760,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
       value: 
-      objectReference: {fileID: 32900000, guid: 2b4845641d8f7cd4cbd55696a486faad, type: 3}
+      objectReference: {fileID: 32900000, guid: 6b6b8e4627ffb6b41891e623d31b571c, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
       value: Chard Plant
@@ -27780,7 +27780,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: b0deedb6d06c5ea4fa9949e29b402190, type: 3}
+      objectReference: {fileID: 21300000, guid: 076ac07b6fb95ab4f8e0a9540ce1fd81, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: itemDemand
       value: 7900000
@@ -57091,6 +57091,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   date: 0100000001000000e9070000
+  dayText: 
+  monthText: 
 --- !u!222 &4662970784423544471
 CanvasRenderer:
   m_ObjectHideFlags: 0

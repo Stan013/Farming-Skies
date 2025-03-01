@@ -78,7 +78,7 @@ public class OpenButton : MonoBehaviour
                     }
                     break;
                 case "Market":
-                    if (GameManager.TTM.tutorialCount == 22)
+                    if (GameManager.TTM.tutorialCount == 17)
                     {
                         GameManager.TTM.QuestCompleted = true;
                         GameManager.UM.openMarketButton.GetComponent<Image>().color = Color.white;

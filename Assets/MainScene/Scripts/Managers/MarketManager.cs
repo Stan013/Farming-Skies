@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class MarketManager : MonoBehaviour
@@ -19,9 +20,23 @@ public class MarketManager : MonoBehaviour
     {
         foreach(MarketItem marketItem in itemsInMarket)
         {
+            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 17)
+            {
+                if(marketItem.attachedItemCard.itemName == "Green Bean")
+                {
+                    marketItem.sellUI.plusButton.GetComponent<Image>().color = Color.green;
+                    marketItem.sellUI.maxButton.GetComponent<Image>().color = Color.green;
+                    marketItem.buyUI.enabled = false;
+                }
+                else
+                {
+                    marketItem.sellUI.enabled = false;
+                    marketItem.buyUI.enabled = false;
+                }
+            }
             marketItem.itemQuantityText.SetText(marketItem.attachedItemCard.itemQuantity.ToString());
-            marketItem.sellButton.inputAmount.text = "";
-            marketItem.buyButton.inputAmount.text = "";
+            marketItem.sellUI.inputAmount.text = "";
+            marketItem.buyUI.inputAmount.text = "";
         }
     }
 
@@ -31,6 +46,11 @@ public class MarketManager : MonoBehaviour
         marketItem.SetMarketItem(itemCard);
         marketItem.transform.SetParent(marketContentArea.transform, false);
         itemsInMarket.Add(marketItem);
+        itemsInMarket.Sort((a, b) => a.attachedItemCard.itemName.CompareTo(b.attachedItemCard.itemName));
+        for (int i = 0; i < itemsInMarket.Count; i++)
+        {
+            itemsInMarket[i].transform.SetSiblingIndex(i);
+        }
         itemCard.cardAddedToMarket = true;
     }
 
@@ -87,6 +107,10 @@ public class MarketManager : MonoBehaviour
         }
         if (isSelling)
         {
+            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 19)
+            {
+                GameManager.TTM.QuestCompleted = true;
+            }
             amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
             marketItem.attachedItemCard.itemQuantity -= amount;
             float totalEarned = amount * marketItem.priceCurrent;
@@ -101,5 +125,6 @@ public class MarketManager : MonoBehaviour
             GameManager.UM.balance -= amount * itemPrice;
         }
         UpdateMarketItems();
+        GameManager.UM.UpdateUI();
     }
 }

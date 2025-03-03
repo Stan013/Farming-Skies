@@ -7,33 +7,20 @@ using TMPro;
 
 public class MarketItem : MonoBehaviour
 {
+    public List<float> allItemPrices;
+    public int itemIndex;
+    public Card attachedItemCard;
+
     public TMP_Text itemQuantityText;
     public TMP_Text itemNameText;
     public Image itemImage;
     public Image changeIcon;
-    public Sprite upIcon;
-    public Sprite downIcon;
-    public TMP_Text priceText;
-    public TMP_Text pricehigh3dText;
-    public TMP_Text pricelow3dText;
-    public TMP_Text pricehigh5dText;
-    public TMP_Text pricelow5dText;
-    public TMP_Text pricehigh7dText;
-    public TMP_Text pricelow7dText;
-    public TMP_Text demandText;
-    public TMP_Text supplyText;
-    public MarketButton sellButton;
-    public MarketButton buyButton;
-    public List<float> allItemPrices;
-    public int itemIndex;
-    public Card attachedItemCard;
-    public float priceCurrent;
-    private float pricehigh3d;
-    private float pricelow3d;
-    private float pricehigh5d;
-    private float pricelow5d;
-    private float pricehigh7d;
-    private float pricelow7d;
+    public Sprite upIcon, downIcon;
+
+    public TMP_Text priceText, pricehigh3dText, pricelow3dText, pricehigh5dText, pricelow5dText, pricehigh7dText, pricelow7dText;
+    public TMP_Text demandText, supplyText;
+    public float priceCurrent, pricehigh3d, pricelow3d, pricehigh5d, pricelow5d, pricehigh7d, pricelow7d;
+    public MarketButton sellUI, buyUI;
 
     public void SetMarketItem(Card itemCard)
     {
@@ -105,6 +92,7 @@ public class MarketItem : MonoBehaviour
             return number.ToString("0");
         }
     }
+
     public void UpdateLowHighPrices()
     {
         if (priceCurrent != allItemPrices[0])

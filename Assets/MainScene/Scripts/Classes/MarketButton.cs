@@ -6,15 +6,14 @@ using TMPro;
 
 public class MarketButton : MonoBehaviour
 {
-    [SerializeField] private bool isSelling;
-    [SerializeField] private TMP_InputField m_InputAmount;
-    public TMP_InputField inputAmount { get { return m_InputAmount; } }
-    [SerializeField] private Button transactionButton;
-    [SerializeField] private Button plusButton;
-    [SerializeField] private Button minusButton;
-    [SerializeField] private Button minButton;
-    [SerializeField] private Button maxButton;
-    [SerializeField] private MarketItem marketItem;
+    public bool isSelling;
+    public TMP_InputField inputAmount;
+    public Button transactionButton;
+    public Button plusButton;
+    public Button minusButton;
+    public Button minButton;
+    public Button maxButton;
+    public MarketItem marketItem;
     private int minAmount = 0;
     private int maxAmount;
 
@@ -77,6 +76,16 @@ public class MarketButton : MonoBehaviour
         {
             inputAmount.text = "0";
         }
+        if(currentValue == marketItem.attachedItemCard.itemQuantity && GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 18)
+        {
+            GameManager.TTM.QuestCompleted = true;
+            minButton.enabled = false;
+            minusButton.enabled = false;
+            inputAmount.enabled = false;
+            plusButton.GetComponent<Image>().color = new Color(0.84f, 0.84f, 0.84f);
+            maxButton.GetComponent<Image>().color = new Color(0.84f, 0.84f, 0.84f);
+            transactionButton.GetComponent<Image>().color = Color.green;
+        }
     }
 
     public void DecreaseInput()
@@ -104,6 +113,16 @@ public class MarketButton : MonoBehaviour
     {
         UpdateMaxAmount();
         inputAmount.text = maxAmount.ToString();
+        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 18)
+        {
+            GameManager.TTM.QuestCompleted = true;
+            minButton.enabled = false;
+            minusButton.enabled = false;
+            inputAmount.enabled = false;
+            plusButton.GetComponent<Image>().color = new Color(0.84f, 0.84f, 0.84f);
+            maxButton.GetComponent<Image>().color = new Color(0.84f, 0.84f, 0.84f);
+            transactionButton.GetComponent<Image>().color = Color.green;
+        }
     }
 
     private void OnTransactionButtonClicked()
@@ -117,6 +136,15 @@ public class MarketButton : MonoBehaviour
             }
             MarketManager marketManager = GameManager.MM;
             marketManager.ExecuteTransaction(marketItem, amount, isSelling);
+        }
+        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 19)
+        {
+            minButton.enabled = true;
+            minusButton.enabled = true;
+            plusButton.enabled = true;
+            maxButton.enabled = true;
+            inputAmount.enabled = true;
+            transactionButton.GetComponent<Image>().color = new Color(0.84f, 0.84f, 0.84f);
         }
     }
 }

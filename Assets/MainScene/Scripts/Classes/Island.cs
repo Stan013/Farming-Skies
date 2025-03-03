@@ -8,6 +8,7 @@ public class Island : MonoBehaviour
     public Material islandMat;
     public IslandState currentState = IslandState.Sowed;
     public IslandState potentialState = IslandState.Sowed;
+    public GameObject glow;
 
     public bool islandAvailable;
     public int islandBuildCost;
@@ -96,9 +97,11 @@ public class Island : MonoBehaviour
         GetIslandComponents();
         switch (state)
         {
-            case IslandState.Highlighted: //Rework
+            case IslandState.Highlighted:
+                glow.SetActive(true);
                 break;
             case IslandState.Default:
+                glow.SetActive(false);
                 Color topColor = topMat.color;
                 topColor.a = 0f;
                 topMat.color = topColor;

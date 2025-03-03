@@ -52,9 +52,12 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     public void AddIslandToBought(Island reconstructedIsland)
     {
-        if(GameManager.TTM.tutorial && reconstructedIsland.name == "0,0")
+        if(GameManager.TTM.tutorial)
         {
-            GameManager.TTM.QuestCompleted = true; 
+            if(reconstructedIsland.name == "0,0" || reconstructedIsland.name == "-1,0")
+            {
+                GameManager.TTM.QuestCompleted = true;
+            }
         }
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
         boughtIslands.Add(reconstructedIsland);

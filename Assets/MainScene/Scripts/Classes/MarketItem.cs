@@ -56,7 +56,7 @@ public class MarketItem : MonoBehaviour
         {
             if (priceCurrent < allItemPrices[allItemPrices.Count - 1])
             {
-                changeIcon.sprite = upIcon;
+                changeIcon.sprite = downIcon;
             }
             else
             {
@@ -66,7 +66,7 @@ public class MarketItem : MonoBehaviour
                 }
                 else
                 {
-                    changeIcon.sprite = downIcon;
+                    changeIcon.sprite = upIcon;
 
                 }
             }

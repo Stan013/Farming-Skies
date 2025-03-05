@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dcb929937df8724e80a38e3453e52f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drop: {fileID: -1591252354767917602, guid: be7d121b1891a9a40b29eb8807fd99e3, type: 3}
+  drop: {fileID: -3315355698080879949, guid: f3374ea4dbcf82846b71822bbf6a5878, type: 3}
   plantScale: 0.0075
-  plantCardID: 
+  plantCardID: CardChivePlant
   yield: 18
   water: 1
   nitrogen: 1

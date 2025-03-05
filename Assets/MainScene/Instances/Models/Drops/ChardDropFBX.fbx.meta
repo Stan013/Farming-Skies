@@ -8,22 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Beige
-    second: {fileID: 2100000, guid: 5d26c3e0303c0e0489064e2252ee845c, type: 2}
+    second: {fileID: 2100000, guid: 3589ca55231255342bec804935bfa43e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Green.001
-    second: {fileID: 2100000, guid: 5d26c3e0303c0e0489064e2252ee845c, type: 2}
+    second: {fileID: 2100000, guid: 3589ca55231255342bec804935bfa43e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Outline.001
-    second: {fileID: 2100000, guid: 5d26c3e0303c0e0489064e2252ee845c, type: 2}
+    second: {fileID: 2100000, guid: 3589ca55231255342bec804935bfa43e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Yellow.001
-    second: {fileID: 2100000, guid: 5d26c3e0303c0e0489064e2252ee845c, type: 2}
+    second: {fileID: 2100000, guid: 3589ca55231255342bec804935bfa43e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

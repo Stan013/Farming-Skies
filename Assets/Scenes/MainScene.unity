@@ -8986,7 +8986,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
       value: 
-      objectReference: {fileID: 32900000, guid: 2b4845641d8f7cd4cbd55696a486faad, type: 3}
+      objectReference: {fileID: 32900000, guid: 95e4fca7aaa6a414297e76cf772e23e4, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
       value: Rice Plant
@@ -9006,7 +9006,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: b0deedb6d06c5ea4fa9949e29b402190, type: 3}
+      objectReference: {fileID: 21300000, guid: a14c7660a7fda824aaa5b91df636aeb5, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: itemDemand
       value: 9800000
@@ -9024,9 +9024,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: cardUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: inventoryItem
       value: 
       objectReference: {fileID: 462690913}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: dragModel
+      value: 
+      objectReference: {fileID: 1095800002574151059, guid: 206823e0632e62b4fa4f162ecc819797, type: 3}
     - target: {fileID: 5777053730670837334, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -27565,6 +27573,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: cardUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: inventoryItem
       value: 
       objectReference: {fileID: 462690913}
@@ -32846,7 +32858,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
       value: 
-      objectReference: {fileID: 32900000, guid: af737bc5339129246a5edf753afac4b1, type: 3}
+      objectReference: {fileID: 32900000, guid: 15714118e391e6244b87d545aea970d2, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
       value: Chive Plant
@@ -32866,7 +32878,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 922e618e7fa89cb46a6eb729d3009714, type: 3}
+      objectReference: {fileID: 21300000, guid: 82d77a07db877fe49b4116119e8213a1, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: itemDemand
       value: 4500000

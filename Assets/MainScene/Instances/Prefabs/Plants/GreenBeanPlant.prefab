@@ -102,8 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dcb929937df8724e80a38e3453e52f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drop: {fileID: 1444400806056005184, guid: 74fb3149ed679554cac0b5ecf3cfa09b, type: 3}
-  plantCardID: GreenBeanPlant
+  drop: {fileID: -7541418366129046587, guid: a226596364a5b6542a481da65955901c, type: 3}
+  plantScale: 0.0075
+  plantCardID: CardGreenBeanPlant
   yield: 18
   water: 4
   nitrogen: 1

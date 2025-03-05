@@ -54,7 +54,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.SettingsMode, GameManager.GameState.Default); //Switch to settings mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E) && GameManager.UM.openInventoryButton.IsInteractable()) //No WASD movement and only inventory window
+            if (Input.GetKeyDown(KeyCode.E)) //No WASD movement and only inventory window
             {
                 if (GameManager.CurrentState == GameManager.GameState.InventoryMode)
                 {
@@ -65,7 +65,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.InventoryMode, GameManager.GameState.Default); //Switch to inventory mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Q) && GameManager.UM.openMarketButton.IsInteractable()) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.Q)) //No WASD movement and only market window
             {
                 if (GameManager.CurrentState == GameManager.GameState.MarketMode)
                 {
@@ -76,7 +76,7 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default); //Switch to market mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.C) && GameManager.UM.openCraftButton.IsInteractable()) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.C)) //No WASD movement and only market window
             {
                 if (GameManager.CurrentState == GameManager.GameState.CraftMode)
                 {
@@ -160,7 +160,7 @@ public class InputManager : MonoBehaviour
             && hit.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
         {
             clickedIsland = GameManager.ISM.GetClickedIsland();
-            if (GameManager.UM.balance >= clickedIsland.islandBuildCost && clickedIsland.islandBought == false && clickedIsland.islandAvailable)
+            if (GameManager.UM.money >= clickedIsland.islandBuildCost && clickedIsland.islandBought == false && clickedIsland.islandAvailable)
             {
                 if (!GameManager.TTM.tutorial || clickedIsland.name == "0,0")
                 {
@@ -249,7 +249,7 @@ public class InputManager : MonoBehaviour
     {
         if (GameManager.TTM.tutorialCount == 10 || GameManager.TTM.tutorialCount == 16)
         {
-            GameManager.TTM.QuestCompleted = true;
+            //GameManager.TTM.QuestCompleted = true;
         }
 
         Vector3 targetPosition = new Vector3(island.transform.position.x + 4, 5, island.transform.position.z + 4);

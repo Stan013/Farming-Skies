@@ -13,10 +13,6 @@ public class UIButton : MonoBehaviour
         {
             hasPressed = true;
             GetComponent<Image>().color = Color.white;
-            if (GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color == Color.white && GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color == Color.white & GameManager.TTM.tutorialCount == 2)
-            {
-                GameManager.TTM.QuestCompleted = true;
-            }
         }
     }
 }

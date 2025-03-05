@@ -15,7 +15,7 @@ public class NextDayButton : MonoBehaviour
     {
         if (GameManager.TTM.tutorialCount == 8)
         {
-            GameManager.TTM.QuestCompleted = true;
+            //GameManager.TTM.QuestCompleted = true;
             GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.white;
         }
         GameManager.PM.Harvest(); //Includes Water and nutrients Check

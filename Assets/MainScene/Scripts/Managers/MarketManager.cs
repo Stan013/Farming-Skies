@@ -109,20 +109,20 @@ public class MarketManager : MonoBehaviour
         {
             if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 19)
             {
-                GameManager.TTM.QuestCompleted = true;
+                //GameManager.TTM.QuestCompleted = true;
             }
             amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
             marketItem.attachedItemCard.itemQuantity -= amount;
             float totalEarned = amount * marketItem.priceCurrent;
-            GameManager.UM.balance += totalEarned;
+            GameManager.UM.money += totalEarned;
         }
         else
         {
             float itemPrice = marketItem.priceCurrent;
-            int affordableAmount = (int)(GameManager.UM.balance / itemPrice);
+            int affordableAmount = (int)(GameManager.UM.money / itemPrice);
             amount = Mathf.Min(amount, affordableAmount);
             marketItem.attachedItemCard.itemQuantity += amount;
-            GameManager.UM.balance -= amount * itemPrice;
+            GameManager.UM.money -= amount * itemPrice;
         }
         UpdateMarketItems();
         GameManager.UM.UpdateUI();

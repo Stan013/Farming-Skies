@@ -41,7 +41,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
             }
             if (inspectedCards.Count == 4)
             {
-                GameManager.TTM.QuestCompleted = true;
+                //GameManager.TTM.QuestCompleted = true;
             }
         }
     }

@@ -10,23 +10,20 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public GameObject UIMenu;
 
     [Header("UI Buttons")]
+    public Image modeIndicator;
+    public Sprite[] modeIcons;
     public bool UIActive = false;
     public Button openUIButton;
     public TMP_Text openUIText;
     public bool questActive = false;
     public Button openQuestButton;
     public TMP_Text openQuestText;
-
-    public Button openSettingsButton;
-    public Button openMarketButton;
-    public Button openInventoryButton;
-    public Button openCraftButton;
     public Button nextDayButton;
     public Button closeButton;
 
     [Header("Game variables")]
     public float tax;
-    public float balance;
+    public float money;
     public int water;
     public int fertilizer;
 
@@ -76,15 +73,15 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (!questActive)
         {
             openQuestText.SetText("ʌ");
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 140);
-            GameManager.TTM.questMenu.SetActive(true);
+            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 275);
+            GameManager.QM.questMenu.SetActive(true);
             questActive = true;
         }
         else
         {
             openQuestText.SetText("v");
             openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 510);
-            GameManager.TTM.questMenu.SetActive(false);
+            GameManager.QM.questMenu.SetActive(false);
             questActive = false;
         }
         if (openQuestButton.GetComponent<Image>().color == Color.green)
@@ -97,7 +94,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     {
         dateAmountText.SetText(GameManager.TM.UpdateDate());
         taxAmountText.SetText(tax.ToString() + " ₴");
-        balanceAmountText.SetText(balance.ToString() + " ₴");
+        balanceAmountText.SetText(money.ToString() + " ₴");
         waterAmountText.SetText(water.ToString() + " L");
         fertilizerAmountText.SetText(fertilizer.ToString() + " L");
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
@@ -126,7 +123,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             {
                 island.sign.SetActive(true);
                 island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
-                balance -= island.islandBuildCost;
+                money -= island.islandBuildCost;
                 tax += island.islandTaxCost;
                 GameManager.ISM.AddIslandToBought(island);
                 island.islandBought = true;
@@ -139,7 +136,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         tax = data.tax;
-        balance = data.balance;
+        money = data.balance;
         water = data.water;
         fertilizer = data.fertilizer;
     }
@@ -147,7 +144,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         data.tax = tax;
-        data.balance = balance;
+        data.balance = money;
         data.water = water;
         data.fertilizer = fertilizer;
     }

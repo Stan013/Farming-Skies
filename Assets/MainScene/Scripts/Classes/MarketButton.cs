@@ -59,7 +59,7 @@ public class MarketButton : MonoBehaviour
         }
         else
         {
-            maxAmount = Mathf.FloorToInt(GameManager.UM.balance / marketItem.priceCurrent);
+            maxAmount = Mathf.FloorToInt(GameManager.UM.money / marketItem.priceCurrent);
         }
     }
 
@@ -78,7 +78,7 @@ public class MarketButton : MonoBehaviour
         }
         if(currentValue == marketItem.attachedItemCard.itemQuantity && GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 18)
         {
-            GameManager.TTM.QuestCompleted = true;
+            //GameManager.TTM.QuestCompleted = true;
             minButton.enabled = false;
             minusButton.enabled = false;
             inputAmount.enabled = false;
@@ -115,7 +115,7 @@ public class MarketButton : MonoBehaviour
         inputAmount.text = maxAmount.ToString();
         if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 18)
         {
-            GameManager.TTM.QuestCompleted = true;
+            //GameManager.TTM.QuestCompleted = true;
             minButton.enabled = false;
             minusButton.enabled = false;
             inputAmount.enabled = false;

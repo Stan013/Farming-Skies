@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static TutorialManager TTM { get; private set; }
     public static DataPersistenceManager DPM { get; private set; }
     public static CraftManager CRM { get; private set; }
+    public static QuestManager QM { get; private set; }
     public static Camera cam { get; private set; }
     public static Vector3 staticPos;
     public GameObject mainMenu;
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         TTM = GetComponent<TutorialManager>();
         DPM = GetComponent<DataPersistenceManager>();
         CRM = GetComponent<CraftManager>();
+        QM = GetComponent<QuestManager>();
         cam = FindAnyObjectByType<Camera>();
         staticPos = cam.transform.position;
         CurrentState = GameState.MainMenuMode;
@@ -95,11 +97,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
             IPM.HandleGameStatesSwitchInput();
             IPM.HandleKeyboardInput(CurrentState);
             IPM.HandleMouseInput(CurrentState);
+            QM.QuestCheck();
             if(TTM.tutorialCount == 11)
             {
                 if(cam.transform.position.y > 7)
                 {
-                    TTM.QuestCompleted = true;
+                    //TTM.QuestCompleted = true;
                 }
             }
         }
@@ -125,25 +128,27 @@ public class GameManager : MonoBehaviour, IDataPersistence
             case GameState.SettingsMode:
                 break;
             case GameState.Default:
+                UM.modeIndicator.sprite = UM.modeIcons[0];
                 Cursor.visible = false;
                 break;
             case GameState.ManageMode:
+                UM.modeIndicator.sprite = UM.modeIcons[1];
                 break;
             case GameState.SelectionMode:
                 HM.ClearCardsInHand();
                 SM.GeneratePickWindow();
                 break;
             case GameState.InventoryMode:
-                UM.openInventoryButton.GetComponent<OpenButton>().OnKeyboardButtonClick("Inventory");
+                UM.modeIndicator.sprite = UM.modeIcons[2];
                 INM.UpdateInventoryItems();
                 break;
-            case GameState.MarketMode:
-                UM.openMarketButton.GetComponent<OpenButton>().OnKeyboardButtonClick("Market");
-                MM.UpdateMarketItems();
-                break;
             case GameState.CraftMode:
-                UM.openCraftButton.GetComponent<OpenButton>().OnKeyboardButtonClick("Craft");
+                UM.modeIndicator.sprite = UM.modeIcons[3];
                 CRM.SetupCraftingMode();
+                break;
+            case GameState.MarketMode:
+                UM.modeIndicator.sprite = UM.modeIcons[4];
+                MM.UpdateMarketItems();
                 break;
         }
     }

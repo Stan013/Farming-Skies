@@ -32,9 +32,9 @@ public class Island : MonoBehaviour
     public TMP_Text phosphorusAvailableText;
     public TMP_Text potassiumAvailableText;
     public int water;
-    public int _nitrogen;
-    public int _phosphorus;
-    public int _potassium;
+    private int _nitrogen;
+    private int _phosphorus;
+    private int _potassium;
     public int magnesium;
     public int sulfur;
     public int calcium;
@@ -112,7 +112,7 @@ public class Island : MonoBehaviour
             case IslandState.Watered:
                 if (islandID == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 4)
                 {
-                    GameManager.TTM.QuestCompleted = true;
+                    //GameManager.TTM.QuestCompleted = true;
                 }
                 if (needsNPK)
                 {
@@ -136,7 +136,7 @@ public class Island : MonoBehaviour
             case IslandState.Cultivated:
                 if(islandID == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 3)
                 {
-                    GameManager.TTM.QuestCompleted = true;
+                    //GameManager.TTM.QuestCompleted = true;
                 }
                 if (needsNPK)
                 {

@@ -56,7 +56,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         {
             if(reconstructedIsland.name == "0,0" || reconstructedIsland.name == "-1,0")
             {
-                GameManager.TTM.QuestCompleted = true;
+                //GameManager.TTM.QuestCompleted = true;
             }
         }
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);

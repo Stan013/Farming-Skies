@@ -228,7 +228,7 @@ public class CraftManager : MonoBehaviour
         List<int> validMaxValues = new List<int>();
         if (selectedCard.cardCraftResources[0] > 0f)
         {
-            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.balance / selectedCard.cardCraftResources[0]));
+            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.money / selectedCard.cardCraftResources[0]));
         }
         if (selectedCard.cardCraftResources[1] > 0)
         {
@@ -341,7 +341,7 @@ public class CraftManager : MonoBehaviour
                 GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
                 if(GameManager.TTM.tutorialCount == 13)
                 {
-                    GameManager.TTM.QuestCompleted = true;
+                    //GameManager.TTM.QuestCompleted = true;
                 }
             }
         }
@@ -358,7 +358,7 @@ public class CraftManager : MonoBehaviour
         }
         if(craftedPhosphorus && craftedPotassium && GameManager.TTM.tutorialCount == 15)
         {
-            GameManager.TTM.QuestCompleted = true;
+            //GameManager.TTM.QuestCompleted = true;
         }
     }
 }

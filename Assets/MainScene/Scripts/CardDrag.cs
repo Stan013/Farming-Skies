@@ -133,7 +133,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
             if (GameManager.TTM.tutorialCount == 3 || GameManager.TTM.tutorialCount == 4)
             {
-                GameManager.TTM.QuestCompleted = true;
+                //GameManager.TTM.QuestCompleted = true;
             }
             GameManager.HM.dragCard.dragSucces = true;
             GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
@@ -174,11 +174,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
                 if (GameManager.TTM.tutorialCount == 6)
                 {
-                    GameManager.TTM.QuestCompleted = true;
+                    //GameManager.TTM.QuestCompleted = true;
                 }
                 if (GameManager.TTM.tutorialCount == 7 && GameManager.HM.cardsInHand.Count == 0)
                 {
-                    GameManager.TTM.QuestCompleted = true;
+                    //GameManager.TTM.QuestCompleted = true;
                 }
             }
             else

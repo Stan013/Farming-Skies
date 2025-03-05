@@ -29,7 +29,7 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 14)
                 {
                     GameManager.CRM.selectedCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f);
-                    GameManager.TTM.QuestCompleted = true;
+                    //GameManager.TTM.QuestCompleted = true;
                 }
             }
         }
@@ -80,7 +80,7 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             }
             else
             {
-                GameManager.UM.balance -= GameManager.CRM.selectedCard.cardCraftResources[0];
+                GameManager.UM.money -= GameManager.CRM.selectedCard.cardCraftResources[0];
                 GameManager.UM.water -= GameManager.CRM.selectedCard.cardCraftResources[1];
                 GameManager.UM.fertilizer -= GameManager.CRM.selectedCard.cardCraftResources[2];
                 GameManager.DM.AddCardToDeck(GameManager.CRM.selectedCard.cardId);

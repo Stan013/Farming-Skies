@@ -93,6 +93,18 @@ public class QuestManager : MonoBehaviour
                         QuestCompleted = true;
                     }
                     break;
+                case 7:
+                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Cultivated)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 8:
+                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Watered)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
             }
         }
     }

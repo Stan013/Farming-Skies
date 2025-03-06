@@ -60,7 +60,7 @@ public class TimeManager : MonoBehaviour
 
     public string CheckDate()
     {
-        if(cardDates.Exists(UpdateDate() => UpdateDate()))
+        if(cardDates.Exists(date => date == UpdateDate()))
         {
             string cardDate = cardDates[cardDateIndex];
             cardDateIndex++;
@@ -68,7 +68,7 @@ public class TimeManager : MonoBehaviour
         }
         else
         {
-            if (taxDates.Exists(UpdateDate() => UpdateDate()))
+            if (taxDates.Exists(date => date == UpdateDate()))
             {
                 string taxDate = taxDates[taxDateIndex];
                 taxDateIndex++;

@@ -50,17 +50,27 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 4:
                 GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateTutorial("Check your expenses!", "Now use your mouse again and <b>left click</b> the green label that shows your tax. Here you can see what your expenses are.");
+                UpdateTutorial("Check your expenses!", "Now use your mouse again and <b>left click</b> on the green label that shows your expenses. Here you can see what your need to pay for.");
                 break;
             case 5:
                 GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateTutorial("Check your expenses!", "Now use your mouse again and <b>left click</b> the green label that shows your tax. Here you can see what your expenses are.");
+                UpdateTutorial("Check upcoming events!", "Do the same thing again and <b>left click</b> on the green label that shows the date. Here you can see all the events each month.");
                 break;
-                /*case 2:
-                    GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                    UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building things. Open your UI menu by <b>left clicking</b> on the green button on the left side off your screen. Now <b>left click</b> on your expenses and you will be able to see how much you need to pay and for what. Then if you <b>left click</b> on the date you can see when you need to pay to make sure your farm survives.");
-                    break;
-                case 3:
+            case 6:
+                GameManager.HM.SetStartingHand();
+                Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
+                cardCultivator.GetComponent<Image>().color = Color.green;
+                cardCultivator.GetComponent<CardDrag>().enabled = true;
+                UpdateTutorial("Start cultivating!", "It is time to start getting your land ready for planting. <b>Hover</b> over the green highlighted card and then <b>hold left mouse button down</b> and move towards your land.");
+                break;
+            case 7:
+                Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
+                cardWateringCan.GetComponent<Image>().color = Color.green;
+                cardWateringCan.GetComponent<CardDrag>().enabled = true;
+                UpdateTutorial("Start watering!", "It is time to start getting your land ready for planting. <b>Hover</b> over the green highlighted card and then <b>hold left mouse button down</b> and move towards your land.");
+                break;
+
+                /*case 3:
                     GameManager.HM.SetStartingHand();
                     Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
                     cardCultivator.GetComponent<Image>().color = Color.green;

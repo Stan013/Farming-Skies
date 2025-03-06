@@ -40,7 +40,7 @@ public class GameData
 
     public GameData()
     {
-        tax = 100f;
+        tax = 0f;
         balance = 500f;
         water = 25;
         fertilizer = 25;

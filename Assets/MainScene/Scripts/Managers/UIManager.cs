@@ -50,14 +50,16 @@ public class UIManager : MonoBehaviour, IDataPersistence
     {
         if (!UIActive)
         {
-            openUIText.SetText("<");
-            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-565, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
+            openUIText.SetText("v");
+            openUIText.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, -90f);
+            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
             UIMenu.SetActive(true);
             UIActive = true;
         }
         else
         {
-            openUIText.SetText(">");
+            openUIText.SetText("v");
+            openUIText.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, 90f);
             openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-930, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
             UIMenu.SetActive(false);
             UIActive = false;
@@ -72,8 +74,9 @@ public class UIManager : MonoBehaviour, IDataPersistence
     {
         if (!questActive)
         {
-            openQuestText.SetText("ʌ");
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 250);
+            openQuestText.SetText("v");
+            openQuestText.GetComponent<RectTransform>().rotation = Quaternion.Euler(0f, 0f, 180f);
+            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 270);
             GameManager.QM.questMenu.SetActive(true);
             questActive = true;
         }

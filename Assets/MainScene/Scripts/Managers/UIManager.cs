@@ -22,14 +22,14 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public Button closeButton;
 
     [Header("Game variables")]
-    public float tax;
+    public float expense;
     public float money;
     public int water;
     public int fertilizer;
 
     [Header("Game variables text")]
-    public TMP_Text taxAmountText;
-    public TMP_Text balanceAmountText;
+    public TMP_Text expenseAmountText;
+    public TMP_Text moneyAmountText;
     public TMP_Text waterAmountText;
     public TMP_Text cardAmountText;
     public TMP_Text dateAmountText;
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     [Header("UI Island builder")]
     public TMP_Text buildCostText;
-    public TMP_Text taxCostText;
+    public TMP_Text expenseCostText;
     public Slider transparencySlider;
     public Image constructionLabel;
 
@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (!UIActive)
         {
             openUIText.SetText("<");
-            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-470, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
+            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-565, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
             UIMenu.SetActive(true);
             UIActive = true;
         }
@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (!questActive)
         {
             openQuestText.SetText("ʌ");
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 275);
+            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 250);
             GameManager.QM.questMenu.SetActive(true);
             questActive = true;
         }
@@ -93,8 +93,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void UpdateUI()
     {
         dateAmountText.SetText(GameManager.TM.UpdateDate());
-        taxAmountText.SetText(tax.ToString() + " ₴");
-        balanceAmountText.SetText(money.ToString() + " ₴");
+        expenseAmountText.SetText(expense.ToString() + " ₴");
+        moneyAmountText.SetText(money.ToString() + " ₴");
         waterAmountText.SetText(water.ToString() + " L");
         fertilizerAmountText.SetText(fertilizer.ToString() + " L");
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
@@ -103,7 +103,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void SetBuildIslandSlider()
     {
         buildCostText.SetText(GameManager.IPM.clickedIsland.islandBuildCost.ToString());
-        taxCostText.SetText(GameManager.IPM.clickedIsland.islandTaxCost.ToString());
+        expenseCostText.SetText(GameManager.IPM.clickedIsland.islandTaxCost.ToString());
         if (constructionLabel != null)
         {
             Vector2 mousePosition = Input.mousePosition;
@@ -124,7 +124,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
                 island.sign.SetActive(true);
                 island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
                 money -= island.islandBuildCost;
-                tax += island.islandTaxCost;
+                expense += island.islandTaxCost;
                 GameManager.ISM.AddIslandToBought(island);
                 island.islandBought = true;
                 constructionLabel.gameObject.SetActive(false);
@@ -135,7 +135,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        tax = data.tax;
+        expense = data.tax;
         money = data.balance;
         water = data.water;
         fertilizer = data.fertilizer;
@@ -143,7 +143,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.tax = tax;
+        data.tax = expense;
         data.balance = money;
         data.water = water;
         data.fertilizer = fertilizer;

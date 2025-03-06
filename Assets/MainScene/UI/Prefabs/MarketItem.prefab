@@ -3034,7 +3034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelling: 0
-  m_InputAmount: {fileID: 2467763101652672872}
+  inputAmount: {fileID: 0}
   transactionButton: {fileID: 2448186398619595225}
   plusButton: {fileID: 5010445188955402258}
   minusButton: {fileID: 1924067320289060023}
@@ -3449,8 +3449,6 @@ MonoBehaviour:
   pricelow7dText: {fileID: 8389852780128502671}
   demandText: {fileID: 1700534454074281098}
   supplyText: {fileID: 3393199721905419886}
-  sellButton: {fileID: 7220060980456438539}
-  buyButton: {fileID: 3897243232652388996}
   priceCurrent: 0
   pricehigh3d: 0
   pricelow3d: 0
@@ -3458,10 +3456,8 @@ MonoBehaviour:
   pricelow5d: 0
   pricehigh7d: 0
   pricelow7d: 0
-  minSellButton: {fileID: 3087895660539109851}
-  minusSellButton: {fileID: 5229994387371308344}
-  plusSellButton: {fileID: 1706768039947116957}
-  maxSellButton: {fileID: 8955100483677995251}
+  sellUI: {fileID: 7220060980456438539}
+  buyUI: {fileID: 3897243232652388996}
 --- !u!222 &5386971118330595215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7166,7 +7162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelling: 1
-  m_InputAmount: {fileID: 8077281043395850471}
+  inputAmount: {fileID: 0}
   transactionButton: {fileID: 8349306102371852374}
   plusButton: {fileID: 1706768039947116957}
   minusButton: {fileID: 5229994387371308344}

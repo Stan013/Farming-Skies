@@ -45,7 +45,7 @@ public class QuestManager : MonoBehaviour
                 {
                     questCompletedIcon.gameObject.SetActive(false);
                     questMenuImage.color = new Color(0.9f, 0.9f, 0.9f, 0.8f);
-                    GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+                    GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 }
             }
         }
@@ -76,7 +76,19 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 4:
-                    if (GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color == Color.white)
+                    if (GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color == Color.white)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 5:
+                    if (GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color == Color.white)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 6:
+                    if (GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color == Color.white)
                     {
                         QuestCompleted = true;
                     }

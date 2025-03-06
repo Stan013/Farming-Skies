@@ -49,12 +49,14 @@ public class TutorialManager : MonoBehaviour
                 UpdateTutorial("Look at your stats!", "Use your mouse and <b>left click</b> on the highlighted green button at the left side off your screen. To see all the stats of your farm.");
                 break;
             case 4:
-                GameManager.UM.taxAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                UpdateTutorial("Check your expenses!", "Now use your mouse again and <b>left click</b> the green label that shows your tax. Here you can see what your expenses are.");
+                break;
+            case 5:
+                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 UpdateTutorial("Check your expenses!", "Now use your mouse again and <b>left click</b> the green label that shows your tax. Here you can see what your expenses are.");
                 break;
                 /*case 2:
-
-
                     GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                     UpdateQuest("Watch your expenses!", "Your expenses will go up by having more land and by building things. Open your UI menu by <b>left clicking</b> on the green button on the left side off your screen. Now <b>left click</b> on your expenses and you will be able to see how much you need to pay and for what. Then if you <b>left click</b> on the date you can see when you need to pay to make sure your farm survives.");
                     break;

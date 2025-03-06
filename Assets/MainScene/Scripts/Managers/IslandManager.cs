@@ -18,6 +18,10 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public Material wateredMat;
     public Material wateredNeedsNPKMat;
 
+    public GameObject islandExpenseContent;
+    public GameObject buildableExpenseContent;
+    public ExpenseItem expenseItem;
+
     public void SetIslands()
     {
         foreach(Transform islandRing in availableIslandsParent)
@@ -52,16 +56,12 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     public void AddIslandToBought(Island reconstructedIsland)
     {
-        if(GameManager.TTM.tutorial)
-        {
-            if(reconstructedIsland.name == "0,0" || reconstructedIsland.name == "-1,0")
-            {
-                //GameManager.TTM.QuestCompleted = true;
-            }
-        }
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
         boughtIslands.Add(reconstructedIsland);
         unboughtIslands.Remove(reconstructedIsland);
+        ExpenseItem islandExpense = Instantiate(expenseItem, Vector3.zero, Quaternion.identity);
+        islandExpense.SetupIslandExpense(reconstructedIsland);
+        islandExpense.transform.SetParent(islandExpenseContent.transform, false);
     }
 
     public void SetCollisions(string cardType)

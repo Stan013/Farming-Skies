@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,10 @@ public class TimeManager : MonoBehaviour
     public List<int> date;
     public string dayText;
     public string monthText;
+    public List<string> cardDates;
+    public int cardDateIndex = 1;
+    public List<string> taxDates;
+    public int taxDateIndex;
 
     public string UpdateDate()
     {
@@ -54,6 +57,30 @@ public class TimeManager : MonoBehaviour
         }
         GameManager.UM.UpdateUI();
     }
+
+    public string CheckDate()
+    {
+        if(cardDates.Exists(UpdateDate() => UpdateDate()))
+        {
+            string cardDate = cardDates[cardDateIndex];
+            cardDateIndex++;
+            return cardDate;
+        }
+        else
+        {
+            if (taxDates.Exists(UpdateDate() => UpdateDate()))
+            {
+                string taxDate = taxDates[taxDateIndex];
+                taxDateIndex++;
+                return taxDate;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
     public void LoadData(GameData data)
     {
         for (int i = 0; i < date.Count; i++)

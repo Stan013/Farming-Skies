@@ -11,6 +11,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public Island hoverIsland;
     private Island previousHoverIsland;
     public GameObject hoverPlot;
+    public GameObject previousHoverPlot;
     private bool collisionOn = false;
     private Quaternion dragInstanceRotation;
 
@@ -92,8 +93,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                             case "PlantBig":
                                 GameManager.ISM.SetCollisions("PlantBig");
                                 break;
-                            case "Machine":
-                                GameManager.ISM.SetCollisions("Machine");
+                            case "Buildable":
+                                GameManager.ISM.SetCollisions("Buildable");
                                 break;
 
                         }
@@ -105,14 +106,24 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     }
                     if (CheckPotentialPlot() != null)
                     {
-                        BoxCollider plotCollider = CheckPotentialPlot().GetComponent<BoxCollider>();
+                        if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
+                        {
+                            previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+                        }
+                        hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+                        BoxCollider plotCollider = hoverPlot.GetComponent<BoxCollider>();
                         BoxCollider dragInstanceCollider = dragInstance.GetComponent<BoxCollider>();
                         Vector3 plotCenter = plotCollider.transform.position + plotCollider.center;
                         Vector3 dragInstanceCenterOffset = dragInstanceCollider.center;
                         dragInstance.transform.position = new Vector3(plotCenter.x - dragInstanceCenterOffset.x, plotCollider.bounds.max.y, plotCenter.z - dragInstanceCenterOffset.z);
+                        previousHoverPlot = hoverPlot;
                     }
                     else
                     {
+                        if(hoverPlot != null)
+                        {
+                            hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+                        }
                         return;
                     }
                     break;
@@ -130,10 +141,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             if (GameManager.HM.dragCard.cardName == "Watering Can")
             {
                 GameManager.ISM.CheckPotentialIsland().water += 50;
-            }
-            if (GameManager.TTM.tutorialCount == 3 || GameManager.TTM.tutorialCount == 4)
-            {
-                //GameManager.TTM.QuestCompleted = true;
             }
             GameManager.HM.dragCard.dragSucces = true;
             GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
@@ -165,21 +172,13 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
             if (CheckPotentialPlot() != null)
             {
+                CheckPotentialPlot().transform.GetChild(0).gameObject.SetActive(false);
                 GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity);
                 plant.transform.SetParent(hoverPlot.transform);
                 plant.transform.localPosition = new Vector3(0, -0.25f, 0);
                 hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
                 GameManager.HM.dragCard.dragSucces = true;
                 GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
-
-                if (GameManager.TTM.tutorialCount == 6)
-                {
-                    //GameManager.TTM.QuestCompleted = true;
-                }
-                if (GameManager.TTM.tutorialCount == 7 && GameManager.HM.cardsInHand.Count == 0)
-                {
-                    //GameManager.TTM.QuestCompleted = true;
-                }
             }
             else
             {

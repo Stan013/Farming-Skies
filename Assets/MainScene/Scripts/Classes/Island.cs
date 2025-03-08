@@ -110,10 +110,6 @@ public class Island : MonoBehaviour
                 bottomMat.color = bottomColor;
                 break;
             case IslandState.Watered:
-                if (islandID == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 4)
-                {
-                    //GameManager.TTM.QuestCompleted = true;
-                }
                 if (needsNPK)
                 {
                     islandMat = GameManager.ISM.wateredNeedsNPKMat;
@@ -134,10 +130,6 @@ public class Island : MonoBehaviour
                 }
                 break;
             case IslandState.Cultivated:
-                if(islandID == "Island(0,0)Ring1" && GameManager.TTM.tutorialCount == 3)
-                {
-                    //GameManager.TTM.QuestCompleted = true;
-                }
                 if (needsNPK)
                 {
                     islandMat = GameManager.ISM.cultivatedNeedsNPKMat;

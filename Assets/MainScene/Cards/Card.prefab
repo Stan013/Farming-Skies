@@ -339,6 +339,7 @@ MonoBehaviour:
   dragModel: {fileID: 5008466887595670994, guid: 1ba6689f77a1e0445ba690115e1b5d33, type: 3}
   hoverIsland: {fileID: 0}
   hoverPlot: {fileID: 0}
+  previousHoverPlot: {fileID: 0}
 --- !u!114 &639138604516858679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +347,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429639242857497370}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd8ce50ca83e44140a34986935f7c170, type: 3}
   m_Name: 
@@ -1772,6 +1773,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8572377007967295450}
     m_Modifications:
+    - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Color.b
       value: 0.9058824

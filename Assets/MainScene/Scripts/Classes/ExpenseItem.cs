@@ -11,11 +11,13 @@ public class ExpenseItem : MonoBehaviour
     public TMP_Text islandCost;
     public TMP_Text buildableName;
     public TMP_Text buildableCost;
+    public int expenseIndex;
 
     public void SetupIslandExpense(Island island)
     {
+        expenseIndex++;
         UIstats.islandTotal += island.islandTaxCost;
-        islandName.text = "Island (" + island.name + ")";
+        islandName.text = expenseIndex.ToString() + ".         Island (" + island.name + "):";
         islandCost.text = island.islandTaxCost + " ₴";
     }
 

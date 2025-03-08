@@ -46,7 +46,7 @@ public class DataPersistenceManager : MonoBehaviour
         else
         {
             GameManager.HM.SetStartingHand();
-            GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
+            GameManager.UM.SetUIButtons(true, GameManager.UM.UIbutton.GetComponent<Button>());
         }
         GameManager.ISM.SetIslands();
         GameManager.CM.SetupCards();

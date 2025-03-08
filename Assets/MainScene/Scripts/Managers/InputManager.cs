@@ -24,17 +24,23 @@ public class InputManager : MonoBehaviour
     private bool buildIslandPress = false;
     private float holdTimer = 0.0f;
 
-    public float doubleClickTime = 0.5f;
-    private float lastClickTime;
-    public UnityEvent onDoubleClick;
+    private bool isHoldingSpace = false;
+    private float spaceHoldTimer = 0.0f;
+
+    public bool defaultModeEnabled;
+    public bool manageModeEnabled;
+    public bool inventoryModeEnabled;
+    public bool craftModeEnabled;
+    public bool marketModeEnabled;
+    public bool timeModeEnabled;
 
     public void HandleGameStatesSwitchInput()
     {
         if(!GameManager.HM.dragging)
         {
-            if (Input.GetKeyDown(KeyCode.Tab)) //No WASD movement and visible mouse
+            if (Input.GetKeyDown(KeyCode.Q) && manageModeEnabled) //No WASD movement and visible mouse
             {
-                if (GameManager.CurrentState == GameManager.GameState.ManageMode)
+                if (GameManager.CurrentState == GameManager.GameState.ManageMode && defaultModeEnabled)
                 {
                     ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode); //Switch back to default
                 }
@@ -54,9 +60,9 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.SettingsMode, GameManager.GameState.Default); //Switch to settings mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E)) //No WASD movement and only inventory window
+            if (Input.GetKeyDown(KeyCode.E) && inventoryModeEnabled) //No WASD movement and only inventory window
             {
-                if (GameManager.CurrentState == GameManager.GameState.InventoryMode)
+                if (GameManager.CurrentState == GameManager.GameState.InventoryMode && defaultModeEnabled)
                 {
                     ToggleState(GameManager.GameState.Default, GameManager.GameState.InventoryMode); //Switch back to default
                 }
@@ -65,9 +71,9 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.InventoryMode, GameManager.GameState.Default); //Switch to inventory mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Q)) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.R) && marketModeEnabled) //No WASD movement and only market window
             {
-                if (GameManager.CurrentState == GameManager.GameState.MarketMode)
+                if (GameManager.CurrentState == GameManager.GameState.MarketMode && defaultModeEnabled)
                 {
                     ToggleState(GameManager.GameState.Default, GameManager.GameState.MarketMode); //Switch back to default
                 }
@@ -76,9 +82,9 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.MarketMode, GameManager.GameState.Default); //Switch to market mode
                 }
             }
-            if (Input.GetKeyDown(KeyCode.C)) //No WASD movement and only market window
+            if (Input.GetKeyDown(KeyCode.C) && craftModeEnabled) //No WASD movement and only market window
             {
-                if (GameManager.CurrentState == GameManager.GameState.CraftMode)
+                if (GameManager.CurrentState == GameManager.GameState.CraftMode && defaultModeEnabled)
                 {
                     ToggleState(GameManager.GameState.Default, GameManager.GameState.CraftMode); //Switch back to default
                 }
@@ -129,6 +135,24 @@ public class InputManager : MonoBehaviour
         rb.velocity = smoothMoveDirection * moveSpeed;
     }
 
+    private void NextWeekInput()
+    {
+        if (Input.GetKey(KeyCode.Space) && timeModeEnabled)
+        {
+            spaceHoldTimer += Time.deltaTime;
+            if (spaceHoldTimer >= 2f && !isHoldingSpace)
+            {
+                isHoldingSpace = true;
+                ToggleState(GameManager.GameState.TimeMode, GameManager.GameState.Default);
+            }
+        }
+        else
+        {
+            spaceHoldTimer = 0f;
+            isHoldingSpace = false;
+        }
+    }
+
     public void HandleMouseInput(GameManager.GameState state)
     {
         switch (state)
@@ -138,10 +162,12 @@ public class InputManager : MonoBehaviour
             case GameManager.GameState.Default:
                 MovementMouse();
                 MouseZoom();
+                NextWeekInput();
                 break;
             case GameManager.GameState.ManageMode:
                 DefaultMouse();
                 MouseZoom();
+                NextWeekInput();
                 break;
             case GameManager.GameState.InventoryMode:
                 break;
@@ -157,8 +183,12 @@ public class InputManager : MonoBehaviour
     private void DefaultMouse()
     {
         if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit) //Hold to build island
-            && hit.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
+            && hit.transform.GetComponent<Island>() != null)
         {
+            if(GameManager.HM.cardsInHand.Count != 0 && Input.mousePosition.y < inventoryHeight)
+            {
+                return;
+            }
             clickedIsland = GameManager.ISM.GetClickedIsland();
             if (GameManager.UM.money >= clickedIsland.islandBuildCost && clickedIsland.islandBought == false && clickedIsland.islandAvailable)
             {
@@ -169,29 +199,6 @@ public class InputManager : MonoBehaviour
                     buildIslandPress = true;
                     GameManager.UM.SetBuildIslandSlider();
                 }
-            }
-        }
-
-        if (Input.GetMouseButtonUp(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitIsland) //Island nutrients inspection
-           && hitIsland.transform.GetComponent<Island>() != null && Input.mousePosition.y >= inventoryHeight)
-        {
-            if (hitIsland.transform.GetComponent<Island>().islandBought)
-            {
-                if (Time.time - lastClickTime < doubleClickTime)
-                {
-                    if(GameManager.TTM.tutorial)
-                    {
-                        if(GameManager.TTM.tutorialCount > 9)
-                        {
-                            MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
-                        }
-                    }
-                    else
-                    {
-                        MoveCameraToIsland(hitIsland.transform.GetComponent<Island>());
-                    }
-                }
-                lastClickTime = Time.time;
             }
         }
 
@@ -243,42 +250,6 @@ public class InputManager : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         mainCamera.fieldOfView -= scroll * zoomSpeed;
         mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, minFOV, maxFOV);
-    }
-
-    private void MoveCameraToIsland(Island island)
-    {
-        if (GameManager.TTM.tutorialCount == 10 || GameManager.TTM.tutorialCount == 16)
-        {
-            //GameManager.TTM.QuestCompleted = true;
-        }
-
-        Vector3 targetPosition = new Vector3(island.transform.position.x + 4, 5, island.transform.position.z + 4);
-        Quaternion targetRotation = Quaternion.Euler(5, -135, 0);
-
-        StartCoroutine(SmoothMoveAndRotate(mainCamera.transform, targetPosition, targetRotation, 5f));
-    }
-
-    private IEnumerator SmoothMoveAndRotate(Transform cameraTransform, Vector3 targetPos, Quaternion targetRot, float speed)
-    {
-        Vector3 startPos = cameraTransform.position;
-        Quaternion startRot = cameraTransform.rotation;
-
-        float journey = 0f;
-        float duration = Vector3.Distance(startPos, targetPos) / speed;
-
-        while (journey < duration)
-        {
-            journey += Time.deltaTime;
-            float t = journey / duration;
-
-            cameraTransform.position = Vector3.Lerp(startPos, targetPos, t);
-            cameraTransform.rotation = Quaternion.Lerp(startRot, targetRot, t);
-
-            yield return null;
-        }
-
-        cameraTransform.position = targetPos;
-        cameraTransform.rotation = targetRot;
     }
 
     private bool IsFacingWall(Vector3 direction)

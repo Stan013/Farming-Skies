@@ -339,10 +339,6 @@ public class CraftManager : MonoBehaviour
                 GameManager.CRM.craftUI.maxButton.enabled = false;
                 GameManager.CRM.craftUI.craftAmountInput.enabled = false;
                 GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
-                if(GameManager.TTM.tutorialCount == 13)
-                {
-                    //GameManager.TTM.QuestCompleted = true;
-                }
             }
         }
         else
@@ -355,10 +351,6 @@ public class CraftManager : MonoBehaviour
             GameManager.CRM.craftUI.maxButton.enabled = true;
             GameManager.CRM.craftUI.craftAmountInput.enabled = true;
             GameManager.CRM.craftUI.plusButton.GetComponent<Image>().color = Color.white;
-        }
-        if(craftedPhosphorus && craftedPotassium && GameManager.TTM.tutorialCount == 15)
-        {
-            //GameManager.TTM.QuestCompleted = true;
         }
     }
 }

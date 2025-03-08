@@ -29,15 +29,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private static GameObject staticGameMenu;
     public enum GameMode
     {
-        Default,
         Campaign,
-        Freeplay,
+        Creative,
+        Scenario,
     }
-    public static GameMode CurrentMode { get; private set; }
+    public static GameMode CurrentMode { get; set; }
     public enum GameState
     {
         MainMenuMode,
         SettingsMode,
+        TimeMode,
         Default,
         ManageMode,
         InventoryMode,
@@ -94,16 +95,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         if (CurrentState != GameState.MainMenuMode) 
         {
-            IPM.HandleGameStatesSwitchInput();
-            IPM.HandleKeyboardInput(CurrentState);
-            IPM.HandleMouseInput(CurrentState);
-            QM.QuestCheck();
-            if(TTM.tutorialCount == 11)
+            if(CurrentState != GameState.TimeMode)
             {
-                if(cam.transform.position.y > 7)
-                {
-                    //TTM.QuestCompleted = true;
-                }
+                TM.RotateSky(1f);
+                IPM.HandleGameStatesSwitchInput();
+                IPM.HandleKeyboardInput(CurrentState);
+                IPM.HandleMouseInput(CurrentState);
+                QM.QuestCheck();
+            }
+            else
+            {
+                TM.RotateSky(30f);
             }
         }
     }
@@ -127,6 +129,19 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 break;
             case GameState.SettingsMode:
                 break;
+            case GameState.TimeMode:
+                TM.timeWindow.SetActive(true);
+                cam.transform.position = new Vector3(30f, 15f, -30f);
+                cam.transform.rotation =  Quaternion.Euler(0f, -45f, 0f);
+                UM.UIbutton.gameObject.SetActive(false);
+                UM.questButton.gameObject.SetActive(false);
+                UM.nextWeekButton.SetActive(false);
+                UM.modeIndicator.gameObject.SetActive(false);
+                PM.Harvest(); //Includes water and nutrients check
+                MM.UpdatePrices(); // Includes Market Update
+                TM.StartWeekCycle();
+                UM.UpdateUI();
+                break;
             case GameState.Default:
                 UM.modeIndicator.sprite = UM.modeIcons[0];
                 Cursor.visible = false;
@@ -139,14 +154,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 SM.GeneratePickWindow();
                 break;
             case GameState.InventoryMode:
+                UM.openButton.ChangeMode("Inventory");
                 UM.modeIndicator.sprite = UM.modeIcons[2];
                 INM.UpdateInventoryItems();
                 break;
             case GameState.CraftMode:
+                UM.openButton.ChangeMode("Crafting");
                 UM.modeIndicator.sprite = UM.modeIcons[3];
                 CRM.SetupCraftingMode();
                 break;
             case GameState.MarketMode:
+                UM.openButton.ChangeMode("Market");
                 UM.modeIndicator.sprite = UM.modeIcons[4];
                 MM.UpdateMarketItems();
                 break;
@@ -165,23 +183,26 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 IPM.rb.angularVelocity = Vector3.zero;
                 Cursor.visible = true;
                 break;
-            case GameState.ManageMode:
-                break;
             case GameState.SettingsMode:
+                break;
+            case GameState.TimeMode:
+                cam.transform.position = staticPos;
+                TM.timeWindow.SetActive(false);
+                UM.UIbutton.gameObject.SetActive(true);
+                UM.questButton.gameObject.SetActive(true);
+                UM.nextWeekButton.SetActive(true);
+                UM.modeIndicator.gameObject.SetActive(true);
                 break;
             case GameState.SelectionMode:
                 break;
             case GameState.InventoryMode:
-                UM.closeButton.GetComponent<CloseButton>().closeWindow = INM.inventoryWindow;
-                UM.closeButton.GetComponent<CloseButton>().OnButtonClick();
+                UM.closeButton.GetComponent<CloseWindowButton>().ChangeModeToDefault();
                 break;
             case GameState.MarketMode:
-                UM.closeButton.GetComponent<CloseButton>().closeWindow = MM.marketWindow;
-                UM.closeButton.GetComponent<CloseButton>().OnButtonClick();
+                UM.closeButton.GetComponent<CloseWindowButton>().ChangeModeToDefault();
                 break;
             case GameState.CraftMode:
-                UM.closeButton.GetComponent<CloseButton>().closeWindow = CRM.craftWindow;
-                UM.closeButton.GetComponent<CloseButton>().OnButtonClick();
+                UM.closeButton.GetComponent<CloseWindowButton>().ChangeModeToDefault();
                 DM.CheckRefillHand();
                 break;
         }

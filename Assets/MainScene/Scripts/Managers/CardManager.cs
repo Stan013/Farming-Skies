@@ -29,23 +29,6 @@ public class CardManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void CheckCardInspectTutorial(Card card)
-    {
-        if(GameManager.TTM.tutorialCount == 5)
-        {
-            if (!card.hasBeenInspected)
-            {
-                card.hasBeenInspected = true;
-                inspectedCards.Add(card);
-                card.GetComponent<Image>().color = new Color(0.735f, 0.735f, 0.735f);
-            }
-            if (inspectedCards.Count == 4)
-            {
-                //GameManager.TTM.QuestCompleted = true;
-            }
-        }
-    }
-
     public void InitializeCard(Card card)
     {
         card.cardImage.GetComponent<Image>().sprite = card.cardSprite;
@@ -60,15 +43,6 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.potassiumText.SetText(dragPlant.potassium.ToString() + " L");
             card.waterText.SetText(dragPlant.water.ToString() + " L");
             card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
-
-            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount > 6)
-            {
-                card.GetComponent<CardDrag>().enabled = true;
-            }
-            else
-            {
-                card.GetComponent<CardDrag>().enabled = false;
-            }
         }
         else
         {   

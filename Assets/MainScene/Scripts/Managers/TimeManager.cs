@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class TimeManager : MonoBehaviour
@@ -9,58 +9,60 @@ public class TimeManager : MonoBehaviour
     public string dayText;
     public string monthText;
     public List<string> cardDates;
-    public int cardDateIndex = 1;
+    public int cardDateIndex;
     public List<string> taxDates;
     public int taxDateIndex;
+    public List<string> refillDates;
+    public int refillDateIndex;
+    public int[] daysInMonth = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    public TMP_Text dateText;
+    private int daysPassed;
+    public GameObject timeWindow;
 
-    public string UpdateDate()
+    public string GetDate()
     {
-        if(date[0] <= 9)
-        {
-            dayText = "0" + date[0].ToString();
-        }
-        else
-        {
-            dayText = date[0].ToString();
-        }
-
-        if(date[1] <= 9)
-        {
-            monthText = "0" + date[1].ToString();
-        }
-        else
-        {
-            monthText = date[1].ToString();
-        }
-
+        if (date[0] <= 9) dayText = "0" + date[0].ToString();
+        else dayText = date[0].ToString();
+        if (date[1] <= 9) monthText = "0" + date[1].ToString();
+        else monthText = date[1].ToString();
         return dayText + "-" + monthText + "-" + date[2].ToString();
     }
 
-    public void NextDay()
+    public void StartWeekCycle()
     {
-        if(date[0] < 30)
+        StartCoroutine(CycleDays());
+    }
+
+    private IEnumerator CycleDays()
+    {
+        while (daysPassed < 8)
         {
-            date[0] += 1;
-        }
-        else
-        {
-            date[0] = 1;
-            if(date[1] < 12)
+            dateText.text = GetDate();
+            date[0]++;
+            if (date[0] > daysInMonth[date[1]])
             {
-                date[1] += 1;
+                date[0] = 1;
+                date[1]++;
+                if (date[1] > 12)
+                {
+                    date[1] = 1;
+                    date[2]++;
+                }
             }
-            else
-            {
-                date[1] = 1;
-                date[2] += 1;
-            }
+            yield return new WaitForSeconds(1f);
+            daysPassed++;
         }
-        GameManager.UM.UpdateUI();
+        GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
+    }
+
+    public void RotateSky(float skyRotationSpeed)
+    {
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyRotationSpeed);
     }
 
     public string CheckDate()
     {
-        if(cardDates.Exists(date => date == UpdateDate()))
+        if (cardDates.Exists(date => date == GetDate()))
         {
             string cardDate = cardDates[cardDateIndex];
             cardDateIndex++;
@@ -68,7 +70,7 @@ public class TimeManager : MonoBehaviour
         }
         else
         {
-            if (taxDates.Exists(date => date == UpdateDate()))
+            if (taxDates.Exists(date => date == GetDate()))
             {
                 string taxDate = taxDates[taxDateIndex];
                 taxDateIndex++;
@@ -76,7 +78,16 @@ public class TimeManager : MonoBehaviour
             }
             else
             {
-                return null;
+                if (refillDates.Exists(date => date == GetDate()))
+                {
+                    string refillDate = refillDates[refillDateIndex];
+                    refillDateIndex++;
+                    return refillDate;
+                }
+                else
+                {
+                    return cardDates[0];
+                }
             }
         }
     }

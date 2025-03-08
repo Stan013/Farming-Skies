@@ -26,11 +26,6 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
                 GameManager.CRM.craftButtonText.SetText("Card crafted");
                 GameManager.CRM.craftSuccess = true;
-                if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 14)
-                {
-                    GameManager.CRM.selectedCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f);
-                    //GameManager.TTM.QuestCompleted = true;
-                }
             }
         }
     }
@@ -72,11 +67,6 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 GameManager.CRM.craftUI.craftResources.Clear();
                 GameManager.CRM.craftButton.GetComponent<Image>().color = Color.red;
                 GameManager.CRM.craftButtonText.SetText("Unsuccessful");
-                if (GameManager.TTM.tutorialCount == 14 || GameManager.TTM.tutorialCount == 15)
-                {
-                    GameManager.CRM.SetCardCraftAmount(1);
-                    GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
-                }
             }
             else
             {

@@ -6,9 +6,7 @@ using TMPro;
 
 public class UIStatButton : MonoBehaviour
 {
-    public GameObject infoMenu;
     public string previousAction;
-
     public GameObject expenseIslandInfo;
     public TMP_Text islandTotalText;
     public int islandTotal;
@@ -21,7 +19,7 @@ public class UIStatButton : MonoBehaviour
 
     public void OpenInfoMenu(string action)
     {
-        if (infoMenu.activeSelf && previousAction == action)
+        if (GameManager.UM.infoMenu.activeSelf && previousAction == action)
         {
             CloseInfoMenu(action);
         }
@@ -33,7 +31,7 @@ public class UIStatButton : MonoBehaviour
                 expenseBuildableInfo.SetActive(false);
                 dateInfo.SetActive(false);
             }
-            infoMenu.SetActive(true);
+            GameManager.UM.infoMenu.SetActive(true);
         }
 
         switch (action)
@@ -62,7 +60,7 @@ public class UIStatButton : MonoBehaviour
 
     public void CloseInfoMenu(string action)
     {
-        infoMenu.SetActive(false);
+        GameManager.UM.infoMenu.SetActive(false);
         switch (action)
         {
             case "Date":

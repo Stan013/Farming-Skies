@@ -115,7 +115,6 @@ public class HandManager : MonoBehaviour, IDataPersistence
         card.transform.localScale = Vector3.one;
     }
 
-
     public void HideCardsInHand(bool hidden)
     {
         foreach(Card card in cardsInHand)

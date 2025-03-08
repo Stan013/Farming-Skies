@@ -56,7 +56,7 @@ public class MarketManager : MonoBehaviour
 
     public void UpdatePrices()
     {
-        if(GameManager.TM.UpdateDate() != "01-01-2025")
+        if(GameManager.TM.GetDate() != "01-01-2025")
         {
             foreach (MarketItem item in itemsInMarket)
             {
@@ -107,10 +107,6 @@ public class MarketManager : MonoBehaviour
         }
         if (isSelling)
         {
-            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 19)
-            {
-                //GameManager.TTM.QuestCompleted = true;
-            }
             amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
             marketItem.attachedItemCard.itemQuantity -= amount;
             float totalEarned = amount * marketItem.priceCurrent;

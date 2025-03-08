@@ -110,7 +110,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                     }
                 }
                 break;
-            case "Machine":
+            case "Buildable":
                 foreach (Island island in boughtIslands)
                 {
                     island.GetComponent<BoxCollider>().enabled = false;

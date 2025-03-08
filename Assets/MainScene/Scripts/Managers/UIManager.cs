@@ -8,18 +8,20 @@ public class UIManager : MonoBehaviour, IDataPersistence
 {
     [Header("Menu objects")]
     public GameObject UIMenu;
+    public GameObject infoMenu;
 
-    [Header("UI Buttons")]
+    [Header("Mode objects")]
     public Image modeIndicator;
     public Sprite[] modeIcons;
-    public bool UIActive = false;
-    public Button openUIButton;
-    public TMP_Text openUIText;
-    public bool questActive = false;
-    public Button openQuestButton;
-    public TMP_Text openQuestText;
-    public Button nextDayButton;
-    public Button closeButton;
+
+    [Header("UI Buttons")]
+    public OpenUIButton UIbutton;
+    public OpenQuestButton questButton;
+    public GameObject nextWeekButton;
+
+    [Header("Window Buttons")]
+    public OpenWindowButton openButton;
+    public CloseWindowButton closeButton;
 
     [Header("Game variables")]
     public float expense;
@@ -41,61 +43,20 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public Slider transparencySlider;
     public Image constructionLabel;
 
+    public void Start()
+    {
+        openButton = GetComponent<OpenWindowButton>();
+        closeButton = GetComponent<CloseWindowButton>();
+    }
+
     public void SetUIButtons(bool active, Button button)
     {
         button.interactable = active;
     }
 
-    public void OpenUIMenu()
-    {
-        if (!UIActive)
-        {
-            openUIText.SetText("v");
-            openUIText.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, -90f);
-            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
-            UIMenu.SetActive(true);
-            UIActive = true;
-        }
-        else
-        {
-            openUIText.SetText("v");
-            openUIText.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, 90f);
-            openUIButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-930, openUIButton.GetComponent<RectTransform>().anchoredPosition.y);
-            UIMenu.SetActive(false);
-            UIActive = false;
-        }
-        if (openUIButton.GetComponent<Image>().color == Color.green)
-        {
-            openUIButton.GetComponent<Image>().color = Color.white;
-        }
-    }
-
-    public void OpenQuestMenu()
-    {
-        if (!questActive)
-        {
-            openQuestText.SetText("v");
-            openQuestText.GetComponent<RectTransform>().rotation = Quaternion.Euler(0f, 0f, 180f);
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 270);
-            GameManager.QM.questMenu.SetActive(true);
-            questActive = true;
-        }
-        else
-        {
-            openQuestText.SetText("v");
-            openQuestButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(openQuestButton.GetComponent<RectTransform>().anchoredPosition.x, 510);
-            GameManager.QM.questMenu.SetActive(false);
-            questActive = false;
-        }
-        if (openQuestButton.GetComponent<Image>().color == Color.green)
-        {
-            openQuestButton.GetComponent<Image>().color = Color.white;
-        }
-    }
-
     public void UpdateUI()
     {
-        dateAmountText.SetText(GameManager.TM.UpdateDate());
+        dateAmountText.SetText(GameManager.TM.GetDate());
         expenseAmountText.SetText(expense.ToString() + " ₴");
         moneyAmountText.SetText(money.ToString() + " ₴");
         waterAmountText.SetText(water.ToString() + " L");

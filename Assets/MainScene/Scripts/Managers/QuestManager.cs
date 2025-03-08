@@ -70,7 +70,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 3:
-                    if (GameManager.UM.openUIButton.GetComponent<Image>().color == Color.white)
+                    if (GameManager.UM.UIbutton.GetComponent<Image>().color == Color.white)
                     {
                         QuestCompleted = true;
                     }
@@ -88,19 +88,76 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 6:
-                    if (GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color == Color.white)
-                    {
-                        QuestCompleted = true;
-                    }
-                    break;
-                case 7:
                     if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Cultivated)
                     {
                         QuestCompleted = true;
                     }
                     break;
-                case 8:
+                case 7:
                     if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Watered)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 8:
+                    if (GameManager.CM.inspectCard != null)
+                    {
+                        if(GameManager.CM.inspectCard.GetComponent<Image>().color == Color.green)
+                        {
+                            GameManager.CM.inspectCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f); // Gray
+                        }
+                    }
+                    if (GameManager.HM.FindCardInHandById("CardGreenBeanPlant").GetComponent<Image>().color != Color.green)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 9:
+                    if (GameManager.CM.inspectCard != null)
+                    {
+                        if (GameManager.CM.inspectCard.GetComponent<Image>().color == Color.green)
+                        {
+                            GameManager.CM.inspectCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f); // Gray
+                        }
+                    }
+                    if (GameManager.HM.FindCardInHandById("CardChivePlant").GetComponent<Image>().color != Color.green)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 10:
+                    if (GameManager.CM.inspectCard != null)
+                    {
+                        if (GameManager.CM.inspectCard.GetComponent<Image>().color == Color.green)
+                        {
+                            GameManager.CM.inspectCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f); // Gray
+                        }
+                    }
+                    if (GameManager.HM.FindCardInHandById("CardChardPlant").GetComponent<Image>().color != Color.green && GameManager.HM.FindCardInHandById("CardRicePlant").GetComponent<Image>().color != Color.green)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 11:
+                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").itemsOnIsland.Count == 1)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 12:
+                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").itemsOnIsland.Count == 2)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 13:
+                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").itemsOnIsland.Count == 4)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 14:
+                    if (GameManager.TM.GetDate() == "08-01-2025")
                     {
                         QuestCompleted = true;
                     }

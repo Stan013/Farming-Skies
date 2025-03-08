@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class CardInspect : MonoBehaviour, IPointerClickHandler
@@ -19,7 +20,6 @@ public class CardInspect : MonoBehaviour, IPointerClickHandler
             {
                 if (GameManager.CM.inspectCard == GetComponent<Card>())
                 {
-                    GameManager.CM.CheckCardInspectTutorial(GameManager.CM.inspectCard);
                     GameManager.CM.inspectCard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     GameManager.CM.inspectCard.transform.localScale = Vector3.one;
                     GameManager.CM.inspectCard = null;

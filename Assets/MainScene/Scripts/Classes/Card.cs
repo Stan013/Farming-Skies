@@ -63,8 +63,6 @@ public class Card : MonoBehaviour
     [Header("Tutorial card variables")]
     public bool hasBeenInspected;
 
-
-
     public enum CardState
     {
         InDeck,

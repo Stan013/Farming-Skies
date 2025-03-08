@@ -12,6 +12,10 @@ public class TutorialManager : MonoBehaviour
     public Button nextButton;
     public bool tutorial;
     public int tutorialCount;
+    public Card cardGreenBean;
+    public Card cardChive;
+    public Card cardChard;
+    public Card cardRice;
 
     public void UpdateTutorial(string tutorialTitle, string tutorialInfo)
     {
@@ -30,7 +34,7 @@ public class TutorialManager : MonoBehaviour
         {
             GameManager.UM.UpdateUI();
             startTutorialMenu.SetActive(false);
-            GameManager.UM.OpenQuestMenu();
+            GameManager.UM.questButton.OpenQuestMenu();
             GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.SettingsMode);
             GameManager.ISM.FindIslandByID("Starter(0,0)").ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
         }
@@ -38,79 +42,82 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialCount)
         {
             case 1:
-                UpdateTutorial("Manage your islands!", "Press <b>TAB</b> to go into manage mode. In this mode you can build, inspect and manage your farm. You can see which mode you are in on the bottom right.");
+                GameManager.IPM.manageModeEnabled = true;
+                UpdateTutorial("Manage your islands!", "Press Q to go into manage mode. In this mode you can build, inspect and manage your farm. You can see which mode you are in on the bottom right.");
                 break;
             case 2:
-                UpdateTutorial("Build your first island!", "Hover over the highlighted island and hold down your <b>right mouse button</b> until the island is build.");
+                GameManager.IPM.defaultModeEnabled = false;
+                UpdateTutorial("Build your first island!", "Hover with your mouse over the highlighted island and hold down your right mouse button until the island is built.");
                 break;
             case 3:
-                GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton);
-                GameManager.UM.openUIButton.GetComponent<Image>().color = Color.green;
-                UpdateTutorial("Look at your stats!", "Use your mouse and <b>left click</b> on the highlighted green button at the left side off your screen. To see all the stats of your farm.");
+                GameManager.UM.SetUIButtons(true, GameManager.UM.UIbutton.GetComponent<Button>());
+                GameManager.UM.UIbutton.GetComponent<Image>().color = Color.green;
+                UpdateTutorial("Look at your stats!", "Use your mouse and click on the highlighted green button on the left side of your screen. To see all the stats of your farm.");
                 break;
             case 4:
                 GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateTutorial("Check your expenses!", "Now use your mouse again and <b>left click</b> on the green label that shows your expenses. Here you can see what your need to pay for.");
+                UpdateTutorial("Check your expenses!", "Now, use your mouse again and left-click on the green label that shows your expenses. You can see what you need to pay for.");
                 break;
             case 5:
                 GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateTutorial("Check upcoming events!", "Do the same thing again and <b>left click</b> on the green label that shows the date. Here you can see all the events each month.");
+                UpdateTutorial("Check upcoming events!", "Do the same thing again and left click on the green label that shows the date. Here you can see all the events each month.");
                 break;
             case 6:
                 GameManager.HM.SetStartingHand();
                 Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
                 cardCultivator.GetComponent<Image>().color = Color.green;
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Start cultivating!", "It is time to start getting your land ready for planting. <b>Hover</b> over the green highlighted card and then <b>hold left mouse button down</b> and move towards your land.");
+                UpdateTutorial("Start cultivating!", "It is time to start getting your land ready for planting. Hover over the green highlighted card, hold the left mouse button down, and move towards your land.");
                 break;
             case 7:
                 Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
                 cardWateringCan.GetComponent<Image>().color = Color.green;
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Start watering!", "It is time to start getting your land ready for planting. <b>Hover</b> over the green highlighted card and then <b>hold left mouse button down</b> and move towards your land.");
+                UpdateTutorial("Water your soil!", "Your land has been cultivated now, let's water it so we can plant it. Hover over the green highlighted card again, hold the left mouse button down, and move towards your land.");
                 break;
-
-                /*case 3:
-                    GameManager.HM.SetStartingHand();
-                    Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
-                    cardCultivator.GetComponent<Image>().color = Color.green;
-                    cardCultivator.GetComponent<CardDrag>().enabled = true;
-                    UpdateQuest("Cultivate your island!", "Now that you have some land it is time to start growing crops. But first off let me give you some tools and plant cards to help you out. To use these plant cards your land will have to be cultivated and watered first. This is done by making sure you are in manage mode and then by <b>holding down left mouse button</b> over the highlighted card to <b>drag</b> it towards your land.");
-                    break;
-                case 4:
-                    Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
-                    cardWateringCan.GetComponent<Image>().color = Color.green;
-                    cardWateringCan.GetComponent<CardDrag>().enabled = true;
-                    UpdateQuest("Water your island!", "As you can see your land has now been cultivated. Now we go onto the second step making sure your land is watered. Use your <b>left mouse button</b> again and this time <b>drag</b> your watering can card over your cultivated land. Using this card will add <color=blue><b>50 water</b></color> to the soil make sure this number doesn't run out our the soil will dry up and your crops will die.");
-                    break;
-                case 5:
-                    foreach(Card card in GameManager.HM.cardsInHand)
-                    {
-                        if(card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
-                        {
-                            card.GetComponent<Image>().color = Color.green;
-                        }
-                    }
-                    UpdateQuest("Check your crop needs!", "Besides water your lands will need to have the right nutrients for your crops. These nutrients are <color=orange><b>Nitrogen (N)</b></color>, <color=green><b>Phosphorus (P)</b></color> and <color=red><b>Potassium (K)</b></color> each crop has a different need so make sure your soil has plenty of nutrients. Use your mouse and <b>right click</b> on one of your plant cards to see what this crop needs and also check how big it is. <b>Right click</b> again to put the plant card back in your hand.");
-                    break;
-                case 6:
-                    Card cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
-                    cardGreenBean.GetComponent<Image>().color = Color.green;
-                    cardGreenBean.GetComponent<CardDrag>().enabled = true;
-                    UpdateQuest("Plant your first crop!", "Now that you have got your land ready and know what each crop needs and how big they are, it is time to plant. Hover over the highlighted plant card and by <b>holding left mouse button</b> you can <b>drag</b> that card over your soil. Now move your mouse to whichever spot and the crop should snap into place. Each land has space for <b>36 small plots, 9 medium plots or 1 big plot</b>. So be sure to plan your placement carefully");
-                    break;
-                case 7:
-                    foreach (Card card in GameManager.HM.cardsInHand)
-                    {
-                        if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
-                        {
-                            card.GetComponent<Image>().color = Color.green;
-                            card.GetComponent<CardDrag>().enabled = true;
-                        }
-                    }
-                    UpdateQuest("Plant everything you have!", "It seems like you know what you are doing so how about you plant some more. This time you will see that some spots are already taken by the crop you previously used. Don't worry though if you don't have enough space you can always buy more land. You can also rotate your crops by moving your mouse around the spot it has snapped to. But this is just purely for the aesthetic.");
-                    break;
-                case 8:
+            case 8:
+                cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
+                cardGreenBean.GetComponent<Image>().color = Color.green;
+                cardGreenBean.GetComponent<CardInspect>().enabled = true;
+                UpdateTutorial("Inspect your plant!", "Your land is ready for planting, but first let's see what crops you have and what they need. Click with your right mouse button on the green highlighted card and click again to close.");
+                break;
+            case 9:
+                cardChive = GameManager.HM.FindCardInHandById("CardChivePlant");
+                cardChive.GetComponent<Image>().color = Color.green;
+                cardChive.GetComponent<CardInspect>().enabled = true;
+                UpdateTutorial("Inspect another!", "Right click with your mouse on the other green highlighted card. And as you can see, the plant size, water, and nutrient needs are different. This will result in a different yield.");
+                break;
+            case 10  :
+                cardChard = GameManager.HM.FindCardInHandById("CardChardPlant");
+                cardRice = GameManager.HM.FindCardInHandById("CardRicePlant");
+                cardChard.GetComponent<Image>().color = Color.green;
+                cardRice.GetComponent<Image>().color = Color.green;
+                cardChard.GetComponent<CardInspect>().enabled = true;
+                cardRice.GetComponent<CardInspect>().enabled = true;
+                UpdateTutorial("Compare all of them!", "I hope you noticed the difference now, inspect the remaining plants. Each month, the nutrients in your soil will refill, so making good combinations can be very beneficial.");
+                break;
+            case 11:
+                cardGreenBean.GetComponent<Image>().color = Color.green;
+                cardGreenBean.GetComponent<CardDrag>().enabled = true;
+                UpdateTutorial("Plant your first crop!", "Let's hover over the green highlighted card and this time hold down your left mouse button. Then move the plant towards your soil and once snapped in place let go of your mouse.");
+                break;
+            case 12:
+                cardChive.GetComponent<Image>().color = Color.green;
+                cardChive.GetComponent<CardDrag>().enabled = true;
+                UpdateTutorial("Plant another crop!", "Now do it again with the other green highlighted card. Since the plant size is smaller, more plots available. You can however only have one plant for each plot.");
+                break;
+            case 13:
+                cardChard.GetComponent<Image>().color = Color.green;
+                cardRice.GetComponent<Image>().color = Color.green;
+                cardChard.GetComponent<CardDrag>().enabled = true;
+                cardRice.GetComponent<CardDrag>().enabled = true;
+                UpdateTutorial("Plant all your crops!", "You are well on your way to becoming a farmer, so let's plant your last crops as well. With the last 2 highlighted plant cards, do the same drag motions as before.");
+                break;
+            case 14:
+                GameManager.IPM.timeModeEnabled = true;
+                UpdateTutorial("Time to advance!", "If you are ready, hold down your space bar and wait until the bar on the top right fills up. Now watch as the week goes by and let your crops do the work.");
+                break;
+                /*case 8:
                     GameManager.UM.SetUIButtons(true, GameManager.UM.nextDayButton);
                     UpdateQuest("It is time to advance!", "Good job farmer all your crops are in the ground and your land is looking healthy. <b>Click</b> with your <b>left mouse button</b> on the next day and watch the harvest from the day go right into your storage. You might see that some of your crops give a different yield this is depending on the size of crop, the plant itself but also the soil quality. Each nutrient need that is met gives you a <b>80%</b> chance to get 1,2,3 or 4 extra drops based on the plants base yield.");
                     GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.green;

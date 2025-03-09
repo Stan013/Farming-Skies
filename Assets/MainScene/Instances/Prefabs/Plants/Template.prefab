@@ -103,13 +103,7 @@ MonoBehaviour:
   plantScale: 0.0075
   plantCardID: 
   yield: 12
-  water: 1
-  nitrogen: 2
-  phosphorus: 1
-  potassium: 1
-  magnesium: 1
-  sulfur: 1
-  calcium: 1
+  nutrientsUsages: 01000000010000000100000001000000
 --- !u!65 &6846091476340966412
 BoxCollider:
   m_ObjectHideFlags: 0

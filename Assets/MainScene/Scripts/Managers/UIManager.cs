@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public OpenQuestButton questButton;
     public GameObject nextWeekButton;
 
+    [Header("Next Week UI")]
+    public Slider nextWeekSlider;
+
     [Header("Window Buttons")]
     public OpenWindowButton openButton;
     public CloseWindowButton closeButton;
@@ -43,12 +46,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public Slider transparencySlider;
     public Image constructionLabel;
 
-    public void Start()
-    {
-        openButton = GetComponent<OpenWindowButton>();
-        closeButton = GetComponent<CloseWindowButton>();
-    }
-
     public void SetUIButtons(bool active, Button button)
     {
         button.interactable = active;
@@ -57,8 +54,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void UpdateUI()
     {
         dateAmountText.SetText(GameManager.TM.GetDate());
-        expenseAmountText.SetText(expense.ToString() + " ₴");
-        moneyAmountText.SetText(money.ToString() + " ₴");
+        expenseAmountText.SetText(expense.ToString());
+        moneyAmountText.SetText(money.ToString());
         waterAmountText.SetText(water.ToString() + " L");
         fertilizerAmountText.SetText(fertilizer.ToString() + " L");
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
@@ -85,7 +82,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
             transparencySlider.value = alphaValue;
             if (alphaValue == 1f && island.islandBought == false)
             {
-                island.sign.SetActive(true);
                 island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
                 money -= island.islandBuildCost;
                 expense += island.islandTaxCost;

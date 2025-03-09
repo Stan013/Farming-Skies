@@ -38,10 +38,10 @@ public class CardManager : MonoBehaviour, IDataPersistence
             CardDrag cardDrag = card.GetComponent<CardDrag>();
             Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();
             card.cardDescriptionText.gameObject.SetActive(false);
-            card.nitrogenText.SetText(dragPlant.nitrogen.ToString() + " L");
-            card.phosphorusText.SetText(dragPlant.phosphorus.ToString() + " L");
-            card.potassiumText.SetText(dragPlant.potassium.ToString() + " L");
-            card.waterText.SetText(dragPlant.water.ToString() + " L");
+            card.waterText.SetText(dragPlant.nutrientsUsages[0].ToString() + " L");
+            card.nitrogenText.SetText(dragPlant.nutrientsUsages[1].ToString() + " L");
+            card.phosphorusText.SetText(dragPlant.nutrientsUsages[2].ToString() + " L");
+            card.potassiumText.SetText(dragPlant.nutrientsUsages[3].ToString() + " L");
             card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
         }
         else

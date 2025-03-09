@@ -140,7 +140,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             GameManager.ISM.CheckPotentialIsland().ToggleState(hoverIsland.potentialState, hoverIsland.currentState);
             if (GameManager.HM.dragCard.cardName == "Watering Can")
             {
-                GameManager.ISM.CheckPotentialIsland().water += 50;
+                GameManager.ISM.CheckPotentialIsland().nutrientsAvailable[0] += 50;
             }
             GameManager.HM.dragCard.dragSucces = true;
             GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
@@ -149,26 +149,9 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             if (GameManager.ISM.CheckPotentialIsland() != null)
             {
-                switch (GameManager.HM.dragCard.cardName)
-                {
-                    case "Nitrogen Fertilizer":
-                        GameManager.ISM.CheckPotentialIsland().Nitrogen += 50;
-                        GameManager.HM.dragCard.dragSucces = true;
-                        GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
-                        break;
-                    case "Phosphorus Fertilizer":
-                        GameManager.ISM.CheckPotentialIsland().Phosphorus += 50;
-                        GameManager.HM.dragCard.dragSucces = true;
-                        GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
-                        break;
-                    case "Potassium Fertilizer":
-                        GameManager.ISM.CheckPotentialIsland().Potassium += 50;
-                        GameManager.HM.dragCard.dragSucces = true;
-                        GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
-                        break;
-                    default:
-                        break;
-                }
+                GameManager.ISM.CheckPotentialIsland().nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex] += 50;
+                GameManager.HM.dragCard.dragSucces = true;
+                GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
             }
             if (CheckPotentialPlot() != null)
             {

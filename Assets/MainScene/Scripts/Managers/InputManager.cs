@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
     public bool craftModeEnabled;
     public bool marketModeEnabled;
     public bool timeModeEnabled;
+    public bool islandInspectEnabled;
 
     public void HandleGameStatesSwitchInput()
     {
@@ -140,7 +141,12 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && timeModeEnabled)
         {
             spaceHoldTimer += Time.deltaTime;
-            if (spaceHoldTimer >= 2f && !isHoldingSpace)
+            float fillValue = Mathf.Clamp01(spaceHoldTimer / 1f);
+            GameManager.UM.nextWeekSlider.value = fillValue;
+            RectTransform handleRect = GameManager.UM.nextWeekSlider.handleRect;
+            float newX = Mathf.Lerp(25f, -40f, fillValue);
+            handleRect.anchoredPosition = new Vector2(newX, handleRect.anchoredPosition.y);
+            if (spaceHoldTimer >= 1f && !isHoldingSpace)
             {
                 isHoldingSpace = true;
                 ToggleState(GameManager.GameState.TimeMode, GameManager.GameState.Default);
@@ -148,10 +154,18 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            spaceHoldTimer = 0f;
-            isHoldingSpace = false;
+            if(spaceHoldTimer != 0f)
+            {
+                spaceHoldTimer = 0f;
+                isHoldingSpace = false;
+                GameManager.UM.nextWeekSlider.value = 0f;
+                RectTransform handleRect = GameManager.UM.nextWeekSlider.handleRect;
+                handleRect.anchoredPosition = new Vector2(25f, handleRect.anchoredPosition.y);
+            }
         }
     }
+
+
 
     public void HandleMouseInput(GameManager.GameState state)
     {
@@ -229,6 +243,14 @@ public class InputManager : MonoBehaviour
             float alphaChangeSpeed = 1.0f / holdDuration;
             GameManager.UM.UpdateBuildIslandSlider(clickedIsland);
             clickedIsland.ChangeMaterial(alphaChangeSpeed);
+        }
+
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit2) //Click to inspect island
+            && hit2.transform.GetComponent<Island>() != null && islandInspectEnabled)
+        {
+            Island hitIsland = hit2.transform.GetComponent<Island>();
+            GameManager.ISM.islandMenu.SetActive(true);
+            GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().SetupIslandInfo(hitIsland);
         }
     }
 

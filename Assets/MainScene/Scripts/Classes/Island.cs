@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using TMPro;
 
 public class Island : MonoBehaviour
 {
@@ -15,8 +15,6 @@ public class Island : MonoBehaviour
     public int islandTaxCost;
     public bool islandBought;
 
-    public GameObject sign;
-    public GameObject signWarningIcon;
     public List<GameObject> plotsSmallPlants;
     public List<GameObject> plotsMediumPlants;
     public List<GameObject> plotsBigPlants;
@@ -26,45 +24,13 @@ public class Island : MonoBehaviour
     public Material topMat;
     public GameObject islandBottom;
     public Material bottomMat;
-
-    public TMP_Text waterAvailableText;
-    public TMP_Text nitrogenAvailableText;
-    public TMP_Text phosphorusAvailableText;
-    public TMP_Text potassiumAvailableText;
-    public int water;
-    private int _nitrogen;
-    private int _phosphorus;
-    private int _potassium;
-    public int magnesium;
-    public int sulfur;
-    public int calcium;
-    public int Nitrogen
-    {
-        get => _nitrogen;
-        set { _nitrogen = value; OnNutrientChanged(); }
-    }
-    public int Phosphorus
-    {
-        get => _phosphorus;
-        set { _phosphorus = value; OnNutrientChanged(); }
-    }
-    public int Potassium
-    {
-        get => _potassium;
-        set { _potassium = value; OnNutrientChanged(); }
-    }
-
-    public TMP_Text waterUsageText;
-    public TMP_Text nitrogenUsageText;
-    public TMP_Text phosphorusUsageText;
-    public TMP_Text potassiumUsageText;
-    public int waterUsage;
-    public int nitrogenUsage;
-    public int phosphorusUsage;
-    public int potassiumUsage;
-
-    public bool needsNPK;
     public Material bottomDefaultMat;
+
+    public List<int> nutrientsAvailable;
+    public List<int> nutrientsRequired;
+
+    public GameObject warningIcon;
+    public bool needsNPK;
 
     public enum IslandState
     {
@@ -73,12 +39,6 @@ public class Island : MonoBehaviour
         Watered,
         Sowed,
         Cultivated,
-    }
-
-    public void OnNutrientChanged()
-    {
-        GameManager.ISM.UpdateIslandMaterial(this);
-        UpdateIslandStats();
     }
 
     public void ToggleState(IslandState targetState, IslandState fallbackState)
@@ -327,40 +287,31 @@ public class Island : MonoBehaviour
         return GameManager.CM.FindCardById("Card" + plantCardId);
     }
 
-    public void UpdateIslandStats()
+    public void UpdateNutrientsRequired()
     {
-        waterUsage = 0;
-        nitrogenUsage = 0;
-        phosphorusUsage = 0;
-        potassiumUsage = 0;
-
+        for(int i = 0; i < nutrientsRequired.Count; i++)
+        {
+            nutrientsRequired[i] = 0;
+        }
         foreach (Plant plant in itemsOnIsland)
         {
-            waterUsage += plant.water;
-            nitrogenUsage += plant.nitrogen;
-            phosphorusUsage += plant.phosphorus;
-            potassiumUsage += plant.potassium;
+            for (int i = 0; i < nutrientsRequired.Count; i++)
+            {
+                nutrientsRequired[i] += plant.nutrientsUsages[i];
+            }
         }
         CheckWarningIcon();
-        waterUsageText.SetText(waterUsage.ToString() + " L");
-        nitrogenUsageText.SetText(nitrogenUsage.ToString() + " L");
-        phosphorusUsageText.SetText(phosphorusUsage.ToString() + " L");
-        potassiumUsageText.SetText(potassiumUsage.ToString() + " L");
-        waterAvailableText.SetText(water.ToString() + " L");
-        nitrogenAvailableText.SetText(_nitrogen.ToString() + " L");
-        phosphorusAvailableText.SetText(_phosphorus.ToString() + " L");
-        potassiumAvailableText.SetText(_potassium.ToString() + " L");
     }
 
     public void CheckWarningIcon()
     {
-        if (waterUsage > water || nitrogenUsage > _nitrogen || phosphorusUsage > _phosphorus || potassiumUsage > _potassium)
+        if (nutrientsRequired.Sum() > nutrientsAvailable.Sum())
         {
-            signWarningIcon.SetActive(true);
+            warningIcon.SetActive(true);
         }
         else
         {
-            signWarningIcon.SetActive(false);
+            warningIcon.SetActive(false);
         }
     }
 }

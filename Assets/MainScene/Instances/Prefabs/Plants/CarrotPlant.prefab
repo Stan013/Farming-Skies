@@ -102,15 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drop: {fileID: -596940967104286558, guid: ae57a356711e28c45882ec66a70360e9, type: 3}
+  plantScale: 0.0075
   plantCardID: CarrotPlant
   yield: 12
-  water: 1
-  nitrogen: 1
-  phosphorus: 2
-  potassium: 2
-  magnesium: 1
-  sulfur: 1
-  calcium: 2
+  nutrientsUsages: 01000000010000000200000002000000
 --- !u!65 &485660705593406173
 BoxCollider:
   m_ObjectHideFlags: 0

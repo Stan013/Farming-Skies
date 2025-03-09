@@ -9,13 +9,7 @@ public class Plant : MonoBehaviour
     public string plantCardID;
 
     public int yield;
-    public int water;
-    public int nitrogen;
-    public int phosphorus;
-    public int potassium;
-    public int magnesium;
-    public int sulfur;
-    public int calcium;
+    public List<int> nutrientsUsages;
 
     public void GiveDrop(Transform plot)
     {

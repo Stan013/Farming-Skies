@@ -106,13 +106,7 @@ MonoBehaviour:
   plantScale: 0.0075
   plantCardID: CardRicePlant
   yield: 18
-  water: 1
-  nitrogen: 2
-  phosphorus: 1
-  potassium: 1
-  magnesium: 1
-  sulfur: 1
-  calcium: 1
+  nutrientsUsages: 01000000020000000100000001000000
 --- !u!65 &3980613064867296773
 BoxCollider:
   m_ObjectHideFlags: 0

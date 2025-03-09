@@ -105,13 +105,7 @@ MonoBehaviour:
   plantScale: 0.0075
   plantCardID: CardChivePlant
   yield: 18
-  water: 1
-  nitrogen: 1
-  phosphorus: 2
-  potassium: 1
-  magnesium: 1
-  sulfur: 1
-  calcium: 1
+  nutrientsUsages: 01000000010000000200000001000000
 --- !u!65 &-1899781645364398760
 BoxCollider:
   m_ObjectHideFlags: 0

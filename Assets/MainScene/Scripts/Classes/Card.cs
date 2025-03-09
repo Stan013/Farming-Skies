@@ -13,6 +13,7 @@ public class Card : MonoBehaviour
     public bool cardSetup;
     public CardState CurrentState;
     public bool dragSucces;
+    public int nutrientIndex;
 
     [Header("Visible card variables")]
     public string cardName;
@@ -149,7 +150,10 @@ public class Card : MonoBehaviour
                     GameManager.HM.cardsInHand.Remove(this);
                     GameManager.HM.MoveCardsInHand(this);
                     GameManager.DM.CheckRefillHand();
-                    GetComponent<CardDrag>().hoverIsland.UpdateIslandStats();
+                    if(GameManager.HM.dragCard.nutrientIndex != 0)
+                    {
+                        GetComponent<CardDrag>().hoverIsland.UpdateNutrientsRequired();
+                    }
                     Destroy(this.gameObject);
                     dragSucces = false;
                 }

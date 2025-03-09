@@ -102,15 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drop: {fileID: 3137658292428287410, guid: f33859dfe9cbdb2409ea1963d7b45b16, type: 3}
+  plantScale: 0.0075
   plantCardID: LeekPlant
   yield: 12
-  water: 1
-  nitrogen: 1
-  phosphorus: 2
-  potassium: 1
-  magnesium: 2
-  sulfur: 1
-  calcium: 1
+  nutrientsUsages: 01000000010000000200000001000000
 --- !u!65 &3953892608246439757
 BoxCollider:
   m_ObjectHideFlags: 0

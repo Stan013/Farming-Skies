@@ -6,19 +6,17 @@ using TMPro;
 
 public class ExpenseItem : MonoBehaviour
 {
-    public UIStatButton UIstats;
+    public ExpenseUI expenseUI;
     public TMP_Text islandName;
     public TMP_Text islandCost;
     public TMP_Text buildableName;
     public TMP_Text buildableCost;
-    public int expenseIndex;
 
     public void SetupIslandExpense(Island island)
     {
-        expenseIndex++;
-        UIstats.islandTotal += island.islandTaxCost;
-        islandName.text = expenseIndex.ToString() + ".         Island (" + island.name + "):";
-        islandCost.text = island.islandTaxCost + " ₴";
+        expenseUI.islandTotal += island.islandTaxCost;
+        islandName.text = "Island (" + island.name + "):";
+        islandCost.text = island.islandTaxCost.ToString() + " ₴";
     }
 
 /*    public void SetupBuildableExpense(Buildable buildable)

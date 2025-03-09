@@ -162,6 +162,30 @@ public class QuestManager : MonoBehaviour
                         QuestCompleted = true;
                     }
                     break;
+                case 15:
+                    if(GameManager.CurrentState == GameManager.GameState.InventoryMode)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 16:
+                    if (GameManager.CurrentState == GameManager.GameState.ManageMode)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 17:
+                    if(GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().requiredInfo.activeSelf == true)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 18:
+                    if (GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().availableInfo.activeSelf == true)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
             }
         }
     }

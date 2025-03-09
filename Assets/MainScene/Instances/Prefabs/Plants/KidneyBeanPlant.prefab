@@ -103,15 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drop: {fileID: 1057506649644725150, guid: 92405ed63184e5c46b805f6543a32925, type: 3}
+  plantScale: 0.0075
   plantCardID: 
   yield: 18
-  water: 4
-  nitrogen: 1
-  phosphorus: 1
-  potassium: 1
-  magnesium: 2
-  sulfur: 2
-  calcium: 1
+  nutrientsUsages: 01000000010000000100000001000000
 --- !u!65 &3979547501414459580
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -136,9 +136,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 UM.UIbutton.gameObject.SetActive(false);
                 UM.questButton.gameObject.SetActive(false);
                 UM.nextWeekButton.SetActive(false);
-                UM.modeIndicator.gameObject.SetActive(false);
-                PM.Harvest(); //Includes water and nutrients check
-                MM.UpdatePrices(); // Includes Market Update
+                UM.modeIndicator.transform.parent.gameObject.SetActive(false);
+                UM.UIMenu.SetActive(false);
+                UM.infoMenu.SetActive(false);
+                QM.questMenu.SetActive(false);
+                PM.Harvest();
+                MM.UpdatePrices();
                 TM.StartWeekCycle();
                 UM.UpdateUI();
                 break;
@@ -154,17 +157,17 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 SM.GeneratePickWindow();
                 break;
             case GameState.InventoryMode:
-                UM.openButton.ChangeMode("Inventory");
+                UM.openButton.ChangeMode(INM.inventoryWindow);
                 UM.modeIndicator.sprite = UM.modeIcons[2];
                 INM.UpdateInventoryItems();
                 break;
             case GameState.CraftMode:
-                UM.openButton.ChangeMode("Crafting");
+                UM.openButton.ChangeMode(CRM.craftWindow);
                 UM.modeIndicator.sprite = UM.modeIcons[3];
                 CRM.SetupCraftingMode();
                 break;
             case GameState.MarketMode:
-                UM.openButton.ChangeMode("Market");
+                UM.openButton.ChangeMode(MM.marketWindow);
                 UM.modeIndicator.sprite = UM.modeIcons[4];
                 MM.UpdateMarketItems();
                 break;
@@ -191,18 +194,20 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 UM.UIbutton.gameObject.SetActive(true);
                 UM.questButton.gameObject.SetActive(true);
                 UM.nextWeekButton.SetActive(true);
-                UM.modeIndicator.gameObject.SetActive(true);
+                UM.modeIndicator.transform.parent.gameObject.SetActive(true);
+                UM.UIMenu.SetActive(true);
+                QM.questMenu.SetActive(true);
                 break;
             case GameState.SelectionMode:
                 break;
             case GameState.InventoryMode:
-                UM.closeButton.GetComponent<CloseWindowButton>().ChangeModeToDefault();
+                UM.closeButton.ChangeModeToDefault(INM.inventoryWindow);
                 break;
             case GameState.MarketMode:
-                UM.closeButton.GetComponent<CloseWindowButton>().ChangeModeToDefault();
+                UM.closeButton.ChangeModeToDefault(MM.marketWindow);
                 break;
             case GameState.CraftMode:
-                UM.closeButton.GetComponent<CloseWindowButton>().ChangeModeToDefault();
+                UM.closeButton.ChangeModeToDefault(CRM.craftWindow);
                 DM.CheckRefillHand();
                 break;
         }

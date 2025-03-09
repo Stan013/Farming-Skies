@@ -6,10 +6,7 @@ using UnityEngine.EventSystems;
 
 public class CloseWindowButton : MonoBehaviour
 {
-    public Button closeButton;
-    public GameObject closeWindow;
-
-    public void ChangeModeToDefault()
+    public void ChangeModeToDefault(GameObject closeWindow)
     {
         closeWindow.SetActive(false);
         GameManager.HM.HideCardsInHand(false);

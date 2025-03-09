@@ -106,13 +106,7 @@ MonoBehaviour:
   plantScale: 0.0075
   plantCardID: CardGreenBeanPlant
   yield: 18
-  water: 4
-  nitrogen: 1
-  phosphorus: 1
-  potassium: 1
-  magnesium: 1
-  sulfur: 1
-  calcium: 1
+  nutrientsUsages: 01000000010000000100000001000000
 --- !u!65 &4827056884458180532
 BoxCollider:
   m_ObjectHideFlags: 0

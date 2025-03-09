@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlantManager : MonoBehaviour
 {
+    public float dropChance;
     private System.Random random = new System.Random();
 
     public void Harvest()
@@ -13,11 +14,10 @@ public class PlantManager : MonoBehaviour
         {
             foreach (Plant plant in island.itemsOnIsland)
             {
-                if (GameManager.ISM.CheckIslandWater(plant))
+                if (plant.nutrientsUsages[0] <= island.nutrientsAvailable[0])
                 {
-                    island.water -= plant.water;
-                    plant.GiveDrop(plant.transform.parent.GetComponent<Transform>());
                     CalculateDropAmount(island, plant);
+                    plant.GiveDrop(plant.transform.parent.GetComponent<Transform>()); //add based on yield
                 }
                 else
                 {
@@ -29,51 +29,56 @@ public class PlantManager : MonoBehaviour
 
     public void CalculateDropAmount(Island island, Plant plant)
     {
-        if(island.Nitrogen >= plant.nitrogen)
+        int baseYield = plant.yield;
+        for(int i = 0; i < island.nutrientsAvailable.Count; i++)
         {
-            if (random.NextDouble() <= 0.75)
+            if(i != 0)
             {
-                plant.yield++;
+                if (island.nutrientsAvailable[i] >= plant.nutrientsUsages[i])
+                {
+                    if (random.NextDouble() <= dropChance)
+                    {
+                        switch (baseYield)
+                        {
+                            case 6:
+                                plant.yield++;
+                                break;
+                            case 12:
+                                plant.yield += 2;
+                                break;
+                            case 18:
+                                plant.yield += 3;
+                                break;
+                            case 24:
+                                plant.yield += 4;
+                                break;
+                        }
+                    }
+                    island.nutrientsAvailable[i] -= plant.nutrientsUsages[i];
+                }
+                else
+                {
+                    if (random.NextDouble() <= dropChance)
+                    {
+                        switch (baseYield)
+                        {
+                            case 6:
+                                plant.yield--;
+                                break;
+                            case 12:
+                                plant.yield -= 2;
+                                break;
+                            case 18:
+                                plant.yield -= 3;
+                                break;
+                            case 24:
+                                plant.yield -= 4;
+                                break;
+                        }
+                    }
+                }
             }
         }
-        else
-        {
-            if (random.NextDouble() <= 0.75)
-            {
-                plant.yield--;
-            }
-        }
-        if (island.Phosphorus >= plant.phosphorus)
-        {
-            if (random.NextDouble() <= 0.75)
-            {
-                plant.yield++;
-            }
-        }
-        else
-        {
-            if (random.NextDouble() <= 0.75)
-            {
-                plant.yield--;
-            }
-        }
-        if (island.Potassium >= plant.potassium)
-        {
-            if (random.NextDouble() <= 0.75)
-            {
-                plant.yield++;
-            }
-        }
-        else
-        {
-            if (random.NextDouble() <= 0.75)
-            {
-                plant.yield--;
-            }
-        }
-        island.Nitrogen -= plant.nitrogen;
-        island.Phosphorus -= plant.phosphorus;
-        island.Potassium -= plant.potassium;
         island.CheckWarningIcon();
     }
 }

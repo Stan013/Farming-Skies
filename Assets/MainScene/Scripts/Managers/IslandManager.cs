@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class IslandManager : MonoBehaviour, IDataPersistence
 {
@@ -18,6 +21,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public Material wateredMat;
     public Material wateredNeedsNPKMat;
 
+    public GameObject islandMenu;
     public GameObject islandExpenseContent;
     public GameObject buildableExpenseContent;
     public ExpenseItem expenseItem;
@@ -161,7 +165,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     public void UpdateIslandMaterial(Island island)
     {
-        float totalNPK = island.Nitrogen + island.Phosphorus + island.Potassium;
+        float totalNPK = island.nutrientsAvailable.Sum() - island.nutrientsAvailable[0];
         float blendFactor = Mathf.Clamp01(totalNPK / 50f);
         Material defaultMat = null;
         Material needsNPKMat = null;
@@ -218,18 +222,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         blendedTex.Apply();
 
         return blendedTex;
-    }
-
-    public bool CheckIslandWater(Plant plant)
-    {
-        if(GameManager.UM.water >= plant.water)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public Island FindIslandByID(string islandID)

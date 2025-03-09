@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
     public int refillDateIndex;
     public int[] daysInMonth = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     public TMP_Text dateText;
-    private int daysPassed;
+    public int daysToAdvance;
     public GameObject timeWindow;
 
     public string GetDate()
@@ -35,9 +35,8 @@ public class TimeManager : MonoBehaviour
 
     private IEnumerator CycleDays()
     {
-        while (daysPassed < 8)
+        for (int i = 0; i < daysToAdvance; i++)
         {
-            dateText.text = GetDate();
             date[0]++;
             if (date[0] > daysInMonth[date[1]])
             {
@@ -49,8 +48,8 @@ public class TimeManager : MonoBehaviour
                     date[2]++;
                 }
             }
-            yield return new WaitForSeconds(1f);
-            daysPassed++;
+            dateText.text = GetDate();
+            yield return new WaitForSeconds(0.5f);
         }
         GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
     }

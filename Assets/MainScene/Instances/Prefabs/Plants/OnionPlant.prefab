@@ -102,15 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drop: {fileID: 3884167802581976701, guid: ca8f041306e3c494688173a8cc6ab890, type: 3}
+  plantScale: 0.0075
   plantCardID: OnionPlant
   yield: 12
-  water: 1
-  nitrogen: 1
-  phosphorus: 2
-  potassium: 1
-  magnesium: 1
-  sulfur: 1
-  calcium: 2
+  nutrientsUsages: 01000000010000000200000001000000
 --- !u!65 &4018325775907447230
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -102,15 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drop: {fileID: 4218872012039365939, guid: 477dca27cdbbc1340a0faa52287757bb, type: 3}
+  plantScale: 0.0075
   plantCardID: GarlicPlant
   yield: 12
-  water: 1
-  nitrogen: 1
-  phosphorus: 2
-  potassium: 1
-  magnesium: 2
-  sulfur: 1
-  calcium: 2
+  nutrientsUsages: 01000000010000000200000001000000
 --- !u!65 &1389862676574877369
 BoxCollider:
   m_ObjectHideFlags: 0

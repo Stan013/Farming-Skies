@@ -73,7 +73,7 @@ public class TutorialManager : MonoBehaviour
                 Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
                 cardWateringCan.GetComponent<Image>().color = Color.green;
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Water your soil!", "Your land has been cultivated now, let's water it so we can plant it. Hover over the green highlighted card again, hold the left mouse button down, and move towards your land.");
+                UpdateTutorial("Water your land!", "Your land has been cultivated now, let's water it so we can plant it. Hover over the green highlighted card again, hold the left mouse button down, and move towards your land.");
                 break;
             case 8:
                 cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
@@ -94,12 +94,12 @@ public class TutorialManager : MonoBehaviour
                 cardRice.GetComponent<Image>().color = Color.green;
                 cardChard.GetComponent<CardInspect>().enabled = true;
                 cardRice.GetComponent<CardInspect>().enabled = true;
-                UpdateTutorial("Compare all of them!", "I hope you noticed the difference now, inspect the remaining plants. Each month, the nutrients in your soil will refill, so making good combinations can be very beneficial.");
+                UpdateTutorial("Compare all of them!", "I hope you noticed the difference now, inspect the remaining plants. Each month, the nutrients in your lamd will refill, so making good combinations can be very beneficial.");
                 break;
             case 11:
                 cardGreenBean.GetComponent<Image>().color = Color.green;
                 cardGreenBean.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Plant your first crop!", "Let's hover over the green highlighted card and this time hold down your left mouse button. Then move the plant towards your soil and once snapped in place let go of your mouse.");
+                UpdateTutorial("Plant your first crop!", "Let's hover over the green highlighted card and this time hold down your left mouse button. Then move the plant towards your land and once snapped in place let go of your mouse.");
                 break;
             case 12:
                 cardChive.GetComponent<Image>().color = Color.green;
@@ -117,19 +117,25 @@ public class TutorialManager : MonoBehaviour
                 GameManager.IPM.timeModeEnabled = true;
                 UpdateTutorial("Time to advance!", "If you are ready, hold down your space bar and wait until the bar on the top right fills up. Now watch as the week goes by and let your crops do the work.");
                 break;
-                /*case 8:
-                    GameManager.UM.SetUIButtons(true, GameManager.UM.nextDayButton);
-                    UpdateQuest("It is time to advance!", "Good job farmer all your crops are in the ground and your land is looking healthy. <b>Click</b> with your <b>left mouse button</b> on the next day and watch the harvest from the day go right into your storage. You might see that some of your crops give a different yield this is depending on the size of crop, the plant itself but also the soil quality. Each nutrient need that is met gives you a <b>80%</b> chance to get 1,2,3 or 4 extra drops based on the plants base yield.");
-                    GameManager.UM.nextDayButton.GetComponent<Image>().color = Color.green;
-                    break;
-                case 9:
-                    GameManager.UM.SetUIButtons(true, GameManager.UM.openInventoryButton);
-                    GameManager.UM.openInventoryButton.GetComponent<Image>().color = Color.green;
-                    UpdateQuest("Look at your harvest!", "You did the work and got your farm up and running so now it is time to see what you got from it. It is a new day so <b>press E</b> to go into inventory mode or in manage mode <b>click</b> on the green icon at the top right of your screen and see what drops you got from your crops. You can sort these drops by using the tabs at the top of the window. As you can see you can sell and craft as well but we will get to that for now exit inventory mode by <b>pressing E</b> or <b>click</b> the red close button");
-                    break;
-                case 10:
-                    UpdateQuest("Check your soil health!", "As you can see after that harvest your land is looking a bit rough. This is because the crops you planted are taking nutrients from the soil. There also might be a warning icon if your soil doesn't have enough nutrients or water for the next day. By <b>double clicking</b> on your land with your <b>left mouse button</b> and by using your <b>scroll wheel</b> to zoom in on the sign. You can see the total amount of nutrients and water all the crops are using each day.");
-                    break;
+            case 15:
+                GameManager.IPM.timeModeEnabled = false;                
+                GameManager.IPM.inventoryModeEnabled = true;
+                GameManager.UM.SetUIButtons(true, GameManager.UM.questButton.GetComponent<Button>());
+                UpdateTutorial("Look at your spoils!", "You watched your harvest, now open up your inventory by pressing E and find out how much you got. Your yield can increase or decrease based on whether the crops' needs are met.");
+                break;
+            case 16:
+                GameManager.IPM.inventoryModeEnabled = false;
+                UpdateTutorial("Inspect your land!", "Go out of inventory mode by pressing E and notice that the quality of your land has changed. A warning icon has appeared as well, let's press Q to go into manage mode and see what's up.");
+                break;
+            case 17:
+                GameManager.IPM.islandInspectEnabled = true;
+                UpdateTutorial("Select your land!", "With your mouse hover over the land that has a warning icon on top of it. Now click with your left mouse button and an information panel should appear on the right side of your screen.");
+                break;
+            case 18:
+                GameManager.IPM.islandInspectEnabled = true;
+                UpdateTutorial("Check your crop needs!", "This displays how much water and nutrients your land has, plus how much water and nutrients your crops require. ");
+                break;
+                /*
                 case 11:
                     UpdateQuest("Move back to your land!", "In order to improve the nutrients in your soil we will have to move above your land again and use some cards on it. Press <b>TAB</b> to go out of manage mode and now you can freely move around your farm with your <b>WASD</b> keys. You can also move <b>UP</b> by pressing your <b>SHIFT</b> key and <b>DOWN</b> by pressing your <b>CTRL</b> key. Your WASD movement is based on the direction you are looking in. So try to get above your land so we can improve your soil.");
                     break;

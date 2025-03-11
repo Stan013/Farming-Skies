@@ -175,13 +175,37 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 17:
-                    if(GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().requiredInfo.activeSelf == true)
+                    if(GameManager.ISM.islandMenu.activeSelf == true)
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 18:
                     if (GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().availableInfo.activeSelf == true)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 19:
+                    if (GameManager.ISM.islandMenu.activeSelf != true)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 20:
+                    if (GameManager.CurrentState == GameManager.GameState.CraftMode)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 21:
+                    if (GameManager.CRM.selectedCard == GameManager.CM.FindCardById("CardNitrogenFertilizerUtility"))
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 22:
+                    if (GameManager.UM.UIMenu.activeSelf == true)
                     {
                         QuestCompleted = true;
                     }

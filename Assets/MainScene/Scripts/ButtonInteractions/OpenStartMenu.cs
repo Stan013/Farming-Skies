@@ -22,14 +22,14 @@ public class OpenStartMenu : MonoBehaviour
     {
         switch (gameMode)
         {
-            case "Campaign":
-                GameManager.CurrentMode = GameManager.GameMode.Campaign;
-                break;
-            case "Creative":
-                GameManager.CurrentMode = GameManager.GameMode.Creative;
+            case "Career":
+                GameManager.CurrentMode = GameManager.GameMode.Career;
                 break;
             case "Scenario":
                 GameManager.CurrentMode = GameManager.GameMode.Scenario;
+                break;
+            case "Creative":
+                GameManager.CurrentMode = GameManager.GameMode.Creative;
                 break;
         }
         GameManager.IPM.ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.MainMenuMode);

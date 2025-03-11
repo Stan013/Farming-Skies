@@ -10,7 +10,6 @@ public class CloseWindowButton : MonoBehaviour
     {
         closeWindow.SetActive(false);
         GameManager.HM.HideCardsInHand(false);
-        GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
         EventSystem.current.SetSelectedGameObject(null);
     }
 }

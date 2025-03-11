@@ -29,9 +29,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private static GameObject staticGameMenu;
     public enum GameMode
     {
-        Campaign,
-        Creative,
+        Career,
         Scenario,
+        Creative,
     }
     public static GameMode CurrentMode { get; set; }
     public enum GameState

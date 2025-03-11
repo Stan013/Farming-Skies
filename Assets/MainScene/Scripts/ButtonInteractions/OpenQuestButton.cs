@@ -7,22 +7,23 @@ using TMPro;
 public class OpenQuestButton : MonoBehaviour
 {
     public bool questActive = false;
-    public TMP_Text openQuestText;
+    public Image questButtonImage;
+    public Sprite upIcon;
+    public Sprite downIcon;
 
     public void OpenQuestMenu()
     {
         if (!questActive)
         {
-            openQuestText.SetText("v");
-            openQuestText.GetComponent<RectTransform>().rotation = Quaternion.Euler(0f, 0f, 180f);
+            questButtonImage.sprite = downIcon;
             GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 270);
             GameManager.QM.questMenu.SetActive(true);
             questActive = true;
         }
         else
         {
-            openQuestText.SetText("v");
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 510);
+            questButtonImage.sprite = upIcon;
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 495);
             GameManager.QM.questMenu.SetActive(false);
             questActive = false;
         }

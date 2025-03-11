@@ -24,6 +24,7 @@ public class PlantManager : MonoBehaviour
                     island.ToggleState(Island.IslandState.Cultivated, Island.IslandState.Sowed);
                 }
             }
+            GameManager.ISM.UpdateIslandMaterial(island);
         }
     }
 
@@ -79,6 +80,6 @@ public class PlantManager : MonoBehaviour
                 }
             }
         }
-        island.CheckWarningIcon();
+        island.UpdateNutrientsRequired();
     }
 }

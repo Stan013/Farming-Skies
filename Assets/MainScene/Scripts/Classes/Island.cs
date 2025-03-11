@@ -305,7 +305,7 @@ public class Island : MonoBehaviour
 
     public void CheckWarningIcon()
     {
-        if (nutrientsRequired.Sum() > nutrientsAvailable.Sum())
+        if (nutrientsRequired[1] > nutrientsAvailable[1] || nutrientsRequired[2] > nutrientsAvailable[2] || nutrientsRequired[3] > nutrientsAvailable[3] && warningIcon.activeSelf != true)
         {
             warningIcon.SetActive(true);
         }

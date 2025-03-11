@@ -26,7 +26,7 @@ public class IslandInfoUI : MonoBehaviour
 
     public void SetupIslandInfo(Island island)
     {
-        for (int i = 0; i <= island.nutrientsRequired.Count; i++)
+        for (int i = 0; i < island.nutrientsRequired.Count; i++)
         {
             nutrientsRequiredText[i].SetText(island.nutrientsRequired[i].ToString() + " L");
         }

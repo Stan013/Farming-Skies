@@ -52,17 +52,18 @@ public class TutorialManager : MonoBehaviour
             case 3:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.UIbutton.GetComponent<Button>());
                 GameManager.UM.UIbutton.GetComponent<Image>().color = Color.green;
-                UpdateTutorial("Look at your stats!", "Use your mouse and click on the highlighted green button on the left side of your screen. To see all the stats of your farm.");
+                UpdateTutorial("Look at your stats!", "Use your mouse and click on the green highlighted label at the left side of your screen. To see all the stats of your farm.");
                 break;
             case 4:
                 GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.green;
-                UpdateTutorial("Check your expenses!", "Now, use your mouse again and left-click on the green label that shows your expenses. You can see what you need to pay for.");
+                UpdateTutorial("Check your expenses!", "Now, use your mouse again and left click on the green label that shows your expenses. This shows what you need to pay for.");
                 break;
             case 5:
                 GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 UpdateTutorial("Check upcoming events!", "Do the same thing again and left click on the green label that shows the date. Here you can see all the events each month.");
                 break;
             case 6:
+                GameManager.UM.UIbutton.GetComponent<OpenUIButton>().OpenUIMenu();
                 GameManager.HM.SetStartingHand();
                 Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
                 cardCultivator.GetComponent<Image>().color = Color.green;
@@ -124,21 +125,31 @@ public class TutorialManager : MonoBehaviour
                 UpdateTutorial("Look at your spoils!", "You watched your harvest, now open up your inventory by pressing E and find out how much you got. Your yield can increase or decrease based on whether the crops' needs are met.");
                 break;
             case 16:
-                GameManager.IPM.inventoryModeEnabled = false;
                 UpdateTutorial("Inspect your land!", "Go out of inventory mode by pressing E and notice that the quality of your land has changed. A warning icon has appeared as well, let's press Q to go into manage mode and see what's up.");
                 break;
             case 17:
+                GameManager.IPM.inventoryModeEnabled = false;
                 GameManager.IPM.islandInspectEnabled = true;
                 UpdateTutorial("Select your land!", "With your mouse hover over the land that has a warning icon on top of it. Now click with your left mouse button and an information panel should appear on the right side of your screen.");
                 break;
             case 18:
-                GameManager.IPM.islandInspectEnabled = true;
-                UpdateTutorial("Check your crop needs!", "This displays how much water and nutrients your land has, plus how much water and nutrients your crops require. ");
+                UpdateTutorial("Check your crop needs!", "You can see how much water and nutrients your crops require. Don't run out of water because your land will dry up. Now click with your left mouse button on the blue switch icon.");
+                break;
+            case 19:
+                UpdateTutorial("Your island reserves!", "It now shows how much your land still has. Some of these reserves are too low for the next harvest so let's help your land out. With your left mouse button click on the red close icon.");
+                break;
+            case 20:
+                GameManager.IPM.islandInspectEnabled = false;
+                GameManager.IPM.inventoryModeEnabled = true;
+                UpdateTutorial("Open craft mode!", "First we need some cards to use, so open the crafting menu by pressing C. Here you can craft any card you need. You can filter the different card types with the blue buttons on top.");
+                break;
+            case 21:
+                UpdateTutorial("Find nitrogen fertilizer!", "The first nutrient that was low was Nitrogen, so by using the blue arrow buttons. Cycle through the cards until the nitrogen fertilizer card is in the center.");
+                break;
+            case 22:
+                UpdateTutorial("Look at your storage!", "Click on the green highlighted plus button to set the amount of cards you want to craft. It then displays the cost, now open up your stats again and see if you have enough.");
                 break;
                 /*
-                case 11:
-                    UpdateQuest("Move back to your land!", "In order to improve the nutrients in your soil we will have to move above your land again and use some cards on it. Press <b>TAB</b> to go out of manage mode and now you can freely move around your farm with your <b>WASD</b> keys. You can also move <b>UP</b> by pressing your <b>SHIFT</b> key and <b>DOWN</b> by pressing your <b>CTRL</b> key. Your WASD movement is based on the direction you are looking in. So try to get above your land so we can improve your soil.");
-                    break;
                 case 12:
                     GameManager.UM.SetUIButtons(true, GameManager.UM.openCraftButton);
                     GameManager.UM.openCraftButton.GetComponent<Image>().color = Color.green;

@@ -54,8 +54,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void UpdateUI()
     {
         dateAmountText.SetText(GameManager.TM.GetDate());
-        expenseAmountText.SetText(expense.ToString());
-        moneyAmountText.SetText(money.ToString());
+        expenseAmountText.SetText(expense.ToString() + " ₴");
+        moneyAmountText.SetText(money.ToString() + " ₴");
         waterAmountText.SetText(water.ToString() + " L");
         fertilizerAmountText.SetText(fertilizer.ToString() + " L");
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
@@ -63,8 +63,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void SetBuildIslandSlider()
     {
-        buildCostText.SetText(GameManager.IPM.clickedIsland.islandBuildCost.ToString());
-        expenseCostText.SetText(GameManager.IPM.clickedIsland.islandTaxCost.ToString());
+        buildCostText.SetText(GameManager.IPM.clickedIsland.islandBuildCost.ToString() + " ₴");
+        expenseCostText.SetText(GameManager.IPM.clickedIsland.islandTaxCost.ToString() + " ₴");
         if (constructionLabel != null)
         {
             Vector2 mousePosition = Input.mousePosition;

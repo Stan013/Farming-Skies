@@ -16,14 +16,14 @@ public class OpenQuestButton : MonoBehaviour
         if (!questActive)
         {
             questButtonImage.sprite = downIcon;
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 270);
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 235);
             GameManager.QM.questMenu.SetActive(true);
             questActive = true;
         }
         else
         {
             questButtonImage.sprite = upIcon;
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 495);
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 505);
             GameManager.QM.questMenu.SetActive(false);
             questActive = false;
         }

@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         {
             case GameState.MainMenuMode:
                 MainMenuStatus(false);
+                cam.transform.position = new Vector3(0f, 10f, 0f);
                 break;
             case GameState.Default:
                 IPM.rb.velocity = Vector3.zero;

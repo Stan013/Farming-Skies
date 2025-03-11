@@ -15,13 +15,13 @@ public class OpenUIButton : MonoBehaviour
     {
         if (!UIActive)
         {
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(-510, GetComponent<RectTransform>().anchoredPosition.y);
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(-480, GetComponent<RectTransform>().anchoredPosition.y);
             GameManager.UM.UIMenu.SetActive(true);
             UIActive = true;
         }
         else
         {
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(-930, GetComponent<RectTransform>().anchoredPosition.y);
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(-925, GetComponent<RectTransform>().anchoredPosition.y);
             GameManager.UM.UIMenu.SetActive(false);
             GameManager.UM.infoMenu.SetActive(false);
             UIActive = false;

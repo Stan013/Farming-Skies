@@ -51,48 +51,48 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 3:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.UIbutton.GetComponent<Button>());
-                GameManager.UM.UIbutton.GetComponent<Image>().color = Color.green;
+                GameManager.UM.UIbutton.GetComponent<Image>().color = Color.blue;
                 UpdateTutorial("Look at your stats!", "Use your mouse and click on the green highlighted label at the left side of your screen. To see all the stats of your farm.");
                 break;
             case 4:
-                GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.blue;
                 UpdateTutorial("Check your expenses!", "Now, use your mouse again and left click on the green label that shows your expenses. This shows what you need to pay for.");
                 break;
             case 5:
-                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.blue;
                 UpdateTutorial("Check upcoming events!", "Do the same thing again and left click on the green label that shows the date. Here you can see all the events each month.");
                 break;
             case 6:
                 GameManager.UM.UIbutton.GetComponent<OpenUIButton>().OpenUIMenu();
                 GameManager.HM.SetStartingHand();
                 Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
-                cardCultivator.GetComponent<Image>().color = Color.green;
+                cardCultivator.GetComponent<Image>().color = Color.blue;
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
                 UpdateTutorial("Start cultivating!", "It is time to start getting your land ready for planting. Hover over the green highlighted card, hold the left mouse button down, and move towards your land.");
                 break;
             case 7:
                 Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
-                cardWateringCan.GetComponent<Image>().color = Color.green;
+                cardWateringCan.GetComponent<Image>().color = Color.blue;
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
                 UpdateTutorial("Water your land!", "Your land has been cultivated now, let's water it so we can plant it. Hover over the green highlighted card again, hold the left mouse button down, and move towards your land.");
                 break;
             case 8:
                 cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
-                cardGreenBean.GetComponent<Image>().color = Color.green;
+                cardGreenBean.GetComponent<Image>().color = Color.blue;
                 cardGreenBean.GetComponent<CardInspect>().enabled = true;
                 UpdateTutorial("Inspect your plant!", "Your land is ready for planting, but first let's see what crops you have and what they need. Click with your right mouse button on the green highlighted card and click again to close.");
                 break;
             case 9:
                 cardChive = GameManager.HM.FindCardInHandById("CardChivePlant");
-                cardChive.GetComponent<Image>().color = Color.green;
+                cardChive.GetComponent<Image>().color = Color.blue;
                 cardChive.GetComponent<CardInspect>().enabled = true;
                 UpdateTutorial("Inspect another!", "Right click with your mouse on the other green highlighted card. And as you can see, the plant size, water, and nutrient needs are different. This will result in a different yield.");
                 break;
             case 10  :
                 cardChard = GameManager.HM.FindCardInHandById("CardChardPlant");
                 cardRice = GameManager.HM.FindCardInHandById("CardRicePlant");
-                cardChard.GetComponent<Image>().color = Color.green;
-                cardRice.GetComponent<Image>().color = Color.green;
+                cardChard.GetComponent<Image>().color = Color.blue;
+                cardRice.GetComponent<Image>().color = Color.blue;
                 cardChard.GetComponent<CardInspect>().enabled = true;
                 cardRice.GetComponent<CardInspect>().enabled = true;
                 UpdateTutorial("Compare all of them!", "I hope you noticed the difference now, inspect the remaining plants. Each month, the nutrients in your lamd will refill, so making good combinations can be very beneficial.");

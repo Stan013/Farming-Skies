@@ -23,13 +23,9 @@ public class OpenQuestButton : MonoBehaviour
         else
         {
             questButtonImage.sprite = upIcon;
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 505);
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 510);
             GameManager.QM.questMenu.SetActive(false);
             questActive = false;
-        }
-        if (GetComponent<Image>().color == Color.green)
-        {
-            GetComponent<Image>().color = Color.white;
         }
     }
 }

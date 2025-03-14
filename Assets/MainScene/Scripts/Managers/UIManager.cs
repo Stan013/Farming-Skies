@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public float expense;
     public float money;
     public int water;
-    public int fertilizer;
+    public int fertiliser;
 
     [Header("Game variables text")]
     public TMP_Text expenseAmountText;
@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public TMP_Text waterAmountText;
     public TMP_Text cardAmountText;
     public TMP_Text dateAmountText;
-    public TMP_Text fertilizerAmountText;
+    public TMP_Text fertiliserAmountText;
 
     [Header("UI Island builder")]
     public TMP_Text buildCostText;
@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         expenseAmountText.SetText(expense.ToString() + " ₴");
         moneyAmountText.SetText(money.ToString() + " ₴");
         waterAmountText.SetText(water.ToString() + " L");
-        fertilizerAmountText.SetText(fertilizer.ToString() + " L");
+        fertiliserAmountText.SetText(fertiliser.ToString() + " L");
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
     }
 
@@ -82,11 +82,9 @@ public class UIManager : MonoBehaviour, IDataPersistence
             transparencySlider.value = alphaValue;
             if (alphaValue == 1f && island.islandBought == false)
             {
-                island.ToggleState(Island.IslandState.Default, Island.IslandState.Highlighted);
                 money -= island.islandBuildCost;
                 expense += island.islandTaxCost;
                 GameManager.ISM.AddIslandToBought(island);
-                island.islandBought = true;
                 constructionLabel.gameObject.SetActive(false);
                 GameManager.UM.UpdateUI();
             }
@@ -98,7 +96,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         expense = data.tax;
         money = data.balance;
         water = data.water;
-        fertilizer = data.fertilizer;
+        fertiliser = data.fertiliser;
     }
 
     public void SaveData(ref GameData data)
@@ -106,6 +104,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
         data.tax = expense;
         data.balance = money;
         data.water = water;
-        data.fertilizer = fertilizer;
+        data.fertiliser = fertiliser;
     }
 }

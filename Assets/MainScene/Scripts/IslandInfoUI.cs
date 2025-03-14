@@ -30,7 +30,7 @@ public class IslandInfoUI : MonoBehaviour
         {
             nutrientsRequiredText[i].SetText(island.nutrientsRequired[i].ToString() + " L");
         }
-        for (int i = 0; i <= island.nutrientsAvailable.Count; i++)
+        for (int i = 0; i < island.nutrientsAvailable.Count; i++)
         {
             nutrientsAvailableText[i].SetText(island.nutrientsAvailable[i].ToString() + " L");
         }

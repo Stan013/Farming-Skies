@@ -23,8 +23,8 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             if (fillAmount == 0)
             {
                 GameManager.CRM.isCrafting = false;
-                GameManager.CRM.craftButton.GetComponent<Image>().color = Color.green;
-                GameManager.CRM.craftButtonText.SetText("Card crafted");
+                GameManager.CRM.craftButton.GetComponent<Image>().sprite = GameManager.CRM.successCraft;
+                GameManager.CRM.craftButtonText.SetText("Craft success");
                 GameManager.CRM.craftSuccess = true;
             }
         }
@@ -44,8 +44,8 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 slot.SetActive(false);
             }
-            GameManager.CRM.craftButtonText.SetText("Crafting....");
-            GameManager.CRM.craftButton.GetComponent<Image>().color = new Color(1f, 0.64f, 0f);
+            GameManager.CRM.craftButton.GetComponent<Image>().sprite = GameManager.CRM.validCraft;
+            GameManager.CRM.craftButtonText.SetText("Crafting...");
             GameObject centerSlot = GameManager.CRM.selectionSlots[2];
             centerSlot.SetActive(true);
             GameManager.CRM.craftUI.craftCardCover.SetActive(true);
@@ -65,26 +65,18 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     Destroy(resource.gameObject);
                 }
                 GameManager.CRM.craftUI.craftResources.Clear();
-                GameManager.CRM.craftButton.GetComponent<Image>().color = Color.red;
-                GameManager.CRM.craftButtonText.SetText("Unsuccessful");
+                GameManager.CRM.craftButton.GetComponent<Image>().sprite = GameManager.CRM.validCraft;
+                GameManager.CRM.craftButtonText.SetText("Craft card");
             }
             else
             {
                 GameManager.UM.money -= GameManager.CRM.selectedCard.cardCraftResources[0];
                 GameManager.UM.water -= GameManager.CRM.selectedCard.cardCraftResources[1];
-                GameManager.UM.fertilizer -= GameManager.CRM.selectedCard.cardCraftResources[2];
+                GameManager.UM.fertiliser -= GameManager.CRM.selectedCard.cardCraftResources[2];
                 GameManager.DM.AddCardToDeck(GameManager.CRM.selectedCard.cardId);
                 GameManager.CRM.SetCardCraftAmount(0);
                 GameManager.UM.UpdateUI();
-                if(GameManager.TTM.tutorial)
-                {
-                    if(GameManager.CRM.selectedCard.cardName == "Phosphorus Fertilizer" || GameManager.CRM.selectedCard.cardName == "Potassium Fertilizer" || GameManager.CRM.selectedCard.cardName == "Nitrogen Fertilizer")
-                    {
-                        GameManager.CRM.selectedCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f);
-                        GameManager.CRM.matchingCard = false;
-                        GameManager.CRM.CheckSelectedCard();
-                    }
-                }
+                GameManager.CRM.CalculateMaxCraftableAmount();
             }
             GameManager.CRM.ResetCraftCard();
         }

@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2259297375406068178}
   - component: {fileID: 4322764034554363831}
   m_Layer: 0
-  m_Name: PhosphorusFertilizer
+  m_Name: PhosphorusFertiliser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -26,9 +26,5 @@ public class OpenUIButton : MonoBehaviour
             GameManager.UM.infoMenu.SetActive(false);
             UIActive = false;
         }
-        if (GetComponent<Image>().color == Color.green)
-        {
-            GetComponent<Image>().color = Color.white;
-        }
     }
 }

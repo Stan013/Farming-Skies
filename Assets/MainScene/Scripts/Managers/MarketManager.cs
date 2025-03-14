@@ -10,6 +10,7 @@ public class MarketManager : MonoBehaviour
     public List<MarketItem> itemsInMarket;
     public GameObject marketWindow;
     public GameObject marketContentArea;
+    public Scrollbar marketScrollbar;
 
     private int[] marketChanges = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
     private float[] marketWeights = {1f, 1.2f, 1.4f, 1.6f, 1.7f, 1.8f, 1.7f, 1.6f, 1.4f, 1.2f, 1f};
@@ -20,20 +21,6 @@ public class MarketManager : MonoBehaviour
     {
         foreach(MarketItem marketItem in itemsInMarket)
         {
-            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 17)
-            {
-                if(marketItem.attachedItemCard.itemName == "Green Bean")
-                {
-                    marketItem.sellUI.plusButton.GetComponent<Image>().color = Color.green;
-                    marketItem.sellUI.maxButton.GetComponent<Image>().color = Color.green;
-                    marketItem.buyUI.enabled = false;
-                }
-                else
-                {
-                    marketItem.sellUI.enabled = false;
-                    marketItem.buyUI.enabled = false;
-                }
-            }
             marketItem.itemQuantityText.SetText(marketItem.attachedItemCard.itemQuantity.ToString());
             marketItem.sellUI.inputAmount.text = "";
             marketItem.buyUI.inputAmount.text = "";
@@ -71,7 +58,6 @@ public class MarketManager : MonoBehaviour
                 item.attachedItemCard.itemDemand = (float)Math.Round(baseDemand * (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
                 item.attachedItemCard.itemSupply = (float)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
                 item.priceCurrent = (float)Math.Round(currentPrice * (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
-                item.UpdateLowHighPrices();
                 item.UpdateMarketItem(item.attachedItemCard);
             }
         }

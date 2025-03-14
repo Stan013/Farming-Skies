@@ -958,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Name
-      value: NitrogenFertilizerCard
+      value: NitrogenFertiliserCard
       objectReference: {fileID: 0}
     - target: {fileID: 1921602048528338584, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -966,7 +966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardId
-      value: CardNitrogenFertilizerUtility
+      value: CardNitrogenFertiliserUtility
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
@@ -974,7 +974,7 @@ PrefabInstance:
       objectReference: {fileID: 32900000, guid: 25273ab5b1c50a34bbf4fe4bb48b440f, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
-      value: Nitrogen Fertilizer
+      value: Nitrogen Fertiliser
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardType
@@ -990,11 +990,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: nutrientIndex
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardDescription
-      value: Nitrogen fertilizing liquid that can be used to fertilize your land.
+      value: Nitrogen fertilising liquid that can be used to fertilise your land.
         It will add 50 nitrogen to the soil you used it on.
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
@@ -1669,12 +1669,12 @@ PrefabInstance:
       value: Island(-1,-1)Ring1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: currentState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandTaxCost
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: potentialState
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
@@ -2257,7 +2257,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5344,17 +5344,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6758,10 +6758,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_SizeDelta.y
       value: 90
       objectReference: {fileID: 0}
@@ -6795,7 +6791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 125
+      value: 162.5
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6860,7 +6856,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 680, y: 0}
-  m_SizeDelta: {x: 110, y: 50}
+  m_SizeDelta: {x: 115, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &225684816
 MonoBehaviour:
@@ -7973,7 +7969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.68235296, g: 0.90196085, b: 0.5058824, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13347,6 +13343,10 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: potentialState
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
       value: 1
       objectReference: {fileID: 0}
@@ -14666,7 +14666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 150
+      value: 162.5
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -15479,7 +15479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Name
-      value: PotassiumFertilizerCard
+      value: PotassiumFertiliserCard
       objectReference: {fileID: 0}
     - target: {fileID: 1921602048528338584, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -15487,7 +15487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardId
-      value: CardPotassiumFertilizerUtility
+      value: CardPotassiumFertiliserUtility
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
@@ -15495,7 +15495,7 @@ PrefabInstance:
       objectReference: {fileID: 32900000, guid: 11a5fb3e78708aa4bb03d8a67985304d, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
-      value: Potassium Fertilizer
+      value: Potassium Fertiliser
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardType
@@ -15511,12 +15511,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: nutrientIndex
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardDescription
-      value: Potassium fertilizing liquid that can be used to fertilize your land.
-        It will add 50 potassium to the soil you used it on.
+      value: Potassium fertilising liquid that can be used to fertilise your land.
+        It will add 50 potassium to the land you used it on.
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -16041,16 +16041,12 @@ PrefabInstance:
       value: Island(0,-1)Ring1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: currentState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandTaxCost
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: potentialState
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
@@ -18212,8 +18208,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -675, y: 0}
-  m_SizeDelta: {x: 150, y: 175}
+  m_AnchoredPosition: {x: -700, y: 0}
+  m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &699804927
 PrefabInstance:
@@ -20313,16 +20309,16 @@ PrefabInstance:
       value: Island(1,1)Ring1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: currentState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: _islandStatus
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandTaxCost
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: potentialState
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
@@ -21129,10 +21125,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -23519,17 +23515,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Craft
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281611318
+  m_fontColor: {r: 0.21176471, g: 0.20414071, b: 0.20392157, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -23546,13 +23542,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -27397,7 +27393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Name
-      value: PhosphorusFertilizerCard
+      value: PhosphorusFertiliserCard
       objectReference: {fileID: 0}
     - target: {fileID: 1921602048528338584, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -27405,7 +27401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardId
-      value: CardPhosphorusFertilizerUtility
+      value: CardPhosphorusFertiliserUtility
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
@@ -27413,7 +27409,7 @@ PrefabInstance:
       objectReference: {fileID: 32900000, guid: a4633a9859c30d6478024f59cd7fbbe8, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
-      value: Phosphorus Fertilizer
+      value: Phosphorus Fertiliser
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardType
@@ -27429,12 +27425,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: nutrientIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardDescription
-      value: Phosphorus fertilizing liquid that can be used to fertilize your land.
-        It will add 50 phosphorus to the soil you used it on.
+      value: Phosphorus fertilising liquid that can be used to fertilise your land.
+        It will add 50 phosphorus to the land you used it on.
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -30979,7 +30975,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 450}
+  m_SizeDelta: {x: 325, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1143907901
 MonoBehaviour:
@@ -32367,7 +32363,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 555, y: 0}
-  m_SizeDelta: {x: 110, y: 50}
+  m_SizeDelta: {x: 115, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193178772
 MonoBehaviour:
@@ -32956,8 +32952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: -71}
-  m_SizeDelta: {x: 350, y: 515}
+  m_AnchoredPosition: {x: -25, y: -75}
+  m_SizeDelta: {x: 350, y: 475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1217507118
 MonoBehaviour:
@@ -32981,10 +32977,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0.5019608}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -33035,13 +33031,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220327572}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 270892826}
-  m_Father: {fileID: 2661151753590545840}
+  m_Father: {fileID: 6650326524659519570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -33147,15 +33143,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -33281,17 +33277,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -33507,8 +33503,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.5}
-  m_SizeDelta: {x: 0, y: -3}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1225820108
 MonoBehaviour:
@@ -33532,15 +33528,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -33557,8 +33553,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -34224,7 +34220,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 450}
+  m_SizeDelta: {x: 325, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1252305732
 MonoBehaviour:
@@ -35418,17 +35414,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u200B"
+  m_text: "0\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -37579,15 +37575,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Amount:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -37604,13 +37600,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -39197,16 +39193,16 @@ PrefabInstance:
       value: Island(1,0)Ring1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: currentState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: _islandStatus
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandTaxCost
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: potentialState
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
@@ -41766,17 +41762,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -42336,15 +42332,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Cost:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -42361,13 +42357,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -43082,6 +43078,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: nutrientIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
@@ -44586,16 +44586,16 @@ PrefabInstance:
       value: Island(0,1)Ring1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: currentState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: _islandStatus
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandTaxCost
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: potentialState
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
@@ -44899,8 +44899,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1918246868}
   m_HandleRect: {fileID: 1918246866}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.4999999
+  m_Value: 0
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -45723,15 +45723,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Min
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -45748,8 +45748,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -45999,12 +45999,12 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 0
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -52033,7 +52033,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 430.00003, y: 0}
-  m_SizeDelta: {x: 110, y: 50}
+  m_SizeDelta: {x: 115, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1837962452
 MonoBehaviour:
@@ -52833,7 +52833,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.00073719025}
+  m_AnchoredPosition: {x: 0, y: 0.00030213594}
   m_SizeDelta: {x: 1345, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1860169079
@@ -54175,8 +54175,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2138290732}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.50000006}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -54423,8 +54423,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 675, y: 0}
-  m_SizeDelta: {x: 150, y: 175}
+  m_AnchoredPosition: {x: 700, y: 0}
+  m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1922960588
 PrefabInstance:
@@ -54970,15 +54970,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
+  m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -54995,8 +54995,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -55681,7 +55681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 1}
+  m_Color: {r: 0.5411765, g: 0.5411765, b: 0.54901963, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -56618,16 +56618,16 @@ PrefabInstance:
       value: Island(-1,1)Ring1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: currentState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: _islandStatus
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandTaxCost
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: potentialState
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
@@ -57216,11 +57216,11 @@ MonoBehaviour:
   craftAmountInput: {fileID: 1608752852}
   balanceCostText: {fileID: 1469561572}
   waterCostText: {fileID: 1222544133}
-  fertilizerCostText: {fileID: 161158379}
+  fertiliserCostText: {fileID: 161158379}
   craftCardCover: {fileID: 1217507116}
   waterCraftIcon: {fileID: 21300000, guid: b45ffa70f41577a48bd958e7c5d4125d, type: 3}
   coinCraftIcon: {fileID: 21300000, guid: 752c4dc99e9ea9143b9fc3e358c8e7a3, type: 3}
-  fertilizerCraftIcon: {fileID: 21300000, guid: f118b98ccc8967947926e7cf3ab72467, type: 3}
+  fertiliserCraftIcon: {fileID: 21300000, guid: f118b98ccc8967947926e7cf3ab72467, type: 3}
   spawnArea1: {fileID: 2007909169}
   spawnArea2: {fileID: 275157710}
   resource: {fileID: 2547574726261885398, guid: 2ee32253b114e4b42bb0ca97ce2ca144, type: 3}
@@ -57228,7 +57228,7 @@ MonoBehaviour:
   spawnAreaIndex: 0
   coinCost: 0
   waterCost: 0
-  fertilizerCost: 0
+  fertiliserCost: 0
   leftButton: {fileID: 695569815}
   rightButton: {fileID: 1922149146}
 --- !u!114 &2073053640
@@ -57342,16 +57342,16 @@ PrefabInstance:
       value: Island(-1,0)Ring1
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
-      propertyPath: currentState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: _islandStatus
       value: Unbought
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandTaxCost
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: potentialState
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: islandAvailable
@@ -60048,7 +60048,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4281742388
   m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -60141,7 +60141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2222359008452419762}
   - component: {fileID: 7945776442328556530}
-  - component: {fileID: 4409143633988297283}
   m_Layer: 5
   m_Name: HomeScreen
   m_TagString: Untagged
@@ -60258,7 +60257,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4281742388
   m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -60650,7 +60649,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3402395179999337383}
   - component: {fileID: 6698718030795102776}
-  - component: {fileID: 3142260016963351936}
   m_Layer: 5
   m_Name: GameScreen
   m_TagString: Untagged
@@ -60950,7 +60948,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
+    rgba: 4286151033
   m_fontColor: {r: 0.4745098, g: 0.4745098, b: 0.4745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -61311,7 +61309,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4281742388
   m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -61641,7 +61639,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4281742388
   m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -62169,7 +62167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Manage your islands!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
@@ -62178,7 +62176,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4281742388
   m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -62196,8 +62194,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -62257,7 +62255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 45}
+  m_AnchoredPosition: {x: -10, y: 55}
   m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2080490970306452466
@@ -62551,7 +62549,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4281742388
   m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -62720,7 +62718,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 5, y: 5}
-  m_SizeDelta: {x: 125, y: 20}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2396980218983093667
 RectTransform:
@@ -62805,7 +62803,6 @@ GameObject:
   m_Component:
   - component: {fileID: 680069203830137978}
   - component: {fileID: 7671476292116846670}
-  - component: {fileID: 3053951653773014650}
   m_Layer: 5
   m_Name: LoadMode
   m_TagString: Untagged
@@ -63006,7 +63003,6 @@ Transform:
   - {fileID: 89339860}
   - {fileID: 5565425345248548342}
   - {fileID: 3016592021580990424}
-  - {fileID: 1220327573}
   m_Father: {fileID: 8545395672337255013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2662327594444571503
@@ -63087,7 +63083,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
+    rgba: 4286151033
   m_fontColor: {r: 0.4745098, g: 0.4745098, b: 0.4745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -63434,36 +63430,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8515244217986163348}
   m_CullTransparentMesh: 1
---- !u!114 &3053951653773014650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2443284324766611388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7490196}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &3064448588994375637
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -63498,36 +63464,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3142260016963351936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923966746835623718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7490196}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &3151281420527001626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64853,36 +64789,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4409143633988297283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245957071819615227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 6abe918ee1229b34f8557fc2a5a39825, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &4417066235820167370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64913,13 +64819,13 @@ MonoBehaviour:
   expense: 0
   money: 0
   water: 0
-  fertilizer: 0
+  fertiliser: 0
   expenseAmountText: {fileID: 3928377874529171891}
   moneyAmountText: {fileID: 2683957701878787076}
   waterAmountText: {fileID: 4801239128684723928}
   cardAmountText: {fileID: 7912848233730572738}
   dateAmountText: {fileID: 1305217719665846578}
-  fertilizerAmountText: {fileID: 4813861992484909716}
+  fertiliserAmountText: {fileID: 4813861992484909716}
   buildCostText: {fileID: 2150299982182787186}
   expenseCostText: {fileID: 1617302317208246472}
   transparencySlider: {fileID: 6220280989209536805}
@@ -65275,6 +65181,7 @@ MonoBehaviour:
   itemsInMarket: []
   marketWindow: {fileID: 89339859}
   marketContentArea: {fileID: 1860169077}
+  marketScrollbar: {fileID: 1580948952}
 --- !u!224 &4683400640112149204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65458,7 +65365,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
+    rgba: 4286151033
   m_fontColor: {r: 0.4745098, g: 0.4745098, b: 0.4745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -65557,7 +65464,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
+    rgba: 4286151033
   m_fontColor: {r: 0.4745098, g: 0.4745098, b: 0.4745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -67509,7 +67416,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4281742388
   m_fontColor: {r: 0.20392159, g: 0.20392159, b: 0.21176472, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -67836,6 +67743,7 @@ RectTransform:
   - {fileID: 1627115198}
   - {fileID: 5541642512247819870}
   - {fileID: 1852544379936751172}
+  - {fileID: 1220327573}
   m_Father: {fileID: 8545395672337255013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -68575,8 +68483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectColor: {r: 0.20392159, g: 0.20392159, b: 0.21568629, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!1 &7454793006654495564
 GameObject:
@@ -69226,7 +69134,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
+    rgba: 4286151033
   m_fontColor: {r: 0.4745098, g: 0.4745098, b: 0.4745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -69649,7 +69557,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6002842654370067964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -69658,7 +69566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: 0, y: 275}
   m_SizeDelta: {x: 1350, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8273482482997427825
@@ -69771,15 +69679,15 @@ MonoBehaviour:
   craftUI: {fileID: 2073053639}
   craftButton: {fileID: 814792657}
   craftButtonText: {fileID: 901645873}
+  invalidCraft: {fileID: 21300000, guid: 273f8553cedaa4c4986ad7f0e1cab6cc, type: 3}
+  validCraft: {fileID: 21300000, guid: 61fd3d9dfb30c2e4eb44c67484e86dc9, type: 3}
+  successCraft: {fileID: 21300000, guid: 6858d1dd02ba1a140a70ec87c38f74e6, type: 3}
   isCrafting: 0
   biggestResourceCost: 0
   craftSuccess: 0
   craftSpeed: 0.25
   cardCraftAmount: 0
   maxCraftableAmount: 0
-  matchingCard: 0
-  craftedPotassium: 0
-  craftedPhosphorus: 0
 --- !u!114 &8413217862094962417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70755,7 +70663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 85}
+  m_AnchoredPosition: {x: 0, y: 90}
   m_SizeDelta: {x: 275, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8972318144995865122
@@ -71073,8 +70981,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectColor: {r: 0.20392159, g: 0.20392159, b: 0.21568629, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!4 &9218053735118042587
 Transform:

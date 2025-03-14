@@ -9,14 +9,14 @@ public class CraftUI : MonoBehaviour
 {
     public Button minButton, minusButton, plusButton, maxButton;
     public TMP_InputField craftAmountInput;
-    public TMP_Text balanceCostText, waterCostText, fertilizerCostText;
+    public TMP_Text balanceCostText, waterCostText, fertiliserCostText;
     public GameObject craftCardCover;
-    public Sprite waterCraftIcon, coinCraftIcon, fertilizerCraftIcon;
+    public Sprite waterCraftIcon, coinCraftIcon, fertiliserCraftIcon;
     public RectTransform spawnArea1, spawnArea2;
     public Resource resource;
     public List<Resource> craftResources;
     public int spawnAreaIndex;
-    public int coinCost, waterCost, fertilizerCost;
+    public int coinCost, waterCost, fertiliserCost;
     public Button leftButton, rightButton;
 
     public void SetupCraftingUI()
@@ -47,10 +47,10 @@ public class CraftUI : MonoBehaviour
 
         coinCost = GameManager.CRM.selectedCard.cardCraftResources[0] * GameManager.CRM.cardCraftAmount;
         waterCost = GameManager.CRM.selectedCard.cardCraftResources[1] * GameManager.CRM.cardCraftAmount;
-        fertilizerCost = GameManager.CRM.selectedCard.cardCraftResources[2] * GameManager.CRM.cardCraftAmount;
+        fertiliserCost = GameManager.CRM.selectedCard.cardCraftResources[2] * GameManager.CRM.cardCraftAmount;
         balanceCostText.text = coinCost.ToString() + " ₴";
         waterCostText.text = waterCost.ToString() + " L";
-        fertilizerCostText.text = fertilizerCost.ToString() + " L";
+        fertiliserCostText.text = fertiliserCost.ToString() + " L";
     }
 
     public void SpawnResources(int[] neededResources)
@@ -74,8 +74,8 @@ public class CraftUI : MonoBehaviour
             if (neededResources[2] > 0)
             {
                 spawnAreaIndex++;
-                SpawnSingleResource(spawnAreaIndex, "Fertilizer");
-                fertilizerCost -= 5;
+                SpawnSingleResource(spawnAreaIndex, "fertiliser");
+                fertiliserCost -= 5;
             }
         }
     }
@@ -118,6 +118,6 @@ public class CraftUI : MonoBehaviour
     {
         if (type == "Coin") return coinCraftIcon;
         if (type == "Water") return waterCraftIcon;
-        return fertilizerCraftIcon;
+        return fertiliserCraftIcon;
     }
 }

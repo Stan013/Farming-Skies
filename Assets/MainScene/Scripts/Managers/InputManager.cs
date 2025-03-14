@@ -225,15 +225,6 @@ public class InputManager : MonoBehaviour
             {
                 GameManager.UM.constructionLabel.gameObject.SetActive(false);
                 clickedIsland.ResetMaterials();
-                if (!GameManager.TTM.tutorial)
-                {
-                    clickedIsland.ToggleState(Island.IslandState.Default, Island.IslandState.Default);
-                }
-                else
-                {
-                    clickedIsland.topMat.SetColor("_EmissionColor", Color.blue * 2.0f);
-                    clickedIsland.bottomMat.SetColor("_EmissionColor", Color.blue * 2.0f);
-                }
             }
         }
 
@@ -249,8 +240,11 @@ public class InputManager : MonoBehaviour
             && hit2.transform.GetComponent<Island>() != null && islandInspectEnabled)
         {
             Island hitIsland = hit2.transform.GetComponent<Island>();
-            GameManager.ISM.islandMenu.SetActive(true);
-            GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().SetupIslandInfo(hitIsland);
+            if(hitIsland.islandBought)
+            {
+                GameManager.ISM.islandMenu.SetActive(true);
+                GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().SetupIslandInfo(hitIsland);
+            }
         }
     }
 

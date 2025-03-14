@@ -55,7 +55,6 @@ public class PlantManager : MonoBehaviour
                                 break;
                         }
                     }
-                    island.nutrientsAvailable[i] -= plant.nutrientsUsages[i];
                 }
                 else
                 {
@@ -79,6 +78,7 @@ public class PlantManager : MonoBehaviour
                     }
                 }
             }
+            island.nutrientsAvailable[i] -= plant.nutrientsUsages[i];
         }
         island.UpdateNutrientsRequired();
     }

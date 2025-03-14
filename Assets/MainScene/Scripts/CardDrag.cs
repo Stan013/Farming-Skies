@@ -38,72 +38,52 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             dragInstance.transform.LookAt(GameManager.cam.transform);
             dragInstanceRotation = Quaternion.Euler(0, dragInstance.transform.rotation.eulerAngles.y - 90, dragInstance.transform.rotation.eulerAngles.z);
             dragInstance.transform.rotation = dragInstanceRotation;
+            if (!collisionOn)
+            {
+                GameManager.ISM.SetCollisions(GameManager.HM.dragCard.cardType);
+                collisionOn = true;
+            }
+            else
+            {
+                collisionOn = false;
+            }
             switch (GameManager.HM.dragCard.cardType)
             {
                 case "Utility":
-                    if (!collisionOn)
-                    {
-                        GameManager.ISM.SetCollisions("Utility");
-                        collisionOn = true;
-                    }
-                    else
-                    {
-                        collisionOn = false;
-                    }
                     if (GameManager.ISM.CheckPotentialIsland() != null)
                     {
+                        if(hoverIsland != null)
+                        {
+                            previousHoverIsland = hoverIsland;
+                        }
                         hoverIsland = GameManager.ISM.CheckPotentialIsland();
-                        if (GameManager.HM.dragCard.name.Contains("CultivatorCard") && hoverIsland.currentState == Island.IslandState.Sowed && hoverIsland.potentialState != Island.IslandState.Cultivated)
+                        if (GameManager.HM.dragCard.cardName == "Cultivator" && GameManager.ISM.CheckPotentialIsland().currentState == Island.IslandState.Sowed)
                         {
-                            hoverIsland.TogglePotentialState(Island.IslandState.Cultivated, Island.IslandState.Sowed);
-                            previousHoverIsland = GameManager.ISM.CheckPotentialIsland();
+                            hoverIsland.previousState = hoverIsland.currentState;
+                            hoverIsland.ToggleState(Island.IslandState.Cultivated, hoverIsland.currentState);
                         }
-                        if (GameManager.HM.dragCard.name.Contains("WateringCanCard") && hoverIsland.currentState == Island.IslandState.Cultivated && hoverIsland.potentialState != Island.IslandState.Watered)
+                        if (GameManager.HM.dragCard.cardName == "Watering Can" && GameManager.ISM.CheckPotentialIsland().currentState == Island.IslandState.Cultivated)
                         {
-                            hoverIsland.TogglePotentialState(Island.IslandState.Watered, Island.IslandState.Cultivated);
-                            previousHoverIsland = hoverIsland;
+                            hoverIsland.previousState = hoverIsland.currentState;
+                            hoverIsland.ToggleState(Island.IslandState.Watered, hoverIsland.currentState);
                         }
-                        if (GameManager.HM.dragCard.name.Contains("GrassSeedCard") && hoverIsland.currentState != Island.IslandState.Sowed && hoverIsland.potentialState != Island.IslandState.Sowed)
+                        if (GameManager.HM.dragCard.cardName == "Grass Seed" && GameManager.ISM.CheckPotentialIsland().currentState != Island.IslandState.Sowed)
                         {
-                            hoverIsland.TogglePotentialState(Island.IslandState.Sowed, Island.IslandState.Watered);
-                            previousHoverIsland = hoverIsland;
+
+                            hoverIsland.previousState = hoverIsland.currentState;
+                            hoverIsland.ToggleState(Island.IslandState.Sowed, hoverIsland.currentState);
                         }
                     }
                     else
                     {
-                        if(previousHoverIsland != null)
+                        if(hoverIsland != null)
                         {
-                            previousHoverIsland.ToggleState(previousHoverIsland.currentState, previousHoverIsland.currentState);
-                            previousHoverIsland.potentialState = previousHoverIsland.currentState;
-                            previousHoverIsland = null;
+                            hoverIsland.ToggleState(hoverIsland.previousState, hoverIsland.currentState);
+                            hoverIsland = null;
                         }
                     }
                     break;
                 default:
-                    if (!collisionOn)
-                    {
-                        switch (GameManager.HM.dragCard.cardType)
-                        {
-                            case "PlantSmall":
-                                GameManager.ISM.SetCollisions("PlantSmall");
-                                break;
-                            case "PlantMedium":
-                                GameManager.ISM.SetCollisions("PlantMedium");
-                                break;
-                            case "PlantBig":
-                                GameManager.ISM.SetCollisions("PlantBig");
-                                break;
-                            case "Buildable":
-                                GameManager.ISM.SetCollisions("Buildable");
-                                break;
-
-                        }
-                        collisionOn = true;
-                    }
-                    else
-                    {
-                        collisionOn = false;
-                    }
                     if (CheckPotentialPlot() != null)
                     {
                         if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
@@ -135,39 +115,43 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         GameManager.HM.dragging = false;
         collisionOn = false;
-        if (hoverIsland != null && hoverIsland.currentState != hoverIsland.potentialState && GameManager.ISM.CheckPotentialIsland() != null)
+        switch (GameManager.HM.dragCard.cardType)
         {
-            GameManager.ISM.CheckPotentialIsland().ToggleState(hoverIsland.potentialState, hoverIsland.currentState);
-            if (GameManager.HM.dragCard.cardName == "Watering Can")
-            {
-                GameManager.ISM.CheckPotentialIsland().nutrientsAvailable[0] += 50;
-            }
-            GameManager.HM.dragCard.dragSucces = true;
-            GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
-        }
-        else
-        {
-            if (GameManager.ISM.CheckPotentialIsland() != null)
-            {
-                GameManager.ISM.CheckPotentialIsland().nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex] += 50;
-                GameManager.HM.dragCard.dragSucces = true;
-                GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
-            }
-            if (CheckPotentialPlot() != null)
-            {
-                CheckPotentialPlot().transform.GetChild(0).gameObject.SetActive(false);
-                GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity);
-                plant.transform.SetParent(hoverPlot.transform);
-                plant.transform.localPosition = new Vector3(0, -0.25f, 0);
-                hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
-                GameManager.HM.dragCard.dragSucces = true;
-                GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
-            }
-            else
-            {
-                GameManager.HM.dragCard.dragSucces = false;
-                GameManager.HM.dragCard.ToggleState(Card.CardState.InHand, Card.CardState.InDrag);
-            }
+            case "Utility":
+                if (hoverIsland != null)
+                {
+                    if(GameManager.HM.dragCard.nutrientIndex != 0)
+                    {
+                        hoverIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex-1] += 50;
+                    }
+                    GameManager.HM.dragCard.dragSucces = true;
+                    GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+                }
+                else
+                {
+                    hoverIsland = null;
+                    GameManager.HM.dragCard.dragSucces = false;
+                    GameManager.HM.dragCard.ToggleState(Card.CardState.InHand, Card.CardState.InDrag);
+                }
+                break;
+            default:
+                if (CheckPotentialPlot() != null)
+                {
+                    CheckPotentialPlot().transform.GetChild(0).gameObject.SetActive(false);
+                    GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity);
+                    plant.transform.SetParent(hoverPlot.transform);
+                    plant.transform.localPosition = new Vector3(0, -0.25f, 0);
+                    hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
+                    hoverIsland.UpdateNutrientsRequired();
+                    GameManager.HM.dragCard.dragSucces = true;
+                    GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+                }
+                else
+                {
+                    GameManager.HM.dragCard.dragSucces = false;
+                    GameManager.HM.dragCard.ToggleState(Card.CardState.InHand, Card.CardState.InDrag);
+                }
+                break;
         }
         Destroy(dragInstance);
         GameManager.ISM.SetCollisions("Reset");

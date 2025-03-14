@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4700944383041299446}
   - component: {fileID: 5731536039587344205}
   m_Layer: 0
-  m_Name: PotassiumFertilizer
+  m_Name: PotassiumFertiliser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,6 +15,10 @@ public class CardInspect : MonoBehaviour, IPointerClickHandler
                 GameManager.CM.inspectCard = GetComponent<Card>();
                 GameManager.CM.inspectCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(transform.parent.GetComponent<RectTransform>().anchoredPosition.x * 2 * -1, 1250);
                 GameManager.CM.inspectCard.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
+                if(GameManager.CM.inspectCard.hasBeenInspected != true)
+                {
+                    GameManager.CM.inspectCard.hasBeenInspected = true;
+                }
             }
             else
             {

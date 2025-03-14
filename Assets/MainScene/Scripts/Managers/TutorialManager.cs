@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -51,68 +49,57 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 3:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.UIbutton.GetComponent<Button>());
-                GameManager.UM.UIbutton.GetComponent<Image>().color = Color.blue;
-                UpdateTutorial("Look at your stats!", "Use your mouse and click on the green highlighted label at the left side of your screen. To see all the stats of your farm.");
+                UpdateTutorial("Look at your stats!", "Use your mouse and click on the arrow at the left side of your screen. To see all your resources, the date and how many cards you have in your deck.");
                 break;
             case 4:
-                GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.blue;
+                GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 UpdateTutorial("Check your expenses!", "Now, use your mouse again and left click on the green label that shows your expenses. This shows what you need to pay for.");
                 break;
             case 5:
-                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.blue;
+                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
                 UpdateTutorial("Check upcoming events!", "Do the same thing again and left click on the green label that shows the date. Here you can see all the events each month.");
                 break;
             case 6:
                 GameManager.UM.UIbutton.GetComponent<OpenUIButton>().OpenUIMenu();
                 GameManager.HM.SetStartingHand();
                 Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
-                cardCultivator.GetComponent<Image>().color = Color.blue;
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Start cultivating!", "It is time to start getting your land ready for planting. Hover over the green highlighted card, hold the left mouse button down, and move towards your land.");
+                UpdateTutorial("Start cultivating!", "It is time to start getting your land ready for planting. Hover over the cultivator card and hold down your left mouse button. Now move towards your land to cultivate it.");
                 break;
             case 7:
                 Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
-                cardWateringCan.GetComponent<Image>().color = Color.blue;
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Water your land!", "Your land has been cultivated now, let's water it so we can plant it. Hover over the green highlighted card again, hold the left mouse button down, and move towards your land.");
+                UpdateTutorial("Water your land!", "Your land has been cultivated, let's water it so we can start planting. Hover over the watering can card and hold down your left mouse button again. Now move towards your land to water it.");
                 break;
             case 8:
                 cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
-                cardGreenBean.GetComponent<Image>().color = Color.blue;
                 cardGreenBean.GetComponent<CardInspect>().enabled = true;
-                UpdateTutorial("Inspect your plant!", "Your land is ready for planting, but first let's see what crops you have and what they need. Click with your right mouse button on the green highlighted card and click again to close.");
+                UpdateTutorial("Inspect your plant!", "Your land is ready for planting, but first let's see what crops you have and what they need. Click with your right mouse button on the green bean plant card and click again to put the card away.");
                 break;
             case 9:
                 cardChive = GameManager.HM.FindCardInHandById("CardChivePlant");
-                cardChive.GetComponent<Image>().color = Color.blue;
                 cardChive.GetComponent<CardInspect>().enabled = true;
-                UpdateTutorial("Inspect another!", "Right click with your mouse on the other green highlighted card. And as you can see, the plant size, water, and nutrient needs are different. This will result in a different yield.");
+                UpdateTutorial("Inspect another!", "Right click again with your mouse on the chive plant card this time. And as you can see, the plant size, water, and nutrient needs are different. This will result in a different yield.");
                 break;
             case 10  :
                 cardChard = GameManager.HM.FindCardInHandById("CardChardPlant");
                 cardRice = GameManager.HM.FindCardInHandById("CardRicePlant");
-                cardChard.GetComponent<Image>().color = Color.blue;
-                cardRice.GetComponent<Image>().color = Color.blue;
                 cardChard.GetComponent<CardInspect>().enabled = true;
                 cardRice.GetComponent<CardInspect>().enabled = true;
-                UpdateTutorial("Compare all of them!", "I hope you noticed the difference now, inspect the remaining plants. Each month, the nutrients in your lamd will refill, so making good combinations can be very beneficial.");
+                UpdateTutorial("Compare all of them!", "I hope you noticed the difference, so now inspect the remaining plant cards. Each month, the nutrients in your land will refill, so making good combinations can be very beneficial.");
                 break;
             case 11:
-                cardGreenBean.GetComponent<Image>().color = Color.green;
                 cardGreenBean.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Plant your first crop!", "Let's hover over the green highlighted card and this time hold down your left mouse button. Then move the plant towards your land and once snapped in place let go of your mouse.");
+                UpdateTutorial("Plant your first crop!", "Let's hover over your green bean plant card, but this time hold down your left mouse button. Then move the plant towards your land and once snapped in place let go of your mouse.");
                 break;
             case 12:
-                cardChive.GetComponent<Image>().color = Color.green;
                 cardChive.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Plant another crop!", "Now do it again with the other green highlighted card. Since the plant size is smaller, more plots available. You can however only have one plant for each plot.");
+                UpdateTutorial("Plant another crop!", "Now do it again with your chive plant card. Since the plant size is smaller, more plots are available. You can, however, only have one plant for each plot, so use your space efficiently.");
                 break;
             case 13:
-                cardChard.GetComponent<Image>().color = Color.green;
-                cardRice.GetComponent<Image>().color = Color.green;
                 cardChard.GetComponent<CardDrag>().enabled = true;
                 cardRice.GetComponent<CardDrag>().enabled = true;
-                UpdateTutorial("Plant all your crops!", "You are well on your way to becoming a farmer, so let's plant your last crops as well. With the last 2 highlighted plant cards, do the same drag motions as before.");
+                UpdateTutorial("Plant all your crops!", "You are well on your way to becoming a farmer, so let's plant your last plant cards as well. With the last two plant cards in your hand, do the same drag motions as before.");
                 break;
             case 14:
                 GameManager.IPM.timeModeEnabled = true;
@@ -133,57 +120,112 @@ public class TutorialManager : MonoBehaviour
                 UpdateTutorial("Select your land!", "With your mouse hover over the land that has a warning icon on top of it. Now click with your left mouse button and an information panel should appear on the right side of your screen.");
                 break;
             case 18:
-                UpdateTutorial("Check your crop needs!", "You can see how much water and nutrients your crops require. Don't run out of water because your land will dry up. Now click with your left mouse button on the blue switch icon.");
+                UpdateTutorial("Check your crop needs!", "You can see how much water and nutrients your crops require. Don't run out of water because your land will dry up. Now click with your left mouse button on the green switch icon.");
                 break;
             case 19:
                 UpdateTutorial("Your island reserves!", "It now shows how much your land still has. Some of these reserves are too low for the next harvest so let's help your land out. With your left mouse button click on the red close icon.");
                 break;
             case 20:
                 GameManager.IPM.islandInspectEnabled = false;
-                GameManager.IPM.inventoryModeEnabled = true;
-                UpdateTutorial("Open craft mode!", "First we need some cards to use, so open the crafting menu by pressing C. Here you can craft any card you need. You can filter the different card types with the blue buttons on top.");
+                GameManager.IPM.craftModeEnabled = true;
+                UpdateTutorial("Open craft mode!", "First we need some cards to use, so open the crafting menu by pressing C. Here you can craft any card you need. You can filter the different card types with the green labels on top.");
                 break;
             case 21:
-                UpdateTutorial("Find nitrogen fertilizer!", "The first nutrient that was low was Nitrogen, so by using the blue arrow buttons. Cycle through the cards until the nitrogen fertilizer card is in the center.");
+                GameManager.IPM.craftModeEnabled = false;
+                GameManager.CRM.craftUI.plusButton.enabled = false;
+                GameManager.CRM.craftUI.maxButton.enabled = false;
+                UpdateTutorial("Find nitrogen fertiliser!", "The first nutrient that was low was Nitrogen, so by using the green arrow buttons. Cycle through the cards until the nitrogen fertiliser card is in the center.");
                 break;
             case 22:
-                UpdateTutorial("Look at your storage!", "Click on the green highlighted plus button to set the amount of cards you want to craft. It then displays the cost, now open up your stats again and see if you have enough.");
+                GameManager.CRM.craftUI.plusButton.enabled = true;
+                GameManager.CRM.craftUI.maxButton.enabled = true;
+                GameManager.CRM.craftUI.leftButton.enabled = false;
+                GameManager.CRM.craftUI.rightButton.enabled = false;
+                UpdateTutorial("Select amount!", "Click on the plus button on the left and set the amount of cards you want to craft to one. You can then craft that amount if you have the required resources.");
+                break;
+            case 23:
+                GameManager.CRM.craftUI.minusButton.enabled = false;
+                GameManager.CRM.craftUI.minButton.enabled = false;
+                GameManager.CRM.craftButton.enabled = false;
+                UpdateTutorial("Check your storage!", "On the right side of the craft button, it now shows how much your craft costs. Open up your stats again by clicking on the arrow at the left side of the screen and check if you have enough.");
+                break;
+            case 24:
+                GameManager.CRM.craftButton.enabled = true;
+                UpdateTutorial("Let's craft!", "It seems like you have just enough. Let's go back to the craft button and hold down your left mouse button on it. Keep holding down your mouse button until the card is fully crafted.");
+                break;
+            case 25:
+                GameManager.CRM.craftUI.plusButton.enabled = false;
+                GameManager.CRM.craftUI.maxButton.enabled = false;
+                GameManager.CRM.craftUI.leftButton.enabled = true;
+                GameManager.CRM.craftUI.rightButton.enabled = true;
+                GameManager.UM.fertiliser += 25;
+                UpdateTutorial("Next card!", "Okay, next up is Phosphorus so let's find that fertiliser card. Cycle through the cards again by using the green arrow buttons until the phosphorus fertiliser card is in the center.");
+                break;
+            case 26:
+                GameManager.CRM.craftUI.plusButton.enabled = true;
+                GameManager.CRM.craftUI.maxButton.enabled = true;
+                GameManager.CRM.craftUI.leftButton.enabled = false;
+                GameManager.CRM.craftUI.rightButton.enabled = false;
+                UpdateTutorial("Input the amount!", "We also need one of these, so click on the plus button again. You can also type in the amount you need or click the max button to get the max amount of craftable cards.");
+                break;
+            case 27:
+                GameManager.CRM.craftUI.minusButton.enabled = false;
+                GameManager.CRM.craftUI.minButton.enabled = false;
+                UpdateTutorial("Craft another one!", "Hold down your left mouse on the craft button again and watch your resources get used. If you stop holding down, the crafting process will be cancelled and your resources get returned.");
+                break;
+            case 28:
+                GameManager.CRM.craftUI.plusButton.enabled = false;
+                GameManager.CRM.craftUI.maxButton.enabled = false;
+                GameManager.CRM.craftUI.leftButton.enabled = true;
+                GameManager.CRM.craftUI.rightButton.enabled = true;
+                GameManager.UM.water += 5;
+                GameManager.UM.fertiliser += 25;
+                UpdateTutorial("Last fertiliser card!", "Last nutrient we were missing was Potassium, so let's see if we can find the fertiliser card for that one as well. I will give you some extra resources, but this will be the last time.");
+                break;
+            case 29:
+                GameManager.CRM.craftUI.plusButton.enabled = true;
+                GameManager.CRM.craftUI.maxButton.enabled = true;
+                GameManager.CRM.craftUI.leftButton.enabled = false;
+                GameManager.CRM.craftUI.rightButton.enabled = false;
+                UpdateTutorial("Input one once more!", "Now let's do the same thing one more time. Click the plus button and put the craft amount to one once again. You should also note that if you craft more cards you might get a discount.");
+                break;
+            case 30:
+                GameManager.CRM.craftUI.minusButton.enabled = false;
+                GameManager.CRM.craftUI.minButton.enabled = false;
+                UpdateTutorial("One more craft!", "Click and hold the craft button one last time and add the last fertiliser card to your deck. We now have all the fertilisers we need to get the nutrients in your land back.");
+                break;
+            case 31:
+                GameManager.IPM.craftModeEnabled = true;
+                UpdateTutorial("Enough crafting!", "We crafted all the cards we needed so let's get out of crafting mode by pressing C. And then press Q again to get back into manage mode so we can use these cards.");
+                break;
+            case 32:
+                GameManager.IPM.craftModeEnabled = false;
+                UpdateTutorial("Fertilise your land!", "With your newly crafted cards in your hand hover over your nitrogen fertiliser card. Now click with your left mouse button and drag the fertiliser to your land.");
+                break;
+            case 33:
+                UpdateTutorial("Fertilise some more!", "Since your land is also missing Phosphorus and Potassium, use those cards as well. One by one, drag them to your land and watch your land improve.");
+                break;
+            case 34:
+                GameManager.IPM.islandInspectEnabled = true;
+                UpdateTutorial("Check your land!", "Now that we fertilised your land, let's see if we meet the nutrients required. Click with your left mouse button on your land again and switch to the available nutrients.");
+                break;
+            case 35:
+                GameManager.IPM.marketModeEnabled = true;
+                UpdateTutorial("Open the market!", "Let's close the information tab again and open up the market by pressing R. In this mode, we can buy and sell products. You can, however, only sell products from crops you have unlocked.");
+                break;
+            case 36:
+                GameManager.IPM.marketModeEnabled = false;
+                foreach (MarketItem marketItem in GameManager.MM.itemsInMarket)
+                {
+                    marketItem.sellUI.GetComponent<MarketButton>().enabled = false;
+                    marketItem.buyUI.GetComponent<MarketButton>().enabled = false;
+                }
+                UpdateTutorial("Find rice market!", "Each product has its own price, supply and demand, which changes every week. With the green labels on top, you can sort between products. Now let's scroll down and find the rice market.");
+                break;
+            case 37:
+                UpdateTutorial("Input the max!", "It is time to sell something and earn some money. Start of by pressing the max button on the rice ");
                 break;
                 /*
-                case 12:
-                    GameManager.UM.SetUIButtons(true, GameManager.UM.openCraftButton);
-                    GameManager.UM.openCraftButton.GetComponent<Image>().color = Color.green;
-                    UpdateQuest("It is crafting time!", "To add nutrients to the soil we need to use the appropriate fertilizer card. But we first need to craft these cards you already got some fertilizer saved up so you can craft some fertilizer cards. In manage mode <b>click</b> on the green icon again or press your <b>C key</b> to go into crafting mode. Open up your quest menu again by <b>left clicking</b> the green button at the top of your screen and start crafting the cards that you need.");
-                    break;
-                case 13:
-                    GameManager.UM.SetUIButtons(true, GameManager.UM.openQuestButton);
-                    UpdateQuest("Select nitrogen fertilizer!", "As you noticed when inspecting your soil the following nutrient was scarce <color=orange><b>Nitrogen (N)</b></color>. So now that your are in crafting mode select the green fertilizer card with the use of the left and right buttons. Once you have selected the right card the craft button will show up as invalid amount. This is because you need to <b>click</b> the plus button so you set how many cards you want to craft.");
-                    break;
-                case 14:
-                    UpdateQuest("Craft the fertilizer card!", "Now that you have selected the right card and put in the right crafting amount the craft button should show up. You can only craft 1 <color=orange><b>Nitrogen (N)</b></color> fertilizer card currently however when you are crafting more cards your cost will update to the total crafting cost. To fully craft a card you <b>hold down left mouse button</b> on the craft button and watch as the card gets made. Once finished the card should be fully revealed and the craft button should say <b>card crafted.</b>");
-                    break;
-                case 15:
-                    GameManager.UM.water += 5;
-                    GameManager.UM.fertilizer += 50;
-                    GameManager.CRM.HighlightCards();
-                    UpdateQuest("Craft some more!", "Okay lets craft the other fertilizer cards you will need as well. I gave you some extra resoucres so you should be able to craft them now. Selected the other green fertilizer cards <color=green><b>Phosphorus (P)</b></color> plus <color=red><b>Potassium (K)</b></color> and craft 1 of each. Once you have crafted these card exit crafting mode by <b>pressing C</b> again or <b>click</b> the red close button. Now you should have all the cards needed to improve your soil and get the yield of your crops up again.");
-                    break;
-                case 16:
-                    //GameManager.DM.AddCardToDeck("CardCultivatorUtility"); //Testing
-                    //GameManager.DM.AddCardToDeck("CardWateringCanUtility"); //Testing
-                    //GameManager.DM.AddCardToDeck("CardGreenBeanPlant"); //Testing
-                    //GameManager.DM.AddCardToDeck("CardChivePlant"); //Testing
-                    //GameManager.DM.AddCardToDeck("CardChardPlant"); //Testing
-                    //GameManager.UM.SetUIButtons(true, GameManager.UM.openUIButton); //Testing
-                    //GameManager.UM.SetUIButtons(true, GameManager.UM.nextDayButton); //Testing
-                    //GameManager.DM.CheckRefillHand(); //Testing
-                    UpdateQuest("Improve your soil!", "With these newly crafted fertilizer cards it is time to improve your soil. <b>Drag</b> each of your crafted fertilizer cards towards the soil and it will add <b>50</b> of that nutrient to it. Than inspect your land by <b>double clicking</b> and check if all the nutrients are available again. The warning icon should also disappear since your crops needs are met for the next day. If you don't meet these needs the same as previously you have a <b>80%</b> chance to lose 1,2,3 or 4 drops based on the plants base yield.");
-                    break;
-                case 17:
-                    GameManager.UM.SetUIButtons(true, GameManager.UM.openMarketButton);
-                    GameManager.UM.openMarketButton.GetComponent<Image>().color = Color.green;
-                    UpdateQuest("Time to earn!", "Your soil has been improved and is ready for another harvest but lets first see what we can do with the previous harvest. In manage mode <b>click</b> on the green icon again or press your <b>Q key</b> to go into market mode. Here you will see all the items you can sell, the demand and supply and the prices of this item in the last few days. You won't see all the items in the game just yet since you need to unlock these crops first. You will however see every product that can be made with your items.");
-                    break;
                 case 18:
                     UpdateQuest("Learn the market!", "To earn money you will need to sell your harvest from today. As you can see the prices are currently all the same but this will change each day. A new day means a new demand and a new supply. More demand equals a higher price but more supply means a lower price. You can also see what the lowest and highest price was each week. <b>Scroll</b> down and try to find the market for green beans. Then <b>click</b> the highlighted max button or input the max amount of green beans you have.");
                     break;
@@ -192,10 +234,10 @@ public class TutorialManager : MonoBehaviour
                     break;
                 case 20:
                     GameManager.ISM.FindIslandByID("Ring1(-1,0)").ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
-                    UpdateQuest("Expand some more!", "You are almost ready to start your farming empire. The last thing you need to learn is how to refill your storages as crafting requires water and fertilizer. This is done by buildables but lets first start off with buying another island now that you got the money for it. Go into manage mode again and then <b>hover</b> over the highlighted island. Now remember <b>hold down</b> your <b>right mouse button</b> until the island has fully been build.");
+                    UpdateQuest("Expand some more!", "You are almost ready to start your farming empire. The last thing you need to learn is how to refill your storages as crafting requires water and fertiliser. This is done by buildables but lets first start off with buying another island now that you got the money for it. Go into manage mode again and then <b>hover</b> over the highlighted island. Now remember <b>hold down</b> your <b>right mouse button</b> until the island has fully been build.");
                     break;
                 case 21:
-                    UpdateQuest("Time to build!", "You are almost ready to start your farming empire. The last thing you need to learn is how to refill your storages as crafting requires water and fertilizer. This is done by buildables but lets first start off with buying another island now that you got the money for it. Make sure you are in manage mode again and then <b>hover</b> over the highlighted island. Now remember <b>hold down</b> your <b>right mouse button</b> until the island has fully been build.");
+                    UpdateQuest("Time to build!", "You are almost ready to start your farming empire. The last thing you need to learn is how to refill your storages as crafting requires water and fertiliser. This is done by buildables but lets first start off with buying another island now that you got the money for it. Make sure you are in manage mode again and then <b>hover</b> over the highlighted island. Now remember <b>hold down</b> your <b>right mouse button</b> until the island has fully been build.");
                     break;*/
         }
     }

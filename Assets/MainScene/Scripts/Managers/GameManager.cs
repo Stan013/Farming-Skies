@@ -137,9 +137,15 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 UM.questButton.gameObject.SetActive(false);
                 UM.nextWeekButton.SetActive(false);
                 UM.modeIndicator.transform.parent.gameObject.SetActive(false);
-                UM.UIMenu.SetActive(false);
+                if(UM.UIMenu.activeSelf)
+                {
+                    UM.UIbutton.OpenUIMenu();
+                }
+                if(QM.questMenu.activeSelf)
+                {
+                    UM.questButton.OpenQuestMenu();
+                }
                 UM.infoMenu.SetActive(false);
-                QM.questMenu.SetActive(false);
                 PM.Harvest();
                 MM.UpdatePrices();
                 TM.StartWeekCycle();
@@ -190,14 +196,16 @@ public class GameManager : MonoBehaviour, IDataPersistence
             case GameState.SettingsMode:
                 break;
             case GameState.TimeMode:
+                if(TTM.tutorial)
+                {
+                    UM.questButton.OpenQuestMenu();
+                }
                 cam.transform.position = staticPos;
                 TM.timeWindow.SetActive(false);
                 UM.UIbutton.gameObject.SetActive(true);
                 UM.questButton.gameObject.SetActive(true);
                 UM.nextWeekButton.SetActive(true);
                 UM.modeIndicator.transform.parent.gameObject.SetActive(true);
-                UM.UIMenu.SetActive(true);
-                QM.questMenu.SetActive(true);
                 break;
             case GameState.SelectionMode:
                 break;

@@ -38,14 +38,11 @@ public class QuestManager : MonoBehaviour
                 if (QuestCompleted)
                 {
                     questCompletedIcon.gameObject.SetActive(true);
-                    questMenuImage.color = new Color(0.8f, 1.0f, 0.4f, 0.8f);
                     StartCoroutine(ResetQuestCompletedAfterDelay());
                 }
                 else
                 {
                     questCompletedIcon.gameObject.SetActive(false);
-                    questMenuImage.color = new Color(0.9f, 0.9f, 0.9f, 0.8f);
-                    GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 }
             }
         }
@@ -70,7 +67,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 3:
-                    if (GameManager.UM.UIbutton.GetComponent<Image>().color == Color.white)
+                    if (GameManager.UM.UIMenu.activeSelf)
                     {
                         QuestCompleted = true;
                     }
@@ -88,52 +85,31 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 6:
-                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Cultivated)
+                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Cultivated && !GameManager.HM.dragging)
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 7:
-                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Watered)
+                    if (GameManager.ISM.FindIslandByID("Starter(0,0)").currentState == Island.IslandState.Watered && !GameManager.HM.dragging)
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 8:
-                    if (GameManager.CM.inspectCard != null)
-                    {
-                        if(GameManager.CM.inspectCard.GetComponent<Image>().color == Color.green)
-                        {
-                            GameManager.CM.inspectCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f); // Gray
-                        }
-                    }
-                    if (GameManager.HM.FindCardInHandById("CardGreenBeanPlant").GetComponent<Image>().color != Color.green)
+                    if (GameManager.HM.FindCardInHandById("CardGreenBeanPlant").hasBeenInspected)
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 9:
-                    if (GameManager.CM.inspectCard != null)
-                    {
-                        if (GameManager.CM.inspectCard.GetComponent<Image>().color == Color.green)
-                        {
-                            GameManager.CM.inspectCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f); // Gray
-                        }
-                    }
-                    if (GameManager.HM.FindCardInHandById("CardChivePlant").GetComponent<Image>().color != Color.green)
+                    if (GameManager.HM.FindCardInHandById("CardChivePlant").hasBeenInspected)
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 10:
-                    if (GameManager.CM.inspectCard != null)
-                    {
-                        if (GameManager.CM.inspectCard.GetComponent<Image>().color == Color.green)
-                        {
-                            GameManager.CM.inspectCard.GetComponent<Image>().color = new Color(0.74f, 0.74f, 0.74f); // Gray
-                        }
-                    }
-                    if (GameManager.HM.FindCardInHandById("CardChardPlant").GetComponent<Image>().color != Color.green && GameManager.HM.FindCardInHandById("CardRicePlant").GetComponent<Image>().color != Color.green)
+                    if (GameManager.HM.FindCardInHandById("CardChardPlant").hasBeenInspected && GameManager.HM.FindCardInHandById("CardRicePlant").hasBeenInspected)
                     {
                         QuestCompleted = true;
                     }
@@ -175,19 +151,19 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 17:
-                    if(GameManager.ISM.islandMenu.activeSelf == true)
+                    if(GameManager.ISM.islandMenu.activeSelf)
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 18:
-                    if (GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().availableInfo.activeSelf == true)
+                    if (GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().availableInfo.activeSelf)
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 19:
-                    if (GameManager.ISM.islandMenu.activeSelf != true)
+                    if (!GameManager.ISM.islandMenu.activeSelf)
                     {
                         QuestCompleted = true;
                     }
@@ -199,13 +175,97 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 21:
-                    if (GameManager.CRM.selectedCard == GameManager.CM.FindCardById("CardNitrogenFertilizerUtility"))
+                    if (GameManager.CRM.selectedCard.cardName == "Nitrogen Fertiliser")
                     {
                         QuestCompleted = true;
                     }
                     break;
                 case 22:
-                    if (GameManager.UM.UIMenu.activeSelf == true)
+                    if (GameManager.CRM.cardCraftAmount == 1)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 23:
+                    if (GameManager.UM.UIMenu.activeSelf)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 24:
+                    if (GameManager.DM.cardsInDeck.Count == 1)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 25:
+                    if (GameManager.CRM.selectedCard.cardName == "Phosphorus Fertiliser")
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 26:
+                    if (GameManager.CRM.cardCraftAmount == 1)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 27:
+                    if (GameManager.DM.cardsInDeck.Count == 2)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 28:
+                    if (GameManager.CRM.selectedCard.cardName == "Potassium Fertiliser")
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 29:
+                    if (GameManager.CRM.cardCraftAmount == 1)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 30:
+                    if (GameManager.DM.cardsInDeck.Count == 3)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 31:
+                    if (GameManager.CurrentState == GameManager.GameState.ManageMode)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 32:
+                    if (GameManager.ISM.starterIsland.nutrientsAvailable[1] != 0)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 33:
+                    if (GameManager.ISM.starterIsland.nutrientsAvailable[2] != 0 && GameManager.ISM.starterIsland.nutrientsAvailable[3] != 0)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 34:
+                    if (GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().availableInfo.activeSelf)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 35:
+                    if (GameManager.CurrentState == GameManager.GameState.MarketMode)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 36:
+                    if (GameManager.MM.marketScrollbar.value < 0.1)
                     {
                         QuestCompleted = true;
                     }

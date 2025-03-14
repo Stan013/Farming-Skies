@@ -20,9 +20,9 @@ public class Drop : MonoBehaviour
                 {
                     GameManager.UM.water += 1;
                 }
-                if (name == "FertilizerDrop")
+                if (name == "fertiliserDrop")
                 {
-                    GameManager.UM.fertilizer += 1;
+                    GameManager.UM.fertiliser += 1;
                 }
                 break;
             case "Product":

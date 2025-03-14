@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 953947131332911820}
   - component: {fileID: 1464274192850915389}
   m_Layer: 0
-  m_Name: NitrogenFertilizer
+  m_Name: NitrogenFertiliser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

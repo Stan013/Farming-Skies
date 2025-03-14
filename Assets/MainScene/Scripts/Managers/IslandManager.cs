@@ -46,10 +46,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 }
             }
         }
-        if (GameManager.TTM.tutorial)
-        {
-            starterIsland.ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
-        }
     }
 
     public Island GetClickedIsland()
@@ -60,6 +56,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     public void AddIslandToBought(Island reconstructedIsland)
     {
+        reconstructedIsland.islandBought = true;
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
         boughtIslands.Add(reconstructedIsland);
         unboughtIslands.Remove(reconstructedIsland);

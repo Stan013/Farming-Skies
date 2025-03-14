@@ -6,8 +6,8 @@ public class Island : MonoBehaviour
 {
     public string islandID;
     public Material islandMat;
-    public IslandState currentState = IslandState.Sowed;
-    public IslandState potentialState = IslandState.Sowed;
+    public IslandState currentState;
+    public IslandState previousState;
     public GameObject glow;
 
     public bool islandAvailable;
@@ -46,14 +46,9 @@ public class Island : MonoBehaviour
         SetState(currentState == targetState ? fallbackState : targetState);
     }
 
-    public void SetState(IslandState newState)
+    private void SetState(IslandState state)
     {
-        currentState = newState;
-        EnterState(currentState);
-    }
-
-    private void EnterState(IslandState state)
-    {
+        currentState = state;
         GetIslandComponents();
         switch (state)
         {
@@ -61,7 +56,6 @@ public class Island : MonoBehaviour
                 glow.SetActive(true);
                 break;
             case IslandState.Default:
-                glow.SetActive(false);
                 Color topColor = topMat.color;
                 topColor.a = 0f;
                 topMat.color = topColor;
@@ -80,6 +74,7 @@ public class Island : MonoBehaviour
                 }
                 break;
             case IslandState.Sowed:
+                glow.SetActive(false);
                 if (needsNPK)
                 {
                     islandMat = GameManager.ISM.sowedNeedsNPKMat;
@@ -106,55 +101,6 @@ public class Island : MonoBehaviour
         }
     }
 
-    public void TogglePotentialState(IslandState targetState, IslandState fallbackState)
-    {
-        SetPotentialState(potentialState == targetState ? fallbackState : targetState);
-    }
-
-    public void SetPotentialState(IslandState newState)
-    {
-        potentialState = newState;
-        EnterPotentialState(potentialState);
-    }
-
-    private void EnterPotentialState(IslandState state)
-    {
-        switch (state)
-        {
-            case IslandState.Watered:
-                if (needsNPK)
-                {
-                    islandMat = GameManager.ISM.wateredNeedsNPKMat;
-                }
-                else
-                {
-                    islandMat = GameManager.ISM.wateredMat;
-                }
-                break;
-            case IslandState.Sowed:
-                if (needsNPK)
-                {
-                    islandMat = GameManager.ISM.sowedMat;
-                }
-                else
-                {
-                    islandMat = GameManager.ISM.sowedNeedsNPKMat;
-                }
-                break;
-            case IslandState.Cultivated:
-                if(needsNPK)
-                {
-                    islandMat = GameManager.ISM.cultivatedNeedsNPKMat;
-                }
-                else
-                {
-                    islandMat = GameManager.ISM.cultivatedMat;
-                }
-                break;
-        }
-        SetMaterial(islandMat);
-    }
-
     public void MakeUsedPlot(GameObject usedPlot, Card usedCard, GameObject usedPlant)
     {
         if (usedPlot == null || usedCard == null || usedPlant == null)
@@ -178,7 +124,7 @@ public class Island : MonoBehaviour
                 GameManager.ISM.SetCollisions("PlantSmall");
                 GameManager.ISM.SetCollisions("PlantMedium");
                 break;
-            case "Machine":
+            case "Buildable":
                 GameManager.ISM.SetCollisions("PlantSmall");
                 GameManager.ISM.SetCollisions("PlantBig");
                 break;

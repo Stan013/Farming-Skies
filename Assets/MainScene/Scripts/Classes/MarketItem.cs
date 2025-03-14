@@ -7,20 +7,29 @@ using TMPro;
 
 public class MarketItem : MonoBehaviour
 {
-    public List<float> allItemPrices;
     public int itemIndex;
     public Card attachedItemCard;
+
+    public List<float> itemPricesMonth;
+    public List<float> itemPrices6Month;
+    public List<float> itemPricesYear;
+    public float previousPrice = 0;
+    public float previousDemand = 0;
+    public float previousSupply = 0;
 
     public TMP_Text itemQuantityText;
     public TMP_Text itemNameText;
     public Image itemImage;
-    public Image changeIcon;
-    public Sprite upIcon, downIcon;
+    public Image supplyChangeIcon, demandChangeIcon, priceChangeIcon;
+    public Sprite upIcon, neutralIcon, downIcon;
 
-    public TMP_Text priceText, pricehigh3dText, pricelow3dText, pricehigh5dText, pricelow5dText, pricehigh7dText, pricelow7dText;
+    public TMP_Text priceText, priceMonthHighText, priceMonthAverageText, priceMonthLowText, price6MonthHighText, price6MonthAverageText, price6MonthLowText, priceYearHighText, priceYearAverageText, priceYearLowText;
     public TMP_Text demandText, supplyText;
-    public float priceCurrent, pricehigh3d, pricelow3d, pricehigh5d, pricelow5d, pricehigh7d, pricelow7d;
+    public float priceCurrent, priceMonthHigh, priceMonthAverage, priceMonthLow, price6MonthHigh, price6MonthAverage, price6MonthLow, priceYearHigh, priceYearAverage, priceYearLow;
+    
     public MarketButton sellUI, buyUI;
+    public GameObject itemDetails;
+    public GameObject itemPrices;
 
     public void SetMarketItem(Card itemCard)
     {
@@ -32,45 +41,69 @@ public class MarketItem : MonoBehaviour
             itemIndex = GameManager.MM.itemsInMarket.Count;
             itemImage.sprite = attachedItemCard.cardSprite;
             priceCurrent = attachedItemCard.itemPrice;
-            for (int i = 0; i < 7; i++)
-            {
-                allItemPrices.Add(priceCurrent);
-            }
-            UpdateLowHighPrices();
+            for (int i = 0; i < 4; i++) itemPricesMonth.Add(priceCurrent);
+            for (int i = 0; i < 24; i++) itemPrices6Month.Add(priceCurrent);
+            for (int i = 0; i < 52; i++) itemPricesYear.Add(priceCurrent);
+            UpdateDetailedPrices();
             UpdateMarketItem(attachedItemCard);
         }
     }
 
     public void UpdateMarketItem(Card itemCard)
     {
-        priceText.SetText("₴ " + priceCurrent.ToString());
-        pricelow3dText.SetText("₴ " + pricelow3d.ToString());
-        pricehigh3dText.SetText("₴ " + pricehigh3d.ToString());
-        pricelow5dText.SetText("₴ " + pricelow5d.ToString());
-        pricehigh5dText.SetText("₴ " + pricehigh5d.ToString());
-        pricelow7dText.SetText("₴ " + pricelow7d.ToString());
-        pricehigh7dText.SetText("₴ " + pricehigh7d.ToString());
+        priceText.SetText(priceCurrent.ToString() + " ₴");
+        priceMonthLowText.SetText(priceMonthLow.ToString() + " ₴");
+        priceMonthAverageText.SetText(priceMonthAverage.ToString() + " ₴");
+        priceMonthHighText.SetText(priceMonthHigh.ToString() + " ₴");
+        price6MonthLowText.SetText(price6MonthLow.ToString() + " ₴");
+        price6MonthAverageText.SetText(priceMonthAverage.ToString() + " ₴");
+        price6MonthHighText.SetText(price6MonthHigh.ToString() + " ₴");
+        priceYearLowText.SetText(priceYearLow.ToString() + " ₴");
+        priceYearAverageText.SetText(priceYearAverage.ToString() + " ₴");
+        priceYearHighText.SetText(priceYearHigh.ToString() + " ₴");
         demandText.SetText(FormatNumber(itemCard.itemDemand));
         supplyText.SetText(FormatNumber(itemCard.itemSupply));
-        if (allItemPrices.Count != 1)
-        {
-            if (priceCurrent < allItemPrices[allItemPrices.Count - 1])
-            {
-                changeIcon.sprite = downIcon;
-            }
-            else
-            {
-                if(priceCurrent == allItemPrices[allItemPrices.Count - 1])
-                {
-                    //Add no market change icon
-                }
-                else
-                {
-                    changeIcon.sprite = upIcon;
 
-                }
-            }
+        if (previousPrice != 0)
+        {
+            if (priceCurrent > previousPrice)
+                priceChangeIcon.sprite = upIcon;
+            else if (priceCurrent < previousPrice)
+                priceChangeIcon.sprite = downIcon;
+            else
+                priceChangeIcon.sprite = neutralIcon;
         }
+        else
+            supplyChangeIcon.sprite = neutralIcon;
+
+
+        if (previousDemand != 0)
+        {
+            if (itemCard.itemDemand > previousDemand)
+                demandChangeIcon.sprite = upIcon;
+            else if (itemCard.itemDemand < previousDemand)
+                demandChangeIcon.sprite = downIcon;
+            else
+                demandChangeIcon.sprite = neutralIcon;
+        }
+        else
+            supplyChangeIcon.sprite = neutralIcon;
+
+        if (previousSupply != 0)
+        {
+            if (itemCard.itemSupply > previousSupply)
+                supplyChangeIcon.sprite = upIcon;
+            else if (itemCard.itemSupply < previousSupply)
+                supplyChangeIcon.sprite = downIcon;
+            else
+                supplyChangeIcon.sprite = neutralIcon;
+        }
+        else
+            supplyChangeIcon.sprite = neutralIcon;
+
+        previousPrice = priceCurrent;
+        previousDemand = itemCard.itemDemand;
+        previousSupply = itemCard.itemSupply;
     }
 
     private string FormatNumber(float number)
@@ -93,18 +126,43 @@ public class MarketItem : MonoBehaviour
         }
     }
 
-    public void UpdateLowHighPrices()
+    public void UpdateDetailedPrices()
     {
-        if (priceCurrent != allItemPrices[0])
+        if (itemPricesMonth.Count >= 4) itemPricesMonth.RemoveAt(0);
+        itemPricesMonth.Add(priceCurrent);
+
+        if (itemPrices6Month.Count >= 24) itemPrices6Month.RemoveAt(0);
+        itemPrices6Month.Add(priceCurrent);
+
+        if (itemPricesYear.Count >= 52) itemPricesYear.RemoveAt(0);
+        itemPricesYear.Add(priceCurrent);
+
+        priceMonthHigh = itemPricesMonth.Max();
+        priceMonthLow = itemPricesMonth.Min();
+        priceMonthAverage = itemPricesMonth.Average();
+
+        price6MonthHigh = itemPrices6Month.Max();
+        price6MonthLow = itemPrices6Month.Min();
+        price6MonthAverage = itemPrices6Month.Average();
+
+        priceYearHigh = itemPricesYear.Max();
+        priceYearLow = itemPricesYear.Min();
+        priceYearAverage = itemPricesYear.Average();
+    }
+
+
+    public void SwitchItemInfo()
+    {
+        if (itemDetails.activeSelf)
         {
-            allItemPrices.Insert(1, priceCurrent);
-            allItemPrices.RemoveAt(0);
+            itemDetails.SetActive(false);
+            itemPrices.SetActive(true);
+            UpdateDetailedPrices();
         }
-        pricehigh3d = allItemPrices.Take(3).DefaultIfEmpty(0).Max();
-        pricelow3d = allItemPrices.Take(3).DefaultIfEmpty(float.MaxValue).Min();
-        pricehigh5d = allItemPrices.Take(5).DefaultIfEmpty(0).Max();
-        pricelow5d = allItemPrices.Take(5).DefaultIfEmpty(float.MaxValue).Min();
-        pricehigh7d = allItemPrices.Take(7).DefaultIfEmpty(0).Max();
-        pricelow7d = allItemPrices.Take(7).DefaultIfEmpty(float.MaxValue).Min();
+        else
+        {
+            itemDetails.SetActive(true);
+            itemPrices.SetActive(false);
+        }
     }
 }

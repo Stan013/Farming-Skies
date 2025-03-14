@@ -53,7 +53,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.UM.expense = this.gameData.tax;
         GameManager.UM.money = this.gameData.balance;
         GameManager.UM.water = this.gameData.water;
-        GameManager.UM.fertilizer = this.gameData.fertilizer;
+        GameManager.UM.fertiliser = this.gameData.fertiliser;
     }
 
     public void LoadGame()

@@ -13,13 +13,6 @@ public class DeckManager : MonoBehaviour, IDataPersistence
         if (GameManager.HM.lastFilledSlotIndex < 9)
         {
             GameManager.HM.SetCardsInHand();
-            if(GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 16)
-            {
-                foreach (Card card in GameManager.HM.cardsInHand)
-                {
-                    card.GetComponent<Image>().color = Color.green;
-                }
-            }
         }
     }
 

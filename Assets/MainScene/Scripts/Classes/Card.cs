@@ -150,10 +150,6 @@ public class Card : MonoBehaviour
                     GameManager.HM.cardsInHand.Remove(this);
                     GameManager.HM.MoveCardsInHand(this);
                     GameManager.DM.CheckRefillHand();
-                    if(GameManager.HM.dragCard.nutrientIndex != 0)
-                    {
-                        GetComponent<CardDrag>().hoverIsland.UpdateNutrientsRequired();
-                    }
                     Destroy(this.gameObject);
                     dragSucces = false;
                 }

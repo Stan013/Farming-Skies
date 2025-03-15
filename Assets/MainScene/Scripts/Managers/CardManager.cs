@@ -54,9 +54,10 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.waterText.transform.parent.gameObject.SetActive(false);
             card.plantSizeText.transform.parent.gameObject.SetActive(false);
             card.GetComponent<CardDrag>().enabled = true;
+            card.GetComponent<CardInspect>().enabled = true;
         }
         card.cardSetup = true;
-    }
+    }   
 
     public Card FindCardById(string id)
     {

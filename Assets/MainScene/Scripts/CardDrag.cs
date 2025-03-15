@@ -136,6 +136,28 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     GameManager.HM.dragCard.ToggleState(Card.CardState.InHand, Card.CardState.InDrag);
                 }
                 break;
+            case "Buildable":
+                if (CheckPotentialPlot() != null)
+                {
+                    CheckPotentialPlot().transform.GetChild(0).gameObject.SetActive(false);
+                    GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
+                    plant.transform.localPosition = new Vector3(0, -0.25f, 0);
+                    plant.transform.localRotation = Quaternion.identity;
+                    plant.GetComponent<Plant>().attachedIsland = hoverIsland;
+                    hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
+                    ExpenseItem islandExpense = Instantiate(GameManager.ISM.expenseItem, Vector3.zero, Quaternion.identity, GameManager.ISM.buildableExpenseContent.transform);
+                    islandExpense.transform.localPosition = new Vector3(islandExpense.transform.localPosition.x, islandExpense.transform.localPosition.y, 0);
+                    islandExpense.transform.localRotation = Quaternion.identity;
+                    islandExpense.SetupBuildableExpense(plant.GetComponent<Plant>());
+                    GameManager.HM.dragCard.dragSucces = true;
+                    GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+                }
+                else
+                {
+                    GameManager.HM.dragCard.dragSucces = false;
+                    GameManager.HM.dragCard.ToggleState(Card.CardState.InHand, Card.CardState.InDrag);
+                }
+                break;
             default:
                 if (CheckPotentialPlot() != null)
                 {

@@ -241,9 +241,12 @@ public class Island : MonoBehaviour
         }
         foreach (Plant plant in itemsOnIsland)
         {
-            for (int i = 0; i < nutrientsRequired.Count; i++)
+            if(plant.plantCardID.Contains("Plant"))
             {
-                nutrientsRequired[i] += plant.nutrientsUsages[i];
+                for (int i = 0; i < nutrientsRequired.Count; i++)
+                {
+                    nutrientsRequired[i] += plant.nutrientsUsages[i];
+                }
             }
         }
         CheckWarningIcon();

@@ -61,6 +61,11 @@ public class UIManager : MonoBehaviour, IDataPersistence
         cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
     }
 
+    public void AddExpense(int taxExpense)
+    {
+        expense += taxExpense;
+    }
+
     public void SetBuildIslandSlider()
     {
         buildCostText.SetText(GameManager.IPM.clickedIsland.islandBuildCost.ToString() + " ₴");
@@ -83,7 +88,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
             if (alphaValue == 1f && island.islandBought == false)
             {
                 money -= island.islandBuildCost;
-                expense += island.islandTaxCost;
                 GameManager.ISM.AddIslandToBought(island);
                 constructionLabel.gameObject.SetActive(false);
                 GameManager.UM.UpdateUI();

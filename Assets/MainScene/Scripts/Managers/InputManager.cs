@@ -133,8 +133,8 @@ public class InputManager : MonoBehaviour
         moveDirection -= (Input.GetKey(KeyCode.S) && !IsFacingWall(-forward)) ? forward : Vector3.zero;
         moveDirection += (Input.GetKey(KeyCode.D) && !IsFacingWall(right)) ? right : Vector3.zero;
         moveDirection -= (Input.GetKey(KeyCode.A) && !IsFacingWall(-right)) ? right : Vector3.zero;
-        moveDirection += (Input.GetKey(KeyCode.LeftShift) && !IsFacingWall(-up)) ? up : Vector3.zero;
-        moveDirection -= (Input.GetKey(KeyCode.LeftControl) && !IsFacingWall(up)) ? up : Vector3.zero;
+        moveDirection += (Input.GetKey(KeyCode.LeftShift) && !IsFacingWall(Vector3.up)) ? Vector3.up : Vector3.zero;
+        moveDirection -= (Input.GetKey(KeyCode.LeftControl) && !IsFacingWall(Vector3.down)) ? Vector3.up : Vector3.zero;
 
         smoothMoveDirection = Vector3.Lerp(smoothMoveDirection, moveDirection.normalized, Time.deltaTime * moveSpeed);
         rb.velocity = smoothMoveDirection * moveSpeed;

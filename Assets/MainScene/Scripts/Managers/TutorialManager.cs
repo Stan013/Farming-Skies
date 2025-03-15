@@ -14,6 +14,9 @@ public class TutorialManager : MonoBehaviour
     public Card cardChive;
     public Card cardChard;
     public Card cardRice;
+    public Island expansionIsland;
+    public Card cardWaterBarrel;
+    public Card cardCompost;
     public MarketItem riceMarketItem;
 
     public void UpdateTutorial(string tutorialTitle, string tutorialInfo)
@@ -255,33 +258,47 @@ public class TutorialManager : MonoBehaviour
             case 40:
                 GameManager.IPM.defaultModeEnabled = true;
                 GameManager.IPM.marketModeEnabled = false;
-                GameManager.ISM.FindIslandByID("Ring1(0,-1)").ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
+                expansionIsland = GameManager.ISM.FindIslandByID("Ring1(0,-1)");
+                expansionIsland.ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
+                expansionIsland.islandAvailable = false;
                 UpdateTutorial("Start moving!", "In order for you to expand, you need to buy more land. So press Q to exit manage mode and you can now move. Use your WASD keys to move to the newly highlighted island.");
                 break;
             case 41:
                 UpdateTutorial("Move some more!", "You can also move up by pressing left shift and down by pressing left control. Try to go up a little bit so you have a better view of the highlighted island.");
                 break;
             case 42:
+                expansionIsland.islandAvailable = true;
                 UpdateTutorial("Buy another island!", "You are above your future island, you only need to buy it. Go into manage mode again and hover over the highlighted island. Now hold down your left mouse button until the island is built.");
                 break;
             case 43:
-
+                GameManager.DM.AddCardToDeck(GameManager.CM.FindCardById("CardCompostBuildable").cardId);
+                GameManager.DM.AddCardToDeck(GameManager.CM.FindCardById("CardWaterBarrelBuildable").cardId);
+                GameManager.DM.CheckRefillHand();
+                GameManager.HM.FindCardInHandById("CardCompostBuildable").GetComponent<CardDrag>().enabled = false;
+                GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").GetComponent<CardDrag>().enabled = false;
                 UpdateTutorial("Inspect new cards!", "Since you ran out of resources crafting cards and just paid for a new island, I will help you and give you some cards. Inspect these cards and see what they do by left clicking on them.");
                 break;
-                /*
-                case 18:
-                    UpdateQuest("Learn the market!", "To earn money you will need to sell your harvest from today. As you can see the prices are currently all the same but this will change each day. A new day means a new demand and a new supply. More demand equals a higher price but more supply means a lower price. You can also see what the lowest and highest price was each week. <b>Scroll</b> down and try to find the market for green beans. Then <b>click</b> the highlighted max button or input the max amount of green beans you have.");
-                    break;
-                case 19:
-                    UpdateQuest("Let's make so money!", "The market allows you to buy and sell items but do be mindful since the market fluctuates. Big fluctuations in supply and demand are less likely but can still happen. A increase in demand will make the price go up but a increase in supply will make the price go down. But for now let's just make some money and sell the green beans you got. <b>Click</b> the sell button and watch your money go up. You don't always have to sell your harvest immediately something holding on to it can earn you more.");
-                    break;
-                case 20:
-                    GameManager.ISM.FindIslandByID("Ring1(-1,0)").ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
-                    UpdateQuest("Expand some more!", "You are almost ready to start your farming empire. The last thing you need to learn is how to refill your storages as crafting requires water and fertiliser. This is done by buildables but lets first start off with buying another island now that you got the money for it. Go into manage mode again and then <b>hover</b> over the highlighted island. Now remember <b>hold down</b> your <b>right mouse button</b> until the island has fully been build.");
-                    break;
-                case 21:
-                    UpdateQuest("Time to build!", "You are almost ready to start your farming empire. The last thing you need to learn is how to refill your storages as crafting requires water and fertiliser. This is done by buildables but lets first start off with buying another island now that you got the money for it. Make sure you are in manage mode again and then <b>hover</b> over the highlighted island. Now remember <b>hold down</b> your <b>right mouse button</b> until the island has fully been build.");
-                    break;*/
+            case 44:
+                GameManager.HM.FindCardInHandById("CardCompostBuildable").GetComponent<CardDrag>().enabled = true;
+                GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").GetComponent<CardDrag>().enabled = true;
+                UpdateTutorial("Use the cards!", "Drag the water barrel and compost cards towards your newly acquired land. These cards will create buildables that generate resources so you can start filling up your storage again.");
+                break;
+            case 45:
+                UpdateTutorial("Check your expenses!", "These buildables will cost money to maintain, so make sure you have some, otherwise they won't give you any. Let’s open up your resources again and have a look at your expenses.");
+                break;
+            case 46:
+                GameManager.IPM.marketModeEnabled = true;
+                UpdateTutorial("Shopping time!", "Last up I will show you how to get more plant cards, so you can plant some more crops and expand. Start with pressing R to go into market mode and find the market for chard.");
+                break;
+            case 47:
+                UpdateTutorial("Buy some chard!", "Now buy as much chard as you need until you have a total of 50 chard in your inventory. We are going to need this for crafting. After that, exit market mode by pressing R again.");
+                break;
+            case 48:
+                UpdateTutorial("More crafting!", "Let’s craft some more plant cards, start off pressing C to open up crafting mode again. This time, switch to the plant tab with the green tabs on top and find the chard plant card.");
+                break;
+            case 49:
+                UpdateTutorial("Under construction!", "You made it to the end of the demo. More things will be added and a new version will be out very soon!");
+                break;
         }
     }
 }

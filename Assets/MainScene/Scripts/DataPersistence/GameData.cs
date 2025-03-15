@@ -41,7 +41,7 @@ public class GameData
     public GameData()
     {
         tax = 0f;
-        balance = 550f;
+        balance = 1000f;
         water = 25;
         fertiliser = 25;
         playerPosition = new Vector3(0, 0, 0);

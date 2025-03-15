@@ -28,7 +28,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
     {
         if(GameManager.DM.cardsInDeck.Count != 0)
         {
-            while (lastFilledSlotIndex < 9 && GameManager.DM.cardsInDeck.Count > 0)
+            while (lastFilledSlotIndex < 8 && GameManager.DM.cardsInDeck.Count > 0)
             {
                 Card originalCard = GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)];
                 handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, originalCard);
@@ -45,6 +45,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
         handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, newCard);
         lastFilledSlotIndex++;
         newCard.ToggleState(Card.CardState.InHand, Card.CardState.Hidden);
+        
         StartCoroutine(MoveCardsFromBottom(newCard));
     }
 

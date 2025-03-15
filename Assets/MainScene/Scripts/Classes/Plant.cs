@@ -8,8 +8,10 @@ public class Plant : MonoBehaviour
     public float plantScale = 0.005f;
     public string plantCardID;
 
+    public Island attachedIsland;
     public int yield;
     public List<int> nutrientsUsages;
+    public int buildableTaxCost;
 
     public void GiveDrop(Transform plot)
     {

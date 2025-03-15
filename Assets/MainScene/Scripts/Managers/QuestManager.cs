@@ -69,6 +69,7 @@ public class QuestManager : MonoBehaviour
                 case 3:
                     if (GameManager.UM.UIMenu.activeSelf)
                     {
+                        GameManager.TTM.tutorialCount = 45; // Testing
                         QuestCompleted = true;
                     }
                     break;
@@ -135,7 +136,6 @@ public class QuestManager : MonoBehaviour
                 case 14:
                     if (GameManager.TM.GetDate() == "08-01-2025")
                     {
-                        GameManager.TTM.tutorialCount = 34; // Testing
                         QuestCompleted = true;
                     }
                     break;
@@ -308,7 +308,34 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 43:
-                    if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").islandBought)
+                    if (GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable") != null && GameManager.HM.FindCardInHandById("CardCompostBuildable") != null)
+                    {
+                        if (GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").hasBeenInspected && GameManager.HM.FindCardInHandById("CardCompostBuildable").hasBeenInspected)
+                        {
+                            QuestCompleted = true;
+                        }
+                    }
+                    break;
+                case 44:
+                    if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").itemsOnIsland.Count == 2)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 45:
+                    if (GameManager.UM.infoMenu.activeSelf)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 46:
+                    if (GameManager.CurrentState == GameManager.GameState.MarketMode)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 47:
+                    if (GameManager.CurrentState == GameManager.GameState.Default && GameManager.CM.FindCardById("CardChardPlant").itemQuantity >= 50)
                     {
                         QuestCompleted = true;
                     }

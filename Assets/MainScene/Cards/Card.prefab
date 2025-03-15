@@ -168,11 +168,11 @@ RectTransform:
   m_Children:
   - {fileID: 7809797353905123345}
   - {fileID: 3693536758015227634}
-  m_Father: {fileID: 495937706536431621}
+  m_Father: {fileID: 8572377007967295450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -110, y: -146}
+  m_AnchoredPosition: {x: -110, y: 79}
   m_SizeDelta: {x: 200, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1726173405128174940
@@ -250,7 +250,6 @@ RectTransform:
   - {fileID: 6610025100994378665}
   - {fileID: 5995198397979848105}
   - {fileID: 8572377007967295450}
-  - {fileID: 2820301411813970161}
   - {fileID: 4104985308028427058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -542,6 +541,7 @@ RectTransform:
   m_Children:
   - {fileID: 3591143353941510120}
   - {fileID: 704206594351924017}
+  - {fileID: 2820301411813970161}
   - {fileID: 3269303054108723610}
   - {fileID: 6273715070881352370}
   - {fileID: 1417059007384769059}
@@ -1126,8 +1126,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 130}
-  m_SizeDelta: {x: 425, y: 325}
+  m_AnchoredPosition: {x: 0, y: 85}
+  m_SizeDelta: {x: 475, y: 325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &2793141055817344698
 VideoPlayer:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4282729283
-  m_fontColor: {r: 0.2627451, g: 0.2627451, b: 0.27058825, a: 1}
+  m_fontColor: {r: 0.4745098, g: 0.4745098, b: 0.4745098, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

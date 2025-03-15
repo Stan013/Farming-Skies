@@ -21,5 +21,10 @@ public class InventoryManager : MonoBehaviour
     {
         inventoryItem.transform.SetParent(inventoryContentArea.transform, false);
         itemsInInventory.Add(inventoryItem);
+        itemsInInventory.Sort((a, b) => a.attachedItemCard.itemName.CompareTo(b.attachedItemCard.itemName));
+        for (int i = 0; i < itemsInInventory.Count; i++)
+        {
+            itemsInInventory[i].transform.SetSiblingIndex(i);
+        }
     }
 }

@@ -135,6 +135,7 @@ public class QuestManager : MonoBehaviour
                 case 14:
                     if (GameManager.TM.GetDate() == "08-01-2025")
                     {
+                        GameManager.TTM.tutorialCount = 34; // Testing
                         QuestCompleted = true;
                     }
                     break;
@@ -253,7 +254,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 34:
-                    if (GameManager.ISM.islandMenu.GetComponent<IslandInfoUI>().availableInfo.activeSelf)
+                    if (GameManager.ISM.islandMenu.activeSelf)
                     {
                         QuestCompleted = true;
                     }
@@ -266,6 +267,48 @@ public class QuestManager : MonoBehaviour
                     break;
                 case 36:
                     if (GameManager.MM.marketScrollbar.value < 0.1)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 37:
+                    if (GameManager.MM.FindMarketItemByName("Rice").sellUI.inputAmount == GameManager.MM.FindMarketItemByName("Rice").sellUI.GetComponent<MarketButton>().maxAmount)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 38:
+                    if (GameManager.MM.FindMarketItemByName("Rice").attachedItemCard.itemQuantity == 0)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 39:
+                    if (GameManager.CurrentState == GameManager.GameState.ManageMode && GameManager.UM.UIMenu.activeSelf)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 40:
+                    if (GameManager.cam.transform.position.z < -6)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 41:
+                    if (GameManager.cam.transform.position.y > 10)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 42:
+                    if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").islandBought)
+                    {
+                        QuestCompleted = true;
+                    }
+                    break;
+                case 43:
+                    if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").islandBought)
                     {
                         QuestCompleted = true;
                     }

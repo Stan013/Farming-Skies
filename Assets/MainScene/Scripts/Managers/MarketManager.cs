@@ -17,21 +17,25 @@ public class MarketManager : MonoBehaviour
     private int[] marketChangesDecimal = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     private float[] marketWeightsDecimal = {2.5f, 2.4f, 2.3f, 2.1f, 1.8f, 1.6f, 1.4f, 1.2f, 1f};
 
+    public GameObject spawnResources;
+    public Resource coinIcon;
+
     public void UpdateMarketItems()
     {
         foreach(MarketItem marketItem in itemsInMarket)
         {
             marketItem.itemQuantityText.SetText(marketItem.attachedItemCard.itemQuantity.ToString());
-            marketItem.sellUI.inputAmount.text = "";
-            marketItem.buyUI.inputAmount.text = "";
+            marketItem.sellUI.inputAmountField.text = "0";
+            marketItem.buyUI.inputAmountField.text = "0";
         }
     }
 
     public void UnlockMarketItem(Card itemCard)
     {
-        MarketItem marketItem = Instantiate(itemCard.marketItem, Vector3.zero, Quaternion.identity);
+        MarketItem marketItem = Instantiate(itemCard.marketItem, Vector3.zero, Quaternion.identity, marketContentArea.transform);
+        marketItem.transform.localRotation = Quaternion.identity;
+        marketItem.transform.localPosition = new Vector3(marketItem.transform.localPosition.x, marketItem.transform.localPosition.y, 0);
         marketItem.SetMarketItem(itemCard);
-        marketItem.transform.SetParent(marketContentArea.transform, false);
         itemsInMarket.Add(marketItem);
         itemsInMarket.Sort((a, b) => a.attachedItemCard.itemName.CompareTo(b.attachedItemCard.itemName));
         for (int i = 0; i < itemsInMarket.Count; i++)
@@ -87,16 +91,18 @@ public class MarketManager : MonoBehaviour
 
     public void ExecuteTransaction(MarketItem marketItem, int amount, bool isSelling)
     {
-        if (amount <= 0)
-        {
-            return;
-        }
+        if (amount <= 0) return;
+        Vector3 startPos;
+        Vector3 endPos;
+        float totalMoney = 0f;
         if (isSelling)
         {
             amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
             marketItem.attachedItemCard.itemQuantity -= amount;
-            float totalEarned = amount * marketItem.priceCurrent;
-            GameManager.UM.money += totalEarned;
+            totalMoney = amount * marketItem.priceCurrent;
+            GameManager.UM.money += totalMoney;
+            startPos = marketItem.sellUI.transactionButton.transform.position;
+            endPos = GameManager.UM.UIbutton.transform.position;
         }
         else
         {
@@ -104,9 +110,47 @@ public class MarketManager : MonoBehaviour
             int affordableAmount = (int)(GameManager.UM.money / itemPrice);
             amount = Mathf.Min(amount, affordableAmount);
             marketItem.attachedItemCard.itemQuantity += amount;
-            GameManager.UM.money -= amount * itemPrice;
+            totalMoney = amount * itemPrice;
+            GameManager.UM.money -= totalMoney;
+            startPos = GameManager.UM.UIbutton.transform.position;
+            endPos = marketItem.buyUI.transactionButton.transform.position;
         }
+
+        int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalMoney / 50));
+        StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
         UpdateMarketItems();
         GameManager.UM.UpdateUI();
     }
+
+
+    private IEnumerator SpawnCoins(Vector3 start, Vector3 end, int coinCount, MarketItem marketItem)
+    {
+        for (int i = 0; i < coinCount; i++)
+        {
+            Resource coin = Instantiate(coinIcon, Vector3.zero, Quaternion.identity, spawnResources.transform);
+            coin.transform.localPosition = new Vector3(marketItem.transform.position.x + UnityEngine.Random.Range(-250f, 250f), marketItem.transform.position.y + UnityEngine.Random.Range(-250f, 250f), 0f);
+            coin.transform.localRotation = Quaternion.identity;
+            StartCoroutine(MoveCoin(coin, end));
+        }
+        yield return null;
+    }
+
+    private IEnumerator MoveCoin(Resource coin, Vector3 target)
+    {
+        float speed = Vector3.Distance(coin.transform.position, target);
+
+        while (Vector3.Distance(coin.transform.position, target) > 0.01f)
+        {
+            coin.transform.position = Vector3.MoveTowards(coin.transform.position, target, speed * Time.deltaTime);
+            yield return null;
+        }
+        coin.transform.position = target;
+        Destroy(coin.gameObject);
+    }
+
+    public MarketItem FindMarketItemByName(string itemName)
+    {
+        return itemsInMarket.Find(marketItem => marketItem.attachedItemCard.itemName == itemName);
+    }
+
 }

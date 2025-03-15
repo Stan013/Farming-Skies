@@ -124,6 +124,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     {
                         hoverIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex-1] += 50;
                     }
+                    GameManager.ISM.UpdateIslandMaterial(hoverIsland);
+                    hoverIsland.UpdateNutrientsRequired();
                     GameManager.HM.dragCard.dragSucces = true;
                     GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
                 }
@@ -138,9 +140,9 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 if (CheckPotentialPlot() != null)
                 {
                     CheckPotentialPlot().transform.GetChild(0).gameObject.SetActive(false);
-                    GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity);
-                    plant.transform.SetParent(hoverPlot.transform);
+                    GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
                     plant.transform.localPosition = new Vector3(0, -0.25f, 0);
+                    plant.transform.localRotation = Quaternion.identity;
                     hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
                     hoverIsland.UpdateNutrientsRequired();
                     GameManager.HM.dragCard.dragSucces = true;

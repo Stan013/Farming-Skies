@@ -15,8 +15,7 @@ public class SelectionManager : MonoBehaviour
             cardPickWindow.SetActive(true);
             while (pickSlots.Count < 3)
             {
-                CardSlot newSlot = Instantiate(GameManager.HM.cardSlotPrefab, new Vector3(-600f + (pickSlots.Count * 600f), -75f, 0f), Quaternion.identity);
-                newSlot.transform.SetParent(pickSlotParent.transform, false);
+                CardSlot newSlot = Instantiate(GameManager.HM.cardSlotPrefab, new Vector3(-600f + (pickSlots.Count * 600f), -75f, 0f), Quaternion.identity, pickSlotParent.transform);
                 newSlot.transform.localScale = Vector3.one;
                 pickSlots.Add(newSlot);
                 Card randomCard = Instantiate(GameManager.CM.availableCards[Random.Range(0, GameManager.CM.availableCards.Count)], Vector3.zero, Quaternion.identity);

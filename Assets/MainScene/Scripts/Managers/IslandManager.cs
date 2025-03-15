@@ -60,9 +60,10 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
         boughtIslands.Add(reconstructedIsland);
         unboughtIslands.Remove(reconstructedIsland);
-        ExpenseItem islandExpense = Instantiate(expenseItem, Vector3.zero, Quaternion.identity);
+        ExpenseItem islandExpense = Instantiate(expenseItem, Vector3.zero, Quaternion.identity, islandExpenseContent.transform);
+        islandExpense.transform.localPosition = new Vector3(islandExpense.transform.localPosition.x, islandExpense.transform.localPosition.y, 0);
+        islandExpense.transform.localRotation = Quaternion.identity;
         islandExpense.SetupIslandExpense(reconstructedIsland);
-        islandExpense.transform.SetParent(islandExpenseContent.transform, false);
     }
 
     public void SetCollisions(string cardType)
@@ -163,7 +164,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public void UpdateIslandMaterial(Island island)
     {
         float totalNPK = island.nutrientsAvailable.Sum() - island.nutrientsAvailable[0];
-        float blendFactor = Mathf.Clamp01(totalNPK / 50f);
+        float blendFactor = Mathf.Clamp01(totalNPK / 150f);
         Material defaultMat = null;
         Material needsNPKMat = null;
 
@@ -223,14 +224,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     public Island FindIslandByID(string islandID)
     {
-        foreach(Island island in availableIsland)
-        {
-            if(island.islandID == islandID)
-            {
-                return island;
-            }
-        }
-        return null;
+        return availableIsland.Find(island => island.islandID == islandID);
     }
 
     public void LoadData(GameData data)
@@ -253,9 +247,9 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 {
                     var usedPlot = island.FindPlotByName(plotName);
                     var plantCard = island.FindItemOnIslandByCardId(data.islandDataMap[islandDataCount].itemsOnIsland[islandDataCount]);
-                    GameObject plant = Instantiate(plantCard.GetComponent<CardDrag>().dragModel, Vector3.zero, Quaternion.identity);
-                    plant.transform.SetParent(usedPlot.transform);
+                    GameObject plant = Instantiate(plantCard.GetComponent<CardDrag>().dragModel, Vector3.zero, Quaternion.identity, usedPlot.transform);
                     plant.transform.localPosition = new Vector3(0, -0.25f, 0);
+                    plant.transform.localRotation = Quaternion.identity;
                     island.MakeUsedPlot(usedPlot, GameManager.HM.dragCard, plant);
                 }
                 islandDataCount++;

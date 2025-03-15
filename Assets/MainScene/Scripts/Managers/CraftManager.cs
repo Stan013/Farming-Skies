@@ -48,10 +48,9 @@ public class CraftManager : MonoBehaviour
         {
             for (int i = 0; i < selectionSlots.Count; i++)
             {
-                Card newCard = Instantiate(craftableCards[i]);
+                Card newCard = Instantiate(craftableCards[i], selectionSlots[i].transform);
                 newCard.GetComponent<CardInspect>().enabled = false;
                 newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
-                newCard.transform.SetParent(selectionSlots[i].transform);
                 newCard.transform.localPosition = cardPositions[i];
                 newCard.transform.localScale = (i == 2) ? centerScale : (i == 1 || i == 3) ? sideScale : farSideScale;
                 newCard.transform.localRotation = Quaternion.identity;
@@ -62,8 +61,8 @@ public class CraftManager : MonoBehaviour
         selectedCard = cardsInCrafting[2];
         craftUI.SetupCraftingUI();
         CalculateMaxCraftableAmount();
-        CheckValidCraft();
         SetCardCraftAmount(0);
+        CheckValidCraft();
     }
 
 
@@ -79,17 +78,16 @@ public class CraftManager : MonoBehaviour
                 Card firstCard = cardsInCrafting[0];
                 if (firstCard.cardCraftIndex + 5 >= craftableCards.Count)
                 {
-                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex - 1]);
+                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex - 1], selectionSlots[4].transform);
                     newCard.cardCraftIndex = firstCard.cardCraftIndex - 1;
                 }
                 else
                 {
-                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex + 5]);
+                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex + 5], selectionSlots[4].transform);
                     newCard.cardCraftIndex = firstCard.cardCraftIndex + 5;
                 }
                 newCard.GetComponent<CardInspect>().enabled = false;
                 newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
-                newCard.transform.SetParent(selectionSlots[4].transform);
                 newCard.transform.localPosition = cardPositions[4];
                 newCard.transform.localScale = farSideScale;
                 newCard.transform.localRotation = Quaternion.identity;
@@ -111,17 +109,16 @@ public class CraftManager : MonoBehaviour
                 Card lastCard = cardsInCrafting[4];
                 if (lastCard.cardCraftIndex + 1 >= craftableCards.Count)
                 {
-                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex - 5]);
+                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex - 5], selectionSlots[0].transform);
                     newCard.cardCraftIndex = lastCard.cardCraftIndex - 5;
                 }
                 else
                 {
-                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex + 1]);
+                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex + 1], selectionSlots[0].transform);
                     newCard.cardCraftIndex = lastCard.cardCraftIndex + 1;
                 }
                 newCard.GetComponent<CardInspect>().enabled = false;
                 newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
-                newCard.transform.SetParent(selectionSlots[0].transform);
                 newCard.transform.localPosition = cardPositions[0];
                 newCard.transform.localScale = farSideScale;
                 newCard.transform.localRotation = Quaternion.identity;

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private static GameObject staticMainMenu;
     public GameObject gameMenu;
     private static GameObject staticGameMenu;
+    public static Cheats cheats;
     public enum GameMode
     {
         Career,
@@ -65,6 +66,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         DPM = GetComponent<DataPersistenceManager>();
         CRM = GetComponent<CraftManager>();
         QM = GetComponent<QuestManager>();
+        cheats = GetComponent<Cheats>();
         cam = FindAnyObjectByType<Camera>();
         staticPos = cam.transform.position;
         CurrentState = GameState.MainMenuMode;

@@ -14,6 +14,7 @@ public class TutorialManager : MonoBehaviour
     public Card cardChive;
     public Card cardChard;
     public Card cardRice;
+    public MarketItem riceMarketItem;
 
     public void UpdateTutorial(string tutorialTitle, string tutorialInfo)
     {
@@ -49,14 +50,14 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 3:
                 GameManager.UM.SetUIButtons(true, GameManager.UM.UIbutton.GetComponent<Button>());
-                UpdateTutorial("Look at your stats!", "Use your mouse and click on the arrow at the left side of your screen. To see all your resources, the date and how many cards you have in your deck.");
+                UpdateTutorial("Look at your resources!", "Use your mouse and click on the arrow at the left side of your screen. To see all your resources, the date and how many cards you have in your deck.");
                 break;
             case 4:
-                GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                GameManager.UM.expenseAmountText.transform.parent.GetComponent<Image>().color = new Color(0.68f, 0.9f, 0.5f);
                 UpdateTutorial("Check your expenses!", "Now, use your mouse again and left click on the green label that shows your expenses. This shows what you need to pay for.");
                 break;
             case 5:
-                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = Color.green;
+                GameManager.UM.dateAmountText.transform.parent.GetComponent<Image>().color = new Color(0.68f, 0.9f, 0.5f);
                 UpdateTutorial("Check upcoming events!", "Do the same thing again and left click on the green label that shows the date. Here you can see all the events each month.");
                 break;
             case 6:
@@ -147,7 +148,7 @@ public class TutorialManager : MonoBehaviour
                 GameManager.CRM.craftUI.minusButton.enabled = false;
                 GameManager.CRM.craftUI.minButton.enabled = false;
                 GameManager.CRM.craftButton.enabled = false;
-                UpdateTutorial("Check your storage!", "On the right side of the craft button, it now shows how much your craft costs. Open up your stats again by clicking on the arrow at the left side of the screen and check if you have enough.");
+                UpdateTutorial("Check your storage!", "On the right side of the craft button, it now shows how much your craft costs. Open up your resources again by clicking on the arrow at the left side of the screen and check if you have enough.");
                 break;
             case 24:
                 GameManager.CRM.craftButton.enabled = true;
@@ -200,9 +201,13 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 32:
                 GameManager.IPM.craftModeEnabled = false;
-                UpdateTutorial("Fertilise your land!", "With your newly crafted cards in your hand hover over your nitrogen fertiliser card. Now click with your left mouse button and drag the fertiliser to your land.");
+                GameManager.HM.FindCardInHandById("CardPhosphorusFertiliserUtility").GetComponent<CardDrag>().enabled = false;
+                GameManager.HM.FindCardInHandById("CardPotassiumFertiliserUtility").GetComponent<CardDrag>().enabled = false;
+                UpdateTutorial("Fertilise your land!", "With your newly crafted cards in your hand hover over your nitrogen fertiliser card. Now hold down your left mouse button and drag the fertiliser to your land.");
                 break;
             case 33:
+                GameManager.HM.FindCardInHandById("CardPhosphorusFertiliserUtility").GetComponent<CardDrag>().enabled = true;
+                GameManager.HM.FindCardInHandById("CardPotassiumFertiliserUtility").GetComponent<CardDrag>().enabled = true;
                 UpdateTutorial("Fertilise some more!", "Since your land is also missing Phosphorus and Potassium, use those cards as well. One by one, drag them to your land and watch your land improve.");
                 break;
             case 34:
@@ -217,13 +222,51 @@ public class TutorialManager : MonoBehaviour
                 GameManager.IPM.marketModeEnabled = false;
                 foreach (MarketItem marketItem in GameManager.MM.itemsInMarket)
                 {
-                    marketItem.sellUI.GetComponent<MarketButton>().enabled = false;
-                    marketItem.buyUI.GetComponent<MarketButton>().enabled = false;
+                    marketItem.sellUI.GetComponent<MarketButton>().transactionButton.enabled = false;
+                    marketItem.sellUI.GetComponent<MarketButton>().plusButton.enabled = false;
+                    marketItem.sellUI.GetComponent<MarketButton>().maxButton.enabled = false;
+                    marketItem.sellUI.GetComponent<MarketButton>().inputAmountField.enabled = false;
+                    marketItem.buyUI.GetComponent<MarketButton>().transactionButton.enabled = false;
+                    marketItem.buyUI.GetComponent<MarketButton>().plusButton.enabled = false;
+                    marketItem.buyUI.GetComponent<MarketButton>().maxButton.enabled = false;
+                    marketItem.buyUI.GetComponent<MarketButton>().inputAmountField.enabled = false;
                 }
                 UpdateTutorial("Find rice market!", "Each product has its own price, supply and demand, which changes every week. With the green labels on top, you can sort between products. Now let's scroll down and find the rice market.");
                 break;
             case 37:
-                UpdateTutorial("Input the max!", "It is time to sell something and earn some money. Start of by pressing the max button on the rice ");
+                riceMarketItem = GameManager.MM.FindMarketItemByName("Rice");
+                riceMarketItem.sellUI.GetComponent<MarketButton>().plusButton.enabled = true;
+                riceMarketItem.sellUI.GetComponent<MarketButton>().maxButton.enabled = true;
+                riceMarketItem.sellUI.GetComponent<MarketButton>().inputAmountField.enabled = true;
+                UpdateTutorial("Input the max!", "It is time to earn some money and sell part of your harvest. For now, we are just selling rice, so click on the max button or input the max amount on the sell side of the market.");
+                break;
+            case 38:
+                riceMarketItem = GameManager.MM.FindMarketItemByName("Rice");
+                riceMarketItem.sellUI.GetComponent<MarketButton>().minButton.enabled = false;
+                riceMarketItem.sellUI.GetComponent<MarketButton>().minusButton.enabled = false;
+                riceMarketItem.sellUI.GetComponent<MarketButton>().inputAmountField.enabled = false;
+                riceMarketItem.sellUI.GetComponent<MarketButton>().transactionButton.enabled = true;
+                UpdateTutorial("Make that money!", "Now click on sell and watch your money come in. With the market fluctuations, you can also earn money by buying when products are cheap and selling when they are expensive.");
+                break;
+            case 39:
+                GameManager.IPM.marketModeEnabled = true;
+                UpdateTutorial("Exit the market!", "You got some money in your pocket and are ready to expand. Press R again to exit market mode and Q to go into manage mode. Open up your resources and look at your balance.");
+                break;
+            case 40:
+                GameManager.IPM.defaultModeEnabled = true;
+                GameManager.IPM.marketModeEnabled = false;
+                GameManager.ISM.FindIslandByID("Ring1(0,-1)").ToggleState(Island.IslandState.Highlighted, Island.IslandState.Default);
+                UpdateTutorial("Start moving!", "In order for you to expand, you need to buy more land. So press Q to exit manage mode and you can now move. Use your WASD keys to move to the newly highlighted island.");
+                break;
+            case 41:
+                UpdateTutorial("Move some more!", "You can also move up by pressing left shift and down by pressing left control. Try to go up a little bit so you have a better view of the highlighted island.");
+                break;
+            case 42:
+                UpdateTutorial("Buy another island!", "You are above your future island, you only need to buy it. Go into manage mode again and hover over the highlighted island. Now hold down your left mouse button until the island is built.");
+                break;
+            case 43:
+
+                UpdateTutorial("Inspect new cards!", "Since you ran out of resources crafting cards and just paid for a new island, I will help you and give you some cards. Inspect these cards and see what they do by left clicking on them.");
                 break;
                 /*
                 case 18:

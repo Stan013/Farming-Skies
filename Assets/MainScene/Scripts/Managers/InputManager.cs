@@ -94,6 +94,10 @@ public class InputManager : MonoBehaviour
                     ToggleState(GameManager.GameState.CraftMode, GameManager.GameState.Default); //Switch to craft mode
                 }
             }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                GameManager.cheats.AddMoney();
+            }
         }
         else
         {
@@ -144,7 +148,7 @@ public class InputManager : MonoBehaviour
             float fillValue = Mathf.Clamp01(spaceHoldTimer / 1f);
             GameManager.UM.nextWeekSlider.value = fillValue;
             RectTransform handleRect = GameManager.UM.nextWeekSlider.handleRect;
-            float newX = Mathf.Lerp(25f, -40f, fillValue);
+            float newX = Mathf.Lerp(25f, -35f, fillValue);
             handleRect.anchoredPosition = new Vector2(newX, handleRect.anchoredPosition.y);
             if (spaceHoldTimer >= 1f && !isHoldingSpace)
             {
@@ -206,7 +210,7 @@ public class InputManager : MonoBehaviour
             clickedIsland = GameManager.ISM.GetClickedIsland();
             if (GameManager.UM.money >= clickedIsland.islandBuildCost && clickedIsland.islandBought == false && clickedIsland.islandAvailable)
             {
-                if (!GameManager.TTM.tutorial || clickedIsland.name == "0,0")
+                if (!GameManager.TTM.tutorial || clickedIsland.currentState == Island.IslandState.Highlighted)
                 {
                     Cursor.lockState = CursorLockMode.Locked;
                     GameManager.UM.constructionLabel.gameObject.SetActive(true);

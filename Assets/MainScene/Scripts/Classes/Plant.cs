@@ -5,7 +5,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
     public Drop drop;
-    public float plantScale = 0.0075f;
+    public float plantScale = 0.005f;
     public string plantCardID;
 
     public int yield;

@@ -30,7 +30,6 @@ public class CraftUI : MonoBehaviour
 
     private void OnCraftAmountInputChanged(string input)
     {
-        GameManager.CRM.CheckValidCraft();
         if (int.TryParse(input, out int value))
         {
             GameManager.CRM.SetCardCraftAmount(value);
@@ -39,6 +38,7 @@ public class CraftUI : MonoBehaviour
         {
             craftAmountInput.text = GameManager.CRM.cardCraftAmount.ToString();
         }
+        GameManager.CRM.CheckValidCraft();
     }
 
     public void UpdateCostDisplay()

@@ -7,22 +7,22 @@ using TMPro;
 public class MarketButton : MonoBehaviour
 {
     public bool isSelling;
-    public TMP_InputField inputAmount;
+    public TMP_InputField inputAmountField;
     public Button transactionButton;
     public Button plusButton;
     public Button minusButton;
     public Button minButton;
     public Button maxButton;
     public MarketItem marketItem;
-    private int minAmount = 0;
-    private int maxAmount;
+    public int inputAmount;
+    public int maxAmount;
 
     private void Awake()
     {
-        if (inputAmount != null)
+        if (inputAmountField != null)
         {
-            inputAmount.contentType = TMP_InputField.ContentType.IntegerNumber;
-            inputAmount.onValueChanged.AddListener((input) => ValidateInput(input));
+            inputAmountField.contentType = TMP_InputField.ContentType.IntegerNumber;
+            inputAmountField.onValueChanged.AddListener((input) => ValidateInput(input));
         }
     }
 
@@ -34,7 +34,7 @@ public class MarketButton : MonoBehaviour
         minusButton.onClick.AddListener(DecreaseInput);
         minButton.onClick.AddListener(SetToMinAmount);
         maxButton.onClick.AddListener(SetToMaxAmount);
-        inputAmount.onValueChanged.AddListener((input) => ValidateInput(input));
+        inputAmountField.onValueChanged.AddListener((input) => ValidateInput(input));
     }
 
     private void ValidateInput(string input)
@@ -42,12 +42,14 @@ public class MarketButton : MonoBehaviour
         int currentValue;
         if (int.TryParse(input, out currentValue))
         {
-            currentValue = Mathf.Clamp(currentValue, minAmount, maxAmount);
-            inputAmount.text = currentValue.ToString();
+            currentValue = Mathf.Clamp(currentValue, 0, maxAmount);
+            inputAmount = currentValue;
+            inputAmountField.text = currentValue.ToString();
         }
         else
         {
-            inputAmount.text = minAmount.ToString();
+            inputAmount = 0;
+            inputAmountField.text = "0";
         }
     }
 
@@ -67,14 +69,11 @@ public class MarketButton : MonoBehaviour
     {
         UpdateMaxAmount();
         int currentValue;
-        if (int.TryParse(inputAmount.text, out currentValue))
+        if (int.TryParse(inputAmountField.text, out currentValue))
         {
             currentValue = Mathf.Min(currentValue + 1, maxAmount);
-            inputAmount.text = currentValue.ToString();
-        }
-        else
-        {
-            inputAmount.text = "0";
+            inputAmount = currentValue;
+            inputAmountField.text = currentValue.ToString();
         }
     }
 
@@ -82,33 +81,32 @@ public class MarketButton : MonoBehaviour
     {
         UpdateMaxAmount();
         int currentValue;
-        if (int.TryParse(inputAmount.text, out currentValue))
+        if (int.TryParse(inputAmountField.text, out currentValue))
         {
-            currentValue = Mathf.Max(currentValue - 1, minAmount);
-            inputAmount.text = currentValue.ToString();
-        }
-        else
-        {
-            inputAmount.text = "0";
+            currentValue = Mathf.Max(currentValue - 1, 0);
+            inputAmount = currentValue;
+            inputAmountField.text = currentValue.ToString();
         }
     }
 
     public void SetToMinAmount()
     {
         UpdateMaxAmount();
-        inputAmount.text = minAmount.ToString();
+        inputAmount = 0;
+        inputAmountField.text = "0";
     }
 
     public void SetToMaxAmount()
     {
         UpdateMaxAmount();
-        inputAmount.text = maxAmount.ToString();
+        inputAmount = maxAmount;
+        inputAmountField.text = maxAmount.ToString();
     }
 
     private void OnTransactionButtonClicked()
     {
         int amount;
-        if (int.TryParse(inputAmount.text, out amount))
+        if (int.TryParse(inputAmountField.text, out amount))
         {
             if (amount <= 0)
             {
@@ -116,15 +114,6 @@ public class MarketButton : MonoBehaviour
             }
             MarketManager marketManager = GameManager.MM;
             marketManager.ExecuteTransaction(marketItem, amount, isSelling);
-        }
-        if (GameManager.TTM.tutorial && GameManager.TTM.tutorialCount == 19)
-        {
-            minButton.enabled = true;
-            minusButton.enabled = true;
-            plusButton.enabled = true;
-            maxButton.enabled = true;
-            inputAmount.enabled = true;
-            transactionButton.GetComponent<Image>().color = new Color(0.84f, 0.84f, 0.84f);
         }
     }
 }

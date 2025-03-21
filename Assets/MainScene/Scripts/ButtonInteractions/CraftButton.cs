@@ -70,7 +70,7 @@ public class CraftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             }
             else
             {
-                GameManager.UM.money -= GameManager.CRM.selectedCard.cardCraftResources[0];
+                GameManager.UM.balance -= GameManager.CRM.selectedCard.cardCraftResources[0];
                 GameManager.UM.water -= GameManager.CRM.selectedCard.cardCraftResources[1];
                 GameManager.UM.fertiliser -= GameManager.CRM.selectedCard.cardCraftResources[2];
                 GameManager.DM.AddCardToDeck(GameManager.CRM.selectedCard.cardId);

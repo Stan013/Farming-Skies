@@ -21,18 +21,17 @@ public class IslandData
 [System.Serializable]
 public class GameData
 {
-    public GameManager.GameState CurrentState;
     public Vector3 playerPosition;
     public Vector3 cameraDirection;
 
-    public float tax;
+    public int farmLevel;
+    public float expense;
     public float balance;
     public int water;
     public int fertiliser;
-    public List<int> date = new List<int> { 1, 1, 2025 };
-
-    public List<string> starterCards = new List<string>();
+    public int weeks;
     public List<string> cardsInDeck = new List<string>();
+
     public List<string> cardsInHand = new List<string>();
 
     public List<string> boughtIslands = new List<string>();
@@ -40,11 +39,11 @@ public class GameData
 
     public GameData()
     {
-        tax = 0f;
-        balance = 1000f;
-        water = 25;
-        fertiliser = 25;
-        playerPosition = new Vector3(0, 0, 0);
-        cameraDirection = new Vector3(0, 10, 0);
+        farmLevel = 1;
+        expense = 0f;
+        balance = 0f;
+        water = 0;
+        fertiliser = 0;
+        weeks = 1;
     }
 }

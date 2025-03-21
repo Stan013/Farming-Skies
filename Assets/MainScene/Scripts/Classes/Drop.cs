@@ -28,7 +28,7 @@ public class Drop : MonoBehaviour
             case "Product":
                 break;
             case "Plant":
-                Card itemCard = GameManager.CM.FindCardById(plantCardID);
+                Card itemCard = GameManager.CM.FindCardByID(plantCardID);
                 InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == itemCard.itemName);
                 if (existingInventoryItem == null)
                 {

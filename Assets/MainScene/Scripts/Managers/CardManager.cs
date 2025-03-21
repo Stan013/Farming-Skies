@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardManager : MonoBehaviour, IDataPersistence
+public class CardManager : MonoBehaviour
 {
-    public Transform availableCardsParent;
+    [Header("Cards lists")]
     public List<Card> starterCards = new List<Card>();
     public List<Card> availableCards = new List<Card>();
     public List<Card> inspectedCards = new List<Card>();
+
+    [Header("Cards variables")]
+    public Transform availableCardsParent;
     public Card inspectCard;
 
     public void SetupCards()
@@ -16,7 +19,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
         {
             foreach(Card childCard in cardCategory.GetComponentsInChildren<Card>())
             {
-                if(childCard.cardType == "Utility" && childCard.cardUnlocked)
+                if(childCard.cardUnlocked)
                 {
                     GameManager.CRM.craftableCards.Add(childCard);
                 }
@@ -59,12 +62,12 @@ public class CardManager : MonoBehaviour, IDataPersistence
         card.cardSetup = true;
     }   
 
-    public Card FindCardById(string id)
+    public Card FindCardByID(string id)
     {
         return availableCards.Find(card => card.cardId == id);
     }
 
-    public void LoadData(GameData data)
+/*    public void LoadData(GameData data)
     {
         starterCards.Clear();
         foreach (string cardID in data.starterCards)
@@ -80,5 +83,5 @@ public class CardManager : MonoBehaviour, IDataPersistence
         {
             data.starterCards.Add(card.cardId);
         }
-    }
+    }*/
 }

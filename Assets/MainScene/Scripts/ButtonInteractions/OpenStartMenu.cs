@@ -32,7 +32,6 @@ public class OpenStartMenu : MonoBehaviour
                 GameManager.CurrentMode = GameManager.GameMode.Creative;
                 break;
         }
-        GameManager.IPM.ToggleState(GameManager.GameState.ManageMode, GameManager.GameState.MainMenuMode);
         GameManager.DPM.NewGame();
     }
 }

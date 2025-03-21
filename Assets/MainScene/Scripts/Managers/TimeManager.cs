@@ -51,7 +51,6 @@ public class TimeManager : MonoBehaviour
             dateText.text = GetDate();
             yield return new WaitForSeconds(0.5f);
         }
-        GameManager.IPM.ToggleState(GameManager.GameState.Default, GameManager.GameState.ManageMode);
     }
 
     public void RotateSky(float skyRotationSpeed)
@@ -91,7 +90,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    public void LoadData(GameData data)
+/*    public void LoadData(GameData data)
     {
         for (int i = 0; i < date.Count; i++)
         {
@@ -105,5 +104,5 @@ public class TimeManager : MonoBehaviour
         {
             date.Add(data.date[i]);
         }
-    }
+    }*/
 }

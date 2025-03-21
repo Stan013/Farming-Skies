@@ -8,7 +8,7 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private GameObject pickSlotParent;
     public List<CardSlot> pickSlots;
 
-    public void GeneratePickWindow()
+/*    public void GeneratePickWindow()
     {
         if (GameManager.CurrentState == GameManager.GameState.SelectionMode)
         {
@@ -27,7 +27,7 @@ public class SelectionManager : MonoBehaviour
         {
             cardPickWindow.SetActive(false);
         }
-    }
+    }*/
 
     public void ClosePickWindow()
     {

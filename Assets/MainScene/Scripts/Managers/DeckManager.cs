@@ -5,21 +5,29 @@ using UnityEngine.UI;
 
 public class DeckManager : MonoBehaviour, IDataPersistence
 {
+    [Header("Deck variables")]
     public GameObject cardsInDeckParent;
+
+    [Header("Cards list")]
     public List<Card> cardsInDeck = new List<Card>();
 
-    public void CheckRefillHand()
+    public void SetStartingDeck()
     {
-        if (GameManager.HM.lastFilledSlotIndex < 9)
+        foreach (Card card in GameManager.CM.starterCards)
         {
-            GameManager.HM.SetCardsInHand();
+            AddCardToDeck(card.cardId);
         }
     }
 
     public void AddCardToDeck(string cardId)
     {
-        Card newCard = Instantiate(GameManager.CM.FindCardById(cardId), Vector3.zero, Quaternion.identity);
-        newCard.ToggleState(Card.CardState.InDeck, Card.CardState.Hidden);
+        Card newCard = Instantiate(GameManager.CM.FindCardByID(cardId), Vector3.zero, Quaternion.identity);
+        newCard.SetCardState(Card.CardState.InDeck);
+    }
+
+    public Card FindCardInDeckByID(string cardId)
+    {
+        return cardsInDeck.Find(card => card.cardId == cardId);
     }
 
     public void LoadData(GameData data)

@@ -50,7 +50,7 @@ public class CraftManager : MonoBehaviour
             {
                 Card newCard = Instantiate(craftableCards[i], selectionSlots[i].transform);
                 newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
+                newCard.SetCardState(Card.CardState.InCraft);
                 newCard.transform.localPosition = cardPositions[i];
                 newCard.transform.localScale = (i == 2) ? centerScale : (i == 1 || i == 3) ? sideScale : farSideScale;
                 newCard.transform.localRotation = Quaternion.identity;
@@ -87,7 +87,7 @@ public class CraftManager : MonoBehaviour
                     newCard.cardCraftIndex = firstCard.cardCraftIndex + 5;
                 }
                 newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
+                newCard.SetCardState(Card.CardState.InCraft);
                 newCard.transform.localPosition = cardPositions[4];
                 newCard.transform.localScale = farSideScale;
                 newCard.transform.localRotation = Quaternion.identity;
@@ -118,7 +118,7 @@ public class CraftManager : MonoBehaviour
                     newCard.cardCraftIndex = lastCard.cardCraftIndex + 1;
                 }
                 newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.ToggleState(Card.CardState.InCraft, Card.CardState.Hidden);
+                newCard.SetCardState(Card.CardState.InCraft);
                 newCard.transform.localPosition = cardPositions[0];
                 newCard.transform.localScale = farSideScale;
                 newCard.transform.localRotation = Quaternion.identity;
@@ -195,7 +195,7 @@ public class CraftManager : MonoBehaviour
         List<int> validMaxValues = new List<int>();
         if (selectedCard.cardCraftResources[0] > 0f)
         {
-            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.money / selectedCard.cardCraftResources[0]));
+            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.balance / selectedCard.cardCraftResources[0]));
         }
         if (selectedCard.cardCraftResources[1] > 0)
         {

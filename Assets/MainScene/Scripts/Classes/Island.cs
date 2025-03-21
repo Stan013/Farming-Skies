@@ -4,101 +4,242 @@ using UnityEngine;
 
 public class Island : MonoBehaviour
 {
+    [Header("Island stat variables")]
+    public bool islandAvailable;
+    public bool islandBought;
+    public bool needsNPK;
     public string islandID;
-    public Material islandMat;
+
+    [Header("Island variables")]
+    public GameObject islandTop;
+    public GameObject islandBottom;
+    public Material topMat;
+    public Material bottomMat;
+
+    [Header("Island build variables")]
+    public int islandBuildCost;
+    public int islandExpenseCost;
+
+    [Header("Island states")]
     public IslandState currentState;
     public IslandState previousState;
     public GameObject glow;
 
-    public bool islandAvailable;
-    public int islandBuildCost;
-    public int islandTaxCost;
-    public bool islandBought;
+    [Header("Island top materials")]
+    public Material transparentMatTop;
+    public Material sowedMatTop;
+    public Material sowedNeedsNPKMatTop;
+    public Material cultivatedMatTop;
+    public Material cultivatedNeedsNPKMatTop;
+    public Material wateredMatTop;
+    public Material wateredNeedsNPKMatTop;
 
+    [Header("Island bottom materials")]
+    public Material transparentMatBot;
+    public Material sowedMatBot;
+    public Material sowedNeedsNPKMatBot;
+    public Material wateredMatBot;
+    public Material wateredNeedsNPKMatBot;
+
+    [Header("Plots lists")]
     public List<GameObject> plotsSmallPlants;
     public List<GameObject> plotsMediumPlants;
     public List<GameObject> plotsBigPlants;
     public List<GameObject> usedPlots = new List<GameObject>();
-    public List<Plant> itemsOnIsland = new List<Plant>();
-    public GameObject islandTop;
-    public Material topMat;
-    public GameObject islandBottom;
-    public Material bottomMat;
-    public Material bottomDefaultMat;
 
+    [Header("Plants lists")]
+    public List<Plant> itemsOnIsland = new List<Plant>();
+
+    [Header("Nutrient variables")]
+    public GameObject warningIcon;
     public List<int> nutrientsAvailable;
     public List<int> nutrientsRequired;
 
-    public GameObject warningIcon;
-    public bool needsNPK;
 
     public enum IslandState
     {
+        Transparent,
         Highlighted,
-        Default,
-        Watered,
         Sowed,
         Cultivated,
+        Watered
     }
 
-    public void ToggleState(IslandState targetState, IslandState fallbackState)
-    {
-        SetState(currentState == targetState ? fallbackState : targetState);
-    }
-
-    private void SetState(IslandState state)
+    public void SetIslandState(IslandState state)
     {
         currentState = state;
-        GetIslandComponents();
         switch (state)
         {
+            case IslandState.Transparent:
+                islandTop.GetComponent<MeshRenderer>().material = transparentMatTop;
+                islandBottom.GetComponent<MeshRenderer>().material = transparentMatBot;
+                break;
             case IslandState.Highlighted:
                 glow.SetActive(true);
                 break;
-            case IslandState.Default:
-                Color topColor = topMat.color;
-                topColor.a = 0f;
-                topMat.color = topColor;
-                Color bottomColor = bottomMat.color;
-                bottomColor.a = 0f;
-                bottomMat.color = bottomColor;
-                break;
             case IslandState.Watered:
-                if (needsNPK)
-                {
-                    islandMat = GameManager.ISM.wateredNeedsNPKMat;
-                }
-                else
-                {
-                    islandMat = GameManager.ISM.wateredMat;
-                }
+                islandTop.GetComponent<MeshRenderer>().material = wateredMatTop;
+                islandBottom.GetComponent<MeshRenderer>().material = wateredMatBot;
                 break;
             case IslandState.Sowed:
                 glow.SetActive(false);
-                if (needsNPK)
-                {
-                    islandMat = GameManager.ISM.sowedNeedsNPKMat;
-                }
-                else
-                {
-                    islandMat = GameManager.ISM.sowedMat;
-                }
+                islandTop.GetComponent<MeshRenderer>().material = sowedMatTop;
+                islandBottom.GetComponent<MeshRenderer>().material = sowedMatBot;
                 break;
             case IslandState.Cultivated:
-                if (needsNPK)
+                islandTop.GetComponent<MeshRenderer>().material = cultivatedMatTop;
+                islandBottom.GetComponent<MeshRenderer>().material = sowedMatBot;
+                break;
+        }
+    }
+
+    public void SetIslandMaterial(Material islandMat, Material islandMatNeedsNPK, GameObject islandPart)
+    {
+        MeshRenderer meshRenderer = islandPart.GetComponent<MeshRenderer>();
+        if (islandMat == transparentMatTop || islandMat == transparentMatBot)
+        {
+            Color color = meshRenderer.materials[0].color;
+            color.a = 0f;
+            meshRenderer.materials[0].color = color;
+        }
+        else
+        {
+            float totalNPK = nutrientsAvailable.Sum() - nutrientsAvailable[0];
+            float blendFactor = Mathf.Clamp01(totalNPK / 150f);
+            Material blendedMaterial = new Material(islandMat);
+            Color blendedColor = Color.Lerp(islandMat.color, islandMatNeedsNPK.color, blendFactor);
+            blendedMaterial.color = blendedColor;
+
+            if (islandMat.mainTexture is Texture2D tex1 && islandMatNeedsNPK.mainTexture is Texture2D tex2)
+            {
+                Texture2D blendedTexture = BlendTextures(tex1, tex2, blendFactor);
+                blendedMaterial.SetTexture("_MainTex", blendedTexture);
+            }
+            
+            meshRenderer.material = blendedMaterial;
+        }
+    }
+
+    private Texture2D BlendTextures(Texture2D tex1, Texture2D tex2, float blendFactor)
+    {
+        int width = tex1.width;
+        int height = tex1.height;
+        Texture2D blendedTex = new Texture2D(width, height);
+
+        Color[] colors1 = tex1.GetPixels();
+        Color[] colors2 = tex2.GetPixels();
+        Color[] blendedColors = new Color[colors1.Length];
+
+        for (int i = 0; i < blendedColors.Length; i++)
+        {
+            blendedColors[i] = Color.Lerp(colors1[i], colors2[i], blendFactor);
+        }
+
+        blendedTex.SetPixels(blendedColors);
+        blendedTex.Apply();
+
+        return blendedTex;
+    }
+
+
+    public void SetCollisions(string cardType)
+    {
+        switch (cardType)
+        {
+            case "PlantSmall":
+                foreach (Island island in GameManager.ISM.boughtIslands)
                 {
-                    islandMat = GameManager.ISM.cultivatedNeedsNPKMat;
+                    if (island.currentState == Island.IslandState.Watered)
+                    {
+                        foreach (GameObject plot in island.plotsSmallPlants)
+                        {
+                            plot.GetComponent<BoxCollider>().enabled = true;
+                        }
+                    }
                 }
-                else
+                break;
+            case "PlantMedium":
+                foreach (Island island in GameManager.ISM.boughtIslands)
                 {
-                    islandMat = GameManager.ISM.cultivatedMat;
+                    if (island.currentState == Island.IslandState.Watered)
+                    {
+                        foreach (GameObject plot in island.plotsMediumPlants)
+                        {
+                            plot.GetComponent<BoxCollider>().enabled = true;
+                        }
+                    }
+                }
+                break;
+            case "PlantBig":
+                foreach (Island island in GameManager.ISM.boughtIslands)
+                {
+                    if (island.currentState == Island.IslandState.Watered)
+                    {
+                        foreach (GameObject plot in island.plotsBigPlants)
+                        {
+                            plot.GetComponent<BoxCollider>().enabled = true;
+                        }
+                    }
+                }
+                break;
+            case "Buildable":
+                foreach (Island island in GameManager.ISM.boughtIslands)
+                {
+                    island.GetComponent<BoxCollider>().enabled = false;
+                    foreach (GameObject plot in island.plotsMediumPlants)
+                    {
+                        plot.GetComponent<BoxCollider>().enabled = true;
+                    }
+                }
+                break;
+            default:
+                foreach (Island island in GameManager.ISM.boughtIslands)
+                {
+                    island.GetComponent<BoxCollider>().enabled = true;
+                    foreach (GameObject plot in island.plotsSmallPlants)
+                    {
+                        plot.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    foreach (GameObject plot in island.plotsMediumPlants)
+                    {
+                        plot.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    foreach (GameObject plot in island.plotsBigPlants)
+                    {
+                        plot.GetComponent<BoxCollider>().enabled = false;
+                    }
                 }
                 break;
         }
-        if (islandMat != null)
+    }
+
+    public void UpdateMaterialAlpha(float alphaChangeSpeed)
+    {
+        Color colorTop = topMat.color;
+        Color colorBot = bottomMat.color;
+        colorTop.a += alphaChangeSpeed * Time.deltaTime;
+        colorBot.a += alphaChangeSpeed * Time.deltaTime;
+        colorTop.a = Mathf.Clamp01(colorTop.a);
+        colorBot.a = Mathf.Clamp01(colorBot.a);
+        topMat.color = colorTop;
+        bottomMat.color = colorBot;
+        if (Mathf.Approximately(colorTop.a, 1.0f) || Mathf.Approximately(colorBot.a, 1.0f))
         {
-            SetMaterial(islandMat);
+            ToOpaqueMode(topMat);
+            ToOpaqueMode(bottomMat);
         }
+    }
+
+    public void ToOpaqueMode(Material material)
+    {
+        material.SetOverrideTag("RenderType", "");
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        material.SetInt("_ZWrite", 1);
+        material.DisableKeyword("_ALPHATEST_ON");
+        material.DisableKeyword("_ALPHABLEND_ON");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.renderQueue = -1;
     }
 
     public void MakeUsedPlot(GameObject usedPlot, Card usedCard, GameObject usedPlant)
@@ -113,20 +254,20 @@ public class Island : MonoBehaviour
         switch (usedCard.cardType)
         {
             case "PlantSmall":
-                GameManager.ISM.SetCollisions("PlantMedium");
-                GameManager.ISM.SetCollisions("PlantBig");
+                SetCollisions("PlantMedium");
+                SetCollisions("PlantBig");
                 break;
             case "PlantMedium":
-                GameManager.ISM.SetCollisions("PlantSmall");
-                GameManager.ISM.SetCollisions("PlantBig");
+                SetCollisions("PlantSmall");
+                SetCollisions("PlantBig");
                 break;
             case "PlantBig":
-                GameManager.ISM.SetCollisions("PlantSmall");
-                GameManager.ISM.SetCollisions("PlantMedium");
+                SetCollisions("PlantSmall");
+                SetCollisions("PlantMedium");
                 break;
             case "Buildable":
-                GameManager.ISM.SetCollisions("PlantSmall");
-                GameManager.ISM.SetCollisions("PlantBig");
+                SetCollisions("PlantSmall");
+                SetCollisions("PlantBig");
                 break;
         }
         CheckOverlappingPlots(usedPlot.GetComponent<BoxCollider>());
@@ -148,79 +289,7 @@ public class Island : MonoBehaviour
                 usedPlots.Add(collider.gameObject);
             }
         }
-        GameManager.ISM.SetCollisions("Reset");
-    }
-
-    public void GetIslandComponents()
-    {
-        if (islandTop != null && islandBottom != null)
-        {
-            topMat = islandTop.GetComponent<Renderer>()?.material;
-            bottomMat = islandBottom.GetComponent<Renderer>()?.material;
-        }
-    }
-
-    public void ChangeMaterial(float alphaChangeSpeed)
-    {
-        GetIslandComponents();
-        UpdateMaterialAlpha(topMat, alphaChangeSpeed);
-        UpdateMaterialAlpha(bottomMat, alphaChangeSpeed);
-    }
-
-    private void UpdateMaterialAlpha(Material material, float alphaChangeSpeed)
-    {
-        if (material == null) return;
-        Color color = material.color;
-        color.a += alphaChangeSpeed * Time.deltaTime;
-        color.a = Mathf.Clamp01(color.a);
-        material.color = color;
-        if (Mathf.Approximately(color.a, 1.0f))
-        {
-            ToOpaqueMode(material, false);
-        }
-    }
-
-    public void ToOpaqueMode(Material material, bool transparent)
-    {
-        if(transparent)
-        {
-            Color color = material.color;
-            color.a = 0f;
-            material.color = color;
-        }
-        else
-        {
-            material.SetOverrideTag("RenderType", "");
-            material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-            material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-            material.SetInt("_ZWrite", 1);
-            material.DisableKeyword("_ALPHATEST_ON");
-            material.DisableKeyword("_ALPHABLEND_ON");
-            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            material.renderQueue = -1;
-        }
-    }
-
-    public void ResetMaterials()
-    {
-        GetIslandComponents();
-        ToOpaqueMode(topMat, true);
-        ToOpaqueMode(bottomMat, true);
-    }
-
-    public void SetMaterial(Material changeMaterial)
-    {
-        if (islandTop != null)
-        {
-            var renderer = islandTop.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                var materials = renderer.materials;
-                materials[0] = changeMaterial;
-                renderer.materials = materials;
-            }
-        }
-        topMat = changeMaterial;
+        SetCollisions("Reset");
     }
 
     public GameObject FindPlotByName(string name)
@@ -230,18 +299,19 @@ public class Island : MonoBehaviour
 
     public Card FindItemOnIslandByCardId(string plantCardId)
     {
-        return GameManager.CM.FindCardById("Card" + plantCardId);
+        return GameManager.CM.FindCardByID("Card" + plantCardId);
     }
 
     public void UpdateNutrientsRequired()
     {
-        for(int i = 0; i < nutrientsRequired.Count; i++)
+        for (int i = 0; i < nutrientsRequired.Count; i++)
         {
             nutrientsRequired[i] = 0;
         }
+
         foreach (Plant plant in itemsOnIsland)
         {
-            if(plant.plantCardID.Contains("Plant"))
+            if (plant.plantCardID.Contains("Plant"))
             {
                 for (int i = 0; i < nutrientsRequired.Count; i++)
                 {
@@ -249,6 +319,29 @@ public class Island : MonoBehaviour
                 }
             }
         }
+
+        switch (currentState)
+        {
+            case IslandState.Sowed:
+                {
+                    SetIslandMaterial(sowedMatTop, sowedNeedsNPKMatTop, islandTop);
+                    SetIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
+                    break;
+                }
+            case IslandState.Cultivated:
+                {
+                    SetIslandMaterial(cultivatedMatTop, cultivatedNeedsNPKMatTop, islandTop);
+                    SetIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
+                    break;
+                }
+            case IslandState.Watered:
+                {
+                    SetIslandMaterial(wateredMatTop, wateredNeedsNPKMatTop, islandTop);
+                    SetIslandMaterial(wateredMatBot, wateredNeedsNPKMatBot, islandBottom);
+                    break;
+                }
+        }
+
         CheckWarningIcon();
     }
 

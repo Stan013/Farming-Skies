@@ -75,12 +75,7 @@ public class Card : MonoBehaviour
         InCraft,
     }
 
-    public void ToggleState(CardState targetState, CardState fallbackState)
-    {
-        SetState(CurrentState == targetState ? fallbackState : targetState);
-    }
-
-    public void SetState(CardState newState)
+    public void SetCardState(CardState newState)
     {
         ExitState(CurrentState);
         CurrentState = newState;
@@ -149,7 +144,7 @@ public class Card : MonoBehaviour
                     GameManager.HM.lastFilledSlotIndex--;
                     GameManager.HM.cardsInHand.Remove(this);
                     GameManager.HM.MoveCardsInHand(this);
-                    GameManager.DM.CheckRefillHand();
+                    GameManager.HM.SetCardsInHand();
                     Destroy(this.gameObject);
                     dragSucces = false;
                 }

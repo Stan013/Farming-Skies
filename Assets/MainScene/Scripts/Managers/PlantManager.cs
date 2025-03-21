@@ -21,10 +21,9 @@ public class PlantManager : MonoBehaviour
                 }
                 else
                 {
-                    island.ToggleState(Island.IslandState.Cultivated, Island.IslandState.Sowed);
+                    island.SetIslandState(Island.IslandState.Cultivated);
                 }
             }
-            GameManager.ISM.UpdateIslandMaterial(island);
         }
     }
 
@@ -80,6 +79,6 @@ public class PlantManager : MonoBehaviour
             }
             island.nutrientsAvailable[i] -= plant.nutrientsUsages[i];
         }
-        island.UpdateNutrientsRequired();
+        //island.UpdateNutrientsRequired();
     }
 }

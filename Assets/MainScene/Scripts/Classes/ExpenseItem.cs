@@ -7,25 +7,23 @@ using System.Runtime.CompilerServices;
 
 public class ExpenseItem : MonoBehaviour
 {
-    public ExpenseUI expenseUI;
-    public TMP_Text islandName;
-    public TMP_Text islandCost;
-    public TMP_Text buildableName;
-    public TMP_Text buildableCost;
+    public ExpenseCategory islandExpenses;
+    public ExpenseCategory waterBarrelExpenses;
+    public ExpenseCategory compostExpenses;
+
+    public TMP_Text expenseItemNameText;
+    public Image expenseItemImage;
+    public TMP_Text expenseItemCostText;
+
+    public Sprite islandImage;
+    public Sprite waterBarrelImage;
+    public Sprite compostImage;
 
     public void SetupIslandExpense(Island island)
     {
-        GameManager.UM.AddExpense(island.islandTaxCost);
-        expenseUI.islandTotal += island.islandTaxCost;
-        islandName.text = "Island (" + island.name + "):";
-        islandCost.text = island.islandTaxCost.ToString() + " ₴";
-    }
-
-    public void SetupBuildableExpense(Plant buildable)
-    {
-        GameManager.UM.AddExpense(buildable.buildableTaxCost);
-        expenseUI.buildableTotal += buildable.buildableTaxCost;
-        buildableName.text = buildable.name.Replace("(Clone)(Clone)", "").Trim();
-        buildableCost.text = buildable.buildableTaxCost.ToString() + " ₴";
+        islandExpenses.IslandsTotal += island.islandExpenseCost;
+        expenseItemNameText.text = "(" + island.name + ")";
+        expenseItemImage.sprite = islandImage;
+        expenseItemCostText.text = "+ " + island.islandExpenseCost.ToString() + " ₴";
     }
 }

@@ -5,145 +5,58 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class IslandManager : MonoBehaviour, IDataPersistence
+public class IslandManager : MonoBehaviour
 {
-    //Manager
+    [Header("GameManager objects")]
     public Transform availableIslandsParent;
+
+    [Header("Island lists")]
     public List<Island> availableIsland;
     public List<Island> boughtIslands;
     public List<Island> unboughtIslands;
+
+    [Header("General island variables")]
     public Island starterIsland;
 
-    public Material sowedMat;
-    public Material sowedNeedsNPKMat;
-    public Material cultivatedMat;
-    public Material cultivatedNeedsNPKMat;
-    public Material wateredMat;
-    public Material wateredNeedsNPKMat;
-
-    public GameObject islandMenu;
-    public GameObject islandExpenseContent;
-    public GameObject buildableExpenseContent;
+    [Header("Expense variables")]
     public ExpenseItem expenseItem;
+    public GameObject islandExpenseContent;
+    public GameObject waterBarrelExpenseContent;
+    public GameObject compostExpenseContent;
 
-    public void SetIslands()
+    public void SetupIslands()
     {
         foreach(Transform islandRing in availableIslandsParent)
         {
             foreach (Island childIsland in islandRing.GetComponentsInChildren<Island>())
             {
-                if(childIsland.islandAvailable)
+                if (childIsland.islandBought)
                 {
-                    availableIsland.Add(childIsland);
-                    if (childIsland.islandBought)
-                    {
-                        boughtIslands.Add(childIsland);
-                    }
-                    else
-                    {
-                        unboughtIslands.Add(childIsland);
-                    }
+                    boughtIslands.Add(childIsland);
                 }
+                else
+                {
+                    unboughtIslands.Add(childIsland);
+                }
+
+                childIsland.SetIslandState(Island.IslandState.Transparent);
+                childIsland.previousState = Island.IslandState.Transparent;
+                childIsland.topMat = childIsland.islandTop.GetComponent<Renderer>().material;
+                childIsland.bottomMat = childIsland.islandBottom.GetComponent<Renderer>().material;
             }
         }
+        SetupIslandCollisions(false);
     }
 
-    public Island GetClickedIsland()
+    public void SetupIslandCollisions(bool active)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out var hit) ? hit.collider.gameObject.GetComponent<Island>() : null;
-    }
-
-    public void AddIslandToBought(Island reconstructedIsland)
-    {
-        reconstructedIsland.islandBought = true;
-        reconstructedIsland.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
-        boughtIslands.Add(reconstructedIsland);
-        unboughtIslands.Remove(reconstructedIsland);
-        ExpenseItem islandExpense = Instantiate(expenseItem, Vector3.zero, Quaternion.identity, islandExpenseContent.transform);
-        islandExpense.transform.localPosition = new Vector3(islandExpense.transform.localPosition.x, islandExpense.transform.localPosition.y, 0);
-        islandExpense.transform.localRotation = Quaternion.identity;
-        islandExpense.SetupIslandExpense(reconstructedIsland);
-    }
-
-    public void SetCollisions(string cardType)
-    {
-        switch (cardType)
+        foreach (Island island in GameManager.ISM.boughtIslands)
         {
-            case "Utility":
-                foreach (Island island in boughtIslands)
-                {
-                    island.GetComponent<BoxCollider>().enabled = true;
-                }
-                break;
-            case "PlantSmall":
-                foreach (Island island in boughtIslands)
-                {
-                    if (island.currentState == Island.IslandState.Watered)
-                    {
-                        foreach (GameObject plot in island.plotsSmallPlants)
-                        {
-                            plot.GetComponent<BoxCollider>().enabled = true;
-                        }
-                    }
-                }
-                break;
-            case "PlantMedium":
-                foreach (Island island in boughtIslands)
-                {
-                    if (island.currentState == Island.IslandState.Watered)
-                    {
-                        foreach (GameObject plot in island.plotsMediumPlants)
-                        {
-                            plot.GetComponent<BoxCollider>().enabled = true;
-                        }
-                    }
-                }
-                break;
-            case "PlantBig":
-                foreach (Island island in boughtIslands)
-                {
-                    if (island.currentState == Island.IslandState.Watered)
-                    {
-                        foreach (GameObject plot in island.plotsBigPlants)
-                        {
-                            plot.GetComponent<BoxCollider>().enabled = true;
-                        }
-                    }
-                }
-                break;
-            case "Buildable":
-                foreach (Island island in boughtIslands)
-                {
-                    island.GetComponent<BoxCollider>().enabled = false;
-                    foreach (GameObject plot in island.plotsMediumPlants)
-                    {
-                        plot.GetComponent<BoxCollider>().enabled = true;
-                    }
-                }
-                break;
-            default:
-                foreach (Island island in boughtIslands)
-                {
-                    island.GetComponent<BoxCollider>().enabled = true;
-                    foreach (GameObject plot in island.plotsSmallPlants)
-                    {
-                        plot.GetComponent<BoxCollider>().enabled = false;
-                    }
-                    foreach (GameObject plot in island.plotsMediumPlants)
-                    {
-                        plot.GetComponent<BoxCollider>().enabled = false;
-                    }
-                    foreach (GameObject plot in island.plotsBigPlants)
-                    {
-                        plot.GetComponent<BoxCollider>().enabled = false;
-                    }
-                }
-                break;
+            island.GetComponent<BoxCollider>().enabled = active;
         }
     }
 
-    public Island CheckPotentialIsland()
+    public Island GetPotentialBoughtIsland()
 
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -161,65 +74,31 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         return null;
     }
 
-    public void UpdateIslandMaterial(Island island)
+    public Island GetPotentialIsland()
+
     {
-        float totalNPK = island.nutrientsAvailable.Sum() - island.nutrientsAvailable[0];
-        float blendFactor = Mathf.Clamp01(totalNPK / 150f);
-        Material defaultMat = null;
-        Material needsNPKMat = null;
-
-        switch (island.currentState)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, ~0, QueryTriggerInteraction.Collide);
+        foreach (var hit in hits)
         {
-            case Island.IslandState.Sowed:
-                defaultMat = sowedMat;
-                needsNPKMat = sowedNeedsNPKMat;
-                break;
-            case Island.IslandState.Watered:
-                defaultMat = wateredMat;
-                needsNPKMat = wateredNeedsNPKMat;
-                break;
-            case Island.IslandState.Cultivated:
-                defaultMat = cultivatedMat;
-                needsNPKMat = cultivatedNeedsNPKMat;
-                break;
-        }
-
-        if (defaultMat != null && needsNPKMat != null)
-        {
-            Material blendedMaterial = new Material(defaultMat);
-            Color blendedColor = Color.Lerp(needsNPKMat.color, defaultMat.color, blendFactor);
-            blendedMaterial.color = blendedColor;
-            if (defaultMat.mainTexture != null && needsNPKMat.mainTexture != null)
+            if (hit.collider.TryGetComponent(out Island island))
             {
-                blendedMaterial.SetTexture("_MainTex", BlendTextures(
-                    (Texture2D)needsNPKMat.mainTexture,
-                    (Texture2D)defaultMat.mainTexture,
-                    blendFactor
-                ));
+                return island;
             }
-            island.SetMaterial(blendedMaterial);
         }
+        return null;
     }
 
-    private Texture2D BlendTextures(Texture2D tex1, Texture2D tex2, float blendFactor)
+    public void AddIslandToBought(Island reconstructedIsland)
     {
-        int width = tex1.width;
-        int height = tex1.height;
-        Texture2D blendedTex = new Texture2D(width, height);
-
-        Color[] colors1 = tex1.GetPixels();
-        Color[] colors2 = tex2.GetPixels();
-        Color[] blendedColors = new Color[colors1.Length];
-
-        for (int i = 0; i < blendedColors.Length; i++)
-        {
-            blendedColors[i] = Color.Lerp(colors1[i], colors2[i], blendFactor);
-        }
-
-        blendedTex.SetPixels(blendedColors);
-        blendedTex.Apply();
-
-        return blendedTex;
+        reconstructedIsland.islandBought = true;
+        reconstructedIsland.SetIslandState(Island.IslandState.Sowed);
+        boughtIslands.Add(reconstructedIsland);
+        unboughtIslands.Remove(reconstructedIsland);
+        ExpenseItem islandExpense = Instantiate(expenseItem, Vector3.zero, Quaternion.identity, islandExpenseContent.transform);
+        islandExpense.transform.localPosition = new Vector3(islandExpense.transform.localPosition.x, islandExpense.transform.localPosition.y, 0);
+        islandExpense.transform.localRotation = Quaternion.identity;
+        islandExpense.SetupIslandExpense(reconstructedIsland);
     }
 
     public Island FindIslandByID(string islandID)
@@ -227,7 +106,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         return availableIsland.Find(island => island.islandID == islandID);
     }
 
-    public void LoadData(GameData data)
+/*    public void LoadData(GameData data)
     {
         boughtIslands.Clear();
         var islandDataCount = 0;
@@ -236,7 +115,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
             var island = FindIslandByID(islandID);
             unboughtIslands.Remove(island);
             boughtIslands.Add(island);
-            island.islandBought= true;
+            island.islandBought = true;
             island.islandBottom.GetComponent<Renderer>().material = island.bottomDefaultMat;
             island.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
             island.usedPlots.Clear();
@@ -265,12 +144,12 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         foreach (Island island in boughtIslands)
         {
             List<string> usedPlotNamesList = new List<string>();
-            foreach(GameObject plot in island.usedPlots)
+            foreach (GameObject plot in island.usedPlots)
             {
                 usedPlotNamesList.Add(plot.name);
             }
             List<string> plantIdList = new List<string>();
-            foreach(Plant plant in island.itemsOnIsland)
+            foreach (Plant plant in island.itemsOnIsland)
             {
                 plantIdList.Add(plant.plantCardID);
             }
@@ -278,5 +157,5 @@ public class IslandManager : MonoBehaviour, IDataPersistence
             data.boughtIslands.Add(island.islandID);
             data.islandDataMap.Add(islandData);
         }
-    }
+    }*/
 }

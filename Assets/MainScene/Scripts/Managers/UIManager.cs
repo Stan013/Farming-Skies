@@ -6,70 +6,61 @@ using TMPro;
 
 public class UIManager : MonoBehaviour, IDataPersistence
 {
-    [Header("Menu objects")]
-    public GameObject UIMenu;
-    public GameObject infoMenu;
-
-    [Header("Mode objects")]
-    public Image modeIndicator;
-    public Sprite[] modeIcons;
-
-    [Header("UI Buttons")]
-    public OpenUIButton UIbutton;
-    public OpenQuestButton questButton;
-    public GameObject nextWeekButton;
-
-    [Header("Next Week UI")]
-    public Slider nextWeekSlider;
-
-    [Header("Window Buttons")]
-    public OpenWindowButton openButton;
-    public CloseWindowButton closeButton;
+    [Header("UI menus")]
+    public GameObject levelUI;
+    public GameObject resourceUI;
+    public GameObject timeUI;
+    public GameObject selectionUI;
 
     [Header("Game variables")]
+    public int farmLevel;
     public float expense;
-    public float money;
+    public float balance;
     public int water;
     public int fertiliser;
+    public int weeks;
 
     [Header("Game variables text")]
-    public TMP_Text expenseAmountText;
-    public TMP_Text moneyAmountText;
-    public TMP_Text waterAmountText;
-    public TMP_Text cardAmountText;
-    public TMP_Text dateAmountText;
-    public TMP_Text fertiliserAmountText;
+    public TMP_Text farmLevelText;
+    public TMP_Text expenseText;
+    public TMP_Text balanceText;
+    public TMP_Text waterText;
+    public TMP_Text fertiliserText;
+    public TMP_Text deckText;
+    public TMP_Text weekText;
 
-    [Header("UI Island builder")]
+    [Header("Island builder")]
     public TMP_Text buildCostText;
     public TMP_Text expenseCostText;
     public Slider transparencySlider;
     public Image constructionLabel;
 
-    public void SetUIButtons(bool active, Button button)
-    {
-        button.interactable = active;
-    }
-
     public void UpdateUI()
     {
-        dateAmountText.SetText(GameManager.TM.GetDate());
-        expenseAmountText.SetText(expense.ToString() + " ₴");
-        moneyAmountText.SetText(money.ToString() + " ₴");
-        waterAmountText.SetText(water.ToString() + " L");
-        fertiliserAmountText.SetText(fertiliser.ToString() + " L");
-        cardAmountText.SetText(GameManager.DM.cardsInDeck.Count.ToString() + " x");
+        farmLevelText.SetText("Level " + FormatNumber(farmLevel).ToString());
+        expenseText.SetText(FormatNumber(expense).ToString() + " ₴");
+        balanceText.SetText(FormatNumber(balance).ToString() + " ₴");
+        waterText.SetText(FormatNumber(water).ToString() + " L");
+        fertiliserText.SetText(FormatNumber(fertiliser).ToString() + " L");
+        deckText.SetText(FormatNumber(GameManager.DM.cardsInDeck.Count).ToString() + " x");
     }
 
-    public void AddExpense(int taxExpense)
+    public static string FormatNumber(float num)
     {
-        expense += taxExpense;
+        if (num >= 1000000000)
+            return (num / 1000000000f).ToString("0.#") + "B";
+        if (num >= 1000000)
+            return (num / 1000000f).ToString("0.#") + "M";
+        if (num >= 1000)
+            return (num / 1000f).ToString("0.#") + "K";
+
+        return num.ToString("0");
     }
 
     public void SetBuildIslandSlider()
     {
-        buildCostText.SetText(GameManager.IPM.clickedIsland.islandBuildCost.ToString() + " ₴");
-        expenseCostText.SetText(GameManager.IPM.clickedIsland.islandTaxCost.ToString() + " ₴");
+        buildCostText.SetText(GameManager.IPM.potentialIsland.islandBuildCost.ToString() + " ₴");
+        expenseCostText.SetText(GameManager.IPM.potentialIsland.islandExpenseCost.ToString() + " ₴");
         if (constructionLabel != null)
         {
             Vector2 mousePosition = Input.mousePosition;
@@ -87,7 +78,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             transparencySlider.value = alphaValue;
             if (alphaValue == 1f && island.islandBought == false)
             {
-                money -= island.islandBuildCost;
+                balance -= island.islandBuildCost;
                 GameManager.ISM.AddIslandToBought(island);
                 constructionLabel.gameObject.SetActive(false);
                 GameManager.UM.UpdateUI();
@@ -97,16 +88,16 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        expense = data.tax;
-        money = data.balance;
+        expense = data.expense;
+        balance = data.balance;
         water = data.water;
         fertiliser = data.fertiliser;
     }
 
     public void SaveData(ref GameData data)
     {
-        data.tax = expense;
-        data.balance = money;
+        data.expense = expense;
+        data.balance = balance;
         data.water = water;
         data.fertiliser = fertiliser;
     }

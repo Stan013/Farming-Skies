@@ -94,29 +94,29 @@ public class MarketManager : MonoBehaviour
         if (amount <= 0) return;
         Vector3 startPos;
         Vector3 endPos;
-        float totalMoney = 0f;
+        float totalBalance = 0f;
         if (isSelling)
         {
             amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
             marketItem.attachedItemCard.itemQuantity -= amount;
-            totalMoney = amount * marketItem.priceCurrent;
-            GameManager.UM.money += totalMoney;
+            totalBalance = amount * marketItem.priceCurrent;
+            GameManager.UM.balance += totalBalance;
             startPos = marketItem.sellUI.transactionButton.transform.position;
-            endPos = GameManager.UM.UIbutton.transform.position;
+            endPos = GameManager.UM.transform.position;
         }
         else
         {
             float itemPrice = marketItem.priceCurrent;
-            int affordableAmount = (int)(GameManager.UM.money / itemPrice);
+            int affordableAmount = (int)(GameManager.UM.balance / itemPrice);
             amount = Mathf.Min(amount, affordableAmount);
             marketItem.attachedItemCard.itemQuantity += amount;
-            totalMoney = amount * itemPrice;
-            GameManager.UM.money -= totalMoney;
-            startPos = GameManager.UM.UIbutton.transform.position;
+            totalBalance = amount * itemPrice;
+            GameManager.UM.balance -= totalBalance;
+            startPos = GameManager.UM.transform.position;
             endPos = marketItem.buyUI.transactionButton.transform.position;
         }
 
-        int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalMoney / 50));
+        int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalBalance / 50));
         StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
         UpdateMarketItems();
         GameManager.UM.UpdateUI();

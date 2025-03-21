@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour, IDataPersistence
+public class GameManager : MonoBehaviour
 {
-    //Managers
+    [Header("Managers")]
+    public static DataPersistenceManager DPM { get; private set; }
+    public static SpawnManager SPM { get; private set; }
+    public static WindowManager WM { get; private set; }
+    public static QuestManager QM { get; private set; }
     public static CardManager CM { get; private set; }
     public static HandManager HM { get; private set; }
     public static InventoryManager INM { get; private set; }
@@ -17,40 +21,22 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static MarketManager MM { get; private set; }
     public static PlantManager PM { get; private set; }
     public static SelectionManager SM { get; private set; }
-    public static TutorialManager TTM { get; private set; }
-    public static DataPersistenceManager DPM { get; private set; }
     public static CraftManager CRM { get; private set; }
-    public static QuestManager QM { get; private set; }
-    public static Camera cam { get; private set; }
-    public static Vector3 staticPos;
-    public GameObject mainMenu;
-    private static GameObject staticMainMenu;
-    public GameObject gameMenu;
-    private static GameObject staticGameMenu;
-    public static Cheats cheats;
-    public enum GameMode
-    {
-        Career,
-        Scenario,
-        Creative,
-    }
-    public static GameMode CurrentMode { get; set; }
-    public enum GameState
-    {
-        MainMenuMode,
-        SettingsMode,
-        TimeMode,
-        Default,
-        ManageMode,
-        InventoryMode,
-        MarketMode,
-        CraftMode,
-        SelectionMode,
-    }
-    public static GameState CurrentState { get; private set; }
+
+    [Header("Debug")]
+    public static DebugManager DBM { get; private set; }
+
+    [Header("Game modes")]
+    public static GameMode CurrentMode;
+    public enum GameMode { Career, Scenario, Creative }
 
     private void Awake()
     {
+        DPM = GetComponent<DataPersistenceManager>();
+        SPM = GetComponent<SpawnManager>();
+        WM = GetComponent<WindowManager>();
+        QM = GetComponent<QuestManager>();
+
         HM = GetComponent<HandManager>();
         SM = GetComponent<SelectionManager>();
         CM = GetComponent<CardManager>();
@@ -62,21 +48,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
         MM = GetComponent<MarketManager>();
         INM = GetComponent<InventoryManager>();
         PM = GetComponent<PlantManager>();
-        TTM = GetComponent<TutorialManager>();
-        DPM = GetComponent<DataPersistenceManager>();
         CRM = GetComponent<CraftManager>();
-        QM = GetComponent<QuestManager>();
-        cheats = GetComponent<Cheats>();
-        cam = FindAnyObjectByType<Camera>();
-        staticPos = cam.transform.position;
-        CurrentState = GameState.MainMenuMode;
-        staticMainMenu = mainMenu;
-        staticGameMenu = gameMenu;
+
+
+        DBM = GetComponent<DebugManager>();
     }
 
     private void StartGame(string gameAction)
     {
-        IPM.ToggleState(GameState.ManageMode, GameState.Default);
         if (gameAction == "LoadGame")
         {
             DPM.LoadGame();
@@ -87,22 +66,15 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    private static void MainMenuStatus(bool mainMenuStatus)
-    {
-        staticMainMenu.SetActive(mainMenuStatus);
-        staticGameMenu.SetActive(!mainMenuStatus);
-    }
-
     private void Update()
     {
-        if (CurrentState != GameState.MainMenuMode) 
+        if (!WM.mainWindow.activeSelf) 
         {
-            if(CurrentState != GameState.TimeMode)
+            if(!TM.timeWindow.activeSelf)
             {
-                TM.RotateSky(1f);
-                IPM.HandleGameStatesSwitchInput();
-                IPM.HandleKeyboardInput(CurrentState);
-                IPM.HandleMouseInput(CurrentState);
+                TM.RotateSky(3f);
+                IPM.KeyboardInput();
+                IPM.MouseInput();
                 QM.QuestCheck();
             }
             else
@@ -112,14 +84,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public static void SetState(GameState newState)
+/*    public static void SetState(GameState newState)
     {
         ExitState(CurrentState);
         CurrentState = newState;
         EnterState(CurrentState);
-    }
+    }*/
 
-    private static void EnterState(GameState state)
+/*    private static void EnterState(GameState state)
     {
         UM.UpdateUI();
         staticPos = cam.transform.position;
@@ -222,9 +194,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 DM.CheckRefillHand();
                 break;
         }
-    }
+    }*/
 
-    public void LoadData(GameData data)
+/*    public void LoadData(GameData data)
     {
         CurrentState = data.CurrentState;
         staticPos = data.playerPosition;
@@ -236,5 +208,5 @@ public class GameManager : MonoBehaviour, IDataPersistence
         data.CurrentState = CurrentState;
         data.playerPosition = staticPos;
         data.cameraDirection = cam.transform.forward;
-    }
+    }*/
 }

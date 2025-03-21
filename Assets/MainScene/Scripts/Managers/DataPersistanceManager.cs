@@ -39,21 +39,17 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void InitializeGame()
     {
-        if (GameManager.TTM.tutorial)
-        {
-            GameManager.TTM.StartTutorial();
-        }
-        else
-        {
-            GameManager.HM.SetStartingHand();
-            GameManager.UM.SetUIButtons(true, GameManager.UM.UIbutton.GetComponent<Button>());
-        }
-        GameManager.ISM.SetIslands();
-        GameManager.CM.SetupCards();
-        GameManager.UM.expense = this.gameData.tax;
-        GameManager.UM.money = this.gameData.balance;
+        GameManager.SPM.Spawn();
+        GameManager.UM.farmLevel = this.gameData.farmLevel;
+        GameManager.UM.expense = this.gameData.expense;
+        GameManager.UM.balance = this.gameData.balance;
         GameManager.UM.water = this.gameData.water;
         GameManager.UM.fertiliser = this.gameData.fertiliser;
+        GameManager.UM.weeks = this.gameData.weeks;
+        GameManager.ISM.SetupIslands();
+        GameManager.CM.SetupCards();
+        GameManager.DM.SetStartingDeck();
+        GameManager.UM.UpdateUI();
     }
 
     public void LoadGame()

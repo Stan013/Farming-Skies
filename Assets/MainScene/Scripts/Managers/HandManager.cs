@@ -4,47 +4,40 @@ using UnityEngine;
 
 public class HandManager : MonoBehaviour, IDataPersistence
 {
+    [Header("Cards list")]
     public List<Card> cardsInHand = new List<Card>();
+
+    [Header("Handslot variables")]
     public GameObject handSlotParent;
     public CardSlot cardSlotPrefab;
     public List<CardSlot> handSlots;
     public int lastFilledSlotIndex;
 
+    [Header("Drag variables")]
     public Card dragCard;
     public bool dragging;
     public string placement;
-    private float cardMoveDuration = 0.125f;
 
-    public void SetStartingHand()
-    {
-        foreach(Card card in GameManager.CM.starterCards)
-        {
-            GameManager.DM.AddCardToDeck(card.cardId);
-        }
-        SetCardsInHand();
-    }
+    [Header("Refill variables")]
+    private float cardMoveDuration = 0.125f;
 
     public void SetCardsInHand()
     {
         if(GameManager.DM.cardsInDeck.Count != 0)
         {
-            while (lastFilledSlotIndex < 8 && GameManager.DM.cardsInDeck.Count > 0)
+            while (lastFilledSlotIndex < 7 && GameManager.DM.cardsInDeck.Count > 0)
             {
-                Card originalCard = GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)];
-                handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, originalCard);
-                lastFilledSlotIndex++;
-                originalCard.ToggleState(Card.CardState.InHand, Card.CardState.Hidden);
-                StartCoroutine(MoveCardsFromBottom(originalCard));
+                AddCardToHand(GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)].cardId);
             }
         }
     }
 
     public void AddCardToHand(string cardId)
     {
-        Card newCard = Instantiate(GameManager.CM.FindCardById(cardId), Vector3.zero, Quaternion.identity);
+        Card newCard = GameManager.DM.FindCardInDeckByID(cardId);
         handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, newCard);
         lastFilledSlotIndex++;
-        newCard.ToggleState(Card.CardState.InHand, Card.CardState.Hidden);
+        newCard.SetCardState(Card.CardState.InHand);
         
         StartCoroutine(MoveCardsFromBottom(newCard));
     }
@@ -68,7 +61,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
     {
         foreach (Card card in cardsInHand)
         {
-            card.ToggleState(Card.CardState.InDeck, Card.CardState.Hidden);
+            card.SetCardState(Card.CardState.InDeck);
         }
     }
 

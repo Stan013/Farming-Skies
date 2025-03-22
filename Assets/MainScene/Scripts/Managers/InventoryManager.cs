@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public List<InventoryItem> itemsInInventory;
-    public GameObject inventoryWindow;
     public GameObject inventoryContentArea;
 
     public void UpdateInventoryItems()

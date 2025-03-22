@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     {
         if (!WM.mainWindow.activeSelf) 
         {
-            if(!TM.timeWindow.activeSelf)
+            if(!WM.advanceWindow.activeSelf)
             {
                 TM.RotateSky(3f);
                 IPM.KeyboardInput();

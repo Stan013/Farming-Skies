@@ -37,12 +37,13 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void UpdateUI()
     {
-        farmLevelText.SetText("Level " + FormatNumber(farmLevel).ToString());
-        expenseText.SetText(FormatNumber(expense).ToString() + " ₴");
-        balanceText.SetText(FormatNumber(balance).ToString() + " ₴");
-        waterText.SetText(FormatNumber(water).ToString() + " L");
-        fertiliserText.SetText(FormatNumber(fertiliser).ToString() + " L");
-        deckText.SetText(FormatNumber(GameManager.DM.cardsInDeck.Count).ToString() + " x");
+        farmLevelText.text = "Level " + FormatNumber(farmLevel).ToString();
+        expenseText.text = FormatNumber(expense).ToString() + " ₴";
+        balanceText.text = FormatNumber(balance).ToString() + " ₴";
+        waterText.text = FormatNumber(water).ToString() + " L";
+        fertiliserText.text = FormatNumber(fertiliser).ToString() + " L";
+        deckText.text = FormatNumber(GameManager.DM.cardsInDeck.Count).ToString() + " x";
+        weekText.text = weeks.ToString();
     }
 
     public static string FormatNumber(float num)

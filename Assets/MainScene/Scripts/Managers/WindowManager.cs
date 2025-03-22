@@ -9,6 +9,8 @@ public class WindowManager : MonoBehaviour
     public GameObject gameWindow;
     public GameObject tutorialWindow;
     public GameObject questWindow;
+    public GameObject advanceWindow;
+    public GameObject inventoryWindow;
     public GameObject expenseWindow;
 
     [Header("Quest window variables")]

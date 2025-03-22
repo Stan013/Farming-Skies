@@ -44,6 +44,6 @@ public class GameData
         balance = 0f;
         water = 0;
         fertiliser = 0;
-        weeks = 1;
+        weeks = 0;
     }
 }

@@ -47,7 +47,7 @@ public class MarketManager : MonoBehaviour
 
     public void UpdatePrices()
     {
-        if(GameManager.TM.GetDate() != "01-01-2025")
+        if(GameManager.UM.weeks != 0)
         {
             foreach (MarketItem item in itemsInMarket)
             {

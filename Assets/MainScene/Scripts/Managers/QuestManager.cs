@@ -105,9 +105,9 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Plant all your crops!", "You are well on your way to becoming a farmer, so let's plant your last plant cards as well. With the last two plant cards in your hand, do the same drag motions as before.");
                 break;
             case 11:
-                UpdateQuest("Time to advance!", "If you are ready, hold down your space bar and wait until the bar on the top right fills up. Now watch as the week goes by and let your crops do the work.");
+                UpdateQuest("Time to advance!", "If you are ready, hold down your space bar and wait until the arrow on the top right fills up. Now watch as the week goes by and let your crops do the work.");
                 break;
-            case 15:
+            case 12:
                 UpdateQuest("Look at your spoils!", "You watched your harvest, now open up your inventory by pressing E and find out how much you got. Your yield can increase or decrease based on whether the crops' needs are met.");
                 break;
             case 16:
@@ -357,17 +357,17 @@ public class QuestManager : MonoBehaviour
                         QuestCompleted();
                     }
                     break;
-                case 14:
-                    if (GameManager.TM.GetDate() == "08-01-2025")
+                case 11:
+                    if (GameManager.UM.weeks == 1)
                     {
                         QuestCompleted();
                     }
                     break;
-                case 15:
-/*                    if(GameManager.CurrentState == GameManager.GameState.InventoryMode)
+                case 12:
+                    if (GameManager.WM.inventoryWindow.activeSelf)
                     {
-                        QuestCompleted = true;
-                    }*/
+                        QuestCompleted();
+                    }
                     break;
                 case 16:
 /*                    if (GameManager.CurrentState == GameManager.GameState.ManageMode)

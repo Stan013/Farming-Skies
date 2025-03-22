@@ -34,9 +34,9 @@ public class InputManager : MonoBehaviour
 
     public void KeyboardInput()
     {
+        NextWeekInput();
         Vector3 moveDirection = Vector3.zero;
 
-        // Movement along world-space axes
         moveDirection += (Input.GetKey(KeyCode.W) && !IsFacingWall(Vector3.forward)) ? Vector3.forward : Vector3.zero;
         moveDirection -= (Input.GetKey(KeyCode.S) && !IsFacingWall(Vector3.back)) ? Vector3.forward : Vector3.zero;
         moveDirection += (Input.GetKey(KeyCode.D) && !IsFacingWall(Vector3.right)) ? Vector3.right : Vector3.zero;
@@ -44,39 +44,33 @@ public class InputManager : MonoBehaviour
         moveDirection += (Input.GetKey(KeyCode.LeftShift) && !IsFacingWall(Vector3.up)) ? Vector3.up : Vector3.zero;
         moveDirection -= (Input.GetKey(KeyCode.LeftControl) && !IsFacingWall(Vector3.down)) ? Vector3.up : Vector3.zero;
 
-        // Smooth transition for movement
         smoothMoveDirection = Vector3.Lerp(smoothMoveDirection, moveDirection.normalized, Time.deltaTime * moveSpeed);
         rb.velocity = smoothMoveDirection * moveSpeed;
     }
 
 
-/*    private void NextWeekInput()
+    private void NextWeekInput()
     {
         if (Input.GetKey(KeyCode.Space))
         {
             spaceHoldTimer += Time.deltaTime;
             float fillValue = Mathf.Clamp01(spaceHoldTimer / 1f);
-            GameManager.UM.nextWeekSlider.value = fillValue;
-            RectTransform handleRect = GameManager.UM.nextWeekSlider.handleRect;
-            float newX = Mathf.Lerp(25f, -35f, fillValue);
-            handleRect.anchoredPosition = new Vector2(newX, handleRect.anchoredPosition.y);
+            GameManager.TM.advanceWeekImage.fillAmount = fillValue;
             if (spaceHoldTimer >= 1f && !isHoldingSpace)
             {
-                isHoldingSpace = true;
+                GameManager.WM.advanceWindow.SetActive(true);
+                GameManager.TM.AdvanceNextWeek();
             }
         }
         else
         {
-            if(spaceHoldTimer != 0f)
+            if (spaceHoldTimer != 0f)
             {
                 spaceHoldTimer = 0f;
-                isHoldingSpace = false;
-                GameManager.UM.nextWeekSlider.value = 0f;
-                RectTransform handleRect = GameManager.UM.nextWeekSlider.handleRect;
-                handleRect.anchoredPosition = new Vector2(25f, handleRect.anchoredPosition.y);
+                GameManager.TM.advanceWeekImage.fillAmount = 0f;
             }
         }
-    }*/
+    }
 
     public void MouseInput()
     {

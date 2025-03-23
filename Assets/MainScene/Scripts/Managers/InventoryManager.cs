@@ -5,8 +5,14 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    [Header("Inventory lists")]
     public List<InventoryItem> itemsInInventory;
+
+    [Header("Inventory variables")]
     public GameObject inventoryContentArea;
+    public InventoryItem inventoryItemTemplate;
+    public GameObject fillerInventoryItem;
+    public ExpandedInventoryItem expandedInventoryItem;
 
     public void UpdateInventoryItems()
     {

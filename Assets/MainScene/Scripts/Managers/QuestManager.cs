@@ -108,10 +108,23 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Time to advance!", "If you are ready, hold down your space bar and wait until the arrow on the top right fills up. Now watch as the week goes by and let your crops do the work.");
                 break;
             case 12:
-                UpdateQuest("Look at your spoils!", "You watched your harvest, now open up your inventory by pressing E and find out how much you got. Your yield can increase or decrease based on whether the crops' needs are met.");
+                GameManager.UM.selectionUI.SetActive(true);
+                UpdateQuest("Look at your spoils!", "You watched your harvest come in so let's find out how much you got by opening up your inventory. Click with your left mouse button on the boxes icon at the right side of your screen.");
+                break;
+            case 13:
+                GameManager.UM.selectionUI.SetActive(true);
+                UpdateQuest("Inspect thoroughly!", "If you want to see some extra details about the items in your inventory you can click on the green button with an arrow. Let's do this with the chard you have in your inventory.");
+                break;
+            case 14:
+                GameManager.UM.selectionUI.SetActive(true);
+                UpdateQuest("Close the details!", "Your inventory can also be filtered with the green buttons on top. But for now let's close the extra details by clicking the green button with the arrow located at the top right. ");
+                break;
+            case 15:
+                GameManager.UM.selectionUI.SetActive(true);
+                UpdateQuest("Crop yield importance!", "Depending on if the nutrient needs of a crop are met your yield has a chance to either increase or decrease. Let's close your inventory and find out if we meet those needs.");
                 break;
             case 16:
-                UpdateQuest("Inspect your land!", "Go out of inventory mode by pressing E and notice that the quality of your land has changed. A warning icon has appeared as well, let's press Q to go into manage mode and see what's up.");
+                UpdateQuest("Inspect your land!", "As you can see the quality of your land has changed and a warning icon has appeared. Left click on the cogwheel at the right side of your screen to open up your farm management.");
                 break;
             case 17:
                 UpdateQuest("Select your land!", "With your mouse hover over the land that has a warning icon on top of it. Now click with your left mouse button and an information panel should appear on the right side of your screen.");
@@ -365,6 +378,24 @@ public class QuestManager : MonoBehaviour
                     break;
                 case 12:
                     if (GameManager.WM.inventoryWindow.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 13:
+                    if (GameManager.INM.expandedInventoryItem.gameObject.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 14:
+                    if (!GameManager.INM.expandedInventoryItem.gameObject.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 15:
+                    if (!GameManager.WM.inventoryWindow.activeSelf)
                     {
                         QuestCompleted();
                     }

@@ -10,6 +10,7 @@ public class Plant : MonoBehaviour
 
     public Island attachedIsland;
     public int yield;
+    public int maxYield;
     public List<int> nutrientsUsages;
     public int buildableTaxCost;
 

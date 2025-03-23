@@ -32,7 +32,7 @@ public class Drop : MonoBehaviour
                 InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == itemCard.itemName);
                 if (existingInventoryItem == null)
                 {
-                    InventoryItem inventoryItem = Instantiate(itemCard.inventoryItem, Vector3.zero, Quaternion.identity);
+                    InventoryItem inventoryItem = Instantiate(GameManager.INM.inventoryItemTemplate, Vector3.zero, Quaternion.identity);
                     inventoryItem.SetInventoryItem(itemCard, dropAmount);
                     inventoryItem.transform.localPosition = new Vector3(inventoryItem.transform.localPosition.x, inventoryItem.transform.localPosition.y, 0);
                     inventoryItem.transform.localRotation = Quaternion.identity;

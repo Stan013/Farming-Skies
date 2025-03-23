@@ -85,8 +85,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     {
                         if(hoverIsland != null)
                         {
-                            hoverIsland.SetIslandState(hoverIsland.previousState);
-                            hoverIsland = null;
+                            if (hoverIsland.previousState != Island.IslandState.Transparent)
+                            {
+                                hoverIsland.SetIslandState(hoverIsland.previousState);
+                                hoverIsland = null;
+                            }
                         }
                     }
                     break;
@@ -129,7 +132,19 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 {
                     if (GameManager.HM.dragCard.nutrientIndex != 0)
                     {
-                        hoverIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex - 1] += 50;
+                        if (GameManager.HM.dragCard.nutrientIndex == 1)
+                        {
+                            if (hoverIsland.previousState != Island.IslandState.Cultivated)
+                            {
+                                hoverIsland.SetCollisions("Reset");
+                                hoverIsland = null;
+                                GameManager.HM.dragCard.dragSucces = false;
+                                GameManager.HM.dragCard.SetCardState(Card.CardState.InHand);
+                                Destroy(dragInstance);
+                                return;
+                            }
+                        }
+                        hoverIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex - 1] += 25;
                     }
                     hoverIsland.UpdateNutrientsRequired();
                     GameManager.HM.dragCard.dragSucces = true;
@@ -184,7 +199,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 break;
         }
         Destroy(dragInstance);
-        hoverIsland.SetCollisions("Reset");
+        if(hoverIsland != null)
+        {
+            hoverIsland.SetCollisions("Reset");
+        }
     }
 
     public GameObject CheckPotentialPlot()

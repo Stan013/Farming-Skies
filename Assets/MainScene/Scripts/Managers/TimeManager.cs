@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
 
     public void AdvanceNextWeek()
     {
-        //GameManager.PM.Harvest();
+        GameManager.PM.Harvest();
         StartCoroutine(CycleWeekDays());
     }
 

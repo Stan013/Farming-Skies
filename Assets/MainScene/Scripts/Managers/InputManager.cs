@@ -74,55 +74,58 @@ public class InputManager : MonoBehaviour
 
     public void MouseInput()
     {
-        if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit) //Hold to build island
-            && hit.transform.GetComponent<Island>() != null)
+        if (!GameManager.HM.dragging)
         {
-            if(GameManager.HM.cardsInHand.Count != 0 && Input.mousePosition.y < inventoryHeight)
+            if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit) //Hold to build island
+                && hit.transform.GetComponent<Island>() != null)
             {
-                return;
-            }
-            potentialIsland = GameManager.ISM.GetPotentialIsland();
-            if (GameManager.UM.balance >= potentialIsland.islandBuildCost)
-            {
-                if (!GameManager.QM.questActive || potentialIsland.currentState == Island.IslandState.Highlighted)
+                if (GameManager.HM.cardsInHand.Count != 0 && Input.mousePosition.y < inventoryHeight)
                 {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    GameManager.UM.constructionLabel.gameObject.SetActive(true);
-                    buildIslandPress = true;
-                    GameManager.UM.SetBuildIslandSlider();
+                    return;
+                }
+                potentialIsland = GameManager.ISM.GetPotentialIsland();
+                if (GameManager.UM.balance >= potentialIsland.islandBuildCost)
+                {
+                    if (!GameManager.QM.questActive || potentialIsland.currentState == Island.IslandState.Highlighted)
+                    {
+                        Cursor.lockState = CursorLockMode.Locked;
+                        GameManager.UM.constructionLabel.gameObject.SetActive(true);
+                        buildIslandPress = true;
+                        GameManager.UM.SetBuildIslandSlider();
+                    }
                 }
             }
-        }
 
-        if (!Input.GetMouseButton(1)) //Unsuccesful island build
-        {
-            Cursor.lockState = CursorLockMode.None;
-            buildIslandPress = false;
-            holdTimer = 0f;
-            if (GameManager.UM.constructionLabel.gameObject.activeSelf)
+            if (!Input.GetMouseButton(1)) //Unsuccesful island build
             {
-                GameManager.UM.constructionLabel.gameObject.SetActive(false);
-                potentialIsland.SetIslandState(Island.IslandState.Transparent);
+                Cursor.lockState = CursorLockMode.None;
+                buildIslandPress = false;
+                holdTimer = 0f;
+                if (GameManager.UM.constructionLabel.gameObject.activeSelf)
+                {
+                    GameManager.UM.constructionLabel.gameObject.SetActive(false);
+                    potentialIsland.SetIslandState(Island.IslandState.Transparent);
+                }
             }
-        }
 
-        if (buildIslandPress) //Successful island build
-        {
-            holdTimer = Mathf.Min(holdTimer + Time.deltaTime, holdDuration);
-            float alphaChangeSpeed = 1.0f / holdDuration;
-            GameManager.UM.UpdateBuildIslandSlider(potentialIsland);
-            potentialIsland.UpdateMaterialAlpha(alphaChangeSpeed);
-        }
+            if (buildIslandPress) //Successful island build
+            {
+                holdTimer = Mathf.Min(holdTimer + Time.deltaTime, holdDuration);
+                float alphaChangeSpeed = 1.0f / holdDuration;
+                GameManager.UM.UpdateBuildIslandSlider(potentialIsland);
+                potentialIsland.UpdateMaterialAlpha(alphaChangeSpeed);
+            }
 
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit2) // Click to inspect island
-            && hit2.transform.GetComponent<Island>() != null)
-        {
-            Island hitIsland = hit2.transform.GetComponent<Island>();
-        }
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit2) // Click to inspect island
+                && hit2.transform.GetComponent<Island>() != null)
+            {
+                Island hitIsland = hit2.transform.GetComponent<Island>();
+            }
 
-        float scroll = Input.GetAxis("Mouse ScrollWheel"); // Zooming
-        cam.fieldOfView -= scroll * zoomSpeed;
-        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, minFOV, maxFOV);
+            float scroll = Input.GetAxis("Mouse ScrollWheel"); // Zooming
+            cam.fieldOfView -= scroll * zoomSpeed;
+            cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, minFOV, maxFOV);
+        }
     }
 
     private bool IsFacingWall(Vector3 direction)

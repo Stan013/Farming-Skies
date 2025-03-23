@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlantManager : MonoBehaviour
 {
+    [Header("Drop variables")]
     public float dropChance;
     private System.Random random = new System.Random();
 
@@ -79,6 +80,6 @@ public class PlantManager : MonoBehaviour
             }
             island.nutrientsAvailable[i] -= plant.nutrientsUsages[i];
         }
-        //island.UpdateNutrientsRequired();
+        island.UpdateNutrientsRequired();
     }
 }

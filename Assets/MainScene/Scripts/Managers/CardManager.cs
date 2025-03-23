@@ -48,7 +48,7 @@ public class CardManager : MonoBehaviour
             card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
         }
         else
-        {   
+        {
             card.cardDescriptionText.gameObject.SetActive(true);
             card.cardDescriptionText.SetText(card.cardDescription);
             card.nitrogenText.transform.parent.gameObject.SetActive(false);
@@ -56,8 +56,12 @@ public class CardManager : MonoBehaviour
             card.potassiumText.transform.parent.gameObject.SetActive(false);
             card.waterText.transform.parent.gameObject.SetActive(false);
             card.plantSizeText.transform.parent.gameObject.SetActive(false);
-            card.GetComponent<CardDrag>().enabled = true;
-            card.GetComponent<CardInspect>().enabled = true;
+            if (!GameManager.QM.questActive)
+            {
+                card.GetComponent<CardDrag>().enabled = true;
+                card.GetComponent<CardInspect>().enabled = true;
+
+            }
         }
         card.cardSetup = true;
     }   

@@ -104,8 +104,11 @@ MonoBehaviour:
   drop: {fileID: -4764516505451954136, guid: 810f17d8769b68e4087baa712ced7942, type: 3}
   plantScale: 0.0075
   plantCardID: CardChardPlant
+  attachedIsland: {fileID: 0}
   yield: 18
+  maxYield: 27
   nutrientsUsages: 01000000010000000100000002000000
+  buildableTaxCost: 0
 --- !u!65 &9164081038206290030
 BoxCollider:
   m_ObjectHideFlags: 0

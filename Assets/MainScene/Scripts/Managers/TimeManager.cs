@@ -16,6 +16,9 @@ public class TimeManager : MonoBehaviour
 
     public void AdvanceNextWeek()
     {
+        GameManager.IPM.startingPos = GameManager.IPM.cam.transform.position;
+        GameManager.IPM.cam.transform.position = new Vector3(-25f, 25f, -25f);
+        GameManager.IPM.cam.transform.rotation = Quaternion.Euler(32f,45f,0f);
         GameManager.PM.Harvest();
         StartCoroutine(CycleWeekDays());
     }
@@ -33,11 +36,13 @@ public class TimeManager : MonoBehaviour
             }
 
             weekDayText.text = weekDays[currentDayOfWeek];
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.75f);
         }
         GameManager.UM.weeks++;
         GameManager.WM.advanceWindow.SetActive(false);
         GameManager.UM.UpdateUI();
+        GameManager.IPM.cam.transform.position = GameManager.IPM.startingPos;
+        GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
     }
 
     private IEnumerator SlideTextTransition()

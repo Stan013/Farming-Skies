@@ -18,6 +18,16 @@ public class IslandManager : MonoBehaviour
     [Header("General island variables")]
     public Island starterIsland;
 
+    [Header("Island management variables")]
+    public Island centerIsland;
+    public GameObject islandInformation;
+    public GameObject plotInformation;
+    public TMP_Text islandName;
+    public TMP_Text waterNeed;
+    public TMP_Text nitrogenNeed;
+    public TMP_Text phosphorusNeed;
+    public TMP_Text potassiumNeed;
+
     [Header("Expense variables")]
     public ExpenseItem expenseItem;
     public GameObject islandExpenseContent;
@@ -104,6 +114,35 @@ public class IslandManager : MonoBehaviour
     public Island FindIslandByID(string islandID)
     {
         return availableIsland.Find(island => island.islandID == islandID);
+    }
+
+    public void OpenIslandManagement(string tab)
+    {
+        switch (tab)
+        {
+            case "Available":
+                islandInformation.SetActive(true);
+                plotInformation.SetActive(false);
+                islandName.text = "Island " + centerIsland.islandID;
+                waterNeed.text = centerIsland.nutrientsAvailable[1].ToString();
+                nitrogenNeed.text = centerIsland.nutrientsAvailable[2].ToString();
+                phosphorusNeed.text = centerIsland.nutrientsAvailable[3].ToString();
+                potassiumNeed.text = centerIsland.nutrientsAvailable[4].ToString();
+                break;
+            case "Required":
+                islandInformation.SetActive(true);
+                plotInformation.SetActive(false);
+                islandName.text = "Island " + centerIsland.islandID;
+                waterNeed.text = centerIsland.nutrientsRequired[1].ToString();
+                nitrogenNeed.text = centerIsland.nutrientsRequired[2].ToString();
+                phosphorusNeed.text = centerIsland.nutrientsRequired[3].ToString();
+                potassiumNeed.text = centerIsland.nutrientsRequired[4].ToString();
+                break;
+            case "Plots":
+                islandInformation.SetActive(false);
+                plotInformation.SetActive(true);
+                break;
+        }
     }
 
 /*    public void LoadData(GameData data)

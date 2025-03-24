@@ -16,7 +16,7 @@ public class ExpandedInventoryItem : MonoBehaviour
     public void SetupExpandedItem(InventoryItem item)
     {
         collapsedItem = item;
-        expandedImage.sprite = collapsedItem.attachedItemCard.itemSprite;
+        expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
         expandedQuantity.text = collapsedItem.attachedItemCard.itemQuantity.ToString();
         predictedYield.text = collapsedItem.attachedPlant.yield + " - " + item.attachedPlant.maxYield;

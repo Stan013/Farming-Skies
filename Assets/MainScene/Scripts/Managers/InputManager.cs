@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
     public Island potentialIsland;
 
     [Header("Next week variables")]
+    public bool nextWeekEnabled;
     private bool isHoldingSpace = false;
     private float spaceHoldTimer = 0.0f;
 
@@ -51,7 +52,7 @@ public class InputManager : MonoBehaviour
 
     private void NextWeekInput()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && nextWeekEnabled)
         {
             spaceHoldTimer += Time.deltaTime;
             float fillValue = Mathf.Clamp01(spaceHoldTimer / 1f);
@@ -103,8 +104,10 @@ public class InputManager : MonoBehaviour
                 holdTimer = 0f;
                 if (GameManager.UM.constructionLabel.gameObject.activeSelf)
                 {
+                    GameManager.UM.transparencySlider.value = 0f;
                     GameManager.UM.constructionLabel.gameObject.SetActive(false);
-                    potentialIsland.SetIslandState(Island.IslandState.Transparent);
+                    potentialIsland.SetIslandMaterial(potentialIsland.transparentMatTop, potentialIsland.transparentMatTop, potentialIsland.islandTop);
+                    potentialIsland.SetIslandMaterial(potentialIsland.transparentMatBot, potentialIsland.transparentMatBot, potentialIsland.islandBottom);
                 }
             }
 

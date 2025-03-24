@@ -105,6 +105,7 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Plant all your crops!", "You are well on your way to becoming a farmer, so let's plant your last plant cards as well. With the last two plant cards in your hand, do the same drag motions as before.");
                 break;
             case 11:
+                GameManager.IPM.nextWeekEnabled = true;
                 UpdateQuest("Time to advance!", "If you are ready, hold down your space bar and wait until the arrow on the top right fills up. Now watch as the week goes by and let your crops do the work.");
                 break;
             case 12:
@@ -253,7 +254,7 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Exit the market!", "You got some money in your pocket and are ready to expand. Press R again to exit market mode and Q to go into manage mode. Open up your resources and look at your balance.");
                 break;
             case 40:
-                expansionIsland = GameManager.ISM.FindIslandByID("Ring1(0,-1)");
+                expansionIsland = GameManager.ISM.FindIslandByID("(0,-1)");
                 expansionIsland.SetIslandState(Island.IslandState.Highlighted);
                 UpdateQuest("Start moving!", "In order for you to expand, you need to buy more land. So press Q to exit manage mode and you can now move. Use your WASD keys to move to the newly highlighted island.");
                 break;
@@ -527,7 +528,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 42:
-                    if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").islandBought)
+                    if (GameManager.ISM.FindIslandByID("(0,-1)").islandBought)
                     {
                         QuestCompleted();
                     }

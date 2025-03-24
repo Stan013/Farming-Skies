@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
         itemsInInventory.Sort((a, b) => a.attachedItemCard.itemName.CompareTo(b.attachedItemCard.itemName));
         for (int i = 0; i < itemsInInventory.Count; i++)
         {
-            itemsInInventory[i].transform.SetSiblingIndex(i);
+            itemsInInventory[i].transform.SetSiblingIndex(i+1);
         }
     }
 }

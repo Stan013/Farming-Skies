@@ -1848,7 +1848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7219808787914752688}
   m_Layer: 0
-  m_Name: BigPlots
+  m_Name: LargePlots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5428,7 +5428,7 @@ GameObject:
   - component: {fileID: 4368481225562046116}
   - component: {fileID: 2396154321284891053}
   m_Layer: 0
-  m_Name: PlotBig(1.1)
+  m_Name: PlotLarge(1.1)
   m_TagString: Plot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8401,13 +8401,14 @@ MonoBehaviour:
   - {fileID: 834771599800876459}
   - {fileID: 5796489451900043384}
   - {fileID: 8762975127757774504}
-  plotsBigPlants:
-  - {fileID: 4833152447451571568}
-  usedPlots: []
+  plotsLargePlants: []
+  usedSmallPlots: []
+  usedMediumPlots: []
+  usedLargePlots: []
   itemsOnIsland: []
+  warningIcon: {fileID: 5121178845173758381}
   nutrientsAvailable: 07000000050000000500000005000000
   nutrientsRequired: 00000000000000000000000000000000
-  warningIcon: {fileID: 5121178845173758381}
 --- !u!1 &7618935844727798640
 GameObject:
   m_ObjectHideFlags: 0

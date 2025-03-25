@@ -44,8 +44,10 @@ public class Island : MonoBehaviour
     [Header("Plots lists")]
     public List<GameObject> plotsSmallPlants;
     public List<GameObject> plotsMediumPlants;
-    public List<GameObject> plotsBigPlants;
-    public List<GameObject> usedPlots = new List<GameObject>();
+    public List<GameObject> plotsLargePlants;
+    public List<GameObject> usedSmallPlots;
+    public List<GameObject> usedMediumPlots;
+    public List<GameObject> usedLargePlots;
 
     [Header("Plants lists")]
     public List<Plant> itemsOnIsland = new List<Plant>();
@@ -170,12 +172,12 @@ public class Island : MonoBehaviour
                     }
                 }
                 break;
-            case "PlantBig":
+            case "PlantLarge":
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Watered)
                     {
-                        foreach (GameObject plot in island.plotsBigPlants)
+                        foreach (GameObject plot in island.plotsLargePlants)
                         {
                             plot.GetComponent<BoxCollider>().enabled = true;
                         }
@@ -204,7 +206,7 @@ public class Island : MonoBehaviour
                     {
                         plot.GetComponent<BoxCollider>().enabled = false;
                     }
-                    foreach (GameObject plot in island.plotsBigPlants)
+                    foreach (GameObject plot in island.plotsLargePlants)
                     {
                         plot.GetComponent<BoxCollider>().enabled = false;
                     }
@@ -244,30 +246,27 @@ public class Island : MonoBehaviour
 
     public void MakeUsedPlot(GameObject usedPlot, Card usedCard, GameObject usedPlant)
     {
-        if (usedPlot == null || usedCard == null || usedPlant == null)
-        {
-            Debug.LogWarning("Invalid plot, card or plant provided.");
-            return;
-        }
         itemsOnIsland.Add(usedPlant.GetComponent<Plant>());
-        usedPlots.Add(usedPlot);
         switch (usedCard.cardType)
         {
             case "PlantSmall":
                 SetCollisions("PlantMedium");
-                SetCollisions("PlantBig");
+                SetCollisions("PlantLarge");
+                usedSmallPlots.Add(usedPlot);
                 break;
             case "PlantMedium":
                 SetCollisions("PlantSmall");
-                SetCollisions("PlantBig");
+                SetCollisions("PlantLarge");
+                usedMediumPlots.Add(usedPlot);
                 break;
-            case "PlantBig":
+            case "PlantLarge":
                 SetCollisions("PlantSmall");
                 SetCollisions("PlantMedium");
+                usedLargePlots.Add(usedPlot);
                 break;
             case "Buildable":
                 SetCollisions("PlantSmall");
-                SetCollisions("PlantBig");
+                SetCollisions("PlantLarge");
                 break;
         }
         CheckOverlappingPlots(usedPlot.GetComponent<BoxCollider>());
@@ -275,10 +274,6 @@ public class Island : MonoBehaviour
 
     public void CheckOverlappingPlots(BoxCollider boxCollider)
     {
-        if (boxCollider == null)
-        {
-            return;
-        }
         Vector3 center = boxCollider.transform.TransformPoint(boxCollider.center);
         Vector3 halfExtents = boxCollider.size / 2;
         Collider[] overlappingColliders = Physics.OverlapBox(center, halfExtents, boxCollider.transform.rotation);
@@ -286,15 +281,21 @@ public class Island : MonoBehaviour
         {
             if (collider != boxCollider && collider.GetComponent<Plant>() == null)
             {
-                usedPlots.Add(collider.gameObject);
+                if(collider.transform.parent.name.Contains("PlotSmall"))
+                {
+                    usedSmallPlots.Add(collider.gameObject);
+                }
+                if (collider.transform.parent.name.Contains("PlotMedium"))
+                {
+                    usedMediumPlots.Add(collider.gameObject);
+                }
+                if (collider.transform.parent.name.Contains("PlotLarge"))
+                {
+                    usedLargePlots.Add(collider.gameObject);
+                }
             }
         }
         SetCollisions("Reset");
-    }
-
-    public GameObject FindPlotByName(string name)
-    {
-        return usedPlots.Find(plot => plot.name == name);
     }
 
     public Card FindItemOnIslandByCardId(string plantCardId)

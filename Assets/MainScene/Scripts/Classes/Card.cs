@@ -153,7 +153,7 @@ public class Card : MonoBehaviour
                     GetComponent<Image>().enabled = true;
                     foreach (Transform child in this.transform)
                     {
-                        if (cardType == "PlantSmall" || cardType == "PlantMedium" || cardType == "PlantBig")
+                        if (cardType == "PlantSmall" || cardType == "PlantMedium" || cardType == "PlantLarge")
                         {
                             if (child.gameObject.name != "CardAnimation" && child.gameObject.name != "CardPickButton")
                             {

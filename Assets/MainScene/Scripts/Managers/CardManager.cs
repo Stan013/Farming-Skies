@@ -36,7 +36,7 @@ public class CardManager : MonoBehaviour
     {
         card.cardImage.GetComponent<Image>().sprite = card.cardSprite;
         card.cardNameText.SetText(card.cardName);
-        if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantBig")
+        if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantLarge")
         {
             CardDrag cardDrag = card.GetComponent<CardDrag>();
             Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();

@@ -17,16 +17,25 @@ public class IslandManager : MonoBehaviour
 
     [Header("General island variables")]
     public Island starterIsland;
+    public string islandManageTab;
 
     [Header("Island management variables")]
     public Island centerIsland;
     public GameObject islandInformation;
-    public GameObject plotInformation;
     public TMP_Text islandName;
     public TMP_Text waterNeed;
     public TMP_Text nitrogenNeed;
     public TMP_Text phosphorusNeed;
     public TMP_Text potassiumNeed;
+
+    [Header("Plot management variables")]
+    public GameObject plotInformation;
+    public TMP_Text smallPlotsAvailable;
+    public TMP_Text mediumPlotsAvailable;
+    public TMP_Text largePlotsAvailable;
+    public TMP_Text smallPlants;
+    public TMP_Text mediumPlants;
+    public TMP_Text largePlants;
 
     [Header("Expense variables")]
     public ExpenseItem expenseItem;
@@ -118,29 +127,36 @@ public class IslandManager : MonoBehaviour
 
     public void OpenIslandManagement(string tab)
     {
+        islandManageTab = tab;
         switch (tab)
         {
             case "Available":
                 islandInformation.SetActive(true);
                 plotInformation.SetActive(false);
                 islandName.text = "Island " + centerIsland.islandID;
-                waterNeed.text = centerIsland.nutrientsAvailable[1].ToString();
-                nitrogenNeed.text = centerIsland.nutrientsAvailable[2].ToString();
-                phosphorusNeed.text = centerIsland.nutrientsAvailable[3].ToString();
-                potassiumNeed.text = centerIsland.nutrientsAvailable[4].ToString();
+                waterNeed.text = centerIsland.nutrientsAvailable[0].ToString();
+                nitrogenNeed.text = centerIsland.nutrientsAvailable[1].ToString();
+                phosphorusNeed.text = centerIsland.nutrientsAvailable[2].ToString();
+                potassiumNeed.text = centerIsland.nutrientsAvailable[3].ToString();
                 break;
             case "Required":
                 islandInformation.SetActive(true);
                 plotInformation.SetActive(false);
                 islandName.text = "Island " + centerIsland.islandID;
-                waterNeed.text = centerIsland.nutrientsRequired[1].ToString();
-                nitrogenNeed.text = centerIsland.nutrientsRequired[2].ToString();
-                phosphorusNeed.text = centerIsland.nutrientsRequired[3].ToString();
-                potassiumNeed.text = centerIsland.nutrientsRequired[4].ToString();
+                waterNeed.text = centerIsland.nutrientsRequired[0].ToString();
+                nitrogenNeed.text = centerIsland.nutrientsRequired[1].ToString();
+                phosphorusNeed.text = centerIsland.nutrientsRequired[2].ToString();
+                potassiumNeed.text = centerIsland.nutrientsRequired[3].ToString();
                 break;
             case "Plots":
                 islandInformation.SetActive(false);
                 plotInformation.SetActive(true);
+                smallPlotsAvailable.text = centerIsland.plotsSmallPlants.Count.ToString();
+                mediumPlotsAvailable.text = centerIsland.plotsMediumPlants.Count.ToString();
+                largePlotsAvailable.text = centerIsland.plotsLargePlants.Count.ToString();
+                smallPlants.text = centerIsland.usedSmallPlots.Count.ToString();
+                mediumPlants.text = centerIsland.usedMediumPlots.Count.ToString();
+                largePlants.text = centerIsland.usedLargePlots.Count.ToString();
                 break;
         }
     }

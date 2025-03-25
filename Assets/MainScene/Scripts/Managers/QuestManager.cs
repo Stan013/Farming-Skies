@@ -58,7 +58,7 @@ public class QuestManager : MonoBehaviour
         {
             case 1:
                 GameManager.ISM.starterIsland.SetIslandState(Island.IslandState.Highlighted);
-                UpdateQuest("Move around!", "Let's start with moving around a little bit. You can move by using WASD and you can go up with Shift and down with Control. Try the to find the highlighted island.");
+                UpdateQuest("Move around!", "Let's start with moving around a little bit. You can move by using WASD and you can go up with Shift and down with Control. Try to find the highlighted island and move in all directions.");
                 break;
             case 2:
                 UpdateQuest("Build your first island!", "Now it is time to get your first island build. Hover over the highlighted island and hold down your right mouse button until the island is fully build.");
@@ -67,17 +67,17 @@ public class QuestManager : MonoBehaviour
                 GameManager.HM.SetCardsInHand();
                 Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Start cultivating!", "It is time to start getting your land ready for planting. Hover over the cultivator card and hold down your left mouse button. Now move towards your land to cultivate it.");
+                UpdateQuest("Start cultivating!", "It is time to start getting your island ready for planting. Hover over the cultivator card and hold down your left mouse button. Now move towards your island to cultivate it.");
                 break;
             case 4:
                 Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Water your land!", "Your land has been cultivated, let's water it so we can start planting. Hover over the watering can card and hold down your left mouse button again. Now move towards your land to water it.");
+                UpdateQuest("Water your soil!", "Your island has been cultivated, now let's water it so we can start planting. Hover over the watering can card and hold down your left mouse button again. Now move towards your soil to water it.");
                 break;
             case 5:
                 cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
                 cardGreenBean.GetComponent<CardInspect>().enabled = true;
-                UpdateQuest("Inspect your plant!", "Your land is ready for planting, but first let's see what crops you have and what they need. Click with your right mouse button on the green bean plant card and click again to put the card away.");
+                UpdateQuest("Inspect your plant!", "Your soil is ready for planting, but first let's see what crops you have and what they need. Click with your right mouse button on the green bean plant card and click again to put the card away.");
                 break;
             case 6:
                 cardChive = GameManager.HM.FindCardInHandById("CardChivePlant");
@@ -93,7 +93,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 8:
                 cardGreenBean.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Plant your first crop!", "Let's hover over your green bean plant card, but this time hold down your left mouse button. Then move the plant towards your land and once snapped in place let go of your mouse.");
+                UpdateQuest("Plant your first crop!", "Let's hover over your green bean plant card, but this time hold down your left mouse button. Then move the plant towards your soil and once snapped in place let go of your mouse.");
                 break;
             case 9:
                 cardChive.GetComponent<CardDrag>().enabled = true;
@@ -114,30 +114,30 @@ public class QuestManager : MonoBehaviour
                 break;
             case 13:
                 GameManager.UM.selectionUI.SetActive(true);
-                UpdateQuest("Inspect thoroughly!", "If you want to see some extra details about the items in your inventory you can click on the green button with an arrow. Let's do this with the chard you have in your inventory.");
+                UpdateQuest("Inspect thoroughly!", "If you want to see more details about the items in your inventory click on the green button with an arrow point downwards. Let's do this with the chard you have in your inventory.");
                 break;
             case 14:
                 GameManager.UM.selectionUI.SetActive(true);
-                UpdateQuest("Close the details!", "Your inventory can also be filtered with the green buttons on top. But for now let's close the extra details by clicking the green button with the arrow located at the top right. ");
+                UpdateQuest("Close the details!", "Your inventory can also be filtered with the green tabs on top. But for now let's close the details by clicking the green button with an arrow pointing upwards, located at the top left.");
                 break;
             case 15:
                 GameManager.UM.selectionUI.SetActive(true);
                 UpdateQuest("Crop yield importance!", "Depending on if the nutrient needs of a crop are met your yield has a chance to either increase or decrease. Let's close your inventory and find out if we meet those needs.");
                 break;
             case 16:
-                UpdateQuest("Inspect your land!", "As you can see the quality of your land has changed and a warning icon has appeared. Left click on the cogwheel at the right side of your screen to open up your farm management.");
+                UpdateQuest("Inspect your island!", "As you can see the quality of your soil has changed and a warning icon has appeared. Left click on the cogwheel at the right side of your screen to open up your farm management.");
                 break;
             case 17:
-                UpdateQuest("Select your land!", "With your mouse hover over the land that has a warning icon on top of it. Now click with your left mouse button and an information panel should appear on the right side of your screen.");
+                UpdateQuest("Select available!", "Now click with your left mouse button on the green available tab at the top. You currently only have one island but you can select the island you want to look at with the arrows.");
                 break;
             case 18:
-                UpdateQuest("Check your crop needs!", "You can see how much water and nutrients your crops require. Don't run out of water because your land will dry up. Now click with your left mouse button on the green switch icon.");
+                UpdateQuest("Check required!", "We can now see what nutrients your island has but how much do your crops require. With your left mouse button click on the green required tab and look at your island needs.");
                 break;
             case 19:
-                UpdateQuest("Your island reserves!", "It now shows how much your land still has. Some of these reserves are too low for the next harvest so let's help your land out. With your left mouse button click on the red close icon.");
+                UpdateQuest("Let's improve!", "You can also see the in the plots tab, how many available plots there are. Plus how many crops are on your island but for now click on the red close icon so we can help your soil.");
                 break;
             case 20:
-                UpdateQuest("Open craft mode!", "First we need some cards to use, so open the crafting menu by pressing C. Here you can craft any card you need. You can filter the different card types with the green labels on top.");
+                UpdateQuest("Checkout crafting!", "First we need some cards to use, so click with your left mouse button on the anvil icon at the right side of your screen. Here you can craft any card you need if you have enough resources.");
                 break;
             case 21:
                 GameManager.CRM.craftUI.plusButton.enabled = false;
@@ -402,16 +402,34 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 16:
-/*                    if (GameManager.CurrentState == GameManager.GameState.ManageMode)
+                    if (GameManager.WM.manageWindow.activeSelf)
                     {
-                        QuestCompleted = true;
-                    }*/
+                        QuestCompleted();
+                    }
+                    break;
+                case 17:
+                    if (GameManager.ISM.islandManageTab == "Available")
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 18:
+                    if (GameManager.ISM.islandManageTab == "Required")
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 19:
+                    if (!GameManager.WM.manageWindow.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
                     break;
                 case 20:
-/*                    if (GameManager.CurrentState == GameManager.GameState.CraftMode)
+                    if (GameManager.WM.craftWindow.activeSelf)
                     {
-                        QuestCompleted = true;
-                    }*/
+                        QuestCompleted();
+                    }
                     break;
                 case 21:
                     if (GameManager.CRM.selectedCard.cardName == "Nitrogen Fertiliser")

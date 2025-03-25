@@ -216,7 +216,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 var plot = hit.collider.gameObject;
                 var plotParent = plot.transform.parent;
                 hoverIsland = plotParent.transform.parent.GetComponent<Island>();
-                if (hoverIsland.usedPlots.Contains(plot))
+                if (hoverIsland.usedSmallPlots.Contains(plot) || hoverIsland.usedMediumPlots.Contains(plot) || hoverIsland.usedLargePlots.Contains(plot))
                 {
                     hoverPlot = null;
                     return null;

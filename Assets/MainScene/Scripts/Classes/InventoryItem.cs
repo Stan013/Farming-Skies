@@ -14,13 +14,12 @@ public class InventoryItem : MonoBehaviour
     public Plant attachedPlant;
     public Button expandButton;
 
-    public void SetInventoryItem(Card itemCard, int dropAmount)
+    public void SetInventoryItem(Card itemCard)
     {
         if(itemCard != null)
         {
             attachedItemCard = itemCard;
             attachedPlant = itemCard.GetComponent<CardDrag>().dragModel.GetComponent<Plant>();
-            attachedItemCard.itemQuantity = dropAmount;
             itemNameText.text = attachedItemCard.itemName;
             itemQuantityText.text = attachedItemCard.itemQuantity.ToString();
             itemImage.sprite = attachedItemCard.cardSprite;
@@ -35,8 +34,8 @@ public class InventoryItem : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            Instantiate(GameManager.INM.fillerInventoryItem, transform.parent)
-                .transform.SetSiblingIndex(rowStartIndex+1); 
+            GameObject fillerItem = Instantiate(GameManager.INM.fillerItem, transform.parent);
+            fillerItem.transform.SetSiblingIndex(rowStartIndex + 1);
         }
 
         GameManager.INM.expandedInventoryItem.SetupExpandedItem(this);

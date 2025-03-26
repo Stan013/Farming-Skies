@@ -140,21 +140,12 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Checkout crafting!", "First we need some cards to use, so click with your left mouse button on the anvil icon at the right side of your screen. Here you can craft any card you need if you have enough resources.");
                 break;
             case 21:
-                GameManager.CRM.craftUI.plusButton.enabled = false;
-                GameManager.CRM.craftUI.maxButton.enabled = false;
                 UpdateQuest("Find nitrogen fertiliser!", "The first nutrient that was low was Nitrogen, so by using the green arrow buttons. Cycle through the cards until the nitrogen fertiliser card is in the center.");
                 break;
             case 22:
-                GameManager.CRM.craftUI.plusButton.enabled = true;
-                GameManager.CRM.craftUI.maxButton.enabled = true;
-                GameManager.CRM.craftUI.leftButton.enabled = false;
-                GameManager.CRM.craftUI.rightButton.enabled = false;
                 UpdateQuest("Select amount!", "Click on the plus button on the left and set the amount of cards you want to craft to one. You can then craft that amount if you have the required resources.");
                 break;
             case 23:
-                GameManager.CRM.craftUI.minusButton.enabled = false;
-                GameManager.CRM.craftUI.minButton.enabled = false;
-                GameManager.CRM.craftButton.enabled = false;
                 UpdateQuest("Check your storage!", "On the right side of the craft button, it now shows how much your craft costs. Open up your resources again by clicking on the arrow at the left side of the screen and check if you have enough.");
                 break;
             case 24:
@@ -162,44 +153,24 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Let's craft!", "It seems like you have just enough. Let's go back to the craft button and hold down your left mouse button on it. Keep holding down your mouse button until the card is fully crafted.");
                 break;
             case 25:
-                GameManager.CRM.craftUI.plusButton.enabled = false;
-                GameManager.CRM.craftUI.maxButton.enabled = false;
-                GameManager.CRM.craftUI.leftButton.enabled = true;
-                GameManager.CRM.craftUI.rightButton.enabled = true;
                 GameManager.UM.fertiliser += 25;
                 UpdateQuest("Next card!", "Okay, next up is Phosphorus so let's find that fertiliser card. Cycle through the cards again by using the green arrow buttons until the phosphorus fertiliser card is in the center.");
                 break;
             case 26:
-                GameManager.CRM.craftUI.plusButton.enabled = true;
-                GameManager.CRM.craftUI.maxButton.enabled = true;
-                GameManager.CRM.craftUI.leftButton.enabled = false;
-                GameManager.CRM.craftUI.rightButton.enabled = false;
                 UpdateQuest("Input the amount!", "We also need one of these, so click on the plus button again. You can also type in the amount you need or click the max button to get the max amount of craftable cards.");
                 break;
             case 27:
-                GameManager.CRM.craftUI.minusButton.enabled = false;
-                GameManager.CRM.craftUI.minButton.enabled = false;
                 UpdateQuest("Craft another one!", "Hold down your left mouse on the craft button again and watch your resources get used. If you stop holding down, the crafting process will be cancelled and your resources get returned.");
                 break;
             case 28:
-                GameManager.CRM.craftUI.plusButton.enabled = false;
-                GameManager.CRM.craftUI.maxButton.enabled = false;
-                GameManager.CRM.craftUI.leftButton.enabled = true;
-                GameManager.CRM.craftUI.rightButton.enabled = true;
                 GameManager.UM.water += 5;
                 GameManager.UM.fertiliser += 25;
                 UpdateQuest("Last fertiliser card!", "Last nutrient we were missing was Potassium, so let's see if we can find the fertiliser card for that one as well. I will give you some extra resources, but this will be the last time.");
                 break;
             case 29:
-                GameManager.CRM.craftUI.plusButton.enabled = true;
-                GameManager.CRM.craftUI.maxButton.enabled = true;
-                GameManager.CRM.craftUI.leftButton.enabled = false;
-                GameManager.CRM.craftUI.rightButton.enabled = false;
                 UpdateQuest("Input one once more!", "Now let's do the same thing one more time. Click the plus button and put the craft amount to one once again. You should also note that if you craft more cards you might get a discount.");
                 break;
             case 30:
-                GameManager.CRM.craftUI.minusButton.enabled = false;
-                GameManager.CRM.craftUI.minButton.enabled = false;
                 UpdateQuest("One more craft!", "Click and hold the craft button one last time and add the last fertiliser card to your deck. We now have all the fertilisers we need to get the nutrients in your land back.");
                 break;
             case 31:
@@ -432,10 +403,6 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 21:
-                    if (GameManager.CRM.selectedCard.cardName == "Nitrogen Fertiliser")
-                    {
-                        QuestCompleted();
-                    }
                     break;
                 case 22:
                     if (GameManager.CRM.cardCraftAmount == 1)
@@ -450,10 +417,6 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 25:
-                    if (GameManager.CRM.selectedCard.cardName == "Phosphorus Fertiliser")
-                    {
-                        QuestCompleted();
-                    }
                     break;
                 case 26:
                     if (GameManager.CRM.cardCraftAmount == 1)
@@ -468,10 +431,6 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 28:
-                    if (GameManager.CRM.selectedCard.cardName == "Potassium Fertiliser")
-                    {
-                        QuestCompleted();
-                    }
                     break;
                 case 29:
                     if (GameManager.CRM.cardCraftAmount == 1)

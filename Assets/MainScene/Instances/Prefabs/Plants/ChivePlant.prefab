@@ -102,10 +102,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drop: {fileID: -3315355698080879949, guid: f3374ea4dbcf82846b71822bbf6a5878, type: 3}
+  dropAmount: 0
   plantScale: 0.0075
   plantCardID: CardChivePlant
+  addedDropToInventory: 0
   attachedIsland: {fileID: 0}
-  yield: 18
+  baseYield: 18
+  yield: 0
   maxYield: 27
   nutrientsUsages: 01000000010000000200000001000000
   buildableTaxCost: 0

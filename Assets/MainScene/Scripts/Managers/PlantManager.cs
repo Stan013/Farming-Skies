@@ -17,8 +17,8 @@ public class PlantManager : MonoBehaviour
             {
                 if (plant.nutrientsUsages[0] <= island.nutrientsAvailable[0])
                 {
-                    CalculateDropAmount(island, plant);
-                    plant.GiveDrop(plant.transform.parent.GetComponent<Transform>()); //add based on yield
+                    UpdatePlantYield(island, plant);
+                    StartCoroutine(SpawnDropsWithInterval(plant));
                 }
                 else
                 {
@@ -28,58 +28,43 @@ public class PlantManager : MonoBehaviour
         }
     }
 
-    public void CalculateDropAmount(Island island, Plant plant)
+    public void UpdatePlantYield(Island island, Plant plant)
     {
-        int baseYield = plant.yield;
-        for(int i = 0; i < island.nutrientsAvailable.Count; i++)
+        plant.yield = plant.baseYield;
+        for (int i = 0; i < island.nutrientsAvailable.Count; i++)
         {
-            if(i != 0)
+            if (i != 0)
             {
                 if (island.nutrientsAvailable[i] >= plant.nutrientsUsages[i])
                 {
                     if (random.NextDouble() <= dropChance)
                     {
-                        switch (baseYield)
-                        {
-                            case 6:
-                                plant.yield++;
-                                break;
-                            case 12:
-                                plant.yield += 2;
-                                break;
-                            case 18:
-                                plant.yield += 3;
-                                break;
-                            case 24:
-                                plant.yield += 4;
-                                break;
-                        }
+                        plant.yield += plant.baseYield / 6;
                     }
                 }
                 else
                 {
                     if (random.NextDouble() <= dropChance)
                     {
-                        switch (baseYield)
-                        {
-                            case 6:
-                                plant.yield--;
-                                break;
-                            case 12:
-                                plant.yield -= 2;
-                                break;
-                            case 18:
-                                plant.yield -= 3;
-                                break;
-                            case 24:
-                                plant.yield -= 4;
-                                break;
-                        }
+                        plant.yield -= plant.baseYield / 6;
                     }
                 }
             }
             island.nutrientsAvailable[i] -= plant.nutrientsUsages[i];
         }
         island.UpdateNutrientsRequired();
+    }
+
+
+    private IEnumerator SpawnDropsWithInterval(Plant plant)
+    {
+        int dropCount = Mathf.FloorToInt(plant.yield / 3);
+        float interval = 0.25f;
+
+        for (int i = 0; i < dropCount; i++)
+        {
+            plant.GiveDrop(plant.transform.parent);
+            yield return new WaitForSeconds(interval);
+        }
     }
 }

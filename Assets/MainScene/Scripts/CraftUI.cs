@@ -19,16 +19,16 @@ public class CraftUI : MonoBehaviour
     public int coinCost, waterCost, fertiliserCost;
     public Button leftButton, rightButton;
 
-    public void SetupCraftingUI()
+/*    public void SetupCraftingUI()
     {
         minButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(0));
         minusButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(GameManager.CRM.cardCraftAmount - 1));
         plusButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(GameManager.CRM.cardCraftAmount + 1));
         maxButton.onClick.AddListener(() => GameManager.CRM.SetCardCraftAmount(GameManager.CRM.maxCraftableAmount));
         craftAmountInput.onValueChanged.AddListener(OnCraftAmountInputChanged);
-    }
+    }*/
 
-    private void OnCraftAmountInputChanged(string input)
+/*    private void OnCraftAmountInputChanged(string input)
     {
         if (int.TryParse(input, out int value))
         {
@@ -39,15 +39,13 @@ public class CraftUI : MonoBehaviour
             craftAmountInput.text = GameManager.CRM.cardCraftAmount.ToString();
         }
         GameManager.CRM.CheckValidCraft();
-    }
+    }*/
 
     public void UpdateCostDisplay()
     {
-        if (GameManager.CRM.selectedCard == null) return;
-
-        coinCost = GameManager.CRM.selectedCard.cardCraftResources[0] * GameManager.CRM.cardCraftAmount;
+/*        coinCost = GameManager.CRM.selectedCard.cardCraftResources[0] * GameManager.CRM.cardCraftAmount;
         waterCost = GameManager.CRM.selectedCard.cardCraftResources[1] * GameManager.CRM.cardCraftAmount;
-        fertiliserCost = GameManager.CRM.selectedCard.cardCraftResources[2] * GameManager.CRM.cardCraftAmount;
+        fertiliserCost = GameManager.CRM.selectedCard.cardCraftResources[2] * GameManager.CRM.cardCraftAmount;*/
         balanceCostText.text = coinCost.ToString() + " ₴";
         waterCostText.text = waterCost.ToString() + " L";
         fertiliserCostText.text = fertiliserCost.ToString() + " L";

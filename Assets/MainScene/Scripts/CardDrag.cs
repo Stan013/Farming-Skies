@@ -187,7 +187,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     plant.transform.localPosition = new Vector3(0, -0.25f, 0);
                     plant.transform.localRotation = Quaternion.identity;
                     hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
-                    hoverIsland.UpdateNutrientsRequired();
                     GameManager.HM.dragCard.dragSucces = true;
                     GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
                 }

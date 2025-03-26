@@ -22,6 +22,7 @@ public class CardManager : MonoBehaviour
                 if(childCard.cardUnlocked)
                 {
                     GameManager.CRM.craftableCards.Add(childCard);
+                    GameManager.CRM.UnlockCraftItem(childCard);
                 }
                 if(childCard.cardStarter)
                 {

@@ -36,7 +36,7 @@ public class Resource : MonoBehaviour
             {
                 transform.position = targetPosition;
                 resourceImage.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
-                GameManager.CRM.craftUI.craftResources.Remove(GetComponent<Resource>());
+                //GameManager.CRM.craftUI.craftResources.Remove(GetComponent<Resource>());
                 Destroy(gameObject);
             }
         }

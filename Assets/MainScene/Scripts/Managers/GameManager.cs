@@ -32,26 +32,23 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DPM = GetComponent<DataPersistenceManager>();
+        DBM = GetComponent<DebugManager>();
         SPM = GetComponent<SpawnManager>();
         WM = GetComponent<WindowManager>();
-        QM = GetComponent<QuestManager>();
-
-        HM = GetComponent<HandManager>();
-        SM = GetComponent<SelectionManager>();
-        CM = GetComponent<CardManager>();
-        DM = GetComponent<DeckManager>();
-        ISM = GetComponent<IslandManager>();
-        TM = GetComponent<TimeManager>();
         UM = GetComponent<UIManager>();
+        QM = GetComponent<QuestManager>();
         IPM = GetComponent<InputManager>();
-        MM = GetComponent<MarketManager>();
+        ISM = GetComponent<IslandManager>();
+        DM = GetComponent<DeckManager>();
+        HM = GetComponent<HandManager>();
+        CM = GetComponent<CardManager>();
+        TM = GetComponent<TimeManager>();
         INM = GetComponent<InventoryManager>();
         PM = GetComponent<PlantManager>();
         CRM = GetComponent<CraftManager>();
-
-
-        DBM = GetComponent<DebugManager>();
+        MM = GetComponent<MarketManager>();
+        SM = GetComponent<SelectionManager>();
+        DPM = GetComponent<DataPersistenceManager>();
     }
 
     private void StartGame(string gameAction)

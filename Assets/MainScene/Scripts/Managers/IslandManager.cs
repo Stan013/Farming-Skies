@@ -23,6 +23,7 @@ public class IslandManager : MonoBehaviour
     public Island centerIsland;
     public GameObject islandInformation;
     public TMP_Text islandName;
+    public TMP_Text nutrientText;
     public TMP_Text waterNeed;
     public TMP_Text nitrogenNeed;
     public TMP_Text phosphorusNeed;
@@ -127,10 +128,16 @@ public class IslandManager : MonoBehaviour
 
     public void OpenIslandManagement(string tab)
     {
+        if(centerIsland == null)
+        {
+            centerIsland = starterIsland;
+        }
+
         islandManageTab = tab;
         switch (tab)
         {
             case "Available":
+                nutrientText.text = "Available Nutrients: ";
                 islandInformation.SetActive(true);
                 plotInformation.SetActive(false);
                 islandName.text = "Island " + centerIsland.islandID;
@@ -140,6 +147,7 @@ public class IslandManager : MonoBehaviour
                 potassiumNeed.text = centerIsland.nutrientsAvailable[3].ToString();
                 break;
             case "Required":
+                nutrientText.text = "Required Nutrients: ";
                 islandInformation.SetActive(true);
                 plotInformation.SetActive(false);
                 islandName.text = "Island " + centerIsland.islandID;

@@ -103,10 +103,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drop: {fileID: -7541418366129046587, guid: a226596364a5b6542a481da65955901c, type: 3}
+  dropAmount: 0
   plantScale: 0.0075
   plantCardID: CardGreenBeanPlant
+  addedDropToInventory: 0
   attachedIsland: {fileID: 0}
-  yield: 18
+  baseYield: 18
+  yield: 0
   maxYield: 27
   nutrientsUsages: 04000000010000000100000001000000
   buildableTaxCost: 0

@@ -6,13 +6,14 @@ using TMPro;
 
 public class CraftManager : MonoBehaviour
 {
-    public GameObject craftWindow;
-    public int currentCardIndex = 0;
+    [Header("Craft lists")]
     public List<Card> craftableCards;
-    public List<Card> cardsInCrafting;
-    public List<GameObject> selectionSlots;
-    public Card selectedCard;
-    public CraftUI craftUI;
+    public List<CraftItem> itemsInCrafting;
+
+    [Header("Inventory variables")]
+    public GameObject craftContentArea;
+    public CraftItem craftItemTemplate;
+    //public ExpandedInventoryItem expandedInventoryItem;
 
     public Button craftButton;
     public TMP_Text craftButtonText;
@@ -27,130 +28,136 @@ public class CraftManager : MonoBehaviour
     public int cardCraftAmount;
     public int maxCraftableAmount;
 
-    // Card scales & positions
-    private readonly Vector3 centerScale = new Vector3(0.55f, 0.55f, 1f);
-    private readonly Vector3 sideScale = new Vector3(0.35f, 0.35f, 1f);
-    private readonly Vector3 farSideScale = new Vector3(0.30f, 0.30f, 1f);
-    private readonly Vector3[] cardPositions =
+    public void UnlockCraftItem(Card attachedCard)
     {
-        new Vector3(-535f, 0f, 0f),  // Far-left card
-        new Vector3(-315f, 0f, 0f),  // Left card
-        Vector3.zero,                // Center card
-        new Vector3(315f, 0f, 0f),   // Right card
-        new Vector3(535f, 0f, 0f)    // Far-right card
-    };
-
-    private bool isTransitioning = false;
-
-    public void SetupCraftingMode()
-    {
-        if (cardsInCrafting.Count == 0)
-        {
-            for (int i = 0; i < selectionSlots.Count; i++)
-            {
-                Card newCard = Instantiate(craftableCards[i], selectionSlots[i].transform);
-                newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.SetCardState(Card.CardState.InCraft);
-                newCard.transform.localPosition = cardPositions[i];
-                newCard.transform.localScale = (i == 2) ? centerScale : (i == 1 || i == 3) ? sideScale : farSideScale;
-                newCard.transform.localRotation = Quaternion.identity;
-                newCard.cardCraftIndex = i;
-                cardsInCrafting.Add(newCard);
-            }
-        }
-        selectedCard = cardsInCrafting[2];
-        craftUI.SetupCraftingUI();
-        CalculateMaxCraftableAmount();
-        SetCardCraftAmount(0);
-        CheckValidCraft();
+        CraftItem craftItem = Instantiate(craftItemTemplate, Vector3.zero, Quaternion.identity);
+        craftItem.SetCraftItem(attachedCard);
+        craftItem.transform.localPosition = new Vector3(craftItem.transform.localPosition.x, craftItem.transform.localPosition.y, 0);
+        craftItem.transform.localRotation = Quaternion.identity;
+        itemsInCrafting.Add(craftItem);
+        AddItemToCrafting(craftItem);
     }
 
-
-    public void ChangeSelectedCard(int direction)
+    public void AddItemToCrafting(CraftItem craftItem)
     {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        Card newCard = null;
-        if (direction == -1)
+        craftItem.transform.SetParent(craftContentArea.transform, false);
+        itemsInCrafting.Add(craftItem);
+        itemsInCrafting.Sort((a, b) => a.attachedItemCard.itemName.CompareTo(b.attachedItemCard.itemName));
+        for (int i = 0; i < itemsInCrafting.Count; i++)
         {
-            if (craftableCards.Count > 5)
+            itemsInCrafting[i].transform.SetSiblingIndex(i + 1);
+        }
+    }
+
+    /*    public void SetupCraftingMode()
+        {
+            if (cardsInCrafting.Count == 0)
             {
-                Card firstCard = cardsInCrafting[0];
-                if (firstCard.cardCraftIndex + 5 >= craftableCards.Count)
+                for (int i = 0; i < selectionSlots.Count; i++)
                 {
-                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex - 1], selectionSlots[4].transform);
-                    newCard.cardCraftIndex = firstCard.cardCraftIndex - 1;
+                    Card newCard = Instantiate(craftableCards[i], selectionSlots[i].transform);
+                    newCard.GetComponent<CardInspect>().enabled = false;
+                    newCard.SetCardState(Card.CardState.InCraft);
+                    newCard.transform.localPosition = cardPositions[i];
+                    newCard.transform.localScale = (i == 2) ? centerScale : (i == 1 || i == 3) ? sideScale : farSideScale;
+                    newCard.transform.localRotation = Quaternion.identity;
+                    newCard.cardCraftIndex = i;
+                    cardsInCrafting.Add(newCard);
+                }
+            }
+            selectedCard = cardsInCrafting[2];
+            craftUI.SetupCraftingUI();
+            CalculateMaxCraftableAmount();
+            SetCardCraftAmount(0);
+            CheckValidCraft();
+        }*/
+
+
+    /*    public void ChangeSelectedCard(int direction)
+        {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            Card newCard = null;
+            if (direction == -1)
+            {
+                if (craftableCards.Count > 5)
+                {
+                    Card firstCard = cardsInCrafting[0];
+                    if (firstCard.cardCraftIndex + 5 >= craftableCards.Count)
+                    {
+                        newCard = Instantiate(craftableCards[firstCard.cardCraftIndex - 1], selectionSlots[4].transform);
+                        newCard.cardCraftIndex = firstCard.cardCraftIndex - 1;
+                    }
+                    else
+                    {
+                        newCard = Instantiate(craftableCards[firstCard.cardCraftIndex + 5], selectionSlots[4].transform);
+                        newCard.cardCraftIndex = firstCard.cardCraftIndex + 5;
+                    }
+                    newCard.GetComponent<CardInspect>().enabled = false;
+                    newCard.SetCardState(Card.CardState.InCraft);
+                    newCard.transform.localPosition = cardPositions[4];
+                    newCard.transform.localScale = farSideScale;
+                    newCard.transform.localRotation = Quaternion.identity;
+                    cardsInCrafting.RemoveAt(0);
+                    cardsInCrafting.Add(newCard);
+                    Destroy(firstCard.gameObject);
                 }
                 else
                 {
-                    newCard = Instantiate(craftableCards[firstCard.cardCraftIndex + 5], selectionSlots[4].transform);
-                    newCard.cardCraftIndex = firstCard.cardCraftIndex + 5;
+                    Card firstCard = cardsInCrafting[0];
+                    cardsInCrafting.RemoveAt(0);
+                    cardsInCrafting.Add(firstCard);
                 }
-                newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.SetCardState(Card.CardState.InCraft);
-                newCard.transform.localPosition = cardPositions[4];
-                newCard.transform.localScale = farSideScale;
-                newCard.transform.localRotation = Quaternion.identity;
-                cardsInCrafting.RemoveAt(0);
-                cardsInCrafting.Add(newCard);
-                Destroy(firstCard.gameObject);
             }
-            else
+            else if (direction == 1)
             {
-                Card firstCard = cardsInCrafting[0];
-                cardsInCrafting.RemoveAt(0);
-                cardsInCrafting.Add(firstCard);
-            }
-        }
-        else if (direction == 1)
-        {
-            if (craftableCards.Count > 5)
-            {
-                Card lastCard = cardsInCrafting[4];
-                if (lastCard.cardCraftIndex + 1 >= craftableCards.Count)
+                if (craftableCards.Count > 5)
                 {
-                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex - 5], selectionSlots[0].transform);
-                    newCard.cardCraftIndex = lastCard.cardCraftIndex - 5;
+                    Card lastCard = cardsInCrafting[4];
+                    if (lastCard.cardCraftIndex + 1 >= craftableCards.Count)
+                    {
+                        newCard = Instantiate(craftableCards[lastCard.cardCraftIndex - 5], selectionSlots[0].transform);
+                        newCard.cardCraftIndex = lastCard.cardCraftIndex - 5;
+                    }
+                    else
+                    {
+                        newCard = Instantiate(craftableCards[lastCard.cardCraftIndex + 1], selectionSlots[0].transform);
+                        newCard.cardCraftIndex = lastCard.cardCraftIndex + 1;
+                    }
+                    newCard.GetComponent<CardInspect>().enabled = false;
+                    newCard.SetCardState(Card.CardState.InCraft);
+                    newCard.transform.localPosition = cardPositions[0];
+                    newCard.transform.localScale = farSideScale;
+                    newCard.transform.localRotation = Quaternion.identity;
+                    cardsInCrafting.RemoveAt(cardsInCrafting.Count - 1);
+                    cardsInCrafting.Insert(0, newCard);
+                    Destroy(lastCard.gameObject);
                 }
                 else
                 {
-                    newCard = Instantiate(craftableCards[lastCard.cardCraftIndex + 1], selectionSlots[0].transform);
-                    newCard.cardCraftIndex = lastCard.cardCraftIndex + 1;
+                    Card lastCard = cardsInCrafting[cardsInCrafting.Count - 1];
+                    cardsInCrafting.RemoveAt(cardsInCrafting.Count - 1);
+                    cardsInCrafting.Insert(0, lastCard);
                 }
-                newCard.GetComponent<CardInspect>().enabled = false;
-                newCard.SetCardState(Card.CardState.InCraft);
-                newCard.transform.localPosition = cardPositions[0];
-                newCard.transform.localScale = farSideScale;
-                newCard.transform.localRotation = Quaternion.identity;
-                cardsInCrafting.RemoveAt(cardsInCrafting.Count - 1);
-                cardsInCrafting.Insert(0, newCard);
-                Destroy(lastCard.gameObject);
             }
-            else
-            {
-                Card lastCard = cardsInCrafting[cardsInCrafting.Count - 1];
-                cardsInCrafting.RemoveAt(cardsInCrafting.Count - 1);
-                cardsInCrafting.Insert(0, lastCard);
-            }
-        }
-        UpdateCraftingCards(true);
-        CalculateMaxCraftableAmount();
-        SetCardCraftAmount(0);
-        CheckValidCraft();
-        StartCoroutine(ResetTransitionAfterDelay(0.3f));
-    }
+            UpdateCraftingCards(true);
+            CalculateMaxCraftableAmount();
+            SetCardCraftAmount(0);
+            CheckValidCraft();
+            StartCoroutine(ResetTransitionAfterDelay(0.3f));
+        }*/
 
-    public void UpdateCraftingCards(bool animate)
-    {
-        Vector3[] scales = { farSideScale, sideScale, centerScale, sideScale, farSideScale };
-        for (int i = 0; i < cardsInCrafting.Count; i++)
+    /*    public void UpdateCraftingCards(bool animate)
         {
-            cardsInCrafting[i].transform.SetParent(selectionSlots[i].transform);
-            cardsInCrafting[i].transform.SetAsLastSibling();
-            UpdateCardSlot(cardsInCrafting[i], scales[i], cardPositions[i], animate);
-        }
-        selectedCard = cardsInCrafting[2];
-    }
+            Vector3[] scales = { farSideScale, sideScale, centerScale, sideScale, farSideScale };
+            for (int i = 0; i < cardsInCrafting.Count; i++)
+            {
+                cardsInCrafting[i].transform.SetParent(selectionSlots[i].transform);
+                cardsInCrafting[i].transform.SetAsLastSibling();
+                UpdateCardSlot(cardsInCrafting[i], scales[i], cardPositions[i], animate);
+            }
+            selectedCard = cardsInCrafting[2];
+        }*/
 
     public void UpdateCardSlot(Card card, Vector3 scale, Vector3 position, bool animate)
     {
@@ -184,13 +191,7 @@ public class CraftManager : MonoBehaviour
         cardTransform.localScale = targetScale;
     }
 
-    private IEnumerator ResetTransitionAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        isTransitioning = false;
-    }
-
-    public void CalculateMaxCraftableAmount()
+/*    public void CalculateMaxCraftableAmount()
     {
         List<int> validMaxValues = new List<int>();
         if (selectedCard.cardCraftResources[0] > 0f)
@@ -217,14 +218,14 @@ public class CraftManager : MonoBehaviour
         {
             maxCraftableAmount = 0;
         }
-    }
+    }*/
 
-    public void SetCardCraftAmount(int amount)
+/*    public void SetCardCraftAmount(int amount)
     {
         cardCraftAmount = Mathf.Clamp(amount, 0, maxCraftableAmount);
         craftUI.craftAmountInput.text = cardCraftAmount.ToString();
         craftUI.UpdateCostDisplay();
-    }
+    }*/
 
     public bool CheckValidCraft()
     {
@@ -244,15 +245,5 @@ public class CraftManager : MonoBehaviour
             valid = false;
         }
         return valid;
-    }
-
-    public void ResetCraftCard()
-    {
-        foreach (var slot in GameManager.CRM.selectionSlots)
-        {
-            slot.SetActive(true);
-        }
-        craftUI.craftCardCover.SetActive(false);
-        isCrafting = false;
     }
 }

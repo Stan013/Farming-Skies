@@ -107,7 +107,7 @@ public class Island : MonoBehaviour
         else
         {
             float totalNPK = nutrientsAvailable.Sum() - nutrientsAvailable[0];
-            float blendFactor = Mathf.Clamp01(totalNPK / 150f);
+            float blendFactor = 1f - Mathf.Clamp01(totalNPK / 75f);
             Material blendedMaterial = new Material(islandMat);
             Color blendedColor = Color.Lerp(islandMat.color, islandMatNeedsNPK.color, blendFactor);
             blendedMaterial.color = blendedColor;
@@ -320,7 +320,7 @@ public class Island : MonoBehaviour
                 }
             }
         }
-
+        
         switch (currentState)
         {
             case IslandState.Sowed:

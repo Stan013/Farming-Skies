@@ -104,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drop: {fileID: -6762057183795775958, guid: 0fde08d08ac4ed04ab30a1d3a53356b1, type: 3}
   dropAmount: 0
-  plantScale: 0.0075
   plantCardID: CardRicePlant
   addedDropToInventory: 0
   attachedIsland: {fileID: 0}

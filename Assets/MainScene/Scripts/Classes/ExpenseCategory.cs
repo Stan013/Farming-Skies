@@ -35,16 +35,16 @@ public class ExpenseCategory : MonoBehaviour
         }
     }
 
-    public int _compostsTotal;
-    public int CompostsTotal
+    public int _compostBinsTotal;
+    public int CompostBinsTotal
     {
-        get => _compostsTotal;
+        get => _compostBinsTotal;
         set
         {
-            if (_compostsTotal != value)
+            if (_compostBinsTotal != value)
             {
-                _compostsTotal = value;
-                expenseItemText.SetText(_compostsTotal + " ₴");
+                _compostBinsTotal = value;
+                expenseItemText.SetText(_compostBinsTotal + " ₴");
             }
         }
     }

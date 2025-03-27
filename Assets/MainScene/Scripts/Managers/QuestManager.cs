@@ -21,7 +21,7 @@ public class QuestManager : MonoBehaviour
     private Card cardChard;
     private Card cardRice;
     private Card cardWaterBarrel;
-    private Card cardCompost;
+    private Card cardCompostBin;
 
     [Header("Quest islands")]
     private Island expansionIsland;
@@ -140,21 +140,25 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Checkout crafting!", "First we need some cards to use, so click with your left mouse button on the anvil icon at the right side of your screen. Here you can craft any card you need if you have enough resources.");
                 break;
             case 21:
-                UpdateQuest("Find nitrogen fertiliser!", "The first nutrient that was low was Nitrogen, so by using the green arrow buttons. Cycle through the cards until the nitrogen fertiliser card is in the center.");
+                UpdateQuest("Find nitrogen!", "One of the nutrients that was low was nitrogen so we need to craft some nitrogen fertiliser. Let's use the filters on top and click the green tab that says utilities and then find the nitrogen.");
                 break;
             case 22:
-                UpdateQuest("Select amount!", "Click on the plus button on the left and set the amount of cards you want to craft to one. You can then craft that amount if you have the required resources.");
+                GameManager.UM.balance += 50;
+                GameManager.UM.water += 10;
+                GameManager.UM.fertiliser += 25;
+                UpdateQuest("Quick craft!", "I have given you some resources so that you can now quick craft a nitrogen card. The craft label is currently red since it doesn't have a valid input amount so let's put that to 1.");
                 break;
             case 23:
-                UpdateQuest("Check your storage!", "On the right side of the craft button, it now shows how much your craft costs. Open up your resources again by clicking on the arrow at the left side of the screen and check if you have enough.");
+                UpdateQuest("Hold to craft!", "The craft label should turn green and now you can hold down your left mouse button on the craft text. This should turn the label blue and then eventually back to green when the craft is completed.");
                 break;
             case 24:
-                GameManager.CRM.craftButton.enabled = true;
-                UpdateQuest("Let's craft!", "It seems like you have just enough. Let's go back to the craft button and hold down your left mouse button on it. Keep holding down your mouse button until the card is fully crafted.");
+                UpdateQuest("Craft another!", "We crafted 1 nitrogen card, however we weren't able to see how many resources that cost us. So lets now craft the next nutrient phosphorus by clicking on the green button with the arrow pointing downwards again.");
                 break;
             case 25:
+                GameManager.UM.balance += 50;
+                GameManager.UM.water += 10;
                 GameManager.UM.fertiliser += 25;
-                UpdateQuest("Next card!", "Okay, next up is Phosphorus so let's find that fertiliser card. Cycle through the cards again by using the green arrow buttons until the phosphorus fertiliser card is in the center.");
+                UpdateQuest("Crafting costs!", "");
                 break;
             case 26:
                 UpdateQuest("Input the amount!", "We also need one of these, so click on the plus button again. You can also type in the amount you need or click the max button to get the max amount of craftable cards.");
@@ -403,9 +407,13 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 21:
+                    if (GameManager.CRM.craftingTab == "Utilities")
+                    {
+                        QuestCompleted();
+                    }
                     break;
                 case 22:
-                    if (GameManager.CRM.cardCraftAmount == 1)
+                    if (GameManager.CRM.GetCraftItemByID("CardNitrogenFertiliserUtility").craftAmount == 1)
                     {
                         QuestCompleted();
                     }

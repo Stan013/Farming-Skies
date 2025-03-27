@@ -287,7 +287,7 @@ MonoBehaviour:
   cardPickButton: {fileID: 8022029349146204646}
   cardAnimation: {fileID: 6720073896161107888}
   cardClip: {fileID: 0}
-  cardCraftResources: 
+  cardCraftResources: 190000001900000019000000
   cardDropsRequired: 0
   cardCraftIndex: 0
   itemName: 
@@ -301,6 +301,7 @@ MonoBehaviour:
   itemDemand: 0
   itemSupply: 0
   cardType: 
+  plantGroup: 
   plantSizeText: {fileID: 8861860043992965257}
   waterText: {fileID: 8455086928085624875}
   nitrogenText: {fileID: 1087851942403795715}

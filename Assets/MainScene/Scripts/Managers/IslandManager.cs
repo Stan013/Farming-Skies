@@ -42,7 +42,7 @@ public class IslandManager : MonoBehaviour
     public ExpenseItem expenseItem;
     public GameObject islandExpenseContent;
     public GameObject waterBarrelExpenseContent;
-    public GameObject compostExpenseContent;
+    public GameObject compostBinExpenseContent;
 
     public void SetupIslands()
     {
@@ -156,7 +156,7 @@ public class IslandManager : MonoBehaviour
                 phosphorusNeed.text = centerIsland.nutrientsRequired[2].ToString();
                 potassiumNeed.text = centerIsland.nutrientsRequired[3].ToString();
                 break;
-            case "Plots":
+            case "Plot":
                 islandInformation.SetActive(false);
                 plotInformation.SetActive(true);
                 smallPlotsAvailable.text = centerIsland.plotsSmallPlants.Count.ToString();

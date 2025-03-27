@@ -56,7 +56,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
             switch (GameManager.HM.dragCard.cardType)
             {
-                case "Utility":
+                case "Utilities":
                     if (GameManager.ISM.GetPotentialBoughtIsland() != null)
                     {
                         if(hoverIsland != null)
@@ -127,7 +127,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         collisionOn = false;
         switch (GameManager.HM.dragCard.cardType)
         {
-            case "Utility":
+            case "Utilities":
                 if (hoverIsland != null)
                 {
                     if (GameManager.HM.dragCard.nutrientIndex != 0)

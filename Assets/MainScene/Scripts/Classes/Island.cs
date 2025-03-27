@@ -148,7 +148,7 @@ public class Island : MonoBehaviour
     {
         switch (cardType)
         {
-            case "PlantSmall":
+            case "Small crops":
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Watered)
@@ -160,7 +160,7 @@ public class Island : MonoBehaviour
                     }
                 }
                 break;
-            case "PlantMedium":
+            case "Medium crops":
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Watered)
@@ -172,7 +172,7 @@ public class Island : MonoBehaviour
                     }
                 }
                 break;
-            case "PlantLarge":
+            case "Large crops":
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Watered)
@@ -249,24 +249,24 @@ public class Island : MonoBehaviour
         itemsOnIsland.Add(usedPlant.GetComponent<Plant>());
         switch (usedCard.cardType)
         {
-            case "PlantSmall":
-                SetCollisions("PlantMedium");
-                SetCollisions("PlantLarge");
+            case "Small crops":
+                SetCollisions("Medium crops");
+                SetCollisions("Large crops");
                 usedSmallPlots.Add(usedPlot);
                 break;
-            case "PlantMedium":
-                SetCollisions("PlantSmall");
-                SetCollisions("PlantLarge");
+            case "Medium crops":
+                SetCollisions("Small crops");
+                SetCollisions("Large crops");
                 usedMediumPlots.Add(usedPlot);
                 break;
-            case "PlantLarge":
-                SetCollisions("PlantSmall");
-                SetCollisions("PlantMedium");
+            case "Large crops":
+                SetCollisions("Small crops");
+                SetCollisions("Medium crops");
                 usedLargePlots.Add(usedPlot);
                 break;
             case "Buildable":
-                SetCollisions("PlantSmall");
-                SetCollisions("PlantLarge");
+                SetCollisions("Small crops");
+                SetCollisions("Large crops");
                 break;
         }
         CheckOverlappingPlots(usedPlot.GetComponent<BoxCollider>());

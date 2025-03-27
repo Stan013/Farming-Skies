@@ -9,7 +9,7 @@ public class ExpenseItem : MonoBehaviour
 {
     public ExpenseCategory islandExpenses;
     public ExpenseCategory waterBarrelExpenses;
-    public ExpenseCategory compostExpenses;
+    public ExpenseCategory compostBinExpenses;
 
     public TMP_Text expenseItemNameText;
     public Image expenseItemImage;
@@ -17,7 +17,7 @@ public class ExpenseItem : MonoBehaviour
 
     public Sprite islandImage;
     public Sprite waterBarrelImage;
-    public Sprite compostImage;
+    public Sprite compostBinImage;
 
     public void SetupIslandExpense(Island island)
     {

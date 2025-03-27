@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0325, y: 0.0425, z: 0.0325}
+  m_LocalScale: {x: 0.025, y: 0.0425, z: 0.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drop: {fileID: -7541418366129046587, guid: a226596364a5b6542a481da65955901c, type: 3}
   dropAmount: 0
-  plantScale: 0.0075
   plantCardID: CardGreenBeanPlant
   addedDropToInventory: 0
   attachedIsland: {fileID: 0}

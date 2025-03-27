@@ -55,6 +55,7 @@ public class Card : MonoBehaviour
 
     [Header("Associated plant variables")]
     public string cardType;
+    public string plantGroup;
     public TMP_Text plantSizeText;
     public TMP_Text waterText;
     public TMP_Text nitrogenText;
@@ -106,6 +107,7 @@ public class Card : MonoBehaviour
                 cardPickButton.SetActive(true);
                 cardAmount = Random.Range(1, 3);
                 cardAmountText.SetText($"X{cardAmount}");
+                cardName = cardName.Replace(" crops", "").Trim();
                 cardNameText.SetText(cardName);
                 break;
             case CardState.InDrag:
@@ -153,7 +155,7 @@ public class Card : MonoBehaviour
                     GetComponent<Image>().enabled = true;
                     foreach (Transform child in this.transform)
                     {
-                        if (cardType == "PlantSmall" || cardType == "PlantMedium" || cardType == "PlantLarge")
+                        if (cardType == "Small crops" || cardType == "Medium crops" || cardType == "Large crops")
                         {
                             if (child.gameObject.name != "CardAnimation" && child.gameObject.name != "CardPickButton")
                             {

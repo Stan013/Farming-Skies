@@ -20,7 +20,9 @@ public class CraftItem : MonoBehaviour
     public Sprite invalidCraft;
     public Sprite validCraft;
     public Sprite ongoingCraft;
+
     public bool canCraft;
+    public int maxCraftAmount;
 
     private Coroutine holdCoroutine = null;
     private float holdTime = 0f;
@@ -28,27 +30,52 @@ public class CraftItem : MonoBehaviour
 
     public void CheckValidCraftAmount(string input)
     {
+        CalculateMaxCraftableAmount();
+
         if (int.TryParse(input, out int value))
         {
-            if (value == 0)
+            if (value <= 0 || value > maxCraftAmount)
             {
-                craftAmountInput.text = "0";
-                craftInputBackground.GetComponent<Image>().sprite = invalidCraft;
+                craftAmountInput.text = Mathf.Clamp(value, 0, maxCraftAmount).ToString();
+                craftInputBackground.sprite = invalidCraft;
                 canCraft = false;
             }
             else
             {
                 craftAmount = value;
-                craftInputBackground.GetComponent<Image>().sprite = validCraft;
+                craftInputBackground.sprite = validCraft;
                 canCraft = true;
             }
         }
         else
         {
             craftAmountInput.text = "0";
-            craftInputBackground.GetComponent<Image>().sprite = invalidCraft;
+            craftInputBackground.sprite = invalidCraft;
             canCraft = false;
         }
+    }
+
+    public void CalculateMaxCraftableAmount()
+    {
+        List<int> validMaxValues = new List<int>();
+        if (attachedItemCard.cardCraftResources[0] > 0f)
+        {
+            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.balance / attachedItemCard.cardCraftResources[0]));
+        }
+        if (attachedItemCard.cardCraftResources[1] > 0f)
+        {
+            validMaxValues.Add(GameManager.UM.water / attachedItemCard.cardCraftResources[1]);
+        }
+        if (attachedItemCard.cardCraftResources[2] > 0f)
+        {
+            validMaxValues.Add(GameManager.UM.fertiliser / attachedItemCard.cardCraftResources[2]);
+        }
+        if (attachedItemCard.cardType != "Utilities" && attachedItemCard.itemQuantity > 0)
+        {
+            validMaxValues.Add(attachedItemCard.itemQuantity / attachedItemCard.cardDropsRequired);
+        }
+
+        maxCraftAmount = (validMaxValues.Count > 0) ? Mathf.Min(validMaxValues.ToArray()) : 0;
     }
 
     public void SetCraftItem(Card itemCard)
@@ -65,13 +92,13 @@ public class CraftItem : MonoBehaviour
 
     public void OnCraftButtonPress()
     {
-        if(canCraft)
+        if (canCraft)
         {
             if (holdCoroutine == null)
             {
                 holdCoroutine = StartCoroutine(HandleCraftHold());
             }
-            craftInputBackground.GetComponent<Image>().sprite = ongoingCraft;
+            craftInputBackground.sprite = ongoingCraft;
         }
     }
 
@@ -101,7 +128,6 @@ public class CraftItem : MonoBehaviour
     {
         holdCoroutine = null;
         CheckValidCraftAmount("0");
-        Debug.Log("Quick Crafting performed with amount: " + craftAmount);
     }
 
 /*    public void ExpandInventoryItem()

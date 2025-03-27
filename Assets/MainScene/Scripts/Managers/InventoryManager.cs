@@ -41,4 +41,19 @@ public class InventoryManager : MonoBehaviour
             itemsInInventory[i].transform.SetSiblingIndex(i+1);
         }
     }
+
+    public void FilterItemsInInventory(string filter)
+    {
+        foreach (InventoryItem inventoryItem in itemsInInventory)
+        {
+            if (inventoryItem.attachedItemCard.plantGroup != filter)
+            {
+                inventoryItem.gameObject.SetActive(false);
+            }
+            else
+            {
+                inventoryItem.gameObject.SetActive(true);
+            }
+        }
+    }
 }

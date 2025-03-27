@@ -37,7 +37,7 @@ public class CardManager : MonoBehaviour
     {
         card.cardImage.GetComponent<Image>().sprite = card.cardSprite;
         card.cardNameText.SetText(card.cardName);
-        if (card.cardType == "PlantSmall" || card.cardType == "PlantMedium" || card.cardType == "PlantLarge")
+        if (card.cardType == "Small crops" || card.cardType == "Medium crops" || card.cardType == "Large crops")
         {
             CardDrag cardDrag = card.GetComponent<CardDrag>();
             Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();
@@ -46,7 +46,7 @@ public class CardManager : MonoBehaviour
             card.nitrogenText.SetText(dragPlant.nutrientsUsages[1].ToString() + " L");
             card.phosphorusText.SetText(dragPlant.nutrientsUsages[2].ToString() + " L");
             card.potassiumText.SetText(dragPlant.nutrientsUsages[3].ToString() + " L");
-            card.plantSizeText.SetText(card.cardType.Replace("Plant", ""));
+            card.plantSizeText.SetText(card.cardType.Replace(" crops", ""));
         }
         else
         {

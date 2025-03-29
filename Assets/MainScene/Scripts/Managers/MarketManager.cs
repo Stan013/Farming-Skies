@@ -18,7 +18,6 @@ public class MarketManager : MonoBehaviour
     private float[] marketWeightsDecimal = {2.5f, 2.4f, 2.3f, 2.1f, 1.8f, 1.6f, 1.4f, 1.2f, 1f};
 
     public GameObject spawnResources;
-    public Resource coinIcon;
 
     public void UpdateMarketItems()
     {
@@ -117,13 +116,13 @@ public class MarketManager : MonoBehaviour
         }
 
         int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalBalance / 50));
-        StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
+        //StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
         UpdateMarketItems();
         GameManager.UM.UpdateUI();
     }
 
 
-    private IEnumerator SpawnCoins(Vector3 start, Vector3 end, int coinCount, MarketItem marketItem)
+/*    private IEnumerator SpawnCoins(Vector3 start, Vector3 end, int coinCount, MarketItem marketItem)
     {
         for (int i = 0; i < coinCount; i++)
         {
@@ -133,9 +132,9 @@ public class MarketManager : MonoBehaviour
             StartCoroutine(MoveCoin(coin, end));
         }
         yield return null;
-    }
+    }*/
 
-    private IEnumerator MoveCoin(Resource coin, Vector3 target)
+/*    private IEnumerator MoveCoin(Resource coin, Vector3 target)
     {
         float speed = Vector3.Distance(coin.transform.position, target);
 
@@ -146,7 +145,7 @@ public class MarketManager : MonoBehaviour
         }
         coin.transform.position = target;
         Destroy(coin.gameObject);
-    }
+    }*/
 
     public MarketItem FindMarketItemByName(string itemName)
     {

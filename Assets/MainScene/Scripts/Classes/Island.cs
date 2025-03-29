@@ -281,17 +281,20 @@ public class Island : MonoBehaviour
         {
             if (collider != boxCollider && collider.GetComponent<Plant>() == null)
             {
-                if(collider.transform.parent.name.Contains("PlotSmall"))
+                if(collider.gameObject.name.Contains("PlotSmall"))
                 {
                     usedSmallPlots.Add(collider.gameObject);
+                    plotsSmallPlants.Remove(collider.gameObject);
                 }
-                if (collider.transform.parent.name.Contains("PlotMedium"))
+                if (collider.gameObject.name.Contains("PlotMedium"))
                 {
                     usedMediumPlots.Add(collider.gameObject);
+                    plotsMediumPlants.Remove(collider.gameObject);
                 }
-                if (collider.transform.parent.name.Contains("PlotLarge"))
+                if (collider.gameObject.name.Contains("PlotLarge"))
                 {
                     usedLargePlots.Add(collider.gameObject);
+                    plotsLargePlants.Remove(collider.gameObject);
                 }
             }
         }

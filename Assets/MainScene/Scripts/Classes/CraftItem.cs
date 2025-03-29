@@ -15,12 +15,12 @@ public class CraftItem : MonoBehaviour
 
     public Button craftButton;
     public TMP_InputField craftAmountInput;
-    public int craftAmount;
     public Image craftInputBackground;
     public Sprite invalidCraft;
     public Sprite validCraft;
     public Sprite ongoingCraft;
 
+    public int craftAmount;
     public bool canCraft;
     public int maxCraftAmount;
 
@@ -127,23 +127,27 @@ public class CraftItem : MonoBehaviour
     private void QuickCraft()
     {
         holdCoroutine = null;
+        GameManager.UM.balance -= attachedItemCard.cardCraftResources[0];
+        GameManager.UM.water -= attachedItemCard.cardCraftResources[1];
+        GameManager.UM.fertiliser -= attachedItemCard.cardCraftResources[2];
+        GameManager.DM.AddCardToDeck(attachedItemCard.cardId);
         CheckValidCraftAmount("0");
     }
 
-/*    public void ExpandInventoryItem()
+    public void ExpandCraftItem()
     {
         int itemIndex = transform.GetSiblingIndex();
         int rowStartIndex = (itemIndex / 4) * 4;
 
         for (int i = 0; i < 3; i++)
         {
-            Instantiate(GameManager.INM.fillerInventoryItem, transform.parent)
+            Instantiate(GameManager.INM.fillerItem, transform.parent)
                 .transform.SetSiblingIndex(rowStartIndex + 1);
         }
 
-        GameManager.INM.expandedInventoryItem.SetupExpandedItem(this);
-        GameManager.INM.expandedInventoryItem.gameObject.SetActive(true);
+        GameManager.CRM.expandedCraftItem.SetupExpandedItem(this);
+        GameManager.CRM.expandedCraftItem.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
-    }*/
+    }
 }

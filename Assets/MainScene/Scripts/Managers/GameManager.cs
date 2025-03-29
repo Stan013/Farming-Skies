@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
                 IPM.KeyboardInput();
                 IPM.MouseInput();
                 QM.QuestCheck();
+
+                DBM.DebugInput(); // Debug mode
             }
             else
             {

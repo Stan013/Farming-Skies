@@ -158,13 +158,13 @@ public class QuestManager : MonoBehaviour
                 GameManager.UM.balance += 50;
                 GameManager.UM.water += 10;
                 GameManager.UM.fertiliser += 25;
-                UpdateQuest("Crafting costs!", "");
+                UpdateQuest("Crafting costs!", "We can now see how much our craft cost this amount will of course be dependent on the amount of cards you craft. We only need 1 so put that amount in, you can also click plus or hit the max button.");
                 break;
             case 26:
-                UpdateQuest("Input the amount!", "We also need one of these, so click on the plus button again. You can also type in the amount you need or click the max button to get the max amount of craftable cards.");
+                UpdateQuest("Hold again!", "The same as the quick craft you will need to hold down your left mouse on the green craft button. If the input is valid the button will turn blue and if held long enough your craft will be succesful.");
                 break;
             case 27:
-                UpdateQuest("Craft another one!", "Hold down your left mouse on the craft button again and watch your resources get used. If you stop holding down, the crafting process will be cancelled and your resources get returned.");
+                UpdateQuest("Craft another one!", "");
                 break;
             case 28:
                 GameManager.UM.water += 5;
@@ -418,16 +418,26 @@ public class QuestManager : MonoBehaviour
                         QuestCompleted();
                     }
                     break;
-                case 24:
+                case 23:
                     if (GameManager.DM.cardsInDeck.Count == 1)
                     {
                         QuestCompleted();
                     }
                     break;
+                case 24:
+                    if (GameManager.CRM.expandedCraftItem.gameObject.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
+                    break;
                 case 25:
+                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1)
+                    {
+                        QuestCompleted();
+                    }
                     break;
                 case 26:
-                    if (GameManager.CRM.cardCraftAmount == 1)
+                    if (GameManager.DM.cardsInDeck.Count == 2)
                     {
                         QuestCompleted();
                     }
@@ -441,10 +451,6 @@ public class QuestManager : MonoBehaviour
                 case 28:
                     break;
                 case 29:
-                    if (GameManager.CRM.cardCraftAmount == 1)
-                    {
-                        QuestCompleted();
-                    }
                     break;
                 case 30:
                     if (GameManager.DM.cardsInDeck.Count == 3)

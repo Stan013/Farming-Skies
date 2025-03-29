@@ -240,6 +240,8 @@ MonoBehaviour:
   invalidCraft: {fileID: 21300000, guid: 273f8553cedaa4c4986ad7f0e1cab6cc, type: 3}
   validCraft: {fileID: 21300000, guid: 49ae692f20ee37542a601539e74241ff, type: 3}
   ongoingCraft: {fileID: 21300000, guid: 6858d1dd02ba1a140a70ec87c38f74e6, type: 3}
+  canCraft: 0
+  maxCraftAmount: 0
 --- !u!1 &3609895447363493573
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +529,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1031,9 +1033,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryItem, Assembly-CSharp
-        m_MethodName: ExpandInventoryItem
+      - m_Target: {fileID: 6727825815218093069}
+        m_TargetAssemblyTypeName: CraftItem, Assembly-CSharp
+        m_MethodName: ExpandCraftItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

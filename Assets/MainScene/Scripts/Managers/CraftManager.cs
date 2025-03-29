@@ -13,21 +13,8 @@ public class CraftManager : MonoBehaviour
     [Header("Craft variables")]
     public GameObject craftContentArea;
     public CraftItem craftItemTemplate;
-    //public ExpandedInventoryItem expandedInventoryItem;
+    public ExpandedCraftItem expandedCraftItem;
     public string craftingTab;
-
-    public Button craftButton;
-    public TMP_Text craftButtonText;
-    public Sprite invalidCraft;
-    public Sprite validCraft;
-    public Sprite successCraft;
-    public bool isCrafting;
-    public int biggestResourceCost;
-    public bool craftSuccess;
-    public float craftSpeed;
-
-    public int cardCraftAmount;
-    public int maxCraftableAmount;
 
     public void UnlockCraftItem(Card attachedCard)
     {

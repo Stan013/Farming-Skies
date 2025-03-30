@@ -14,6 +14,7 @@ public class CraftManager : MonoBehaviour
     public GameObject craftContentArea;
     public CraftItem craftItemTemplate;
     public ExpandedCraftItem expandedCraftItem;
+    public ScrollRect craftScroll;
     public string craftingTab;
 
     public void UnlockCraftItem(Card attachedCard)

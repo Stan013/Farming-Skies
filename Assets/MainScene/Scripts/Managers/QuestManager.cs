@@ -143,9 +143,9 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Find nitrogen!", "One of the nutrients that was low was nitrogen so we need to craft some nitrogen fertiliser. Let's use the filters on top and click the green tab that says utilities and then find the nitrogen.");
                 break;
             case 22:
-                GameManager.UM.balance += 50;
-                GameManager.UM.water += 10;
-                GameManager.UM.fertiliser += 25;
+                GameManager.UM.Balance += 50;
+                GameManager.UM.Water += 10;
+                GameManager.UM.Fertiliser += 25;
                 UpdateQuest("Quick craft!", "I have given you some resources so that you can now quick craft a nitrogen card. The craft label is currently red since it doesn't have a valid input amount so let's put that to 1.");
                 break;
             case 23:
@@ -155,21 +155,22 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Craft another!", "We crafted 1 nitrogen card, however we weren't able to see how many resources that cost us. So lets now craft the next nutrient phosphorus by clicking on the green button with the arrow pointing downwards again.");
                 break;
             case 25:
-                GameManager.UM.balance += 50;
-                GameManager.UM.water += 10;
-                GameManager.UM.fertiliser += 25;
+                GameManager.UM.Balance += 50;
+                GameManager.UM.Water += 10;
+                GameManager.UM.Fertiliser += 25;
                 UpdateQuest("Crafting costs!", "We can now see how much our craft cost this amount will of course be dependent on the amount of cards you craft. We only need 1 so put that amount in, you can also click plus or hit the max button.");
                 break;
             case 26:
                 UpdateQuest("Hold again!", "The same as the quick craft you will need to hold down your left mouse on the green craft button. If the input is valid the button will turn blue and if held long enough your craft will be succesful.");
                 break;
             case 27:
-                UpdateQuest("Craft another one!", "");
+                UpdateQuest("Select next one!", "Do this one more time for the last nutrient we need which is potassium. Search for potassium and click the green button with the arrow pointing downwards again. It should now expand that item.");
                 break;
             case 28:
-                GameManager.UM.water += 5;
-                GameManager.UM.fertiliser += 25;
-                UpdateQuest("Last fertiliser card!", "Last nutrient we were missing was Potassium, so let's see if we can find the fertiliser card for that one as well. I will give you some extra resources, but this will be the last time.");
+                GameManager.UM.Balance += 50;
+                GameManager.UM.Water += 10;
+                GameManager.UM.Fertiliser += 25;
+                UpdateQuest("Input amount again!", "This will be the last time I give you some resources after that you will have to generate them yourself. We again need one so input 1 or click the plus or max button and hold craft.");
                 break;
             case 29:
                 UpdateQuest("Input one once more!", "Now let's do the same thing one more time. Click the plus button and put the craft amount to one once again. You should also note that if you craft more cards you might get a discount.");
@@ -297,7 +298,7 @@ public class QuestManager : MonoBehaviour
                     {
                         QuestCompleted();
                     }
-                    break;
+                    break; 
                 case 3:
                     if (GameManager.ISM.starterIsland.currentState == Island.IslandState.Cultivated && !GameManager.HM.dragging)
                     {
@@ -347,7 +348,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 11:
-                    if (GameManager.UM.weeks == 1)
+                    if (GameManager.UM.Weeks == 1)
                     {
                         QuestCompleted();
                     }
@@ -431,7 +432,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 25:
-                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1)
+                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Phosphorus")
                     {
                         QuestCompleted();
                     }
@@ -443,12 +444,16 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 27:
-                    if (GameManager.DM.cardsInDeck.Count == 2)
+                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Potassium")
                     {
                         QuestCompleted();
                     }
                     break;
                 case 28:
+                    if (GameManager.DM.cardsInDeck.Count == 3)
+                    {
+                        QuestCompleted();
+                    }
                     break;
                 case 29:
                     break;

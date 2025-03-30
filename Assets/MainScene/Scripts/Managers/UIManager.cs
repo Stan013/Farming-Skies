@@ -13,12 +13,67 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public GameObject selectionUI;
 
     [Header("Game variables")]
-    public int farmLevel;
-    public float expense;
-    public float balance;
-    public int water;
-    public int fertiliser;
-    public int weeks;
+    private int _farmLevel;
+    private float _expense;
+    private float _balance;
+    private int _water;
+    private int _fertiliser;
+    private int _weeks;
+
+    public int FarmLevel
+    {
+        get => _farmLevel;
+        set
+        {
+            _farmLevel = value;
+            UpdateUI();
+        }
+    }
+    public float Expense
+    {
+        get => _expense;
+        set
+        {
+            _expense = value;
+            UpdateUI();
+        }
+    }
+    public float Balance
+    {
+        get => _balance;
+        set
+        {
+            _balance = value;
+            UpdateUI();
+        }
+    }
+    public int Water
+    {
+        get => _water;
+        set
+        {
+            _water = value;
+            UpdateUI();
+        }
+    }
+    public int Fertiliser
+    {
+        get => _fertiliser;
+        set
+        {
+            _fertiliser = value;
+            UpdateUI();
+        }
+    }
+    public int Weeks
+    {
+        get => _weeks;
+        set
+        {
+            _weeks = value;
+            UpdateUI();
+        }
+    }
 
     [Header("Game variables text")]
     public TMP_Text farmLevelText;
@@ -37,13 +92,13 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void UpdateUI()
     {
-        farmLevelText.text = "Level " + FormatNumber(farmLevel).ToString();
-        expenseText.text = FormatNumber(expense).ToString() + " ₴";
-        balanceText.text = FormatNumber(balance).ToString() + " ₴";
-        waterText.text = FormatNumber(water).ToString() + " L";
-        fertiliserText.text = FormatNumber(fertiliser).ToString() + " L";
-        deckText.text = FormatNumber(GameManager.DM.cardsInDeck.Count).ToString() + " x";
-        weekText.text = weeks.ToString();
+        farmLevelText.text = "Level " + _farmLevel.ToString();
+        expenseText.text = _expense.ToString() + " ₴";
+        balanceText.text = _balance.ToString() + " ₴";
+        waterText.text = _water.ToString() + " L";
+        fertiliserText.text = _fertiliser.ToString() + " L";
+        deckText.text = GameManager.DM.cardsInDeck.Count.ToString() + " x";
+        weekText.text = _weeks.ToString();
     }
 
     public static string FormatNumber(float num)
@@ -79,7 +134,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             transparencySlider.value = alphaValue;
             if (alphaValue == 1f && island.islandBought == false)
             {
-                balance -= island.islandBuildCost;
+                _balance -= island.islandBuildCost;
                 GameManager.ISM.AddIslandToBought(island);
                 constructionLabel.gameObject.SetActive(false);
                 GameManager.UM.UpdateUI();
@@ -89,17 +144,17 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        expense = data.expense;
-        balance = data.balance;
-        water = data.water;
-        fertiliser = data.fertiliser;
+        _expense = data.expense;
+        _balance = data.balance;
+        _water = data.water;
+        _fertiliser = data.fertiliser;
     }
 
     public void SaveData(ref GameData data)
     {
-        data.expense = expense;
-        data.balance = balance;
-        data.water = water;
-        data.fertiliser = fertiliser;
+        data.expense = _expense;
+        data.balance = _balance;
+        data.water = _water;
+        data.fertiliser = _fertiliser;
     }
 }

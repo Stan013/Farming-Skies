@@ -324,13 +324,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bdbada5d5b061642a2738ddf2a06f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expenseCategory: {fileID: 0}
+  islandExpenses: {fileID: 0}
+  waterBarrelExpenses: {fileID: 0}
+  compostBinExpenses: {fileID: 0}
   expenseItemNameText: {fileID: 7496956419090414593}
   expenseItemImage: {fileID: 1988915823824690010}
   expenseItemCostText: {fileID: 6945331213946665635}
-  islandImage: {fileID: 21300000, guid: 6c3d69928da458a4c869082a7520203a, type: 3}
+  islandImage: {fileID: 21300000, guid: ae1e16c8b1f3c7d4c88fde9fd7c0d50f, type: 3}
   waterBarrelImage: {fileID: 21300000, guid: f63e81d75defa5a43a5f639169e7b3e1, type: 3}
-  compostImage: {fileID: 21300000, guid: ae1e16c8b1f3c7d4c88fde9fd7c0d50f, type: 3}
+  compostBinImage: {fileID: 21300000, guid: ae1e16c8b1f3c7d4c88fde9fd7c0d50f, type: 3}
 --- !u!1 &4938808478074456590
 GameObject:
   m_ObjectHideFlags: 0

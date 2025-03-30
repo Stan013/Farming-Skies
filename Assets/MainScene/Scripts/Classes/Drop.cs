@@ -17,11 +17,11 @@ public class Drop : MonoBehaviour
             case "Buildable":
                 if (name == "WaterDrop")
                 {
-                    GameManager.UM.water += 1;
+                    GameManager.UM.Water += 1;
                 }
                 if (name == "fertiliserDrop")
                 {
-                    GameManager.UM.fertiliser += 1;
+                    GameManager.UM.Fertiliser += 1;
                 }
                 break;
             case "Product":

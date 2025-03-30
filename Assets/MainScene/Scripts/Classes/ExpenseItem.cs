@@ -19,7 +19,7 @@ public class ExpenseItem : MonoBehaviour
     public Sprite waterBarrelImage;
     public Sprite compostBinImage;
 
-    public void SetupIslandExpense(Island island)
+    public void SetupIslandexpense(Island island)
     {
         islandExpenses.IslandsTotal += island.islandExpenseCost;
         expenseItemNameText.text = "(" + island.name + ")";

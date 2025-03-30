@@ -10782,7 +10782,7 @@ MonoBehaviour:
   sowedNeedsNPKMatBot: {fileID: 2100000, guid: e3dce13a3ee44ee40860d47d9cb5d457, type: 2}
   wateredMatBot: {fileID: 2100000, guid: c803ca968492bbd41a658c22e68e07ea, type: 2}
   wateredNeedsNPKMatBot: {fileID: 2100000, guid: 9c776df8393453f4a9f48b6d104793ee, type: 2}
-  plotsSmallPlants:
+  availableSmallPlots:
   - {fileID: 7938958760340876345}
   - {fileID: 9074272155846697336}
   - {fileID: 3564597002558228445}
@@ -10819,7 +10819,7 @@ MonoBehaviour:
   - {fileID: 1754132139125697959}
   - {fileID: 7990794639377562189}
   - {fileID: 1447094454183404861}
-  plotsMediumPlants:
+  availableMediumPlots:
   - {fileID: 5776325442163020713}
   - {fileID: 602209818380123605}
   - {fileID: 4589390450160324036}
@@ -10836,7 +10836,7 @@ MonoBehaviour:
   - {fileID: 1023533011032129032}
   - {fileID: 8737813484729979641}
   - {fileID: 9116866760449542509}
-  plotsLargePlants:
+  availableLargePlots:
   - {fileID: 3031697121399008328}
   - {fileID: 3127095343348151055}
   - {fileID: 5232733278872410314}
@@ -10850,6 +10850,10 @@ MonoBehaviour:
   usedMediumPlots: []
   usedLargePlots: []
   itemsOnIsland: []
+  smallPlantsOnIsland: []
+  mediumPlantsOnIsland: []
+  largePlantsOnIsland: []
+  buildablesOnIsland: []
   warningIcon: {fileID: 5121178845173758381}
   nutrientsAvailable: 07000000050000000500000005000000
   nutrientsRequired: 00000000000000000000000000000000

@@ -10,6 +10,10 @@ public class ExpandedCraftItem : MonoBehaviour
     public Image expandedImage;
     public TMP_Text expandedName;
 
+    public TMP_Text balanceCost;
+    public TMP_Text waterCost;
+    public TMP_Text fertiliserCost;
+
     public Button craftButton;
     public Image craftButtonBackground;
     public Sprite invalidCraft;
@@ -24,7 +28,6 @@ public class ExpandedCraftItem : MonoBehaviour
 
     public int craftAmount;
     public bool canCraft;
-    public int maxCraftAmount;
 
     private Coroutine holdCoroutine = null;
     private float holdTime = 0f;
@@ -35,6 +38,9 @@ public class ExpandedCraftItem : MonoBehaviour
         collapsedItem = item;
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
+        balanceCost.text = collapsedItem.attachedItemCard.cardCraftResources[0].ToString();
+        waterCost.text = collapsedItem.attachedItemCard.cardCraftResources[1].ToString();
+        fertiliserCost.text = collapsedItem.attachedItemCard.cardCraftResources[2].ToString();
         CheckValidCraftAmount("0");
     }
 
@@ -69,32 +75,42 @@ public class ExpandedCraftItem : MonoBehaviour
     public void IncreaseAmount()
     {
         int amount = craftAmount;
-        amount = Mathf.Min(maxCraftAmount, amount + 1);
+        amount = Mathf.Min(collapsedItem.maxCraftAmount, amount + 1);
         craftAmountInput.text = amount.ToString();
     }
 
     public void SetMax()
     {
-        craftAmountInput.text = maxCraftAmount.ToString();
+        craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
     }
 
     public void CheckValidCraftAmount(string input)
     {
         collapsedItem.CalculateMaxCraftableAmount();
-
         if (int.TryParse(input, out int value))
         {
-            if (value <= 0 || value > maxCraftAmount)
+            if (value > collapsedItem.maxCraftAmount)
             {
-                craftAmountInput.text = Mathf.Clamp(value, 0, maxCraftAmount).ToString();
-                craftButtonBackground.sprite = invalidCraft;
-                canCraft = false;
+                craftAmount = collapsedItem.maxCraftAmount;
+                craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
+                craftButtonBackground.sprite = validCraft;
+                canCraft = true;
             }
             else
             {
-                collapsedItem.craftAmount = value;
-                craftButtonBackground.sprite = validCraft;
-                canCraft = true;
+                if (value <= 0)
+                {
+                    craftAmountInput.text = "0";
+                    craftButtonBackground.sprite = invalidCraft;
+                    canCraft = false;
+                }
+                else
+                {
+                    craftAmount = value;
+                    craftAmountInput.text = value.ToString();
+                    craftButtonBackground.sprite = validCraft;
+                    canCraft = true;
+                }
             }
         }
         else
@@ -103,6 +119,9 @@ public class ExpandedCraftItem : MonoBehaviour
             craftButtonBackground.sprite = invalidCraft;
             canCraft = false;
         }
+        balanceCost.text = (collapsedItem.attachedItemCard.cardCraftResources[0] * craftAmount).ToString();
+        waterCost.text = (collapsedItem.attachedItemCard.cardCraftResources[1] * craftAmount).ToString();
+        fertiliserCost.text = (collapsedItem.attachedItemCard.cardCraftResources[2] * craftAmount).ToString();
     }
 
     public void OnCraftButtonPress()
@@ -142,9 +161,9 @@ public class ExpandedCraftItem : MonoBehaviour
     private void CraftCard()
     {
         holdCoroutine = null;
-        GameManager.UM.balance -= collapsedItem.attachedItemCard.cardCraftResources[0];
-        GameManager.UM.water -= collapsedItem.attachedItemCard.cardCraftResources[1];
-        GameManager.UM.fertiliser -= collapsedItem.attachedItemCard.cardCraftResources[2];
+        GameManager.UM.Balance -= collapsedItem.attachedItemCard.cardCraftResources[0];
+        GameManager.UM.Water -= collapsedItem.attachedItemCard.cardCraftResources[1];
+        GameManager.UM.Fertiliser -= collapsedItem.attachedItemCard.cardCraftResources[2];
         GameManager.DM.AddCardToDeck(collapsedItem.attachedItemCard.cardId);
         CheckValidCraftAmount("0");
     }

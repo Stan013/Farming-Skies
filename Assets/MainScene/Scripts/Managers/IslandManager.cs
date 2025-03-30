@@ -118,7 +118,7 @@ public class IslandManager : MonoBehaviour
         ExpenseItem islandExpense = Instantiate(expenseItem, Vector3.zero, Quaternion.identity, islandExpenseContent.transform);
         islandExpense.transform.localPosition = new Vector3(islandExpense.transform.localPosition.x, islandExpense.transform.localPosition.y, 0);
         islandExpense.transform.localRotation = Quaternion.identity;
-        islandExpense.SetupIslandExpense(reconstructedIsland);
+        islandExpense.SetupIslandexpense(reconstructedIsland);
     }
 
     public Island FindIslandByID(string islandID)
@@ -159,12 +159,12 @@ public class IslandManager : MonoBehaviour
             case "Plot":
                 islandInformation.SetActive(false);
                 plotInformation.SetActive(true);
-                smallPlotsAvailable.text = centerIsland.plotsSmallPlants.Count.ToString();
-                mediumPlotsAvailable.text = centerIsland.plotsMediumPlants.Count.ToString();
-                largePlotsAvailable.text = centerIsland.plotsLargePlants.Count.ToString();
-                smallPlants.text = centerIsland.usedSmallPlots.Count.ToString();
-                mediumPlants.text = centerIsland.usedMediumPlots.Count.ToString();
-                largePlants.text = centerIsland.usedLargePlots.Count.ToString();
+                smallPlotsAvailable.text = centerIsland.availableSmallPlots.Count.ToString();
+                mediumPlotsAvailable.text = centerIsland.availableMediumPlots.Count.ToString();
+                largePlotsAvailable.text = centerIsland.availableLargePlots.Count.ToString();
+                smallPlants.text = centerIsland.smallPlantsOnIsland.Count.ToString();
+                mediumPlants.text = centerIsland.mediumPlantsOnIsland.Count.ToString();
+                largePlants.text = centerIsland.largePlantsOnIsland.Count.ToString();
                 break;
         }
     }

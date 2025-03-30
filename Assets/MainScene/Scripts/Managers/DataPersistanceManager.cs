@@ -40,12 +40,12 @@ public class DataPersistenceManager : MonoBehaviour
     public void InitializeGame()
     {
         GameManager.SPM.Spawn();
-        GameManager.UM.farmLevel = this.gameData.farmLevel;
-        GameManager.UM.expense = this.gameData.expense;
-        GameManager.UM.balance = this.gameData.balance;
-        GameManager.UM.water = this.gameData.water;
-        GameManager.UM.fertiliser = this.gameData.fertiliser;
-        GameManager.UM.weeks = this.gameData.weeks;
+        GameManager.UM.FarmLevel = this.gameData.farmLevel;
+        GameManager.UM.Expense = this.gameData.expense;
+        GameManager.UM.Balance = this.gameData.balance;
+        GameManager.UM.Water = this.gameData.water;
+        GameManager.UM.Fertiliser = this.gameData.fertiliser;
+        GameManager.UM.Weeks = this.gameData.weeks;
         GameManager.ISM.SetupIslands();
         GameManager.CM.SetupCards();
         GameManager.DM.SetStartingDeck();

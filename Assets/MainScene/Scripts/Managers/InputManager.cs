@@ -52,23 +52,26 @@ public class InputManager : MonoBehaviour
 
     private void NextWeekInput()
     {
-        if (Input.GetKey(KeyCode.Space) && nextWeekEnabled)
+        if (!GameManager.HM.dragging)
         {
-            spaceHoldTimer += Time.deltaTime;
-            float fillValue = Mathf.Clamp01(spaceHoldTimer / 1f);
-            GameManager.TM.advanceWeekImage.fillAmount = fillValue;
-            if (spaceHoldTimer >= 1f && !isHoldingSpace)
+            if (Input.GetKey(KeyCode.Space) && nextWeekEnabled)
             {
-                GameManager.WM.advanceWindow.SetActive(true);
-                GameManager.TM.AdvanceNextWeek();
+                spaceHoldTimer += Time.deltaTime;
+                float fillValue = Mathf.Clamp01(spaceHoldTimer / 1f);
+                GameManager.TM.advanceWeekImage.fillAmount = fillValue;
+                if (spaceHoldTimer >= 1f && !isHoldingSpace)
+                {
+                    GameManager.WM.advanceWindow.SetActive(true);
+                    GameManager.TM.AdvanceNextWeek();
+                }
             }
-        }
-        else
-        {
-            if (spaceHoldTimer != 0f)
+            else
             {
-                spaceHoldTimer = 0f;
-                GameManager.TM.advanceWeekImage.fillAmount = 0f;
+                if (spaceHoldTimer != 0f)
+                {
+                    spaceHoldTimer = 0f;
+                    GameManager.TM.advanceWeekImage.fillAmount = 0f;
+                }
             }
         }
     }
@@ -85,7 +88,7 @@ public class InputManager : MonoBehaviour
                     return;
                 }
                 potentialIsland = GameManager.ISM.GetPotentialIsland();
-                if (GameManager.UM.balance >= potentialIsland.islandBuildCost)
+                if (GameManager.UM.Balance >= potentialIsland.islandBuildCost)
                 {
                     if (!GameManager.QM.questActive || potentialIsland.currentState == Island.IslandState.Highlighted)
                     {
@@ -125,7 +128,7 @@ public class InputManager : MonoBehaviour
                 Island hitIsland = hit2.transform.GetComponent<Island>();
             }
 
-            float scroll = Input.GetAxis("Mouse ScrollWheel"); // Zooming
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
             cam.fieldOfView -= scroll * zoomSpeed;
             cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, minFOV, maxFOV);
         }

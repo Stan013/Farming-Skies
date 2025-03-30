@@ -61,7 +61,7 @@ public class MarketButton : MonoBehaviour
         }
         else
         {
-            maxAmount = Mathf.FloorToInt(GameManager.UM.balance / marketItem.priceCurrent);
+            maxAmount = Mathf.FloorToInt(GameManager.UM.Balance / marketItem.priceCurrent);
         }
     }
 

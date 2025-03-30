@@ -29,19 +29,22 @@ public class InventoryItem : MonoBehaviour
 
     public void ExpandInventoryItem()
     {
-        int itemIndex = transform.GetSiblingIndex();
-        int rowStartIndex = (itemIndex / 4) * 4;
+        if (GameManager.INM.expandedInventoryItem.gameObject.activeSelf)
+        {
+            GameManager.INM.expandedInventoryItem.CollapseInventoryItem();
+        }
 
         for (int i = 0; i < 3; i++)
         {
             GameObject fillerItem = Instantiate(GameManager.INM.fillerItem, transform.parent);
-            fillerItem.transform.SetSiblingIndex(rowStartIndex + 1);
+            fillerItem.transform.SetSiblingIndex(1);
         }
 
         GameManager.INM.expandedInventoryItem.SetupExpandedItem(this);
         GameManager.INM.expandedInventoryItem.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        GameManager.INM.inventoryScroll.verticalNormalizedPosition = 1f;
     }
 }
  

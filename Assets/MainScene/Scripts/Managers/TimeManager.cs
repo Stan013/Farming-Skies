@@ -38,7 +38,7 @@ public class TimeManager : MonoBehaviour
             weekDayText.text = weekDays[currentDayOfWeek];
             yield return new WaitForSeconds(0.75f);
         }
-        GameManager.UM.weeks++;
+        GameManager.UM.Weeks++;
         GameManager.WM.advanceWindow.SetActive(false);
         GameManager.UM.UpdateUI();
         GameManager.IPM.cam.transform.position = GameManager.IPM.startingPos;

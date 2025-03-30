@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem inventoryItemTemplate;
     public GameObject fillerItem;
     public ExpandedInventoryItem expandedInventoryItem;
+    public ScrollRect inventoryScroll;
 
     public void UnlockInventoryItem(Card itemCard)
     {

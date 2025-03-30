@@ -31,20 +31,30 @@ public class CraftItem : MonoBehaviour
     public void CheckValidCraftAmount(string input)
     {
         CalculateMaxCraftableAmount();
-
         if (int.TryParse(input, out int value))
         {
-            if (value <= 0 || value > maxCraftAmount)
+            if (value > maxCraftAmount)
             {
-                craftAmountInput.text = Mathf.Clamp(value, 0, maxCraftAmount).ToString();
-                craftInputBackground.sprite = invalidCraft;
-                canCraft = false;
+                craftAmount = maxCraftAmount;
+                craftAmountInput.text = maxCraftAmount.ToString();
+                craftInputBackground.sprite = validCraft;
+                canCraft = true;
             }
             else
             {
-                craftAmount = value;
-                craftInputBackground.sprite = validCraft;
-                canCraft = true;
+                if(value <= 0)
+                {
+                    craftAmountInput.text = "0";
+                    craftInputBackground.sprite = invalidCraft;
+                    canCraft = false;
+                }
+                else
+                {
+                    craftAmount = value;
+                    craftAmountInput.text = value.ToString();
+                    craftInputBackground.sprite = validCraft;
+                    canCraft = true;
+                }
             }
         }
         else
@@ -60,15 +70,15 @@ public class CraftItem : MonoBehaviour
         List<int> validMaxValues = new List<int>();
         if (attachedItemCard.cardCraftResources[0] > 0f)
         {
-            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.balance / attachedItemCard.cardCraftResources[0]));
+            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.Balance / attachedItemCard.cardCraftResources[0]));
         }
         if (attachedItemCard.cardCraftResources[1] > 0f)
         {
-            validMaxValues.Add(GameManager.UM.water / attachedItemCard.cardCraftResources[1]);
+            validMaxValues.Add(GameManager.UM.Water / attachedItemCard.cardCraftResources[1]);
         }
         if (attachedItemCard.cardCraftResources[2] > 0f)
         {
-            validMaxValues.Add(GameManager.UM.fertiliser / attachedItemCard.cardCraftResources[2]);
+            validMaxValues.Add(GameManager.UM.Fertiliser / attachedItemCard.cardCraftResources[2]);
         }
         if (attachedItemCard.cardType != "Utilities" && attachedItemCard.itemQuantity > 0)
         {
@@ -86,6 +96,7 @@ public class CraftItem : MonoBehaviour
             itemNameText.text = attachedItemCard.itemName;
             itemImage.sprite = attachedItemCard.cardSprite;
             itemIndex = GameManager.INM.itemsInInventory.Count;
+            CalculateMaxCraftableAmount();
             CheckValidCraftAmount("0");
         }
     }
@@ -127,27 +138,31 @@ public class CraftItem : MonoBehaviour
     private void QuickCraft()
     {
         holdCoroutine = null;
-        GameManager.UM.balance -= attachedItemCard.cardCraftResources[0];
-        GameManager.UM.water -= attachedItemCard.cardCraftResources[1];
-        GameManager.UM.fertiliser -= attachedItemCard.cardCraftResources[2];
+        GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
+        GameManager.UM.Water -= attachedItemCard.cardCraftResources[1];
+        GameManager.UM.Fertiliser -= attachedItemCard.cardCraftResources[2];
         GameManager.DM.AddCardToDeck(attachedItemCard.cardId);
         CheckValidCraftAmount("0");
     }
 
     public void ExpandCraftItem()
     {
-        int itemIndex = transform.GetSiblingIndex();
-        int rowStartIndex = (itemIndex / 4) * 4;
+        if(GameManager.CRM.expandedCraftItem.gameObject.activeSelf)
+        {
+            GameManager.CRM.expandedCraftItem.CollapseCraftItem();
+        }
 
         for (int i = 0; i < 3; i++)
         {
-            Instantiate(GameManager.INM.fillerItem, transform.parent)
-                .transform.SetSiblingIndex(rowStartIndex + 1);
+            GameObject fillerItem = Instantiate(GameManager.INM.fillerItem, transform.parent);
+            fillerItem.transform.SetSiblingIndex(1);
         }
 
         GameManager.CRM.expandedCraftItem.SetupExpandedItem(this);
         GameManager.CRM.expandedCraftItem.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        GameManager.CRM.craftScroll.verticalNormalizedPosition = 1f;
+        CalculateMaxCraftableAmount();
     }
 }

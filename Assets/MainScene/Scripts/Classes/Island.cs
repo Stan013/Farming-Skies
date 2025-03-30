@@ -42,15 +42,19 @@ public class Island : MonoBehaviour
     public Material wateredNeedsNPKMatBot;
 
     [Header("Plots lists")]
-    public List<GameObject> plotsSmallPlants;
-    public List<GameObject> plotsMediumPlants;
-    public List<GameObject> plotsLargePlants;
+    public List<GameObject> availableSmallPlots;
+    public List<GameObject> availableMediumPlots;
+    public List<GameObject> availableLargePlots;
     public List<GameObject> usedSmallPlots;
     public List<GameObject> usedMediumPlots;
     public List<GameObject> usedLargePlots;
 
-    [Header("Plants lists")]
+    [Header("Objects on island lists")]
     public List<Plant> itemsOnIsland = new List<Plant>();
+    public List<Plant> smallPlantsOnIsland = new List<Plant>();
+    public List<Plant> mediumPlantsOnIsland = new List<Plant>();
+    public List<Plant> largePlantsOnIsland = new List<Plant>();
+    public List<Plant> buildablesOnIsland = new List<Plant>();
 
     [Header("Nutrient variables")]
     public GameObject warningIcon;
@@ -153,7 +157,7 @@ public class Island : MonoBehaviour
                 {
                     if (island.currentState == Island.IslandState.Watered)
                     {
-                        foreach (GameObject plot in island.plotsSmallPlants)
+                        foreach (GameObject plot in island.availableSmallPlots)
                         {
                             plot.GetComponent<BoxCollider>().enabled = true;
                         }
@@ -165,7 +169,7 @@ public class Island : MonoBehaviour
                 {
                     if (island.currentState == Island.IslandState.Watered)
                     {
-                        foreach (GameObject plot in island.plotsMediumPlants)
+                        foreach (GameObject plot in island.availableMediumPlots)
                         {
                             plot.GetComponent<BoxCollider>().enabled = true;
                         }
@@ -177,7 +181,7 @@ public class Island : MonoBehaviour
                 {
                     if (island.currentState == Island.IslandState.Watered)
                     {
-                        foreach (GameObject plot in island.plotsLargePlants)
+                        foreach (GameObject plot in island.availableLargePlots)
                         {
                             plot.GetComponent<BoxCollider>().enabled = true;
                         }
@@ -188,7 +192,7 @@ public class Island : MonoBehaviour
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     island.GetComponent<BoxCollider>().enabled = false;
-                    foreach (GameObject plot in island.plotsMediumPlants)
+                    foreach (GameObject plot in island.availableMediumPlots)
                     {
                         plot.GetComponent<BoxCollider>().enabled = true;
                     }
@@ -198,15 +202,15 @@ public class Island : MonoBehaviour
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     island.GetComponent<BoxCollider>().enabled = true;
-                    foreach (GameObject plot in island.plotsSmallPlants)
+                    foreach (GameObject plot in island.availableSmallPlots)
                     {
                         plot.GetComponent<BoxCollider>().enabled = false;
                     }
-                    foreach (GameObject plot in island.plotsMediumPlants)
+                    foreach (GameObject plot in island.availableMediumPlots)
                     {
                         plot.GetComponent<BoxCollider>().enabled = false;
                     }
-                    foreach (GameObject plot in island.plotsLargePlants)
+                    foreach (GameObject plot in island.availableLargePlots)
                     {
                         plot.GetComponent<BoxCollider>().enabled = false;
                     }
@@ -244,32 +248,37 @@ public class Island : MonoBehaviour
         material.renderQueue = -1;
     }
 
-    public void MakeUsedPlot(GameObject usedPlot, Card usedCard, GameObject usedPlant)
+    public void MakeUsedPlot(GameObject usedPlot, Card usedCard, Plant usedPlant)
     {
-        itemsOnIsland.Add(usedPlant.GetComponent<Plant>());
+        itemsOnIsland.Add(usedPlant);
         switch (usedCard.cardType)
         {
             case "Small crops":
+                smallPlantsOnIsland.Add(usedPlant);
+                usedSmallPlots.Add(usedPlot);
                 SetCollisions("Medium crops");
                 SetCollisions("Large crops");
-                usedSmallPlots.Add(usedPlot);
                 break;
             case "Medium crops":
+                usedMediumPlots.Add(usedPlot);
+                mediumPlantsOnIsland.Add(usedPlant);
                 SetCollisions("Small crops");
                 SetCollisions("Large crops");
-                usedMediumPlots.Add(usedPlot);
                 break;
             case "Large crops":
+                usedLargePlots.Add(usedPlot);
+                largePlantsOnIsland.Add(usedPlant);
                 SetCollisions("Small crops");
                 SetCollisions("Medium crops");
-                usedLargePlots.Add(usedPlot);
                 break;
             case "Buildable":
+                buildablesOnIsland.Add(usedPlant);
                 SetCollisions("Small crops");
                 SetCollisions("Large crops");
                 break;
         }
         CheckOverlappingPlots(usedPlot.GetComponent<BoxCollider>());
+        usedPlot.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void CheckOverlappingPlots(BoxCollider boxCollider)
@@ -284,18 +293,19 @@ public class Island : MonoBehaviour
                 if(collider.gameObject.name.Contains("PlotSmall"))
                 {
                     usedSmallPlots.Add(collider.gameObject);
-                    plotsSmallPlants.Remove(collider.gameObject);
+                    availableSmallPlots.Remove(collider.gameObject);
                 }
                 if (collider.gameObject.name.Contains("PlotMedium"))
                 {
                     usedMediumPlots.Add(collider.gameObject);
-                    plotsMediumPlants.Remove(collider.gameObject);
+                    availableMediumPlots.Remove(collider.gameObject);
                 }
                 if (collider.gameObject.name.Contains("PlotLarge"))
                 {
                     usedLargePlots.Add(collider.gameObject);
-                    plotsLargePlants.Remove(collider.gameObject);
+                    availableLargePlots.Remove(collider.gameObject);
                 }
+                collider.enabled = false;
             }
         }
         SetCollisions("Reset");

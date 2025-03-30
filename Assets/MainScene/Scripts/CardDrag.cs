@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -166,10 +167,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                                 plant.transform.localRotation = Quaternion.identity;
                                 plant.GetComponent<Plant>().attachedIsland = hoverIsland;
                                 hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
-                                ExpenseItem islandExpense = Instantiate(GameManager.ISM.expenseItem, Vector3.zero, Quaternion.identity, GameManager.ISM.buildableExpenseContent.transform);
-                                islandExpense.transform.localPosition = new Vector3(islandExpense.transform.localPosition.x, islandExpense.transform.localPosition.y, 0);
-                                islandExpense.transform.localRotation = Quaternion.identity;
-                                islandExpense.SetupBuildableExpense(plant.GetComponent<Plant>());
+                                expenseItem islandexpense = Instantiate(GameManager.ISM.expenseItem, Vector3.zero, Quaternion.identity, GameManager.ISM.buildableexpenseContent.transform);
+                                islandexpense.transform.localPosition = new Vector3(islandexpense.transform.localPosition.x, islandexpense.transform.localPosition.y, 0);
+                                islandexpense.transform.localRotation = Quaternion.identity;
+                                islandexpense.SetupBuildableexpense(plant.GetComponent<Plant>());
                                 GameManager.HM.dragCard.dragSucces = true;
                                 GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
                             }
@@ -186,7 +187,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
                     plant.transform.localPosition = new Vector3(0, -0.25f, 0);
                     plant.transform.localRotation = Quaternion.identity;
-                    hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
+                    hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant.GetComponent<Plant>());
                     GameManager.HM.dragCard.dragSucces = true;
                     GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
                 }

@@ -24,19 +24,16 @@ public class DebugManager : MonoBehaviour
 
     public void AddMoney()
     {
-        GameManager.UM.balance += 500;
-        GameManager.UM.UpdateUI();
+        GameManager.UM.Balance += 500;
     }
 
     public void AddWater()
     {
-        GameManager.UM.water += 500;
-        GameManager.UM.UpdateUI();
+        GameManager.UM.Water += 500;
     }
 
     public void AddFertiliser()
     {
-        GameManager.UM.fertiliser += 500;
-        GameManager.UM.UpdateUI();
+        GameManager.UM.Fertiliser += 500;
     }
 }

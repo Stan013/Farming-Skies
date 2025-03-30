@@ -46,7 +46,7 @@ public class MarketManager : MonoBehaviour
 
     public void UpdatePrices()
     {
-        if(GameManager.UM.weeks != 0)
+        if(GameManager.UM.Weeks != 0)
         {
             foreach (MarketItem item in itemsInMarket)
             {
@@ -99,18 +99,18 @@ public class MarketManager : MonoBehaviour
             amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
             marketItem.attachedItemCard.itemQuantity -= amount;
             totalBalance = amount * marketItem.priceCurrent;
-            GameManager.UM.balance += totalBalance;
+            GameManager.UM.Balance += totalBalance;
             startPos = marketItem.sellUI.transactionButton.transform.position;
             endPos = GameManager.UM.transform.position;
         }
         else
         {
             float itemPrice = marketItem.priceCurrent;
-            int affordableAmount = (int)(GameManager.UM.balance / itemPrice);
+            int affordableAmount = (int)(GameManager.UM.Balance / itemPrice);
             amount = Mathf.Min(amount, affordableAmount);
             marketItem.attachedItemCard.itemQuantity += amount;
             totalBalance = amount * itemPrice;
-            GameManager.UM.balance -= totalBalance;
+            GameManager.UM.Balance -= totalBalance;
             startPos = GameManager.UM.transform.position;
             endPos = marketItem.buyUI.transactionButton.transform.position;
         }

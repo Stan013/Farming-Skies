@@ -93,11 +93,11 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void UpdateUI()
     {
         farmLevelText.text = "Level " + _farmLevel.ToString();
-        expenseText.text = _expense.ToString() + " ₴";
-        balanceText.text = _balance.ToString() + " ₴";
-        waterText.text = _water.ToString() + " L";
-        fertiliserText.text = _fertiliser.ToString() + " L";
-        deckText.text = GameManager.DM.cardsInDeck.Count.ToString() + " x";
+        expenseText.text = _expense.ToString() + "₴";
+        balanceText.text = _balance.ToString() + "₴";
+        waterText.text = _water.ToString() + "L";
+        fertiliserText.text = _fertiliser.ToString() + "L";
+        deckText.text = GameManager.DM.cardsInDeck.Count.ToString() + "x";
         weekText.text = _weeks.ToString();
     }
 
@@ -115,8 +115,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void SetBuildIslandSlider()
     {
-        buildCostText.SetText(GameManager.IPM.potentialIsland.islandBuildCost.ToString() + " ₴");
-        expenseCostText.SetText(GameManager.IPM.potentialIsland.islandExpenseCost.ToString() + " ₴");
+        buildCostText.SetText(GameManager.IPM.potentialIsland.islandBuildCost.ToString() + "₴");
+        expenseCostText.SetText(GameManager.IPM.potentialIsland.islandExpenseCost.ToString() + "₴");
         if (constructionLabel != null)
         {
             Vector2 mousePosition = Input.mousePosition;

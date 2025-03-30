@@ -28,12 +28,32 @@ public class CraftItem : MonoBehaviour
     private float holdTime = 0f;
     private float holdThreshold = 1f;
 
+    public void SetCraftItem(Card itemCard)
+    {
+        if (itemCard != null)
+        {
+            attachedItemCard = itemCard;
+            itemNameText.text = attachedItemCard.itemName;
+            itemImage.sprite = attachedItemCard.cardSprite;
+            itemIndex = GameManager.INM.itemsInInventory.Count;
+            CalculateMaxCraftableAmount();
+            CheckValidCraftAmount("0");
+        }
+    }
+
     public void CheckValidCraftAmount(string input)
     {
         CalculateMaxCraftableAmount();
         if (int.TryParse(input, out int value))
         {
-            if (value > maxCraftAmount)
+            if (value <= 0)
+            {
+                craftAmount = 0;
+                craftAmountInput.text = "0";
+                craftInputBackground.sprite = invalidCraft;
+                canCraft = false;
+            }
+            else if (value > maxCraftAmount)
             {
                 craftAmount = maxCraftAmount;
                 craftAmountInput.text = maxCraftAmount.ToString();
@@ -42,23 +62,15 @@ public class CraftItem : MonoBehaviour
             }
             else
             {
-                if(value <= 0)
-                {
-                    craftAmountInput.text = "0";
-                    craftInputBackground.sprite = invalidCraft;
-                    canCraft = false;
-                }
-                else
-                {
-                    craftAmount = value;
-                    craftAmountInput.text = value.ToString();
-                    craftInputBackground.sprite = validCraft;
-                    canCraft = true;
-                }
+                craftAmount = value;
+                craftAmountInput.text = value.ToString();
+                craftInputBackground.sprite = validCraft;
+                canCraft = true;
             }
         }
         else
         {
+            craftAmount = 0;
             craftAmountInput.text = "0";
             craftInputBackground.sprite = invalidCraft;
             canCraft = false;
@@ -84,21 +96,7 @@ public class CraftItem : MonoBehaviour
         {
             validMaxValues.Add(attachedItemCard.itemQuantity / attachedItemCard.cardDropsRequired);
         }
-
         maxCraftAmount = (validMaxValues.Count > 0) ? Mathf.Min(validMaxValues.ToArray()) : 0;
-    }
-
-    public void SetCraftItem(Card itemCard)
-    {
-        if (itemCard != null)
-        {
-            attachedItemCard = itemCard;
-            itemNameText.text = attachedItemCard.itemName;
-            itemImage.sprite = attachedItemCard.cardSprite;
-            itemIndex = GameManager.INM.itemsInInventory.Count;
-            CalculateMaxCraftableAmount();
-            CheckValidCraftAmount("0");
-        }
     }
 
     public void OnCraftButtonPress()

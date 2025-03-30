@@ -19,16 +19,10 @@ public class CraftManager : MonoBehaviour
 
     public void UnlockCraftItem(Card attachedCard)
     {
-        CraftItem craftItem = Instantiate(craftItemTemplate, Vector3.zero, Quaternion.identity);
+        CraftItem craftItem = Instantiate(craftItemTemplate, Vector3.zero, Quaternion.identity, craftContentArea.transform);
         craftItem.SetCraftItem(attachedCard);
         craftItem.transform.localPosition = new Vector3(craftItem.transform.localPosition.x, craftItem.transform.localPosition.y, 0);
         craftItem.transform.localRotation = Quaternion.identity;
-        AddItemToCrafting(craftItem);
-    }
-
-    public void AddItemToCrafting(CraftItem craftItem)
-    {
-        craftItem.transform.SetParent(craftContentArea.transform, false);
         itemsInCrafting.Add(craftItem);
         itemsInCrafting.Sort((a, b) => a.attachedItemCard.itemName.CompareTo(b.attachedItemCard.itemName));
         for (int i = 0; i < itemsInCrafting.Count; i++)

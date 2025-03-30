@@ -13,6 +13,7 @@ public class WindowManager : MonoBehaviour
     public GameObject inventoryWindow;
     public GameObject manageWindow;
     public GameObject craftWindow;
+    public GameObject marketWindow;
     public GameObject expenseWindow;
 
     [Header("Quest window variables")]

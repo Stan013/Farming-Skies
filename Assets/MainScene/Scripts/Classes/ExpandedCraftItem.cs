@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -38,9 +38,9 @@ public class ExpandedCraftItem : MonoBehaviour
         collapsedItem = item;
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
-        balanceCost.text = collapsedItem.attachedItemCard.cardCraftResources[0].ToString();
-        waterCost.text = collapsedItem.attachedItemCard.cardCraftResources[1].ToString();
-        fertiliserCost.text = collapsedItem.attachedItemCard.cardCraftResources[2].ToString();
+        balanceCost.text = collapsedItem.attachedItemCard.cardCraftResources[0].ToString() + "₴";
+        waterCost.text = collapsedItem.attachedItemCard.cardCraftResources[1].ToString() + "₴";
+        fertiliserCost.text = collapsedItem.attachedItemCard.cardCraftResources[2].ToString() + "₴";
         CheckValidCraftAmount("0");
     }
 
@@ -55,6 +55,7 @@ public class ExpandedCraftItem : MonoBehaviour
             Destroy(fillItem);
         }
 
+        craftAmount = 0;
         collapsedItem.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
@@ -62,13 +63,14 @@ public class ExpandedCraftItem : MonoBehaviour
 
     public void SetMin()
     {
+        craftAmount = 0;
         craftAmountInput.text = "0";
     }
 
     public void DecreaseAmount()
     {
         int amount = craftAmount;
-        amount = Mathf.Max(1, amount - 1);
+        amount = Mathf.Max(0, amount - 1);
         craftAmountInput.text = amount.ToString();
     }
 
@@ -81,6 +83,7 @@ public class ExpandedCraftItem : MonoBehaviour
 
     public void SetMax()
     {
+        craftAmount = collapsedItem.maxCraftAmount;
         craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
     }
 

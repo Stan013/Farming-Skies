@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 
 public class MarketManager : MonoBehaviour
 {
+    [Header("Market lists")]
     public List<MarketItem> itemsInMarket;
-    public GameObject marketWindow;
+
+    [Header("Market variables")]
     public GameObject marketContentArea;
-    public Scrollbar marketScrollbar;
+    public MarketItem marketItemTemplate;
+    public GameObject fillerItem;
+    public string marketTab;
+    //public ExpandedMarketItem expandedMarketItem;
+    //public ScrollRect marketScroll;
 
     private int[] marketChanges = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
     private float[] marketWeights = {1f, 1.2f, 1.4f, 1.6f, 1.7f, 1.8f, 1.7f, 1.6f, 1.4f, 1.2f, 1f};
@@ -19,49 +26,44 @@ public class MarketManager : MonoBehaviour
 
     public GameObject spawnResources;
 
-    public void UpdateMarketItems()
+    public void SetupMarket()
     {
-        foreach(MarketItem marketItem in itemsInMarket)
+        foreach(Card card in GameManager.CM.availableCards)
         {
-            marketItem.itemQuantityText.SetText(marketItem.attachedItemCard.itemQuantity.ToString());
-            marketItem.sellUI.inputAmountField.text = "0";
-            marketItem.buyUI.inputAmountField.text = "0";
+            if(!card.cardAddedToMarket && card.cardUnlocked)
+            {
+                UnlockMarketItem(card);
+            }
         }
     }
 
     public void UnlockMarketItem(Card itemCard)
     {
-        MarketItem marketItem = Instantiate(itemCard.marketItem, Vector3.zero, Quaternion.identity, marketContentArea.transform);
+        MarketItem marketItem = Instantiate(marketItemTemplate, Vector3.zero, Quaternion.identity, marketContentArea.transform);
+        marketItem.SetMarketItem(itemCard);
         marketItem.transform.localRotation = Quaternion.identity;
         marketItem.transform.localPosition = new Vector3(marketItem.transform.localPosition.x, marketItem.transform.localPosition.y, 0);
-        marketItem.SetMarketItem(itemCard);
         itemsInMarket.Add(marketItem);
         itemsInMarket.Sort((a, b) => a.attachedItemCard.itemName.CompareTo(b.attachedItemCard.itemName));
         for (int i = 0; i < itemsInMarket.Count; i++)
         {
-            itemsInMarket[i].transform.SetSiblingIndex(i);
+            itemsInMarket[i].transform.SetSiblingIndex(i+1);
         }
         itemCard.cardAddedToMarket = true;
     }
 
-    public void UpdatePrices()
+    public void FilterItemsInMarket(string filter)
     {
-        if(GameManager.UM.Weeks != 0)
+        marketTab = filter;
+        foreach (MarketItem marketItem in itemsInMarket)
         {
-            foreach (MarketItem item in itemsInMarket)
+            if (marketItem.attachedItemCard.plantGroup != filter)
             {
-                float currentPrice = item.priceCurrent;
-                float baseDemand = item.attachedItemCard.itemDemand;
-                float baseSupply = item.attachedItemCard.itemSupply;
-                int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
-                int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
-                int priceChange = randomDemand - randomSupply;
-                float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
-                float totalPriceChangePercentage = priceChange + (randomDecimal / 10 * Mathf.Sign(priceChange));
-                item.attachedItemCard.itemDemand = (float)Math.Round(baseDemand * (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
-                item.attachedItemCard.itemSupply = (float)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
-                item.priceCurrent = (float)Math.Round(currentPrice * (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
-                item.UpdateMarketItem(item.attachedItemCard);
+                marketItem.gameObject.SetActive(false);
+            }
+            else
+            {
+                marketItem.gameObject.SetActive(true);
             }
         }
     }
@@ -88,7 +90,20 @@ public class MarketManager : MonoBehaviour
         return 0;
     }
 
-    public void ExecuteTransaction(MarketItem marketItem, int amount, bool isSelling)
+/*    float currentPrice = item.priceCurrent;
+    float baseDemand = item.attachedItemCard.itemDemand;
+    float baseSupply = item.attachedItemCard.itemSupply;
+    int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
+    int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
+    int priceChange = randomDemand - randomSupply;
+    float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
+    float totalPriceChangePercentage = priceChange + (randomDecimal / 10 * Mathf.Sign(priceChange));
+    item.attachedItemCard.itemDemand = (float) Math.Round(baseDemand* (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
+                item.attachedItemCard.itemSupply = (float) Math.Round(baseSupply* (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
+                item.priceCurrent = (float) Math.Round(currentPrice* (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
+                item.UpdateMarketItem(item.attachedItemCard);*/
+
+/*    public void ExecuteTransaction(MarketItem marketItem, int amount, bool isSelling)
     {
         if (amount <= 0) return;
         Vector3 startPos;
@@ -117,39 +132,12 @@ public class MarketManager : MonoBehaviour
 
         int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalBalance / 50));
         //StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
-        UpdateMarketItems();
-        GameManager.UM.UpdateUI();
-    }
-
-
-/*    private IEnumerator SpawnCoins(Vector3 start, Vector3 end, int coinCount, MarketItem marketItem)
-    {
-        for (int i = 0; i < coinCount; i++)
-        {
-            Resource coin = Instantiate(coinIcon, Vector3.zero, Quaternion.identity, spawnResources.transform);
-            coin.transform.localPosition = new Vector3(marketItem.transform.position.x + UnityEngine.Random.Range(-250f, 250f), marketItem.transform.position.y + UnityEngine.Random.Range(-250f, 250f), 0f);
-            coin.transform.localRotation = Quaternion.identity;
-            StartCoroutine(MoveCoin(coin, end));
-        }
-        yield return null;
+        //UpdateMarketItems();
+        //GameManager.UM.UpdateUI();
     }*/
 
-/*    private IEnumerator MoveCoin(Resource coin, Vector3 target)
+    public MarketItem GetMarketItemByID(string id)
     {
-        float speed = Vector3.Distance(coin.transform.position, target);
-
-        while (Vector3.Distance(coin.transform.position, target) > 0.01f)
-        {
-            coin.transform.position = Vector3.MoveTowards(coin.transform.position, target, speed * Time.deltaTime);
-            yield return null;
-        }
-        coin.transform.position = target;
-        Destroy(coin.gameObject);
-    }*/
-
-    public MarketItem FindMarketItemByName(string itemName)
-    {
-        return itemsInMarket.Find(marketItem => marketItem.attachedItemCard.itemName == itemName);
+        return itemsInMarket.Find(marketItem => marketItem.attachedItemCard.cardId == id);
     }
-
 }

@@ -146,88 +146,61 @@ public class QuestManager : MonoBehaviour
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
-                UpdateQuest("Quick craft!", "I have given you some resources so that you can now quick craft a nitrogen card. The craft label is currently red since it doesn't have a valid input amount so let's put that to 1.");
+                UpdateQuest("Quick craft!", "I have given you some resources so that you can now quick craft a nitrogen card. Put 1 into the craft amount and the label will turn green which means you have the resources available to craft that amount.");
                 break;
             case 23:
-                UpdateQuest("Hold to craft!", "The craft label should turn green and now you can hold down your left mouse button on the craft text. This should turn the label blue and then eventually back to green when the craft is completed.");
+                UpdateQuest("Hold to craft!", "You can now use your left mouse button and hold down on the craft label. This should turn the amount label blue and then eventually back to red when the craft is completed.");
                 break;
             case 24:
-                UpdateQuest("Craft another!", "We crafted 1 nitrogen card, however we weren't able to see how many resources that cost us. So lets now craft the next nutrient phosphorus by clicking on the green button with the arrow pointing downwards again.");
-                break;
-            case 25:
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
-                UpdateQuest("Crafting costs!", "We can now see how much our craft cost this amount will of course be dependent on the amount of cards you craft. We only need 1 so put that amount in, you can also click plus or hit the max button.");
+                UpdateQuest("Craft another!", "We crafted 1 nitrogen card, however we weren't able to see how many resources that cost us. So lets now craft the next nutrient phosphorus by clicking on the green button with the arrow pointing downwards again.");
+                break;
+            case 25:
+                UpdateQuest("Crafting costs!", "We can now see how much our craft cost this amount will of course be dependent on the amount of cards you craft. We only need 1 so put that amount in, you can also click plus or the max button.");
                 break;
             case 26:
                 UpdateQuest("Hold again!", "The same as the quick craft you will need to hold down your left mouse on the green craft button. If the input is valid the button will turn blue and if held long enough your craft will be succesful.");
                 break;
             case 27:
-                UpdateQuest("Select next one!", "Do this one more time for the last nutrient we need which is potassium. Search for potassium and click the green button with the arrow pointing downwards again. It should now expand that item.");
-                break;
-            case 28:
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
-                UpdateQuest("Input amount again!", "This will be the last time I give you some resources after that you will have to generate them yourself. We again need one so input 1 or click the plus or max button and hold craft.");
+                UpdateQuest("Select next one!", "Do this one more time for the last nutrient we need which is potassium. Search for potassium and click the green button with the arrow pointing downwards again. It should now expand that item.");
+                break;
+            case 28:
+                UpdateQuest("Input amount again!", "This will be the last time I give you some resources after that you will have to generate them yourself. We again need one so input 1 or click the plus/max button.");
                 break;
             case 29:
-                UpdateQuest("Input one once more!", "Now let's do the same thing one more time. Click the plus button and put the craft amount to one once again. You should also note that if you craft more cards you might get a discount.");
+                UpdateQuest("The last nutrient!", "Let's do the same thing again and hold the craft button until your card is crafted. The craft button should turn blue and when finished back to red.");
                 break;
             case 30:
-                UpdateQuest("One more craft!", "Click and hold the craft button one last time and add the last fertiliser card to your deck. We now have all the fertilisers we need to get the nutrients in your land back.");
+                UpdateQuest("Enough crafting!", "You should now have 3 cards in your deck with each of the nutrients you need. So let's use these cards to improve your soil, close the crafting window by clicking on the red cross.");
                 break;
             case 31:
-                UpdateQuest("Enough crafting!", "We crafted all the cards we needed so let's get out of crafting mode by pressing C. And then press Q again to get back into manage mode so we can use these cards.");
+                UpdateQuest("Time to improve!", "It is time to improve your soil with the fertiliser cards you just crafted. Hover over them and while holding down your left mouse button drag them to you land. Do this with all of them.");
                 break;
             case 32:
-                GameManager.HM.FindCardInHandById("CardPhosphorusFertiliserUtility").GetComponent<CardDrag>().enabled = false;
-                GameManager.HM.FindCardInHandById("CardPotassiumFertiliserUtility").GetComponent<CardDrag>().enabled = false;
-                UpdateQuest("Fertilise your land!", "With your newly crafted cards in your hand hover over your nitrogen fertiliser card. Now hold down your left mouse button and drag the fertiliser to your land.");
+                UpdateQuest("Look at the market!", "Now that we have done that let's go to the market and sell some of our harvest. Open up the market window by left clicking on the market stall at the right side of your screen.");
                 break;
             case 33:
-                GameManager.HM.FindCardInHandById("CardPhosphorusFertiliserUtility").GetComponent<CardDrag>().enabled = true;
-                GameManager.HM.FindCardInHandById("CardPotassiumFertiliserUtility").GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Fertilise some more!", "Since your land is also missing Phosphorus and Potassium, use those cards as well. One by one, drag them to your land and watch your land improve.");
+                UpdateQuest("Find rice market!", "As you can see this is the place where you can buy and sell all your items. Let's use the filters on top and click the green tab that says grains and then find the market for rice.");
                 break;
             case 34:
-                UpdateQuest("Check your land!", "Now that we fertilised your land, let's see if we meet the nutrients required. Click with your left mouse button on your land again and switch to the available nutrients.");
+                UpdateQuest("Quick sell rice!", "The same as crafting you can quick sell or buy an item. It will then sell or buy the given quantity for the current market price. Let's do this with the rice we harvested and put in 10 as the sell amount.");
                 break;
             case 35:
-                UpdateQuest("Open the market!", "Let's close the information tab again and open up the market by pressing R. In this mode, we can buy and sell products. You can, however, only sell products from crops you have unlocked.");
+                UpdateQuest("Sell your rice!", "As you can see the label turns green again which means you put in a valid amount. Now use your left mouse button and hold down on the sell label to earn some money.");
                 break;
             case 36:
-                foreach (MarketItem marketItem in GameManager.MM.itemsInMarket)
-                {
-                    marketItem.sellUI.GetComponent<MarketButton>().transactionButton.enabled = false;
-                    marketItem.sellUI.GetComponent<MarketButton>().plusButton.enabled = false;
-                    marketItem.sellUI.GetComponent<MarketButton>().maxButton.enabled = false;
-                    marketItem.sellUI.GetComponent<MarketButton>().inputAmountField.enabled = false;
-                    marketItem.buyUI.GetComponent<MarketButton>().transactionButton.enabled = false;
-                    marketItem.buyUI.GetComponent<MarketButton>().plusButton.enabled = false;
-                    marketItem.buyUI.GetComponent<MarketButton>().maxButton.enabled = false;
-                    marketItem.buyUI.GetComponent<MarketButton>().inputAmountField.enabled = false;
-                }
-                UpdateQuest("Find rice market!", "Each product has its own price, supply and demand, which changes every week. With the green labels on top, you can sort between products. Now let's scroll down and find the rice market.");
+                UpdateQuest("More market details!", "The problem again is that we don't know how much the rice the rice sold for. Besides we don't know what the supply and demand is for rice plus how much we still have left. So let's click on the green button again to expand.");
                 break;
             case 37:
-                riceMarketItem = GameManager.MM.FindMarketItemByName("Rice");
-                riceMarketItem.sellUI.GetComponent<MarketButton>().plusButton.enabled = true;
-                riceMarketItem.sellUI.GetComponent<MarketButton>().maxButton.enabled = true;
-                riceMarketItem.sellUI.GetComponent<MarketButton>().inputAmountField.enabled = true;
-                UpdateQuest("Input the max!", "It is time to earn some money and sell part of your harvest. For now, we are just selling rice, so click on the max button or input the max amount on the sell side of the market.");
+                UpdateQuest("Open the market!", "Let's close the information tab again and open up the market by pressing R. In this mode, we can buy and sell products. You can, however, only sell products from crops you have unlocked.");
                 break;
             case 38:
-                riceMarketItem = GameManager.MM.FindMarketItemByName("Rice");
-                riceMarketItem.sellUI.GetComponent<MarketButton>().minButton.enabled = false;
-                riceMarketItem.sellUI.GetComponent<MarketButton>().minusButton.enabled = false;
-                riceMarketItem.sellUI.GetComponent<MarketButton>().inputAmountField.enabled = false;
-                riceMarketItem.sellUI.GetComponent<MarketButton>().transactionButton.enabled = true;
-                UpdateQuest("Make that money!", "Now click on sell and watch your money come in. With the market fluctuations, you can also earn money by buying when products are cheap and selling when they are expensive.");
-                break;
-            case 39:
-                UpdateQuest("Exit the market!", "You got some money in your pocket and are ready to expand. Press R again to exit market mode and Q to go into manage mode. Open up your resources and look at your balance.");
+                UpdateQuest("Find rice market!", "Each product has its own price, supply and demand, which changes every week. With the green labels on top, you can sort between products. Now let's scroll down and find the rice market.");
                 break;
             case 40:
                 expansionIsland = GameManager.ISM.FindIslandByID("(0,-1)");
@@ -260,10 +233,6 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Shopping time!", "Last up I will show you how to get more plant cards, so you can plant some more crops and expand. Start with pressing R to go into market mode and find the market for chard.");
                 break;
             case 47:
-                chardMarketItem = GameManager.MM.FindMarketItemByName("Chard");
-                chardMarketItem.buyUI.GetComponent<MarketButton>().plusButton.enabled = true;
-                chardMarketItem.buyUI.GetComponent<MarketButton>().maxButton.enabled = true;
-                chardMarketItem.buyUI.GetComponent<MarketButton>().inputAmountField.enabled = true;
                 UpdateQuest("Buy some chard!", "Now buy as much chard as you need until you have a total of 50 chard in your inventory. We are going to need this for crafting. After that, exit market mode by pressing R again.");
                 break;
             //case 48:
@@ -444,66 +413,64 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 27:
-                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Potassium")
+                    if (GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Potassium")
                     {
                         QuestCompleted();
                     }
                     break;
                 case 28:
-                    if (GameManager.DM.cardsInDeck.Count == 3)
+                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Potassium")
                     {
                         QuestCompleted();
                     }
                     break;
                 case 29:
-                    break;
-                case 30:
                     if (GameManager.DM.cardsInDeck.Count == 3)
                     {
                         QuestCompleted();
                     }
                     break;
-                case 31:
-/*                    if (GameManager.CurrentState == GameManager.GameState.ManageMode)
+                case 30:
+                    if (!GameManager.WM.craftWindow.activeSelf)
                     {
-                        QuestCompleted = true;
-                    }*/
+                        QuestCompleted();
+                    }
+                    break;
+                case 31:
+                    if (GameManager.DM.cardsInDeck.Count == 0)
+                    {
+                        QuestCompleted();
+                    }
                     break;
                 case 32:
-                    if (GameManager.ISM.starterIsland.nutrientsAvailable[1] != 0)
+                    if(GameManager.WM.marketWindow.activeSelf)
                     {
                         QuestCompleted();
                     }
                     break;
                 case 33:
-                    if (GameManager.ISM.starterIsland.nutrientsAvailable[2] != 0 && GameManager.ISM.starterIsland.nutrientsAvailable[3] != 0)
+                    if (GameManager.MM.marketTab == "Grains")
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 34:
+                    if (GameManager.MM.GetMarketItemByID("CardRicePlant").transactionAmount == 10)
                     {
                         QuestCompleted();
                     }
                     break;
                 case 35:
-/*                    if (GameManager.CurrentState == GameManager.GameState.MarketMode)
+                    if (GameManager.UM.Balance != 0)
                     {
-                        QuestCompleted = true;
-                    }*/
+                        QuestCompleted();
+                    }
                     break;
                 case 36:
-                    if (GameManager.MM.marketScrollbar.value < 0.1)
-                    {
-                        QuestCompleted();
-                    }
                     break;
                 case 37:
-                    if (GameManager.MM.FindMarketItemByName("Rice").sellUI.inputAmount == GameManager.MM.FindMarketItemByName("Rice").sellUI.GetComponent<MarketButton>().maxAmount)
-                    {
-                        QuestCompleted();
-                    }
                     break;
                 case 38:
-                    if (GameManager.MM.FindMarketItemByName("Rice").attachedItemCard.itemQuantity == 0)
-                    {
-                        QuestCompleted();
-                    }
                     break;
                 case 39:
 /*                    if (GameManager.CurrentState == GameManager.GameState.ManageMode && GameManager.UM.UIMenu.activeSelf)

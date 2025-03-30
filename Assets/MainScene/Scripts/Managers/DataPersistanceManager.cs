@@ -49,6 +49,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.ISM.SetupIslands();
         GameManager.CM.SetupCards();
         GameManager.DM.SetStartingDeck();
+        GameManager.MM.SetupMarket();
         GameManager.UM.UpdateUI();
     }
 

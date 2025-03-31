@@ -437,7 +437,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 31:
-                    if (GameManager.DM.cardsInDeck.Count == 0)
+                    if (!GameManager.ISM.starterIsland.warningIcon.activeSelf)
                     {
                         QuestCompleted();
                     }

@@ -1275,6 +1275,10 @@ PrefabInstance:
       propertyPath: dragModel
       value: 
       objectReference: {fileID: 1992889638216005812, guid: 77747c96cf403174eb1492c2956f8a98, type: 3}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5492509097477325142, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -4127,14 +4131,14 @@ PrefabInstance:
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358575052972692482}
+      objectReference: {fileID: 4672296984563043129}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FilterItemsInInventory
+      value: FilterItemsInMarket
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InventoryManager, Assembly-CSharp
+      value: MarketManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -21016,6 +21020,10 @@ PrefabInstance:
       propertyPath: dragModel
       value: 
       objectReference: {fileID: 7966672353276964547, guid: 2602d277dc2014047b0f6e4ba56b977a, type: 3}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5492509097477325142, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -30597,14 +30605,14 @@ PrefabInstance:
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358575052972692482}
+      objectReference: {fileID: 4672296984563043129}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FilterItemsInInventory
+      value: FilterItemsInMarket
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InventoryManager, Assembly-CSharp
+      value: MarketManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -30723,14 +30731,14 @@ PrefabInstance:
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358575052972692482}
+      objectReference: {fileID: 4672296984563043129}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FilterItemsInInventory
+      value: FilterItemsInMarket
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InventoryManager, Assembly-CSharp
+      value: MarketManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -36260,14 +36268,14 @@ PrefabInstance:
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358575052972692482}
+      objectReference: {fileID: 4672296984563043129}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FilterItemsInInventory
+      value: FilterItemsInMarket
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InventoryManager, Assembly-CSharp
+      value: MarketManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -36518,6 +36526,10 @@ PrefabInstance:
       propertyPath: dragModel
       value: 
       objectReference: {fileID: 6579287608497389501, guid: ff9274b15d5294c49ae3a2af4c8306c9, type: 3}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5492509097477325142, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -47001,6 +47013,10 @@ PrefabInstance:
       propertyPath: dragModel
       value: 
       objectReference: {fileID: 1570436495116664669, guid: a773ef161fd659441a404bdb6ddf3a25, type: 3}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5492509097477325142, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -48750,14 +48766,14 @@ PrefabInstance:
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358575052972692482}
+      objectReference: {fileID: 4672296984563043129}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FilterItemsInInventory
+      value: FilterItemsInMarket
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InventoryManager, Assembly-CSharp
+      value: MarketManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -55072,6 +55088,10 @@ PrefabInstance:
       propertyPath: dragModel
       value: 
       objectReference: {fileID: 5831054420211141045, guid: 1e49513e3e2314245ab7627ce93c5bd3, type: 3}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5492509097477325142, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -56421,6 +56441,38 @@ PrefabInstance:
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.91764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1943327019}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7822972623581788941, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Name
@@ -71384,14 +71436,14 @@ PrefabInstance:
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1358575052972692482}
+      objectReference: {fileID: 4672296984563043129}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FilterItemsInInventory
+      value: FilterItemsInMarket
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InventoryManager, Assembly-CSharp
+      value: MarketManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7041757184453272056, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -85013,7 +85065,7 @@ MonoBehaviour:
   inventoryWindow: {fileID: 1478100243}
   manageWindow: {fileID: 303241061}
   craftWindow: {fileID: 520239672}
-  marketWindow: {fileID: 0}
+  marketWindow: {fileID: 1943327019}
   expenseWindow: {fileID: 0}
   windowTransitionDuration: 0.5
 --- !u!114 &8413217862094962420

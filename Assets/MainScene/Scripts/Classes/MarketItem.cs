@@ -58,10 +58,18 @@ public class MarketItem : MonoBehaviour
                 }
                 else if (value > attachedItemCard.itemQuantity)
                 {
+                    if (attachedItemCard.itemQuantity == 0)
+                    {
+                        transactionInputBackground.sprite = invalidTransaction;
+                        canTransaction = false;
+                    }
+                    else
+                    {
+                        transactionInputBackground.sprite = validTransaction;
+                        canTransaction = true;
+                    }
                     transactionAmount = attachedItemCard.itemQuantity;
                     transactionAmountInput.text = attachedItemCard.itemQuantity.ToString();
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
                 }
                 else
                 {
@@ -120,21 +128,22 @@ public class MarketItem : MonoBehaviour
             transactionText.text = "Sell";
             marketTransaction = "Sell";
         }
+        CheckValidTransactionAmount("0");
     }
 
-    public void OnCraftButtonPress()
+    public void OnTransactionButtonPress()
     {
         if (canTransaction)
         {
             if (holdCoroutine == null)
             {
-                holdCoroutine = StartCoroutine(HandleCraftHold());
+                holdCoroutine = StartCoroutine(HandleTransactionHold());
             }
             transactionInputBackground.sprite = ongoingTransaction;
         }
     }
 
-    public void OnCraftButtonRelease()
+    public void OnTransactionButtonRelease()
     {
         if (holdCoroutine != null)
         {
@@ -144,7 +153,7 @@ public class MarketItem : MonoBehaviour
         }
     }
 
-    private IEnumerator HandleCraftHold()
+    private IEnumerator HandleTransactionHold()
     {
         holdTime = 0f;
         while (holdTime < holdThreshold)
@@ -159,11 +168,37 @@ public class MarketItem : MonoBehaviour
     private void QuickTransaction()
     {
         holdCoroutine = null;
-        GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
-        GameManager.UM.Water -= attachedItemCard.cardCraftResources[1];
-        GameManager.UM.Fertiliser -= attachedItemCard.cardCraftResources[2];
-        GameManager.DM.AddCardToDeck(attachedItemCard.cardId);
+
+        if(marketTransaction == "Sell")
+        {
+            GameManager.UM.Balance += transactionAmount * attachedItemCard.itemPrice;
+        }
+        else
+        {
+            GameManager.UM.Balance -= transactionAmount * attachedItemCard.itemPrice;
+        }
+
         CheckValidTransactionAmount("0");
+    }
+
+    public void ExpandMarketItem()
+    {
+        if (GameManager.MM.expandedMarketItem.gameObject.activeSelf)
+        {
+            GameManager.MM.expandedMarketItem.CollapseMarketItem();
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject fillerItem = Instantiate(GameManager.MM.fillerItem, transform.parent);
+            fillerItem.transform.SetSiblingIndex(1);
+        }
+
+        GameManager.MM.expandedMarketItem.SetupExpandedItem(this);
+        GameManager.MM.expandedMarketItem.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        GameManager.MM.marketScroll.verticalNormalizedPosition = 1f;
     }
 
     private string FormatNumber(float number)

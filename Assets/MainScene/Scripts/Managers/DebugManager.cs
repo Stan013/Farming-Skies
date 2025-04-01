@@ -8,15 +8,15 @@ public class DebugManager : MonoBehaviour
 
     public void DebugInput()
     {
-        if (Input.GetKey(KeyCode.F1))
+        if (Input.GetKeyUp(KeyCode.F1))
         {
             AddMoney();
         }
-        if (Input.GetKey(KeyCode.F2))
+        if (Input.GetKeyUp(KeyCode.F2))
         {
             AddWater();
         }
-        if (Input.GetKey(KeyCode.F3))
+        if (Input.GetKeyUp(KeyCode.F3))
         {
             AddFertiliser();
         }

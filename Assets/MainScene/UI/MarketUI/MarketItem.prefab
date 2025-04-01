@@ -399,7 +399,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 3452304237790212670}
           m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
-          m_MethodName: OnCraftButtonPress
+          m_MethodName: OnTransactionButtonPress
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -415,7 +415,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 3452304237790212670}
           m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
-          m_MethodName: OnCraftButtonRelease
+          m_MethodName: OnTransactionButtonRelease
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1233,9 +1233,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryItem, Assembly-CSharp
-        m_MethodName: ExpandInventoryItem
+      - m_Target: {fileID: 3452304237790212670}
+        m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
+        m_MethodName: ExpandMarketItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

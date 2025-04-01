@@ -55,10 +55,18 @@ public class CraftItem : MonoBehaviour
             }
             else if (value > maxCraftAmount)
             {
+                if(maxCraftAmount == 0)
+                {
+                    craftInputBackground.sprite = invalidCraft;
+                    canCraft = false;
+                }
+                else
+                {
+                    craftInputBackground.sprite = validCraft;
+                    canCraft = true;
+                }
                 craftAmount = maxCraftAmount;
                 craftAmountInput.text = maxCraftAmount.ToString();
-                craftInputBackground.sprite = validCraft;
-                canCraft = true;
             }
             else
             {

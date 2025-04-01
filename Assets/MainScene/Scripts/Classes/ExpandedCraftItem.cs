@@ -99,21 +99,27 @@ public class ExpandedCraftItem : MonoBehaviour
                 craftButtonBackground.sprite = validCraft;
                 canCraft = true;
             }
-            else
+            else if (value > collapsedItem.maxCraftAmount)
             {
-                if (value <= 0)
+                if (collapsedItem.maxCraftAmount == 0)
                 {
-                    craftAmountInput.text = "0";
                     craftButtonBackground.sprite = invalidCraft;
                     canCraft = false;
                 }
                 else
                 {
-                    craftAmount = value;
-                    craftAmountInput.text = value.ToString();
                     craftButtonBackground.sprite = validCraft;
                     canCraft = true;
                 }
+                craftAmount = collapsedItem.maxCraftAmount;
+                craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
+            }
+            else
+            {
+                craftAmount = value;
+                craftAmountInput.text = value.ToString();
+                craftButtonBackground.sprite = validCraft;
+                canCraft = true;
             }
         }
         else

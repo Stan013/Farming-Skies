@@ -10855,7 +10855,7 @@ MonoBehaviour:
   largePlantsOnIsland: []
   buildablesOnIsland: []
   warningIcon: {fileID: 5121178845173758381}
-  nutrientsAvailable: 07000000050000000500000005000000
+  nutrientsAvailable: 00000000000000000000000000000000
   nutrientsRequired: 00000000000000000000000000000000
 --- !u!1 &7618935844727798640
 GameObject:

@@ -34,20 +34,34 @@ public class CraftManager : MonoBehaviour
     public void FilterItemsInCrafting(string filter)
     {
         craftingTab = filter;
-        foreach(CraftItem craftItem in itemsInCrafting)
+        if (filter == "Default")
         {
-            if(craftItem.attachedItemCard.cardType != filter)
-            {
-                craftItem.gameObject.SetActive(false);
-            }
-            else
+            foreach (CraftItem craftItem in itemsInCrafting)
             {
                 craftItem.gameObject.SetActive(true);
             }
         }
+        else
+        {
+            foreach (CraftItem craftItem in itemsInCrafting)
+            {
+                if (craftItem.attachedItemCard.cardType != filter)
+                {
+                    craftItem.gameObject.SetActive(false);
+                }
+                else
+                {
+                    craftItem.gameObject.SetActive(true);
+                }
+            }
+        }
+        if (expandedCraftItem.gameObject.activeSelf)
+        {
+            expandedCraftItem.CollapseCraftItem();
+        }
     }
 
-    public CraftItem GetCraftItemByID(string id)
+    public CraftItem FindCraftItemByID(string id)
     {
         return itemsInCrafting.Find(craftItem => craftItem.attachedItemCard.cardId == id);
     }

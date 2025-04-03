@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,7 +21,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     [Header("Collision variables")]
     private bool collisionOn = false;
-
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -145,11 +145,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                                 return;
                             }
                         }
-                        hoverIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex - 1] += 25;
+                        hoverIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex-1] += GameManager.HM.dragCard.nutrientAddition;
                     }
-                    hoverIsland.UpdateNutrientsRequired();
                     GameManager.HM.dragCard.dragSucces = true;
                     GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
+                    hoverIsland.UpdateNutrients();
                 }
                 else
                 {

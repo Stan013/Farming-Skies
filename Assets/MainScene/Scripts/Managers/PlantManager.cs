@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,17 +8,17 @@ public class PlantManager : MonoBehaviour
 {
     [Header("Drop variables")]
     public float dropChance;
-    private System.Random random = new System.Random();
 
     public void Harvest()
     {
         foreach (Island island in GameManager.ISM.boughtIslands)
         {
-            foreach (Plant plant in island.itemsOnIsland)
+            foreach (Plant plant in island.smallPlantsOnIsland.Concat(island.mediumPlantsOnIsland).Concat(island.largePlantsOnIsland))
             {
+                plant.attachedInventoryItem.ItemQuantity += plant.yield;
                 if (plant.nutrientsUsages[0] <= island.nutrientsAvailable[0])
                 {
-                    UpdatePlantYield(island, plant);
+                    plant.UpdatePlantYield();
                     StartCoroutine(SpawnDropsWithInterval(plant));
                 }
                 else
@@ -27,34 +28,6 @@ public class PlantManager : MonoBehaviour
             }
         }
     }
-
-    public void UpdatePlantYield(Island island, Plant plant)
-    {
-        plant.yield = plant.baseYield;
-        for (int i = 0; i < island.nutrientsAvailable.Count; i++)
-        {
-            if (i != 0)
-            {
-                if (island.nutrientsAvailable[i] >= plant.nutrientsUsages[i])
-                {
-                    if (random.NextDouble() <= dropChance)
-                    {
-                        plant.yield += plant.baseYield / 6;
-                    }
-                }
-                else
-                {
-                    if (random.NextDouble() <= dropChance)
-                    {
-                        plant.yield -= plant.baseYield / 6;
-                    }
-                }
-            }
-            island.nutrientsAvailable[i] -= plant.nutrientsUsages[i];
-        }
-        island.UpdateNutrientsRequired();
-    }
-
 
     private IEnumerator SpawnDropsWithInterval(Plant plant)
     {

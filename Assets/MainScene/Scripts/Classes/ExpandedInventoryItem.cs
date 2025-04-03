@@ -10,7 +10,7 @@ public class ExpandedInventoryItem : MonoBehaviour
     public Image expandedImage;
     public TMP_Text expandedName;
     public TMP_Text expandedQuantity;
-    public TMP_Text predictedYield;
+    public TMP_Text predictedYieldText;
     public TMP_Text predictedProduction;
 
     public void SetupExpandedItem(InventoryItem item)
@@ -18,8 +18,8 @@ public class ExpandedInventoryItem : MonoBehaviour
         collapsedItem = item;
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
-        expandedQuantity.text = collapsedItem.attachedItemCard.itemQuantity.ToString();
-        predictedYield.text = collapsedItem.attachedPlant.baseYield + " - " + item.attachedPlant.maxYield;
+        expandedQuantity.text = collapsedItem.ItemQuantity.ToString();
+        UpdatePredictedYield();
     }
 
     public void CollapseInventoryItem()
@@ -36,5 +36,17 @@ public class ExpandedInventoryItem : MonoBehaviour
         collapsedItem.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+    }
+
+    public void UpdatePredictedYield()
+    {
+        if (collapsedItem.totalPredictedYield < collapsedItem.totalBaseYield)
+        {
+            predictedYieldText.text = collapsedItem.totalPredictedYield.ToString() + " - " + collapsedItem.totalBaseYield.ToString();
+        }
+        else
+        {
+            predictedYieldText.text = collapsedItem.totalBaseYield.ToString() + " - " + collapsedItem.totalPredictedYield.ToString();
+        }
     }
 }

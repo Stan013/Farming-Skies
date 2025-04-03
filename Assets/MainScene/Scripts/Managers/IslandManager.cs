@@ -140,7 +140,7 @@ public class IslandManager : MonoBehaviour
                 nutrientText.text = "Available Nutrients: ";
                 islandInformation.SetActive(true);
                 plotInformation.SetActive(false);
-                islandName.text = "Island " + centerIsland.islandID;
+                islandName.text = "Island " + centerIsland.islandID + ":";
                 waterNeed.text = centerIsland.nutrientsAvailable[0].ToString();
                 nitrogenNeed.text = centerIsland.nutrientsAvailable[1].ToString();
                 phosphorusNeed.text = centerIsland.nutrientsAvailable[2].ToString();
@@ -150,7 +150,7 @@ public class IslandManager : MonoBehaviour
                 nutrientText.text = "Required Nutrients: ";
                 islandInformation.SetActive(true);
                 plotInformation.SetActive(false);
-                islandName.text = "Island " + centerIsland.islandID;
+                islandName.text = "Island " + centerIsland.islandID + ":";
                 waterNeed.text = centerIsland.nutrientsRequired[0].ToString();
                 nitrogenNeed.text = centerIsland.nutrientsRequired[1].ToString();
                 phosphorusNeed.text = centerIsland.nutrientsRequired[2].ToString();
@@ -159,6 +159,7 @@ public class IslandManager : MonoBehaviour
             case "Plot":
                 islandInformation.SetActive(false);
                 plotInformation.SetActive(true);
+                islandName.text = "Island " + centerIsland.islandID + ":";
                 smallPlotsAvailable.text = centerIsland.availableSmallPlots.Count.ToString();
                 mediumPlotsAvailable.text = centerIsland.availableMediumPlots.Count.ToString();
                 largePlotsAvailable.text = centerIsland.availableLargePlots.Count.ToString();

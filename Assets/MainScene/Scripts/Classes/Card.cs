@@ -14,6 +14,7 @@ public class Card : MonoBehaviour
     public CardState CurrentState;
     public bool dragSucces;
     public int nutrientIndex;
+    public int nutrientAddition;
 
     [Header("Visible card variables")]
     public string cardName;
@@ -40,7 +41,6 @@ public class Card : MonoBehaviour
     [Header("Associated item variables")]
     public string itemName;
     public Sprite itemSprite;
-    public int itemQuantity;
 
     [Header("Associated inventory item variables")]
     public InventoryItem inventoryItem;
@@ -127,7 +127,6 @@ public class Card : MonoBehaviour
                 this.gameObject.SetActive(false);
                 break;
         }
-        GameManager.UM.UpdateUI();
     }
 
     private void ExitState(CardState state)

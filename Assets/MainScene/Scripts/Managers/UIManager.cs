@@ -14,10 +14,11 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     [Header("Game variables")]
     private int _farmLevel;
-    private float _expense;
     private float _balance;
     private int _water;
     private int _fertiliser;
+    private int _deck;
+    private float _expense;
     private int _weeks;
 
     public int FarmLevel
@@ -26,15 +27,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
         set
         {
             _farmLevel = value;
-            UpdateUI();
-        }
-    }
-    public float Expense
-    {
-        get => _expense;
-        set
-        {
-            _expense = value;
             UpdateUI();
         }
     }
@@ -65,6 +57,24 @@ public class UIManager : MonoBehaviour, IDataPersistence
             UpdateUI();
         }
     }
+    public int Deck
+    {
+        get => _deck;
+        set
+        {
+            _deck = value;
+            UpdateUI();
+        }
+    }
+    public float Expense
+    {
+        get => _expense;
+        set
+        {
+            _expense = value;
+            UpdateUI();
+        }
+    }
     public int Weeks
     {
         get => _weeks;
@@ -92,13 +102,13 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void UpdateUI()
     {
-        farmLevelText.text = "Level " + _farmLevel.ToString();
-        expenseText.text = _expense.ToString() + "₴";
-        balanceText.text = _balance.ToString() + "₴";
-        waterText.text = _water.ToString() + "L";
-        fertiliserText.text = _fertiliser.ToString() + "L";
-        deckText.text = GameManager.DM.cardsInDeck.Count.ToString() + "x";
-        weekText.text = _weeks.ToString();
+        farmLevelText.text = "Level " + FormatNumber(_farmLevel).ToString();
+        expenseText.text = FormatNumber(_expense).ToString();
+        balanceText.text = FormatNumber(_balance).ToString();
+        waterText.text = FormatNumber(_water).ToString();
+        fertiliserText.text = FormatNumber(_fertiliser).ToString();
+        deckText.text = FormatNumber(_deck).ToString();
+        weekText.text = FormatNumber(_weeks).ToString();
     }
 
     public static string FormatNumber(float num)
@@ -137,7 +147,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
                 _balance -= island.islandBuildCost;
                 GameManager.ISM.AddIslandToBought(island);
                 constructionLabel.gameObject.SetActive(false);
-                GameManager.UM.UpdateUI();
+                ;
             }
         }
     }

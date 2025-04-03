@@ -20,6 +20,11 @@ public class DebugManager : MonoBehaviour
         {
             AddFertiliser();
         }
+        if (Input.GetKeyUp(KeyCode.Keypad1))
+        {
+            GameManager.DM.AddCardToDeck("CardWaterBarrelBuildable");
+            GameManager.HM.SetCardsInHand();
+        }
     }
 
     public void AddMoney()

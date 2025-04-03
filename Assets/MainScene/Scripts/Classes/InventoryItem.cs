@@ -14,6 +14,20 @@ public class InventoryItem : MonoBehaviour
     public Plant attachedPlant;
     public Button expandButton;
 
+    public int totalBaseYield;
+    public int totalPredictedYield;
+    private int _itemQuantity;
+
+    public int ItemQuantity
+    {
+        get => _itemQuantity;
+        set
+        {
+            _itemQuantity = value;
+            OnItemQuantityChange();
+        }
+    }
+
     public void SetInventoryItem(Card itemCard)
     {
         if(itemCard != null)
@@ -21,10 +35,15 @@ public class InventoryItem : MonoBehaviour
             attachedItemCard = itemCard;
             attachedPlant = itemCard.GetComponent<CardDrag>().dragModel.GetComponent<Plant>();
             itemNameText.text = attachedItemCard.itemName;
-            itemQuantityText.text = attachedItemCard.itemQuantity.ToString();
+            itemQuantityText.text = _itemQuantity.ToString();
             itemImage.sprite = attachedItemCard.cardSprite;
             itemIndex = GameManager.INM.itemsInInventory.Count;
         }
+    }
+
+    public void OnItemQuantityChange()
+    {
+        itemQuantityText.text = _itemQuantity.ToString();
     }
 
     public void ExpandInventoryItem()

@@ -58,9 +58,8 @@ public class Island : MonoBehaviour
 
     [Header("Nutrient variables")]
     public GameObject warningIcon;
-    public List<int> nutrientsAvailable;
-    public List<int> nutrientsRequired;
-
+    public List<int> nutrientsAvailable = new List<int>();
+    public List<int> nutrientsRequired = new List<int>();
 
     public enum IslandState
     {
@@ -111,7 +110,7 @@ public class Island : MonoBehaviour
         else
         {
             float totalNPK = nutrientsAvailable.Sum() - nutrientsAvailable[0];
-            float blendFactor = 1f - Mathf.Clamp01(totalNPK / 75f);
+            float blendFactor = 1f - Mathf.Clamp01(totalNPK / 900);
             Material blendedMaterial = new Material(islandMat);
             Color blendedColor = Color.Lerp(islandMat.color, islandMatNeedsNPK.color, blendFactor);
             blendedMaterial.color = blendedColor;
@@ -146,7 +145,6 @@ public class Island : MonoBehaviour
 
         return blendedTex;
     }
-
 
     public void SetCollisions(string cardType)
     {
@@ -258,18 +256,30 @@ public class Island : MonoBehaviour
                 usedSmallPlots.Add(usedPlot);
                 SetCollisions("Medium crops");
                 SetCollisions("Large crops");
+                GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
+                UpdateNutrientsRequired(usedPlant);
+                usedPlant.attachedIsland = this;
+                usedPlant.UpdatePredictedYield();
                 break;
             case "Medium crops":
                 usedMediumPlots.Add(usedPlot);
                 mediumPlantsOnIsland.Add(usedPlant);
                 SetCollisions("Small crops");
                 SetCollisions("Large crops");
+                GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
+                UpdateNutrientsRequired(usedPlant);
+                usedPlant.attachedIsland = this;
+                usedPlant.UpdatePredictedYield();
                 break;
             case "Large crops":
                 usedLargePlots.Add(usedPlot);
                 largePlantsOnIsland.Add(usedPlant);
                 SetCollisions("Small crops");
                 SetCollisions("Medium crops");
+                GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
+                UpdateNutrientsRequired(usedPlant);
+                usedPlant.attachedIsland = this;
+                usedPlant.UpdatePredictedYield();
                 break;
             case "Buildable":
                 buildablesOnIsland.Add(usedPlant);
@@ -311,29 +321,32 @@ public class Island : MonoBehaviour
         SetCollisions("Reset");
     }
 
+    public void UpdateNutrientsRequired(Plant plant)
+    {
+        for (int i = 0; i < nutrientsRequired.Count; i++)
+        {
+            nutrientsRequired[i] += plant.nutrientsUsages[i];
+        }
+    }
+
+    public void UpdateNutrients()
+    {
+        foreach (Plant plant in smallPlantsOnIsland.Concat(mediumPlantsOnIsland).Concat(largePlantsOnIsland))
+        {
+            plant.attachedInventoryItem.totalBaseYield = 0;
+            plant.attachedInventoryItem.totalPredictedYield = 0;
+            plant.UpdatePredictedYield();
+        }
+        CheckIslandMaterial();
+    }
+
     public Card FindItemOnIslandByCardId(string plantCardId)
     {
         return GameManager.CM.FindCardByID("Card" + plantCardId);
     }
 
-    public void UpdateNutrientsRequired()
+    public void CheckIslandMaterial()
     {
-        for (int i = 0; i < nutrientsRequired.Count; i++)
-        {
-            nutrientsRequired[i] = 0;
-        }
-
-        foreach (Plant plant in itemsOnIsland)
-        {
-            if (plant.plantCardID.Contains("Plant"))
-            {
-                for (int i = 0; i < nutrientsRequired.Count; i++)
-                {
-                    nutrientsRequired[i] += plant.nutrientsUsages[i];
-                }
-            }
-        }
-        
         switch (currentState)
         {
             case IslandState.Sowed:
@@ -355,7 +368,6 @@ public class Island : MonoBehaviour
                     break;
                 }
         }
-
         CheckWarningIcon();
     }
 

@@ -50,7 +50,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.CM.SetupCards();
         GameManager.DM.SetStartingDeck();
         GameManager.MM.SetupMarket();
-        GameManager.UM.UpdateUI();
+        ;
     }
 
     public void LoadGame()

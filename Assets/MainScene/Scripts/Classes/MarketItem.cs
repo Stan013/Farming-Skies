@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static UnityEditor.Progress;
 
 public class MarketItem : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class MarketItem : MonoBehaviour
     public Image itemImage;
     public int itemIndex;
     public Card attachedItemCard;
+    public InventoryItem attachedInventoryItem;
     public Button expandButton;
 
     private string marketTransaction = "Sell";
@@ -45,20 +47,21 @@ public class MarketItem : MonoBehaviour
 
     public void CheckValidTransactionAmount(string input)
     {
+        
         if (int.TryParse(input, out int value))
         {
             if (marketTransaction == "Sell")
             {
-                if (value <= 0 || attachedItemCard.itemQuantity == 0)
+                if (value <= 0 || attachedInventoryItem.ItemQuantity == 0)
                 {
                     transactionAmount = 0;
                     transactionAmountInput.text = "0";
                     transactionInputBackground.sprite = invalidTransaction;
                     canTransaction = false;
                 }
-                else if (value > attachedItemCard.itemQuantity)
+                else if (value > attachedInventoryItem.ItemQuantity)
                 {
-                    if (attachedItemCard.itemQuantity == 0)
+                    if (attachedInventoryItem.ItemQuantity == 0)
                     {
                         transactionInputBackground.sprite = invalidTransaction;
                         canTransaction = false;
@@ -68,8 +71,8 @@ public class MarketItem : MonoBehaviour
                         transactionInputBackground.sprite = validTransaction;
                         canTransaction = true;
                     }
-                    transactionAmount = attachedItemCard.itemQuantity;
-                    transactionAmountInput.text = attachedItemCard.itemQuantity.ToString();
+                    transactionAmount = attachedInventoryItem.ItemQuantity;
+                    transactionAmountInput.text = attachedInventoryItem.ItemQuantity.ToString();
                 }
                 else
                 {
@@ -84,7 +87,7 @@ public class MarketItem : MonoBehaviour
             {
                 maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / attachedItemCard.itemPrice);
                 float transactionCost = value * attachedItemCard.itemPrice;
-                if (transactionCost <= 0)
+                if (transactionCost <= 0 || maxBuyAmount == 0)
                 {
                     transactionAmount = 0;
                     transactionAmountInput.text = "0";
@@ -148,9 +151,9 @@ public class MarketItem : MonoBehaviour
         if (holdCoroutine != null)
         {
             StopCoroutine(holdCoroutine);
-            CheckValidTransactionAmount("0");
             holdCoroutine = null;
         }
+        CheckValidTransactionAmount("0");
     }
 
     private IEnumerator HandleTransactionHold()
@@ -171,13 +174,16 @@ public class MarketItem : MonoBehaviour
 
         if(marketTransaction == "Sell")
         {
-            GameManager.UM.Balance += transactionAmount * attachedItemCard.itemPrice;
+            float sellTotal = transactionAmount * attachedItemCard.itemPrice;
+            GameManager.UM.Balance += sellTotal;
+            attachedInventoryItem.ItemQuantity -= transactionAmount;
         }
         else
         {
-            GameManager.UM.Balance -= transactionAmount * attachedItemCard.itemPrice;
+            float buyTotal = transactionAmount * attachedItemCard.itemPrice;
+            GameManager.UM.Balance -= buyTotal;
+            attachedInventoryItem.ItemQuantity += transactionAmount;
         }
-
         CheckValidTransactionAmount("0");
     }
 

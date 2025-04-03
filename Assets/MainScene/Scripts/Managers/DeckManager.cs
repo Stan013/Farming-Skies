@@ -21,6 +21,7 @@ public class DeckManager : MonoBehaviour, IDataPersistence
 
     public void AddCardToDeck(string cardId)
     {
+        GameManager.UM.Deck += 1;
         Card newCard = Instantiate(GameManager.CM.FindCardByID(cardId), Vector3.zero, Quaternion.identity);
         newCard.SetCardState(Card.CardState.InDeck);
     }

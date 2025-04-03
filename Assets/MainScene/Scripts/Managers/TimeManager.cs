@@ -19,6 +19,7 @@ public class TimeManager : MonoBehaviour
         GameManager.IPM.startingPos = GameManager.IPM.cam.transform.position;
         GameManager.IPM.cam.transform.position = new Vector3(-25f, 25f, -25f);
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(32f,45f,0f);
+        GameManager.MM.SetAttachedInventoryItems();
         GameManager.PM.Harvest();
         StartCoroutine(CycleWeekDays());
     }
@@ -40,7 +41,6 @@ public class TimeManager : MonoBehaviour
         }
         GameManager.UM.Weeks++;
         GameManager.WM.advanceWindow.SetActive(false);
-        GameManager.UM.UpdateUI();
         GameManager.IPM.cam.transform.position = GameManager.IPM.startingPos;
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
     }

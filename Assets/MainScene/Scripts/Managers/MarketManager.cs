@@ -24,8 +24,6 @@ public class MarketManager : MonoBehaviour
     private int[] marketChangesDecimal = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     private float[] marketWeightsDecimal = {2.5f, 2.4f, 2.3f, 2.1f, 1.8f, 1.6f, 1.4f, 1.2f, 1f};
 
-    public GameObject spawnResources;
-
     public void SetupMarket()
     {
         foreach(Card card in GameManager.CM.availableCards)
@@ -55,16 +53,30 @@ public class MarketManager : MonoBehaviour
     public void FilterItemsInMarket(string filter)
     {
         marketTab = filter;
-        foreach (MarketItem marketItem in itemsInMarket)
+        if (filter == "Default")
         {
-            if (marketItem.attachedItemCard.plantGroup != filter)
-            {
-                marketItem.gameObject.SetActive(false);
-            }
-            else
+            foreach (MarketItem marketItem in itemsInMarket)
             {
                 marketItem.gameObject.SetActive(true);
             }
+        }
+        else
+        {
+            foreach (MarketItem marketItem in itemsInMarket)
+            {
+                if (marketItem.attachedItemCard.plantGroup != filter)
+                {
+                    marketItem.gameObject.SetActive(false);
+                }
+                else
+                {
+                    marketItem.gameObject.SetActive(true);
+                }
+            }
+        }
+        if (expandedMarketItem.gameObject.activeSelf)
+        {
+            expandedMarketItem.CollapseMarketItem();
         }
     }
 
@@ -90,53 +102,61 @@ public class MarketManager : MonoBehaviour
         return 0;
     }
 
-/*    float currentPrice = item.priceCurrent;
-    float baseDemand = item.attachedItemCard.itemDemand;
-    float baseSupply = item.attachedItemCard.itemSupply;
-    int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
-    int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
-    int priceChange = randomDemand - randomSupply;
-    float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
-    float totalPriceChangePercentage = priceChange + (randomDecimal / 10 * Mathf.Sign(priceChange));
-    item.attachedItemCard.itemDemand = (float) Math.Round(baseDemand* (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
-                item.attachedItemCard.itemSupply = (float) Math.Round(baseSupply* (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
-                item.priceCurrent = (float) Math.Round(currentPrice* (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
-                item.UpdateMarketItem(item.attachedItemCard);*/
-
-/*    public void ExecuteTransaction(MarketItem marketItem, int amount, bool isSelling)
+    public void SetAttachedInventoryItems()
     {
-        if (amount <= 0) return;
-        Vector3 startPos;
-        Vector3 endPos;
-        float totalBalance = 0f;
-        if (isSelling)
+        foreach (MarketItem marketItem in itemsInMarket)
         {
-            amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
-            marketItem.attachedItemCard.itemQuantity -= amount;
-            totalBalance = amount * marketItem.priceCurrent;
-            GameManager.UM.Balance += totalBalance;
-            startPos = marketItem.sellUI.transactionButton.transform.position;
-            endPos = GameManager.UM.transform.position;
+            marketItem.attachedInventoryItem = GameManager.INM.FindInventoryItemByID(marketItem.attachedItemCard.cardId);
         }
-        else
+    }
+
+    /*    float currentPrice = item.priceCurrent;
+        float baseDemand = item.attachedItemCard.itemDemand;
+        float baseSupply = item.attachedItemCard.itemSupply;
+        int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
+        int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
+        int priceChange = randomDemand - randomSupply;
+        float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
+        float totalPriceChangePercentage = priceChange + (randomDecimal / 10 * Mathf.Sign(priceChange));
+        item.attachedItemCard.itemDemand = (float) Math.Round(baseDemand* (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
+                    item.attachedItemCard.itemSupply = (float) Math.Round(baseSupply* (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
+                    item.priceCurrent = (float) Math.Round(currentPrice* (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
+                    item.UpdateMarketItem(item.attachedItemCard);*/
+
+    /*    public void ExecuteTransaction(MarketItem marketItem, int amount, bool isSelling)
         {
-            float itemPrice = marketItem.priceCurrent;
-            int affordableAmount = (int)(GameManager.UM.Balance / itemPrice);
-            amount = Mathf.Min(amount, affordableAmount);
-            marketItem.attachedItemCard.itemQuantity += amount;
-            totalBalance = amount * itemPrice;
-            GameManager.UM.Balance -= totalBalance;
-            startPos = GameManager.UM.transform.position;
-            endPos = marketItem.buyUI.transactionButton.transform.position;
-        }
+            if (amount <= 0) return;
+            Vector3 startPos;
+            Vector3 endPos;
+            float totalBalance = 0f;
+            if (isSelling)
+            {
+                amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
+                marketItem.attachedItemCard.itemQuantity -= amount;
+                totalBalance = amount * marketItem.priceCurrent;
+                GameManager.UM.Balance += totalBalance;
+                startPos = marketItem.sellUI.transactionButton.transform.position;
+                endPos = GameManager.UM.transform.position;
+            }
+            else
+            {
+                float itemPrice = marketItem.priceCurrent;
+                int affordableAmount = (int)(GameManager.UM.Balance / itemPrice);
+                amount = Mathf.Min(amount, affordableAmount);
+                marketItem.attachedItemCard.itemQuantity += amount;
+                totalBalance = amount * itemPrice;
+                GameManager.UM.Balance -= totalBalance;
+                startPos = GameManager.UM.transform.position;
+                endPos = marketItem.buyUI.transactionButton.transform.position;
+            }
 
-        int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalBalance / 50));
-        //StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
-        //UpdateMarketItems();
-        //GameManager.UM.UpdateUI();
-    }*/
+            int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalBalance / 50));
+            //StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
+            //UpdateMarketItems();
+            //;
+        }*/
 
-    public MarketItem GetMarketItemByID(string id)
+    public MarketItem FindMarketItemByID(string id)
     {
         return itemsInMarket.Find(marketItem => marketItem.attachedItemCard.cardId == id);
     }

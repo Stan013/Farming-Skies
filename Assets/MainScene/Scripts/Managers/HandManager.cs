@@ -34,6 +34,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
 
     public void AddCardToHand(string cardId)
     {
+        GameManager.UM.Deck -= 1; 
         Card newCard = GameManager.DM.FindCardInDeckByID(cardId);
         handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, newCard);
         lastFilledSlotIndex++;

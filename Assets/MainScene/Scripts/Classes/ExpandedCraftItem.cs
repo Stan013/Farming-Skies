@@ -92,25 +92,17 @@ public class ExpandedCraftItem : MonoBehaviour
         collapsedItem.CalculateMaxCraftableAmount();
         if (int.TryParse(input, out int value))
         {
-            if (value > collapsedItem.maxCraftAmount)
+            if (value <= 0 || collapsedItem.maxCraftAmount == 0)
             {
-                craftAmount = collapsedItem.maxCraftAmount;
-                craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
-                craftButtonBackground.sprite = validCraft;
-                canCraft = true;
+                craftAmount = 0;
+                craftAmountInput.text = "0";
+                craftButtonBackground.sprite = invalidCraft;
+                canCraft = false;
             }
             else if (value > collapsedItem.maxCraftAmount)
             {
-                if (collapsedItem.maxCraftAmount == 0)
-                {
-                    craftButtonBackground.sprite = invalidCraft;
-                    canCraft = false;
-                }
-                else
-                {
-                    craftButtonBackground.sprite = validCraft;
-                    canCraft = true;
-                }
+                craftButtonBackground.sprite = validCraft;
+                canCraft = true;
                 craftAmount = collapsedItem.maxCraftAmount;
                 craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
             }
@@ -124,6 +116,7 @@ public class ExpandedCraftItem : MonoBehaviour
         }
         else
         {
+            craftAmount = 0;
             craftAmountInput.text = "0";
             craftButtonBackground.sprite = invalidCraft;
             canCraft = false;
@@ -150,9 +143,9 @@ public class ExpandedCraftItem : MonoBehaviour
         if (holdCoroutine != null)
         {
             StopCoroutine(holdCoroutine);
-            CheckValidCraftAmount("0");
             holdCoroutine = null;
         }
+        CheckValidCraftAmount("0");
     }
 
     private IEnumerator HandleCraftHold()

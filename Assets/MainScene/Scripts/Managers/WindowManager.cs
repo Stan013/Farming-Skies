@@ -5,6 +5,7 @@ using UnityEngine;
 public class WindowManager : MonoBehaviour
 {
     [Header("Game windows")]
+    public bool inMenu;
     public GameObject mainWindow;
     public GameObject gameWindow;
     public GameObject tutorialWindow;
@@ -18,6 +19,20 @@ public class WindowManager : MonoBehaviour
 
     [Header("Quest window variables")]
     public float windowTransitionDuration = 0.5f;
+
+    public void OpenWindow()
+    {
+        inMenu = true;
+        inventoryWindow.SetActive(false);
+        manageWindow.SetActive(false);
+        craftWindow.SetActive(false);
+        marketWindow.SetActive(false);
+    }
+
+    public void CloseWindow()
+    {
+        inMenu = false;
+    }
 
     public void OpenQuestWindow()
     {

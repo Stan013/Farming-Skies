@@ -284,7 +284,6 @@ GameObject:
   - component: {fileID: 5467092739488221113}
   - component: {fileID: 5976526526254852950}
   - component: {fileID: 3452304237790212670}
-  - component: {fileID: 6089732233340770423}
   m_Layer: 0
   m_Name: MarketItem
   m_TagString: Untagged
@@ -374,57 +373,12 @@ MonoBehaviour:
   transactionText: {fileID: 3163921139594962170}
   transactionAmountInput: {fileID: 88918071458080014}
   transactionInputBackground: {fileID: 7222063105327674047}
-  invalidTransaction: {fileID: 21300000, guid: 295e29bb18da3d942afddaa844b7ff21, type: 3}
+  invalidTransaction: {fileID: 21300000, guid: 36fded8526e6003419da4ca3e7e69621, type: 3}
   validTransaction: {fileID: 21300000, guid: bf84bfd91fe65804586578d23a90fac6, type: 3}
-  ongoingTransaction: {fileID: 21300000, guid: 31be80946372a054fb77f4b638408374, type: 3}
+  ongoingTransaction: {fileID: 21300000, guid: 0bb474f0322933b46ab10f050e6748ed, type: 3}
   transactionAmount: 0
   canTransaction: 0
   maxBuyAmount: 0
---- !u!114 &6089732233340770423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449411075004391945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3452304237790212670}
-          m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
-          m_MethodName: OnTransactionButtonPress
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3452304237790212670}
-          m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
-          m_MethodName: OnTransactionButtonRelease
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1903097537940943528
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf84bfd91fe65804586578d23a90fac6, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1332,6 +1286,7 @@ GameObject:
   - component: {fileID: 5093237363442372183}
   - component: {fileID: 5183325512133350869}
   - component: {fileID: 2775292884922326128}
+  - component: {fileID: 937575548982045682}
   m_Layer: 0
   m_Name: QuickTransactionButton
   m_TagString: Untagged
@@ -1387,7 +1342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 35be3fc323a94294a9c0aad79f4047e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34ff8cec10281694dbc1f102d39308d4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1453,3 +1408,48 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &937575548982045682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9081884368100339887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3452304237790212670}
+          m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
+          m_MethodName: OnTransactionButtonPress
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3452304237790212670}
+          m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
+          m_MethodName: OnTransactionButtonRelease
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

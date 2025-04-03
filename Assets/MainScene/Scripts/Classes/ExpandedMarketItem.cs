@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ExpandedMarketItem : MonoBehaviour
 {
     public MarketItem collapsedItem;
+    public InventoryItem attachedInventoryItem;
     public Image expandedImage;
     public TMP_Text expandedName;
     public TMP_Text expandedQuantity;
@@ -46,8 +47,10 @@ public class ExpandedMarketItem : MonoBehaviour
     public void SetupExpandedItem(MarketItem item)
     {
         collapsedItem = item;
+        attachedInventoryItem = GameManager.INM.FindInventoryItemByID(item.attachedItemCard.cardId);
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
+        CheckValidTransactionAmount("0");
     }
 
     public void CollapseMarketItem()
@@ -103,16 +106,16 @@ public class ExpandedMarketItem : MonoBehaviour
         {
             if (marketTransaction == "Sell")
             {
-                if (value <= 0 || collapsedItem.attachedItemCard.itemQuantity == 0)
+                if (value <= 0 || attachedInventoryItem.ItemQuantity == 0)
                 {
                     transactionAmount = 0;
                     transactionAmountInput.text = "0";
                     transactionInputBackground.sprite = invalidTransaction;
                     canTransaction = false;
                 }
-                else if (value > collapsedItem.attachedItemCard.itemQuantity)
+                else if (value > attachedInventoryItem.ItemQuantity)
                 {
-                    if (collapsedItem.attachedItemCard.itemQuantity == 0)
+                    if (attachedInventoryItem.ItemQuantity == 0)
                     {
                         transactionInputBackground.sprite = invalidTransaction;
                         canTransaction = false;
@@ -122,8 +125,8 @@ public class ExpandedMarketItem : MonoBehaviour
                         transactionInputBackground.sprite = validTransaction;
                         canTransaction = true;
                     }
-                    transactionAmount = collapsedItem.attachedItemCard.itemQuantity;
-                    transactionAmountInput.text = collapsedItem.attachedItemCard.itemQuantity.ToString();
+                    transactionAmount = attachedInventoryItem.ItemQuantity;
+                    transactionAmountInput.text = attachedInventoryItem.ItemQuantity.ToString();
                 }
                 else
                 {
@@ -138,7 +141,7 @@ public class ExpandedMarketItem : MonoBehaviour
             {
                 collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
                 float transactionCost = value * collapsedItem.attachedItemCard.itemPrice;
-                if (transactionCost <= 0)
+                if (transactionCost <= 0 || collapsedItem.maxBuyAmount == 0)
                 {
                     transactionAmount = 0;
                     transactionAmountInput.text = "0";
@@ -187,9 +190,9 @@ public class ExpandedMarketItem : MonoBehaviour
         if (holdCoroutine != null)
         {
             StopCoroutine(holdCoroutine);
-            CheckValidTransactionAmount("0");
             holdCoroutine = null;
         }
+        CheckValidTransactionAmount("0");
     }
 
     private IEnumerator HandleCraftHold()
@@ -201,6 +204,25 @@ public class ExpandedMarketItem : MonoBehaviour
             yield return null;
         }
 
-        //CraftCard();
+        Transaction();
+    }
+
+    private void Transaction()
+    {
+        holdCoroutine = null;
+
+        if (marketTransaction == "Sell")
+        {
+            float sellTotal = transactionAmount * collapsedItem.attachedItemCard.itemPrice;
+            GameManager.UM.Balance += sellTotal;
+            attachedInventoryItem.ItemQuantity -= transactionAmount;
+        }
+        else
+        {
+            float buyTotal = transactionAmount * collapsedItem.attachedItemCard.itemPrice;
+            GameManager.UM.Balance -= buyTotal;
+            attachedInventoryItem.ItemQuantity += transactionAmount;
+        }
+        CheckValidTransactionAmount("0");
     }
 }

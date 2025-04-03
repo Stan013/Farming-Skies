@@ -6,11 +6,10 @@ using UnityEngine;
 public class Drop : MonoBehaviour
 {
     public string dropType;
-    public string plantCardID;
     private int moveSpeed = 10;
     private int rotationSpeed = 500;
 
-    public void AddDropToInventory(Card attachedCard, Plant attachedPlant)
+    public void AddDropToInventory(InventoryItem attachedInventoryItem, Plant attachedPlant)
     {
         switch (dropType)
         {
@@ -27,11 +26,7 @@ public class Drop : MonoBehaviour
             case "Product":
                 break;
             case "Plant":
-                InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == attachedCard.itemName);
-                if (existingInventoryItem == null)
-                {
-                    GameManager.INM.UnlockInventoryItem(attachedCard);
-                }
+                attachedInventoryItem.ItemQuantity += 3;
                 break;
         }
         MoveDrop();

@@ -34,6 +34,10 @@ public class CraftManager : MonoBehaviour
     public void FilterItemsInCrafting(string filter)
     {
         craftingTab = filter;
+        if (expandedCraftItem.gameObject.activeSelf)
+        {
+            expandedCraftItem.CollapseCraftItem();
+        }
         if (filter == "Default")
         {
             foreach (CraftItem craftItem in itemsInCrafting)
@@ -54,10 +58,6 @@ public class CraftManager : MonoBehaviour
                     craftItem.gameObject.SetActive(true);
                 }
             }
-        }
-        if (expandedCraftItem.gameObject.activeSelf)
-        {
-            expandedCraftItem.CollapseCraftItem();
         }
     }
 

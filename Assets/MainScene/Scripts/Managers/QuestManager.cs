@@ -220,9 +220,7 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("Place them down!", "As you read when inspecting the cards these are buildable cards that will give you resources. Place these buildables on your new island by dragging them to it.");
                 break;
             case 44:
-                GameManager.HM.FindCardInHandById("CardCompostBuildable").GetComponent<CardDrag>().enabled = true;
-                GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Use the cards!", "Drag the water barrel and compost cards towards your newly acquired land. These cards will create buildables that generate resources so you can start filling up your storage again.");
+                UpdateQuest("Check your expenses!", "These buildables will however up your expenses just as the new island has. So let's check out your expenses first by clicking on the calculator at the right side of your screen.");
                 break;
             case 45:
                 UpdateQuest("Check your expenses!", "These buildables will cost money to maintain, so make sure you have some, otherwise they won't give you any. Let’s open up your resources again and have a look at your expenses.");
@@ -447,7 +445,7 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 33:
-                    if (!GameManager.WM.marketWindow.activeSelf)
+                    if (GameManager.WM.marketWindow.activeSelf)
                     {
                         QuestCompleted();
                     }
@@ -513,13 +511,6 @@ public class QuestManager : MonoBehaviour
                     }
                     break;
                 case 44:
-                    if (GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable") != null && GameManager.HM.FindCardInHandById("CardCompostBuildable") != null)
-                    {
-                        if (GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").hasBeenInspected && GameManager.HM.FindCardInHandById("CardCompostBuildable").hasBeenInspected)
-                        {
-                            QuestCompleted();
-                        }
-                    }
                     break;
                 case 45:
                     if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").itemsOnIsland.Count == 2)

@@ -53,6 +53,10 @@ public class MarketManager : MonoBehaviour
     public void FilterItemsInMarket(string filter)
     {
         marketTab = filter;
+        if (expandedMarketItem.gameObject.activeSelf)
+        {
+            expandedMarketItem.CollapseMarketItem();
+        }
         if (filter == "Default")
         {
             foreach (MarketItem marketItem in itemsInMarket)
@@ -73,10 +77,6 @@ public class MarketManager : MonoBehaviour
                     marketItem.gameObject.SetActive(true);
                 }
             }
-        }
-        if (expandedMarketItem.gameObject.activeSelf)
-        {
-            expandedMarketItem.CollapseMarketItem();
         }
     }
 

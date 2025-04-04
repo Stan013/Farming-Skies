@@ -18,6 +18,7 @@ public class MarketItem : MonoBehaviour
     private string marketTransaction = "Sell";
     public Button transactionButton;
     public TMP_Text transactionText;
+    public int transactionAmount;
 
     public TMP_InputField transactionAmountInput;
     public Image transactionInputBackground;
@@ -25,7 +26,9 @@ public class MarketItem : MonoBehaviour
     public Sprite validTransaction;
     public Sprite ongoingTransaction;
 
-    public int transactionAmount;
+    public List<float> itemPrices = new List<float>();
+    public List<int> itemDemands = new List<int>();
+    public List<int> itemSupplies= new List<int>();
     public bool canTransaction;
     public int maxBuyAmount;
 
@@ -41,13 +44,15 @@ public class MarketItem : MonoBehaviour
             itemNameText.text = attachedItemCard.itemName;
             itemImage.sprite = attachedItemCard.cardSprite;
             itemIndex = GameManager.MM.itemsInMarket.Count;
+            itemPrices.Add(itemCard.itemPrice);
+            itemDemands.Add(itemCard.itemDemand);
+            itemSupplies.Add(itemCard.itemSupply);
             CheckValidTransactionAmount("0");
         }
     }
 
     public void CheckValidTransactionAmount(string input)
     {
-        
         if (int.TryParse(input, out int value))
         {
             if (marketTransaction == "Sell")

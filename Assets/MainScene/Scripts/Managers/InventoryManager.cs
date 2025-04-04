@@ -39,6 +39,10 @@ public class InventoryManager : MonoBehaviour
     public void FilterItemsInInventory(string filter)
     {
         inventoryTab = filter;
+        if (expandedInventoryItem.gameObject.activeSelf)
+        {
+            expandedInventoryItem.CollapseInventoryItem();
+        }
         if (filter == "Default")
         {
             foreach (InventoryItem inventoryItem in itemsInInventory)
@@ -59,10 +63,6 @@ public class InventoryManager : MonoBehaviour
                     inventoryItem.gameObject.SetActive(true);
                 }
             }
-        }
-        if (expandedInventoryItem.gameObject.activeSelf)
-        {
-            expandedInventoryItem.CollapseInventoryItem();
         }
     }
 

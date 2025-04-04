@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,9 @@ public class ExpandedMarketItem : MonoBehaviour
 
     public Button sellButton;
     public Button buyButton;
+    public Sprite validSell;
+    public Sprite invalidSell;
+
     public string marketTransaction;
     public Image transactionInputBackground;
     public Sprite validTransaction;
@@ -29,9 +33,7 @@ public class ExpandedMarketItem : MonoBehaviour
     public Button maxButton;
 
     public TMP_Text highestPriceText;
-    public int highestPrice;
     public TMP_Text lowestPriceText;
-    public int lowestPrice; 
 
     public TMP_Text expandedDemandAmount;
     public Image expandedDemandIcon;
@@ -39,6 +41,10 @@ public class ExpandedMarketItem : MonoBehaviour
     public Image expandedPriceIcon;
     public TMP_Text expandedSupplyAmount;
     public Image expandedSupplyIcon;
+
+    public Sprite upIcon;
+    public Sprite sameIcon;
+    public Sprite downIcon;
 
     private Coroutine holdCoroutine = null;
     private float holdTime = 0f;
@@ -50,6 +56,13 @@ public class ExpandedMarketItem : MonoBehaviour
         attachedInventoryItem = GameManager.INM.FindInventoryItemByID(item.attachedItemCard.cardId);
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
+        highestPriceText.text = collapsedItem.itemPrices.Max().ToString();
+        lowestPriceText.text = collapsedItem.itemPrices.Min().ToString();
+        expandedDemandAmount.text = FormatNumber(collapsedItem.attachedItemCard.itemDemand).ToString();
+        expandedSupplyAmount.text = FormatNumber(collapsedItem.attachedItemCard.itemSupply).ToString();
+        expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString();
+        collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
+        SetPriceIcons();
         CheckValidTransactionAmount("0");
     }
 
@@ -102,74 +115,48 @@ public class ExpandedMarketItem : MonoBehaviour
 
     public void CheckValidTransactionAmount(string input)
     {
-        if (int.TryParse(input, out int value))
-        {
-            if (marketTransaction == "Sell")
-            {
-                if (value <= 0 || attachedInventoryItem.ItemQuantity == 0)
-                {
-                    transactionAmount = 0;
-                    transactionAmountInput.text = "0";
-                    transactionInputBackground.sprite = invalidTransaction;
-                    canTransaction = false;
-                }
-                else if (value > attachedInventoryItem.ItemQuantity)
-                {
-                    if (attachedInventoryItem.ItemQuantity == 0)
-                    {
-                        transactionInputBackground.sprite = invalidTransaction;
-                        canTransaction = false;
-                    }
-                    else
-                    {
-                        transactionInputBackground.sprite = validTransaction;
-                        canTransaction = true;
-                    }
-                    transactionAmount = attachedInventoryItem.ItemQuantity;
-                    transactionAmountInput.text = attachedInventoryItem.ItemQuantity.ToString();
-                }
-                else
-                {
-                    transactionAmount = value;
-                    transactionAmountInput.text = value.ToString();
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
-                }
-
-            }
-            else
-            {
-                collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
-                float transactionCost = value * collapsedItem.attachedItemCard.itemPrice;
-                if (transactionCost <= 0 || collapsedItem.maxBuyAmount == 0)
-                {
-                    transactionAmount = 0;
-                    transactionAmountInput.text = "0";
-                    transactionInputBackground.sprite = invalidTransaction;
-                    canTransaction = false;
-                }
-                else if (transactionCost > GameManager.UM.Balance)
-                {
-                    transactionAmount = collapsedItem.maxBuyAmount;
-                    transactionAmountInput.text = collapsedItem.maxBuyAmount.ToString();
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
-                }
-                else
-                {
-                    transactionAmount = value;
-                    transactionAmountInput.text = value.ToString();
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
-                }
-            }
-        }
-        else
+        if (!int.TryParse(input, out int value) || value <= 0)
         {
             transactionAmount = 0;
             transactionAmountInput.text = "0";
             transactionInputBackground.sprite = invalidTransaction;
             canTransaction = false;
+
+            buyButton.interactable = false;
+            sellButton.interactable = false;
+            return;
+        }
+
+        transactionAmount = value;
+        transactionAmountInput.text = value.ToString();
+
+        float totalCost = value * collapsedItem.attachedItemCard.itemPrice;
+        bool canBuy = totalCost <= GameManager.UM.Balance && collapsedItem.maxBuyAmount > 0;
+        bool canSell = value <= attachedInventoryItem.ItemQuantity && attachedInventoryItem.ItemQuantity > 0;
+
+        buyButton.interactable = canBuy;
+        sellButton.interactable = canSell;
+
+        canTransaction = canBuy || canSell;
+
+        if(canBuy)
+        {
+            buyButton.GetComponent<Image>().sprite = validTransaction;
+            transactionInputBackground.sprite = validTransaction;
+        }
+        else
+        {
+            buyButton.GetComponent<Image>().sprite = invalidTransaction;
+        }
+
+        if (canSell)
+        {
+            sellButton.GetComponent<Image>().sprite = validSell;
+            transactionInputBackground.sprite = validTransaction;
+        }
+        else
+        {
+            sellButton.GetComponent<Image>().sprite = invalidSell;
         }
     }
 
@@ -224,5 +211,59 @@ public class ExpandedMarketItem : MonoBehaviour
             attachedInventoryItem.ItemQuantity += transactionAmount;
         }
         CheckValidTransactionAmount("0");
+    }
+
+    public void SetPriceIcons()
+    {
+        if (collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 1] > collapsedItem.attachedItemCard.itemPrice)
+        {
+            expandedPriceIcon.sprite = downIcon;
+        }
+        else if (collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 1] < collapsedItem.attachedItemCard.itemPrice)
+        {
+            expandedPriceIcon.sprite = upIcon;
+        }
+        else
+        {
+            expandedPriceIcon.sprite = sameIcon;
+        }
+
+        if (collapsedItem.itemDemands[collapsedItem.itemDemands.Count - 1] > collapsedItem.attachedItemCard.itemDemand)
+        {
+            expandedDemandIcon.sprite = downIcon;
+        }
+        else if (collapsedItem.itemDemands[collapsedItem.itemDemands.Count - 1] < collapsedItem.attachedItemCard.itemDemand)
+        {
+            expandedDemandIcon.sprite = upIcon;
+        }
+        else
+        {
+            expandedDemandIcon.sprite = sameIcon;
+        }
+
+        if (collapsedItem.itemSupplies[collapsedItem.itemSupplies.Count - 1] > collapsedItem.attachedItemCard.itemSupply)
+        {
+            expandedSupplyIcon.sprite = downIcon;
+        }
+        else if (collapsedItem.itemSupplies[collapsedItem.itemSupplies.Count - 1] < collapsedItem.attachedItemCard.itemSupply)
+        {
+            expandedSupplyIcon.sprite = upIcon;
+        }
+        else
+        {
+            expandedSupplyIcon.sprite = sameIcon;
+        }
+    }
+
+    public static string FormatNumber(float num)
+    {
+        if (num >= 1000000000)
+            return (num / 1000000000f).ToString("0.#") + "B";
+        if (num >= 1000000)
+            return (num / 1000000f).ToString("0.#") + "M";
+        if (num >= 1000)
+            return (num / 1000f).ToString("0.#") + "K";
+
+        return num.ToString("0");
     }
 }

@@ -50,8 +50,8 @@ public class Card : MonoBehaviour
     public MarketItem marketItem;
     public bool cardAddedToMarket;
     public float itemPrice;
-    public float itemDemand;
-    public float itemSupply;
+    public int itemDemand;
+    public int itemSupply;
 
     [Header("Associated plant variables")]
     public string cardType;

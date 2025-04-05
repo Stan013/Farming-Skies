@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public GameObject selectionUI;
 
     [Header("Game variables")]
-    private int _farmLevel;
     private float _balance;
     private int _water;
     private int _fertiliser;
@@ -21,15 +20,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private float _expense;
     private int _weeks;
 
-    public int FarmLevel
-    {
-        get => _farmLevel;
-        set
-        {
-            _farmLevel = value;
-            UpdateUI();
-        }
-    }
     public float Balance
     {
         get => _balance;
@@ -86,7 +76,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     }
 
     [Header("Game variables text")]
-    public TMP_Text farmLevelText;
     public TMP_Text expenseText;
     public TMP_Text balanceText;
     public TMP_Text waterText;
@@ -102,7 +91,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void UpdateUI()
     {
-        farmLevelText.text = "Level " + FormatNumber(_farmLevel).ToString();
         expenseText.text = FormatNumber(_expense).ToString();
         balanceText.text = FormatNumber(_balance).ToString();
         waterText.text = FormatNumber(_water).ToString();

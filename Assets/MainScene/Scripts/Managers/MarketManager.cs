@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 
 public class MarketManager : MonoBehaviour
@@ -14,10 +13,9 @@ public class MarketManager : MonoBehaviour
     [Header("Market variables")]
     public GameObject marketContentArea;
     public MarketItem marketItemTemplate;
-    public GameObject fillerItem;
     public string marketTab;
-    public ExpandedMarketItem expandedMarketItem;
     public ScrollRect marketScroll;
+    public ExpandedMarketItem expandedMarketItem;
 
     private int[] marketChanges = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
     private float[] marketWeights = {1f, 1.2f, 1.4f, 1.6f, 1.7f, 1.8f, 1.7f, 1.6f, 1.4f, 1.2f, 1f};

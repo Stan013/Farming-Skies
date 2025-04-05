@@ -45,6 +45,7 @@ public class Plant : MonoBehaviour
         }
         attachedInventoryItem.totalBaseYield += baseYield;
         attachedInventoryItem.totalPredictedYield += predictedYield;
+        GameManager.EM.plantValue += attachedInventoryItem.totalPredictedYield * attachedInventoryItem.attachedItemCard.itemPrice;
     }
 
     public void UpdatePlantYield()

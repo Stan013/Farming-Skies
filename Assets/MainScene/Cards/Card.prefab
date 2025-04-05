@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Phosphorus fertilizer
+  m_text: Green Bean Plant
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -276,6 +276,7 @@ MonoBehaviour:
   CurrentState: 5
   dragSucces: 0
   nutrientIndex: 0
+  nutrientAddition: 0
   cardName: 
   cardNameText: {fileID: 1921602048528338584}
   cardDescription: 
@@ -292,7 +293,6 @@ MonoBehaviour:
   cardCraftIndex: 0
   itemName: 
   itemSprite: {fileID: 0}
-  itemQuantity: 0
   inventoryItem: {fileID: 0}
   cardUnlocked: 0
   marketItem: {fileID: 0}

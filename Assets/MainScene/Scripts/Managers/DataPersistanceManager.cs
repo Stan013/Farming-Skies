@@ -40,7 +40,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void InitializeGame()
     {
         GameManager.SPM.Spawn();
-        GameManager.UM.FarmLevel = this.gameData.farmLevel;
+        GameManager.LM.FarmLevel = this.gameData.farmLevel;
         GameManager.UM.Expense = this.gameData.expense;
         GameManager.UM.Balance = this.gameData.balance;
         GameManager.UM.Water = this.gameData.water;

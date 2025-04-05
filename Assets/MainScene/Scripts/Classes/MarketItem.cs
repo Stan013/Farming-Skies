@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static UnityEditor.Progress;
 
 public class MarketItem : MonoBehaviour
 {
@@ -201,7 +200,7 @@ public class MarketItem : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject fillerItem = Instantiate(GameManager.MM.fillerItem, transform.parent);
+            GameObject fillerItem = Instantiate(GameManager.INM.fillerItem, transform.parent);
             fillerItem.transform.SetSiblingIndex(1);
         }
 

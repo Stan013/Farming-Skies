@@ -115,10 +115,9 @@ public class IslandManager : MonoBehaviour
         reconstructedIsland.SetIslandState(Island.IslandState.Sowed);
         boughtIslands.Add(reconstructedIsland);
         unboughtIslands.Remove(reconstructedIsland);
-        ExpenseItem islandExpense = Instantiate(expenseItem, Vector3.zero, Quaternion.identity, islandExpenseContent.transform);
-        islandExpense.transform.localPosition = new Vector3(islandExpense.transform.localPosition.x, islandExpense.transform.localPosition.y, 0);
-        islandExpense.transform.localRotation = Quaternion.identity;
-        islandExpense.SetupIslandexpense(reconstructedIsland);
+        GameManager.LM.FarmLevel += 1;
+        GameManager.EM.farmValue += reconstructedIsland.islandBuildCost;
+        GameManager.EM.AddExpenseIsland(reconstructedIsland);
     }
 
     public Island FindIslandByID(string islandID)

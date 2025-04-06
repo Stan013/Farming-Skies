@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardManager : MonoBehaviour
+public class CardManager : MonoBehaviour, IDataPersistence
 {
     [Header("Cards lists")]
-    public List<Card> starterCards = new List<Card>();
-    public List<Card> availableCards = new List<Card>();
-    public List<Card> inspectedCards = new List<Card>();
+    public List<Card> allCards;
+    public List<Card> starterCards;
+    public List<Card> unlockedCards;
+    public List<Card> inspectedCards;
 
     [Header("Cards variables")]
     public Transform availableCardsParent;
@@ -21,6 +22,7 @@ public class CardManager : MonoBehaviour
             {
                 if(childCard.cardUnlocked)
                 {
+                    unlockedCards.Add(childCard);
                     GameManager.CRM.craftableCards.Add(childCard);
                     GameManager.CRM.UnlockCraftItem(childCard);
                 }
@@ -28,7 +30,6 @@ public class CardManager : MonoBehaviour
                 {
                     GameManager.CM.starterCards.Add(childCard);
                 }
-                availableCards.Add(childCard);
             }
         }
     }
@@ -69,24 +70,36 @@ public class CardManager : MonoBehaviour
 
     public Card FindCardByID(string id)
     {
-        return availableCards.Find(card => card.cardId == id);
+        return allCards.Find(card => card.cardId == id);
     }
 
-/*    public void LoadData(GameData data)
+    public void LoadData(GameData data)
     {
-        starterCards.Clear();
-        foreach (string cardID in data.starterCards)
+        unlockedCards.Clear();
+        foreach (string cardID in data.unlockedCardsID)
         {
-            starterCards.Add(FindCardById(cardID));
+            unlockedCards.Add(FindCardByID(cardID));
+        }
+
+        inspectedCards.Clear();
+        foreach (string cardID in data.inspectedCardsID)
+        {
+            inspectedCards.Add(FindCardByID(cardID));
         }
     }
 
     public void SaveData(ref GameData data)
     {
-        data.starterCards.Clear();
-        foreach (Card card in starterCards)
+        data.unlockedCardsID.Clear();
+        foreach (Card card in unlockedCards)
         {
-            data.starterCards.Add(card.cardId);
+            data.unlockedCardsID.Add(card.cardId);
         }
-    }*/
+
+        data.inspectedCardsID.Clear();
+        foreach (Card card in inspectedCards)
+        {
+            data.inspectedCardsID.Add(card.cardId);
+        }
+    }
 }

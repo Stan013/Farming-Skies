@@ -5,19 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class IslandManager : MonoBehaviour
+public class IslandManager : MonoBehaviour, IDataPersistence
 {
     [Header("GameManager objects")]
     public Transform availableIslandsParent;
 
     [Header("Island lists")]
-    public List<Island> availableIsland;
+    public List<Island> allIslands;
+    public List<Island> availableIslands;
     public List<Island> boughtIslands;
-    public List<Island> unboughtIslands;
 
     [Header("General island variables")]
     public Island starterIsland;
     public string islandManageTab;
+    public Button closeButton;
 
     [Header("Island management variables")]
     public Island centerIsland;
@@ -50,13 +51,9 @@ public class IslandManager : MonoBehaviour
         {
             foreach (Island childIsland in islandRing.GetComponentsInChildren<Island>())
             {
-                if (childIsland.islandBought)
+                if (childIsland.islandAvailable)
                 {
-                    boughtIslands.Add(childIsland);
-                }
-                else
-                {
-                    unboughtIslands.Add(childIsland);
+                    availableIslands.Add(childIsland);
                 }
 
                 childIsland.SetIslandState(Island.IslandState.Transparent);
@@ -77,7 +74,6 @@ public class IslandManager : MonoBehaviour
     }
 
     public Island GetPotentialBoughtIsland()
-
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, ~0, QueryTriggerInteraction.Collide);
@@ -114,15 +110,42 @@ public class IslandManager : MonoBehaviour
         reconstructedIsland.islandBought = true;
         reconstructedIsland.SetIslandState(Island.IslandState.Sowed);
         boughtIslands.Add(reconstructedIsland);
-        unboughtIslands.Remove(reconstructedIsland);
         GameManager.LM.FarmLevel += 1;
         GameManager.EM.farmValue += reconstructedIsland.islandBuildCost;
         GameManager.EM.AddExpenseIsland(reconstructedIsland);
+        SetAvailableIslands(reconstructedIsland.islandID);
+    }
+
+    public void SetAvailableIslands(string id)
+    {
+        string cleanInput = id.Trim('(', ')');
+        string[] coordinates = cleanInput.Split(',');
+        int x = int.Parse(coordinates[0]);
+        int y = int.Parse(coordinates[1]);
+
+        List<Vector2Int> neighborCoordinates = new List<Vector2Int>
+        {
+            new Vector2Int(x + 1, y), // Right
+            new Vector2Int(x - 1, y), // Left
+            new Vector2Int(x, y + 1), // Up
+            new Vector2Int(x, y - 1), // Down
+        };
+
+        foreach (var coord in neighborCoordinates)
+        {
+            string islandID = $"({coord.x},{coord.y})";
+            Island island = FindIslandByID(islandID);
+            island.islandAvailable = true;
+            if (!availableIslands.Contains(island))
+            {
+                availableIslands.Add(island);
+            }
+        }
     }
 
     public Island FindIslandByID(string islandID)
     {
-        return availableIsland.Find(island => island.islandID == islandID);
+        return allIslands.Find(island => island.islandID == islandID);
     }
 
     public void OpenIslandManagement(string tab)
@@ -169,56 +192,25 @@ public class IslandManager : MonoBehaviour
         }
     }
 
-/*    public void LoadData(GameData data)
+    public void LoadData(GameData data)
     {
-        boughtIslands.Clear();
-        var islandDataCount = 0;
-        foreach (string islandID in data.boughtIslands)
+        for (int i = 0; i < data.islandsMap.Count; i++)
         {
-            var island = FindIslandByID(islandID);
-            unboughtIslands.Remove(island);
-            boughtIslands.Add(island);
-            island.islandBought = true;
-            island.islandBottom.GetComponent<Renderer>().material = island.bottomDefaultMat;
-            island.ToggleState(Island.IslandState.Sowed, Island.IslandState.Default);
-            island.usedPlots.Clear();
-            island.itemsOnIsland.Clear();
-            if (data.islandDataMap[islandDataCount].islandId == island.islandID)
+            Island island = FindIslandByID(data.islandsMap[i].islandID);
+            island.LoadIslandData(data.islandsMap[i]);
+            availableIslands.Add(island);
+            if (island.islandBought)
             {
-                foreach (string plotName in data.islandDataMap[islandDataCount].usedPlotNames)
-                {
-                    var usedPlot = island.FindPlotByName(plotName);
-                    var plantCard = island.FindItemOnIslandByCardId(data.islandDataMap[islandDataCount].itemsOnIsland[islandDataCount]);
-                    GameObject plant = Instantiate(plantCard.GetComponent<CardDrag>().dragModel, Vector3.zero, Quaternion.identity, usedPlot.transform);
-                    plant.transform.localPosition = new Vector3(0, -0.25f, 0);
-                    plant.transform.localRotation = Quaternion.identity;
-                    island.MakeUsedPlot(usedPlot, GameManager.HM.dragCard, plant);
-                }
-                islandDataCount++;
+                boughtIslands.Add(island);
             }
         }
-
     }
 
     public void SaveData(ref GameData data)
     {
-        data.boughtIslands.Clear();
-        data.islandDataMap.Clear();
-        foreach (Island island in boughtIslands)
+        foreach (Island island in availableIslands)
         {
-            List<string> usedPlotNamesList = new List<string>();
-            foreach (GameObject plot in island.usedPlots)
-            {
-                usedPlotNamesList.Add(plot.name);
-            }
-            List<string> plantIdList = new List<string>();
-            foreach (Plant plant in island.itemsOnIsland)
-            {
-                plantIdList.Add(plant.plantCardID);
-            }
-            IslandData islandData = new IslandData(usedPlotNamesList, plantIdList, island.islandID);
-            data.boughtIslands.Add(island.islandID);
-            data.islandDataMap.Add(islandData);
+            data.islandsMap.Add(island.SaveIslandData());
         }
-    }*/
+    }
 }

@@ -16,6 +16,7 @@ public class CraftManager : MonoBehaviour
     public ExpandedCraftItem expandedCraftItem;
     public ScrollRect craftScroll;
     public string craftingTab;
+    public Button closeButton;
 
     public void UnlockCraftItem(Card attachedCard)
     {

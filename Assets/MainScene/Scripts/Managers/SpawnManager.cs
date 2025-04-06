@@ -10,16 +10,14 @@ public class SpawnManager : MonoBehaviour
 
     public void Spawn()
     {
-        GameManager.WM.mainWindow.SetActive(false);
-        GameManager.WM.gameWindow.SetActive(true);
-        GameManager.UM.levelUI.SetActive(true);
-        GameManager.UM.timeUI.SetActive(true);
+        GameManager.WM.inMenu = true;
         if(GameManager.DBM.skipIntro)
         {
             GameManager.IPM.cam.transform.position = new Vector3(0f,10f,0f);
             GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
             GameManager.UM.resourceUI.SetActive(true);
             GameManager.WM.tutorialWindow.SetActive(true);
+            GameManager.WM.inMenu = false;
             return;
         }
         StartCoroutine(SpawnSequence());
@@ -39,6 +37,7 @@ public class SpawnManager : MonoBehaviour
         GameManager.IPM.startingRot = GameManager.IPM.cam.transform.rotation;
         GameManager.UM.resourceUI.SetActive(true);
         GameManager.WM.tutorialWindow.SetActive(true);
+        GameManager.WM.inMenu = false;
     }
 
     private IEnumerator CenterTransition()
@@ -139,15 +138,12 @@ public class SpawnManager : MonoBehaviour
         {
             float t = elapsedTime / dropDuration;
             GameManager.IPM.cam.transform.position = Vector3.Lerp(startPos, targetPos, t);
-            float spinAngle = Mathf.Lerp(0f, 675f, t); // Spin 315 degrees
+            float spinAngle = Mathf.Lerp(0f, 675f, t);
             GameManager.IPM.cam.transform.rotation = Quaternion.Euler(startRot.eulerAngles.x, startRot.eulerAngles.y + spinAngle, startRot.eulerAngles.z);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // Ensure the final position and rotation are exact
         GameManager.IPM.cam.transform.position = targetPos;
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, startRot.eulerAngles.y + 675f, startRot.eulerAngles.z);
     }
-
 }

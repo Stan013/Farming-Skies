@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviour, IDataPersistence
 {
     [Header("Player variables")]
     public Vector3 startingPos;
@@ -35,24 +35,32 @@ public class InputManager : MonoBehaviour
 
     public void KeyboardInput()
     {
-        NextWeekInput();
-        Vector3 moveDirection = Vector3.zero;
+        if(!GameManager.WM.inMenu && !GameManager.HM.dragging)
+        {
+            NextWeekInput();
+            Vector3 moveDirection = Vector3.zero;
 
-        moveDirection += (Input.GetKey(KeyCode.W) && !IsFacingWall(Vector3.forward)) ? Vector3.forward : Vector3.zero;
-        moveDirection -= (Input.GetKey(KeyCode.S) && !IsFacingWall(Vector3.back)) ? Vector3.forward : Vector3.zero;
-        moveDirection += (Input.GetKey(KeyCode.D) && !IsFacingWall(Vector3.right)) ? Vector3.right : Vector3.zero;
-        moveDirection -= (Input.GetKey(KeyCode.A) && !IsFacingWall(Vector3.left)) ? Vector3.right : Vector3.zero;
-        moveDirection += (Input.GetKey(KeyCode.LeftShift) && !IsFacingWall(Vector3.up)) ? Vector3.up : Vector3.zero;
-        moveDirection -= (Input.GetKey(KeyCode.LeftControl) && !IsFacingWall(Vector3.down)) ? Vector3.up : Vector3.zero;
+            moveDirection += (Input.GetKey(KeyCode.W) && !IsFacingWall(Vector3.forward)) ? Vector3.forward : Vector3.zero;
+            moveDirection -= (Input.GetKey(KeyCode.S) && !IsFacingWall(Vector3.back)) ? Vector3.forward : Vector3.zero;
+            moveDirection += (Input.GetKey(KeyCode.D) && !IsFacingWall(Vector3.right)) ? Vector3.right : Vector3.zero;
+            moveDirection -= (Input.GetKey(KeyCode.A) && !IsFacingWall(Vector3.left)) ? Vector3.right : Vector3.zero;
+            moveDirection += (Input.GetKey(KeyCode.LeftShift) && !IsFacingWall(Vector3.up)) ? Vector3.up : Vector3.zero;
+            moveDirection -= (Input.GetKey(KeyCode.LeftControl) && !IsFacingWall(Vector3.down)) ? Vector3.up : Vector3.zero;
 
-        smoothMoveDirection = Vector3.Lerp(smoothMoveDirection, moveDirection.normalized, Time.deltaTime * moveSpeed);
-        rb.velocity = smoothMoveDirection * moveSpeed;
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                GameManager.WM.OpenSettings();
+            }
+
+            smoothMoveDirection = Vector3.Lerp(smoothMoveDirection, moveDirection.normalized, Time.deltaTime * moveSpeed);
+            rb.velocity = smoothMoveDirection * moveSpeed;
+        }
     }
 
 
     private void NextWeekInput()
     {
-        if (!GameManager.HM.dragging)
+        if (!GameManager.WM.inMenu && !GameManager.HM.dragging)
         {
             if (Input.GetKey(KeyCode.Space) && nextWeekEnabled)
             {
@@ -78,7 +86,7 @@ public class InputManager : MonoBehaviour
 
     public void MouseInput()
     {
-        if (!GameManager.HM.dragging)
+        if (!GameManager.WM.inMenu && !GameManager.HM.dragging)
         {
             if (Input.GetMouseButtonDown(1) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit) //Hold to build island
                 && hit.transform.GetComponent<Island>() != null)
@@ -137,5 +145,16 @@ public class InputManager : MonoBehaviour
     private bool IsFacingWall(Vector3 direction)
     {
         return Physics.Raycast(transform.position, direction, 1f);
+    }
+
+    public void LoadData(GameData data)
+    {
+        cam.transform.position = data.playerPosition;
+        cam.transform.localRotation = Quaternion.Euler(32f, 0f, 0f);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = cam.transform.position;
     }
 }

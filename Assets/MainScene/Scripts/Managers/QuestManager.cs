@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : MonoBehaviour, IDataPersistence
 {
     [Header("Quest UI")]
     public TMP_Text questTitleText;
@@ -111,45 +112,58 @@ public class QuestManager : MonoBehaviour
             case 12:
                 GameManager.IPM.nextWeekEnabled = false;
                 GameManager.UM.selectionUI.SetActive(true);
+                GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
                 UpdateQuest("Look at your spoils!", "You watched your harvest come in so let's find out how much you got by opening up your inventory. Click with your left mouse button on the boxes icon at the right side of your screen.");
                 break;
             case 13:
+                GameManager.INM.closeButton.interactable = false;
                 UpdateQuest("Inspect thoroughly!", "If you want to see more details about the items in your inventory click on the green button with an arrow pointing downwards. Let's do this with the chard you have in your inventory.");
                 break;
             case 14:
+                GameManager.INM.closeButton.interactable = true;
                 UpdateQuest("Close the details!", "It also shows you an estimate harvest for next week it might be low as you haven't improved your soil yet. That is the next thing you are going to work on by closing your inventory with the red cross on the top left.");
                 break;
             case 15:
+                GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = false;
+                GameManager.UM.selectionUI.transform.GetChild(1).GetComponent<Button>().interactable = true;
                 UpdateQuest("Inspect your island!", "You first need to find out what nutrients you are missing by inspecting your soil. So let's left click on the cogwheel at the right side of your screen to open up your island management.");
                 break;
             case 16:
+                GameManager.ISM.closeButton.interactable = false;
                 UpdateQuest("Select available!", "Now click with your left mouse button on the green tab at the top that says available. You currently only have one island but you can select the island you want to look at with the arrows.");
                 break;
             case 17:
                 UpdateQuest("Check required!", "You can now see what nutrients your island has, but how much do your crops require. With your left mouse button click on the green tab that says required and look at your crops needs.");
                 break;
             case 18:
+                GameManager.ISM.closeButton.interactable = true;
                 UpdateQuest("Let's improve!", "With this information you should now know that the nutrients, nitrogen, phosphorus and potassium in our soil are low. This has reduced your yield so lets improve this by clicking on the red close icon.");
                 break;
             case 19:
+                GameManager.UM.selectionUI.transform.GetChild(1).GetComponent<Button>().interactable = false;
+                GameManager.UM.selectionUI.transform.GetChild(2).GetComponent<Button>().interactable = true;
                 UpdateQuest("Checkout crafting!", "First you need some fertiliser cards to use, so click with your left mouse button on the anvil icon at the right side of your screen. Here you can craft any card you need if you have enough resources.");
                 break;
             case 20:
+                GameManager.CRM.closeButton.interactable = false;
                 UpdateQuest("Find nitrogen!", "One of the nutrients that was low was nitrogen so you need to craft some nitrogen fertiliser. Let's use the filters on top and click the green tab that says utilities and then find the nitrogen.");
                 break;
             case 21:
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
-                UpdateQuest("Quick craft!", "I have given you some resources so that you can now quick craft a nitrogen card. Put 1 into the craft amount and the label will turn green which means you have the resources available to craft that amount.");
+                UpdateQuest("Quick craft!", "I have given you some resources so that you can now quick craft a nitrogen card. Put 1 into the craft amount and the red label will turn green which means you have the resources available to craft that amount.");
                 break;
             case 22:
+                GameManager.CRM.FindCraftItemByID("CardNitrogenUtility").craftAmountInput.interactable = true;
                 UpdateQuest("Hold to craft!", "You can now use your left mouse button and hold down on the craft label. This should turn the amount label yellow and then eventually back to red when the craft is completed.");
                 break;
             case 23:
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
+                GameManager.CRM.FindCraftItemByID("CardNitrogenUtility").craftAmountInput.interactable = false;
+                GameManager.CRM.FindCraftItemByID("CardPhosphorusUtility").expandButton.interactable = true;
                 UpdateQuest("Craft another!", "You crafted 1 nitrogen card, however you weren't able to see how many resources that cost you. So let's now craft the next nutrient phosphorus by clicking on the green button with the arrow pointing downwards again.");
                 break;
             case 24:
@@ -162,6 +176,7 @@ public class QuestManager : MonoBehaviour
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
+                GameManager.CRM.FindCraftItemByID("CardPotassiumUtility").expandButton.interactable = true;
                 UpdateQuest("Select next one!", "Do this one more time for the last nutrient you need which is potassium. Search for potassium and click the green button with the arrow pointing downwards again. It should now expand that item.");
                 break;
             case 27:
@@ -171,6 +186,7 @@ public class QuestManager : MonoBehaviour
                 UpdateQuest("The last nutrient!", "Let's do the same thing again and hold the craft button until your card is crafted. The craft button should turn yellow and when finished back to red.");
                 break;
             case 29:
+                GameManager.CRM.closeButton.interactable = true;
                 UpdateQuest("Enough crafting!", "You should now have 3 fertiliser cards in your deck for each of the nutrients you need. So let's use these cards to improve your soil, close the crafting window by clicking on the red cross.");
                 break;
             case 30:
@@ -534,5 +550,22 @@ public class QuestManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        questCount = data.questCount;
+        if (data.questActive)
+        {
+            GameManager.WM.OpenQuestWindow();
+            questCount -= 1;
+            NextQuest();
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.questActive = questActive;
+        data.questCount = questCount;
     }
 }

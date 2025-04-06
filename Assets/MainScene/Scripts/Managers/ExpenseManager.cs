@@ -8,6 +8,7 @@ public class ExpenseManager : MonoBehaviour
 {
     [Header("General variables")]
     public string statsTab;
+    public Button closeButton;
 
     [Header("Farm Level variables")]
     public Slider farmLevelBar;

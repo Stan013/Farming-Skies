@@ -47,15 +47,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
             UpdateUI();
         }
     }
-    public int Deck
-    {
-        get => _deck;
-        set
-        {
-            _deck = value;
-            UpdateUI();
-        }
-    }
     public float Expense
     {
         get => _expense;
@@ -80,7 +71,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public TMP_Text balanceText;
     public TMP_Text waterText;
     public TMP_Text fertiliserText;
-    public TMP_Text deckText;
     public TMP_Text weekText;
 
     [Header("Island builder")]
@@ -95,11 +85,10 @@ public class UIManager : MonoBehaviour, IDataPersistence
         balanceText.text = FormatNumber(_balance).ToString();
         waterText.text = FormatNumber(_water).ToString();
         fertiliserText.text = FormatNumber(_fertiliser).ToString();
-        deckText.text = FormatNumber(_deck).ToString();
         weekText.text = FormatNumber(_weeks).ToString();
     }
 
-    public static string FormatNumber(float num)
+    public string FormatNumber(float num)
     {
         if (num >= 1000000000)
             return (num / 1000000000f).ToString("0.#") + "B";
@@ -146,6 +135,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
         _balance = data.balance;
         _water = data.water;
         _fertiliser = data.fertiliser;
+        _deck = data.cardsInDeck.Count;
+        UpdateUI();
     }
 
     public void SaveData(ref GameData data)

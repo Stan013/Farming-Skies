@@ -13,9 +13,10 @@ public class MarketManager : MonoBehaviour
     [Header("Market variables")]
     public GameObject marketContentArea;
     public MarketItem marketItemTemplate;
-    public string marketTab;
     public ScrollRect marketScroll;
     public ExpandedMarketItem expandedMarketItem;
+    public string marketTab;
+    public Button closeButton;
 
     private int[] marketChanges = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
     private float[] marketWeights = {1f, 1.2f, 1.4f, 1.6f, 1.7f, 1.8f, 1.7f, 1.6f, 1.4f, 1.2f, 1f};
@@ -24,9 +25,9 @@ public class MarketManager : MonoBehaviour
 
     public void SetupMarket()
     {
-        foreach(Card card in GameManager.CM.availableCards)
+        foreach(Card card in GameManager.CM.unlockedCards)
         {
-            if(!card.cardAddedToMarket && card.cardUnlocked)
+            if(!card.cardAddedToMarket)
             {
                 UnlockMarketItem(card);
             }

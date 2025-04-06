@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     public ExpandedInventoryItem expandedInventoryItem;
     public ScrollRect inventoryScroll;
     public string inventoryTab;
+    public Button closeButton;
 
     public void UnlockInventoryItem(Card itemCard, Plant plant)
     {

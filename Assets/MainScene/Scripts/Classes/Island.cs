@@ -7,7 +7,6 @@ public class Island : MonoBehaviour
     [Header("Island stat variables")]
     public bool islandAvailable;
     public bool islandBought;
-    public bool needsNPK;
     public string islandID;
 
     [Header("Island variables")]
@@ -15,12 +14,14 @@ public class Island : MonoBehaviour
     public GameObject islandBottom;
     public Material topMat;
     public Material bottomMat;
+    public IslandData islandData;
 
     [Header("Island build variables")]
     public int islandBuildCost;
     public int islandExpenseCost;
 
     [Header("Island states")]
+    public int islandState;
     public IslandState currentState;
     public IslandState previousState;
     public GameObject glow;
@@ -50,6 +51,7 @@ public class Island : MonoBehaviour
     public List<GameObject> usedLargePlots;
 
     [Header("Objects on island lists")]
+    public List<PlantData> plantMap = new List<PlantData>();
     public List<Plant> itemsOnIsland = new List<Plant>();
     public List<Plant> smallPlantsOnIsland = new List<Plant>();
     public List<Plant> mediumPlantsOnIsland = new List<Plant>();
@@ -381,5 +383,58 @@ public class Island : MonoBehaviour
         {
             warningIcon.SetActive(false);
         }
+    }
+
+    public void LoadIslandData(IslandData data)
+    {
+        islandBought = data.islandBought;
+        islandAvailable = data.islandAvailable;
+        islandID = data.islandID;
+        islandState = data.islandState;
+        nutrientsAvailable = data.nutrientsAvailable;
+        nutrientsRequired = data.nutrientsRequired;
+
+        switch (data.islandState)
+        {
+            case 0:
+                SetIslandState(IslandState.Transparent);
+                break;
+            case 1:
+                SetIslandState(IslandState.Highlighted);
+                break;
+            case 2:
+                SetIslandState(IslandState.Sowed);
+                break;
+            case 3:
+                SetIslandState(IslandState.Cultivated);
+                break;
+            case 4:
+                SetIslandState(IslandState.Watered);
+                break;
+        }
+    }
+
+    public IslandData SaveIslandData()
+    {
+        switch (currentState)
+        {
+            case IslandState.Transparent:
+                islandState = 0;
+                break;
+            case IslandState.Highlighted:
+                islandState = 1;
+                break;
+            case IslandState.Sowed:
+                islandState = 2;
+                break;
+            case IslandState.Cultivated:
+                islandState = 3;
+                break;
+            case IslandState.Watered:
+                islandState = 4;
+                break;
+        }
+        islandData = new IslandData(islandAvailable, islandBought, islandID, islandState, plantMap, nutrientsAvailable, nutrientsRequired);
+        return islandData;
     }
 }

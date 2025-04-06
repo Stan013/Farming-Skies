@@ -11,51 +11,39 @@ public class DataPersistenceManager : MonoBehaviour
     private FileDataHandler dataHandler;
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
-    public static DataPersistenceManager dataManager { get; private set; }
+    public GameManager gm;
 
-    private void Awake()
+    public void Awake()
     {
-        if (dataManager != null && dataManager != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        dataManager = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        dataPersistenceObjects = FindAllDataPersistenceObjects();
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }
 
     public void NewGame()
     {
-        this.gameData = new GameData();
+        gameData = new GameData();
         InitializeGame();
     }
 
     public void InitializeGame()
     {
         GameManager.SPM.Spawn();
-        GameManager.LM.FarmLevel = this.gameData.farmLevel;
-        GameManager.UM.Expense = this.gameData.expense;
-        GameManager.UM.Balance = this.gameData.balance;
-        GameManager.UM.Water = this.gameData.water;
-        GameManager.UM.Fertiliser = this.gameData.fertiliser;
-        GameManager.UM.Weeks = this.gameData.weeks;
+        GameManager.LM.FarmLevel = gameData.farmLevel;
+        GameManager.UM.Expense = gameData.expense;
+        GameManager.UM.Balance = gameData.balance;
+        GameManager.UM.Water = gameData.water;
+        GameManager.UM.Fertiliser = gameData.fertiliser;
+        GameManager.UM.Weeks = gameData.weeks;
+        GameManager.HM.SetHandSlots();
         GameManager.ISM.SetupIslands();
         GameManager.CM.SetupCards();
         GameManager.DM.SetStartingDeck();
         GameManager.MM.SetupMarket();
-        ;
     }
 
     public void LoadGame()
     {
-        this.gameData = dataHandler.Load(selectedProfileId);
+        gameData = dataHandler.Load(selectedProfileId);
         foreach(IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.LoadData(gameData);
@@ -73,8 +61,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
-        return new List<IDataPersistence>(dataPersistenceObjects);
+        return gm.GetComponents<MonoBehaviour>().OfType<IDataPersistence>().ToList();
     }
 
     public Dictionary<string, GameData> GetAllProfilesGameData()

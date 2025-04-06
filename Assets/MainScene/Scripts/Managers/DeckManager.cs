@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,17 @@ public class DeckManager : MonoBehaviour, IDataPersistence
 {
     [Header("Deck variables")]
     public GameObject cardsInDeckParent;
+    public TMP_Text deckText;
+    private int _deck;
+    public int Deck
+    {
+        get => _deck;
+        set
+        {
+            _deck = value;
+            deckText.text = GameManager.UM.FormatNumber(Deck).ToString();
+        }
+    }
 
     [Header("Cards list")]
     public List<Card> cardsInDeck = new List<Card>();
@@ -21,7 +33,7 @@ public class DeckManager : MonoBehaviour, IDataPersistence
 
     public void AddCardToDeck(string cardId)
     {
-        GameManager.UM.Deck += 1;
+        _deck += 1;
         Card newCard = Instantiate(GameManager.CM.FindCardByID(cardId), Vector3.zero, Quaternion.identity);
         newCard.SetCardState(Card.CardState.InDeck);
     }

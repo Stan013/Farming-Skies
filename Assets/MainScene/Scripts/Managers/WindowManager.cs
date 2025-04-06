@@ -8,6 +8,7 @@ public class WindowManager : MonoBehaviour
     public bool inMenu;
     public GameObject mainWindow;
     public GameObject gameWindow;
+    public GameObject settingsWindow;
     public GameObject tutorialWindow;
     public GameObject questWindow;
     public GameObject advanceWindow;
@@ -20,13 +21,42 @@ public class WindowManager : MonoBehaviour
     [Header("Quest window variables")]
     public float windowTransitionDuration = 0.5f;
 
+    public void StartGame(bool loadGame)
+    {
+        if (loadGame)
+        {
+            GameManager.DPM.LoadGame();
+        }
+    }
+
+    public void SelectGameMode(string gameMode)
+    {
+        switch (gameMode)
+        {
+            case "Career":
+                GameManager.CurrentMode = GameManager.GameMode.Career;
+                GameManager.DPM.NewGame();
+                break;
+            case "Scenario":
+                GameManager.CurrentMode = GameManager.GameMode.Scenario;
+                GameManager.DPM.NewGame();
+                break;
+            case "Creative":
+                GameManager.CurrentMode = GameManager.GameMode.Creative;
+                GameManager.DPM.NewGame();
+                break;
+        }
+    }
+
     public void OpenWindow()
     {
         inMenu = true;
+        settingsWindow.SetActive(false);
         inventoryWindow.SetActive(false);
         manageWindow.SetActive(false);
         craftWindow.SetActive(false);
         marketWindow.SetActive(false);
+        expenseWindow.SetActive(false);
     }
 
     public void CloseWindow()
@@ -57,5 +87,20 @@ public class WindowManager : MonoBehaviour
         }
 
         window.anchoredPosition = new Vector2(window.anchoredPosition.x, targetY);
+    }
+
+    public void OpenSettings()
+    {
+        if(settingsWindow.activeSelf)
+        {
+            settingsWindow.SetActive(false);
+            inMenu = false;
+        }
+        else
+        {
+            GameManager.HM.HideCardsInHand(true);
+            settingsWindow.SetActive(true);
+            inMenu = true;
+        }
     }
 }

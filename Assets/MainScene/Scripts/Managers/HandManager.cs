@@ -21,26 +21,37 @@ public class HandManager : MonoBehaviour, IDataPersistence
     [Header("Refill variables")]
     private float cardMoveDuration = 0.125f;
 
+    public void SetHandSlots()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            CardSlot cardSlot = Instantiate(cardSlotPrefab, Vector3.zero, Quaternion.identity, handSlotParent.transform);
+            cardSlot.transform.localPosition = new Vector3(-525 + (i*175), -525, 0);
+            cardSlot.transform.localRotation = Quaternion.identity;
+            handSlots.Add(cardSlot);
+        }
+    }
+
     public void SetCardsInHand()
     {
         if(GameManager.DM.cardsInDeck.Count != 0)
         {
             while (lastFilledSlotIndex < 7 && GameManager.DM.cardsInDeck.Count > 0)
             {
-                AddCardToHand(GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)].cardId);
+                Card newCard = GameManager.DM.FindCardInDeckByID(GameManager.DM.cardsInDeck[Random.Range(0, GameManager.DM.cardsInDeck.Count)].cardId);
+                AddCardToHand(newCard);
             }
         }
     }
 
-    public void AddCardToHand(string cardId)
+    public void AddCardToHand(Card card)
     {
-        GameManager.UM.Deck -= 1; 
-        Card newCard = GameManager.DM.FindCardInDeckByID(cardId);
-        handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, newCard);
+        handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, card);
         lastFilledSlotIndex++;
-        newCard.SetCardState(Card.CardState.InHand);
-        
-        StartCoroutine(MoveCardsFromBottom(newCard));
+        card.SetCardState(Card.CardState.InHand);
+        card.transform.localScale *= 0.5f;
+        GameManager.DM.Deck = GameManager.DM.cardsInDeck.Count;
+        StartCoroutine(MoveCardsFromBottom(card));
     }
 
     private IEnumerator MoveCardsFromBottom(Card card)
@@ -127,10 +138,23 @@ public class HandManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        cardsInHand.Clear();
-        foreach (string cardID in data.cardsInHand)
+        if(handSlotParent.transform.childCount != 0)
         {
-            AddCardToHand(cardID);
+            foreach (Transform childSlot in handSlotParent.transform)
+            {
+                Destroy(childSlot.gameObject);
+            }
+            handSlots.Clear();
+        }
+        SetHandSlots();
+
+        cardsInHand.Clear();
+        for (int i = 0; i < data.cardsInHand.Count; i++)
+        {
+            Card newCard = Instantiate(GameManager.CM.FindCardByID(data.cardsInHand[i]), Vector3.zero, Quaternion.identity);
+            GameManager.CM.InitializeCard(newCard);
+            GameManager.HM.AddCardToHand(newCard);
+            GameManager.HM.cardsInHand.Add(newCard);
         }
     }
 

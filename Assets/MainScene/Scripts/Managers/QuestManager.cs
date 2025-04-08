@@ -17,6 +17,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     public int questCount;
 
     [Header("Quest cards")]
+    private Card cardCultivator;
+    private Card cardWateringCan;
     private Card cardGreenBean;
     private Card cardChive;
     private Card cardChard;
@@ -30,6 +32,23 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     [Header("Quest marketItems")]
     private MarketItem riceMarketItem;
     private MarketItem chardMarketItem;
+
+    public void InitializeQuestCards()
+    {
+        if (questCount > 2)
+        {
+            cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
+            cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
+            cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
+            cardChive = GameManager.HM.FindCardInHandById("CardChivePlant");
+            cardChard = GameManager.HM.FindCardInHandById("CardChardPlant");
+            cardRice = GameManager.HM.FindCardInHandById("CardRicePlant");
+        }
+        if(questCount > 11)
+        {
+            GameManager.UM.selectionUI.SetActive(true);
+        }
+    }
 
     public void QuestCompleted()
     {
@@ -58,7 +77,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         switch (questCount)
         {
             case 1:
-                GameManager.ISM.starterIsland.SetIslandState(Island.IslandState.Highlighted);
+                GameManager.ISM.starterIsland.currentState = Island.IslandState.Highlighted;
                 UpdateQuest("Move around!", "Let's start with moving around a little bit. You can move by using WASD and you can go up with Shift and down with Control. Try to find the highlighted island and move in all directions.");
                 break;
             case 2:
@@ -66,28 +85,23 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 3:
                 GameManager.HM.SetCardsInHand();
-                Card cardCultivator = GameManager.HM.FindCardInHandById("CardCultivatorUtility");
+                InitializeQuestCards();
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Start cultivating!", "It is time to start getting your island ready for planting. Hover over the cultivator card and hold down your left mouse button. Now move towards your island to cultivate it.");
                 break;
             case 4:
-                Card cardWateringCan = GameManager.HM.FindCardInHandById("CardWateringCanUtility");
                 cardWateringCan.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Water your soil!", "Your island has been cultivated, now let's water it so we can start planting. Hover over the watering can card and hold down your left mouse button again. Now move towards your soil to water it.");
                 break;
             case 5:
-                cardGreenBean = GameManager.HM.FindCardInHandById("CardGreenBeanPlant");
                 cardGreenBean.GetComponent<CardInspect>().enabled = true;
                 UpdateQuest("Inspect your plant!", "Your soil is ready for planting, but first let's see what crops you have and what they need. Click with your right mouse button on the green bean plant card and click again to put the card away.");
                 break;
             case 6:
-                cardChive = GameManager.HM.FindCardInHandById("CardChivePlant");
                 cardChive.GetComponent<CardInspect>().enabled = true;
                 UpdateQuest("Inspect another!", "Right click again with your mouse on the chive plant card this time. And as you can see, the plant size, water, and nutrient needs are different. This will result in a different yield.");
                 break;
             case 7:
-                cardChard = GameManager.HM.FindCardInHandById("CardChardPlant");
-                cardRice = GameManager.HM.FindCardInHandById("CardRicePlant");
                 cardChard.GetComponent<CardInspect>().enabled = true;
                 cardRice.GetComponent<CardInspect>().enabled = true;
                 UpdateQuest("Compare all of them!", "I hope you noticed the difference, so now inspect the remaining plant cards. Each month, the nutrients in your land will refill, so making good combinations can be very beneficial.");
@@ -101,7 +115,10 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Plant another crop!", "Now do it again with your chive plant card. Since the plant size is smaller, more plots are available. You can, however, only have one plant for each plot, so use your space efficiently.");
                 break;
             case 10:
-                cardChard.GetComponent<CardDrag>().enabled = true;
+                if (cardChard != null)
+                {
+                    cardChard.GetComponent<CardDrag>().enabled = true;
+                }
                 cardRice.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Plant all your crops!", "You are well on your way to becoming a farmer, so let's plant your last plant cards as well. With the last two plant cards in your hand, do the same drag motions as before.");
                 break;
@@ -152,10 +169,10 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
+                GameManager.CRM.FindCraftItemByID("CardNitrogenUtility").craftAmountInput.interactable = true;
                 UpdateQuest("Quick craft!", "I have given you some resources so that you can now quick craft a nitrogen card. Put 1 into the craft amount and the red label will turn green which means you have the resources available to craft that amount.");
                 break;
             case 22:
-                GameManager.CRM.FindCraftItemByID("CardNitrogenUtility").craftAmountInput.interactable = true;
                 UpdateQuest("Hold to craft!", "You can now use your left mouse button and hold down on the craft label. This should turn the amount label yellow and then eventually back to red when the craft is completed.");
                 break;
             case 23:
@@ -176,10 +193,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
+                GameManager.CRM.expandedCraftItem.craftAmountInput.interactable = false;
                 GameManager.CRM.FindCraftItemByID("CardPotassiumUtility").expandButton.interactable = true;
                 UpdateQuest("Select next one!", "Do this one more time for the last nutrient you need which is potassium. Search for potassium and click the green button with the arrow pointing downwards again. It should now expand that item.");
                 break;
             case 27:
+                GameManager.CRM.expandedCraftItem.craftAmountInput.interactable = true;
                 UpdateQuest("Input amount again!", "This will be the last time I give you some resources after that you will have to generate them yourself. You again need one card so input 1 or click the plus or max button.");
                 break;
             case 28:
@@ -190,15 +209,19 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Enough crafting!", "You should now have 3 fertiliser cards in your deck for each of the nutrients you need. So let's use these cards to improve your soil, close the crafting window by clicking on the red cross.");
                 break;
             case 30:
+                GameManager.UM.selectionUI.transform.GetChild(2).GetComponent<Button>().interactable = false;
                 UpdateQuest("Time to improve!", "It is time to improve your soil with the fertiliser cards you just crafted. Hover over them and while holding down your left mouse button drag them to you land. Do this with all your fertiliser cards.");
                 break;
             case 31:
+                GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
                 UpdateQuest("Crop yield!", "Your soil is looking better and the warning icon has disappeared. So let's see how much your estimated harvest will be now. Open up your inventory again and expand one of your items to see the improvement.");
                 break;
             case 32:
+                GameManager.INM.closeButton.interactable = true;
                 UpdateQuest("Earn some money!", "With this in mind it is time to see what you can do with your harvest. You can either reinvest it into more plant cards or in this case sell them. Close your inventory again and on we go.");
                 break;
             case 33:
+                GameManager.UM.selectionUI.transform.GetChild(3).GetComponent<Button>().interactable = true;
                 UpdateQuest("Look at the market!", "Let's go to the market and figure out how you can sell your harvest. Open up the market window by left clicking on the market stall at the right side of your screen.");
                 break;
             case 34:
@@ -223,7 +246,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Show me something!", "These are the basics of managing your crops and generating money. So how about you show me you can make 500 ₴ and I will tell you some more about expanding your farm.");
                 break;
             case 41:
-                GameManager.ISM.FindIslandByID("(0,-1)").SetIslandState(Island.IslandState.Highlighted);
+                GameManager.ISM.FindIslandByID("(0,-1)").currentState = Island.IslandState.Highlighted;
                 UpdateQuest("Expansion time!", "Well done on earning yourself some money as promised I will help you to expand. First of let's buy another island move towards the highlighted island and buy it.");
                 break;
             case 42:
@@ -329,7 +352,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 11:
-                    if (GameManager.UM.Weeks == 1)
+                    if (GameManager.TM.Weeks == 1)
                     {
                         QuestCompleted();
                     }
@@ -557,6 +580,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         questCount = data.questCount;
         if (data.questActive)
         {
+            InitializeQuestCards();
             GameManager.WM.OpenQuestWindow();
             questCount -= 1;
             NextQuest();

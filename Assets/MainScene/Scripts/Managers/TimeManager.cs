@@ -4,11 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : MonoBehaviour, IDataPersistence
 {
     [Header("Time variables")]
     public Image advanceWeekImage;
     public TMP_Text weekDayText;
+    public TMP_Text weekText;
+    private int _weeks;
+    public int Weeks
+    {
+        get => _weeks;
+        set
+        {
+            _weeks = value;
+            weekText.text = GameManager.UM.FormatNumber(_weeks).ToString();
+        }
+    }
 
     [Header("Week cycle variables")]
     public List<string> weekDays = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
@@ -39,7 +50,7 @@ public class TimeManager : MonoBehaviour
             weekDayText.text = weekDays[currentDayOfWeek];
             yield return new WaitForSeconds(0.75f);
         }
-        GameManager.UM.Weeks++;
+        Weeks++;
         GameManager.WM.advanceWindow.SetActive(false);
         GameManager.IPM.cam.transform.position = GameManager.IPM.startingPos;
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
@@ -79,5 +90,15 @@ public class TimeManager : MonoBehaviour
     public void RotateSky(float skyRotationSpeed)
     {
         RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyRotationSpeed);
+    }
+
+    public void LoadData(GameData data)
+    {
+        Weeks = data.weeks;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.weeks = _weeks;
     }
 }

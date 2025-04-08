@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     [Header("Inventory lists")]
     public List<InventoryItem> itemsInInventory;
@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UnlockInventoryItem(Card itemCard, Plant plant)
     {
-        InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == GameManager.HM.dragCard.itemName);
+        InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == itemCard.itemName);
         if (existingInventoryItem == null)
         {
             InventoryItem inventoryItem = Instantiate(inventoryItemTemplate, Vector3.zero, Quaternion.identity, inventoryContentArea.transform);
@@ -70,5 +70,22 @@ public class InventoryManager : MonoBehaviour
     public InventoryItem FindInventoryItemByID(string id)
     {
         return itemsInInventory.Find(item => item.attachedItemCard.cardId == id);
+    }
+
+    public void LoadData(GameData data)
+    {
+        for (int i = 0; i < data.itemQuantities.Count; i++)
+        {
+            itemsInInventory[i].ItemQuantity = data.itemQuantities[i];
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.itemQuantities.Clear();
+        foreach (InventoryItem item in itemsInInventory)
+        {
+            data.itemQuantities.Add(item.ItemQuantity);
+        }
     }
 }

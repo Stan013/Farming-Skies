@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static Island;
 
 public class Plant : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Plant : MonoBehaviour
     public List<int> nutrientsUsages;
     public int buildableTaxCost;
     private System.Random random = new System.Random();
+    public PlantData plantData;
 
     public void GiveDrop(Transform plot)
     {
@@ -76,7 +78,11 @@ public class Plant : MonoBehaviour
                 attachedIsland.nutrientsAvailable[i] -= nutrientsUsages[i];
             }
         }
+    }
 
-        attachedIsland.CheckIslandMaterial();
+    public PlantData SavePlantData()
+    {
+        plantData = new PlantData(attachedInventoryItem.attachedItemCard.cardId, attachedIsland.islandID, transform.parent.name, attachedInventoryItem.attachedItemCard.cardType);
+        return plantData;
     }
 }

@@ -33,7 +33,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.UM.Balance = gameData.balance;
         GameManager.UM.Water = gameData.water;
         GameManager.UM.Fertiliser = gameData.fertiliser;
-        GameManager.UM.Weeks = gameData.weeks;
+        GameManager.TM.Weeks = gameData.weeks;
         GameManager.HM.SetHandSlots();
         GameManager.ISM.SetupIslands();
         GameManager.CM.SetupCards();

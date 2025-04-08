@@ -23,7 +23,7 @@ public class PlantManager : MonoBehaviour
                 }
                 else
                 {
-                    island.SetIslandState(Island.IslandState.Cultivated);
+                    island.currentState = Island.IslandState.Cultivated;
                 }
             }
         }
@@ -40,4 +40,48 @@ public class PlantManager : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+
+    public GameObject FindPlotOnIslandByID(Island island, string plotID, string plantSize)
+    {
+        switch (plantSize)
+        {
+            case "Small crops":
+                return island.availableSmallPlots.Find(plot => plot.name == plotID);
+            case "Medium crops":
+                return island.availableMediumPlots.Find(plot => plot.name == plotID);
+            case "Large crops":
+                return island.availableLargePlots.Find(plot => plot.name == plotID);
+            case "Buildables":
+                break;
+        }
+        return null;
+    }
+
+    public void SetPlantData(Island island, List<PlantData> plantsMap)
+    {
+        for (int i = 0; i < plantsMap.Count; i++)
+        {
+            GameObject plot = FindPlotOnIslandByID(island, plantsMap[i].plotID, plantsMap[i].plantSize);
+            GameObject plant = Instantiate(GameManager.CM.FindCardByID(plantsMap[i].plantID).GetComponent<CardDrag>().dragModel, Vector3.zero, Quaternion.identity, plot.transform);
+            plant.transform.localPosition = new Vector3(0, -0.25f, 0);
+            plant.transform.localRotation = Quaternion.identity;
+            island.MakeUsedPlot(plot, GameManager.CM.FindCardByID(plantsMap[i].plantID), plant.GetComponent<Plant>());
+            island.UpdateNutrientsRequired(plant.GetComponent<Plant>());
+        }
+    }
+
+    public List<PlantData> GetPlantData(Island island)
+    {
+        if(island.islandBought)
+        {
+            List<PlantData> plantsMap = new List<PlantData>();
+            foreach (Plant plant in island.itemsOnIsland)
+            {
+                plantsMap.Add(plant.SavePlantData());
+            }
+            return plantsMap;
+        }
+        return null;
+    }
+    
 }

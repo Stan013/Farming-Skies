@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class MarketManager : MonoBehaviour
+public class MarketManager : MonoBehaviour, IDataPersistence
 {
     [Header("Market lists")]
     public List<MarketItem> itemsInMarket;
@@ -158,5 +158,15 @@ public class MarketManager : MonoBehaviour
     public MarketItem FindMarketItemByID(string id)
     {
         return itemsInMarket.Find(marketItem => marketItem.attachedItemCard.cardId == id);
+    }
+
+    public void LoadData(GameData data)
+    {
+        SetupMarket();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+
     }
 }

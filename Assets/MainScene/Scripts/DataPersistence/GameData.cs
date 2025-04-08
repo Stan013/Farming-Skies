@@ -5,11 +5,17 @@ using UnityEngine.Video;
 [System.Serializable]
 public class PlantData
 {
+    public string plantID;
+    public string islandID;
+    public string plotID;
+    public string plantSize;
 
-
-    public PlantData()
+    public PlantData(string plantIDData, string islandIDData, string plotIDData, string plantSizeData)
     {
-
+        plantID = plantIDData;
+        islandID = islandIDData;
+        plotID = plotIDData;
+        plantSize = plantSizeData;
     }
 }
 
@@ -20,20 +26,20 @@ public class IslandData
     public bool islandBought;
     public string islandID;
     public int islandState;
-    public List<PlantData> plantsMap = new List<PlantData>();
-    public List<int> nutrientsAvailable = new List<int>();
-    public List<int> nutrientsRequired = new List<int>();
+    public List<int> nutrientsAvailable;
 
-    public IslandData(bool islandAvailableData, bool islandBoughtData, string islandIDData, int islandStateData, List<PlantData> plantsMapData, List<int> nutrientsAvailableData, List<int> nutrientsRequiredData)
+    // Plant Manager Data
+    public List<PlantData> plantsMap;
+
+    public IslandData(bool islandAvailableData, bool islandBoughtData, string islandIDData, int islandStateData, List<int> nutrientsAvailableData, List<PlantData> plantsMapData)
     {
         islandAvailable = islandAvailableData;
         islandBought = islandBoughtData;
         islandID = islandIDData;
         islandState = islandStateData;
-        plantsMap = plantsMapData;
         nutrientsAvailable = nutrientsAvailableData;
-        nutrientsRequired = nutrientsRequiredData;
-    }
+        plantsMap = plantsMapData;
+    } 
 }
 
 [System.Serializable]
@@ -73,6 +79,9 @@ public class GameData
 
     // Island Manager Data
     public List<IslandData> islandsMap = new List<IslandData>();
+
+    // Inventory Manager Data
+    public List<int> itemQuantities = new List<int>();
 
     public GameData()
     {

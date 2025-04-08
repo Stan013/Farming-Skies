@@ -49,7 +49,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
         handSlots[lastFilledSlotIndex].AddCardToSlot(lastFilledSlotIndex, card);
         lastFilledSlotIndex++;
         card.SetCardState(Card.CardState.InHand);
-        card.transform.localScale *= 0.5f;
+        card.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         GameManager.DM.Deck = GameManager.DM.cardsInDeck.Count;
         StartCoroutine(MoveCardsFromBottom(card));
     }
@@ -118,7 +118,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
         }
         card.transform.localPosition = Vector3.zero;
         card.transform.localRotation = Quaternion.identity;
-        card.transform.localScale = Vector3.one;
+        card.transform.localScale = new Vector3(0.5f,0.5f,1f);
     }
 
     public void HideCardsInHand(bool hidden)
@@ -147,7 +147,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
             handSlots.Clear();
         }
         SetHandSlots();
-
+        lastFilledSlotIndex = 0;
         cardsInHand.Clear();
         for (int i = 0; i < data.cardsInHand.Count; i++)
         {

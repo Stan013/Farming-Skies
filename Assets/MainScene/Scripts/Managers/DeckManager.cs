@@ -16,7 +16,7 @@ public class DeckManager : MonoBehaviour, IDataPersistence
         set
         {
             _deck = value;
-            deckText.text = GameManager.UM.FormatNumber(Deck).ToString();
+            deckText.text = GameManager.UM.FormatNumber(_deck).ToString();
         }
     }
 
@@ -33,7 +33,7 @@ public class DeckManager : MonoBehaviour, IDataPersistence
 
     public void AddCardToDeck(string cardId)
     {
-        _deck += 1;
+        _deck = cardsInDeck.Count;
         Card newCard = Instantiate(GameManager.CM.FindCardByID(cardId), Vector3.zero, Quaternion.identity);
         newCard.SetCardState(Card.CardState.InDeck);
     }
@@ -50,6 +50,8 @@ public class DeckManager : MonoBehaviour, IDataPersistence
         {
             AddCardToDeck(cardID);
         }
+
+        Deck = data.cardsInDeck.Count;
     }
 
     public void SaveData(ref GameData data)

@@ -10759,17 +10759,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   islandAvailable: 0
   islandBought: 0
-  needsNPK: 0
   islandID: 
-  islandTop: {fileID: 1617400347840010319}
-  islandBottom: {fileID: 1294355367727521562}
+  islandTop: {fileID: 969071599434561946}
+  islandBottom: {fileID: 5034893438613666141}
   topMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
   bottomMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
+  islandData:
+    islandAvailable: 0
+    islandBought: 0
+    islandID: 
+    islandState: 0
+    plantsMap: []
+    nutrientsAvailable: 
+    nutrientsRequired: 
   islandBuildCost: 0
   islandExpenseCost: 0
-  currentState: 1
+  islandState: 0
   previousState: 1
   glow: {fileID: 7701377534939352897}
+  potentialMatTop: {fileID: 2100000, guid: c34ed82100654344bb2ace1c57335fb3, type: 2}
   transparentMatTop: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
   sowedMatTop: {fileID: 2100000, guid: a01d16d3d44a79341b9d95acf8dbd6c9, type: 2}
   sowedNeedsNPKMatTop: {fileID: 2100000, guid: c34ed82100654344bb2ace1c57335fb3, type: 2}
@@ -10777,6 +10785,7 @@ MonoBehaviour:
   cultivatedNeedsNPKMatTop: {fileID: 2100000, guid: ecb946983f0586941b75f0f3c971d76d, type: 2}
   wateredMatTop: {fileID: 2100000, guid: 06d64f0686a621c4b9d02b42e257051f, type: 2}
   wateredNeedsNPKMatTop: {fileID: 2100000, guid: 517d062ed46ce864881cf861fb713f4f, type: 2}
+  potentialMatBottom: {fileID: 2100000, guid: e3dce13a3ee44ee40860d47d9cb5d457, type: 2}
   transparentMatBot: {fileID: 2100000, guid: 7358e15b95edd03448ce577d2975690f, type: 2}
   sowedMatBot: {fileID: 2100000, guid: c03ac127f34efe54fbd0eb6755a981bb, type: 2}
   sowedNeedsNPKMatBot: {fileID: 2100000, guid: e3dce13a3ee44ee40860d47d9cb5d457, type: 2}
@@ -10849,6 +10858,7 @@ MonoBehaviour:
   usedSmallPlots: []
   usedMediumPlots: []
   usedLargePlots: []
+  plantMap: []
   itemsOnIsland: []
   smallPlantsOnIsland: []
   mediumPlantsOnIsland: []

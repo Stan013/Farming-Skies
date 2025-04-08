@@ -78,7 +78,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
         unlockedCards.Clear();
         foreach (string cardID in data.unlockedCardsID)
         {
-            unlockedCards.Add(FindCardByID(cardID));
+            FindCardByID(cardID).cardUnlocked = true;
         }
 
         inspectedCards.Clear();
@@ -86,6 +86,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
         {
             inspectedCards.Add(FindCardByID(cardID));
         }
+        SetupCards();
     }
 
     public void SaveData(ref GameData data)

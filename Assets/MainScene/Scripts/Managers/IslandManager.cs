@@ -56,7 +56,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                     availableIslands.Add(childIsland);
                 }
 
-                childIsland.SetIslandState(Island.IslandState.Transparent);
+                childIsland.currentState = Island.IslandState.Transparent;
                 childIsland.previousState = Island.IslandState.Transparent;
                 childIsland.topMat = childIsland.islandTop.GetComponent<Renderer>().material;
                 childIsland.bottomMat = childIsland.islandBottom.GetComponent<Renderer>().material;
@@ -108,7 +108,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public void AddIslandToBought(Island reconstructedIsland)
     {
         reconstructedIsland.islandBought = true;
-        reconstructedIsland.SetIslandState(Island.IslandState.Sowed);
+        reconstructedIsland.currentState = Island.IslandState.Sowed;
         boughtIslands.Add(reconstructedIsland);
         GameManager.LM.FarmLevel += 1;
         GameManager.EM.farmValue += reconstructedIsland.islandBuildCost;
@@ -141,11 +141,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 availableIslands.Add(island);
             }
         }
-    }
-
-    public Island FindIslandByID(string islandID)
-    {
-        return allIslands.Find(island => island.islandID == islandID);
     }
 
     public void OpenIslandManagement(string tab)
@@ -192,6 +187,11 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public Island FindIslandByID(string islandID)
+    {
+        return allIslands.Find(island => island.islandID == islandID);
+    }
+
     public void LoadData(GameData data)
     {
         for (int i = 0; i < data.islandsMap.Count; i++)
@@ -204,10 +204,12 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 boughtIslands.Add(island);
             }
         }
+        GameManager.ISM.SetupIslandCollisions(true);
     }
 
     public void SaveData(ref GameData data)
     {
+        data.islandsMap.Clear();
         foreach (Island island in availableIslands)
         {
             data.islandsMap.Add(island.SaveIslandData());

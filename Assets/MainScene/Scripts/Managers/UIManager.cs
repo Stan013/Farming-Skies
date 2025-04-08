@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static Island;
 
 public class UIManager : MonoBehaviour, IDataPersistence
 {
@@ -18,7 +19,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private int _fertiliser;
     private int _deck;
     private float _expense;
-    private int _weeks;
+
 
     public float Balance
     {
@@ -56,22 +57,12 @@ public class UIManager : MonoBehaviour, IDataPersistence
             UpdateUI();
         }
     }
-    public int Weeks
-    {
-        get => _weeks;
-        set
-        {
-            _weeks = value;
-            UpdateUI();
-        }
-    }
 
     [Header("Game variables text")]
     public TMP_Text expenseText;
     public TMP_Text balanceText;
     public TMP_Text waterText;
     public TMP_Text fertiliserText;
-    public TMP_Text weekText;
 
     [Header("Island builder")]
     public TMP_Text buildCostText;
@@ -85,7 +76,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
         balanceText.text = FormatNumber(_balance).ToString();
         waterText.text = FormatNumber(_water).ToString();
         fertiliserText.text = FormatNumber(_fertiliser).ToString();
-        weekText.text = FormatNumber(_weeks).ToString();
     }
 
     public string FormatNumber(float num)
@@ -124,7 +114,9 @@ public class UIManager : MonoBehaviour, IDataPersistence
                 _balance -= island.islandBuildCost;
                 GameManager.ISM.AddIslandToBought(island);
                 constructionLabel.gameObject.SetActive(false);
-                ;
+                island.islandMatPotential = true;
+                island.SetIslandMaterial();
+                island.CreateIslandMaterial(IslandState.Cultivated);
             }
         }
     }
@@ -135,7 +127,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
         _balance = data.balance;
         _water = data.water;
         _fertiliser = data.fertiliser;
-        _deck = data.cardsInDeck.Count;
         UpdateUI();
     }
 

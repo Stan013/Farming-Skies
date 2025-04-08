@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine; 
 
 
@@ -54,6 +55,11 @@ public class InputManager : MonoBehaviour, IDataPersistence
 
             smoothMoveDirection = Vector3.Lerp(smoothMoveDirection, moveDirection.normalized, Time.deltaTime * moveSpeed);
             rb.velocity = smoothMoveDirection * moveSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            smoothMoveDirection = Vector3.zero; 
         }
     }
 
@@ -117,8 +123,16 @@ public class InputManager : MonoBehaviour, IDataPersistence
                 {
                     GameManager.UM.transparencySlider.value = 0f;
                     GameManager.UM.constructionLabel.gameObject.SetActive(false);
-                    potentialIsland.SetIslandMaterial(potentialIsland.transparentMatTop, potentialIsland.transparentMatTop, potentialIsland.islandTop);
-                    potentialIsland.SetIslandMaterial(potentialIsland.transparentMatBot, potentialIsland.transparentMatBot, potentialIsland.islandBottom);
+
+                    if(potentialIsland.glow.activeSelf)
+                    {
+                        potentialIsland.currentState = Island.IslandState.Highlighted;
+                    }
+                    else
+                    {
+                        potentialIsland.currentState = Island.IslandState.Transparent;
+                    }
+                    potentialIsland.SetIslandMaterial();
                 }
             }
 
@@ -128,12 +142,6 @@ public class InputManager : MonoBehaviour, IDataPersistence
                 float alphaChangeSpeed = 1.0f / holdDuration;
                 GameManager.UM.UpdateBuildIslandSlider(potentialIsland);
                 potentialIsland.UpdateMaterialAlpha(alphaChangeSpeed);
-            }
-
-            if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit2) // Click to inspect island
-                && hit2.transform.GetComponent<Island>() != null)
-            {
-                Island hitIsland = hit2.transform.GetComponent<Island>();
             }
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");

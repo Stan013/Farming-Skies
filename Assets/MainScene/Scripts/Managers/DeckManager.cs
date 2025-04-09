@@ -29,13 +29,13 @@ public class DeckManager : MonoBehaviour, IDataPersistence
         {
             AddCardToDeck(card.cardId);
         }
-    }
+    } 
 
     public void AddCardToDeck(string cardId)
     {
-        _deck = cardsInDeck.Count;
         Card newCard = Instantiate(GameManager.CM.FindCardByID(cardId), Vector3.zero, Quaternion.identity);
         newCard.SetCardState(Card.CardState.InDeck);
+        Deck = cardsInDeck.Count;
     }
 
     public Card FindCardInDeckByID(string cardId)

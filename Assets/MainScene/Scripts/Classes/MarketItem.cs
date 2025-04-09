@@ -13,6 +13,7 @@ public class MarketItem : MonoBehaviour
     public Card attachedItemCard;
     public InventoryItem attachedInventoryItem;
     public Button expandButton;
+    public MarketData marketData;
 
     private string marketTransaction = "Sell";
     public Button transactionButton;
@@ -25,9 +26,9 @@ public class MarketItem : MonoBehaviour
     public Sprite validTransaction;
     public Sprite ongoingTransaction;
 
-    public List<float> itemPrices = new List<float>();
-    public List<int> itemDemands = new List<int>();
-    public List<int> itemSupplies= new List<int>();
+    public List<float> itemPrices;
+    public List<int> itemDemands;
+    public List<int> itemSupplies;
     public bool canTransaction;
     public int maxBuyAmount;
 
@@ -211,24 +212,28 @@ public class MarketItem : MonoBehaviour
         GameManager.MM.marketScroll.verticalNormalizedPosition = 1f;
     }
 
-    private string FormatNumber(float number)
+    public void LoadMarketData(MarketData data)
     {
-        if (number >= 1000000000)
-        {
-            return (number / 1000000000f).ToString("0.0") + "B";
-        }
-        if (number >= 1000000)
-        {
-            return (number / 1000000f).ToString("0.0") + "M";
-        }
-        else if (number >= 1000) 
-        {
-            return (number / 1000f).ToString("0.0") + "K";
-        }
-        else
-        {
-            return number.ToString("0");
-        }
+        Card itemCard = GameManager.CM.FindCardByID(data.cardID);
+        attachedItemCard = itemCard;
+        attachedInventoryItem = GameManager.INM.FindInventoryItemByID(data.cardID);
+        itemNameText.text = attachedItemCard.itemName;
+        itemImage.sprite = attachedItemCard.cardSprite;
+        itemIndex = GameManager.MM.itemsInMarket.Count;
+
+        itemPrices.Clear();
+        itemDemands.Clear();
+        itemSupplies.Clear();
+        itemPrices = data.itemPrices;
+        itemDemands = data.itemDemands;
+        itemSupplies = data.itemSupplies;
+        CheckValidTransactionAmount("0");
+    }
+
+    public MarketData SaveMarketData()
+    {
+        marketData = new MarketData(attachedItemCard.cardId, itemPrices, itemDemands, itemSupplies);
+        return marketData;
     }
 }
  

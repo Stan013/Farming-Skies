@@ -101,59 +101,43 @@ public class MarketManager : MonoBehaviour, IDataPersistence
         return 0;
     }
 
-    public void SetAttachedInventoryItems()
+    public void MarketUpdate()
     {
         foreach (MarketItem marketItem in itemsInMarket)
         {
-            marketItem.attachedInventoryItem = GameManager.INM.FindInventoryItemByID(marketItem.attachedItemCard.cardId);
+            if(marketItem.attachedInventoryItem == null)
+            {
+                marketItem.attachedInventoryItem = GameManager.INM.FindInventoryItemByID(marketItem.attachedItemCard.cardId);
+            }
+            GenerateNewMarket(marketItem);
         }
     }
 
-    /*    float currentPrice = item.priceCurrent;
+    public void GenerateNewMarket(MarketItem item)
+    {
+        float currentPrice = item.attachedItemCard.itemPrice;
         float baseDemand = item.attachedItemCard.itemDemand;
         float baseSupply = item.attachedItemCard.itemSupply;
+
         int randomDemand = GetRandomPercentage(marketWeights, marketChanges);
         int randomSupply = GetRandomPercentage(marketWeights, marketChanges);
+
         int priceChange = randomDemand - randomSupply;
         float randomDecimal = GetRandomPercentage(marketWeightsDecimal, marketChangesDecimal);
         float totalPriceChangePercentage = priceChange + (randomDecimal / 10 * Mathf.Sign(priceChange));
-        item.attachedItemCard.itemDemand = (float) Math.Round(baseDemand* (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
-                    item.attachedItemCard.itemSupply = (float) Math.Round(baseSupply* (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
-                    item.priceCurrent = (float) Math.Round(currentPrice* (1 + totalPriceChangePercentage / 100f), 2, MidpointRounding.AwayFromZero);
-                    item.UpdateMarketItem(item.attachedItemCard);*/
 
-    /*    public void ExecuteTransaction(MarketItem marketItem, int amount, bool isSelling)
-        {
-            if (amount <= 0) return;
-            Vector3 startPos;
-            Vector3 endPos;
-            float totalBalance = 0f;
-            if (isSelling)
-            {
-                amount = Mathf.Min(amount, marketItem.attachedItemCard.itemQuantity);
-                marketItem.attachedItemCard.itemQuantity -= amount;
-                totalBalance = amount * marketItem.priceCurrent;
-                GameManager.UM.Balance += totalBalance;
-                startPos = marketItem.sellUI.transactionButton.transform.position;
-                endPos = GameManager.UM.transform.position;
-            }
-            else
-            {
-                float itemPrice = marketItem.priceCurrent;
-                int affordableAmount = (int)(GameManager.UM.Balance / itemPrice);
-                amount = Mathf.Min(amount, affordableAmount);
-                marketItem.attachedItemCard.itemQuantity += amount;
-                totalBalance = amount * itemPrice;
-                GameManager.UM.Balance -= totalBalance;
-                startPos = GameManager.UM.transform.position;
-                endPos = marketItem.buyUI.transactionButton.transform.position;
-            }
+        float newPrice = currentPrice * (1 + totalPriceChangePercentage / 100f);
+        newPrice = Mathf.Max(1f, (float)Math.Round(newPrice, 2, MidpointRounding.AwayFromZero));
+        int newDemand = (int)Math.Round(baseDemand * (1 + randomDemand / 100f), 2, MidpointRounding.AwayFromZero);
+        int newSupply = (int)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
 
-            int coinCount = Mathf.Max(1, Mathf.FloorToInt(totalBalance / 50));
-            //StartCoroutine(SpawnCoins(startPos, endPos, coinCount, marketItem));
-            //UpdateMarketItems();
-            //;
-        }*/
+        item.attachedItemCard.itemPrice = newPrice;
+        item.itemPrices.Add(newPrice);
+        item.attachedItemCard.itemDemand = newDemand;
+        item.itemDemands.Add(newDemand);
+        item.attachedItemCard.itemSupply = newSupply;
+        item.itemSupplies.Add(newSupply);
+    }
 
     public MarketItem FindMarketItemByID(string id)
     {
@@ -163,10 +147,18 @@ public class MarketManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         SetupMarket();
+        for (int i = 0; i < data.marketsMap.Count; i++)
+        {
+            itemsInMarket[i].LoadMarketData(data.marketsMap[i]);
+        }
     }
 
     public void SaveData(ref GameData data)
     {
-
+        data.marketsMap.Clear();
+        foreach (MarketItem item in itemsInMarket)
+        {
+            data.marketsMap.Add(item.SaveMarketData());
+        }
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -33,14 +33,10 @@ public class ExpandedMarketItem : MonoBehaviour
     public Button maxButton;
 
     public TMP_Text highestPriceText;
+    public TMP_Text averagePriceText;
     public TMP_Text lowestPriceText;
-
-    public TMP_Text expandedDemandAmount;
-    public Image expandedDemandIcon;
     public TMP_Text expandedPrice;
     public Image expandedPriceIcon;
-    public TMP_Text expandedSupplyAmount;
-    public Image expandedSupplyIcon;
 
     public Sprite upIcon;
     public Sprite sameIcon;
@@ -56,11 +52,11 @@ public class ExpandedMarketItem : MonoBehaviour
         attachedInventoryItem = GameManager.INM.FindInventoryItemByID(item.attachedItemCard.cardId);
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
+        expandedQuantity.text = attachedInventoryItem.ItemQuantity.ToString();
         highestPriceText.text = collapsedItem.itemPrices.Max().ToString();
+        averagePriceText.text = collapsedItem.itemPrices.Average().ToString();
         lowestPriceText.text = collapsedItem.itemPrices.Min().ToString();
-        expandedDemandAmount.text = FormatNumber(collapsedItem.attachedItemCard.itemDemand).ToString();
-        expandedSupplyAmount.text = FormatNumber(collapsedItem.attachedItemCard.itemSupply).ToString();
-        expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString();
+        expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString() + " ₴";
         collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
         SetPriceIcons();
         CheckValidTransactionAmount("0");
@@ -68,18 +64,21 @@ public class ExpandedMarketItem : MonoBehaviour
 
     public void CollapseMarketItem()
     {
-        int itemIndex = collapsedItem.transform.GetSiblingIndex();
-        int rowStartIndex = (itemIndex / 4) * 4;
-
-        for (int i = 0; i < 3; i++)
+        if(this.gameObject.activeSelf)
         {
-            GameObject fillItem = GameManager.MM.marketContentArea.transform.GetChild(1+i).gameObject;
-            Destroy(fillItem);
-        }
+            int itemIndex = collapsedItem.transform.GetSiblingIndex();
+            int rowStartIndex = (itemIndex / 4) * 4;
 
-        collapsedItem.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject fillItem = GameManager.MM.marketContentArea.transform.GetChild(1 + i).gameObject;
+                Destroy(fillItem);
+            }
+
+            collapsedItem.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        }
     }
 
     public void SetMarketTransaction(string input)
@@ -103,14 +102,16 @@ public class ExpandedMarketItem : MonoBehaviour
     public void IncreaseAmount()
     {
         int amount = transactionAmount;
-        amount = Mathf.Min(collapsedItem.maxBuyAmount, amount + 1);
+        int maxAmount = Mathf.Max(collapsedItem.maxBuyAmount, attachedInventoryItem.ItemQuantity);
+        amount = Mathf.Min(maxAmount, amount + 1);
         transactionAmountInput.text = amount.ToString();
     }
 
     public void SetMax()
     {
-        transactionAmount = collapsedItem.maxBuyAmount;
-        transactionAmountInput.text = collapsedItem.maxBuyAmount.ToString();
+        int maxAmount = Mathf.Max(collapsedItem.maxBuyAmount, attachedInventoryItem.ItemQuantity);
+        transactionAmount = maxAmount;
+        transactionAmountInput.text = maxAmount.ToString();
     }
 
     public void CheckValidTransactionAmount(string input)
@@ -123,12 +124,15 @@ public class ExpandedMarketItem : MonoBehaviour
             canTransaction = false;
 
             buyButton.interactable = false;
+            buyButton.GetComponent<Image>().sprite = invalidTransaction;
             sellButton.interactable = false;
+            sellButton.GetComponent<Image>().sprite = invalidSell;
             return;
         }
 
         transactionAmount = value;
         transactionAmountInput.text = value.ToString();
+        collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
 
         float totalCost = value * collapsedItem.attachedItemCard.itemPrice;
         bool canBuy = totalCost <= GameManager.UM.Balance && collapsedItem.maxBuyAmount > 0;
@@ -146,6 +150,7 @@ public class ExpandedMarketItem : MonoBehaviour
         }
         else
         {
+            buyButton.interactable = false;
             buyButton.GetComponent<Image>().sprite = invalidTransaction;
         }
 
@@ -156,6 +161,7 @@ public class ExpandedMarketItem : MonoBehaviour
         }
         else
         {
+            sellButton.interactable = false;
             sellButton.GetComponent<Image>().sprite = invalidSell;
         }
     }
@@ -211,15 +217,16 @@ public class ExpandedMarketItem : MonoBehaviour
             attachedInventoryItem.ItemQuantity += transactionAmount;
         }
         CheckValidTransactionAmount("0");
+        expandedQuantity.text = attachedInventoryItem.ItemQuantity.ToString();
     }
 
     public void SetPriceIcons()
     {
-        if (collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 1] > collapsedItem.attachedItemCard.itemPrice)
+        if (collapsedItem.itemPrices.Last() < collapsedItem.itemPrices[collapsedItem.itemPrices.Count-2])
         {
             expandedPriceIcon.sprite = downIcon;
         }
-        else if (collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 1] < collapsedItem.attachedItemCard.itemPrice)
+        else if (collapsedItem.itemPrices.Last() > collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 2])
         {
             expandedPriceIcon.sprite = upIcon;
         }
@@ -227,42 +234,16 @@ public class ExpandedMarketItem : MonoBehaviour
         {
             expandedPriceIcon.sprite = sameIcon;
         }
-
-        if (collapsedItem.itemDemands[collapsedItem.itemDemands.Count - 1] > collapsedItem.attachedItemCard.itemDemand)
-        {
-            expandedDemandIcon.sprite = downIcon;
-        }
-        else if (collapsedItem.itemDemands[collapsedItem.itemDemands.Count - 1] < collapsedItem.attachedItemCard.itemDemand)
-        {
-            expandedDemandIcon.sprite = upIcon;
-        }
-        else
-        {
-            expandedDemandIcon.sprite = sameIcon;
-        }
-
-        if (collapsedItem.itemSupplies[collapsedItem.itemSupplies.Count - 1] > collapsedItem.attachedItemCard.itemSupply)
-        {
-            expandedSupplyIcon.sprite = downIcon;
-        }
-        else if (collapsedItem.itemSupplies[collapsedItem.itemSupplies.Count - 1] < collapsedItem.attachedItemCard.itemSupply)
-        {
-            expandedSupplyIcon.sprite = upIcon;
-        }
-        else
-        {
-            expandedSupplyIcon.sprite = sameIcon;
-        }
     }
 
     public static string FormatNumber(float num)
     {
         if (num >= 1000000000)
-            return (num / 1000000000f).ToString("0.#") + "B";
+            return (num / 1000000000f).ToString("0.##") + "B";
         if (num >= 1000000)
-            return (num / 1000000f).ToString("0.#") + "M";
+            return (num / 1000000f).ToString("0.##") + "M";
         if (num >= 1000)
-            return (num / 1000f).ToString("0.#") + "K";
+            return (num / 1000f).ToString("0.##") + "K";
 
         return num.ToString("0");
     }

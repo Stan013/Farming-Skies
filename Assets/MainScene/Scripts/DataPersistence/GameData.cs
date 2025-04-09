@@ -3,6 +3,23 @@ using UnityEngine;
 using UnityEngine.Video;
 
 [System.Serializable]
+public class MarketData
+{
+    public string cardID;
+    public List<float> itemPrices;
+    public List<int> itemDemands;
+    public List<int> itemSupplies;
+
+    public MarketData(string cardIDData, List<float> itemPricesData, List<int> itemDemandsData, List<int> itemSuppliesData)
+    {
+        cardID = cardIDData;
+        itemPrices = itemPricesData;
+        itemDemands = itemDemandsData;
+        itemSupplies = itemSuppliesData;
+    }
+}
+
+[System.Serializable]
 public class PlantData
 {
     public string plantID;
@@ -82,6 +99,9 @@ public class GameData
 
     // Inventory Manager Data
     public List<int> itemQuantities = new List<int>();
+
+    // Market Manager Data
+    public List<MarketData> marketsMap = new List<MarketData>();
 
     public GameData()
     {

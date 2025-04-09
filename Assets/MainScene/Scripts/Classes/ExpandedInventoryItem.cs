@@ -24,18 +24,21 @@ public class ExpandedInventoryItem : MonoBehaviour
 
     public void CollapseInventoryItem()
     {
-        int itemIndex = collapsedItem.transform.GetSiblingIndex();
-        int rowStartIndex = (itemIndex / 4) * 4;
-
-        for (int i = 0; i < 3; i++)
+        if(this.gameObject.activeSelf)
         {
-            GameObject fillItem = GameManager.INM.inventoryContentArea.transform.GetChild(1+i).gameObject;
-            Destroy(fillItem);
-        }
+            int itemIndex = collapsedItem.transform.GetSiblingIndex();
+            int rowStartIndex = (itemIndex / 4) * 4;
 
-        collapsedItem.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject fillItem = GameManager.INM.inventoryContentArea.transform.GetChild(1 + i).gameObject;
+                Destroy(fillItem);
+            }
+
+            collapsedItem.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        }
     }
 
     public void UpdatePredictedYield()

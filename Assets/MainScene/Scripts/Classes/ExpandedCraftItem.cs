@@ -46,19 +46,22 @@ public class ExpandedCraftItem : MonoBehaviour
 
     public void CollapseCraftItem()
     {
-        int itemIndex = collapsedItem.transform.GetSiblingIndex();
-        int rowStartIndex = (itemIndex / 4) * 4;
-
-        for (int i = 0; i < 3; i++)
+        if(this.gameObject.activeSelf)
         {
-            GameObject fillItem = GameManager.CRM.craftContentArea.transform.GetChild(1+i).gameObject;
-            Destroy(fillItem);
-        }
+            int itemIndex = collapsedItem.transform.GetSiblingIndex();
+            int rowStartIndex = (itemIndex / 4) * 4;
 
-        craftAmount = 0;
-        collapsedItem.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject fillItem = GameManager.CRM.craftContentArea.transform.GetChild(1 + i).gameObject;
+                Destroy(fillItem);
+            }
+
+            craftAmount = 0;
+            collapsedItem.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        }
     }
 
     public void SetMin()

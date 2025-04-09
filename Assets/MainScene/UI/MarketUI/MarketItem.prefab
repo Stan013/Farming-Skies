@@ -370,6 +370,11 @@ MonoBehaviour:
   attachedItemCard: {fileID: 0}
   attachedInventoryItem: {fileID: 0}
   expandButton: {fileID: 6808338977217873428}
+  marketData:
+    cardID: 
+    itemPrices: []
+    itemDemands: 
+    itemSupplies: 
   transactionButton: {fileID: 2775292884922326128}
   transactionText: {fileID: 3163921139594962170}
   transactionAmount: 0
@@ -792,7 +797,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 7222063105327674047}
   m_TextViewport: {fileID: 9055934292872137132}
   m_TextComponent: {fileID: 3152249817460473199}

@@ -190,10 +190,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Hold again!", "The same as the quick craft you will need to hold down your left mouse on the green craft button. If the input is valid the button will turn yellow and if held long enough your craft will be succesful.");
                 break;
             case 26:
+                GameManager.CRM.expandedCraftItem.CollapseCraftItem();
                 GameManager.UM.Balance += 50;
                 GameManager.UM.Water += 10;
                 GameManager.UM.Fertiliser += 25;
                 GameManager.CRM.expandedCraftItem.craftAmountInput.interactable = false;
+                GameManager.CRM.FindCraftItemByID("CardPhosphorusUtility").expandButton.interactable = false;
                 GameManager.CRM.FindCraftItemByID("CardPotassiumUtility").expandButton.interactable = true;
                 UpdateQuest("Select next one!", "Do this one more time for the last nutrient you need which is potassium. Search for potassium and click the green button with the arrow pointing downwards again. It should now expand that item.");
                 break;
@@ -228,22 +230,28 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Find rice market!", "As you can see this is the place where you can buy and sell all your items. Let's use the filters on top and click the green tab that says grains and then find the market for rice.");
                 break;
             case 35:
+                GameManager.MM.FindMarketItemByID("CardRicePlant").transactionAmountInput.interactable = true;
                 UpdateQuest("Quick sell rice!", "The same as crafting you can quick sell or buy an item. It will then sell or buy the given quantity for the current market price. Let's do this with the rice we harvested and put in 10 as the sell amount.");
                 break;
             case 36:
                 UpdateQuest("Sell your rice!", "As you can see the label turns green again which means you put in a valid amount. Now use your left mouse button and hold down on the sell label to earn some money.");
                 break;
             case 37:
+                GameManager.MM.FindMarketItemByID("CardRicePlant").transactionAmountInput.interactable = false;
+                GameManager.MM.FindMarketItemByID("CardRicePlant").expandButton.interactable = true;
                 UpdateQuest("Market details!", "The problem again is that we don't know how much the rice sold for. Besides we don't know what the supply and demand is for rice plus how much we still have left. So let's click on the green button again to expand.");
                 break;
             case 38:
-                UpdateQuest("Get rice back!", "We can now see the demand and the supply of the item plus the current price. These numbers will change everyday so sell and buy at the right time. Since we will need our rice put in the same amount as we sold so 10.");
+                GameManager.MM.expandedMarketItem.sellButton.interactable = false;
+                UpdateQuest("Get rice back!", "We can now see the demand and the supply of the rice plus the current price. These numbers will change everyday so sell and buy at the right time. Since we will need rice put in the same amount as we sold so 10.");
                 break;
             case 39:
-                UpdateQuest("Buy the rice!", "The label will turn green again and you can now buy the given amount. Hover your mouse over the green buy button and the same as before hold it down to buy back the rice we just sold.");
+                UpdateQuest("Buy the rice!", "The label will turn green again and you can now buy 10 rice. Hover your mouse over the green buy button and the same as before hold it down to buy back the rice we just sold.");
                 break;
             case 40:
-                UpdateQuest("Show me something!", "These are the basics of managing your crops and generating money. So how about you show me you can make 500 ₴ and I will tell you some more about expanding your farm.");
+                GameManager.MM.closeButton.interactable = true;
+                EnableFreePlay();
+                UpdateQuest("Make 500₴ yourself!", "These are the basics of managing your crops and generating money. So how about you show me you can make 500₴ and I will tell you some more about expanding your farm.");
                 break;
             case 41:
                 GameManager.ISM.FindIslandByID("(0,-1)").currentState = Island.IslandState.Highlighted;
@@ -276,6 +284,25 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             case 48:
                 UpdateQuest("Under construction!", "You made it to the end of the demo. More things will be added and a new version will be out very soon!");
                 break;
+        }
+    }
+
+    public void EnableFreePlay()
+    {
+        GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
+        GameManager.INM.closeButton.interactable = true;
+        GameManager.UM.selectionUI.transform.GetChild(1).GetComponent<Button>().interactable = true;
+        GameManager.CRM.closeButton.interactable = true;
+        GameManager.UM.selectionUI.transform.GetChild(2).GetComponent<Button>().interactable = true;
+        GameManager.ISM.closeButton.interactable = true;
+        GameManager.UM.selectionUI.transform.GetChild(3).GetComponent<Button>().interactable = true;
+        GameManager.MM.closeButton.interactable = true;
+        GameManager.IPM.nextWeekEnabled = true;
+
+        foreach (MarketItem item in GameManager.MM.itemsInMarket)
+        {
+            item.transactionAmountInput.interactable = true;
+            item.expandButton.interactable = true;
         }
     }
 

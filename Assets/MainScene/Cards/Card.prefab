@@ -324,6 +324,8 @@ MonoBehaviour:
   hoverIsland: {fileID: 0}
   hoverPlot: {fileID: 0}
   previousHoverPlot: {fileID: 0}
+  plotIndicatorGreen: {fileID: 21300000, guid: 355396c1a32877740b8e19ff0b6771b5, type: 3}
+  plotIndicatorOrange: {fileID: 21300000, guid: 31b0353783eb9754f922b1b513e1124b, type: 3}
 --- !u!114 &639138604516858679
 MonoBehaviour:
   m_ObjectHideFlags: 0

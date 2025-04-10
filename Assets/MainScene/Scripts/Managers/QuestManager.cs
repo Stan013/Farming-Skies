@@ -250,7 +250,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 40:
                 GameManager.MM.closeButton.interactable = true;
-                EnableFreePlay();
+                EnableFreeMarket();
                 UpdateQuest("Make 500₴ yourself!", "These are the basics of managing your crops and generating money. So how about you show me you can make 500₴ and I will tell you some more about expanding your farm.");
                 break;
             case 41:
@@ -264,6 +264,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Let's refill!", "Just an extra island isn't enough you need more crops to expand. To get more crops first we need water and fertiliser. I gave you some cards that help but first inspect them.");
                 break;
             case 43:
+                GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").GetComponent<CardDrag>().enabled = true;
+                GameManager.HM.FindCardInHandById("CardCompostBinBuildable").GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Place them down!", "As you read when inspecting the cards these are buildable cards that will give you resources. Place these buildables on your new island by dragging them to it.");
                 break;
             case 44:
@@ -287,7 +289,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void EnableFreePlay()
+    public void EnableFreeMarket()
     {
         GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
         GameManager.INM.closeButton.interactable = true;

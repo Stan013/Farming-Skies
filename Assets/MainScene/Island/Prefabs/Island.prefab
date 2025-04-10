@@ -10764,14 +10764,14 @@ MonoBehaviour:
   islandBottom: {fileID: 5034893438613666141}
   topMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
   bottomMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
+  islandMatPotential: 0
   islandData:
     islandAvailable: 0
     islandBought: 0
     islandID: 
     islandState: 0
-    plantsMap: []
     nutrientsAvailable: 
-    nutrientsRequired: 
+    plantsMap: []
   islandBuildCost: 0
   islandExpenseCost: 0
   islandState: 0
@@ -10858,7 +10858,6 @@ MonoBehaviour:
   usedSmallPlots: []
   usedMediumPlots: []
   usedLargePlots: []
-  plantMap: []
   itemsOnIsland: []
   smallPlantsOnIsland: []
   mediumPlantsOnIsland: []

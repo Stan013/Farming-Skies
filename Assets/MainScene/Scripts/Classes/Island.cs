@@ -127,7 +127,7 @@ public class Island : MonoBehaviour
                     }
                 }
                 break;
-            case "Buildable":
+            case "Buildables":
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     island.GetComponent<BoxCollider>().enabled = false;

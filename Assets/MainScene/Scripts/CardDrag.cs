@@ -17,6 +17,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Island previousHoverIsland;
     public GameObject hoverPlot;
     public GameObject previousHoverPlot;
+    public Sprite plotIndicatorGreen;
+    public Sprite plotIndicatorOrange;
 
     [Header("Collision variables")]
     private bool collisionOn = false;
@@ -180,6 +182,15 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
             {
                 previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+            }
+
+            if(GameManager.HM.dragCard.cardType == "Buildables")
+            {
+                hoverPlot.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = plotIndicatorOrange;
+            }
+            else
+            {
+                hoverPlot.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = plotIndicatorGreen;
             }
 
             hoverPlot.transform.GetChild(0).gameObject.SetActive(true);

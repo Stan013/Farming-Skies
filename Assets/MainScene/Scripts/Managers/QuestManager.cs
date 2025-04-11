@@ -231,7 +231,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 35:
                 GameManager.MM.FindMarketItemByID("CardRicePlant").transactionAmountInput.interactable = true;
-                UpdateQuest("Quick sell rice!", "The same as crafting you can quick sell or buy an item. It will then sell or buy the given quantity for the current market price. Let's do this with the rice we harvested and put in 10 as the sell amount.");
+                UpdateQuest("Quick sell rice!", "The same as crafting you can quick sell or buy an item. It will then sell or buy the given quantity for the current market price. Let's do this with the rice we harvested and put in 5 as the sell amount.");
                 break;
             case 36:
                 UpdateQuest("Sell your rice!", "As you can see the label turns green again which means you put in a valid amount. Now use your left mouse button and hold down on the sell label to earn some money.");
@@ -246,7 +246,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Get rice back!", "We can now see the demand and the supply of the rice plus the current price. These numbers will change everyday so sell and buy at the right time. Since we will need rice put in the same amount as we sold so 10.");
                 break;
             case 39:
-                UpdateQuest("Buy the rice!", "The label will turn green again and you can now buy 10 rice. Hover your mouse over the green buy button and the same as before hold it down to buy back the rice we just sold.");
+                UpdateQuest("Buy the rice!", "The label will turn green again and you can now buy 5 rice. Hover your mouse over the green buy button and the same as before hold it down to buy back the rice we just sold.");
                 break;
             case 40:
                 GameManager.MM.closeButton.interactable = true;
@@ -255,35 +255,41 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 41:
                 GameManager.ISM.FindIslandByID("(0,-1)").currentState = Island.IslandState.Highlighted;
-                UpdateQuest("Expansion time!", "Well done on earning yourself some money as promised I will help you to expand. First of let's buy another island move towards the highlighted island and buy it.");
+                UpdateQuest("Expansion time!", "Well done on earning yourself some money as promised I will help you to expand. First of let's buy another island move towards the blue highlighted island and buy it.");
                 break;
             case 42:
+                GameManager.DM.AddCardToDeck("CardConcreteBagUtility");
+                GameManager.HM.SetCardsInHand();
+                UpdateQuest("Paving time!", "Before you get more crops make sure you can maintain the ones you have. This is done by getting some buildables but you can only place these on a paved island. So hover of the concrete bag and drag it towards your island.");
+
+                break;
+            case 43:
                 GameManager.DM.AddCardToDeck("CardWaterBarrelBuildable");
                 GameManager.DM.AddCardToDeck("CardCompostBinBuildable");
                 GameManager.HM.SetCardsInHand();
-                UpdateQuest("Let's refill!", "Just an extra island isn't enough you need more crops to expand. To get more crops first we need water and fertiliser. I gave you some cards that help but first inspect them.");
-                break;
-            case 43:
-                GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").GetComponent<CardDrag>().enabled = true;
-                GameManager.HM.FindCardInHandById("CardCompostBinBuildable").GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Place them down!", "As you read when inspecting the cards these are buildable cards that will give you resources. Place these buildables on your new island by dragging them to it.");
+                UpdateQuest("Let's refill!", "Now that your island is paved you can place buildables on it. These are buildings that will replenish the resources you need for crafting cards. Inspect the cards that I gave you to see what each buildable card does.");
                 break;
             case 44:
-                UpdateQuest("Check your expenses!", "These buildables will however up your expenses just as the new island has. So let's check out your expenses first by clicking on the calculator at the right side of your screen.");
+                GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").GetComponent<CardDrag>().enabled = true;
+                GameManager.HM.FindCardInHandById("CardCompostBinBuildable").GetComponent<CardDrag>().enabled = true;
+                UpdateQuest("Place them down!", "You know what they do so let's place them down and get your resources storage replenished. Hover over the cards again and drag them towards your island as you can see they are the same size as a medium plant.");
                 break;
             case 45:
-                UpdateQuest("Check your expenses!", "These buildables will cost money to maintain, so make sure you have some, otherwise they won't give you any. Let’s open up your resources again and have a look at your expenses.");
+                UpdateQuest("Check your expenses!", "These buildables will however up your expenses just as the new island has. So let's check out your expenses first by clicking on the calculator at the right side of your screen.");
                 break;
             case 46:
-                UpdateQuest("Shopping time!", "Last up I will show you how to get more plant cards, so you can plant some more crops and expand. Start with pressing R to go into market mode and find the market for chard.");
+                UpdateQuest("Check your expenses!", "These buildables will cost money to maintain, so make sure you have some, otherwise they won't give you any. Let’s open up your resources again and have a look at your expenses.");
                 break;
             case 47:
+                UpdateQuest("Shopping time!", "Last up I will show you how to get more plant cards, so you can plant some more crops and expand. Start with pressing R to go into market mode and find the market for chard.");
+                break;
+            case 48:
                 UpdateQuest("Buy some chard!", "Now buy as much chard as you need until you have a total of 50 chard in your inventory. We are going to need this for crafting. After that, exit market mode by pressing R again.");
                 break;
             //case 48:
             //    UpdateTutorial("More crafting!", "Let’s craft some more plant cards, start off pressing C to open up crafting mode again. This time, switch to the plant tab with the green tabs on top and find the chard plant card.");
             //    break;
-            case 48:
+            case 49:
                 UpdateQuest("Under construction!", "You made it to the end of the demo. More things will be added and a new version will be out very soon!");
                 break;
         }
@@ -525,7 +531,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 35:
-                    if (GameManager.MM.FindMarketItemByID("CardRicePlant").transactionAmount == 10)
+                    if (GameManager.MM.FindMarketItemByID("CardRicePlant").transactionAmount == 5)
                     {
                         QuestCompleted();
                     }
@@ -543,7 +549,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 38:
-                    if (GameManager.MM.expandedMarketItem.transactionAmount == 10)
+                    if (GameManager.MM.expandedMarketItem.transactionAmount == 5)
                     {
                         QuestCompleted();
                     }
@@ -567,20 +573,26 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 42:
-                    if (GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").hasBeenInspected && GameManager.HM.FindCardInHandById("CardCompostBinBuildable").hasBeenInspected)
+                    if (GameManager.ISM.FindIslandByID("(0,-1)").currentState == Island.IslandState.Paved && !GameManager.HM.dragging)
                     {
                         QuestCompleted();
                     }
                     break;
                 case 43:
-                    if (GameManager.ISM.FindIslandByID("(0,-1)").itemsOnIsland.Count == 2)
+                    if (GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").hasBeenInspected && GameManager.HM.FindCardInHandById("CardCompostBinBuildable").hasBeenInspected)
                     {
                         QuestCompleted();
                     }
                     break;
                 case 44:
+                    if (GameManager.ISM.FindIslandByID("(0,-1)").itemsOnIsland.Count == 2)
+                    {
+                        QuestCompleted();
+                    }
                     break;
                 case 45:
+                    break;
+                case 46:
                     if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").itemsOnIsland.Count == 2)
                     {
                         QuestCompleted();

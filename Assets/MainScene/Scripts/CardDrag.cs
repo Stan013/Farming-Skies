@@ -124,6 +124,12 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             UpdateIslandState(Island.IslandState.Sowed);
         }
+        else if (GameManager.HM.dragCard.cardName == "Concrete Bag" && potentialIsland.currentState == Island.IslandState.Sowed)
+        {
+            hoverIsland.potentialMatTop = hoverIsland.pavedMatTop;
+            hoverIsland.islandMatPotential = true;
+            UpdateIslandState(Island.IslandState.Paved);
+        }
     }
 
     private void HandleUtilityDrop()
@@ -162,6 +168,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
                 hoverIsland.CreateIslandMaterial(Island.IslandState.Cultivated);
                 break;
+            case "Concrete Bag":
+                hoverIsland.topMat = hoverIsland.pavedMatTop;
+                hoverIsland.bottomMat = hoverIsland.sowedMatBot;
+                hoverIsland.CreateIslandMaterial(Island.IslandState.Paved);
+                break;
             default:
                 hoverIsland.CreateIslandMaterial(hoverIsland.currentState);
                 hoverIsland.islandMatPotential = true;
@@ -183,17 +194,20 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             {
                 previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
             }
-
-            if(GameManager.HM.dragCard.cardType == "Buildables")
+            else
             {
-                hoverPlot.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = plotIndicatorOrange;
+                hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+            }
+
+            if (GameManager.HM.dragCard.cardType == "Buildables")
+            {
+                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorOrange;
             }
             else
             {
-                hoverPlot.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = plotIndicatorGreen;
+                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
             }
 
-            hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
             AlignDragInstanceToPlot();
             previousHoverPlot = hoverPlot;
         }

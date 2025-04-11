@@ -57,6 +57,8 @@ public class Card : MonoBehaviour
     public string cardType;
     public string plantGroup;
     public TMP_Text plantSizeText;
+    public TMP_Text resourceAdditionText;
+    public Image resourceIcon;
     public TMP_Text waterText;
     public TMP_Text nitrogenText;
     public TMP_Text phosphorusText;

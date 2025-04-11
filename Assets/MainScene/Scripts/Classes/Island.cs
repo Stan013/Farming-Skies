@@ -43,6 +43,7 @@ public class Island : MonoBehaviour
     [Header("Island top materials")]
     public Material potentialMatTop;
     public Material transparentMatTop;
+    public Material pavedMatTop;
     public Material sowedMatTop;
     public Material sowedNeedsNPKMatTop;
     public Material cultivatedMatTop;
@@ -84,7 +85,8 @@ public class Island : MonoBehaviour
         Highlighted,
         Sowed,
         Cultivated,
-        Watered
+        Watered,
+        Paved
     }
 
     public void SetCollisions(string cardType)
@@ -130,10 +132,12 @@ public class Island : MonoBehaviour
             case "Buildables":
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
-                    island.GetComponent<BoxCollider>().enabled = false;
-                    foreach (GameObject plot in island.availableMediumPlots)
+                    if (island.currentState == Island.IslandState.Paved)
                     {
-                        plot.GetComponent<BoxCollider>().enabled = true;
+                        foreach (GameObject plot in island.availableMediumPlots)
+                        {
+                            plot.GetComponent<BoxCollider>().enabled = true;
+                        }
                     }
                 }
                 break;
@@ -348,6 +352,10 @@ public class Island : MonoBehaviour
             case IslandState.Watered:
                 potentialMatTop = BlendIslandMaterial(wateredMatTop, wateredNeedsNPKMatTop, islandTop);
                 potentialMatBottom = BlendIslandMaterial(wateredMatBot, wateredNeedsNPKMatBot, islandBottom);
+                break;
+            case IslandState.Paved:
+                potentialMatTop = BlendIslandMaterial(sowedMatTop, sowedNeedsNPKMatTop, islandTop);
+                potentialMatBottom = BlendIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
                 break;
         }
         islandMatPotential = false;

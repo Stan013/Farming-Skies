@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             transparencySlider.value = alphaValue;
             if (alphaValue == 1f && island.islandBought == false)
             {
-                _balance -= island.islandBuildCost;
+                Balance -= island.islandBuildCost;
                 GameManager.ISM.AddIslandToBought(island);
                 constructionLabel.gameObject.SetActive(false);
                 island.islandMatPotential = true;

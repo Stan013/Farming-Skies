@@ -10763,7 +10763,7 @@ MonoBehaviour:
   islandTop: {fileID: 969071599434561946}
   islandBottom: {fileID: 5034893438613666141}
   topMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
-  bottomMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
+  bottomMat: {fileID: 2100000, guid: 7358e15b95edd03448ce577d2975690f, type: 2}
   islandMatPotential: 0
   islandData:
     islandAvailable: 0
@@ -10779,6 +10779,7 @@ MonoBehaviour:
   glow: {fileID: 7701377534939352897}
   potentialMatTop: {fileID: 2100000, guid: c34ed82100654344bb2ace1c57335fb3, type: 2}
   transparentMatTop: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
+  pavedMatTop: {fileID: 2100000, guid: d304e6c839db7884aa206afa1f74fbc9, type: 2}
   sowedMatTop: {fileID: 2100000, guid: a01d16d3d44a79341b9d95acf8dbd6c9, type: 2}
   sowedNeedsNPKMatTop: {fileID: 2100000, guid: c34ed82100654344bb2ace1c57335fb3, type: 2}
   cultivatedMatTop: {fileID: 2100000, guid: bb434eed192f86a4791a883a0eff6144, type: 2}

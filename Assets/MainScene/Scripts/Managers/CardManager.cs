@@ -13,6 +13,8 @@ public class CardManager : MonoBehaviour, IDataPersistence
     [Header("Cards variables")]
     public Transform availableCardsParent;
     public Card inspectCard;
+    public Sprite waterIcon;
+    public Sprite fertiliserIcon;
 
     public void SetupCards()
     {
@@ -49,7 +51,26 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.potassiumText.SetText(dragPlant.nutrientsUsages[3].ToString() + " L");
             card.plantSizeText.SetText(card.cardType.Replace(" crops", ""));
         }
-        else
+        else if (card.cardType == "Buildables")
+        {
+            card.cardDescriptionText.gameObject.SetActive(true);
+            card.cardDescriptionText.SetText(card.cardDescription);
+            card.nitrogenText.transform.parent.gameObject.SetActive(false);
+            card.phosphorusText.transform.parent.gameObject.SetActive(false);
+            card.potassiumText.transform.parent.gameObject.SetActive(false);
+            card.waterText.transform.parent.gameObject.SetActive(false);
+            card.resourceAdditionText.transform.parent.gameObject.SetActive(true);
+            if(card.cardName == "Water Barrel")
+            {
+                card.resourceIcon.sprite = waterIcon;
+            }
+            else
+            {
+                card.resourceIcon.sprite = fertiliserIcon;
+            }
+            card.resourceAdditionText.SetText("+ 5");
+        }
+        else 
         {
             card.cardDescriptionText.gameObject.SetActive(true);
             card.cardDescriptionText.SetText(card.cardDescription);
@@ -58,12 +79,11 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.potassiumText.transform.parent.gameObject.SetActive(false);
             card.waterText.transform.parent.gameObject.SetActive(false);
             card.plantSizeText.transform.parent.gameObject.SetActive(false);
-            if (!GameManager.QM.questActive)
-            {
-                card.GetComponent<CardDrag>().enabled = true;
-                card.GetComponent<CardInspect>().enabled = true;
-
-            }
+        }
+        if (!GameManager.QM.questActive)
+        {
+            card.GetComponent<CardDrag>().enabled = true;
+            card.GetComponent<CardInspect>().enabled = true;
         }
         card.cardSetup = true;
     }   

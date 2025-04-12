@@ -44,4 +44,14 @@ public class LevelManager : MonoBehaviour
         }
         farmLevelText.text = "Level " + _farmLevel.ToString();
     }
+
+    public void LoadData(GameData data)
+    {
+        FarmLevel = data.farmLevel;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.farmLevel = _farmLevel;
+    }
 }

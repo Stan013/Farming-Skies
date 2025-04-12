@@ -96,12 +96,17 @@ public class GameData
 
     // Island Manager Data
     public List<IslandData> islandsMap = new List<IslandData>();
+    public int islandValue;
 
     // Inventory Manager Data
     public List<int> itemQuantities = new List<int>();
 
     // Market Manager Data
     public List<MarketData> marketsMap = new List<MarketData>();
+
+    // Plant Manager Data
+    public float plantValue;
+    public float buildableValue;
 
     public GameData()
     {

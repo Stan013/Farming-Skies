@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,15 +60,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.potassiumText.transform.parent.gameObject.SetActive(false);
             card.waterText.transform.parent.gameObject.SetActive(false);
             card.resourceAdditionText.transform.parent.gameObject.SetActive(true);
-            if(card.cardName == "Water Barrel")
-            {
-                card.resourceIcon.sprite = waterIcon;
-            }
-            else
-            {
-                card.resourceIcon.sprite = fertiliserIcon;
-            }
-            card.resourceAdditionText.SetText("+ 5");
+            card.resourceAdditionText.SetText("+ 100₴");
         }
         else 
         {

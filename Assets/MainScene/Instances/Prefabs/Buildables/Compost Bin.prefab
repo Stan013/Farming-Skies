@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7947731432225258166}
   - component: {fileID: 3641546025376474744}
   - component: {fileID: 7147725280568796570}
+  - component: {fileID: 6217798391985328798}
   m_Layer: 0
   m_Name: Compost Bin
   m_TagString: Untagged
@@ -110,3 +111,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 28, y: 24.600004, z: 28}
   m_Center: {x: 0, y: 11.300001, z: 0}
+--- !u!114 &6217798391985328798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7648176738084924244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dcb929937df8724e80a38e3453e52f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drop: {fileID: 0}
+  dropAmount: 0
+  attachedIsland: {fileID: 0}
+  attachedInventoryItem: {fileID: 0}
+  baseYield: 0
+  yield: 0
+  predictedYield: 0
+  nutrientsUsages: 
+  buildableTaxCost: 100
+  plantData:
+    plantID: 
+    islandID: 
+    plotID: 
+    plantSize: 

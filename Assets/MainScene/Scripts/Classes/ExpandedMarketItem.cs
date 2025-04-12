@@ -53,10 +53,10 @@ public class ExpandedMarketItem : MonoBehaviour
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
         expandedQuantity.text = attachedInventoryItem.ItemQuantity.ToString();
-        highestPriceText.text = collapsedItem.itemPrices.Max().ToString();
-        averagePriceText.text = collapsedItem.itemPrices.Average().ToString();
-        lowestPriceText.text = collapsedItem.itemPrices.Min().ToString();
-        expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString() + " ₴";
+        highestPriceText.text = collapsedItem.itemPrices.Max().ToString("F2");
+        averagePriceText.text = collapsedItem.itemPrices.Average().ToString("F2");
+        lowestPriceText.text = collapsedItem.itemPrices.Min().ToString("F2");
+        expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString("F2") + " ₴";
         collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
         SetPriceIcons();
         CheckValidTransactionAmount("0");

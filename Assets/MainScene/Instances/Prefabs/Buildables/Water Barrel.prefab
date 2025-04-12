@@ -130,7 +130,7 @@ MonoBehaviour:
   yield: 0
   predictedYield: 0
   nutrientsUsages: 
-  buildableTaxCost: 250
+  buildableTaxCost: 100
   plantData:
     plantID: 
     islandID: 

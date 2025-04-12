@@ -258,14 +258,22 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Expansion time!", "Well done on earning yourself some money as promised I will help you to expand. First of let's buy another island move towards the blue highlighted island and buy it.");
                 break;
             case 42:
-                GameManager.DM.AddCardToDeck("CardConcreteBagUtility");
+                if(GameManager.HM.FindCardInHandById("CardConcreteBagUtility") == null)
+                {
+                    GameManager.DM.AddCardToDeck("CardConcreteBagUtility");
+                }
                 GameManager.HM.SetCardsInHand();
                 UpdateQuest("Paving time!", "Before you get more crops make sure you can maintain the ones you have. This is done by getting some buildables but you can only place these on a paved island. So hover of the concrete bag and drag it towards your island.");
-
                 break;
             case 43:
-                GameManager.DM.AddCardToDeck("CardWaterBarrelBuildable");
-                GameManager.DM.AddCardToDeck("CardCompostBinBuildable");
+                if (GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable") == null)
+                {
+                    GameManager.DM.AddCardToDeck("CardWaterBarrelBuildable");
+                }
+                if (GameManager.HM.FindCardInHandById("CardCompostBinBuildable") == null)
+                {
+                    GameManager.DM.AddCardToDeck("CardCompostBinBuildable");
+                }
                 GameManager.HM.SetCardsInHand();
                 UpdateQuest("Let's refill!", "Now that your island is paved you can place buildables on it. These are buildings that will replenish the resources you need for crafting cards. Inspect the cards that I gave you to see what each buildable card does.");
                 break;
@@ -275,49 +283,19 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Place them down!", "You know what they do so let's place them down and get your resources storage replenished. Hover over the cards again and drag them towards your island as you can see they are the same size as a medium plant.");
                 break;
             case 45:
-                UpdateQuest("Check your expenses!", "These buildables will however up your expenses just as the new island has. So let's check out your expenses first by clicking on the calculator at the right side of your screen.");
+                GameManager.UM.selectionUI.transform.GetChild(4).GetComponent<Button>().interactable = true;
+                UpdateQuest("Check your stats!", "These buildables and the new island you bought will up your farm value and as you might have noticed you levelled up. Let's check out your farm statistics by clicking on the calculator at the right side of your screen.");
                 break;
             case 46:
-                UpdateQuest("Check your expenses!", "These buildables will cost money to maintain, so make sure you have some, otherwise they won't give you any. Let’s open up your resources again and have a look at your expenses.");
+                UpdateQuest("Inspect your expenses!", "Here you can see some stats about your farm but that is not what we are looking for right now. Click on the green label on top which says expenses to see all the expenses you will need to pay for.");
                 break;
             case 47:
-                UpdateQuest("Shopping time!", "Last up I will show you how to get more plant cards, so you can plant some more crops and expand. Start with pressing R to go into market mode and find the market for chard.");
                 break;
             case 48:
-                UpdateQuest("Buy some chard!", "Now buy as much chard as you need until you have a total of 50 chard in your inventory. We are going to need this for crafting. After that, exit market mode by pressing R again.");
                 break;
-            //case 48:
-            //    UpdateTutorial("More crafting!", "Let’s craft some more plant cards, start off pressing C to open up crafting mode again. This time, switch to the plant tab with the green tabs on top and find the chard plant card.");
-            //    break;
             case 49:
-                UpdateQuest("Under construction!", "You made it to the end of the demo. More things will be added and a new version will be out very soon!");
                 break;
         }
-    }
-
-    public void EnableFreeMarket()
-    {
-        GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
-        GameManager.INM.closeButton.interactable = true;
-        GameManager.UM.selectionUI.transform.GetChild(1).GetComponent<Button>().interactable = true;
-        GameManager.CRM.closeButton.interactable = true;
-        GameManager.UM.selectionUI.transform.GetChild(2).GetComponent<Button>().interactable = true;
-        GameManager.ISM.closeButton.interactable = true;
-        GameManager.UM.selectionUI.transform.GetChild(3).GetComponent<Button>().interactable = true;
-        GameManager.MM.closeButton.interactable = true;
-        GameManager.IPM.nextWeekEnabled = true;
-
-        foreach (MarketItem item in GameManager.MM.itemsInMarket)
-        {
-            item.transactionAmountInput.interactable = true;
-            item.expandButton.interactable = true;
-        }
-    }
-
-    private void UpdateQuest(string questTitle, string questDescription)
-    {
-        questTitleText.SetText(questTitle);
-        questDescriptionText.SetText(questDescription);
     }
 
     public void QuestCheck()
@@ -591,9 +569,13 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 45:
+                    if (GameManager.WM.expenseWindow.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
                     break;
                 case 46:
-                    if (GameManager.ISM.FindIslandByID("Ring1(0,-1)").itemsOnIsland.Count == 2)
+                    if (GameManager.EM.statsTab == "Expenses")
                     {
                         QuestCompleted();
                     }
@@ -614,6 +596,31 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     break;
             }
         }
+    }
+
+    public void EnableFreeMarket()
+    {
+        GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
+        GameManager.INM.closeButton.interactable = true;
+        GameManager.UM.selectionUI.transform.GetChild(1).GetComponent<Button>().interactable = true;
+        GameManager.CRM.closeButton.interactable = true;
+        GameManager.UM.selectionUI.transform.GetChild(2).GetComponent<Button>().interactable = true;
+        GameManager.ISM.closeButton.interactable = true;
+        GameManager.UM.selectionUI.transform.GetChild(3).GetComponent<Button>().interactable = true;
+        GameManager.MM.closeButton.interactable = true;
+        GameManager.IPM.nextWeekEnabled = true;
+
+        foreach (MarketItem item in GameManager.MM.itemsInMarket)
+        {
+            item.transactionAmountInput.interactable = true;
+            item.expandButton.interactable = true;
+        }
+    }
+
+    private void UpdateQuest(string questTitle, string questDescription)
+    {
+        questTitleText.SetText(questTitle);
+        questDescriptionText.SetText(questDescription);
     }
 
     public void LoadData(GameData data)

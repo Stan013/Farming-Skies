@@ -16,7 +16,23 @@ public class ExpenseItem : MonoBehaviour
     public void SetupIslandExpense(Island island)
     {
         GameManager.EM.expenseIslandsTotal += island.islandExpenseCost;
+        GameManager.UM.Expense += island.islandExpenseCost;
         expenseItemIcon.sprite = islandIcon;
         expenseItemCostText.text = "+ " + island.islandExpenseCost.ToString() + " ₴";
+    }
+
+    public void SetupBuildableExpense(Plant buildable)
+    {
+        GameManager.EM.expenseBuildablesTotal += buildable.buildableTaxCost;
+        GameManager.UM.Expense += buildable.buildableTaxCost;
+        if (buildable.name.Contains("Water Barrel"))
+        {
+            expenseItemIcon.sprite = waterBarrelIcon;
+        }
+        else
+        {
+            expenseItemIcon.sprite = compostBinIcon;
+        }
+        expenseItemCostText.text = "+ " + buildable.buildableTaxCost.ToString() + " ₴";
     }
 }

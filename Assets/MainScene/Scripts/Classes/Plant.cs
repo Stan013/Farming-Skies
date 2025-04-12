@@ -47,7 +47,6 @@ public class Plant : MonoBehaviour
         }
         attachedInventoryItem.totalBaseYield += baseYield;
         attachedInventoryItem.totalPredictedYield += predictedYield;
-        GameManager.EM.plantValue += attachedInventoryItem.totalPredictedYield * attachedInventoryItem.attachedItemCard.itemPrice;
     }
 
     public void UpdatePlantYield()
@@ -82,7 +81,10 @@ public class Plant : MonoBehaviour
 
     public PlantData SavePlantData()
     {
-        plantData = new PlantData(attachedInventoryItem.attachedItemCard.cardId, attachedIsland.islandID, transform.parent.name, attachedInventoryItem.attachedItemCard.cardType);
+        if(attachedInventoryItem != null)
+        {
+            plantData = new PlantData(attachedInventoryItem.attachedItemCard.cardId, attachedIsland.islandID, transform.parent.name, attachedInventoryItem.attachedItemCard.cardType);
+        }
         return plantData;
     }
 }

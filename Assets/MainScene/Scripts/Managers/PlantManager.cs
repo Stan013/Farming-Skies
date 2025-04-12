@@ -4,11 +4,32 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlantManager : MonoBehaviour
+public class PlantManager : MonoBehaviour, IDataPersistence
 {
     [Header("Drop variables")]
     public float dropChance;
-
+    private float _plantValue;
+    public float PlantValue
+    {
+        get => _plantValue;
+        set
+        {
+            _plantValue = value;
+            GameManager.EM.UpdateFarmValue();
+        }
+    }
+    public float oldPlantValue;
+    public float plantValueChange;
+    private float _buildablesValue;
+    public float BuildablesValue
+    {
+        get => _buildablesValue;
+        set
+        {
+            _buildablesValue = value;
+            GameManager.EM.UpdateFarmValue();
+        }
+    }
     public void Harvest()
     {
         foreach (Island island in GameManager.ISM.boughtIslands)
@@ -84,4 +105,15 @@ public class PlantManager : MonoBehaviour
         return null;
     }
     
+    public void LoadData(GameData data)
+    {
+        PlantValue = data.plantValue;
+        BuildablesValue = data.buildableValue;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.plantValue = PlantValue;
+        data.buildableValue = BuildablesValue;
+    }
 }

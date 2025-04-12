@@ -16,11 +16,10 @@ public class ExpenseManager : MonoBehaviour
 
     [Header("Farm Stat variables")]
     public float farmValue;
+    public float oldFarmValue;
     public float farmValueChange;
     public TMP_Text farmValueText;
     public TMP_Text farmValueChangeText;
-    public float plantValue;
-    public float plantValueChange;
     public TMP_Text plantValueText;
     public TMP_Text plantValueChangeText;
     public float productionValue;
@@ -34,10 +33,12 @@ public class ExpenseManager : MonoBehaviour
     public GameObject expenseIslandsContentArea;
     public float expenseIslandsTotal;
     public TMP_Text expenseIslandsTotalText;
+
     public List<ExpenseItem> expenseBuildables;
     public GameObject expenseBuildablesContentArea;
     public float expenseBuildablesTotal;
     public TMP_Text expenseBuildablesTotalText;
+
     public List<ExpenseItem> expenseProduction;
     public GameObject expenseProductionContentArea;
     public float expenseProductionTotal;
@@ -52,17 +53,25 @@ public class ExpenseManager : MonoBehaviour
         expenseIslands.Add(expenseIsland);
     }
 
+    public void AddExpenseBuildables(Plant plant)
+    {
+        ExpenseItem expenseBuildable = Instantiate(expenseItemTemplate, Vector3.zero, Quaternion.identity, expenseBuildablesContentArea.transform);
+        expenseBuildable.SetupBuildableExpense(plant);
+        expenseBuildable.transform.localPosition = new Vector3(expenseBuildable.transform.localPosition.x, expenseBuildable.transform.localPosition.y, 0);
+        expenseBuildable.transform.localRotation = Quaternion.identity;
+        expenseBuildables.Add(expenseBuildable);
+    }
+
     public void OpenIslandManagement(string tab)
     {
         statsTab = tab;
         int currentValue = GameManager.ISM.boughtIslands.Count;
-        farmLevelBar.value = 1 / GameManager.LM.farmLevelMax * currentValue;
+        farmLevelBar.value = 1 / GameManager.LM.farmLevelMax * GameManager.LM.FarmLevel;
         farmLevelText.text = "Level " + GameManager.LM.FarmLevel.ToString();
         SetFarmStatistics();
         switch (tab)
         {
             case "Statistics":
-
                 break;
             case "Expenses":
                 expenseIslandsTotalText.text = expenseIslandsTotal.ToString();
@@ -75,13 +84,26 @@ public class ExpenseManager : MonoBehaviour
         }
     }
 
+    public void UpdateFarmValue()
+    {
+        farmValue = GameManager.ISM.IslandValue + GameManager.PM.PlantValue + GameManager.PM.BuildablesValue;
+    }
+
     public void SetFarmStatistics()
     {
         farmValueText.text = farmValue.ToString();
         farmValueChangeText.text = farmValueChange.ToString();
-        plantValueText.text = plantValue.ToString();
-        plantValueChangeText.text = plantValueChange.ToString();
         productionValueText.text = productionValue.ToString();
         productionValueChangeText.text = productionValueChange.ToString();
+    }
+
+    public void LoadData(GameData data)
+    {
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+
     }
 }

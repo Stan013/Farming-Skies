@@ -23,6 +23,7 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
 
     [Header("Farm Level variables")]
     public Slider farmLevelBar;
+    public TMP_Text farmLevelBarText;
     public TMP_Text farmLevelText;
 
     [Header("Farm Stat variables")]
@@ -75,7 +76,9 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     {
         statsTab = tab;
         int currentValue = GameManager.ISM.boughtIslands.Count;
-        farmLevelBar.value = 1 / GameManager.LM.farmLevelMax * GameManager.LM.FarmLevel;
+        farmLevelBar.maxValue = GameManager.LM.farmLevelMax;
+        farmLevelBar.value = GameManager.LM.FarmLevel;
+        farmLevelBarText.text = GameManager.LM.FarmLevel + " / " + GameManager.LM.farmLevelMax;
         farmLevelText.text = "Level " + GameManager.LM.FarmLevel.ToString();
         SetFarmStatistics();
         switch (tab)

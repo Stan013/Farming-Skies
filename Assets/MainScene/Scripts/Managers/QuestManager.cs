@@ -290,9 +290,10 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Inspect your expenses!", "Here you can see some stats about your farm but that is not what we are looking for right now. Click on the green label on top which says expenses to see all the expenses you will need to pay for.");
                 break;
             case 47:
-                UpdateQuest("The end!", "More to come.");
+                UpdateQuest("Close expenses!", "So the more islands you buy and the more buildables you get the more you will have to pay. Let's close the expense window and have a look at when you will need to pay this and some other events you might encounter.");
                 break;
             case 48:
+                UpdateQuest("The end for now!", "More updates are coming soon.");
                 break;
             case 49:
                 break;
@@ -581,18 +582,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                         QuestCompleted();
                     }
                     break;
-/*                case 46:
-                    if (GameManager.CurrentState == GameManager.GameState.MarketMode)
+                case 47:
+                    if (!GameManager.WM.expenseWindow.activeSelf)
                     {
-                        QuestCompleted = true;
+                        QuestCompleted();
                     }
                     break;
-                case 47:
-                    if (GameManager.CurrentState == GameManager.GameState.Default && GameManager.CM.FindCardById("CardChardPlant").itemQuantity >= 50)
-                    {
-                        QuestCompleted = true;
-                    }
-                    break;*/
                 case 48:
                     break;
             }

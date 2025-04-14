@@ -8493,14 +8493,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08fdbce4a2ab4dc4690cd52c2333257f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 295e29bb18da3d942afddaa844b7ff21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16060,7 +16060,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Plant Value:'
+  m_text: 'Plants:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
@@ -19388,7 +19388,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 10
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 638650598}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1739713341}
@@ -21316,7 +21316,7 @@ GameObject:
   - component: {fileID: 554205878}
   - component: {fileID: 554205877}
   m_Layer: 0
-  m_Name: ProductionText
+  m_Name: BuildableValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21363,7 +21363,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Production:'
+  m_text: 'Buildables:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
@@ -35389,7 +35389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 675
+      value: 1116.6666
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -38324,14 +38324,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d7b5db6d1475a2b49b6cb9547b195d81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 85cea2fb7e33d834e9817dcb845584ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -46946,14 +46946,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 927e0506102732f429d1c44f06e3d265, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed7424fa593a43f46a0a305104456150, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -51405,7 +51405,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 1632711488}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 866989070}
@@ -55863,7 +55863,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 694623173}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 2098014728}
@@ -70345,7 +70345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1116.6666
+      value: 233.33333
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -77345,7 +77345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 233.33333
+      value: 675
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -88858,7 +88858,6 @@ MonoBehaviour:
   resourceUI: {fileID: 1244416422}
   timeUI: {fileID: 2035294822}
   selectionUI: {fileID: 106743056}
-  expenseText: {fileID: 910547898}
   balanceText: {fileID: 112664081}
   waterText: {fileID: 216290505}
   fertiliserText: {fileID: 1914429244}
@@ -91442,7 +91441,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 38e13e6d22c9a0c4e8fff704025e4889, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6a7c9e70beaeed45af425351fcd712e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91609,7 +91608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &7522958258457268208
 GameObject:
   m_ObjectHideFlags: 0
@@ -92686,6 +92685,8 @@ MonoBehaviour:
   dropChance: 0.75
   oldPlantValue: 0
   plantValueChange: 0
+  oldBuildableValue: 0
+  buildableValueChange: 0
 --- !u!114 &8413217862094962416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92787,6 +92788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsTab: 
   closeButton: {fileID: 0}
+  expenseText: {fileID: 910547898}
   farmLevelBar: {fileID: 109390012}
   farmLevelText: {fileID: 257798285}
   farmValue: 0
@@ -92796,10 +92798,8 @@ MonoBehaviour:
   farmValueChangeText: {fileID: 746472626}
   plantValueText: {fileID: 98500570}
   plantValueChangeText: {fileID: 1636449099}
-  productionValue: 0
-  productionValueChange: 0
-  productionValueText: {fileID: 1255873208}
-  productionValueChangeText: {fileID: 1903339594}
+  buildableValueText: {fileID: 1255873208}
+  buildableValueChangeText: {fileID: 1903339594}
   expenseItemTemplate: {fileID: 1420848322}
   expenseIslands: []
   expenseIslandsContentArea: {fileID: 791095298}
@@ -93721,14 +93721,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64c96c44a6b191248b8c93e5f81b9b60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31be80946372a054fb77f4b638408374, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

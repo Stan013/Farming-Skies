@@ -1,14 +1,25 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ExpenseManager : MonoBehaviour
+public class ExpenseManager : MonoBehaviour, IDataPersistence
 {
     [Header("General variables")]
     public string statsTab;
     public Button closeButton;
+    public TMP_Text expenseText;
+    private float _expense;
+    public float Expense
+    {
+        get => _expense;
+        set
+        {
+            _expense = value;
+            expenseText.text = GameManager.UM.FormatNumber(_expense).ToString();
+        }
+    }
 
     [Header("Farm Level variables")]
     public Slider farmLevelBar;
@@ -22,10 +33,8 @@ public class ExpenseManager : MonoBehaviour
     public TMP_Text farmValueChangeText;
     public TMP_Text plantValueText;
     public TMP_Text plantValueChangeText;
-    public float productionValue;
-    public float productionValueChange;
-    public TMP_Text productionValueText;
-    public TMP_Text productionValueChangeText;
+    public TMP_Text buildableValueText;
+    public TMP_Text buildableValueChangeText;
 
     [Header("Expense tab variables")]
     public ExpenseItem expenseItemTemplate;
@@ -74,9 +83,9 @@ public class ExpenseManager : MonoBehaviour
             case "Statistics":
                 break;
             case "Expenses":
-                expenseIslandsTotalText.text = expenseIslandsTotal.ToString();
-                expenseBuildablesTotalText.text = expenseBuildablesTotal.ToString();
-                expenseProductionTotalText.text = expenseProductionTotal.ToString();
+                expenseIslandsTotalText.text = expenseIslandsTotal.ToString() + " ₴";
+                expenseBuildablesTotalText.text = expenseBuildablesTotal.ToString() + " ₴";
+                expenseProductionTotalText.text = expenseProductionTotal.ToString() + " ₴";
                 break;
             case "Earnings":
 
@@ -91,19 +100,30 @@ public class ExpenseManager : MonoBehaviour
 
     public void SetFarmStatistics()
     {
-        farmValueText.text = farmValue.ToString();
-        farmValueChangeText.text = farmValueChange.ToString();
-        productionValueText.text = productionValue.ToString();
-        productionValueChangeText.text = productionValueChange.ToString();
+        farmValueText.text = farmValue.ToString() + " ₴";
+        farmValueChangeText.text = "(+" + farmValueChange.ToString() + " ₴)";
+        plantValueText.text = GameManager.PM.PlantValue.ToString() + " ₴";
+        plantValueChangeText.text = "(+" + GameManager.PM.plantValueChange.ToString() + " ₴)";
+        buildableValueText.text = GameManager.PM.BuildablesValue.ToString() + " ₴";
+        buildableValueChangeText.text = "(+" + GameManager.PM.buildableValueChange.ToString() + " ₴)";
     }
 
     public void LoadData(GameData data)
     {
-
+        GameManager.DPM.ClearChildren(expenseIslandsContentArea.transform);
+        expenseIslands.Clear();
+        for (int i = 0; i < data.islandExpenses.Count; i++)
+        {
+            AddExpenseIsland(GameManager.ISM.FindIslandByID(data.islandExpenses[i]));
+        }
     }
 
     public void SaveData(ref GameData data)
     {
-
+        data.islandExpenses.Clear();
+        foreach (ExpenseItem expenseItem in expenseIslands)
+        {
+            data.islandExpenses.Add(expenseItem.attachedIsland.islandID);
+        }
     }
 }

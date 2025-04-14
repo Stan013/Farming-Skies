@@ -30,6 +30,8 @@ public class IslandManager : MonoBehaviour, IDataPersistence
             GameManager.EM.UpdateFarmValue();
         }
     }
+    public int oldIslandValue;
+    public int islandValueChange;
 
     [Header("Island management variables")]
     public Island centerIsland;

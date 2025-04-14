@@ -290,6 +290,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Inspect your expenses!", "Here you can see some stats about your farm but that is not what we are looking for right now. Click on the green label on top which says expenses to see all the expenses you will need to pay for.");
                 break;
             case 47:
+                UpdateQuest("The end!", "More to come.");
                 break;
             case 48:
                 break;
@@ -575,7 +576,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 46:
-                    if (GameManager.EM.statsTab == "Expenses")
+                    if (GameManager.EM.statsTab == "Expenses") 
                     {
                         QuestCompleted();
                     }

@@ -32,6 +32,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(32f,45f,0f);
         GameManager.MM.MarketUpdate();
         GameManager.PM.Harvest();
+        GameManager.UM.FarmEvaluation();
         StartCoroutine(CycleWeekDays());
     }
 

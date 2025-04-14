@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : MonoBehaviour, IDataPersistence
 {
     public TMP_Text farmLevelText;
     public Image farmLevelIcon;
@@ -29,18 +29,17 @@ public class LevelManager : MonoBehaviour
 
     public void SetFarmLevel()
     {
-        switch (_farmLevel)
+        if(_farmLevel >= 1)
         {
-            case 1:
-                farmLevelIcon.sprite = farmLevel1;
-                farmLevelMin = 0;
-                farmLevelMax = 9;
-                break;
-            case 9:
-                farmLevelIcon.sprite = farmLevel2;
-                farmLevelMin = 9;
-                farmLevelMax = 25;
-                break;
+            farmLevelIcon.sprite = farmLevel1;
+            farmLevelMin = 0;
+            farmLevelMax = 9;
+        }
+        else if (_farmLevel >= 9)
+        { 
+            farmLevelIcon.sprite = farmLevel2;
+            farmLevelMin = 9;
+            farmLevelMax = 25;
         }
         farmLevelText.text = "Level " + _farmLevel.ToString();
     }

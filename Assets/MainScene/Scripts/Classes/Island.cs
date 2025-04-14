@@ -194,6 +194,8 @@ public class Island : MonoBehaviour
     public void MakeUsedPlot(GameObject usedPlot, Card usedCard, Plant usedPlant)
     {
         itemsOnIsland.Add(usedPlant);
+        usedPlant.attachedCard = usedCard;
+        usedPlant.attachedIsland = this;
         switch (usedCard.cardType)
         {
             case "Small crops":
@@ -203,7 +205,6 @@ public class Island : MonoBehaviour
                 SetCollisions("Large crops");
                 GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
                 UpdateNutrientsRequired(usedPlant);
-                usedPlant.attachedIsland = this;
                 usedPlant.UpdatePredictedYield();
                 GameManager.PM.PlantValue += usedPlant.attachedInventoryItem.totalPredictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
@@ -214,7 +215,6 @@ public class Island : MonoBehaviour
                 SetCollisions("Large crops");
                 GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
                 UpdateNutrientsRequired(usedPlant);
-                usedPlant.attachedIsland = this;
                 usedPlant.UpdatePredictedYield();
                 GameManager.PM.PlantValue += usedPlant.attachedInventoryItem.totalPredictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
@@ -225,7 +225,6 @@ public class Island : MonoBehaviour
                 SetCollisions("Medium crops");
                 GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
                 UpdateNutrientsRequired(usedPlant);
-                usedPlant.attachedIsland = this;
                 usedPlant.UpdatePredictedYield();
                 GameManager.PM.PlantValue += usedPlant.attachedInventoryItem.totalPredictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
@@ -234,7 +233,6 @@ public class Island : MonoBehaviour
                 GameManager.EM.AddExpenseBuildables(usedPlant);
                 SetCollisions("Small crops");
                 SetCollisions("Large crops");
-                GameManager.PM.BuildablesValue += usedPlant.buildableTaxCost;
                 break;
         }
         CheckOverlappingPlots(usedPlot.GetComponent<BoxCollider>());
@@ -469,6 +467,14 @@ public class Island : MonoBehaviour
                 bottomMat = potentialMatBottom;
                 CreateIslandMaterial(IslandState.Sowed);
                 break;
+            case 5:
+                currentState = IslandState.Paved;
+                previousState = IslandState.Sowed;
+                topMat = pavedMatTop;
+                bottomMat = sowedMatBot;
+                SetIslandMaterial();
+                CreateIslandMaterial(currentState);
+                break;
         }
         SetIslandMaterial();
         GameManager.PM.SetPlantData(this, data.plantsMap);
@@ -492,6 +498,9 @@ public class Island : MonoBehaviour
                 break;
             case IslandState.Watered:
                 islandState = 4;
+                break;
+            case IslandState.Paved:
+                islandState = 5;
                 break;
         }
 

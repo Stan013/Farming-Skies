@@ -8,6 +8,8 @@ public class ExpenseItem : MonoBehaviour
 {
     public Image expenseItemIcon;
     public TMP_Text expenseItemCostText;
+    public Island attachedIsland;
+    public Plant attachedBuildable;
 
     public Sprite islandIcon;
     public Sprite waterBarrelIcon;
@@ -15,16 +17,18 @@ public class ExpenseItem : MonoBehaviour
 
     public void SetupIslandExpense(Island island)
     {
-        GameManager.EM.expenseIslandsTotal += island.islandExpenseCost;
-        GameManager.UM.Expense += island.islandExpenseCost;
+        attachedIsland = island;
+        GameManager.EM.expenseIslandsTotal += attachedIsland.islandExpenseCost;
+        GameManager.EM.Expense += attachedIsland.islandExpenseCost;
         expenseItemIcon.sprite = islandIcon;
-        expenseItemCostText.text = "+ " + island.islandExpenseCost.ToString() + " ₴";
+        expenseItemCostText.text = "+ " + attachedIsland.islandExpenseCost.ToString() + " ₴";
     }
 
     public void SetupBuildableExpense(Plant buildable)
     {
-        GameManager.EM.expenseBuildablesTotal += buildable.buildableTaxCost;
-        GameManager.UM.Expense += buildable.buildableTaxCost;
+        attachedBuildable = buildable;
+        GameManager.EM.expenseBuildablesTotal += attachedBuildable.buildableTaxCost;
+        GameManager.EM.Expense += attachedBuildable.buildableTaxCost;
         if (buildable.name.Contains("Water Barrel"))
         {
             expenseItemIcon.sprite = waterBarrelIcon;

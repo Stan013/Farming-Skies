@@ -18,8 +18,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private int _water;
     private int _fertiliser;
     private int _deck;
-    private float _expense;
-
 
     public float Balance
     {
@@ -48,18 +46,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
             UpdateUI();
         }
     }
-    public float Expense
-    {
-        get => _expense;
-        set
-        {
-            _expense = value;
-            UpdateUI();
-        }
-    }
 
     [Header("Game variables text")]
-    public TMP_Text expenseText;
     public TMP_Text balanceText;
     public TMP_Text waterText;
     public TMP_Text fertiliserText;
@@ -72,7 +60,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void UpdateUI()
     {
-        expenseText.text = FormatNumber(_expense).ToString();
         balanceText.text = FormatNumber(_balance).ToString();
         waterText.text = FormatNumber(_water).ToString();
         fertiliserText.text = FormatNumber(_fertiliser).ToString();
@@ -121,9 +108,19 @@ public class UIManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void FarmEvaluation()
+    {
+        GameManager.ISM.islandValueChange = GameManager.ISM.IslandValue - GameManager.ISM.oldIslandValue;
+        GameManager.PM.plantValueChange = GameManager.PM.PlantValue - GameManager.PM.oldPlantValue;
+        GameManager.PM.buildableValueChange = GameManager.PM.BuildablesValue - GameManager.PM.oldBuildableValue;
+        GameManager.ISM.oldIslandValue = GameManager.ISM.IslandValue;
+        GameManager.PM.oldPlantValue = GameManager.PM.PlantValue;
+        GameManager.PM.oldBuildableValue = GameManager.PM.BuildablesValue;
+    }
+
     public void LoadData(GameData data)
     {
-        _expense = data.expense;
+
         _balance = data.balance;
         _water = data.water;
         _fertiliser = data.fertiliser;
@@ -132,7 +129,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.expense = _expense;
         data.balance = _balance;
         data.water = _water;
         data.fertiliser = _fertiliser;

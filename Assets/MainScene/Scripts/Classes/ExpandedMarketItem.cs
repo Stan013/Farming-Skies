@@ -224,11 +224,11 @@ public class ExpandedMarketItem : MonoBehaviour
     {
         if (collapsedItem.itemPrices.Last() < collapsedItem.itemPrices[collapsedItem.itemPrices.Count-2])
         {
-            expandedPriceIcon.sprite = downIcon;
+            expandedPriceIcon.sprite = upIcon;
         }
         else if (collapsedItem.itemPrices.Last() > collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 2])
         {
-            expandedPriceIcon.sprite = upIcon;
+            expandedPriceIcon.sprite = downIcon;
         }
         else
         {

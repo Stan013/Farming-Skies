@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static WindowManager WM { get; private set; }
     public static UIManager UM { get; private set; }
     public static InputManager IPM { get; private set; }
+    public static MarketManager MM { get; private set; }
     public static IslandManager ISM { get; private set; }
     public static DeckManager DM { get; private set; }
     public static HandManager HM { get; private set; }
@@ -18,7 +19,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static InventoryManager INM { get; private set; }
     public static PlantManager PM { get; private set; }
     public static CraftManager CRM { get; private set; }
-    public static MarketManager MM { get; private set; }
     public static ExpenseManager EM { get; private set; }
     public static LevelManager LM { get; private set; }
     public static QuestManager QM { get; private set; }

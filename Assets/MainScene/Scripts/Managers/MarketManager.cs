@@ -132,11 +132,11 @@ public class MarketManager : MonoBehaviour, IDataPersistence
         int newSupply = (int)Math.Round(baseSupply * (1 + randomSupply / 100f), 2, MidpointRounding.AwayFromZero);
 
         item.attachedItemCard.itemPrice = newPrice;
-        item.itemPrices.Add(newPrice);
+        item.itemPrices.Insert(0, newPrice);
         item.attachedItemCard.itemDemand = newDemand;
-        item.itemDemands.Add(newDemand);
+        item.itemDemands.Insert(0, newDemand);
         item.attachedItemCard.itemSupply = newSupply;
-        item.itemSupplies.Add(newSupply);
+        item.itemSupplies.Insert(0, newSupply);
     }
 
     public MarketItem FindMarketItemByID(string id)

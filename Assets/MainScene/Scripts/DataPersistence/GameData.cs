@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
@@ -107,6 +108,10 @@ public class GameData
     // Plant Manager Data
     public float plantValue;
     public float buildableValue;
+
+    // Expense Manager Data
+    public List<string> islandExpenses = new List<string>();
+    public List<string> buildableExpenses = new List<string>();
 
     public GameData()
     {

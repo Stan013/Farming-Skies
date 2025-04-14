@@ -29,7 +29,6 @@ public class DataPersistenceManager : MonoBehaviour
     {
         GameManager.SPM.Spawn();
         GameManager.LM.FarmLevel = gameData.farmLevel;
-        GameManager.UM.Expense = gameData.expense;
         GameManager.UM.Balance = gameData.balance;
         GameManager.UM.Water = gameData.water;
         GameManager.UM.Fertiliser = gameData.fertiliser;
@@ -39,6 +38,13 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.CM.SetupCards();
         GameManager.DM.SetStartingDeck();
         GameManager.MM.SetupMarket();
+    }
+    public void ClearChildren(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     public void LoadGame()

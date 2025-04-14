@@ -20,6 +20,7 @@ public class PlantManager : MonoBehaviour, IDataPersistence
     }
     public float oldPlantValue;
     public float plantValueChange;
+
     private float _buildablesValue;
     public float BuildablesValue
     {
@@ -30,6 +31,9 @@ public class PlantManager : MonoBehaviour, IDataPersistence
             GameManager.EM.UpdateFarmValue();
         }
     }
+    public float oldBuildableValue;
+    public float buildableValueChange;
+
     public void Harvest()
     {
         foreach (Island island in GameManager.ISM.boughtIslands)
@@ -73,7 +77,7 @@ public class PlantManager : MonoBehaviour, IDataPersistence
             case "Large crops":
                 return island.availableLargePlots.Find(plot => plot.name == plotID);
             case "Buildables":
-                break;
+                return island.availableMediumPlots.Find(plot => plot.name == plotID);
         }
         return null;
     }
@@ -87,7 +91,6 @@ public class PlantManager : MonoBehaviour, IDataPersistence
             plant.transform.localPosition = new Vector3(0, -0.25f, 0);
             plant.transform.localRotation = Quaternion.identity;
             island.MakeUsedPlot(plot, GameManager.CM.FindCardByID(plantsMap[i].plantID), plant.GetComponent<Plant>());
-            island.UpdateNutrientsRequired(plant.GetComponent<Plant>());
         }
     }
 

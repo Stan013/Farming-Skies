@@ -10,7 +10,9 @@ public class Plant : MonoBehaviour
     public Drop drop;
     public int dropAmount;
     public Island attachedIsland;
+    public Card attachedCard;
     public InventoryItem attachedInventoryItem;
+
     public int baseYield;
     public int yield;
     public int predictedYield;
@@ -81,10 +83,7 @@ public class Plant : MonoBehaviour
 
     public PlantData SavePlantData()
     {
-        if(attachedInventoryItem != null)
-        {
-            plantData = new PlantData(attachedInventoryItem.attachedItemCard.cardId, attachedIsland.islandID, transform.parent.name, attachedInventoryItem.attachedItemCard.cardType);
-        }
+        plantData = new PlantData(attachedCard.cardId, attachedIsland.islandID, transform.parent.name, attachedCard.cardType);
         return plantData;
     }
 }

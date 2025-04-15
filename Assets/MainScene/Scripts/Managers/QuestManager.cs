@@ -242,7 +242,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Market details!", "The problem again is that we don't know how much the rice sold for. Besides we don't know what the supply and demand is for rice plus how much we still have left. So let's click on the green button again to expand.");
                 break;
             case 38:
-                GameManager.MM.expandedMarketItem.sellButton.interactable = false;
+                GameManager.MM.expandedMarketItem.transactionButton.interactable = false;
                 UpdateQuest("Get rice back!", "We can now see the demand and the supply of the rice plus the current price. These numbers will change everyday so sell and buy at the right time. Since we will need rice put in the same amount as we sold so 10.");
                 break;
             case 39:
@@ -293,11 +293,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Close expenses!", "So the more islands you buy and the more buildables you get the more you will have to pay. Let's close the expense window and have a look at when you will need to pay this and some other events you might encounter.");
                 break;
             case 48:
-                UpdateQuest("The end for now!", "More updates are coming soon.");
+                UpdateQuest("Look at events!", "To see all the upcoming events which includes when you need to pay but also when your soil gets refilled or when you will get new plant cards. Click with your left mouse button on the calendar icon at the right side of your screen.");
                 break;
             case 49:
                 break;
         }
+
     }
 
     public void QuestCheck()

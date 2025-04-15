@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1654311546695061112}
   - component: {fileID: 3172611637536789254}
   m_Layer: 0
-  m_Name: EventItemImage
+  m_Name: EventIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 7547675904629849623}
   - component: {fileID: 3458828569893906484}
   m_Layer: 0
-  m_Name: TimeItemDisplay
+  m_Name: TimeItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

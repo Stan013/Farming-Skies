@@ -13,8 +13,8 @@ public class ExpandedMarketItem : MonoBehaviour
     public TMP_Text expandedName;
     public TMP_Text expandedQuantity;
 
-    public Button sellButton;
-    public Button buyButton;
+    public Button transactionButton;
+    public TMP_Text transactionText;
     public Sprite validSell;
     public Sprite invalidSell;
 
@@ -53,9 +53,9 @@ public class ExpandedMarketItem : MonoBehaviour
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
         expandedQuantity.text = attachedInventoryItem.ItemQuantity.ToString();
-        highestPriceText.text = collapsedItem.itemPrices.Max().ToString("F2");
-        averagePriceText.text = collapsedItem.itemPrices.Average().ToString("F2");
-        lowestPriceText.text = collapsedItem.itemPrices.Min().ToString("F2");
+        highestPriceText.text = collapsedItem.itemPrices.Max().ToString("F2") + " ₴";
+        averagePriceText.text = collapsedItem.itemPrices.Average().ToString("F2") + " ₴";
+        lowestPriceText.text = collapsedItem.itemPrices.Min().ToString("F2") + " ₴";
         expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString("F2") + " ₴";
         collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
         SetPriceIcons();
@@ -81,15 +81,11 @@ public class ExpandedMarketItem : MonoBehaviour
         }
     }
 
-    public void SetMarketTransaction(string input)
-    {
-        marketTransaction = input;
-    }
-
     public void SetMin()
     {
         transactionAmount = 0;
         transactionAmountInput.text = "0";
+        CheckValidTransactionAmount("0");
     }
 
     public void DecreaseAmount()
@@ -97,73 +93,137 @@ public class ExpandedMarketItem : MonoBehaviour
         int amount = transactionAmount;
         amount = Mathf.Max(0, amount - 1);
         transactionAmountInput.text = amount.ToString();
+        CheckValidTransactionAmount(amount.ToString());
     }
 
     public void IncreaseAmount()
     {
         int amount = transactionAmount;
-        int maxAmount = Mathf.Max(collapsedItem.maxBuyAmount, attachedInventoryItem.ItemQuantity);
+        int maxAmount;
+
+        if (marketTransaction == "Buy")
+        {
+            maxAmount = collapsedItem.maxBuyAmount;
+        }
+        else // Sell
+        {
+            maxAmount = attachedInventoryItem.ItemQuantity;
+        }
+
         amount = Mathf.Min(maxAmount, amount + 1);
         transactionAmountInput.text = amount.ToString();
+        CheckValidTransactionAmount(amount.ToString());
     }
 
     public void SetMax()
     {
-        int maxAmount = Mathf.Max(collapsedItem.maxBuyAmount, attachedInventoryItem.ItemQuantity);
+        int maxAmount;
+
+        if (marketTransaction == "Buy")
+        {
+            maxAmount = collapsedItem.maxBuyAmount;
+        }
+        else // Sell
+        {
+            maxAmount = attachedInventoryItem.ItemQuantity;
+        }
+
         transactionAmount = maxAmount;
         transactionAmountInput.text = maxAmount.ToString();
+        CheckValidTransactionAmount(maxAmount.ToString());
     }
 
     public void CheckValidTransactionAmount(string input)
     {
-        if (!int.TryParse(input, out int value) || value <= 0)
+        if (!int.TryParse(input, out int value))
         {
-            transactionAmount = 0;
-            transactionAmountInput.text = "0";
-            transactionInputBackground.sprite = invalidTransaction;
-            canTransaction = false;
-
-            buyButton.interactable = false;
-            buyButton.GetComponent<Image>().sprite = invalidTransaction;
-            sellButton.interactable = false;
-            sellButton.GetComponent<Image>().sprite = invalidSell;
-            return;
+            value = 0;
         }
 
         transactionAmount = value;
         transactionAmountInput.text = value.ToString();
-        collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
 
-        float totalCost = value * collapsedItem.attachedItemCard.itemPrice;
-        bool canBuy = totalCost <= GameManager.UM.Balance && collapsedItem.maxBuyAmount > 0;
-        bool canSell = value <= attachedInventoryItem.ItemQuantity && attachedInventoryItem.ItemQuantity > 0;
-
-        buyButton.interactable = canBuy;
-        sellButton.interactable = canSell;
-
-        canTransaction = canBuy || canSell;
-
-        if(canBuy)
+        if (marketTransaction == "Sell")
         {
-            buyButton.GetComponent<Image>().sprite = validTransaction;
-            transactionInputBackground.sprite = validTransaction;
+            int availableToSell = attachedInventoryItem.ItemQuantity;
+
+            if (value <= 0 || availableToSell == 0)
+            {
+                transactionInputBackground.sprite = invalidTransaction;
+                canTransaction = false;
+                transactionButton.interactable = false;
+                transactionButton.GetComponent<Image>().sprite = invalidSell;
+            }
+            else if (value > availableToSell)
+            {
+                transactionAmount = availableToSell;
+                transactionAmountInput.text = availableToSell.ToString();
+
+                transactionInputBackground.sprite = validTransaction;
+                canTransaction = true;
+                transactionButton.interactable = true;
+                transactionButton.GetComponent<Image>().sprite = validSell;
+            }
+            else
+            {
+                transactionInputBackground.sprite = validTransaction;
+                canTransaction = true;
+                transactionButton.interactable = true;
+                transactionButton.GetComponent<Image>().sprite = validSell;
+            }
+        }
+        else // Buy
+        {
+            float price = collapsedItem.attachedItemCard.itemPrice;
+            float balance = GameManager.UM.Balance;
+            collapsedItem.maxBuyAmount = Mathf.FloorToInt(balance / price);
+            float totalCost = value * price;
+
+            if (value <= 0 || collapsedItem.maxBuyAmount == 0 || totalCost > balance)
+            {
+                if (collapsedItem.maxBuyAmount > 0)
+                {
+                    transactionAmount = collapsedItem.maxBuyAmount;
+                    transactionAmountInput.text = collapsedItem.maxBuyAmount.ToString();
+
+                    transactionInputBackground.sprite = validTransaction;
+                    canTransaction = true;
+                    transactionButton.interactable = true;
+                    transactionButton.GetComponent<Image>().sprite = validSell;
+                }
+                else
+                {
+                    transactionInputBackground.sprite = invalidTransaction;
+                    canTransaction = false;
+                    transactionButton.interactable = false;
+                    transactionButton.GetComponent<Image>().sprite = invalidSell;
+
+                }
+            }
+            else
+            {
+                transactionInputBackground.sprite = validTransaction;
+                canTransaction = true;
+                transactionButton.interactable = true;
+                transactionButton.GetComponent<Image>().sprite = validSell;
+            }
+        }
+    }
+
+
+    public void SwitchTransaction()
+    {
+        if (marketTransaction == "Sell")
+        {
+            transactionText.text = "Buy";
+            marketTransaction = "Buy";
         }
         else
         {
-            buyButton.interactable = false;
-            buyButton.GetComponent<Image>().sprite = invalidTransaction;
+            transactionText.text = "Sell";
+            marketTransaction = "Sell";
         }
-
-        if (canSell)
-        {
-            sellButton.GetComponent<Image>().sprite = validSell;
-            transactionInputBackground.sprite = validTransaction;
-        }
-        else
-        {
-            sellButton.interactable = false;
-            sellButton.GetComponent<Image>().sprite = invalidSell;
-        }
+        CheckValidTransactionAmount("0");
     }
 
     public void OnTransactionButtonPress()
@@ -222,13 +282,13 @@ public class ExpandedMarketItem : MonoBehaviour
 
     public void SetPriceIcons()
     {
-        if (collapsedItem.itemPrices.Last() < collapsedItem.itemPrices[collapsedItem.itemPrices.Count-2])
+        if (collapsedItem.itemPrices[0] < collapsedItem.itemPrices[collapsedItem.itemPrices.Count-1])
         {
-            expandedPriceIcon.sprite = upIcon;
+            expandedPriceIcon.sprite = downIcon; // Price decrease
         }
-        else if (collapsedItem.itemPrices.Last() > collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 2])
+        else if (collapsedItem.itemPrices[0] > collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 1])
         {
-            expandedPriceIcon.sprite = downIcon;
+            expandedPriceIcon.sprite = upIcon; // Price increase
         }
         else
         {

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -15,7 +14,7 @@ public class MarketItem : MonoBehaviour
     public Button expandButton;
     public MarketData marketData;
 
-    private string marketTransaction = "Sell";
+    public string marketTransaction = "Sell";
     public Button transactionButton;
     public TMP_Text transactionText;
     public int transactionAmount;
@@ -124,21 +123,6 @@ public class MarketItem : MonoBehaviour
         }
     }
 
-    public void SwitchTransaction()
-    {
-        if (marketTransaction == "Sell")
-        {
-            transactionText.text = "Buy";
-            marketTransaction = "Buy";
-        }
-        else
-        {
-            transactionText.text = "Sell";
-            marketTransaction = "Sell";
-        }
-        CheckValidTransactionAmount("0");
-    }
-
     public void OnTransactionButtonPress()
     {
         if (canTransaction)
@@ -228,6 +212,10 @@ public class MarketItem : MonoBehaviour
         itemDemands = data.itemDemands;
         itemSupplies = data.itemSupplies;
         CheckValidTransactionAmount("0");
+
+        attachedItemCard.itemPrice = itemPrices[0];
+        attachedItemCard.itemDemand = itemDemands[0];
+        attachedItemCard.itemSupply = itemSupplies[0];
     }
 
     public MarketData SaveMarketData()

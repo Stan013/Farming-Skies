@@ -375,6 +375,7 @@ MonoBehaviour:
     itemPrices: []
     itemDemands: 
     itemSupplies: 
+  marketTransaction: Sell
   transactionButton: {fileID: 2775292884922326128}
   transactionText: {fileID: 3163921139594962170}
   transactionAmount: 0
@@ -1296,6 +1297,7 @@ GameObject:
   - component: {fileID: 5183325512133350869}
   - component: {fileID: 2775292884922326128}
   - component: {fileID: 937575548982045682}
+  - component: {fileID: 8296123020158791690}
   m_Layer: 0
   m_Name: QuickTransactionButton
   m_TagString: Untagged
@@ -1404,19 +1406,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5183325512133350869}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3452304237790212670}
-        m_TargetAssemblyTypeName: MarketItem, Assembly-CSharp
-        m_MethodName: SwitchTransaction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &937575548982045682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,3 +1452,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8296123020158791690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9081884368100339887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83c4ad0a8d855d48b299f51751de8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

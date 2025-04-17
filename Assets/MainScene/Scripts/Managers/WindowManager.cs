@@ -17,6 +17,7 @@ public class WindowManager : MonoBehaviour
     public GameObject craftWindow;
     public GameObject marketWindow;
     public GameObject expenseWindow;
+    public GameObject eventWindow;
 
     [Header("Quest window variables")]
     public float windowTransitionDuration = 0.5f;

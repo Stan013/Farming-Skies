@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static CraftManager CRM { get; private set; }
     public static ExpenseManager EM { get; private set; }
     public static LevelManager LM { get; private set; }
+    public static EventManager EVM { get; private set; }
     public static QuestManager QM { get; private set; }
     public static SelectionManager SM { get; private set; }
 
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         MM = GetComponent<MarketManager>();
         EM = GetComponent<ExpenseManager>();
         LM = GetComponent<LevelManager>();
+        EVM = GetComponent<EventManager>();
         SM = GetComponent<SelectionManager>();
         DPM = GetComponent<DataPersistenceManager>();
     }

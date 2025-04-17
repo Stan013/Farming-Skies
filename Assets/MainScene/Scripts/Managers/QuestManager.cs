@@ -293,6 +293,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Close expenses!", "So the more islands you buy and the more buildables you get the more you will have to pay. Let's close the expense window and have a look at when you will need to pay this and some other events you might encounter.");
                 break;
             case 48:
+                GameManager.UM.selectionUI.transform.GetChild(5).GetComponent<Button>().interactable = true;
                 UpdateQuest("Look at events!", "To see all the upcoming events which includes when you need to pay but also when your soil gets refilled or when you will get new plant cards. Click with your left mouse button on the calendar icon at the right side of your screen.");
                 break;
             case 49:

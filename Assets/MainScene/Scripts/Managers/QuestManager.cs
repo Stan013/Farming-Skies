@@ -294,9 +294,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 48:
                 GameManager.UM.selectionUI.transform.GetChild(5).GetComponent<Button>().interactable = true;
-                UpdateQuest("Look at events!", "To see all the upcoming events which includes when you need to pay but also when your soil gets refilled or when you will get new plant cards. Click with your left mouse button on the calendar icon at the right side of your screen.");
+                UpdateQuest("Look at calendar!", "To see all the upcoming events which includes when you need to pay but also when your soil gets refilled or when you will get new plant cards. Click with your left mouse button on the calendar icon at the right side of your screen.");
                 break;
             case 49:
+
+                UpdateQuest("Check the events!", "Let's use the filters on top again and click the green tab that says New Cards to see when you will receive new plant cards. After that click the green tab that says Payments these will be the weeks you need to pay your expenses.");
                 break;
         }
 

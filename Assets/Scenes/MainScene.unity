@@ -1162,7 +1162,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
       value: 
-      objectReference: {fileID: 32900000, guid: 25273ab5b1c50a34bbf4fe4bb48b440f, type: 3}
+      objectReference: {fileID: 32900000, guid: 996f3ebab2527be45ac66050f29c526a, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
       value: Nitrogen
@@ -1178,7 +1178,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4659201f4daad194db73a457f412f3e8, type: 3}
+      objectReference: {fileID: 21300000, guid: 6677fe05b5dddfe4eba1164fc3c8af11, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardUnlocked
       value: 1
@@ -1223,7 +1223,7 @@ PrefabInstance:
     - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: dragModel
       value: 
-      objectReference: {fileID: 1992889638216005812, guid: 77747c96cf403174eb1492c2956f8a98, type: 3}
+      objectReference: {fileID: 6731698353316333296, guid: 8db97f3f796a62e498fb4886610f0f23, type: 3}
     - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -21042,7 +21042,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
       value: 
-      objectReference: {fileID: 32900000, guid: 11a5fb3e78708aa4bb03d8a67985304d, type: 3}
+      objectReference: {fileID: 32900000, guid: 6d2aabc11a36498438aa09b31d92ef6b, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
       value: Potassium
@@ -21058,7 +21058,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 323510d515870bf4593f530784faf375, type: 3}
+      objectReference: {fileID: 21300000, guid: 42f3fda4ede6ab44fa9ead1c1db3dd6d, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: dragSucces
       value: 0
@@ -21107,7 +21107,7 @@ PrefabInstance:
     - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: dragModel
       value: 
-      objectReference: {fileID: 7966672353276964547, guid: 2602d277dc2014047b0f6e4ba56b977a, type: 3}
+      objectReference: {fileID: 6769085257709866376, guid: d0196962497804c4b965856b81f47131, type: 3}
     - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -30896,7 +30896,7 @@ RectTransform:
   m_GameObject: {fileID: 877823930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.00041946277}
-  m_LocalScale: {x: 0.9993133, y: 0.9993133, z: 0.9993133}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 793918342}
@@ -37121,7 +37121,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardClip
       value: 
-      objectReference: {fileID: 32900000, guid: a4633a9859c30d6478024f59cd7fbbe8, type: 3}
+      objectReference: {fileID: 32900000, guid: 55e776dc507d1d44f9fea27145de4286, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardName
       value: Phosphorus
@@ -37137,7 +37137,7 @@ PrefabInstance:
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: b2199ba64f9173242879af3d590c1a8d, type: 3}
+      objectReference: {fileID: 21300000, guid: f4172550608198649b9427a352384b44, type: 3}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: dragSucces
       value: 0
@@ -37186,7 +37186,7 @@ PrefabInstance:
     - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: dragModel
       value: 
-      objectReference: {fileID: 6579287608497389501, guid: ff9274b15d5294c49ae3a2af4c8306c9, type: 3}
+      objectReference: {fileID: 1413139545638751666, guid: f8cf5fd72c94ae749b90fb2aba259a75, type: 3}
     - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Enabled
       value: 1

@@ -1508,7 +1508,7 @@ PrefabInstance:
     - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bf84bfd91fe65804586578d23a90fac6, type: 3}
+      objectReference: {fileID: 21300000, guid: 6872b92391ec533419265acd9a8377f5, type: 3}
     - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1523,7 +1523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
@@ -1739,7 +1739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8215198041849811362, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8215198041849811362, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2001,7 +2001,7 @@ PrefabInstance:
     - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bf84bfd91fe65804586578d23a90fac6, type: 3}
+      objectReference: {fileID: 21300000, guid: 030e1d279c0489743b7386f16a371bc6, type: 3}
     - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -2020,7 +2020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
@@ -2234,7 +2234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8215198041849811362, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8215198041849811362, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2292,14 +2292,14 @@ PrefabInstance:
     - target: {fileID: 566232052371417669, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bf84bfd91fe65804586578d23a90fac6, type: 3}
+      objectReference: {fileID: 21300000, guid: 6b10d18eec2c07d4282d4d2a697140b0, type: 3}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Name
       value: PotassiumNeeds (1)
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
@@ -2686,7 +2686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8215198041849811362, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8215198041849811362, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

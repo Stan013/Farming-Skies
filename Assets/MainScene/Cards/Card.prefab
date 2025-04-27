@@ -1519,7 +1519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Name
-      value: NitrogenNeeds (1)
+      value: CalciumNeeds
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
@@ -1528,7 +1528,7 @@ PrefabInstance:
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 39d2c79f5bbc60a40b57c0cb2309eecb, type: 3}
+      objectReference: {fileID: 21300000, guid: 68c97c84b57883b4db9eb3580b6e1efc, type: 3}
     - target: {fileID: 3029332767833255955, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4281742388
@@ -2016,7 +2016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Name
-      value: PhosphorusNeeds (1)
+      value: MagnesiumNeeds
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
@@ -2025,7 +2025,7 @@ PrefabInstance:
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ed7117f7d46ae3c429f9b3ffc13b5e27, type: 3}
+      objectReference: {fileID: 21300000, guid: 6df7e996e9079d446a1e9afdded64f4e, type: 3}
     - target: {fileID: 3029332767833255955, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4281742388
@@ -2295,7 +2295,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 6b10d18eec2c07d4282d4d2a697140b0, type: 3}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Name
-      value: PotassiumNeeds (1)
+      value: SulfurNeeds
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
@@ -2304,7 +2304,7 @@ PrefabInstance:
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 99a9469dfa5a50c49a7255974b75dd8b, type: 3}
+      objectReference: {fileID: 21300000, guid: 9ab1b37d971c9374b981612622e791e6, type: 3}
     - target: {fileID: 3029332767833255955, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4281742388

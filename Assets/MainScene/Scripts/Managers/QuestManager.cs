@@ -294,11 +294,16 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 48:
                 GameManager.UM.selectionUI.transform.GetChild(5).GetComponent<Button>().interactable = true;
-                UpdateQuest("Look at calendar!", "To see all the upcoming events which includes when you need to pay but also when your soil gets refilled or when you will get new plant cards. Click with your left mouse button on the calendar icon at the right side of your screen.");
+                UpdateQuest("Look at calendar!", "To see all the upcoming events click with your left mouse button on the calendar icon at the right side of your screen. Each 4 weeks new events can come up that can change your soil so check on it every once in a while.");
                 break;
             case 49:
-
                 UpdateQuest("Check the events!", "Let's use the filters on top again and click the green tab that says New Cards to see when you will receive new plant cards. After that click the green tab that says Payments these will be the weeks you need to pay your expenses.");
+                break;
+            case 50:
+                UpdateQuest("Get to week 4!", "As you saw the 4th week will give you the option to choose some new cards. So show me you can advance to week 4 and pick your new card.");
+                break;
+            case 51:
+                UpdateQuest("Get to week 4!", "As you saw the 4th week will give you the option to choose some new cards. So show me you can advance to week 4 and pick your new card.");
                 break;
         }
 
@@ -593,6 +598,22 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 48:
+                    if (GameManager.WM.eventWindow.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 49:
+                    if (GameManager.EVM.eventTab == "PayExpenses")
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 50:
+                    if (GameManager.TM.Weeks >= 4)
+                    {
+                        QuestCompleted();
+                    }
                     break;
             }
         }

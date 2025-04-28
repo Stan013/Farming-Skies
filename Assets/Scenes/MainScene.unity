@@ -77340,6 +77340,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 02c66aa50aeeb004ebeb504ecf019ede, type: 3}
   m_PrefabInstance: {fileID: 2108862076}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2114673207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2114673208}
+  - component: {fileID: 2114673210}
+  - component: {fileID: 2114673209}
+  m_Layer: 0
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2114673208
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114673207}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3016592021580990424}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1500, y: 750}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2114673209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114673207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2114673210
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114673207}
+  m_CullTransparentMesh: 1
 --- !u!4 &2116629983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6099108510424878838, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
@@ -79532,7 +79607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1630264620642353271}
   m_Layer: 0
-  m_Name: PickSlots
+  m_Name: SelectionSlots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79629,36 +79704,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8229363084468751848}
   m_CullTransparentMesh: 1
---- !u!114 &1177081759394873067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7022761722049436108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1203967530040262437
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -81365,22 +81410,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2661151753590545840
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355916243228392774}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3016592021580990424}
-  m_Father: {fileID: 8545395672337255013}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2662327594444571503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81590,8 +81619,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2114673208}
   - {fileID: 1630264620642353271}
-  m_Father: {fileID: 2661151753590545840}
+  m_Father: {fileID: 8545395672337255013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -83092,9 +83122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd01a77abf0b6644e9ac1bb0c3b6f0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPickWindow: {fileID: 7022761722049436108}
   pickSlotParent: {fileID: 938151234044893403}
   pickSlots: []
+  pickCards: []
 --- !u!224 &4177421555856348027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -83245,22 +83275,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 225}
   m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &4355916243228392774
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2661151753590545840}
-  m_Layer: 0
-  m_Name: Windows
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!114 &4417066235820167370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84203,14 +84217,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!222 &5462047105872106250
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7022761722049436108}
-  m_CullTransparentMesh: 1
 --- !u!222 &5527994464607709595
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -85579,10 +85585,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3016592021580990424}
-  - component: {fileID: 5462047105872106250}
-  - component: {fileID: 1177081759394873067}
   m_Layer: 0
-  m_Name: CardPickWindow
+  m_Name: SelectionWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87171,6 +87175,7 @@ MonoBehaviour:
   marketWindow: {fileID: 1943327019}
   expenseWindow: {fileID: 372999834}
   eventWindow: {fileID: 793918341}
+  selectionWindow: {fileID: 0}
   windowTransitionDuration: 0.5
 --- !u!114 &8413217862094962420
 MonoBehaviour:
@@ -87273,6 +87278,7 @@ MonoBehaviour:
   previousEvents: []
   eventContentArea: {fileID: 347331080}
   eventItemTemplate: {fileID: 1847922798}
+  eventTab: 
   closeButton: {fileID: 877823932}
   eventCount: 0
 --- !u!1 &8438808356335388789
@@ -87376,7 +87382,7 @@ RectTransform:
   - {fileID: 372999835}
   - {fileID: 793918342}
   - {fileID: 5565425345248548342}
-  - {fileID: 2661151753590545840}
+  - {fileID: 3016592021580990424}
   - {fileID: 2441461401252511406}
   - {fileID: 1220327573}
   - {fileID: 7750940639369171469}

@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
     [Header("Event variables")]
     public GameObject eventContentArea;
     public EventItem eventItemTemplate;
+    public string eventTab;
     public Button closeButton;
     public int eventCount;
 
@@ -49,6 +50,7 @@ public class EventManager : MonoBehaviour
 
     public void FilterItemsInEvent(string filter)
     {
+        eventTab = filter;
         if (filter == "Default")
         {
             foreach (EventItem eventItem in upcomingEvents)
@@ -69,6 +71,23 @@ public class EventManager : MonoBehaviour
                     eventItem.gameObject.SetActive(true);
                 }
             }
+        }
+    }
+
+    public void CheckEvent()
+    {
+        EventItem pastEvent = upcomingEvents[0];
+        upcomingEvents.RemoveAt(0);
+        Destroy(pastEvent);
+        switch (upcomingEvents[0].eventItemType)
+        {
+            case "NewCards":
+                GameManager.WM.OpenSelectionWindow();
+                break;
+            case "RefillNutrients":
+                break;
+            case "PayExpenses":
+                break;
         }
     }
 }

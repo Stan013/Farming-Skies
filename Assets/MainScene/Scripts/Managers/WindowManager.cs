@@ -18,6 +18,7 @@ public class WindowManager : MonoBehaviour
     public GameObject marketWindow;
     public GameObject expenseWindow;
     public GameObject eventWindow;
+    public GameObject selectionWindow;
 
     [Header("Quest window variables")]
     public float windowTransitionDuration = 0.5f;
@@ -101,6 +102,22 @@ public class WindowManager : MonoBehaviour
         {
             GameManager.HM.HideCardsInHand(true);
             settingsWindow.SetActive(true);
+            inMenu = true;
+        }
+    }
+
+    public void OpenSelectionWindow()
+    {
+        if (selectionWindow.activeSelf)
+        {
+            selectionWindow.SetActive(false);
+            inMenu = false;
+        }
+        else
+        {
+            GameManager.HM.HideCardsInHand(true);
+            GameManager.SM.SetupCardSelection();
+            selectionWindow.SetActive(true);
             inMenu = true;
         }
     }

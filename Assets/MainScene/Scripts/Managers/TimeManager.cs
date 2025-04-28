@@ -34,6 +34,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.PM.Harvest();
         GameManager.UM.FarmEvaluation();
         StartCoroutine(CycleWeekDays());
+        GameManager.EVM.CheckEvent();
     }
 
     private IEnumerator CycleWeekDays()

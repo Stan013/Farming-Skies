@@ -1523,7 +1523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
@@ -2020,7 +2020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite
@@ -2299,7 +2299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 826486199950385521, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269860631809327273, guid: 913fd9eb450915f40807db1170e1687f, type: 3}
       propertyPath: m_Sprite

@@ -38,6 +38,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.CM.SetupCards();
         GameManager.DM.SetStartingDeck();
         GameManager.MM.SetupMarket();
+        GameManager.EVM.SetupEvents();
     }
     public void ClearChildren(Transform parent)
     {

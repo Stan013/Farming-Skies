@@ -18,6 +18,9 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public string inventoryTab;
     public Button closeButton;
 
+    [Header("Inventory tutorial variables")]
+    public bool canCraftCard;
+
     public void UnlockInventoryItem(Card itemCard, Plant plant)
     {
         InventoryItem existingInventoryItem = GameManager.INM.itemsInInventory.FirstOrDefault(i => i.attachedItemCard.itemName == itemCard.itemName);

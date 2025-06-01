@@ -37,14 +37,15 @@ public class EventManager : MonoBehaviour
                         eventCount = 0;
                         break;
                 }
+                upcomingEvents.Add(eventItem);
             }
             else
             {
                 eventItem.SetupEventItem("Default", i);
+                upcomingEvents.Add(eventItem);
             }
             eventItem.transform.localRotation = Quaternion.identity;
             eventItem.transform.localPosition = new Vector3(eventItem.transform.localPosition.x, eventItem.transform.localPosition.y, 0);
-            upcomingEvents.Add(eventItem);
         }
     }
 
@@ -78,8 +79,8 @@ public class EventManager : MonoBehaviour
     {
         EventItem pastEvent = upcomingEvents[0];
         upcomingEvents.RemoveAt(0);
-        Destroy(pastEvent);
-        switch (upcomingEvents[0].eventItemType)
+        previousEvents.Add(pastEvent);
+        switch (pastEvent.eventItemType)
         {
             case "NewCards":
                 GameManager.WM.OpenSelectionWindow();

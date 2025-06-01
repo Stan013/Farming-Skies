@@ -40,7 +40,6 @@ public class PlantManager : MonoBehaviour, IDataPersistence
         {
             foreach (Plant plant in island.smallPlantsOnIsland.Concat(island.mediumPlantsOnIsland).Concat(island.largePlantsOnIsland))
             {
-                plant.attachedInventoryItem.ItemQuantity += plant.yield;
                 if (plant.nutrientsUsages[0] <= island.nutrientsAvailable[0])
                 {
                     plant.UpdatePlantYield();

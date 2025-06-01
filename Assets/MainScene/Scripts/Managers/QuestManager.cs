@@ -108,11 +108,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 8:
                 cardGreenBean.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Plant your first crop!", "Let's hover over your green bean plant card, but this time hold down your left mouse button. Then move the plant towards your soil and once snapped in place let go of your mouse.");
+                UpdateQuest("Plant your first crop!", "Let's hover over your green bean plant card, but this time hold down your left mouse button. Then move the crop towards your soil and once snapped in place let go of your mouse.");
                 break;
             case 9:
                 cardChive.GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Plant another crop!", "Now do it again with your chive plant card. Since the plant size is smaller, more plots are available. You can, however, only have one plant for each plot, so use your space efficiently.");
+                UpdateQuest("Plant another crop!", "Now do it again with your chive plant card. Since the crop size is smaller, more plots are available. You can, however, only have one crop for each plot, so use your space efficiently.");
                 break;
             case 10:
                 if (cardChard != null)
@@ -243,14 +243,14 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 break;
             case 38:
                 GameManager.MM.expandedMarketItem.transactionButton.interactable = false;
-                UpdateQuest("Get rice back!", "We can now see the demand and the supply of the rice plus the current price. These numbers will change everyday so sell and buy at the right time. Since we will need rice put in the same amount as we sold so 10.");
+                UpdateQuest("Get rice back!", "We can now see the demand and the supply of the rice plus the current price. These numbers will change everyday so sell and buy at the right time. Since we will need rice put in the same amount as we sold."); 
                 break;
             case 39:
                 UpdateQuest("Buy the rice!", "The label will turn green again and you can now buy 5 rice. Hover your mouse over the green buy button and the same as before hold it down to buy back the rice we just sold.");
                 break;
             case 40:
                 GameManager.MM.closeButton.interactable = true;
-                EnableFreeMarket();
+                EnableFreeMarket(1);
                 UpdateQuest("Make 500₴ yourself!", "These are the basics of managing your crops and generating money. So how about you show me you can make 500₴ and I will tell you some more about expanding your farm.");
                 break;
             case 41:
@@ -280,7 +280,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             case 44:
                 GameManager.HM.FindCardInHandById("CardWaterBarrelBuildable").GetComponent<CardDrag>().enabled = true;
                 GameManager.HM.FindCardInHandById("CardCompostBinBuildable").GetComponent<CardDrag>().enabled = true;
-                UpdateQuest("Place them down!", "You know what they do so let's place them down and get your resources storage replenished. Hover over the cards again and drag them towards your island as you can see they are the same size as a medium plant.");
+                UpdateQuest("Place them down!", "You know what they do so let's place them down and get your resources storage replenished. Hover over the cards again and drag them towards your island as you can see they are the same size as a medium crop.");
                 break;
             case 45:
                 GameManager.UM.selectionUI.transform.GetChild(4).GetComponent<Button>().interactable = true;
@@ -290,6 +290,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Inspect your expenses!", "Here you can see some stats about your farm but that is not what we are looking for right now. Click on the green label on top which says expenses to see all the expenses you will need to pay for.");
                 break;
             case 47:
+                GameManager.EM.closeButton.interactable = true;
                 UpdateQuest("Close expenses!", "So the more islands you buy and the more buildables you get the more you will have to pay. Let's close the expense window and have a look at when you will need to pay this and some other events you might encounter.");
                 break;
             case 48:
@@ -297,13 +298,21 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Look at calendar!", "To see all the upcoming events click with your left mouse button on the calendar icon at the right side of your screen. Each 4 weeks new events can come up that can change your soil so check on it every once in a while.");
                 break;
             case 49:
-                UpdateQuest("Check the events!", "Let's use the filters on top again and click the green tab that says New Cards to see when you will receive new plant cards. After that click the green tab that says Payments these will be the weeks you need to pay your expenses.");
+                UpdateQuest("Check new cards!", "Use the filters on top again and click the green tab that says cards to see when you will receive some new plant cards. You will get 3 options each with its own quantity of card that will be added to your deck so chose wisely.");
                 break;
             case 50:
-                UpdateQuest("Get to week 4!", "As you saw the 4th week will give you the option to choose some new cards. So show me you can advance to week 4 and pick your new card.");
+                UpdateQuest("Check pay expenses!", "Now click the filter payment and as you can see at week 12 you will have to pay your expenses. If you can't pay your expenses your farm will fail so make sure to safe up and not expand too fast.");
                 break;
             case 51:
-                UpdateQuest("Get to week 4!", "As you saw the 4th week will give you the option to choose some new cards. So show me you can advance to week 4 and pick your new card.");
+                GameManager.EVM.closeButton.interactable = true;
+                UpdateQuest("Close events!", "Not every week will have an event but it is good to check this window every once in a while. You currently don't have a lot of items yet so events are still rare. But for now let's close this window and get some more crops.");
+                break;
+            case 52:
+                EnableFreeMarket(2);
+                UpdateQuest("Get more crops!", "Craft some more plant cards you will first need to safe up some of your harvest and get some more fertiliser and water. So show me you can do that and fill up your first island with crops.");
+                break;
+            case 53:
+                UpdateQuest("!", "");
                 break;
         }
 
@@ -520,7 +529,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 35:
-                    if (GameManager.MM.FindMarketItemByID("CardRicePlant").transactionAmount == 5)
+                    if (GameManager.MM.FindMarketItemByID("CardRicePlant").transactionAmount > 0)
                     {
                         QuestCompleted();
                     }
@@ -538,7 +547,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 38:
-                    if (GameManager.MM.expandedMarketItem.transactionAmount == 5)
+                    if (GameManager.MM.expandedMarketItem.transactionAmount > 0)
                     {
                         QuestCompleted();
                     }
@@ -604,13 +613,25 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 49:
-                    if (GameManager.EVM.eventTab == "PayExpenses")
+                    if (GameManager.EVM.eventTab == "NewCards")
                     {
                         QuestCompleted();
                     }
                     break;
                 case 50:
-                    if (GameManager.TM.Weeks >= 4)
+                    if (GameManager.EVM.eventTab == "PayExpenses")
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 51:
+                    if (!GameManager.WM.eventWindow.activeSelf)
+                    {
+                        QuestCompleted();
+                    }
+                    break;
+                case 52:
+                    if (GameManager.INM.canCraftCard)
                     {
                         QuestCompleted();
                     }
@@ -619,17 +640,28 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void EnableFreeMarket()
+    public void EnableFreeMarket(int stage)
     {
-        GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
-        GameManager.INM.closeButton.interactable = true;
-        GameManager.UM.selectionUI.transform.GetChild(1).GetComponent<Button>().interactable = true;
-        GameManager.CRM.closeButton.interactable = true;
-        GameManager.UM.selectionUI.transform.GetChild(2).GetComponent<Button>().interactable = true;
-        GameManager.ISM.closeButton.interactable = true;
-        GameManager.UM.selectionUI.transform.GetChild(3).GetComponent<Button>().interactable = true;
-        GameManager.MM.closeButton.interactable = true;
-        GameManager.IPM.nextWeekEnabled = true;
+        if(stage == 1)
+        {
+            GameManager.UM.selectionUI.transform.GetChild(0).GetComponent<Button>().interactable = true;
+            GameManager.INM.closeButton.interactable = true;
+            GameManager.UM.selectionUI.transform.GetChild(1).GetComponent<Button>().interactable = true;
+            GameManager.CRM.closeButton.interactable = true;
+            GameManager.UM.selectionUI.transform.GetChild(2).GetComponent<Button>().interactable = true;
+            GameManager.ISM.closeButton.interactable = true;
+            GameManager.UM.selectionUI.transform.GetChild(3).GetComponent<Button>().interactable = true;
+            GameManager.MM.closeButton.interactable = true;
+            GameManager.IPM.nextWeekEnabled = true;
+        }
+        else
+        {
+            GameManager.UM.selectionUI.transform.GetChild(4).GetComponent<Button>().interactable = true;
+            GameManager.EM.closeButton.interactable = true;
+            GameManager.UM.selectionUI.transform.GetChild(5).GetComponent<Button>().interactable = true;
+            GameManager.EVM.closeButton.interactable = true;
+            GameManager.IPM.nextWeekEnabled = true;
+        }
 
         foreach (MarketItem item in GameManager.MM.itemsInMarket)
         {

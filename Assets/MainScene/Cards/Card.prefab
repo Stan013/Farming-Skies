@@ -1357,7 +1357,6 @@ GameObject:
   - component: {fileID: 4104725461345264046}
   - component: {fileID: 1484413469707627829}
   - component: {fileID: 3113137759257565157}
-  - component: {fileID: 2164437686602726196}
   m_Layer: 0
   m_Name: CardPickButton
   m_TagString: Untagged
@@ -1479,20 +1478,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2164437686602726196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022029349146204646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8428f38ea7bbe2f4a9da5a0e339af5fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickButton: {fileID: 3113137759257565157}
-  card: {fileID: 0}
 --- !u!1001 &2081929408717136939
 PrefabInstance:
   m_ObjectHideFlags: 0

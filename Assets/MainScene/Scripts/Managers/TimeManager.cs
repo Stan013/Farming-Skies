@@ -34,7 +34,6 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.PM.Harvest();
         GameManager.UM.FarmEvaluation();
         StartCoroutine(CycleWeekDays());
-        GameManager.EVM.CheckEvent();
     }
 
     private IEnumerator CycleWeekDays()
@@ -56,6 +55,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.WM.advanceWindow.SetActive(false);
         GameManager.IPM.cam.transform.position = GameManager.IPM.startingPos;
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
+        GameManager.EVM.CheckEvent();
     }
 
     private IEnumerator SlideTextTransition()

@@ -113,6 +113,9 @@ public class GameData
     public List<string> islandExpenses = new List<string>();
     public List<string> buildableExpenses = new List<string>();
 
+    // Event Manager Data
+    public int lastEvent;
+
     public GameData()
     {
         questCount = 0;

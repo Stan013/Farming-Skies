@@ -43,6 +43,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             cardChive = GameManager.HM.FindCardInHandById("CardChivePlant");
             cardChard = GameManager.HM.FindCardInHandById("CardChardPlant");
             cardRice = GameManager.HM.FindCardInHandById("CardRicePlant");
+            GameManager.SM.SetupCardSelection();
         }
         if(questCount > 11)
         {

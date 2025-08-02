@@ -99,6 +99,7 @@ public class EventManager : MonoBehaviour, IDataPersistence
             case "PayExpenses":
                 break;
         }
+        Destroy(pastEvent);
     }
 
     public void LoadData(GameData data)

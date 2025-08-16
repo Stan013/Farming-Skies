@@ -4828,7 +4828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardType
-      value: Buildables
+      value: Structures
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: itemName
@@ -59134,7 +59134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardType
-      value: Buildables
+      value: Structures
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: itemName
@@ -83124,8 +83124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickSlotParent: {fileID: 938151234044893403}
+  cardSlotTemplate: {fileID: 2122358786}
   pickSlots: []
-  pickCards: []
 --- !u!224 &4177421555856348027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -84178,7 +84178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5667769656596532264}
   m_Layer: 0
-  m_Name: Buildables
+  m_Name: Structures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

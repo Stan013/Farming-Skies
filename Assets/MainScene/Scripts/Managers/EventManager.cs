@@ -29,7 +29,7 @@ public class EventManager : MonoBehaviour, IDataPersistence
             if(i >= GameManager.TM.Weeks)
             {
                 EventItem eventItem = Instantiate(eventItemTemplate, Vector3.zero, Quaternion.identity, eventContentArea.transform);
-                if (i % 4 == 0 && i != 0)
+                if (i % 1 == 0 && i != 0)
                 {
                     eventCount++;
                     switch (eventCount)
@@ -99,6 +99,7 @@ public class EventManager : MonoBehaviour, IDataPersistence
             case "PayExpenses":
                 break;
         }
+        Destroy(pastEvent);
     }
 
     public void LoadData(GameData data)

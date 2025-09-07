@@ -58,6 +58,11 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public Slider transparencySlider;
     public Image constructionLabel;
 
+    public void SetupUI()
+    {
+        selectionUI.SetActive(true);
+    }
+
     public void UpdateUI()
     {
         balanceText.text = FormatNumber(_balance).ToString();

@@ -27,7 +27,6 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void InitializeGame()
     {
-        GameManager.SPM.Spawn();
         GameManager.LM.FarmLevel = gameData.farmLevel;
         GameManager.UM.Balance = gameData.balance;
         GameManager.UM.Water = gameData.water;
@@ -39,6 +38,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.DM.SetStartingDeck();
         GameManager.MM.SetupMarket();
         GameManager.EVM.SetupEvents(0);
+        GameManager.SPM.Spawn();
     }
     public void ClearChildren(Transform parent)
     {

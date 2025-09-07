@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebugManager : MonoBehaviour
 {
-    public bool skipIntro;
+    public bool skipTutorial;
 
     public void DebugInput()
     {

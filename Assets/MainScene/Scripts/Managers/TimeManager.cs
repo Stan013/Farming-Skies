@@ -27,6 +27,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
 
     public void AdvanceNextWeek()
     {
+        GameManager.HM.HideCardsInHand(true);
         GameManager.IPM.startingPos = GameManager.IPM.cam.transform.position;
         GameManager.IPM.cam.transform.position = new Vector3(-25f, 25f, -25f);
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(32f,45f,0f);

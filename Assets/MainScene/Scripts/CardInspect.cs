@@ -12,6 +12,7 @@ public class CardInspect : MonoBehaviour, IPointerClickHandler
         {
             if (GameManager.CM.inspectCard == null)
             {
+                GameManager.WM.inMenu = true;
                 GameManager.CM.inspectCard = GetComponent<Card>();
                 GameManager.CM.inspectCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 525);
                 GameManager.CM.inspectCard.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
@@ -24,6 +25,7 @@ public class CardInspect : MonoBehaviour, IPointerClickHandler
             {
                 if (GameManager.CM.inspectCard == GetComponent<Card>())
                 {
+                    GameManager.WM.inMenu = false;
                     GameManager.CM.inspectCard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     GameManager.CM.inspectCard.transform.localScale = new Vector3(0.5f,0.5f,1f);
                     GameManager.CM.inspectCard = null;

@@ -29,7 +29,13 @@ public class LevelManager : MonoBehaviour, IDataPersistence
 
     public void SetFarmLevel()
     {
-        if(_farmLevel >= 1)
+        if(_farmLevel == 0)
+        {
+            farmLevelIcon.sprite = farmLevel1;
+            farmLevelMin = 0;
+            farmLevelMax = 1;
+        }
+        else if(_farmLevel >= 1)
         {
             farmLevelIcon.sprite = farmLevel1;
             farmLevelMin = 0;

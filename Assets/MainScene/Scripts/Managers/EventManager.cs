@@ -98,6 +98,9 @@ public class EventManager : MonoBehaviour, IDataPersistence
                 break;
             case "PayExpenses":
                 break;
+            default:
+                //GameManager.HM.HideCardsInHand(false);
+                break;
         }
         Destroy(pastEvent);
     }

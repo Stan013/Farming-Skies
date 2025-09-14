@@ -100,7 +100,7 @@ public class WindowManager : MonoBehaviour
         }
         else
         {
-            GameManager.HM.HideCardsInHand(true);
+            GameManager.HM.HideCardsInHand(false);
             settingsWindow.SetActive(true);
             inMenu = true;
         }
@@ -115,7 +115,6 @@ public class WindowManager : MonoBehaviour
         }
         else
         {
-            GameManager.HM.HideCardsInHand(true);
             GameManager.SM.SetupCardSelection();
             selectionWindow.SetActive(true);
             inMenu = true;

@@ -112,7 +112,14 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         {
             if (hit.collider.TryGetComponent(out Island island))
             {
-                return island;
+                if(island.islandBought)
+                {
+                    return null;
+                }
+                else
+                {
+                    return island;
+                }
             }
         }
         return null;
@@ -163,40 +170,42 @@ public class IslandManager : MonoBehaviour, IDataPersistence
             centerIsland = starterIsland;
         }
 
-        islandManageTab = tab;
-        switch (tab)
+        if(boughtIslands.Count != 0)
         {
-            case "Available":
-                nutrientText.text = "Available Nutrients: ";
-                islandInformation.SetActive(true);
-                plotInformation.SetActive(false);
-                islandName.text = "Island " + centerIsland.islandID + ":";
-                waterNeed.text = centerIsland.nutrientsAvailable[0].ToString();
-                nitrogenNeed.text = centerIsland.nutrientsAvailable[1].ToString();
-                phosphorusNeed.text = centerIsland.nutrientsAvailable[2].ToString();
-                potassiumNeed.text = centerIsland.nutrientsAvailable[3].ToString();
-                break;
-            case "Required":
-                nutrientText.text = "Required Nutrients: ";
-                islandInformation.SetActive(true);
-                plotInformation.SetActive(false);
-                islandName.text = "Island " + centerIsland.islandID + ":";
-                waterNeed.text = centerIsland.nutrientsRequired[0].ToString();
-                nitrogenNeed.text = centerIsland.nutrientsRequired[1].ToString();
-                phosphorusNeed.text = centerIsland.nutrientsRequired[2].ToString();
-                potassiumNeed.text = centerIsland.nutrientsRequired[3].ToString();
-                break;
-            case "Plot":
-                islandInformation.SetActive(false);
-                plotInformation.SetActive(true);
-                islandName.text = "Island " + centerIsland.islandID + ":";
-                smallPlotsAvailable.text = centerIsland.availableSmallPlots.Count.ToString();
-                mediumPlotsAvailable.text = centerIsland.availableMediumPlots.Count.ToString();
-                largePlotsAvailable.text = centerIsland.availableLargePlots.Count.ToString();
-                smallPlants.text = centerIsland.smallPlantsOnIsland.Count.ToString();
-                mediumPlants.text = centerIsland.mediumPlantsOnIsland.Count.ToString();
-                largePlants.text = centerIsland.largePlantsOnIsland.Count.ToString();
-                break;
+            switch (tab)
+            {
+                case "Available":
+                    nutrientText.text = "Available Nutrients: ";
+                    islandInformation.SetActive(true);
+                    plotInformation.SetActive(false);
+                    islandName.text = "Island " + centerIsland.islandID + ":";
+                    waterNeed.text = centerIsland.nutrientsAvailable[0].ToString();
+                    nitrogenNeed.text = centerIsland.nutrientsAvailable[1].ToString();
+                    phosphorusNeed.text = centerIsland.nutrientsAvailable[2].ToString();
+                    potassiumNeed.text = centerIsland.nutrientsAvailable[3].ToString();
+                    break;
+                case "Required":
+                    nutrientText.text = "Required Nutrients: ";
+                    islandInformation.SetActive(true);
+                    plotInformation.SetActive(false);
+                    islandName.text = "Island " + centerIsland.islandID + ":";
+                    waterNeed.text = centerIsland.nutrientsRequired[0].ToString();
+                    nitrogenNeed.text = centerIsland.nutrientsRequired[1].ToString();
+                    phosphorusNeed.text = centerIsland.nutrientsRequired[2].ToString();
+                    potassiumNeed.text = centerIsland.nutrientsRequired[3].ToString();
+                    break;
+                case "Plot":
+                    islandInformation.SetActive(false);
+                    plotInformation.SetActive(true);
+                    islandName.text = "Island " + centerIsland.islandID + ":";
+                    smallPlotsAvailable.text = centerIsland.availableSmallPlots.Count.ToString();
+                    mediumPlotsAvailable.text = centerIsland.availableMediumPlots.Count.ToString();
+                    largePlotsAvailable.text = centerIsland.availableLargePlots.Count.ToString();
+                    smallPlants.text = centerIsland.smallPlantsOnIsland.Count.ToString();
+                    mediumPlants.text = centerIsland.mediumPlantsOnIsland.Count.ToString();
+                    largePlants.text = centerIsland.largePlantsOnIsland.Count.ToString();
+                    break;
+            }
         }
     }
 

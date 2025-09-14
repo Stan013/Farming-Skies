@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -10,12 +11,13 @@ public class SpawnManager : MonoBehaviour
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
         GameManager.UM.resourceUI.SetActive(true);
 
-        if (GameManager.DBM.skipTutorial)
+        if (!GameManager.DBM.skipTutorial)
         {
             GameManager.WM.tutorialWindow.SetActive(true);
         }
         else
         {
+            GameManager.QM.questActive = false;
             GameManager.HM.SetCardsInHand();
             GameManager.UM.SetupUI();
             GameManager.IPM.nextWeekEnabled = true;

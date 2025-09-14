@@ -101,8 +101,9 @@ public class InputManager : MonoBehaviour, IDataPersistence
                 {
                     return;
                 }
+
                 potentialIsland = GameManager.ISM.GetPotentialIsland();
-                if (GameManager.UM.Balance >= potentialIsland.islandBuildCost)
+                if (potentialIsland != null && GameManager.UM.Balance >= potentialIsland.islandBuildCost)
                 {
                     if (!GameManager.QM.questActive || potentialIsland.currentState == Island.IslandState.Highlighted)
                     {

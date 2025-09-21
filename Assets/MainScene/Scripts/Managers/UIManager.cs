@@ -98,10 +98,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         expenseCostText.SetText(GameManager.IPM.potentialIsland.islandExpenseCost.ToString() + "₴");
         if (constructionLabel != null)
         {
-            Vector2 mousePosition = Input.mousePosition;
-            Vector2 anchoredPosition;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(constructionLabel.canvas.transform as RectTransform, mousePosition, constructionLabel.canvas.worldCamera, out anchoredPosition);
-            constructionLabel.rectTransform.anchoredPosition = anchoredPosition;
+            constructionLabel.rectTransform.anchoredPosition = Vector2.zero;
         }
     }
 

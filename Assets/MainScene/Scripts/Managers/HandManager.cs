@@ -84,42 +84,48 @@ public class HandManager : MonoBehaviour, IDataPersistence
 
     public void MoveCardsInHand(Card usedCard)
     {
-        foreach (Card card in cardsInHand)
+        int usedSlotIndex = usedCard.transform.parent.GetComponent<CardSlot>().index;
+        handSlots[usedSlotIndex].cardInSlot = null;
+        for (int slot = usedSlotIndex + 1; slot < handSlots.Count; slot++)
         {
-            if (card.transform.parent.GetComponent<CardSlot>().index > usedCard.transform.parent.GetComponent<CardSlot>().index)
-            {
-                int originalParentIndex = card.transform.parent.GetComponent<CardSlot>().index;
-                Vector3 offScreenPosition = new Vector3(0, 100, 0);
-                StartCoroutine(MoveCardCoroutine(card, offScreenPosition, originalParentIndex));
-            }
+            Card cardToMove = handSlots[slot].cardInSlot;
+            if (cardToMove == null) continue;
+            int originalIndex = slot;
+            Vector3 offScreenPosition = cardToMove.transform.position + new Vector3(0, 100, 0);
+            StartCoroutine(MoveCardCoroutine(cardToMove, offScreenPosition, originalIndex));
+            handSlots[slot - 1].cardInSlot = cardToMove;
+            handSlots[slot].cardInSlot = null;
         }
     }
 
-    private IEnumerator MoveCardCoroutine(Card card, Vector3 offScreenPosition, int originalParentIndex)
+
+    private IEnumerator MoveCardCoroutine(Card card, Vector3 targetPosition, int originalParentIndex)
     {
         float elapsedTime = 0f;
         Vector3 startPosition = card.transform.position;
-        while (elapsedTime < cardMoveDuration * 2)
+        float duration = cardMoveDuration;
+        Vector3 offscreen = startPosition + new Vector3(0, 100, 0);
+        while (elapsedTime < duration)
         {
-            card.transform.position = Vector3.Lerp(startPosition, offScreenPosition, elapsedTime / cardMoveDuration * 2);
+            card.transform.position = Vector3.Lerp(startPosition, offscreen, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        card.transform.SetParent(null);
-        card.transform.SetParent(handSlots[originalParentIndex-1].transform, false);
+        card.transform.SetParent(handSlots[originalParentIndex - 1].transform, false);
         elapsedTime = 0f;
         startPosition = card.transform.position;
-        Vector3 finalPosition = startPosition + new Vector3(0, 100, 0);
-        while (elapsedTime < cardMoveDuration * 2)
+        Vector3 finalPosition = handSlots[originalParentIndex - 1].transform.position;
+        while (elapsedTime < duration)
         {
-            card.transform.position = Vector3.Lerp(startPosition, finalPosition, elapsedTime / cardMoveDuration * 2);
+            card.transform.position = Vector3.Lerp(startPosition, finalPosition, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         card.transform.localPosition = Vector3.zero;
         card.transform.localRotation = Quaternion.identity;
-        card.transform.localScale = new Vector3(0.5f,0.5f,1f);
+        card.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
     }
+
 
     public void HideCardsInHand(bool hidden)
     {

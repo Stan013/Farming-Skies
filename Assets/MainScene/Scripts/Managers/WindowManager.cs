@@ -115,7 +115,7 @@ public class WindowManager : MonoBehaviour
         }
         else
         {
-            GameManager.SM.SetupCardSelection();
+            GameManager.SM.SetupSelectionPickers();
             selectionWindow.SetActive(true);
             inMenu = true;
         }

@@ -9,6 +9,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
     public List<Card> starterCards;
     public List<Card> unlockedCards;
     public List<Card> inspectedCards;
+    public List<string> cardTypes;
 
     [Header("Cards variables")]
     public Transform availableCardsParent;

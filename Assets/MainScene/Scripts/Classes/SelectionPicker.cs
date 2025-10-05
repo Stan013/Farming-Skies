@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectionPicker : MonoBehaviour
 {
     [SerializeField] private SelectionChoice selectionChoiceTemplate;
+    [SerializeField] private TMP_Text selectionText;
 
     public List<SelectionChoice> selectionChoices = new List<SelectionChoice>();
     private int[] values = { 1, 2, 3, 4, 5 };
@@ -22,7 +24,7 @@ public class SelectionPicker : MonoBehaviour
             SelectionChoice choice = Instantiate(selectionChoiceTemplate, Vector3.zero, Quaternion.identity, picker.transform);
             choice.transform.localPosition = new Vector3(0, 125 - (175*i), 0);
             choice.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            choice.SetupSelectionChoice(selectionAmounts[i], selectionTypes[i]);
+            choice.SetupSelectionChoice(selectionTypes[i], picker);
             selectionChoices.Add(choice);
         }
     }
@@ -69,5 +71,10 @@ public class SelectionPicker : MonoBehaviour
         chosenTypes.Sort();
 
         return chosenTypes;
+    }
+
+    public void GenerateCard()
+    {
+
     }
 }

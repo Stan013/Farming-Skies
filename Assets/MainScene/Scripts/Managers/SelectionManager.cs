@@ -8,29 +8,41 @@ public class SelectionManager : MonoBehaviour
     public List<SelectionPicker> selectionPickers = new List<SelectionPicker>();
     public List<CardSlot> pickSlots;
 
-    public void SetupSelectionPickers()
+    public List<Card> cropCards = new List<Card>();
+    public List<Card> structureCards = new List<Card>();
+    public List<Card> utilityCards = new List<Card>();
+
+    public void SetupSelection()
     {
         foreach (SelectionPicker picker in selectionPickers)
         {
             picker.SetupPicker(picker);
         }
+
+        cropCards.Clear();
+        structureCards.Clear();
+        utilityCards.Clear();
+
+        foreach (Card unlockedCard in GameManager.CM.unlockedCards)
+        {
+            switch (unlockedCard.cardType)
+            {
+                case "Small crops":
+                    cropCards.Add(unlockedCard);
+                    break;
+                case "Medium crops":
+                    cropCards.Add(unlockedCard);
+                    break;
+                case "Big crops":
+                    cropCards.Add(unlockedCard);
+                    break;
+                case "Utilities":
+                    utilityCards.Add(unlockedCard);
+                    break;
+                case "Structure":
+                    structureCards.Add(unlockedCard);
+                    break;
+            }
+        }
     }
-    //public void SetupCardSelection()
-    //{
-    //    for (int i = 0; i < 3; i++)
-    //    {
-    //        CardSlot newSlot = Instantiate(cardSlotTemplate, new Vector3(-450f + (pickSlots.Count * 450f), -75f, 0f), Quaternion.identity, pickSlotParent.transform);
-    //        newSlot.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-    //        newSlot.transform.localPosition = new Vector3(-500 + (500 * i), 0, 0);
-    //        pickSlots.Add(newSlot);
-
-    //        foreach (Card card in GameManager.CM.unlockedCards)
-    //        {
-
-    //            Card randomCard = Instantiate(card, Vector3.zero, Quaternion.identity);
-    //            randomCard.SetCardState(Card.CardState.InChoosing);
-    //            newSlot.AddCardToSlot(pickSlots.Count, randomCard);
-    //        }
-    //    }
-    //}
 }

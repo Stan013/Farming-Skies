@@ -7,18 +7,21 @@ using TMPro;
 public class SelectionChoice : MonoBehaviour
 {
     [SerializeField] private List<Sprite> selectionTypeSprites = new List<Sprite>();
-    [SerializeField] private TMP_Text selectionAmountText;
     [SerializeField] private Image selectionImage;
     [SerializeField] private TMP_Text selectionText;
+    
+    private int[] values = { 1, 2, 3, 4, 5 };
+    private int[] weights = { 30, 25, 20, 15, 10 };
 
     public string selectionType;
-    public int selectionAmount;
+    public SelectionPicker pickerParent;
+    public Sprite selectionCardSprite;
 
-    public void SetupSelectionChoice(int amount, string type)
+
+    public void SetupSelectionChoice(string type, SelectionPicker picker)
     {
-        selectionAmount = amount;
+        pickerParent = picker;
         selectionType = type;
-        selectionAmountText.text = "x" + amount;
         switch(type)
         {
             case "Crop":
@@ -33,6 +36,29 @@ public class SelectionChoice : MonoBehaviour
                 selectionImage.sprite = selectionTypeSprites[2];
                 selectionText.text = "Structure";
                 break;
+        }
+    }
+
+    public void ChooseType()
+    {
+        pickerParent.selectionText.text = selectionType;
+        
+        switch (selectionType)
+        {
+            case "Crop":
+                pickerParent.GenerateCard(GameManager.SM.cropCards);
+                break;
+            case "Utility":
+                pickerParent.GenerateCard(GameManager.SM.utilityCards);
+                break;
+            case "Structure":
+                pickerParent.GenerateCard(GameManager.SM.structureCards);
+                break;
+        }
+
+        foreach (SelectionChoice choice in pickerParent.selectionChoices)
+        {
+            Destroy(choice.gameObject);
         }
     }
 }

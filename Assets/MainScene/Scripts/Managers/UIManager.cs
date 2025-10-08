@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private float _balance;
     private int _water;
     private int _fertiliser;
-    private int _deck;
 
     public float Balance
     {
@@ -124,10 +123,10 @@ public class UIManager : MonoBehaviour, IDataPersistence
     {
         GameManager.ISM.islandValueChange = GameManager.ISM.IslandValue - GameManager.ISM.oldIslandValue;
         GameManager.PM.plantValueChange = GameManager.PM.PlantValue - GameManager.PM.oldPlantValue;
-        GameManager.PM.buildableValueChange = GameManager.PM.BuildablesValue - GameManager.PM.oldBuildableValue;
+        GameManager.PM.structureValueChange = GameManager.PM.StructureValue - GameManager.PM.oldStructureValue;
         GameManager.ISM.oldIslandValue = GameManager.ISM.IslandValue;
         GameManager.PM.oldPlantValue = GameManager.PM.PlantValue;
-        GameManager.PM.oldBuildableValue = GameManager.PM.BuildablesValue;
+        GameManager.PM.oldStructureValue = GameManager.PM.StructureValue;
     }
 
     public void LoadData(GameData data)

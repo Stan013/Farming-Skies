@@ -23,7 +23,6 @@ public class DebugManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Keypad1))
         {
             GameManager.DM.AddCardToDeck("CardWaterBarrelBuildable");
-            GameManager.HM.SetCardsInHand();
         }
     }
 

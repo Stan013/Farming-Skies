@@ -275,6 +275,7 @@ MonoBehaviour:
   weekText: {fileID: 1437161413005799567}
   eventIcon: {fileID: 3172611637536789254}
   eventText: {fileID: 1123184478363042794}
+  eventItemType: Default
   eventItemBackground: {fileID: 4269425234912422496}
   defaultBackground: {fileID: 21300000, guid: 6a1c3e848888b2c43be5267d8b2bdea7, type: 3}
   eventBackground: {fileID: 21300000, guid: e6637d92c33606548a7d700cbd034e1e, type: 3}

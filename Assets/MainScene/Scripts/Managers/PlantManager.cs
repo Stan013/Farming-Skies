@@ -21,18 +21,18 @@ public class PlantManager : MonoBehaviour, IDataPersistence
     public float oldPlantValue;
     public float plantValueChange;
 
-    private float _buildablesValue;
-    public float BuildablesValue
+    private float _structureValue;
+    public float StructureValue
     {
-        get => _buildablesValue;
+        get => _structureValue;
         set
         {
-            _buildablesValue = value;
+            _structureValue = value;
             GameManager.EM.UpdateFarmValue();
         }
     }
-    public float oldBuildableValue;
-    public float buildableValueChange;
+    public float oldStructureValue;
+    public float structureValueChange;
 
     public void Harvest()
     {
@@ -75,7 +75,7 @@ public class PlantManager : MonoBehaviour, IDataPersistence
                 return island.availableMediumPlots.Find(plot => plot.name == plotID);
             case "Large crops":
                 return island.availableLargePlots.Find(plot => plot.name == plotID);
-            case "Buildables":
+            case "Structure":
                 return island.availableMediumPlots.Find(plot => plot.name == plotID);
         }
         return null;
@@ -110,12 +110,12 @@ public class PlantManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         PlantValue = data.plantValue;
-        BuildablesValue = data.buildableValue;
+        StructureValue = data.buildableValue;
     }
 
     public void SaveData(ref GameData data)
     {
         data.plantValue = PlantValue;
-        data.buildableValue = BuildablesValue;
+        data.buildableValue = StructureValue;
     }
 }

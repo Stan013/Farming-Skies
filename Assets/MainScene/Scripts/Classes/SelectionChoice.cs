@@ -9,9 +9,6 @@ public class SelectionChoice : MonoBehaviour
     [SerializeField] private List<Sprite> selectionTypeSprites = new List<Sprite>();
     [SerializeField] private Image selectionImage;
     [SerializeField] private TMP_Text selectionText;
-    
-    private int[] values = { 1, 2, 3, 4, 5 };
-    private int[] weights = { 30, 25, 20, 15, 10 };
 
     public string selectionType;
     public SelectionPicker pickerParent;
@@ -60,5 +57,6 @@ public class SelectionChoice : MonoBehaviour
         {
             Destroy(choice.gameObject);
         }
+        pickerParent.selectionChoices.Clear();
     }
 }

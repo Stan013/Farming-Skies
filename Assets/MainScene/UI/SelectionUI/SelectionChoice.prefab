@@ -130,7 +130,7 @@ MonoBehaviour:
   selectionText: {fileID: 5795912804886167081}
   selectionType: 
   pickerParent: {fileID: 0}
-  selectionCardSprite: {fileID: 21300000, guid: 8fd8fa2464575b54a83eee32d3c1f961, type: 3}
+  selectionCardSprite: {fileID: 21300000, guid: df8c04b4ba76bec43b0380ec4f2895c2, type: 3}
 --- !u!1 &1387309989075379332
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 75, y: -50}
-  m_SizeDelta: {x: 175, y: 50}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5853238164646048856
 CanvasRenderer:
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 52a1e120a75c427468ad85c3430190fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df8c04b4ba76bec43b0380ec4f2895c2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -356,8 +356,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -52,7 +52,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
             card.potassiumText.SetText(dragPlant.nutrientsUsages[3].ToString() + " L");
             card.plantSizeText.SetText(card.cardType.Replace(" crops", ""));
         }
-        else if (card.cardType == "Structures")
+        else if (card.cardType == "Structure")
         {
             card.cardDescriptionText.gameObject.SetActive(true);
             card.cardDescriptionText.SetText(card.cardDescription);

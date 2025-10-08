@@ -147,7 +147,6 @@ public class Card : MonoBehaviour
                     GameManager.HM.lastFilledSlotIndex--;
                     GameManager.HM.cardsInHand.Remove(this);
                     GameManager.HM.MoveCardsInHand(this);
-                    GameManager.HM.SetCardsInHand();
                     Destroy(this.gameObject);
                     dragSucces = false;
                 }

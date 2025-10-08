@@ -18,7 +18,6 @@ public class SpawnManager : MonoBehaviour
         else
         {
             GameManager.QM.questActive = false;
-            GameManager.HM.SetCardsInHand();
             GameManager.UM.SetupUI();
             GameManager.IPM.nextWeekEnabled = true;
         }

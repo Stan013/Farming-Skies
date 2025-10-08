@@ -34,8 +34,8 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     public TMP_Text farmValueChangeText;
     public TMP_Text plantValueText;
     public TMP_Text plantValueChangeText;
-    public TMP_Text buildableValueText;
-    public TMP_Text buildableValueChangeText;
+    public TMP_Text structureValueText;
+    public TMP_Text structureValueChangeText;
 
     [Header("Expense tab variables")]
     public ExpenseItem expenseItemTemplate;
@@ -44,10 +44,10 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     public float expenseIslandsTotal;
     public TMP_Text expenseIslandsTotalText;
 
-    public List<ExpenseItem> expenseBuildables;
-    public GameObject expenseBuildablesContentArea;
-    public float expenseBuildablesTotal;
-    public TMP_Text expenseBuildablesTotalText;
+    public List<ExpenseItem> expenseStructures;
+    public GameObject expenseStructuresContentArea;
+    public float expenseStructuresTotal;
+    public TMP_Text expenseStructuresTotalText;
 
     public List<ExpenseItem> expenseProduction;
     public GameObject expenseProductionContentArea;
@@ -65,11 +65,11 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
 
     public void AddExpenseBuildables(Plant plant)
     {
-        ExpenseItem expenseBuildable = Instantiate(expenseItemTemplate, Vector3.zero, Quaternion.identity, expenseBuildablesContentArea.transform);
-        expenseBuildable.SetupBuildableExpense(plant);
-        expenseBuildable.transform.localPosition = new Vector3(expenseBuildable.transform.localPosition.x, expenseBuildable.transform.localPosition.y, 0);
-        expenseBuildable.transform.localRotation = Quaternion.identity;
-        expenseBuildables.Add(expenseBuildable);
+        ExpenseItem expenseStructure = Instantiate(expenseItemTemplate, Vector3.zero, Quaternion.identity, expenseStructuresContentArea.transform);
+        expenseStructure.SetupBuildableExpense(plant);
+        expenseStructure.transform.localPosition = new Vector3(expenseStructure.transform.localPosition.x, expenseStructure.transform.localPosition.y, 0);
+        expenseStructure.transform.localRotation = Quaternion.identity;
+        expenseStructures.Add(expenseStructure);
     }
 
     public void OpenIslandManagement(string tab)
@@ -87,7 +87,7 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
                 break;
             case "Expenses":
                 expenseIslandsTotalText.text = expenseIslandsTotal.ToString() + " ₴";
-                expenseBuildablesTotalText.text = expenseBuildablesTotal.ToString() + " ₴";
+                expenseStructuresTotalText.text = expenseStructuresTotal.ToString() + " ₴";
                 expenseProductionTotalText.text = expenseProductionTotal.ToString() + " ₴";
                 break;
             case "Earnings":
@@ -98,7 +98,7 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
 
     public void UpdateFarmValue()
     {
-        farmValue = GameManager.ISM.IslandValue + GameManager.PM.PlantValue + GameManager.PM.BuildablesValue;
+        farmValue = GameManager.ISM.IslandValue + GameManager.PM.PlantValue + GameManager.PM.StructureValue;
     }
 
     public void SetFarmStatistics()
@@ -107,8 +107,8 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
         farmValueChangeText.text = "(+" + farmValueChange.ToString() + " ₴)";
         plantValueText.text = GameManager.PM.PlantValue.ToString() + " ₴";
         plantValueChangeText.text = "(+" + GameManager.PM.plantValueChange.ToString() + " ₴)";
-        buildableValueText.text = GameManager.PM.BuildablesValue.ToString() + " ₴";
-        buildableValueChangeText.text = "(+" + GameManager.PM.buildableValueChange.ToString() + " ₴)";
+        structureValueText.text = GameManager.PM.StructureValue.ToString() + " ₴";
+        structureValueChangeText.text = "(+" + GameManager.PM.structureValueChange.ToString() + " ₴)";
     }
 
     public void LoadData(GameData data)

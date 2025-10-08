@@ -27,7 +27,9 @@ public class TimeManager : MonoBehaviour, IDataPersistence
 
     public void AdvanceNextWeek()
     {
+        GameManager.WM.inMenu = true;
         GameManager.HM.HideCardsInHand(true);
+        GameManager.HM.ClearCardsInHand();
         GameManager.IPM.startingPos = GameManager.IPM.cam.transform.position;
         GameManager.IPM.cam.transform.position = new Vector3(-25f, 25f, -25f);
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(32f,45f,0f);
@@ -46,6 +48,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
 
             if (currentDayOfWeek >= weekDays.Count)
             {
+                GameManager.EVM.CheckEvent();
                 currentDayOfWeek = 0;
             }
 
@@ -56,7 +59,6 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.WM.advanceWindow.SetActive(false);
         GameManager.IPM.cam.transform.position = GameManager.IPM.startingPos;
         GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
-        GameManager.EVM.CheckEvent();
     }
 
     private IEnumerator SlideTextTransition()

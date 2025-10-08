@@ -4828,7 +4828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardType
-      value: Structures
+      value: Structure
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: itemName
@@ -5652,6 +5652,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1650479148833501131, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -5820,7 +5824,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+    - {fileID: 639138604516858679, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -19636,7 +19642,7 @@ GameObject:
   - component: {fileID: 554205878}
   - component: {fileID: 554205877}
   m_Layer: 0
-  m_Name: BuildableValueText
+  m_Name: StructureValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23823,6 +23829,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectionPicker2
       objectReference: {fileID: 0}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7022761722049436108}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 35826240093783312}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 8413217862094962419}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: HideCardsInHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: CloseWindow
+      objectReference: {fileID: 0}
     - target: {fileID: 6797775471786962350, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
       propertyPath: selectionChoice
       value: 
@@ -24461,6 +24491,30 @@ PrefabInstance:
     - target: {fileID: 1317514871531474403, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
       propertyPath: m_Name
       value: SelectionPicker3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7022761722049436108}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 35826240093783312}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 8413217862094962419}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: HideCardsInHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: CloseWindow
       objectReference: {fileID: 0}
     - target: {fileID: 6797775471786962350, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
       propertyPath: selectionChoice
@@ -25232,7 +25286,7 @@ GameObject:
   - component: {fileID: 718138262}
   - component: {fileID: 718138261}
   m_Layer: 0
-  m_Name: ExpenseIslandViewport
+  m_Name: ExpenseStructureViewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26661,6 +26715,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1650479148833501131, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -26821,7 +26879,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+    - {fileID: 639138604516858679, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -44421,7 +44481,7 @@ GameObject:
   - component: {fileID: 1237698852}
   - component: {fileID: 1237698851}
   m_Layer: 0
-  m_Name: ExpenseBuildablesImage
+  m_Name: ExpenseStructureImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45152,7 +45212,7 @@ GameObject:
   - component: {fileID: 1255873209}
   - component: {fileID: 1255873208}
   m_Layer: 0
-  m_Name: ProductionAmount
+  m_Name: StructureValueAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54226,7 +54286,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+    - {fileID: 639138604516858679, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -54557,7 +54619,7 @@ GameObject:
   - component: {fileID: 1438007964}
   - component: {fileID: 1438007965}
   m_Layer: 0
-  m_Name: ExpenseIslandScroll
+  m_Name: ExpenseStructureScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59491,7 +59553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardType
-      value: Structures
+      value: Structure
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: itemName
@@ -60472,7 +60534,7 @@ GameObject:
   - component: {fileID: 1614807947}
   - component: {fileID: 1614807946}
   m_Layer: 0
-  m_Name: ExpenseBuildablesTotalBackground (1)
+  m_Name: ExpenseStructureTotalBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65573,7 +65635,7 @@ GameObject:
   - component: {fileID: 1754616142}
   - component: {fileID: 1754616141}
   m_Layer: 0
-  m_Name: ExpenseIslandTotalBackground (1)
+  m_Name: ExpenseIslandTotalBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66615,6 +66677,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1650479148833501131, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -66791,7 +66857,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+    - {fileID: 639138604516858679, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -70987,7 +71055,7 @@ GameObject:
   - component: {fileID: 1903339595}
   - component: {fileID: 1903339594}
   m_Layer: 0
-  m_Name: ProductionChange
+  m_Name: StructureValueChange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71582,7 +71650,7 @@ GameObject:
   - component: {fileID: 1919018681}
   - component: {fileID: 1919018682}
   m_Layer: 0
-  m_Name: ExpenseIslandContent
+  m_Name: ExpenseStructureContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72015,7 +72083,7 @@ GameObject:
   - component: {fileID: 1929174324}
   - component: {fileID: 1929174323}
   m_Layer: 0
-  m_Name: ExpenseBuildables
+  m_Name: ExpenseStructures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81524,6 +81592,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectionPicker1
       objectReference: {fileID: 0}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7022761722049436108}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 35826240093783312}
+    - target: {fileID: 2490117677316947039, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 8413217862094962419}
     - target: {fileID: 6797775471786962350, guid: 34367ca84c2910b46b8c0330bd657b56, type: 3}
       propertyPath: selectionChoice
       value: 
@@ -85366,7 +85446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &6256405162328757094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87543,8 +87623,8 @@ MonoBehaviour:
   dropChance: 0.75
   oldPlantValue: 0
   plantValueChange: 0
-  oldBuildableValue: 0
-  buildableValueChange: 0
+  oldStructureValue: 0
+  structureValueChange: 0
 --- !u!114 &8413217862094962416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87594,7 +87674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1105cf317190b8942a0794c7d06d1f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inMenu: 0
+  inMenu: 1
   mainWindow: {fileID: 3450240228886093872}
   gameWindow: {fileID: 7518494979800978110}
   settingsWindow: {fileID: 208090624760535460}
@@ -87659,17 +87739,17 @@ MonoBehaviour:
   farmValueChangeText: {fileID: 746472626}
   plantValueText: {fileID: 98500570}
   plantValueChangeText: {fileID: 1636449099}
-  buildableValueText: {fileID: 1255873208}
-  buildableValueChangeText: {fileID: 1903339594}
+  structureValueText: {fileID: 1255873208}
+  structureValueChangeText: {fileID: 1903339594}
   expenseItemTemplate: {fileID: 1420848322}
   expenseIslands: []
   expenseIslandsContentArea: {fileID: 791095298}
   expenseIslandsTotal: 0
   expenseIslandsTotalText: {fileID: 494395916}
-  expenseBuildables: []
-  expenseBuildablesContentArea: {fileID: 1919018680}
-  expenseBuildablesTotal: 0
-  expenseBuildablesTotalText: {fileID: 877212029}
+  expenseStructures: []
+  expenseStructuresContentArea: {fileID: 1919018680}
+  expenseStructuresTotal: 0
+  expenseStructuresTotalText: {fileID: 877212029}
   expenseProduction: []
   expenseProductionContentArea: {fileID: 968940387}
   expenseProductionTotal: 0

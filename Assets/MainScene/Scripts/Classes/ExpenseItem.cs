@@ -27,7 +27,7 @@ public class ExpenseItem : MonoBehaviour
     public void SetupBuildableExpense(Plant buildable)
     {
         attachedBuildable = buildable;
-        GameManager.EM.expenseBuildablesTotal += attachedBuildable.buildableTaxCost;
+        GameManager.EM.expenseStructuresTotal += attachedBuildable.buildableTaxCost;
         GameManager.EM.Expense += attachedBuildable.buildableTaxCost;
         if (buildable.name.Contains("Water Barrel"))
         {

@@ -84,7 +84,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 UpdateQuest("Build your first island!", "Now it is time to get your first island build. Hover over the highlighted island and hold down your right mouse button until the island is fully build.");
                 break;
             case 3:
-                GameManager.HM.SetCardsInHand();
                 InitializeQuestCards();
                 cardCultivator.GetComponent<CardDrag>().enabled = true;
                 UpdateQuest("Start cultivating!", "It is time to start getting your island ready for planting. Hover over the cultivator card and hold down your left mouse button. Now move towards your island to cultivate it.");
@@ -262,7 +261,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 {
                     GameManager.DM.AddCardToDeck("CardConcreteBagUtility");
                 }
-                GameManager.HM.SetCardsInHand();
                 UpdateQuest("Paving time!", "Before you get more crops make sure you can maintain the ones you have. This is done by getting some buildables but you can only place these on a paved island. So hover of the concrete bag and drag it towards your island.");
                 break;
             case 43:
@@ -274,7 +272,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 {
                     GameManager.DM.AddCardToDeck("CardCompostBinBuildable");
                 }
-                GameManager.HM.SetCardsInHand();
                 UpdateQuest("Let's refill!", "Now that your island is paved you can place buildables on it. These are buildings that will replenish the resources you need for crafting cards. Inspect the cards that I gave you to see what each buildable card does.");
                 break;
             case 44:

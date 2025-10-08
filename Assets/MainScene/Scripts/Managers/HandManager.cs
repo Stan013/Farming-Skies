@@ -21,6 +21,14 @@ public class HandManager : MonoBehaviour, IDataPersistence
     [Header("Refill variables")]
     private float cardMoveDuration = 0.125f;
 
+    private void Update()
+    {
+        if (!GameManager.WM.inMenu && cardsInHand.Count < 7 && GameManager.DM.cardsInDeck.Count > 0)
+        {
+            SetCardsInHand();
+        }
+    }
+
     public void SetHandSlots()
     {
         for (int i = 0; i < 7; i++)
@@ -74,7 +82,10 @@ public class HandManager : MonoBehaviour, IDataPersistence
         foreach (Card card in cardsInHand)
         {
             card.SetCardState(Card.CardState.InDeck);
+            GameManager.DM.Deck = GameManager.DM.cardsInDeck.Count;
         }
+        lastFilledSlotIndex = 0;
+        cardsInHand.Clear();
     }
 
     public Card FindCardInHandById(string id)
@@ -97,7 +108,6 @@ public class HandManager : MonoBehaviour, IDataPersistence
             handSlots[slot].cardInSlot = null;
         }
     }
-
 
     private IEnumerator MoveCardCoroutine(Card card, Vector3 targetPosition, int originalParentIndex)
     {
@@ -125,7 +135,6 @@ public class HandManager : MonoBehaviour, IDataPersistence
         card.transform.localRotation = Quaternion.identity;
         card.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
     }
-
 
     public void HideCardsInHand(bool hidden)
     {

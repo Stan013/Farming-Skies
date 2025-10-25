@@ -50,20 +50,31 @@ public class WindowManager : MonoBehaviour
         }
     }
 
-    public void OpenWindow()
+    public void OpenWindow(GameObject window)
     {
-        inMenu = true;
+        if (inMenu)
+        {
+            CloseWindow();
+            GameManager.HM.HideCardsInHand(false);
+        }
+        else
+        {
+            CloseWindow();
+            window.SetActive(true);
+            inMenu = true;
+            GameManager.HM.HideCardsInHand(true);
+        }
+    }
+
+    public void CloseWindow()
+    {
+        inMenu = false;
         settingsWindow.SetActive(false);
         inventoryWindow.SetActive(false);
         manageWindow.SetActive(false);
         craftWindow.SetActive(false);
         marketWindow.SetActive(false);
         expenseWindow.SetActive(false);
-    }
-
-    public void CloseWindow()
-    {
-        inMenu = false;
     }
 
     public void OpenQuestWindow()

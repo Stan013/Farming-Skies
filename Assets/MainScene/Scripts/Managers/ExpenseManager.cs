@@ -72,7 +72,7 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
         expenseStructures.Add(expenseStructure);
     }
 
-    public void OpenIslandManagement(string tab)
+    public void OpenExpensenseManagement(string tab)
     {
         statsTab = tab;
         int currentValue = GameManager.ISM.boughtIslands.Count;

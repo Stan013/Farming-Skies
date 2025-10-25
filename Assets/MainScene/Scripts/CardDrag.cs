@@ -100,31 +100,37 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         if (potentialIsland == null)
         {
-            if (hoverIsland != null && hoverIsland.previousState != Island.IslandState.Transparent && !GameManager.HM.dragCard.name.Contains("Fertiliser"))
+            previousHoverIsland = hoverIsland;
+            hoverIsland = null;
+
+            if (previousHoverIsland != null && previousHoverIsland.previousState != Island.IslandState.Transparent && !GameManager.HM.dragCard.name.Contains("Fertiliser"))
             {
-                hoverIsland.islandMatPotential = false;
-                hoverIsland.currentState = hoverIsland.previousState;
-                hoverIsland = null;
+                print(previousHoverIsland);
+                previousHoverIsland.islandMatPotential = false;
+                previousHoverIsland.currentState = previousHoverIsland.previousState;
+                previousHoverIsland = null;
             }
             return;
         }
+        else
+        {
+            hoverIsland = potentialIsland;
+        }
 
-        previousHoverIsland = hoverIsland;
-        hoverIsland = potentialIsland;
-
-        if (GameManager.HM.dragCard.cardName == "Cultivator" && potentialIsland.currentState == Island.IslandState.Sowed)
+        print(hoverIsland);
+        if (GameManager.HM.dragCard.cardName == "Cultivator" && hoverIsland.currentState == Island.IslandState.Sowed)
         {
             UpdateIslandState(Island.IslandState.Cultivated);
         }
-        else if (GameManager.HM.dragCard.cardName == "Watering Can" && potentialIsland.currentState == Island.IslandState.Cultivated)
+        else if (GameManager.HM.dragCard.cardName == "Watering Can" && hoverIsland.currentState == Island.IslandState.Cultivated)
         {
             UpdateIslandState(Island.IslandState.Watered);
         }
-        else if (GameManager.HM.dragCard.cardName == "Grass Seed" && potentialIsland.currentState != Island.IslandState.Sowed)
+        else if (GameManager.HM.dragCard.cardName == "Grass Seed" && hoverIsland.currentState != Island.IslandState.Sowed)
         {
             UpdateIslandState(Island.IslandState.Sowed);
         }
-        else if (GameManager.HM.dragCard.cardName == "Concrete Bag" && potentialIsland.currentState == Island.IslandState.Sowed)
+        else if (GameManager.HM.dragCard.cardName == "Concrete Bag" && hoverIsland.currentState == Island.IslandState.Sowed)
         {
             hoverIsland.potentialMatTop = hoverIsland.pavedMatTop;
             hoverIsland.islandMatPotential = true;

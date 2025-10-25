@@ -12,13 +12,16 @@ public class WindowManager : MonoBehaviour
     public GameObject tutorialWindow;
     public GameObject questWindow;
     public GameObject advanceWindow;
+    public GameObject selectionWindow;
+
     public GameObject inventoryWindow;
     public GameObject manageWindow;
     public GameObject craftWindow;
     public GameObject marketWindow;
     public GameObject expenseWindow;
     public GameObject eventWindow;
-    public GameObject selectionWindow;
+
+    private GameObject openWindow;
 
     [Header("Quest window variables")]
     public float windowTransitionDuration = 0.5f;
@@ -54,27 +57,31 @@ public class WindowManager : MonoBehaviour
     {
         if (inMenu)
         {
-            CloseWindow();
-            GameManager.HM.HideCardsInHand(false);
+            if (openWindow == window)
+            {
+                CloseWindow(window);
+            }
+            else
+            {
+                openWindow.SetActive(false);
+                window.SetActive(true);
+                openWindow = window;
+            }
         }
         else
         {
-            CloseWindow();
-            window.SetActive(true);
             inMenu = true;
+            window.SetActive(true);
+            openWindow = window;
             GameManager.HM.HideCardsInHand(true);
         }
     }
 
-    public void CloseWindow()
+    public void CloseWindow(GameObject window)
     {
         inMenu = false;
-        settingsWindow.SetActive(false);
-        inventoryWindow.SetActive(false);
-        manageWindow.SetActive(false);
-        craftWindow.SetActive(false);
-        marketWindow.SetActive(false);
-        expenseWindow.SetActive(false);
+        window.SetActive(false);
+        GameManager.HM.HideCardsInHand(false);
     }
 
     public void OpenQuestWindow()

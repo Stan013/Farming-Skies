@@ -34,6 +34,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public int islandValueChange;
 
     [Header("Island management variables")]
+    public GameObject islandCamera;
     public Island centerIsland;
     public GameObject islandInformation;
     public TMP_Text islandName;
@@ -172,6 +173,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
         if(boughtIslands.Count != 0)
         {
+            islandCamera.SetActive(true);
             switch (tab)
             {
                 case "Available":
@@ -206,6 +208,12 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                     largePlants.text = centerIsland.largePlantsOnIsland.Count.ToString();
                     break;
             }
+        }
+        else
+        {
+            islandCamera.SetActive(false);
+            islandInformation.SetActive(false);
+            plotInformation.SetActive(false);
         }
     }
 

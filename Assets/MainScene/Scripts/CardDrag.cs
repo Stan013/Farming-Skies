@@ -117,7 +117,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             hoverIsland = potentialIsland;
         }
 
-        print(hoverIsland);
         if (GameManager.HM.dragCard.cardName == "Cultivator" && hoverIsland.currentState == Island.IslandState.Sowed)
         {
             UpdateIslandState(Island.IslandState.Cultivated);

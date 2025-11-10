@@ -32,6 +32,10 @@ public class CardManager : MonoBehaviour, IDataPersistence
                 if(childCard.cardStarter)
                 {
                     GameManager.CM.starterCards.Add(childCard);
+                    if(childCard.cardType != "Utilities" && childCard.cardType != "Structure")
+                    {
+                        GameManager.CM.starterCards.Add(childCard);
+                    }
                 }
             }
         }

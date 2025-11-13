@@ -105,7 +105,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
             if (previousHoverIsland != null && previousHoverIsland.previousState != Island.IslandState.Transparent && !GameManager.HM.dragCard.name.Contains("Fertiliser"))
             {
-                print(previousHoverIsland);
                 previousHoverIsland.islandMatPotential = false;
                 previousHoverIsland.currentState = previousHoverIsland.previousState;
                 previousHoverIsland = null;

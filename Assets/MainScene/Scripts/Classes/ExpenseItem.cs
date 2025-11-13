@@ -27,8 +27,8 @@ public class ExpenseItem : MonoBehaviour
     public void SetupBuildableExpense(Plant buildable)
     {
         attachedBuildable = buildable;
-        GameManager.EM.expenseStructuresTotal += attachedBuildable.buildableTaxCost;
-        GameManager.EM.Expense += attachedBuildable.buildableTaxCost;
+        GameManager.EM.expenseStructuresTotal += attachedBuildable.structureTax;
+        GameManager.EM.Expense += attachedBuildable.structureTax;
         if (buildable.name.Contains("Water Barrel"))
         {
             expenseItemIcon.sprite = waterBarrelIcon;
@@ -37,6 +37,6 @@ public class ExpenseItem : MonoBehaviour
         {
             expenseItemIcon.sprite = compostBinIcon;
         }
-        expenseItemCostText.text = "+ " + buildable.buildableTaxCost.ToString() + " ₴";
+        expenseItemCostText.text = "+ " + buildable.structureTax.ToString() + " ₴";
     }
 }

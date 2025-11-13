@@ -10,9 +10,15 @@ public class ExpandedCraftItem : MonoBehaviour
     public Image expandedImage;
     public TMP_Text expandedName;
 
-    public TMP_Text balanceCost;
-    public TMP_Text waterCost;
-    public TMP_Text fertiliserCost;
+    public GameObject balanceCost;
+    public GameObject plantCost;
+    public GameObject waterCost;
+    public GameObject fertiliserCost;
+
+    public TMP_Text balanceCostText;
+    public TMP_Text plantCostText;
+    public TMP_Text waterCostText;
+    public TMP_Text fertiliserCostText;
 
     public Button craftButton;
     public Image craftButtonBackground;
@@ -26,7 +32,16 @@ public class ExpandedCraftItem : MonoBehaviour
     public Button plusButton;
     public Button maxButton;
 
-    public int craftAmount;
+    public int CraftAmount
+    {
+        get => _craftAmount;
+        set
+        {
+            _craftAmount = value;
+            CheckValidCraftAmount(_craftAmount.ToString());
+        }
+    }
+    private int _craftAmount;
     public bool canCraft;
 
     private Coroutine holdCoroutine = null;
@@ -38,9 +53,23 @@ public class ExpandedCraftItem : MonoBehaviour
         collapsedItem = item;
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
-        balanceCost.text = collapsedItem.attachedItemCard.cardCraftResources[0].ToString() + "₴";
-        waterCost.text = collapsedItem.attachedItemCard.cardCraftResources[1].ToString() + "₴";
-        fertiliserCost.text = collapsedItem.attachedItemCard.cardCraftResources[2].ToString() + "₴";
+
+        if(item.attachedItemCard.cardType != "Structure" && item.attachedItemCard.cardType != "Utilities")
+        {
+            balanceCost.SetActive(false);
+            plantCost.SetActive(true);
+            plantCost.GetComponent<Image>().sprite = collapsedItem.attachedItemCard.cardCraftIcon;
+        }
+        else
+        {
+            balanceCost.SetActive(true);
+            plantCost.SetActive(false);
+        }
+
+        balanceCostText.SetText(collapsedItem.attachedItemCard.cardCraftResources[0].ToString() + " ₴");
+        waterCostText.SetText(collapsedItem.attachedItemCard.cardCraftResources[1].ToString() + " L");
+        fertiliserCostText.SetText(collapsedItem.attachedItemCard.cardCraftResources[2].ToString() + " L");
+        plantCostText.SetText(collapsedItem.attachedItemCard.cardCraftResources[3].ToString() + " X");
         CheckValidCraftAmount("0");
     }
 
@@ -57,7 +86,7 @@ public class ExpandedCraftItem : MonoBehaviour
                 Destroy(fillItem);
             }
 
-            craftAmount = 0;
+            CraftAmount = 0;
             collapsedItem.gameObject.SetActive(true);
             this.gameObject.SetActive(false);
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
@@ -66,67 +95,66 @@ public class ExpandedCraftItem : MonoBehaviour
 
     public void SetMin()
     {
-        craftAmount = 0;
+        CraftAmount = 0;
         craftAmountInput.text = "0";
     }
 
     public void DecreaseAmount()
     {
-        int amount = craftAmount;
+        int amount = CraftAmount;
         amount = Mathf.Max(0, amount - 1);
         craftAmountInput.text = amount.ToString();
     }
 
     public void IncreaseAmount()
     {
-        int amount = craftAmount;
+        int amount = CraftAmount;
         amount = Mathf.Min(collapsedItem.maxCraftAmount, amount + 1);
         craftAmountInput.text = amount.ToString();
     }
 
     public void SetMax()
     {
-        craftAmount = collapsedItem.maxCraftAmount;
+        CraftAmount = collapsedItem.maxCraftAmount;
         craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
     }
 
     public void CheckValidCraftAmount(string input)
     {
         collapsedItem.CalculateMaxCraftableAmount();
-        if (int.TryParse(input, out int value))
+
+        if (int.TryParse(input, out int value) && value > 0)
         {
-            if (value <= 0 || collapsedItem.maxCraftAmount == 0)
+            if (value != CraftAmount)
             {
-                craftAmount = 0;
-                craftAmountInput.text = "0";
-                craftButtonBackground.sprite = invalidCraft;
-                canCraft = false;
-            }
-            else if (value > collapsedItem.maxCraftAmount)
-            {
+                if (value > collapsedItem.maxCraftAmount)
+                {
+                    CraftAmount = collapsedItem.maxCraftAmount;
+                }
+                else
+                {
+                    CraftAmount = value;
+                }
+
                 craftButtonBackground.sprite = validCraft;
                 canCraft = true;
-                craftAmount = collapsedItem.maxCraftAmount;
-                craftAmountInput.text = collapsedItem.maxCraftAmount.ToString();
-            }
-            else
-            {
-                craftAmount = value;
-                craftAmountInput.text = value.ToString();
-                craftButtonBackground.sprite = validCraft;
-                canCraft = true;
+                balanceCostText.SetText((collapsedItem.attachedItemCard.cardCraftResources[0] * CraftAmount).ToString() + " ₴");
+                waterCostText.SetText((collapsedItem.attachedItemCard.cardCraftResources[1] * CraftAmount).ToString() + " L");
+                fertiliserCostText.SetText((collapsedItem.attachedItemCard.cardCraftResources[2] * CraftAmount).ToString() + " L");
+                plantCostText.SetText((collapsedItem.attachedItemCard.cardCraftResources[3] * CraftAmount).ToString() + " X");
             }
         }
         else
         {
-            craftAmount = 0;
-            craftAmountInput.text = "0";
-            craftButtonBackground.sprite = invalidCraft;
-            canCraft = false;
+            if (value != CraftAmount)
+            {
+                CraftAmount = 0;
+                craftButtonBackground.sprite = invalidCraft;
+                canCraft = false;
+            }
         }
-        balanceCost.text = (collapsedItem.attachedItemCard.cardCraftResources[0] * craftAmount).ToString();
-        waterCost.text = (collapsedItem.attachedItemCard.cardCraftResources[1] * craftAmount).ToString();
-        fertiliserCost.text = (collapsedItem.attachedItemCard.cardCraftResources[2] * craftAmount).ToString();
+
+        craftAmountInput.text = CraftAmount.ToString();
     }
 
     public void OnCraftButtonPress()

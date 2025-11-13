@@ -58,6 +58,8 @@ public class PlantManager : MonoBehaviour, IDataPersistence
         int dropCount = Mathf.FloorToInt(plant.yield / 3);
         float interval = 0.25f;
 
+        print(dropCount);
+
         for (int i = 0; i < dropCount; i++)
         {
             plant.GiveDrop(plant.transform.parent);

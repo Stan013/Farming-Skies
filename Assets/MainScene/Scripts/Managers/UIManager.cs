@@ -52,10 +52,12 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public TMP_Text fertiliserText;
 
     [Header("Island builder")]
+    public GameObject islandBuilder;
     public TMP_Text buildCostText;
     public TMP_Text expenseCostText;
-    public Slider transparencySlider;
+    public Slider buildSlider;
     public Image constructionLabel;
+    public GameObject missingFundsLabel;
 
     public void SetupUI()
     {
@@ -106,7 +108,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (island.topMat != null && island.bottomMat != null)
         {
             float alphaValue = Mathf.Clamp01(island.topMat.color.a);
-            transparencySlider.value = alphaValue;
+            buildSlider.value = alphaValue;
             if (alphaValue == 1f && island.islandBought == false)
             {
                 Balance -= island.islandBuildCost;

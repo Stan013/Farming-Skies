@@ -460,7 +460,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 24:
-                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Phosphorus")
+                    if (GameManager.CRM.expandedCraftItem.CraftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Phosphorus")
                     {
                         QuestCompleted();
                     }
@@ -478,7 +478,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 27:
-                    if (GameManager.CRM.expandedCraftItem.craftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Potassium")
+                    if (GameManager.CRM.expandedCraftItem.CraftAmount == 1 && GameManager.CRM.expandedCraftItem.collapsedItem.attachedItemCard.itemName == "Potassium")
                     {
                         QuestCompleted();
                     }

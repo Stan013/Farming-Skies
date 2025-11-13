@@ -400,7 +400,7 @@ MonoBehaviour:
   itemIndex: 0
   attachedItemCard: {fileID: 0}
   expandButton: {fileID: 9080415216052486923}
-  craftButton: {fileID: 0}
+  craftButton: {fileID: 6130724977942200368}
   craftAmountInput: {fileID: 3556820243130504264}
   craftInputBackground: {fileID: 7487545166161354169}
   invalidCraft: {fileID: 21300000, guid: 36fded8526e6003419da4ca3e7e69621, type: 3}

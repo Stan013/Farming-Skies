@@ -36,7 +36,18 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             {
                 itemsInInventory[i].transform.SetSiblingIndex(i + 1);
             }
-            plant.attachedInventoryItem = inventoryItem;
+
+            if(plant != null)
+            {
+                plant.attachedInventoryItem = inventoryItem;
+            }
+        }
+        else
+        {
+            if(plant != null)
+            {
+                plant.attachedInventoryItem = existingInventoryItem;
+            }
         }
     }
 

@@ -125,12 +125,13 @@ MonoBehaviour:
   drop: {fileID: 0}
   dropAmount: 0
   attachedIsland: {fileID: 0}
+  attachedCard: {fileID: 0}
   attachedInventoryItem: {fileID: 0}
   baseYield: 0
   yield: 0
   predictedYield: 0
   nutrientsUsages: 
-  buildableTaxCost: 100
+  structureTax: 100
   plantData:
     plantID: 
     islandID: 

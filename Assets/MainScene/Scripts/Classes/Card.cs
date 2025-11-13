@@ -15,12 +15,16 @@ public class Card : MonoBehaviour
     public bool dragSucces;
     public int nutrientIndex;
     public int nutrientAddition;
+    public GameObject cropSetup;
+    public GameObject structureSetup;
+    public GameObject utilitySetup;
 
     [Header("Visible card variables")]
     public string cardName;
     public TMP_Text cardNameText;
     public string cardDescription;
-    public TMP_Text cardDescriptionText;
+    public TMP_Text structureDescription;
+    public TMP_Text utilityDescription;
 
     [Header("Card in-hand variables")]
     public GameObject cardImage;
@@ -37,6 +41,7 @@ public class Card : MonoBehaviour
     public int[] cardCraftResources;
     public int cardDropsRequired;
     public int cardCraftIndex;
+    public Sprite cardCraftIcon;
 
     [Header("Associated item variables")]
     public string itemName;

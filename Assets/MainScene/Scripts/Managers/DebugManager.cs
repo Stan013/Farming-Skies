@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DebugManager : MonoBehaviour
 {
     public bool skipTutorial;
+    public TMP_InputField cardIdInput;
+    public TMP_InputField cropIdInput;
 
     public void DebugInput()
     {
@@ -22,7 +25,23 @@ public class DebugManager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Keypad1))
         {
-            GameManager.DM.AddCardToDeck("CardWaterBarrelBuildable");
+            if(cardIdInput.gameObject.activeSelf)
+            {
+                cardIdInput.gameObject.SetActive(false);
+            }
+            else
+            {
+                cardIdInput.gameObject.SetActive(true);
+            }
+
+            if (cropIdInput.gameObject.activeSelf)
+            {
+                cropIdInput.gameObject.SetActive(false);
+            }
+            else
+            {
+                cropIdInput.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -39,5 +58,24 @@ public class DebugManager : MonoBehaviour
     public void AddFertiliser()
     {
         GameManager.UM.Fertiliser += 500;
+    }
+
+    public void AddCrop()
+    {
+        string cardID = cropIdInput.text;
+        if (!string.IsNullOrEmpty(cardID))
+        {
+            GameManager.INM.UnlockInventoryItem(GameManager.CM.FindCardByID(cardID), null);
+            GameManager.INM.FindInventoryItemByID(cardID).ItemQuantity += 5;
+        }
+    }
+
+    public void AddCard()
+    {
+        string cropID = cardIdInput.text;
+        if (!string.IsNullOrEmpty(cropID))
+        {
+            GameManager.DM.AddCardToDeck(GameManager.CM.FindCardByID(cropID).cardId);
+        }
     }
 }

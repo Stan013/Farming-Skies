@@ -52,7 +52,6 @@ public class WindowManager : MonoBehaviour
                 break;
         }
     }
-
     public void OpenWindow(GameObject window)
     {
         if (inMenu)
@@ -137,5 +136,10 @@ public class WindowManager : MonoBehaviour
             selectionWindow.SetActive(true);
             inMenu = true;
         }
+    }
+
+    public void SetInMenu(bool menu)
+    {
+        inMenu = menu;
     }
 }

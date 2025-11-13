@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
+using static UnityEditor.Progress;
 
 public class CraftItem : MonoBehaviour
 {
@@ -80,10 +81,22 @@ public class CraftItem : MonoBehaviour
     public void CalculateMaxCraftableAmount()
     {
         List<int> validMaxValues = new List<int>();
-        if (attachedItemCard.cardCraftResources[0] > 0f)
+        if (attachedItemCard.cardType != "Structure" && attachedItemCard.cardType != "Utilities")
         {
-            validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.Balance / attachedItemCard.cardCraftResources[0]));
+            if (attachedItemCard.cardCraftResources[3] > 0f && attachedItemCard.inventoryItem != null)
+            {
+                validMaxValues.Add(Mathf.FloorToInt(attachedItemCard.inventoryItem.ItemQuantity / attachedItemCard.cardCraftResources[3]));
+            }
         }
+        else
+        {
+            if (attachedItemCard.cardCraftResources[0] > 0f)
+            {
+                validMaxValues.Add(Mathf.FloorToInt(GameManager.UM.Balance / attachedItemCard.cardCraftResources[0]));
+            }
+        }
+
+
         if (attachedItemCard.cardCraftResources[1] > 0f)
         {
             validMaxValues.Add(GameManager.UM.Water / attachedItemCard.cardCraftResources[1]);
@@ -92,6 +105,7 @@ public class CraftItem : MonoBehaviour
         {
             validMaxValues.Add(GameManager.UM.Fertiliser / attachedItemCard.cardCraftResources[2]);
         }
+
         maxCraftAmount = (validMaxValues.Count > 0) ? Mathf.Min(validMaxValues.ToArray()) : 0;
     }
 
@@ -132,7 +146,16 @@ public class CraftItem : MonoBehaviour
     private void QuickCraft()
     {
         holdCoroutine = null;
-        GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
+
+        if (attachedItemCard.cardType != "Structure" && attachedItemCard.cardType != "Utilities")
+        {
+
+        }
+        else
+        {
+            GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
+        }
+
         GameManager.UM.Water -= attachedItemCard.cardCraftResources[1];
         GameManager.UM.Fertiliser -= attachedItemCard.cardCraftResources[2];
         GameManager.DM.AddCardToDeck(attachedItemCard.cardId);

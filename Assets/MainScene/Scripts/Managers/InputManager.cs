@@ -108,8 +108,21 @@ public class InputManager : MonoBehaviour, IDataPersistence
                     if (!GameManager.QM.questActive || potentialIsland.currentState == Island.IslandState.Highlighted)
                     {
                         Cursor.lockState = CursorLockMode.Locked;
+                        GameManager.UM.buildSlider.gameObject.SetActive(true);
+                        GameManager.UM.missingFundsLabel.gameObject.SetActive(false);
                         GameManager.UM.constructionLabel.gameObject.SetActive(true);
                         buildIslandPress = true;
+                        GameManager.UM.SetBuildIslandSlider();
+                    }
+                }
+                else
+                {
+                    if(!potentialIsland.islandBought)
+                    {
+                        Cursor.lockState = CursorLockMode.Locked;
+                        GameManager.UM.buildSlider.gameObject.SetActive(false);
+                        GameManager.UM.missingFundsLabel.gameObject.SetActive(true);
+                        GameManager.UM.constructionLabel.gameObject.SetActive(true);
                         GameManager.UM.SetBuildIslandSlider();
                     }
                 }
@@ -122,7 +135,7 @@ public class InputManager : MonoBehaviour, IDataPersistence
                 holdTimer = 0f;
                 if (GameManager.UM.constructionLabel.gameObject.activeSelf)
                 {
-                    GameManager.UM.transparencySlider.value = 0f;
+                    GameManager.UM.buildSlider.value = 0f;
                     GameManager.UM.constructionLabel.gameObject.SetActive(false);
 
                     if(potentialIsland.glow.activeSelf)

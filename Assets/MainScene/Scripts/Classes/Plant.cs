@@ -17,7 +17,7 @@ public class Plant : MonoBehaviour
     public int yield;
     public int predictedYield;
     public List<int> nutrientsUsages;
-    public int buildableTaxCost;
+    public int structureTax;
     private System.Random random = new System.Random();
     public PlantData plantData;
 

@@ -45,11 +45,12 @@ public class CardManager : MonoBehaviour, IDataPersistence
     {
         card.cardImage.GetComponent<Image>().sprite = card.cardSprite;
         card.cardNameText.SetText(card.cardName);
+        CardDrag cardDrag = card.GetComponent<CardDrag>();
+        Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();
+
         if (card.cardType == "Small crops" || card.cardType == "Medium crops" || card.cardType == "Large crops")
         {
-            CardDrag cardDrag = card.GetComponent<CardDrag>();
-            Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();
-            card.cardDescriptionText.gameObject.SetActive(false);
+            card.cropSetup.SetActive(true);
             card.waterText.SetText(dragPlant.nutrientsUsages[0].ToString() + " L");
             card.nitrogenText.SetText(dragPlant.nutrientsUsages[1].ToString() + " L");
             card.phosphorusText.SetText(dragPlant.nutrientsUsages[2].ToString() + " L");
@@ -58,25 +59,16 @@ public class CardManager : MonoBehaviour, IDataPersistence
         }
         else if (card.cardType == "Structure")
         {
-            card.cardDescriptionText.gameObject.SetActive(true);
-            card.cardDescriptionText.SetText(card.cardDescription);
-            card.nitrogenText.transform.parent.gameObject.SetActive(false);
-            card.phosphorusText.transform.parent.gameObject.SetActive(false);
-            card.potassiumText.transform.parent.gameObject.SetActive(false);
-            card.waterText.transform.parent.gameObject.SetActive(false);
-            card.resourceAdditionText.transform.parent.gameObject.SetActive(true);
-            card.resourceAdditionText.SetText("100₴");
+            card.structureSetup.SetActive(true);
+            card.structureDescription.SetText(card.cardDescription);
+            card.resourceAdditionText.SetText("+ " + dragPlant.structureTax + " ₴");
         }
         else 
         {
-            card.cardDescriptionText.gameObject.SetActive(true);
-            card.cardDescriptionText.SetText(card.cardDescription);
-            card.nitrogenText.transform.parent.gameObject.SetActive(false);
-            card.phosphorusText.transform.parent.gameObject.SetActive(false);
-            card.potassiumText.transform.parent.gameObject.SetActive(false);
-            card.waterText.transform.parent.gameObject.SetActive(false);
-            card.plantSizeText.transform.parent.gameObject.SetActive(false);
+            card.utilitySetup.SetActive(true);
+            card.utilityDescription.SetText(card.cardDescription);
         }
+
         if (!GameManager.QM.questActive)
         {
             card.GetComponent<CardDrag>().enabled = true;

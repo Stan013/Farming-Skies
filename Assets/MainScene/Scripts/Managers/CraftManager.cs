@@ -39,6 +39,7 @@ public class CraftManager : MonoBehaviour
         {
             expandedCraftItem.CollapseCraftItem();
         }
+
         if (filter == "Default")
         {
             foreach (CraftItem craftItem in itemsInCrafting)

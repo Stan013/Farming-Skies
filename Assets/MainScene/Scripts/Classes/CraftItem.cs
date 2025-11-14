@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
-using static UnityEditor.Progress;
 
 public class CraftItem : MonoBehaviour
 {
@@ -37,45 +35,60 @@ public class CraftItem : MonoBehaviour
             itemNameText.text = attachedItemCard.itemName;
             itemImage.sprite = attachedItemCard.cardSprite;
             itemIndex = GameManager.INM.itemsInInventory.Count;
-            CalculateMaxCraftableAmount();
-            CheckValidCraftAmount("0");
         }
     }
 
-    public void CheckValidCraftAmount(string input)
+    public void ResetCraftAmount()
     {
-        CalculateMaxCraftableAmount();
-        if (int.TryParse(input, out int value))
+        craftAmount = 0;
+        craftAmountInput.text = "";
+    }
+
+    public void CheckValidCraft() 
+    {
+        int input;
+        if(craftAmountInput.text == "")
         {
-            if (value <= 0 || maxCraftAmount == 0)
-            {
-                craftAmount = 0;
-                craftAmountInput.text = "0";
-                craftInputBackground.sprite = invalidCraft;
-                canCraft = false;
-            }
-            else if (value > maxCraftAmount)
-            {
-                craftInputBackground.sprite = validCraft;
-                canCraft = true;
-                craftAmount = maxCraftAmount;
-                craftAmountInput.text = maxCraftAmount.ToString();
-            }
-            else
-            {
-                craftAmount = value;
-                craftAmountInput.text = value.ToString();
-                craftInputBackground.sprite = validCraft;
-                canCraft = true;
-            }
+            input = 0;
         }
         else
         {
-            craftAmount = 0;
-            craftAmountInput.text = "0";
-            craftInputBackground.sprite = invalidCraft;
-            canCraft = false;
+            input = int.Parse(craftAmountInput.text);
         }
+
+        if (input <= 0) 
+        {
+            craftAmount = 0;
+            craftInputBackground.sprite = invalidCraft; 
+            canCraft = false;
+            return;
+        }
+        else 
+        {
+            CalculateMaxCraftableAmount();
+            if (maxCraftAmount <= 0)
+            {
+                craftAmount = 0;
+                craftInputBackground.sprite = invalidCraft;
+                canCraft = false;
+            }
+            else
+            {
+                if(input > maxCraftAmount)
+                {
+                    craftAmount = maxCraftAmount;
+                }
+                else
+                {
+                    craftAmount = input;
+                }
+
+                craftInputBackground.sprite = validCraft;
+                canCraft = true;
+            }
+        } 
+        
+        craftAmountInput.text = craftAmount.ToString(); 
     }
 
     public void CalculateMaxCraftableAmount()
@@ -128,7 +141,7 @@ public class CraftItem : MonoBehaviour
             StopCoroutine(holdCoroutine);
             holdCoroutine = null;
         }
-        CheckValidCraftAmount("0");
+        ResetCraftAmount();
     }
 
     private IEnumerator HandleCraftHold()
@@ -146,20 +159,12 @@ public class CraftItem : MonoBehaviour
     private void QuickCraft()
     {
         holdCoroutine = null;
-
-        if (attachedItemCard.cardType != "Structure" && attachedItemCard.cardType != "Utilities")
-        {
-
-        }
-        else
-        {
-            GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
-        }
-
+        GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
         GameManager.UM.Water -= attachedItemCard.cardCraftResources[1];
         GameManager.UM.Fertiliser -= attachedItemCard.cardCraftResources[2];
+        attachedItemCard.inventoryItem.ItemQuantity -= attachedItemCard.cardCraftResources[3];
         GameManager.DM.AddCardToDeck(attachedItemCard.cardId);
-        CheckValidCraftAmount("0");
+        ResetCraftAmount();
     }
 
     public void ExpandCraftItem()
@@ -180,6 +185,5 @@ public class CraftItem : MonoBehaviour
         this.gameObject.SetActive(false);
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         GameManager.CRM.craftScroll.verticalNormalizedPosition = 1f;
-        CalculateMaxCraftableAmount();
     }
 }

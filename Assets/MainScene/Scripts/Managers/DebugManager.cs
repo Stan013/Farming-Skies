@@ -65,7 +65,6 @@ public class DebugManager : MonoBehaviour
         string cardID = cropIdInput.text;
         if (!string.IsNullOrEmpty(cardID))
         {
-            GameManager.INM.UnlockInventoryItem(GameManager.CM.FindCardByID(cardID), null);
             GameManager.INM.FindInventoryItemByID(cardID).ItemQuantity += 5;
         }
     }

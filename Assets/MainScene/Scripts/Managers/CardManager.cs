@@ -28,6 +28,11 @@ public class CardManager : MonoBehaviour, IDataPersistence
                     unlockedCards.Add(childCard);
                     GameManager.CRM.craftableCards.Add(childCard);
                     GameManager.CRM.UnlockCraftItem(childCard);
+
+                    if (childCard.cardType != "Utilities" && childCard.cardType != "Structure")
+                    {
+                        GameManager.INM.UnlockInventoryItem(childCard, null);
+                    }
                 }
                 if(childCard.cardStarter)
                 {

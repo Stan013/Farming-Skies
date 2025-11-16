@@ -96,7 +96,7 @@ public class CraftItem : MonoBehaviour
         List<int> validMaxValues = new List<int>();
         if (attachedItemCard.cardType != "Structure" && attachedItemCard.cardType != "Utilities")
         {
-            if (attachedItemCard.cardCraftResources[3] > 0f && attachedItemCard.inventoryItem != null)
+            if (attachedItemCard.cardCraftResources[3] > 0f)
             {
                 validMaxValues.Add(Mathf.FloorToInt(attachedItemCard.inventoryItem.ItemQuantity / attachedItemCard.cardCraftResources[3]));
             }

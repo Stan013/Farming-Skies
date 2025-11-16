@@ -33,6 +33,7 @@ public class InventoryItem : MonoBehaviour
         if(itemCard != null)
         {
             attachedItemCard = itemCard;
+            attachedItemCard.inventoryItem = this;
             attachedPlant = itemCard.GetComponent<CardDrag>().dragModel.GetComponent<Plant>();
             itemNameText.text = attachedItemCard.itemName;
             itemQuantityText.text = _itemQuantity.ToString();

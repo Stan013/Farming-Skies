@@ -31,6 +31,8 @@ public class ExpandedMarketItem : MonoBehaviour
     public int transactionAmount;
     public Button plusButton;
     public Button maxButton;
+    public float balanceIncrease;
+    public TMP_Text balanceIncreaseText;
 
     public TMP_Text highestPriceText;
     public TMP_Text averagePriceText;

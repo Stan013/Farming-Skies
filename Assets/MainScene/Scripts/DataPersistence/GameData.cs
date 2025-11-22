@@ -121,9 +121,9 @@ public class GameData
         questCount = 0;
         farmLevel = 0;
         expense = 0f;
-        balance = 0f;
-        water = 0;
-        fertiliser = 0;
+        balance = 250f;
+        water = 100;
+        fertiliser = 100;
         weeks = 0;
     }
 }

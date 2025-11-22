@@ -46,81 +46,81 @@ public class MarketItem : MonoBehaviour
             itemPrices.Add(itemCard.itemPrice);
             itemDemands.Add(itemCard.itemDemand);
             itemSupplies.Add(itemCard.itemSupply);
-            CheckValidTransactionAmount("0");
         }
     }
 
-    public void CheckValidTransactionAmount(string input)
+    public void ResetTransactionAmount()
     {
-        if (int.TryParse(input, out int value))
-        {
-            if (marketTransaction == "Sell")
-            {
-                if (value <= 0 || attachedInventoryItem.ItemQuantity == 0)
-                {
-                    transactionAmount = 0;
-                    transactionAmountInput.text = "0";
-                    transactionInputBackground.sprite = invalidTransaction;
-                    canTransaction = false;
-                }
-                else if (value > attachedInventoryItem.ItemQuantity)
-                {
-                    if (attachedInventoryItem.ItemQuantity == 0)
-                    {
-                        transactionInputBackground.sprite = invalidTransaction;
-                        canTransaction = false;
-                    }
-                    else
-                    {
-                        transactionInputBackground.sprite = validTransaction;
-                        canTransaction = true;
-                    }
-                    transactionAmount = attachedInventoryItem.ItemQuantity;
-                    transactionAmountInput.text = attachedInventoryItem.ItemQuantity.ToString();
-                }
-                else
-                {
-                    transactionAmount = value;
-                    transactionAmountInput.text = value.ToString();
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
-                }
+        transactionAmount = 0;
+        transactionAmountInput.text = "";
+    }
 
-            }
-            else
-            {
-                maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / attachedItemCard.itemPrice);
-                float transactionCost = value * attachedItemCard.itemPrice;
-                if (transactionCost <= 0 || maxBuyAmount == 0)
-                {
-                    transactionAmount = 0;
-                    transactionAmountInput.text = "0";
-                    transactionInputBackground.sprite = invalidTransaction;
-                    canTransaction = false;
-                }
-                else if (transactionCost > GameManager.UM.Balance)
-                {
-                    transactionAmount = maxBuyAmount;
-                    transactionAmountInput.text = maxBuyAmount.ToString();
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
-                }
-                else
-                {
-                    transactionAmount = value;
-                    transactionAmountInput.text = value.ToString();
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
-                }
-            }
+    public void CheckValidTransaction()
+    {
+        int input;
+        if (transactionAmountInput.text == "")
+        {
+            input = 0;
         }
         else
         {
+            input = int.Parse(transactionAmountInput.text);
+        }
+
+        if (input <= 0)
+        {
             transactionAmount = 0;
-            transactionAmountInput.text = "0";
             transactionInputBackground.sprite = invalidTransaction;
             canTransaction = false;
+            return;
         }
+        else
+        {
+            if (marketTransaction == "Sell")
+            {
+                if(input > attachedInventoryItem.ItemQuantity)
+                {
+                    transactionAmount = attachedInventoryItem.ItemQuantity;
+                }
+                else
+                {
+                    transactionAmount = input;
+                }
+            }
+            else
+            {
+                if(maxBuyAmount <= 0)
+                {
+                    transactionAmount = 0;
+                    transactionInputBackground.sprite = invalidTransaction;
+                    canTransaction = false;
+                }
+                else
+                {
+                    if (input > maxBuyAmount)
+                    {
+                        transactionAmount = maxBuyAmount;
+                    }
+                    else
+                    {
+                        transactionAmount = input;
+                    }
+
+                    transactionInputBackground.sprite = validTransaction;
+                    canTransaction = true;
+                }
+            }
+        }
+
+        transactionAmountInput.text = transactionAmount.ToString();
+    }
+
+    public void CalculateMaxBuyAmount()
+    {
+        float price = attachedItemCard.itemPrice;
+        float balance = GameManager.UM.Balance;
+
+        maxBuyAmount = Mathf.FloorToInt(balance / price);
     }
 
     public void OnTransactionButtonPress()

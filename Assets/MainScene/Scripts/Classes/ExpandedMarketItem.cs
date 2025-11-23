@@ -15,10 +15,11 @@ public class ExpandedMarketItem : MonoBehaviour
 
     public Button transactionButton;
     public TMP_Text transactionText;
-    public Sprite validSell;
-    public Sprite invalidSell;
-
+    public Image transactionButtonBackground;
+    public Sprite sellTransaction;
+    public Sprite buyTransaction;
     public string marketTransaction;
+
     public Image transactionInputBackground;
     public Sprite validTransaction;
     public Sprite ongoingTransaction;
@@ -28,11 +29,29 @@ public class ExpandedMarketItem : MonoBehaviour
     public Button minButton;
     public Button minusButton;
     public TMP_InputField transactionAmountInput;
-    public int transactionAmount;
     public Button plusButton;
     public Button maxButton;
-    public float balanceIncrease;
-    public TMP_Text balanceIncreaseText;
+
+    public Image balanceChangeBackground;
+    public Sprite balanceAddition;
+    public Sprite balanceDeduction;
+    public TMP_Text balanceChangeText;
+
+    public int TransactionAmount
+    {
+        get => _transactionAmount;
+        set
+        {
+            int maxAmount = (marketTransaction == "Buy")
+                ? collapsedItem.maxBuyAmount
+                : attachedInventoryItem.ItemQuantity;
+
+            _transactionAmount = Mathf.Clamp(value, 0, maxAmount);
+            UpdateTransactionAmount();
+        }
+    }
+    public int _transactionAmount;
+    public float balanceChange;
 
     public TMP_Text highestPriceText;
     public TMP_Text averagePriceText;
@@ -61,7 +80,7 @@ public class ExpandedMarketItem : MonoBehaviour
         expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString("F2") + " ₴";
         collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
         SetPriceIcons();
-        CheckValidTransactionAmount("0");
+        TransactionAmount = 0;
     }
 
     public void CollapseMarketItem()
@@ -77,34 +96,24 @@ public class ExpandedMarketItem : MonoBehaviour
                 Destroy(fillItem);
             }
 
+            TransactionAmount = 0;
             collapsedItem.gameObject.SetActive(true);
             this.gameObject.SetActive(false);
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
     }
 
-    public void SetMin()
-    {
-        transactionAmount = 0;
-        transactionAmountInput.text = "0";
-        CheckValidTransactionAmount("0");
-    }
-
     public void DecreaseAmount()
     {
-        int amount = transactionAmount;
-        amount = Mathf.Max(0, amount - 1);
-        transactionAmountInput.text = amount.ToString();
-        CheckValidTransactionAmount(amount.ToString());
+        TransactionAmount = Mathf.Max(0, TransactionAmount - 1);
     }
 
     public void IncreaseAmount()
     {
-        int amount = transactionAmount;
         int maxAmount;
-
         if (marketTransaction == "Buy")
         {
+            collapsedItem.CalculateMaxBuyAmount();
             maxAmount = collapsedItem.maxBuyAmount;
         }
         else // Sell
@@ -112,17 +121,15 @@ public class ExpandedMarketItem : MonoBehaviour
             maxAmount = attachedInventoryItem.ItemQuantity;
         }
 
-        amount = Mathf.Min(maxAmount, amount + 1);
-        transactionAmountInput.text = amount.ToString();
-        CheckValidTransactionAmount(amount.ToString());
+        TransactionAmount = Mathf.Min(maxAmount, TransactionAmount + 1);
     }
 
     public void SetMax()
     {
         int maxAmount;
-
         if (marketTransaction == "Buy")
         {
+            collapsedItem.CalculateMaxBuyAmount();
             maxAmount = collapsedItem.maxBuyAmount;
         }
         else // Sell
@@ -130,102 +137,71 @@ public class ExpandedMarketItem : MonoBehaviour
             maxAmount = attachedInventoryItem.ItemQuantity;
         }
 
-        transactionAmount = maxAmount;
-        transactionAmountInput.text = maxAmount.ToString();
-        CheckValidTransactionAmount(maxAmount.ToString());
+        TransactionAmount = maxAmount;
     }
 
-    public void CheckValidTransactionAmount(string input)
+    public void InputTransactionAmount()
     {
-        if (!int.TryParse(input, out int value))
+        if (transactionAmountInput.text == "")
         {
-            value = 0;
+            transactionAmountInput.text = "";
+            return;
         }
 
-        transactionAmount = value;
-        transactionAmountInput.text = value.ToString();
-
-        if (marketTransaction == "Sell")
+        int maxAmount;
+        if (marketTransaction == "Buy")
         {
-            int availableToSell = attachedInventoryItem.ItemQuantity;
-
-            if (value <= 0 || availableToSell == 0)
-            {
-                transactionInputBackground.sprite = invalidTransaction;
-                canTransaction = false;
-                transactionButton.interactable = false;
-                transactionButton.GetComponent<Image>().sprite = invalidSell;
-            }
-            else if (value > availableToSell)
-            {
-                transactionAmount = availableToSell;
-                transactionAmountInput.text = availableToSell.ToString();
-
-                transactionInputBackground.sprite = validTransaction;
-                canTransaction = true;
-                transactionButton.interactable = true;
-                transactionButton.GetComponent<Image>().sprite = validSell;
-            }
-            else
-            {
-                transactionInputBackground.sprite = validTransaction;
-                canTransaction = true;
-                transactionButton.interactable = true;
-                transactionButton.GetComponent<Image>().sprite = validSell;
-            }
+            collapsedItem.CalculateMaxBuyAmount();
+            maxAmount = collapsedItem.maxBuyAmount;
         }
-        else // Buy
+        else // Sell
         {
-            float price = collapsedItem.attachedItemCard.itemPrice;
-            float balance = GameManager.UM.Balance;
-            collapsedItem.maxBuyAmount = Mathf.FloorToInt(balance / price);
-            float totalCost = value * price;
-
-            if (value <= 0 || collapsedItem.maxBuyAmount == 0 || totalCost > balance)
-            {
-                if (collapsedItem.maxBuyAmount > 0)
-                {
-                    transactionAmount = collapsedItem.maxBuyAmount;
-                    transactionAmountInput.text = collapsedItem.maxBuyAmount.ToString();
-
-                    transactionInputBackground.sprite = validTransaction;
-                    canTransaction = true;
-                    transactionButton.interactable = true;
-                    transactionButton.GetComponent<Image>().sprite = validSell;
-                }
-                else
-                {
-                    transactionInputBackground.sprite = invalidTransaction;
-                    canTransaction = false;
-                    transactionButton.interactable = false;
-                    transactionButton.GetComponent<Image>().sprite = invalidSell;
-
-                }
-            }
-            else
-            {
-                transactionInputBackground.sprite = validTransaction;
-                canTransaction = true;
-                transactionButton.interactable = true;
-                transactionButton.GetComponent<Image>().sprite = validSell;
-            }
+            maxAmount = attachedInventoryItem.ItemQuantity;
         }
+
+        TransactionAmount = Mathf.Clamp(int.Parse(transactionAmountInput.text), 0, maxAmount);
     }
-
-
     public void SwitchTransaction()
     {
         if (marketTransaction == "Sell")
         {
-            transactionText.text = "Buy";
-            marketTransaction = "Buy";
+            transactionText.text = "Sell";
+            transactionButtonBackground.sprite = sellTransaction;
+            balanceChangeBackground.sprite = balanceAddition;
+            marketTransaction = "Sell";
         }
         else
         {
-            transactionText.text = "Sell";
-            marketTransaction = "Sell";
+            transactionText.text = "Buy";
+            transactionButtonBackground.sprite = buyTransaction;
+            balanceChangeBackground.sprite = balanceDeduction;
+            marketTransaction = "Buy";
         }
-        CheckValidTransactionAmount("0");
+
+        UpdateTransactionAmount();
+    }
+
+    public void UpdateTransactionAmount()
+    {
+        canTransaction = TransactionAmount > 0 &&
+                         ((marketTransaction == "Buy" && TransactionAmount <= collapsedItem.maxBuyAmount) ||
+                          (marketTransaction == "Sell" && TransactionAmount <= attachedInventoryItem.ItemQuantity));
+
+        transactionInputBackground.sprite = canTransaction ? validTransaction : invalidTransaction;
+        transactionAmountInput.text = TransactionAmount.ToString();
+
+        if (TransactionAmount != 0)
+        {
+            balanceChange = (marketTransaction == "Buy")
+                ? -TransactionAmount * collapsedItem.attachedItemCard.itemPrice
+                : TransactionAmount * collapsedItem.attachedItemCard.itemPrice;
+        }
+        else
+        {
+            balanceChange = 0;
+        }
+
+        balanceChangeText.text = FormatNumber(balanceChange) + " ₴";
     }
 
     public void OnTransactionButtonPress()
@@ -247,7 +223,7 @@ public class ExpandedMarketItem : MonoBehaviour
             StopCoroutine(holdCoroutine);
             holdCoroutine = null;
         }
-        CheckValidTransactionAmount("0");
+        UpdateTransactionAmount();
     }
 
     private IEnumerator HandleCraftHold()
@@ -265,20 +241,18 @@ public class ExpandedMarketItem : MonoBehaviour
     private void Transaction()
     {
         holdCoroutine = null;
+        GameManager.UM.Balance += balanceChange;
 
         if (marketTransaction == "Sell")
         {
-            float sellTotal = transactionAmount * collapsedItem.attachedItemCard.itemPrice;
-            GameManager.UM.Balance += sellTotal;
-            attachedInventoryItem.ItemQuantity -= transactionAmount;
+            attachedInventoryItem.ItemQuantity -= TransactionAmount;
         }
-        else
+        else // Buy
         {
-            float buyTotal = transactionAmount * collapsedItem.attachedItemCard.itemPrice;
-            GameManager.UM.Balance -= buyTotal;
-            attachedInventoryItem.ItemQuantity += transactionAmount;
+            attachedInventoryItem.ItemQuantity += TransactionAmount;
         }
-        CheckValidTransactionAmount("0");
+
+        TransactionAmount = 0;
         expandedQuantity.text = attachedInventoryItem.ItemQuantity.ToString();
     }
 

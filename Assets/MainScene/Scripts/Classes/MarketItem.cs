@@ -18,6 +18,8 @@ public class MarketItem : MonoBehaviour
     public Button transactionButton;
     public TMP_Text transactionText;
     public int transactionAmount;
+    public Sprite sellTransaction;
+    public Sprite buyTransaction;
 
     public TMP_InputField transactionAmountInput;
     public Image transactionInputBackground;
@@ -142,7 +144,7 @@ public class MarketItem : MonoBehaviour
             StopCoroutine(holdCoroutine);
             holdCoroutine = null;
         }
-        CheckValidTransactionAmount("0");
+        ResetTransactionAmount();
     }
 
     private IEnumerator HandleTransactionHold()
@@ -173,7 +175,7 @@ public class MarketItem : MonoBehaviour
             GameManager.UM.Balance -= buyTotal;
             attachedInventoryItem.ItemQuantity += transactionAmount;
         }
-        CheckValidTransactionAmount("0");
+        ResetTransactionAmount();
     }
 
     public void ExpandMarketItem()
@@ -211,7 +213,7 @@ public class MarketItem : MonoBehaviour
         itemPrices = data.itemPrices;
         itemDemands = data.itemDemands;
         itemSupplies = data.itemSupplies;
-        CheckValidTransactionAmount("0");
+        CheckValidTransaction();
 
         attachedItemCard.itemPrice = itemPrices[0];
         attachedItemCard.itemDemand = itemDemands[0];

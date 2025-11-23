@@ -38,7 +38,7 @@ public class ExpandedCraftItem : MonoBehaviour
         set
         {
             _craftAmount = Mathf.Clamp(value, 0, collapsedItem.maxCraftAmount);
-            UpdateValidState();
+            UpdateCraftAmount();
         }
     }
     private int _craftAmount;
@@ -116,15 +116,14 @@ public class ExpandedCraftItem : MonoBehaviour
         if (craftAmountInput.text == "")
         {
             craftAmountInput.text = "";
+            return;
         }
-        else
-        {
-            collapsedItem.CalculateMaxCraftableAmount();
-            CraftAmount = int.Parse(craftAmountInput.text);
-        }
+
+        collapsedItem.CalculateMaxCraftableAmount();
+        CraftAmount = int.Parse(craftAmountInput.text);
     }
 
-    public void UpdateValidState()
+    public void UpdateCraftAmount()
     {
         canCraft = CraftAmount > 0 && CraftAmount <= collapsedItem.maxCraftAmount;
 
@@ -145,7 +144,6 @@ public class ExpandedCraftItem : MonoBehaviour
             fertiliserCostText.SetText(collapsedItem.attachedItemCard.cardCraftResources[2].ToString() + " L");
             plantCostText.SetText(collapsedItem.attachedItemCard.cardCraftResources[3].ToString() + " X");
         }
-
     }
 
     public void OnCraftButtonPress()
@@ -167,7 +165,7 @@ public class ExpandedCraftItem : MonoBehaviour
             StopCoroutine(holdCoroutine);
             holdCoroutine = null;
         }
-        UpdateValidState();
+        UpdateCraftAmount();
     }
 
     private IEnumerator HandleCraftHold()
@@ -191,6 +189,5 @@ public class ExpandedCraftItem : MonoBehaviour
         GameManager.DM.AddCardToDeck(collapsedItem.attachedItemCard.cardId);
         collapsedItem.CalculateMaxCraftableAmount();
         CraftAmount = 0;
-        UpdateValidState();
     }
 }

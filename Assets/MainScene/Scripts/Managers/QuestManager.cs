@@ -544,7 +544,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     }
                     break;
                 case 38:
-                    if (GameManager.MM.expandedMarketItem.transactionAmount > 0)
+                    if (GameManager.MM.expandedMarketItem.TransactionAmount > 0)
                     {
                         QuestCompleted();
                     }

@@ -161,21 +161,25 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 hoverIsland.topMat = hoverIsland.potentialMatTop;
                 hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
                 hoverIsland.CreateIslandMaterial(Island.IslandState.Watered);
+                hoverIsland.currentState = Island.IslandState.Cultivated;
                 break;
             case "Watering Can":
                 hoverIsland.topMat = hoverIsland.potentialMatTop;
                 hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
                 hoverIsland.CreateIslandMaterial(Island.IslandState.Sowed);
+                hoverIsland.currentState = Island.IslandState.Watered;
                 break;
             case "Grass Seed":
                 hoverIsland.topMat = hoverIsland.potentialMatTop;
                 hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
                 hoverIsland.CreateIslandMaterial(Island.IslandState.Cultivated);
+                hoverIsland.currentState = Island.IslandState.Sowed;
                 break;
             case "Concrete Bag":
                 hoverIsland.topMat = hoverIsland.pavedMatTop;
                 hoverIsland.bottomMat = hoverIsland.sowedMatBot;
                 hoverIsland.CreateIslandMaterial(Island.IslandState.Paved);
+                hoverIsland.currentState = Island.IslandState.Paved;
                 break;
             default:
                 hoverIsland.CreateIslandMaterial(hoverIsland.currentState);

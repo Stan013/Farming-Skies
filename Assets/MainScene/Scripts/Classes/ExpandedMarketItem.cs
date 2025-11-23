@@ -165,17 +165,17 @@ public class ExpandedMarketItem : MonoBehaviour
     {
         if (marketTransaction == "Sell")
         {
-            transactionText.text = "Sell";
-            transactionButtonBackground.sprite = sellTransaction;
-            balanceChangeBackground.sprite = balanceAddition;
-            marketTransaction = "Sell";
-        }
-        else
-        {
             transactionText.text = "Buy";
             transactionButtonBackground.sprite = buyTransaction;
             balanceChangeBackground.sprite = balanceDeduction;
             marketTransaction = "Buy";
+        }
+        else
+        {
+            transactionText.text = "Sell";
+            transactionButtonBackground.sprite = sellTransaction;
+            balanceChangeBackground.sprite = balanceAddition;
+            marketTransaction = "Sell";
         }
 
         UpdateTransactionAmount();

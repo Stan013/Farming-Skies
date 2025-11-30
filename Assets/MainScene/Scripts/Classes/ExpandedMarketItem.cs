@@ -161,25 +161,6 @@ public class ExpandedMarketItem : MonoBehaviour
 
         TransactionAmount = Mathf.Clamp(int.Parse(transactionAmountInput.text), 0, maxAmount);
     }
-    public void SwitchTransaction()
-    {
-        if (marketTransaction == "Sell")
-        {
-            transactionText.text = "Buy";
-            transactionButtonBackground.sprite = buyTransaction;
-            balanceChangeBackground.sprite = balanceDeduction;
-            marketTransaction = "Buy";
-        }
-        else
-        {
-            transactionText.text = "Sell";
-            transactionButtonBackground.sprite = sellTransaction;
-            balanceChangeBackground.sprite = balanceAddition;
-            marketTransaction = "Sell";
-        }
-
-        UpdateTransactionAmount();
-    }
 
     public void UpdateTransactionAmount()
     {
@@ -281,6 +262,6 @@ public class ExpandedMarketItem : MonoBehaviour
         if (num >= 1000)
             return (num / 1000f).ToString("0.##") + "K";
 
-        return num.ToString("0");
+        return num.ToString("0.##");
     }
 }

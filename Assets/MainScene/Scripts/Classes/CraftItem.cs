@@ -40,8 +40,14 @@ public class CraftItem : MonoBehaviour
 
     public void ResetCraftAmount()
     {
-        craftAmount = 0;
-        craftAmountInput.text = "";
+        foreach(CraftItem craftItem in GameManager.CRM.itemsInCrafting)
+        {
+            if(craftItem.gameObject.activeSelf)
+            {
+                craftItem.craftAmount = 0;
+                craftItem.craftAmountInput.text = "";
+            }
+        }
     }
 
     public void CheckValidCraft() 

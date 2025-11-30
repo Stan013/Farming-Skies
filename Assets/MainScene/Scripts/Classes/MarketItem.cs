@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static UnityEditor.Progress;
 
 public class MarketItem : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MarketItem : MonoBehaviour
     public MarketData marketData;
 
     public string marketTransaction = "Sell";
-    public Button transactionButton;
+    public Image transactionButtonBackground;
     public TMP_Text transactionText;
     public int transactionAmount;
     public Sprite sellTransaction;
@@ -42,8 +43,10 @@ public class MarketItem : MonoBehaviour
         if(itemCard != null)
         {
             attachedItemCard = itemCard;
+            attachedInventoryItem = itemCard.inventoryItem;
             itemNameText.text = attachedItemCard.itemName;
             itemImage.sprite = attachedItemCard.cardSprite;
+
             itemIndex = GameManager.MM.itemsInMarket.Count;
             itemPrices.Add(itemCard.itemPrice);
             itemDemands.Add(itemCard.itemDemand);
@@ -53,8 +56,14 @@ public class MarketItem : MonoBehaviour
 
     public void ResetTransactionAmount()
     {
-        transactionAmount = 0;
-        transactionAmountInput.text = "";
+        foreach (MarketItem marketItem in GameManager.MM.itemsInMarket)
+        {
+            if (marketItem.gameObject.activeSelf)
+            {
+                marketItem.transactionAmount = 0;
+                marketItem.transactionAmountInput.text = "";
+            }
+        }
     }
 
     public void CheckValidTransaction()
@@ -91,7 +100,8 @@ public class MarketItem : MonoBehaviour
             }
             else
             {
-                if(maxBuyAmount <= 0)
+                CalculateMaxBuyAmount();
+                if (maxBuyAmount <= 0)
                 {
                     transactionAmount = 0;
                     transactionInputBackground.sprite = invalidTransaction;

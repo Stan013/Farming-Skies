@@ -117,13 +117,16 @@ public class InputManager : MonoBehaviour, IDataPersistence
                 }
                 else
                 {
-                    if(!potentialIsland.islandBought)
+                    if(potentialIsland != null)
                     {
-                        Cursor.lockState = CursorLockMode.Locked;
-                        GameManager.UM.buildSlider.gameObject.SetActive(false);
-                        GameManager.UM.missingFundsLabel.gameObject.SetActive(true);
-                        GameManager.UM.constructionLabel.gameObject.SetActive(true);
-                        GameManager.UM.SetBuildIslandSlider();
+                        if (!potentialIsland.islandBought)
+                        {
+                            Cursor.lockState = CursorLockMode.Locked;
+                            GameManager.UM.buildSlider.gameObject.SetActive(false);
+                            GameManager.UM.missingFundsLabel.gameObject.SetActive(true);
+                            GameManager.UM.constructionLabel.gameObject.SetActive(true);
+                            GameManager.UM.SetBuildIslandSlider();
+                        }
                     }
                 }
             }

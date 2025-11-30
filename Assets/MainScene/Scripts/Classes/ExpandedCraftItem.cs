@@ -87,6 +87,8 @@ public class ExpandedCraftItem : MonoBehaviour
             this.gameObject.SetActive(false);
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
+
+        collapsedItem.ResetCraftAmount();
     }
 
     public void DecreaseAmount()

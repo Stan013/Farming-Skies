@@ -101,6 +101,8 @@ public class ExpandedMarketItem : MonoBehaviour
             this.gameObject.SetActive(false);
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
+
+        collapsedItem.ResetTransactionAmount();
     }
 
     public void DecreaseAmount()

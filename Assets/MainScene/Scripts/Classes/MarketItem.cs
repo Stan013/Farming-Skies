@@ -95,8 +95,10 @@ public class MarketItem : MonoBehaviour
                 }
                 else
                 {
-                    transactionAmount = input;
+                    transactionAmount = input;;
                 }
+                transactionInputBackground.sprite = validTransaction;
+                canTransaction = true;
             }
             else
             {

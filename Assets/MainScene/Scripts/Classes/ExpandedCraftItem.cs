@@ -88,12 +88,15 @@ public class ExpandedCraftItem : MonoBehaviour
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
 
-        collapsedItem.ResetCraftAmount();
+        if(collapsedItem != null)
+        {
+            collapsedItem.ResetCraftAmount();
+        }
     }
 
     public void DecreaseAmount()
     {
-        CraftAmount = Mathf.Max(0, CraftAmount - 1);
+        CraftAmount = Mathf.Max(0, CraftAmount - 1); 
     }
 
     public void IncreaseAmount()

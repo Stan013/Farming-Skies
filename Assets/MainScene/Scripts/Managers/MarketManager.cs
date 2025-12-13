@@ -9,6 +9,7 @@ public class MarketManager : MonoBehaviour, IDataPersistence
 {
     [Header("Market lists")]
     public List<MarketItem> itemsInMarket;
+    public List<PriceData> marketPrices;
 
     [Header("Market variables")]
     public GameObject marketContentArea;
@@ -30,6 +31,13 @@ public class MarketManager : MonoBehaviour, IDataPersistence
             if(!card.cardAddedToMarket)
             {
                 UnlockMarketItem(card);
+                PriceData data = new PriceData
+                (
+                    cardID = card.cardId,
+                    price = card.itemPrice,
+                    demand = card.itemDemand,
+                    supply = card.itemSupply
+                );
             }
         }
     }

@@ -11,9 +11,9 @@ public class SaveSlot : MonoBehaviour
     public TMP_Text saveNameText;
     public TMP_Text balanceText;
 
-    public void SetData(GameData data)
+    public void SetData(string saveSlotName, GameData data)
     {
-        if(data == null)
+        if (data == null)
         {
             noDataContent.SetActive(true);
             hasDataContent.SetActive(false);
@@ -22,8 +22,9 @@ public class SaveSlot : MonoBehaviour
         {
             noDataContent.SetActive(false);
             hasDataContent.SetActive(true);
-            saveNameText.text = GameManager.DPM.fileName.ToString();
+            saveNameText.text = saveSlotName;
             balanceText.text = data.balance.ToString() + " ₴";
         }
     }
+
 }

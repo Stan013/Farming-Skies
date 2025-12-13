@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System.IO;
 
 public class DataPersistenceManager : MonoBehaviour
 {
-    public string fileName;
-    private string selectedProfileId = "test";
+    private string currentSaveSlot;
     private FileDataHandler dataHandler;
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
@@ -16,8 +16,15 @@ public class DataPersistenceManager : MonoBehaviour
     public void Awake()
     {
         dataPersistenceObjects = FindAllDataPersistenceObjects();
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        string savesPath = Path.Combine(Application.persistentDataPath, "Saves");
+        dataHandler = new FileDataHandler(savesPath, "Save.game");
+
+        if (string.IsNullOrEmpty(currentSaveSlot))
+        {
+            currentSaveSlot = "Save1";
+        }
     }
+
 
     public void NewGame()
     {
@@ -50,20 +57,42 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        gameData = dataHandler.Load(selectedProfileId);
-        foreach(IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        if (string.IsNullOrEmpty(currentSaveSlot))
+        {
+            Debug.LogError("No save slot selected!");
+            return;
+        }
+
+        gameData = dataHandler.Load(currentSaveSlot);
+
+        if (gameData == null)
+        {
+            Debug.LogWarning("Save not found, creating new data.");
+            gameData = new GameData();
+        }
+
+        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.LoadData(gameData);
         }
+
+        InitializeGame();
     }
 
     public void SaveGame() 
     {
+        if (string.IsNullOrEmpty(currentSaveSlot))
+        {
+            Debug.LogError("No save slot selected!");
+            return;
+        }
+
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.SaveData(ref gameData);
         }
-        dataHandler.Save(gameData, selectedProfileId);
+
+        dataHandler.Save(gameData, currentSaveSlot);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

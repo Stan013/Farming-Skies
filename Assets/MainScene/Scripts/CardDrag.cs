@@ -207,7 +207,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
             }
 
-            if (GameManager.HM.dragCard.cardType == "Buildables")
+            if (GameManager.HM.dragCard.cardType == "Structure")
             {
                 hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorOrange;
             }

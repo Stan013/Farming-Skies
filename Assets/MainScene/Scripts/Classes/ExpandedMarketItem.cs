@@ -241,19 +241,23 @@ public class ExpandedMarketItem : MonoBehaviour
 
     public void SetPriceIcons()
     {
-        if (collapsedItem.itemPrices[0] < collapsedItem.itemPrices[collapsedItem.itemPrices.Count-1])
-        {
-            expandedPriceIcon.sprite = downIcon; // Price decrease
-        }
-        else if (collapsedItem.itemPrices[0] > collapsedItem.itemPrices[collapsedItem.itemPrices.Count - 1])
-        {
-            expandedPriceIcon.sprite = upIcon; // Price increase
-        }
-        else
+        if (collapsedItem.itemPrices.Count < 2)
         {
             expandedPriceIcon.sprite = sameIcon;
+            return;
         }
+
+        float newest = collapsedItem.itemPrices[0];
+        float oldest = collapsedItem.itemPrices[1];
+
+        if (newest < oldest)
+            expandedPriceIcon.sprite = downIcon;
+        else if (newest > oldest)
+            expandedPriceIcon.sprite = upIcon;
+        else
+            expandedPriceIcon.sprite = sameIcon;
     }
+
 
     public static string FormatNumber(float num)
     {

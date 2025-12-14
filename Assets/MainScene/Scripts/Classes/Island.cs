@@ -129,7 +129,7 @@ public class Island : MonoBehaviour
                     }
                 }
                 break;
-            case "Buildables":
+            case "Structure":
                 foreach (Island island in GameManager.ISM.boughtIslands)
                 {
                     if (island.currentState == Island.IslandState.Paved)
@@ -228,7 +228,7 @@ public class Island : MonoBehaviour
                 usedPlant.UpdatePredictedYield();
                 GameManager.PM.PlantValue += usedPlant.attachedInventoryItem.totalPredictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
-            case "Buildables":
+            case "Structure":
                 buildablesOnIsland.Add(usedPlant);
                 GameManager.EM.AddExpenseBuildables(usedPlant);
                 SetCollisions("Small crops");
@@ -359,8 +359,8 @@ public class Island : MonoBehaviour
                 potentialMatBottom = BlendIslandMaterial(wateredMatBot, wateredNeedsNPKMatBot, islandBottom);
                 break;
             case IslandState.Paved:
-                potentialMatTop = BlendIslandMaterial(sowedMatTop, sowedNeedsNPKMatTop, islandTop);
-                potentialMatBottom = BlendIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
+                potentialMatTop = BlendIslandMaterial(pavedMatTop, pavedMatTop, islandTop);
+                potentialMatBottom = BlendIslandMaterial(sowedMatBot, sowedMatBot, islandBottom);
                 break;
         }
         islandMatPotential = false;

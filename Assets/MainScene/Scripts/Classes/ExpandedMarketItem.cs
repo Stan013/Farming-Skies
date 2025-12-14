@@ -102,7 +102,10 @@ public class ExpandedMarketItem : MonoBehaviour
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
 
-        collapsedItem.ResetTransactionAmount();
+        if(collapsedItem != null)
+        {
+            collapsedItem.ResetTransactionAmount();
+        }
     }
 
     public void DecreaseAmount()

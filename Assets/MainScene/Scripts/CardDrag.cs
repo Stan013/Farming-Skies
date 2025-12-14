@@ -52,7 +52,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 break;
 
             default:
-                HandleBuildableHover();
+                HandleStructureHover();
                 break;
         }
     }
@@ -68,7 +68,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 HandleUtilityDrop();
                 break;
             default:
-                HandleBuildableDrop();
+                HandleStructureDrop();
                 break;
         }
 
@@ -122,6 +122,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
         else if (GameManager.HM.dragCard.cardName == "Watering Can" && hoverIsland.currentState == Island.IslandState.Cultivated)
         {
+            hoverIsland.potentialMatTop = hoverIsland.wateredMatTop;
             UpdateIslandState(Island.IslandState.Watered);
         }
         else if (GameManager.HM.dragCard.cardName == "Grass Seed" && hoverIsland.currentState != Island.IslandState.Sowed)
@@ -130,10 +131,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
         else if (GameManager.HM.dragCard.cardName == "Concrete Bag" && hoverIsland.currentState == Island.IslandState.Sowed)
         {
-            hoverIsland.potentialMatTop = hoverIsland.pavedMatTop;
-            hoverIsland.islandMatPotential = true;
             UpdateIslandState(Island.IslandState.Paved);
         }
+        print(hoverIsland.currentState);
+        print(hoverIsland.potentialMatTop);
     }
 
     private void HandleUtilityDrop()
@@ -158,28 +159,56 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         switch (GameManager.HM.dragCard.cardName)
         {
             case "Cultivator":
-                hoverIsland.topMat = hoverIsland.potentialMatTop;
-                hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
-                hoverIsland.CreateIslandMaterial(Island.IslandState.Watered);
-                hoverIsland.currentState = Island.IslandState.Cultivated;
-                break;
+                if(hoverIsland.currentState == Island.IslandState.Cultivated)
+                {
+                    hoverIsland.topMat = hoverIsland.potentialMatTop;
+                    hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
+                    hoverIsland.CreateIslandMaterial(Island.IslandState.Watered);
+                    hoverIsland.currentState = Island.IslandState.Cultivated;
+                }
+                else
+                {
+                    CancelDrag();
+                }
+                    break;
             case "Watering Can":
-                hoverIsland.topMat = hoverIsland.potentialMatTop;
-                hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
-                hoverIsland.CreateIslandMaterial(Island.IslandState.Sowed);
-                hoverIsland.currentState = Island.IslandState.Watered;
+                if(hoverIsland.currentState == Island.IslandState.Watered)
+                {
+                    hoverIsland.topMat = hoverIsland.potentialMatTop;
+                    hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
+                    hoverIsland.CreateIslandMaterial(Island.IslandState.Sowed);
+                    hoverIsland.currentState = Island.IslandState.Watered;
+                }
+                else
+                {
+                    CancelDrag();
+                }
                 break;
             case "Grass Seed":
-                hoverIsland.topMat = hoverIsland.potentialMatTop;
-                hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
-                hoverIsland.CreateIslandMaterial(Island.IslandState.Cultivated);
-                hoverIsland.currentState = Island.IslandState.Sowed;
+                if(hoverIsland.currentState == Island.IslandState.Sowed)
+                {
+                    hoverIsland.topMat = hoverIsland.potentialMatTop;
+                    hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
+                    hoverIsland.CreateIslandMaterial(Island.IslandState.Cultivated);
+                    hoverIsland.currentState = Island.IslandState.Sowed;
+                }
+                else
+                {
+                    CancelDrag();
+                }
                 break;
             case "Concrete Bag":
-                hoverIsland.topMat = hoverIsland.pavedMatTop;
-                hoverIsland.bottomMat = hoverIsland.sowedMatBot;
-                hoverIsland.CreateIslandMaterial(Island.IslandState.Paved);
-                hoverIsland.currentState = Island.IslandState.Paved;
+                if(hoverIsland.currentState == Island.IslandState.Paved)
+                {
+                    hoverIsland.topMat = hoverIsland.pavedMatTop;
+                    hoverIsland.bottomMat = hoverIsland.sowedMatBot;
+                    hoverIsland.CreateIslandMaterial(Island.IslandState.Paved);
+                    hoverIsland.currentState = Island.IslandState.Paved;
+                }
+                else
+                {
+                    CancelDrag();
+                }
                 break;
             default:
                 hoverIsland.CreateIslandMaterial(hoverIsland.currentState);
@@ -194,7 +223,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         hoverIsland.UpdateNutrients();
     }
 
-    private void HandleBuildableHover()
+    private void HandleStructureHover()
     {
         if (CheckPotentialPlot() != null)
         {
@@ -225,7 +254,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
     }
 
-    private void HandleBuildableDrop()
+    private void HandleStructureDrop()
     {
         if (CheckPotentialPlot() != null)
         {

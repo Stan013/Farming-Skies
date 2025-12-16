@@ -10764,7 +10764,6 @@ MonoBehaviour:
   islandBottom: {fileID: 5034893438613666141}
   topMat: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
   bottomMat: {fileID: 2100000, guid: 7358e15b95edd03448ce577d2975690f, type: 2}
-  islandMatPotential: 0
   islandData:
     islandAvailable: 0
     islandBought: 0
@@ -10777,21 +10776,28 @@ MonoBehaviour:
   islandState: 0
   previousState: 1
   glow: {fileID: 7701377534939352897}
-  potentialMatTop: {fileID: 2100000, guid: c34ed82100654344bb2ace1c57335fb3, type: 2}
   transparentMatTop: {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
   pavedMatTop: {fileID: 2100000, guid: d304e6c839db7884aa206afa1f74fbc9, type: 2}
   sowedMatTop: {fileID: 2100000, guid: a01d16d3d44a79341b9d95acf8dbd6c9, type: 2}
   sowedNeedsNPKMatTop: {fileID: 2100000, guid: c34ed82100654344bb2ace1c57335fb3, type: 2}
+  blendedSowedMatTop: {fileID: 0}
   cultivatedMatTop: {fileID: 2100000, guid: bb434eed192f86a4791a883a0eff6144, type: 2}
   cultivatedNeedsNPKMatTop: {fileID: 2100000, guid: ecb946983f0586941b75f0f3c971d76d, type: 2}
+  blendedCultivatedMatTop: {fileID: 0}
   wateredMatTop: {fileID: 2100000, guid: 06d64f0686a621c4b9d02b42e257051f, type: 2}
   wateredNeedsNPKMatTop: {fileID: 2100000, guid: 517d062ed46ce864881cf861fb713f4f, type: 2}
-  potentialMatBottom: {fileID: 2100000, guid: e3dce13a3ee44ee40860d47d9cb5d457, type: 2}
+  blendedWateredMatTop: {fileID: 0}
   transparentMatBot: {fileID: 2100000, guid: 7358e15b95edd03448ce577d2975690f, type: 2}
   sowedMatBot: {fileID: 2100000, guid: c03ac127f34efe54fbd0eb6755a981bb, type: 2}
   sowedNeedsNPKMatBot: {fileID: 2100000, guid: e3dce13a3ee44ee40860d47d9cb5d457, type: 2}
+  blendedSowedMatBot: {fileID: 0}
   wateredMatBot: {fileID: 2100000, guid: c803ca968492bbd41a658c22e68e07ea, type: 2}
   wateredNeedsNPKMatBot: {fileID: 2100000, guid: 9c776df8393453f4a9f48b6d104793ee, type: 2}
+  blendedWateredMatBot: {fileID: 0}
+  previousMatTop: {fileID: 0}
+  previousMatBot: {fileID: 0}
+  potentialMatTop: {fileID: 2100000, guid: c34ed82100654344bb2ace1c57335fb3, type: 2}
+  potentialMatBot: {fileID: 2100000, guid: e3dce13a3ee44ee40860d47d9cb5d457, type: 2}
   availableSmallPlots:
   - {fileID: 7938958760340876345}
   - {fileID: 9074272155846697336}

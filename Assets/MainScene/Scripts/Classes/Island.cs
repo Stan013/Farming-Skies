@@ -15,7 +15,6 @@ public class Island : MonoBehaviour
     public MeshRenderer islandBottom;
     public Material topMat;
     public Material bottomMat;
-    public bool islandMatPotential;
     public IslandData islandData;
 
     [Header("Island build variables")]
@@ -35,29 +34,39 @@ public class Island : MonoBehaviour
             if (_currentState != value)
             {
                 _currentState = value;
-                SetIslandMaterial();
+                SetIslandMaterial(true);
             }
         }
     }
 
     [Header("Island top materials")]
-    public Material potentialMatTop;
     public Material transparentMatTop;
     public Material pavedMatTop;
     public Material sowedMatTop;
     public Material sowedNeedsNPKMatTop;
+    public Material blendedSowedMatTop;
     public Material cultivatedMatTop;
     public Material cultivatedNeedsNPKMatTop;
+    public Material blendedCultivatedMatTop;
     public Material wateredMatTop;
     public Material wateredNeedsNPKMatTop;
+    public Material blendedWateredMatTop;
 
     [Header("Island bottom materials")]
-    public Material potentialMatBottom;
     public Material transparentMatBot;
     public Material sowedMatBot;
     public Material sowedNeedsNPKMatBot;
+    public Material blendedSowedMatBot;
     public Material wateredMatBot;
     public Material wateredNeedsNPKMatBot;
+    public Material blendedWateredMatBot;
+
+    [Header("Island hover materials")]
+    public bool hoverMatSetup = false;
+    public Material previousMatTop;
+    public Material previousMatBot;
+    public Material potentialMatTop;
+    public Material potentialMatBot;
 
     [Header("Plots lists")]
     public List<GameObject> availableSmallPlots;
@@ -176,6 +185,7 @@ public class Island : MonoBehaviour
         {
             ToOpaqueMode(topMat);
             ToOpaqueMode(bottomMat);
+            GenerateMaterials();
         }
     }
 
@@ -295,7 +305,56 @@ public class Island : MonoBehaviour
         return GameManager.CM.FindCardByID("Card" + plantCardId);
     }
 
-    public void SetIslandMaterial()
+    public void GenerateMaterials()
+    {
+        blendedSowedMatTop = BlendIslandMaterial(sowedMatTop, sowedNeedsNPKMatTop, islandTop);
+        blendedSowedMatBot = BlendIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
+        blendedCultivatedMatTop = BlendIslandMaterial(cultivatedMatTop, cultivatedNeedsNPKMatTop, islandTop);
+        blendedWateredMatTop = BlendIslandMaterial(wateredMatTop, wateredNeedsNPKMatTop, islandTop);
+        blendedWateredMatBot = BlendIslandMaterial(wateredMatBot, wateredNeedsNPKMatBot, islandBottom);
+    }
+
+    public void MaterialDragValidation(string cardName)
+    {
+        previousMatTop = islandTop.material;
+        previousMatBot = islandBottom.material;
+        switch (cardName)
+        {
+            case "Cultivator":
+                if(currentState == Island.IslandState.Sowed)
+                {
+                    potentialMatTop = blendedCultivatedMatTop;
+                    potentialMatBot = blendedSowedMatBot;
+                }
+                break;
+            case "Watering Can":
+                if (currentState == Island.IslandState.Cultivated)
+                {
+                    potentialMatTop = blendedWateredMatTop;
+                    potentialMatBot = blendedWateredMatBot;
+                }
+                break;
+            case "Grass Seed":
+                if (currentState != Island.IslandState.Sowed)
+                {
+                    potentialMatTop = blendedSowedMatTop;
+                    potentialMatBot = blendedSowedMatBot;
+                }
+                break;
+            case "Concrete Bag":
+                if (currentState == Island.IslandState.Sowed)
+                {
+                    potentialMatTop = pavedMatTop;
+                    potentialMatBot = blendedSowedMatBot;
+                }
+                break;
+            default:
+                break;
+        }
+        hoverMatSetup = true;
+    }
+
+    public void SetIslandMaterial(bool validDrag)
     {
         if(currentState == IslandState.Highlighted || currentState == IslandState.Transparent)
         {
@@ -327,43 +386,20 @@ public class Island : MonoBehaviour
         }
         else
         {
-            if (islandMatPotential)
+            if (validDrag)
             {
                 islandTop.material = potentialMatTop;
-                islandBottom.material = potentialMatBottom;
+                islandBottom.material = potentialMatBot;
             }
             else
             {
-                islandTop.material = topMat;
-                islandBottom.material = bottomMat;
+                print("false");
+                islandTop.material = previousMatTop;
+                islandBottom.material = previousMatBot;
             }
             glow.SetActive(false);
             CheckWarningIcon();
         }
-    }
-
-    public void CreateIslandMaterial(IslandState potentialState)
-    {
-        switch(potentialState)
-        {
-            case IslandState.Sowed:
-                potentialMatTop = BlendIslandMaterial(sowedMatTop, sowedNeedsNPKMatTop, islandTop);
-                potentialMatBottom = BlendIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
-                break;
-            case IslandState.Cultivated:
-                potentialMatTop = BlendIslandMaterial(cultivatedMatTop, cultivatedNeedsNPKMatTop, islandTop);
-                potentialMatBottom = BlendIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
-                break;
-            case IslandState.Watered:
-                potentialMatTop = BlendIslandMaterial(wateredMatTop, wateredNeedsNPKMatTop, islandTop);
-                potentialMatBottom = BlendIslandMaterial(wateredMatBot, wateredNeedsNPKMatBot, islandBottom);
-                break;
-            case IslandState.Paved:
-                potentialMatTop = BlendIslandMaterial(pavedMatTop, pavedMatTop, islandTop);
-                potentialMatBottom = BlendIslandMaterial(sowedMatBot, sowedMatBot, islandBottom);
-                break;
-        }
-        islandMatPotential = false;
     }
 
     public Material BlendIslandMaterial(Material islandMat, Material islandMatNeedsNPK, MeshRenderer islandPart)
@@ -446,37 +482,28 @@ public class Island : MonoBehaviour
             case 2:
                 currentState = IslandState.Sowed;
                 previousState = IslandState.Watered;
-                CreateIslandMaterial(currentState);
                 topMat = potentialMatTop;
-                bottomMat = potentialMatBottom;
-                CreateIslandMaterial(IslandState.Cultivated);
+                bottomMat = potentialMatBot;
                 break;
             case 3:
                 currentState = IslandState.Cultivated;
                 previousState = IslandState.Sowed;
-                CreateIslandMaterial(currentState);
                 topMat = potentialMatTop;
-                bottomMat = potentialMatBottom;
-                CreateIslandMaterial(IslandState.Watered);
+                bottomMat = potentialMatBot;
                 break;
             case 4:
                 currentState = IslandState.Watered;
                 previousState = IslandState.Cultivated;
-                CreateIslandMaterial(currentState);
                 topMat = potentialMatTop;
-                bottomMat = potentialMatBottom;
-                CreateIslandMaterial(IslandState.Sowed);
+                bottomMat = potentialMatBot;
                 break;
             case 5:
                 currentState = IslandState.Paved;
                 previousState = IslandState.Sowed;
                 topMat = pavedMatTop;
                 bottomMat = sowedMatBot;
-                SetIslandMaterial();
-                CreateIslandMaterial(currentState);
                 break;
         }
-        SetIslandMaterial();
         GameManager.PM.SetPlantData(this, data.plantsMap);
     }
 

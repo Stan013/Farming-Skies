@@ -114,9 +114,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
                 Balance -= island.islandBuildCost;
                 GameManager.ISM.AddIslandToBought(island);
                 constructionLabel.gameObject.SetActive(false);
-                island.islandMatPotential = true;
-                island.SetIslandMaterial();
-                island.CreateIslandMaterial(IslandState.Cultivated);
             }
         }
     }

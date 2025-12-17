@@ -12,7 +12,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private float adjustZ = 5f;
     private GameObject dragInstance;
     private Quaternion dragInstanceRotation;
-    private bool validDrag;
 
     [Header("Hover variables")]
     public Island potentialIsland;
@@ -66,7 +65,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         switch (GameManager.HM.dragCard.cardType)
         {
             case "Utilities":
-                //HandleUtilityDrop();
+                HandleUtilityDrop();
                 break;
             default:
                 HandleStructureDrop();
@@ -108,102 +107,49 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
         else
         {
-            if(!potentialIsland.hoverMatSetup)
-            {
-                potentialIsland.MaterialDragValidation(GameManager.HM.dragCard.cardName);
-            }
-
+            potentialIsland.MaterialDragValidation(GameManager.HM.dragCard.cardName);
             potentialIsland.SetIslandMaterial(true);
             previousIsland = potentialIsland;
         }
     }
 
 
-    //private void HandleUtilityDrop()
-    //{
-    //    if (hoverIsland == null)
-    //    {
-    //        CancelDrag();
-    //        return;
-    //    }
+    private void HandleUtilityDrop()
+    {
+        if (potentialIsland == null)
+        {
+            if (previousIsland != null)
+            {
+                previousIsland.hoverMatSetup = false;
+            }
 
-    //    if (GameManager.HM.dragCard.nutrientIndex != 0)
-    //    {
-    //        if (GameManager.HM.dragCard.nutrientIndex == 1 && hoverIsland.previousState != Island.IslandState.Cultivated)
-    //        {
-    //            CancelDrag();
-    //            return;
-    //        }
+            CancelDrag();
+            return;
+        }
+        else
+        {
+            potentialIsland.hoverMatSetup = false;
+        }
 
-    //        hoverIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex - 1] += GameManager.HM.dragCard.nutrientAddition;
-    //    }
+        if (GameManager.HM.dragCard.nutrientIndex != 0)
+        {
+            potentialIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex - 1] += GameManager.HM.dragCard.nutrientAddition;
+        }
 
-    //    switch (GameManager.HM.dragCard.cardName)
-    //    {
-    //        case "Cultivator":
-    //            if(hoverIsland.currentState == Island.IslandState.Cultivated)
-    //            {
-    //                hoverIsland.topMat = hoverIsland.potentialMatTop;
-    //                hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
-    //                hoverIsland.CreateIslandMaterial(Island.IslandState.Watered);
-    //                hoverIsland.currentState = Island.IslandState.Cultivated;
-    //            }
-    //            else
-    //            {
-    //                CancelDrag();
-    //            }
-    //                break;
-    //        case "Watering Can":
-    //            if(hoverIsland.currentState == Island.IslandState.Watered)
-    //            {
-    //                hoverIsland.topMat = hoverIsland.potentialMatTop;
-    //                hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
-    //                hoverIsland.CreateIslandMaterial(Island.IslandState.Sowed);
-    //                hoverIsland.currentState = Island.IslandState.Watered;
-    //            }
-    //            else
-    //            {
-    //                CancelDrag();
-    //            }
-    //            break;
-    //        case "Grass Seed":
-    //            if(hoverIsland.currentState == Island.IslandState.Sowed)
-    //            {
-    //                hoverIsland.topMat = hoverIsland.potentialMatTop;
-    //                hoverIsland.bottomMat = hoverIsland.potentialMatBottom;
-    //                hoverIsland.CreateIslandMaterial(Island.IslandState.Cultivated);
-    //                hoverIsland.currentState = Island.IslandState.Sowed;
-    //            }
-    //            else
-    //            {
-    //                CancelDrag();
-    //            }
-    //            break;
-    //        case "Concrete Bag":
-    //            if(hoverIsland.currentState == Island.IslandState.Paved)
-    //            {
-    //                hoverIsland.topMat = hoverIsland.pavedMatTop;
-    //                hoverIsland.bottomMat = hoverIsland.sowedMatBot;
-    //                hoverIsland.CreateIslandMaterial(Island.IslandState.Paved);
-    //                hoverIsland.currentState = Island.IslandState.Paved;
-    //            }
-    //            else
-    //            {
-    //                CancelDrag();
-    //            }
-    //            break;
-    //        default:
-    //            hoverIsland.CreateIslandMaterial(hoverIsland.currentState);
-    //            hoverIsland.islandMatPotential = true;
-    //            hoverIsland.SetIslandMaterial();
-    //            hoverIsland.CheckWarningIcon();
-    //            break;
-    //    }
+        if(!potentialIsland.validPotentialMat)
+        {
+            CancelDrag();
+            return;
+        }
 
-    //    GameManager.HM.dragCard.dragSucces = true;
-    //    GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
-    //    hoverIsland.UpdateNutrients();
-    //}
+        GameManager.HM.dragCard.dragSucces = true;
+        GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
+        potentialIsland.UpdateNutrients();
+        potentialIsland.previousState = potentialIsland.currentState;
+        potentialIsland.currentState = potentialIsland.potentialState;
+        previousIsland = null;
+        potentialIsland = null;
+    }
 
     private void HandleStructureHover()
     {
@@ -269,6 +215,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void CancelDrag()
     {
+        previousIsland = null;
+        potentialIsland = null;
         GameManager.HM.dragCard.dragSucces = false;
         GameManager.HM.dragCard.SetCardState(Card.CardState.InHand);
     }

@@ -49270,9 +49270,17 @@ PrefabInstance:
       value: Utilities
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: itemName
+      value: Grass Seeds
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardSprite
       value: 
       objectReference: {fileID: 21300000, guid: 13f831e451afa3c41b67234ff7df8a48, type: 3}
+    - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: cardUnlocked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardDescription
       value: A tool that can be used to return your land to grass. It will make it
@@ -49288,11 +49296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: 'cardCraftResources.Array.data[0]'
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: 'cardCraftResources.Array.data[1]'
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: 'cardCraftResources.Array.data[2]'
@@ -49306,6 +49314,10 @@ PrefabInstance:
       propertyPath: dragModel
       value: 
       objectReference: {fileID: 5471185877390389525, guid: 0b7ebc4ac9237c24ebe7e14b88ec5533, type: 3}
+    - target: {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5492509097477325142, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -83341,7 +83353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5291c05f0961c744804d648d15bb7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: Save.game
   gm: {fileID: 3611102370164671329}
 --- !u!222 &1419290068126304711
 CanvasRenderer:

@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour, IDataPersistence
     private static int inventoryHeight = 200;
     private bool buildIslandPress = false;
     private float holdTimer = 0.0f;
-    public Island potentialIsland;
+    public Island hoverIsland;
 
     [Header("Next week variables")]
     public bool nextWeekEnabled;
@@ -102,12 +102,12 @@ public class InputManager : MonoBehaviour, IDataPersistence
                     return;
                 }
 
-                potentialIsland = GameManager.ISM.GetPotentialIsland();
-                if (potentialIsland != null && GameManager.UM.Balance >= potentialIsland.islandBuildCost)
+                hoverIsland = GameManager.ISM.GethoverIsland();
+                if (hoverIsland != null && GameManager.UM.Balance >= hoverIsland.islandBuildCost)
                 {
-                    if (!GameManager.QM.questActive || potentialIsland.currentState == Island.IslandState.Highlighted)
+                    if (!GameManager.QM.questActive || hoverIsland.currentState == Island.IslandState.Highlighted)
                     {
-                        if (!potentialIsland.islandBought)
+                        if (!hoverIsland.islandBought)
                         {
                             Cursor.lockState = CursorLockMode.Locked;
                             GameManager.UM.buildSlider.gameObject.SetActive(true);
@@ -120,9 +120,9 @@ public class InputManager : MonoBehaviour, IDataPersistence
                 }
                 else
                 {
-                    if(potentialIsland != null)
+                    if(hoverIsland != null)
                     {
-                        if (!potentialIsland.islandBought)
+                        if (!hoverIsland.islandBought)
                         {
                             Cursor.lockState = CursorLockMode.Locked;
                             GameManager.UM.buildSlider.gameObject.SetActive(false);
@@ -144,15 +144,15 @@ public class InputManager : MonoBehaviour, IDataPersistence
                     GameManager.UM.buildSlider.value = 0f;
                     GameManager.UM.constructionLabel.gameObject.SetActive(false);
 
-                    if(potentialIsland.glow.activeSelf)
+                    if(hoverIsland.glow.activeSelf)
                     {
-                        potentialIsland.currentState = Island.IslandState.Highlighted;
+                        hoverIsland.currentState = Island.IslandState.Highlighted;
                     }
                     else
                     {
-                        potentialIsland.currentState = Island.IslandState.Transparent;
+                        hoverIsland.currentState = Island.IslandState.Transparent;
                     }
-                    potentialIsland.SetIslandMaterial(false);
+                    hoverIsland.SetIslandMaterial(false);
                 }
             }
 
@@ -160,8 +160,8 @@ public class InputManager : MonoBehaviour, IDataPersistence
             {
                 holdTimer = Mathf.Min(holdTimer + Time.deltaTime, holdDuration);
                 float alphaChangeSpeed = 1.0f / holdDuration;
-                GameManager.UM.UpdateBuildIslandSlider(potentialIsland);
-                potentialIsland.UpdateMaterialAlpha(alphaChangeSpeed);
+                GameManager.UM.UpdateBuildIslandSlider(hoverIsland);
+                hoverIsland.UpdateMaterialAlpha(alphaChangeSpeed);
             }
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");

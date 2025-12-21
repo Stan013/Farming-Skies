@@ -14,7 +14,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Quaternion dragInstanceRotation;
 
     [Header("Hover variables")]
-    public Island hoverIsland;
+    public Island potentialIsland;
     private Island previousIsland;
     public GameObject hoverPlot;
     public GameObject previousHoverPlot;
@@ -43,47 +43,37 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         if (dragInstance == null) return;
 
-        hoverIsland = GameManager.ISM.GetPotentialBoughtIsland();
         UpdateDragInstanceTransform();
-        HandleIslandCollisions(hoverIsland);
+        HandleIslandCollisions();
 
         switch (GameManager.HM.dragCard.cardType)
         {
             case "Utilities":
-                HandleUtilityHover(hoverIsland);
+                HandleUtilityHover();
                 break;
             case "Structure":
-                HandleStructureHover(hoverIsland);
-                break;
-            default:
-                HandleCropHover(hoverIsland);
+                HandleStructureHover();
                 break;
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        hoverIsland = GameManager.ISM.GetPotentialBoughtIsland();
         GameManager.HM.dragging = false;
         collisionOn = false;
 
         switch (GameManager.HM.dragCard.cardType)
         {
             case "Utilities":
-                HandleUtilityDrop(hoverIsland);
-                break;
-            case "Structure":
-                HandleStructureDrop(hoverIsland);
+                HandleUtilityDrop();
                 break;
             default:
-                HandleCropDrop(hoverIsland);
+                HandleStructureDrop();
                 break;
         }
 
-        previousIsland = null;
-        hoverIsland = null;
         Destroy(dragInstance);
-        hoverIsland?.SetCollisions("Reset");
+        potentialIsland?.SetCollisions("Reset");
     }
 
     private void UpdateDragInstanceTransform()
@@ -94,148 +84,123 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         dragInstance.transform.rotation = dragInstanceRotation;
     }
 
-    private void HandleIslandCollisions(Island hoverIsland)
+    private void HandleIslandCollisions()
     {
-        if (!collisionOn && hoverIsland != null)
+        if (!collisionOn && GameManager.ISM.GetPotentialBoughtIsland() != null)
         {
             GameManager.ISM.SetupIslandCollisions(true);
-            hoverIsland.SetCollisions(GameManager.HM.dragCard.cardType);
+            GameManager.ISM.GetPotentialBoughtIsland().SetCollisions(GameManager.HM.dragCard.cardType);
             collisionOn = true;
         }
     }
 
-    private void HandleUtilityHover(Island hoverIsland)
+    private void HandleUtilityHover()
     {
-        if (hoverIsland == null)
+        potentialIsland = GameManager.ISM.GetPotentialBoughtIsland();
+
+        if (potentialIsland == null)
         {
             if(previousIsland != null)
             {
                 previousIsland.SetIslandMaterial(false);
             }
-            return;
         }
-
-        hoverIsland.MaterialDragValidation(GameManager.HM.dragCard.cardName);
-        hoverIsland.SetIslandMaterial(true);
-        previousIsland = hoverIsland;
+        else
+        {
+            potentialIsland.MaterialDragValidation(GameManager.HM.dragCard.cardName);
+            potentialIsland.SetIslandMaterial(true);
+            previousIsland = potentialIsland;
+        }
     }
 
-    private void HandleStructureHover(Island hoverIsland)
+
+    private void HandleUtilityDrop()
     {
-        if (hoverIsland == null || CheckPotentialPlot(hoverIsland) == null)
-        {
-            if (previousHoverPlot != null)
-            {
-                previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-                previousHoverPlot = null;
-            }
-            return;
-        }
-
-        if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
-        {
-            previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
-        hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorOrange;
-        AlignDragInstanceToPlot(hoverPlot);
-        previousHoverPlot = hoverPlot;
-    }
-
-    private void HandleCropHover(Island hoverIsland)
-    {
-        if (hoverIsland == null || CheckPotentialPlot(hoverIsland) == null)
-        {
-            if (previousHoverPlot != null)
-            {
-                previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-                previousHoverPlot = null;
-            }
-            return;
-        }
-
-        if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
-        {
-            previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
-        hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
-        AlignDragInstanceToPlot(hoverPlot);
-        previousHoverPlot = hoverPlot;
-    }
-
-    private void HandleUtilityDrop(Island hoverIsland)
-    {
-        if (hoverIsland == null)
+        if (potentialIsland == null)
         {
             if (previousIsland != null)
+            {
                 previousIsland.hoverMatSetup = false;
+            }
 
             CancelDrag();
             return;
         }
+        else
+        {
+            potentialIsland.hoverMatSetup = false;
+        }
 
-        hoverIsland.hoverMatSetup = false;
+        if (GameManager.HM.dragCard.nutrientIndex != 0)
+        {
+            potentialIsland.nutrientsAvailable[GameManager.HM.dragCard.nutrientIndex - 1] += GameManager.HM.dragCard.nutrientAddition;
+        }
 
-        var dragCard = GameManager.HM.dragCard;
-        int nutrientIndex = dragCard.nutrientIndex;
-
-        if (nutrientIndex != 0)
-            hoverIsland.nutrientsAvailable[nutrientIndex - 1] += dragCard.nutrientAddition;
-
-        if (!hoverIsland.validPotentialMat)
+        if(!potentialIsland.validPotentialMat)
         {
             CancelDrag();
             return;
         }
 
-        dragCard.dragSucces = true;
-        dragCard.SetCardState(Card.CardState.Hidden);
-
-        hoverIsland.UpdateNutrients();
-        hoverIsland.previousState = hoverIsland.currentState;
-        hoverIsland.currentState = hoverIsland.potentialState;
-    }
-
-    private void HandleStructureDrop(Island hoverIsland)
-    {
-        if (hoverIsland == null || hoverPlot == null)
-        {
-            CancelDrag();
-            return;
-        }
-
-        hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-        GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
-        plant.transform.localPosition = new Vector3(0, -0.25f, 0);
-        plant.transform.localRotation = Quaternion.identity;
-        hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant.GetComponent<Plant>());
         GameManager.HM.dragCard.dragSucces = true;
         GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
+        potentialIsland.UpdateNutrients();
+        potentialIsland.previousState = potentialIsland.currentState;
+        potentialIsland.currentState = potentialIsland.potentialState;
+        previousIsland = null;
+        potentialIsland = null;
     }
 
-    private void HandleCropDrop(Island hoverIsland)
+    private void HandleStructureHover()
     {
-        if (hoverIsland == null || hoverPlot == null)
+        if (CheckPotentialPlot() != null)
+        {
+            if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
+            {
+                previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+            }
+
+            if (GameManager.HM.dragCard.cardType == "Structure")
+            {
+                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorOrange;
+            }
+            else
+            {
+                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
+            }
+
+            AlignDragInstanceToPlot();
+            previousHoverPlot = hoverPlot;
+        }
+        else if (hoverPlot != null)
+        {
+            hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+        }
+    }
+
+    private void HandleStructureDrop()
+    {
+        if (CheckPotentialPlot() != null)
+        {
+            hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+            GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
+            plant.transform.localPosition = new Vector3(0, -0.25f, 0);
+            plant.transform.localRotation = Quaternion.identity;
+            potentialIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant.GetComponent<Plant>());
+            GameManager.HM.dragCard.dragSucces = true;
+            GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
+        }
+        else
         {
             CancelDrag();
-            return;
         }
-
-        hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-        GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
-        plant.transform.localPosition = new Vector3(0, -0.25f, 0);
-        plant.transform.localRotation = Quaternion.identity;
-        hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant.GetComponent<Plant>());
-        GameManager.HM.dragCard.dragSucces = true;
-        GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
-        hoverIsland.UpdateNutrients();
-
     }
 
-    private void AlignDragInstanceToPlot(GameObject hoverPlot)
+    private void AlignDragInstanceToPlot()
     {
         BoxCollider plotCollider = hoverPlot.GetComponent<BoxCollider>();
         BoxCollider dragCollider = dragInstance.GetComponent<BoxCollider>();
@@ -251,12 +216,12 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private void CancelDrag()
     {
         previousIsland = null;
-        hoverIsland = null;
+        potentialIsland = null;
         GameManager.HM.dragCard.dragSucces = false;
         GameManager.HM.dragCard.SetCardState(Card.CardState.InHand);
     }
 
-    private GameObject CheckPotentialPlot(Island hoverIsland)
+    private GameObject CheckPotentialPlot()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, ~0, QueryTriggerInteraction.Collide);
@@ -266,11 +231,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             if (hit.collider.CompareTag("Plot"))
             {
                 GameObject plot = hit.collider.gameObject;
-                hoverIsland = plot.transform.parent.parent.GetComponent<Island>();
+                potentialIsland = plot.transform.parent.parent.GetComponent<Island>();
 
-                if (hoverIsland.usedSmallPlots.Contains(plot) ||
-                    hoverIsland.usedMediumPlots.Contains(plot) ||
-                    hoverIsland.usedLargePlots.Contains(plot))
+                if (potentialIsland.usedSmallPlots.Contains(plot) ||
+                    potentialIsland.usedMediumPlots.Contains(plot) ||
+                    potentialIsland.usedLargePlots.Contains(plot))
                 {
                     hoverPlot = null;
                     return null;
@@ -291,4 +256,43 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             Input.mousePosition.y,
             Camera.main.nearClipPlane + adjustZ));
     }
+
+    /*            
+case "Buildable":
+    if (CheckPotentialPlot() != null)
+    {
+        CheckPotentialPlot().transform.GetChild(0).gameObject.SetActive(false);
+
+        GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
+        plant.transform.localPosition = new Vector3(0, -0.25f, 0);
+        plant.transform.localRotation = Quaternion.identity;
+
+        plant.GetComponent<Plant>().attachedIsland = hoverIsland;
+        hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant);
+
+        expenseItem islandexpense = Instantiate(
+            GameManager.ISM.expenseItem,
+            Vector3.zero,
+            Quaternion.identity,
+            GameManager.ISM.buildableexpenseContent.transform
+        );
+
+        islandexpense.transform.localPosition = new Vector3(
+            islandexpense.transform.localPosition.x,
+            islandexpense.transform.localPosition.y,
+            0
+        );
+        islandexpense.transform.localRotation = Quaternion.identity;
+        islandexpense.SetupBuildableexpense(plant.GetComponent<Plant>());
+
+        GameManager.HM.dragCard.dragSucces = true;
+        GameManager.HM.dragCard.ToggleState(Card.CardState.Hidden, Card.CardState.Hidden);
+    }
+    else
+    {
+        GameManager.HM.dragCard.dragSucces = false;
+        GameManager.HM.dragCard.ToggleState(Card.CardState.InHand, Card.CardState.InDrag);
+    }
+    break;
+*/
 }

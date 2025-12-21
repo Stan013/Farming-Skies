@@ -381,50 +381,8 @@ public class Island : MonoBehaviour
                 }
                 break;
             default:
-                switch (currentState)
-                {
-                    case Island.IslandState.Sowed:
-                        potentialMatTop = blendedSowedMatTop;
-                        potentialMatBot = blendedSowedMatBot;
-                        validPotentialMat = true;
-                        break;
-                    case Island.IslandState.Cultivated:
-                        potentialMatTop = blendedCultivatedMatTop;
-                        potentialMatBot = blendedSowedMatBot;
-                        validPotentialMat = true;
-                        break;
-                    case Island.IslandState.Watered:
-                        potentialMatTop = blendedWateredMatTop;
-                        potentialMatBot = blendedWateredMatBot;
-                        validPotentialMat = true;
-                        break;
-                    default:
-                        break;
-                }
-
-                IncreaseMaterialSaturation(potentialMatTop, potentialMatBot);
                 break;
         }
-    }
-
-    private void IncreaseMaterialSaturation(Material potentialMatTop, Material potentialMatBottom)
-    {
-        Color topColor = potentialMatTop.color;
-        Color botColor = potentialMatBot.color;
-
-        Color.RGBToHSV(topColor, out float hT, out float sT, out float vT);
-        Color.RGBToHSV(botColor, out float hB, out float sB, out float vB);
-
-        hT = Mathf.Lerp(hT, 0.33f, 0.2f);
-        sT = Mathf.Clamp01(sT + 0.15f);
-        vT = Mathf.Clamp01(vT + 0.1f);
-
-        hB = Mathf.Lerp(hB, 0.33f, 0.2f);
-        sB = Mathf.Clamp01(sB + 0.1f);
-        vB = Mathf.Clamp01(vB + 0.05f);
-
-        potentialMatTop.color = Color.HSVToRGB(hT, sT, vT);
-        potentialMatBot.color = Color.HSVToRGB(hB, sB, vB);
     }
 
     public void SetIslandMaterial(bool validDrag)
@@ -474,7 +432,7 @@ public class Island : MonoBehaviour
         }
     }
 
-    private Material BlendIslandMaterial(Material islandMat, Material islandMatNeedsNPK, MeshRenderer islandPart)
+    public Material BlendIslandMaterial(Material islandMat, Material islandMatNeedsNPK, MeshRenderer islandPart)
     {
         if (islandMat == transparentMatTop || islandMat == transparentMatBot)
         {

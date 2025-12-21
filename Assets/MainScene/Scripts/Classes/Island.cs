@@ -166,6 +166,8 @@ public class Island : MonoBehaviour
 
     public void UpdateMaterialAlpha(float alphaChangeSpeed)
     {
+        Material top = islandTop.materials[0];
+        Material bottom = islandBottom.materials[0];
         Color colorTop = topMat.color;
         Color colorBot = bottomMat.color;
         colorTop.a += alphaChangeSpeed * Time.deltaTime;

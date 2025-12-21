@@ -102,7 +102,7 @@ public class InputManager : MonoBehaviour, IDataPersistence
                     return;
                 }
 
-                hoverIsland = GameManager.ISM.GetPotentialIsland();
+                hoverIsland = GameManager.ISM.GethoverIsland();
                 if (hoverIsland != null && GameManager.UM.Balance >= hoverIsland.islandBuildCost)
                 {
                     if (!GameManager.QM.questActive || hoverIsland.currentState == Island.IslandState.Highlighted)

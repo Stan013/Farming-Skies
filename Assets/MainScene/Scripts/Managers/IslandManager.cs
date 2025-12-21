@@ -104,7 +104,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         return null;
     }
 
-    public Island GetPotentialIsland()
+    public Island GethoverIsland()
 
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

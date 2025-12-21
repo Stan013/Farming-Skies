@@ -95,8 +95,8 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void SetBuildIslandSlider()
     {
-        buildCostText.SetText(GameManager.IPM.potentialIsland.islandBuildCost.ToString() + "₴");
-        expenseCostText.SetText(GameManager.IPM.potentialIsland.islandExpenseCost.ToString() + "₴");
+        buildCostText.SetText(GameManager.IPM.hoverIsland.islandBuildCost.ToString() + "₴");
+        expenseCostText.SetText(GameManager.IPM.hoverIsland.islandExpenseCost.ToString() + "₴");
         if (constructionLabel != null)
         {
             constructionLabel.rectTransform.anchoredPosition = Vector2.zero;

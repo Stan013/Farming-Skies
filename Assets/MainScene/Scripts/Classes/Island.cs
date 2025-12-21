@@ -45,26 +45,15 @@ public class Island : MonoBehaviour
     public Material transparentMatTop;
     public Material pavedMatTop;
     public Material sowedMatTop;
-    public Material sowedNeedsNPKMatTop;
-    public Material blendedSowedMatTop;
     public Material cultivatedMatTop;
-    public Material cultivatedNeedsNPKMatTop;
-    public Material blendedCultivatedMatTop;
     public Material wateredMatTop;
-    public Material wateredNeedsNPKMatTop;
-    public Material blendedWateredMatTop;
 
     [Header("Island bottom materials")]
     public Material transparentMatBot;
     public Material sowedMatBot;
-    public Material sowedNeedsNPKMatBot;
-    public Material blendedSowedMatBot;
     public Material wateredMatBot;
-    public Material wateredNeedsNPKMatBot;
-    public Material blendedWateredMatBot;
 
     [Header("Island hover materials")]
-    public bool materialsGenerated = false;
     public bool hoverMatSetup = false;
     public bool validPotentialMat = false;
     public Material previousMatTop;
@@ -185,15 +174,11 @@ public class Island : MonoBehaviour
         colorBot.a = Mathf.Clamp01(colorBot.a);
         topMat.color = colorTop;
         bottomMat.color = colorBot;
+
         if (colorTop.a >= 0.999f && colorBot.a >= 0.999f)
         {
             ToOpaqueMode(topMat);
             ToOpaqueMode(bottomMat);
-            if(!materialsGenerated)
-            {
-                materialsGenerated = true;
-                StartCoroutine(GenerateMaterials());
-            }
         }
     }
 
@@ -313,23 +298,6 @@ public class Island : MonoBehaviour
         return GameManager.CM.FindCardByID("Card" + plantCardId);
     }
 
-    IEnumerator GenerateMaterials()
-    {
-        blendedSowedMatTop = BlendIslandMaterial(sowedMatTop, sowedNeedsNPKMatTop, islandTop);
-        yield return null;
-
-        blendedSowedMatBot = BlendIslandMaterial(sowedMatBot, sowedNeedsNPKMatBot, islandBottom);
-        yield return null;
-
-        blendedCultivatedMatTop = BlendIslandMaterial(cultivatedMatTop, cultivatedNeedsNPKMatTop, islandTop);
-        yield return null;
-
-        blendedWateredMatTop = BlendIslandMaterial(wateredMatTop, wateredNeedsNPKMatTop, islandTop);
-        yield return null;
-
-        blendedWateredMatBot = BlendIslandMaterial(wateredMatBot, wateredNeedsNPKMatBot, islandBottom);
-    }
-
     public void MaterialDragValidation(string cardName)
     {
         if (!hoverMatSetup)
@@ -342,89 +310,103 @@ public class Island : MonoBehaviour
         }
 
         validPotentialMat = false;
+
         switch (cardName)
         {
             case "Cultivator":
-                if(currentState == Island.IslandState.Sowed)
+                if (currentState == Island.IslandState.Sowed)
                 {
-                    potentialMatTop = blendedCultivatedMatTop;
-                    potentialMatBot = blendedSowedMatBot;
+                    potentialMatTop = cultivatedMatTop;
+                    potentialMatBot = sowedMatBot;
                     potentialState = Island.IslandState.Cultivated;
                     validPotentialMat = true;
                 }
                 break;
+
             case "Watering Can":
                 if (currentState == Island.IslandState.Cultivated)
                 {
-                    potentialMatTop = blendedWateredMatTop;
-                    potentialMatBot = blendedWateredMatBot;
+                    potentialMatTop = wateredMatTop;
+                    potentialMatBot = wateredMatBot;
                     potentialState = Island.IslandState.Watered;
                     validPotentialMat = true;
                 }
                 break;
+
             case "Grass Seeds":
                 if (currentState != Island.IslandState.Sowed)
                 {
-                    potentialMatTop = blendedSowedMatTop;
-                    potentialMatBot = blendedSowedMatBot;
+                    potentialMatTop = sowedMatTop;
+                    potentialMatBot = sowedMatBot;
                     potentialState = Island.IslandState.Sowed;
                     validPotentialMat = true;
                 }
                 break;
+
             case "Concrete Bag":
                 if (currentState != Island.IslandState.Paved)
                 {
                     potentialMatTop = pavedMatTop;
-                    potentialMatBot = blendedSowedMatBot;
+                    potentialMatBot = sowedMatBot;
                     potentialState = Island.IslandState.Paved;
                     validPotentialMat = true;
                 }
                 break;
+
             default:
                 switch (currentState)
                 {
                     case Island.IslandState.Sowed:
-                        potentialMatTop = blendedSowedMatTop;
-                        potentialMatBot = blendedSowedMatBot;
+                        potentialMatTop = sowedMatTop;
+                        potentialMatBot = sowedMatBot;
                         validPotentialMat = true;
                         break;
+
                     case Island.IslandState.Cultivated:
-                        potentialMatTop = blendedCultivatedMatTop;
-                        potentialMatBot = blendedSowedMatBot;
+                        potentialMatTop = cultivatedMatTop;
+                        potentialMatBot = sowedMatBot;
                         validPotentialMat = true;
                         break;
+
                     case Island.IslandState.Watered:
-                        potentialMatTop = blendedWateredMatTop;
-                        potentialMatBot = blendedWateredMatBot;
+                        potentialMatTop = wateredMatTop;
+                        potentialMatBot = wateredMatBot;
                         validPotentialMat = true;
-                        break;
-                    default:
                         break;
                 }
-
-                IncreaseMaterialSaturation(potentialMatTop, potentialMatBot);
                 break;
+        }
+
+        if (validPotentialMat)
+        {
+            IncreaseMaterialSaturation(potentialMatTop, potentialMatBot);
         }
     }
 
     private void IncreaseMaterialSaturation(Material potentialMatTop, Material potentialMatBottom)
     {
+        float n = Mathf.Clamp01(nutrientsAvailable[1] / 100f);
+        float s = Mathf.Clamp01(nutrientsAvailable[2] / 100f);
+        float k = Mathf.Clamp01(nutrientsAvailable[3] / 100f);
+
+        float factor = (n + s + k) / 3f;
+
         Color topColor = potentialMatTop.color;
-        Color botColor = potentialMatBot.color;
+        Color botColor = potentialMatBottom.color;
 
         Color.RGBToHSV(topColor, out float hT, out float sT, out float vT);
         Color.RGBToHSV(botColor, out float hB, out float sB, out float vB);
 
-        hT = Mathf.Lerp(hT, 0.33f, 0.2f);
-        sT = Mathf.Clamp01(sT + 0.15f);
-        vT = Mathf.Clamp01(vT + 0.1f);
+        hT = Mathf.Lerp(hT, 0.33f, factor * 0.35f);
+        sT = Mathf.Lerp(sT, 1f, factor);
+        vT = Mathf.Lerp(vT, vT + 0.1f, factor);
 
-        hB = Mathf.Lerp(hB, 0.33f, 0.2f);
-        sB = Mathf.Clamp01(sB + 0.1f);
-        vB = Mathf.Clamp01(vB + 0.05f);
+        hB = Mathf.Lerp(hB, 0.33f, factor * 0.35f);
+        sB = Mathf.Lerp(sB, 1f, factor * 0.8f);
+        vB = Mathf.Lerp(vB, vB + 0.05f, factor);
 
         potentialMatTop.color = Color.HSVToRGB(hT, sT, vT);
-        potentialMatBot.color = Color.HSVToRGB(hB, sB, vB);
+        potentialMatBottom.color = Color.HSVToRGB(hB, sB, vB);
     }
 
     public void SetIslandMaterial(bool validDrag)
@@ -472,54 +454,6 @@ public class Island : MonoBehaviour
             glow.SetActive(false);
             CheckWarningIcon();
         }
-    }
-
-    private Material BlendIslandMaterial(Material islandMat, Material islandMatNeedsNPK, MeshRenderer islandPart)
-    {
-        if (islandMat == transparentMatTop || islandMat == transparentMatBot)
-        {
-            Color color = islandPart.materials[0].color;
-            color.a = 0f;
-            islandPart.materials[0].color = color;
-            return islandPart.materials[0];
-        }
-        else
-        {
-            float totalNPK = nutrientsAvailable.Sum() - nutrientsAvailable[0];
-            float blendFactor = 1f - Mathf.Clamp01(totalNPK / 900);
-            Material blendedMaterial = new Material(islandMat);
-            Color blendedColor = Color.Lerp(islandMat.color, islandMatNeedsNPK.color, blendFactor);
-            blendedMaterial.color = blendedColor;
-
-            if (islandMat.mainTexture is Texture2D tex1 && islandMatNeedsNPK.mainTexture is Texture2D tex2)
-            {
-                Texture2D blendedTexture = BlendTextures(tex1, tex2, blendFactor);
-                blendedMaterial.SetTexture("_MainTex", blendedTexture);
-            }
-
-            return blendedMaterial;
-        }
-    }
-
-    private Texture2D BlendTextures(Texture2D tex1, Texture2D tex2, float blendFactor)
-    {
-        int width = tex1.width;
-        int height = tex1.height;
-        Texture2D blendedTex = new Texture2D(width, height);
-
-        Color[] colors1 = tex1.GetPixels();
-        Color[] colors2 = tex2.GetPixels();
-        Color[] blendedColors = new Color[colors1.Length];
-
-        for (int i = 0; i < blendedColors.Length; i++)
-        {
-            blendedColors[i] = Color.Lerp(colors1[i], colors2[i], blendFactor);
-        }
-
-        blendedTex.SetPixels(blendedColors);
-        blendedTex.Apply();
-
-        return blendedTex;
     }
 
     public void CheckWarningIcon()

@@ -1714,7 +1714,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 7358e15b95edd03448ce577d2975690f, type: 2}
-  - {fileID: 2100000, guid: c03ac127f34efe54fbd0eb6755a981bb, type: 2}
+  - {fileID: 2100000, guid: 01ba46054bde4a24cbdbc6dbafabe996, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2114,7 +2114,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c544ebc156dc2a841a94856bf0763b26, type: 2}
-  - {fileID: 2100000, guid: a01d16d3d44a79341b9d95acf8dbd6c9, type: 2}
+  - {fileID: 2100000, guid: 37cbe6ac2f02d2e46998b5769b06afc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10791,6 +10791,8 @@ MonoBehaviour:
   previousMatBot: {fileID: 0}
   potentialMatTop: {fileID: 2100000, guid: a01d16d3d44a79341b9d95acf8dbd6c9, type: 2}
   potentialMatBot: {fileID: 2100000, guid: c03ac127f34efe54fbd0eb6755a981bb, type: 2}
+  potentialTopColor: {r: 0, g: 0, b: 0, a: 0}
+  potentialBotColor: {r: 0, g: 0, b: 0, a: 0}
   availableSmallPlots:
   - {fileID: 7938958760340876345}
   - {fileID: 9074272155846697336}

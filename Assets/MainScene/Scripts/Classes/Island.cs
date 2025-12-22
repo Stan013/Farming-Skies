@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -36,7 +36,6 @@ public class Island : MonoBehaviour
             if (_currentState != value)
             {
                 _currentState = value;
-                SetIslandMaterial(true);
             }
         }
     }
@@ -55,11 +54,16 @@ public class Island : MonoBehaviour
 
     [Header("Island hover materials")]
     public bool hoverMatSetup = false;
+    public bool fertiliserHoverSetup = false;
     public bool validPotentialMat = false;
     public Material previousMatTop;
     public Material previousMatBot;
     public Material potentialMatTop;
     public Material potentialMatBot;
+    private Color previousTopColor;
+    private Color previousBotColor;
+    public Color potentialTopColor;
+    public Color potentialBotColor;
 
     [Header("Plots lists")]
     public List<GameObject> availableSmallPlots;
@@ -166,8 +170,8 @@ public class Island : MonoBehaviour
 
     public void UpdateMaterialAlpha(float alphaChangeSpeed)
     {
-        Material top = islandTop.materials[0];
-        Material bottom = islandBottom.materials[0];
+        topMat = islandTop.materials[0];
+        bottomMat = islandBottom.materials[0];
         Color colorTop = topMat.color;
         Color colorBot = bottomMat.color;
         colorTop.a += alphaChangeSpeed * Time.deltaTime;
@@ -304,10 +308,15 @@ public class Island : MonoBehaviour
     {
         if (!hoverMatSetup)
         {
-            previousMatTop = islandTop.material;
-            previousMatBot = islandBottom.material;
-            potentialMatTop = islandTop.material;
-            potentialMatBot = islandBottom.material;
+            previousMatTop = new Material(islandTop.material);
+            previousMatBot = new Material(islandBottom.material);
+
+            previousMatTop.color = islandTop.material.color;
+            previousMatBot.color = islandBottom.material.color;
+
+            potentialMatTop = new Material(previousMatTop);
+            potentialMatBot = new Material(previousMatBot);
+
             hoverMatSetup = true;
         }
 
@@ -316,99 +325,119 @@ public class Island : MonoBehaviour
         switch (cardName)
         {
             case "Cultivator":
-                if (currentState == Island.IslandState.Sowed)
+                if (currentState == IslandState.Sowed)
                 {
-                    potentialMatTop = cultivatedMatTop;
-                    potentialMatBot = sowedMatBot;
-                    potentialState = Island.IslandState.Cultivated;
+                    potentialMatTop = new Material(cultivatedMatTop);
+                    potentialMatTop.color = previousMatTop.color;
+
+                    potentialMatBot = new Material(sowedMatBot);
+                    potentialMatBot.color = previousMatBot.color;
+
+                    potentialState = IslandState.Cultivated;
                     validPotentialMat = true;
                 }
                 break;
 
             case "Watering Can":
-                if (currentState == Island.IslandState.Cultivated)
+                if (currentState == IslandState.Cultivated)
                 {
-                    potentialMatTop = wateredMatTop;
-                    potentialMatBot = wateredMatBot;
-                    potentialState = Island.IslandState.Watered;
+                    potentialMatTop = new Material(wateredMatTop);
+                    potentialMatTop.color = previousMatTop.color;
+
+                    potentialMatBot = new Material(wateredMatBot);
+                    potentialMatBot.color = previousMatBot.color;
+
+                    potentialState = IslandState.Watered;
                     validPotentialMat = true;
                 }
                 break;
 
             case "Grass Seeds":
-                if (currentState != Island.IslandState.Sowed)
+                if (currentState != IslandState.Sowed)
                 {
-                    potentialMatTop = sowedMatTop;
-                    potentialMatBot = sowedMatBot;
-                    potentialState = Island.IslandState.Sowed;
+                    potentialMatTop = new Material(sowedMatTop);
+                    potentialMatTop.color = previousMatTop.color;
+
+                    potentialMatBot = new Material(sowedMatBot);
+                    potentialMatBot.color = previousMatBot.color;
+
+                    potentialState = IslandState.Sowed;
                     validPotentialMat = true;
                 }
                 break;
 
             case "Concrete Bag":
-                if (currentState != Island.IslandState.Paved)
+                if (currentState != IslandState.Paved)
                 {
-                    potentialMatTop = pavedMatTop;
-                    potentialMatBot = sowedMatBot;
-                    potentialState = Island.IslandState.Paved;
+                    potentialMatTop = new Material(pavedMatTop);
+                    potentialMatTop.color = previousMatTop.color;
+
+                    potentialMatBot = new Material(sowedMatBot);
+                    potentialMatBot.color = previousMatBot.color;
+
+                    potentialState = IslandState.Paved;
                     validPotentialMat = true;
                 }
                 break;
-
-            default:
-                switch (currentState)
-                {
-                    case Island.IslandState.Sowed:
-                        potentialMatTop = sowedMatTop;
-                        potentialMatBot = sowedMatBot;
-                        validPotentialMat = true;
-                        break;
-
-                    case Island.IslandState.Cultivated:
-                        potentialMatTop = cultivatedMatTop;
-                        potentialMatBot = sowedMatBot;
-                        validPotentialMat = true;
-                        break;
-
-                    case Island.IslandState.Watered:
-                        potentialMatTop = wateredMatTop;
-                        potentialMatBot = wateredMatBot;
-                        validPotentialMat = true;
-                        break;
-                }
-                break;
-        }
-
-        if (validPotentialMat)
-        {
-            IncreaseMaterialSaturation(potentialMatTop, potentialMatBot);
         }
     }
 
-    private void IncreaseMaterialSaturation(Material potentialMatTop, Material potentialMatBottom)
+    public void HoverFertiliser(int nutrientIndex, int nutrientAddition)
     {
-        float n = Mathf.Clamp01(nutrientsAvailable[1] / 100f);
-        float s = Mathf.Clamp01(nutrientsAvailable[2] / 100f);
-        float k = Mathf.Clamp01(nutrientsAvailable[3] / 100f);
+        int addedNutrient = Mathf.Clamp(nutrientsAvailable[nutrientIndex - 1] + nutrientAddition, 0, 100);
+        int totalNutrients = 0;
 
-        float factor = (n + s + k) / 3f;
+        for (int i = 1; i < nutrientsAvailable.Count; i++)
+        {
+            if (i == nutrientIndex - 1)
+                totalNutrients += addedNutrient;
+            else
+                totalNutrients += nutrientsAvailable[i];
+        }
 
-        Color topColor = potentialMatTop.color;
-        Color botColor = potentialMatBottom.color;
+        float factor = totalNutrients / (100f * (nutrientsAvailable.Count - 1));
 
-        Color.RGBToHSV(topColor, out float hT, out float sT, out float vT);
-        Color.RGBToHSV(botColor, out float hB, out float sB, out float vB);
+        Color targetTop = new Color(165f / 255f, 1f, 165f / 255f);
+        Color targetBot = new Color(1f, 1f, 0f);
 
-        hT = Mathf.Lerp(hT, 0.33f, factor * 0.35f);
-        sT = Mathf.Lerp(sT, 1f, factor);
-        vT = Mathf.Lerp(vT, vT + 0.1f, factor);
+        potentialMatTop.color = Color.Lerp(previousMatTop.color, targetTop, factor);
+        potentialMatBot.color = Color.Lerp(previousMatBot.color, targetBot, factor);
+    }
 
-        hB = Mathf.Lerp(hB, 0.33f, factor * 0.35f);
-        sB = Mathf.Lerp(sB, 1f, factor * 0.8f);
-        vB = Mathf.Lerp(vB, vB + 0.05f, factor);
+    public void SetIslandColor(int nutrientIndex, int nutrientAddition, bool validDrag)
+    {
+        if (!fertiliserHoverSetup)
+        {
+            previousTopColor = islandTop.material.color;
+            previousBotColor = islandBottom.material.color;
+            potentialTopColor = previousTopColor;
+            potentialBotColor = previousBotColor;
+            fertiliserHoverSetup = true;
+        }
 
-        potentialMatTop.color = Color.HSVToRGB(hT, sT, vT);
-        potentialMatBottom.color = Color.HSVToRGB(hB, sB, vB);
+        if (validDrag)
+        {
+            int addedNutrient = Mathf.Clamp(nutrientsAvailable[nutrientIndex] + nutrientAddition, 0, 100);
+            int totalNutrients = 0;
+            for (int i = 1; i < nutrientsAvailable.Count; i++)
+            {
+                totalNutrients += (i == nutrientIndex ? addedNutrient : nutrientsAvailable[i]);
+            }
+
+            float factor = totalNutrients / (100f * (nutrientsAvailable.Count - 1));
+            Color targetTop = new Color(165f / 255f, 1f, 165f / 255f);
+            Color targetBot = new Color(1f, 1f, 0f);
+
+            potentialTopColor = Color.Lerp(previousTopColor, targetTop, factor);
+            potentialBotColor = Color.Lerp(previousBotColor, targetBot, factor);
+            islandTop.material.color = potentialTopColor;
+            islandBottom.material.color = potentialBotColor;
+        }
+        else
+        {
+            islandTop.material.color = previousTopColor;
+            islandBottom.material.color = previousBotColor;
+        }
     }
 
     public void SetIslandMaterial(bool validDrag)

@@ -50,7 +50,14 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         switch (GameManager.HM.dragCard.cardType)
         {
             case "Utilities":
-                HandleUtilityHover(hoverIsland);
+                if (GameManager.HM.dragCard.cardName.Contains("Phosphorus") || GameManager.HM.dragCard.cardName.Contains("Potassium") || GameManager.HM.dragCard.cardName.Contains("Nitrogen"))
+                {
+                    HandleFertiliserHover(hoverIsland);
+                }
+                else
+                {
+                    HandleUtilityHover(hoverIsland);
+                }
                 break;
             case "Structure":
                 HandleStructureHover(hoverIsland);
@@ -70,7 +77,14 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         switch (GameManager.HM.dragCard.cardType)
         {
             case "Utilities":
-                HandleUtilityDrop(hoverIsland);
+                if (GameManager.HM.dragCard.cardName.Contains("Phosphorus") || GameManager.HM.dragCard.cardName.Contains("Potassium") || GameManager.HM.dragCard.cardName.Contains("Nitrogen"))
+                {
+                    HandleFertiliserDrop(hoverIsland);
+                }
+                else
+                {
+                    HandleUtilityDrop(hoverIsland);
+                }
                 break;
             case "Structure":
                 HandleStructureDrop(hoverIsland);
@@ -102,6 +116,21 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             hoverIsland.SetCollisions(GameManager.HM.dragCard.cardType);
             collisionOn = true;
         }
+    }
+
+    private void HandleFertiliserHover(Island hoverIsland)
+    {
+        if (hoverIsland == null)
+        {
+            if (previousIsland != null)
+            {
+                previousIsland.SetIslandColor(GameManager.HM.dragCard.nutrientIndex - 1, GameManager.HM.dragCard.nutrientAddition, false);
+            }
+            return;
+        }
+
+        hoverIsland.SetIslandColor(GameManager.HM.dragCard.nutrientIndex - 1, GameManager.HM.dragCard.nutrientAddition, true);
+        previousIsland = hoverIsland;
     }
 
     private void HandleUtilityHover(Island hoverIsland)
@@ -166,6 +195,28 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         previousHoverPlot = hoverPlot;
     }
 
+    private void HandleFertiliserDrop(Island hoverIsland)
+    {
+        if (hoverIsland == null)
+        {
+            CancelDrag();
+            return;
+        }
+
+        hoverIsland.fertiliserHoverSetup = false;
+        var dragCard = GameManager.HM.dragCard;
+        int nutrientIndex = dragCard.nutrientIndex;
+
+        if (nutrientIndex > 0)
+        {
+            hoverIsland.nutrientsAvailable[nutrientIndex - 1] += dragCard.nutrientAddition;
+            hoverIsland.UpdateNutrients();
+        }
+
+        dragCard.dragSucces = true;
+        dragCard.SetCardState(Card.CardState.Hidden);
+    }
+
     private void HandleUtilityDrop(Island hoverIsland)
     {
         if (hoverIsland == null)
@@ -178,12 +229,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
 
         hoverIsland.hoverMatSetup = false;
-
         var dragCard = GameManager.HM.dragCard;
-        int nutrientIndex = dragCard.nutrientIndex;
-
-        if (nutrientIndex != 0)
-            hoverIsland.nutrientsAvailable[nutrientIndex - 1] += dragCard.nutrientAddition;
 
         if (!hoverIsland.validPotentialMat)
         {
@@ -191,10 +237,9 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             return;
         }
 
+
         dragCard.dragSucces = true;
         dragCard.SetCardState(Card.CardState.Hidden);
-
-        hoverIsland.UpdateNutrients();
         hoverIsland.previousState = hoverIsland.currentState;
         hoverIsland.currentState = hoverIsland.potentialState;
     }

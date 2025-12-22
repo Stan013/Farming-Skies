@@ -10786,6 +10786,7 @@ MonoBehaviour:
   sowedMatBot: {fileID: 2100000, guid: c03ac127f34efe54fbd0eb6755a981bb, type: 2}
   wateredMatBot: {fileID: 2100000, guid: c803ca968492bbd41a658c22e68e07ea, type: 2}
   hoverMatSetup: 0
+  fertiliserHoverSetup: 0
   validPotentialMat: 0
   previousMatTop: {fileID: 0}
   previousMatBot: {fileID: 0}

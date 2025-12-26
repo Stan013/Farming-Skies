@@ -134,10 +134,11 @@ public class MarketManager : MonoBehaviour, IDataPersistence
         {
             totalPriceChangePercentage = UnityEngine.Random.value < 0.5f ? decimalAdjustment : -decimalAdjustment;
         }
+        
+        totalPriceChangePercentage *= 10f;
 
-        float newPrice = currentPrice * (1 + totalPriceChangePercentage / 100f);
-
-        newPrice = Mathf.Max(1f, (float)Math.Round(newPrice, 2, MidpointRounding.AwayFromZero));
+        float newPrice = currentPrice * (1f + totalPriceChangePercentage / 100f);
+        newPrice = Mathf.Max(0.01f, (float)Math.Round(newPrice, 2, MidpointRounding.AwayFromZero));
 
         int newDemand = (int)Math.Round(baseDemand * (1 + demandRoll / 100f), MidpointRounding.AwayFromZero);
         int newSupply = (int)Math.Round(baseSupply * (1 + supplyRoll / 100f), MidpointRounding.AwayFromZero);

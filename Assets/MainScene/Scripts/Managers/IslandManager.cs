@@ -146,10 +146,10 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
         List<Vector2Int> neighborCoordinates = new List<Vector2Int>
         {
-            new Vector2Int(x + 1, y), // Right
-            new Vector2Int(x - 1, y), // Left
-            new Vector2Int(x, y + 1), // Up
-            new Vector2Int(x, y - 1), // Down
+            new Vector2Int(x + 1, y),
+            new Vector2Int(x - 1, y),
+            new Vector2Int(x, y + 1),
+            new Vector2Int(x, y - 1),
         };
 
         foreach (var coord in neighborCoordinates)

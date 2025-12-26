@@ -15,10 +15,22 @@ public class DeckManager : MonoBehaviour, IDataPersistence
         get => _deck;
         set
         {
+            if (Mathf.Approximately(_deck, value)) return;
+
+            if (deckRoutine != null)
+                StopCoroutine(deckRoutine);
+
+            deckRoutine = StartCoroutine(GameManager.UM.AnimateFloat(
+                _deck, value,
+                v => deckText.text = GameManager.UM.FormatNumber(v, false) + " x"
+            ));
+
             _deck = value;
-            deckText.text = GameManager.UM.FormatNumber(_deck).ToString();
         }
     }
+
+    [Header("UI animation")]
+    private Coroutine deckRoutine;
 
     [Header("Cards list")]
     public List<Card> cardsInDeck = new List<Card>();

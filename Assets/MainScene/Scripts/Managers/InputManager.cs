@@ -63,7 +63,6 @@ public class InputManager : MonoBehaviour, IDataPersistence
         }
     }
 
-
     private void NextWeekInput()
     {
         if (!GameManager.WM.inMenu && !GameManager.HM.dragging)
@@ -152,7 +151,7 @@ public class InputManager : MonoBehaviour, IDataPersistence
                     {
                         hoverIsland.currentState = Island.IslandState.Transparent;
                     }
-                    hoverIsland.SetIslandMaterial(false);
+                    hoverIsland.UpdateIslandMaterial(false);
                 }
             }
 

@@ -4,6 +4,13 @@ using UnityEngine.Playables;
 
 public class SpawnManager : MonoBehaviour
 {
+
+   [Header("Start settings")]
+   public float startBalance = 100f;
+   public int startWater = 50;
+   public int startFertiliser = 50;
+
+
     public void Spawn()
     {
         GameManager.WM.inMenu = false;

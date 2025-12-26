@@ -1351,7 +1351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: nutrientAddition
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -2045,6 +2045,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926291033083483648, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: transparencySlider
       value: 
@@ -8422,13 +8438,33 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3a5a09641c37f0a4db81c13de6a97744, type: 3}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_text
+      value: "100.00 \u20B4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontSize
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 3696133528060887703, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_Name
       value: BalanceIcon
       objectReference: {fileID: 0}
     - target: {fileID: 4892085809366743691, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892085809366743691, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892085809366743691, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_Pivot.x
@@ -8437,6 +8473,14 @@ PrefabInstance:
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8452,7 +8496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -230
+      value: -265
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9713,7 +9757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1650479148833501131, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Layer
@@ -20009,6 +20053,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926291033083483648, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: transparencySlider
       value: 
@@ -23904,7 +23964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: nutrientAddition
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -24494,6 +24554,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5924042898274878729, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: island
       value: 
@@ -31287,6 +31363,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926291033083483648, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: transparencySlider
       value: 
@@ -38161,7 +38253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -40502,7 +40594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -125
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -41221,7 +41313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: nutrientAddition
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -43559,7 +43651,7 @@ PrefabInstance:
       objectReference: {fileID: 2150299982182787186}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: 'nutrientsAvailable.Array.data[0]'
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: 'nutrientsAvailable.Array.data[1]'
@@ -47672,7 +47764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1650479148833501131, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Layer
@@ -49217,16 +49309,16 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 223548508}
+  - {fileID: 1755004577}
   - {fileID: 1037302468}
   - {fileID: 954826227}
-  - {fileID: 1755004577}
   - {fileID: 2087752734}
   m_Father: {fileID: 23434304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -510, y: 478}
-  m_SizeDelta: {x: 600, y: 125}
+  m_AnchoredPosition: {x: -460, y: 470}
+  m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1244416424
 MonoBehaviour:
@@ -56653,7 +56745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429639242857497370, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1650479148833501131, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: m_Layer
@@ -57150,6 +57242,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926291033083483648, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: transparencySlider
       value: 
@@ -62223,7 +62331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: nutrientAddition
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -64096,6 +64204,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926291033083483648, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: transparencySlider
       value: 
@@ -83177,6 +83301,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926291033083483648, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: transparencySlider
       value: 
@@ -83885,6 +84025,22 @@ PrefabInstance:
       propertyPath: islandRing1CostText
       value: 
       objectReference: {fileID: 2150299982182787186}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559014494902376027, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: 'nutrientsAvailable.Array.data[3]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5926291033083483648, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: transparencySlider
       value: 
@@ -84467,7 +84623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 190
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -87383,15 +87539,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 752c4dc99e9ea9143b9fc3e358c8e7a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5adc704925b01749a9bbcb607307d05, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.5, y: 2.5}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &86630350254805587
@@ -87795,13 +87951,69 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: c675e9ab3647af64f82969b3216d20f0, type: 3}
+    - target: {fileID: 835670127982236949, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 835670127982236949, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 835670127982236949, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_text
+      value: "0.00 \u20B4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontSize
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.19215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.18431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281413596
+      objectReference: {fileID: 0}
     - target: {fileID: 3696133528060887703, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_Name
       value: ExpenseIcon
       objectReference: {fileID: 0}
     - target: {fileID: 4892085809366743691, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892085809366743691, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892085809366743691, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -87817,7 +88029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 85
+      value: -115
       objectReference: {fileID: 0}
     - target: {fileID: 7969058744099079255, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -88554,8 +88766,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
-  m_fontColor: {r: 0.4431373, g: 0.4431373, b: 0.4431373, a: 1}
+    rgba: 4281807924
+  m_fontColor: {r: 0.8627451, g: 0.18431373, b: 0.19215687, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -89261,7 +89473,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4285624689
-  m_fontColor: {r: 0.44313726, g: 0.44313726, b: 0.44313726, a: 1}
+  m_fontColor: {r: 0.20392157, g: 0.20392157, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -91823,6 +92035,7 @@ MonoBehaviour:
   resourceUI: {fileID: 1244416422}
   timeUI: {fileID: 2035294822}
   selectionUI: {fileID: 106743056}
+  numberAnimDuration: 0.4
   balanceText: {fileID: 112664081}
   waterText: {fileID: 216290505}
   fertiliserText: {fileID: 1914429244}
@@ -95711,6 +95924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7622f2f4364aa44ba746bc22722cce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startBalance: 150
+  startWater: 50
+  startFertiliser: 50
 --- !u!114 &8413217862094962421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95724,6 +95940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skipTutorial: 1
+  skipDay: 0
   cardIdInput: {fileID: 1789137593}
   cropIdInput: {fileID: 707339800}
 --- !u!114 &8413217862094962422

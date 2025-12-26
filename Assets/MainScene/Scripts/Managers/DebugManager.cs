@@ -6,6 +6,7 @@ using TMPro;
 public class DebugManager : MonoBehaviour
 {
     public bool skipTutorial;
+    public bool skipDay;
     public TMP_InputField cardIdInput;
     public TMP_InputField cropIdInput;
 
@@ -22,6 +23,10 @@ public class DebugManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.F3))
         {
             AddFertiliser();
+        }
+        if (Input.GetKeyUp(KeyCode.F4))
+        {
+            UpDayCounter();
         }
         if (Input.GetKeyUp(KeyCode.Keypad1))
         {
@@ -58,6 +63,13 @@ public class DebugManager : MonoBehaviour
     public void AddFertiliser()
     {
         GameManager.UM.Fertiliser += 500;
+    }
+
+    public void UpDayCounter()
+    {
+        skipDay = true;
+        GameManager.TM.AdvanceNextWeek();
+        skipDay = false;
     }
 
     public void AddCrop()

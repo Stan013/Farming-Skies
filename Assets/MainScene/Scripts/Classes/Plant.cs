@@ -21,6 +21,9 @@ public class Plant : MonoBehaviour
     private System.Random random = new System.Random();
     public PlantData plantData;
 
+    public int driedOut;
+    public int plantAge;
+
     public void GiveDrop(Transform plot)
     {
         Drop plantDrop = Instantiate(drop, Vector3.zero, Quaternion.identity);

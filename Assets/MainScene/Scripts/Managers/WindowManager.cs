@@ -52,6 +52,7 @@ public class WindowManager : MonoBehaviour
                 break;
         }
     }
+    
     public void OpenWindow(GameObject window)
     {
         if (inMenu)

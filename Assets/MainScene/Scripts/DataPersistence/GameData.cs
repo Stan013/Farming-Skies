@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -116,14 +117,14 @@ public class GameData
     // Event Manager Data
     public int lastEvent;
 
-    public GameData()
+    public GameData(float startBalance, int startWater, int startFertiliser)
     {
         questCount = 0;
         farmLevel = 0;
         expense = 0f;
-        balance = 250f;
-        water = 100;
-        fertiliser = 100;
+        balance = startBalance;
+        water = startWater;
+        fertiliser = startFertiliser;
         weeks = 0;
     }
 }

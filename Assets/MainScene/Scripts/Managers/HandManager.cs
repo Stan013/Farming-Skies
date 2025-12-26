@@ -23,7 +23,7 @@ public class HandManager : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
-        if (!GameManager.WM.inMenu && cardsInHand.Count < 7 && GameManager.DM.cardsInDeck.Count > 0)
+        if (!GameManager.WM.inMenu && cardsInHand.Count < 7 && GameManager.DM.cardsInDeck.Count > 0 && !GameManager.WM.advanceWindow.activeSelf)
         {
             SetCardsInHand();
         }

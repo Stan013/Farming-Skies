@@ -16,10 +16,22 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
         get => _expense;
         set
         {
+            if (Mathf.Approximately(_expense, value)) return;
+
+            if (expenseRoutine != null)
+                StopCoroutine(expenseRoutine);
+
+            expenseRoutine = StartCoroutine(GameManager.UM.AnimateFloat(
+                _expense, value,
+                v => expenseText.text = GameManager.UM.FormatNumber(v, true) + " ₴"
+            ));
+
             _expense = value;
-            expenseText.text = GameManager.UM.FormatNumber(_expense).ToString();
         }
     }
+
+    [Header("UI animation")]
+    private Coroutine expenseRoutine;
 
     [Header("Farm Level variables")]
     public Slider farmLevelBar;

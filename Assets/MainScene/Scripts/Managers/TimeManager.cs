@@ -17,7 +17,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         set
         {
             _weeks = value;
-            weekText.text = GameManager.UM.FormatNumber(_weeks).ToString();
+            weekText.text = GameManager.UM.FormatNumber(_weeks, false);
         }
     }
 
@@ -30,13 +30,23 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.WM.inMenu = true;
         GameManager.HM.HideCardsInHand(true);
         GameManager.HM.ClearCardsInHand();
-        GameManager.IPM.startingPos = GameManager.IPM.cam.transform.position;
-        GameManager.IPM.cam.transform.position = new Vector3(-25f, 25f, -25f);
-        GameManager.IPM.cam.transform.rotation = Quaternion.Euler(32f,45f,0f);
         GameManager.MM.MarketUpdate();
         GameManager.PM.Harvest();
         GameManager.UM.FarmEvaluation();
-        StartCoroutine(CycleWeekDays());
+
+        if(!GameManager.DBM.skipDay)
+        {
+            GameManager.IPM.startingPos = GameManager.IPM.cam.transform.position;
+            GameManager.IPM.cam.transform.position = new Vector3(-25f, 25f, -25f);
+            GameManager.IPM.cam.transform.rotation = Quaternion.Euler(32f,45f,0f);
+            StartCoroutine(CycleWeekDays());   
+        }
+        else
+        {
+            GameManager.EVM.CheckEvent();
+            Weeks++;
+            GameManager.WM.advanceWindow.SetActive(false);
+        }
     }
 
     private IEnumerator CycleWeekDays()

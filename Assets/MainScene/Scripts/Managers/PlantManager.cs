@@ -42,12 +42,18 @@ public class PlantManager : MonoBehaviour, IDataPersistence
             {
                 if (plant.nutrientsUsages[0] <= island.nutrientsAvailable[0])
                 {
+                    plant.plantAge += 1;
                     plant.UpdatePlantYield();
                     StartCoroutine(SpawnDropsWithInterval(plant));
                 }
                 else
                 {
-                    island.currentState = Island.IslandState.Cultivated;
+                    plant.driedOut += 1;
+                    island.nutrientsAvailable[0] = 0;
+                    island.nutrientsAvailable[1] -= plant.nutrientsUsages[1];
+                    island.nutrientsAvailable[2] -= plant.nutrientsUsages[2];
+                    island.nutrientsAvailable[3] -= plant.nutrientsUsages[3];
+                    island.SetIslandMaterial(Island.IslandState.Cultivated, island.cultivatedMatTop, island.sowedMatBot);
                 }
             }
         }

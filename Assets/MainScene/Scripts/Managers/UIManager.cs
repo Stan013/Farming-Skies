@@ -17,14 +17,22 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private float _balance;
     private int _water;
     private int _fertiliser;
-
     public float Balance
     {
         get => _balance;
         set
         {
+            if (Mathf.Approximately(_balance, value)) return;
+
+            if (balanceRoutine != null)
+                StopCoroutine(balanceRoutine);
+
+            balanceRoutine = StartCoroutine(AnimateFloat(
+                _balance, value,
+                v => balanceText.text = FormatNumber(v, true) + " ₴"
+            ));
+
             _balance = value;
-            UpdateUI();
         }
     }
     public int Water
@@ -32,8 +40,17 @@ public class UIManager : MonoBehaviour, IDataPersistence
         get => _water;
         set
         {
+            if (_water == value) return;
+
+            if (waterRoutine != null)
+                StopCoroutine(waterRoutine);
+
+            waterRoutine = StartCoroutine(AnimateInt(
+                _water, value,
+                v => waterText.text = FormatNumber(v, false) + " L"
+            ));
+
             _water = value;
-            UpdateUI();
         }
     }
     public int Fertiliser
@@ -41,9 +58,52 @@ public class UIManager : MonoBehaviour, IDataPersistence
         get => _fertiliser;
         set
         {
+            if (_fertiliser == value) return;
+
+            if (fertiliserRoutine != null)
+                StopCoroutine(fertiliserRoutine);
+
+            fertiliserRoutine = StartCoroutine(AnimateInt(
+                _fertiliser, value,
+                v => fertiliserText.text = FormatNumber(v, false) + " L"
+            ));
+
             _fertiliser = value;
-            UpdateUI();
         }
+    }
+
+    [Header("UI animation")]
+    public float numberAnimDuration = 1f;
+    private Coroutine balanceRoutine;
+    private Coroutine waterRoutine;
+    private Coroutine fertiliserRoutine;
+    public IEnumerator AnimateFloat(float from, float to, System.Action<float> onUpdate)
+    {
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / numberAnimDuration;
+            float value = Mathf.Lerp(from, to, t);
+            onUpdate(value);
+            yield return null;
+        }
+
+        onUpdate(to);
+    }
+    public IEnumerator AnimateInt(int from, int to, System.Action<int> onUpdate)
+    {
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / numberAnimDuration;
+            int value = Mathf.RoundToInt(Mathf.Lerp(from, to, t));
+            onUpdate(value);
+            yield return null;
+        }
+
+        onUpdate(to);
     }
 
     [Header("Game variables text")]
@@ -76,12 +136,12 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
     public void UpdateUI()
     {
-        balanceText.text = FormatNumber(_balance).ToString();
-        waterText.text = FormatNumber(_water).ToString();
-        fertiliserText.text = FormatNumber(_fertiliser).ToString();
+        balanceText.text = FormatNumber(_balance, true) + " L";
+        waterText.text = FormatNumber(_water, false) + " L";
+        fertiliserText.text = FormatNumber(_fertiliser, false) + " ₴";
     }
 
-    public string FormatNumber(float num)
+    public string FormatNumber(float num, bool isMoney)
     {
         if (num >= 1000000000)
             return (num / 1000000000f).ToString("0.#") + "B";
@@ -90,13 +150,15 @@ public class UIManager : MonoBehaviour, IDataPersistence
         if (num >= 1000)
             return (num / 1000f).ToString("0.#") + "K";
 
-        return num.ToString("0");
+        return isMoney 
+            ? num.ToString("0.00") 
+            : num.ToString("0");     
     }
 
     public void SetBuildIslandSlider()
     {
-        buildCostText.SetText(GameManager.IPM.hoverIsland.islandBuildCost.ToString() + "₴");
-        expenseCostText.SetText(GameManager.IPM.hoverIsland.islandExpenseCost.ToString() + "₴");
+        buildCostText.SetText(GameManager.IPM.hoverIsland.islandBuildCost.ToString() + " ₴");
+        expenseCostText.SetText(GameManager.IPM.hoverIsland.islandExpenseCost.ToString() + " ₴");
         if (constructionLabel != null)
         {
             constructionLabel.rectTransform.anchoredPosition = Vector2.zero;

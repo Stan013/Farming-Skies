@@ -255,7 +255,7 @@ public class Island : MonoBehaviour
         CheckOverlappingPlots(usedPlot.GetComponent<BoxCollider>());
         usedPlot.GetComponent<BoxCollider>().enabled = false;
     }
-
+    
     public void CheckOverlappingPlots(BoxCollider boxCollider)
     {
         Vector3 center = boxCollider.transform.TransformPoint(boxCollider.center);
@@ -285,7 +285,7 @@ public class Island : MonoBehaviour
         }
         SetCollisions("Reset");
     }
-
+    
     public void UpdateNutrientsRequired(Plant plant)
     {
         for (int i = 0; i < nutrientsRequired.Count; i++)
@@ -430,7 +430,7 @@ public class Island : MonoBehaviour
         }
     }
 
-    public void SetIslandMaterial(bool validDrag)
+    public void UpdateIslandMaterial(bool validDrag)
     {
         if(currentState == IslandState.Highlighted || currentState == IslandState.Transparent)
         {
@@ -474,6 +474,16 @@ public class Island : MonoBehaviour
             }
             glow.SetActive(false);
         }
+    }
+
+    public void SetIslandMaterial(IslandState islandState, Material matTop, Material matBottom)
+    {
+        currentState = islandState;
+        SetIslandColor(1, 0, true);
+        potentialMatTop = matTop;
+        potentialMatBot = matBottom;
+        UpdateIslandMaterial(true);
+        CheckWarningIcon();
     }
 
     public void CheckWarningIcon()

@@ -140,13 +140,13 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             if(previousIsland != null)
             {
-                previousIsland.SetIslandMaterial(false);
+                previousIsland.UpdateIslandMaterial(false);
             }
             return;
         }
 
         hoverIsland.MaterialDragValidation(GameManager.HM.dragCard.cardName);
-        hoverIsland.SetIslandMaterial(true);
+        hoverIsland.UpdateIslandMaterial(true);
         previousIsland = hoverIsland;
     }
 

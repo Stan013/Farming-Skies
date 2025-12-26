@@ -97,5 +97,6 @@ public class SelectionPicker : MonoBehaviour
             Card addCard = cardSlot.cardInSlot;
             GameManager.DM.AddCardToDeck(addCard.cardId);
         }
+        GameManager.WM.inMenu = false;
     }
 }

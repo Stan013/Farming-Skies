@@ -28,7 +28,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void NewGame()
     {
-        gameData = new GameData();
+        gameData = new GameData(GameManager.SPM.startBalance, GameManager.SPM.startWater, GameManager.SPM.startFertiliser);
         InitializeGame();
     }
 
@@ -47,6 +47,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.EVM.SetupEvents(0);
         GameManager.SPM.Spawn();
     }
+    
     public void ClearChildren(Transform parent)
     {
         foreach (Transform child in parent)
@@ -68,7 +69,7 @@ public class DataPersistenceManager : MonoBehaviour
         if (gameData == null)
         {
             Debug.LogWarning("Save not found, creating new data.");
-            gameData = new GameData();
+            gameData = new GameData(GameManager.SPM.startBalance, GameManager.SPM.startWater, GameManager.SPM.startFertiliser);
         }
 
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)

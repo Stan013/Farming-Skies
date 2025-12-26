@@ -191,8 +191,18 @@ public class ExpandedCraftItem : MonoBehaviour
         GameManager.UM.Balance -= collapsedItem.attachedItemCard.cardCraftResources[0];
         GameManager.UM.Water -= collapsedItem.attachedItemCard.cardCraftResources[1];
         GameManager.UM.Fertiliser -= collapsedItem.attachedItemCard.cardCraftResources[2];
-        GameManager.DM.AddCardToDeck(collapsedItem.attachedItemCard.cardId);
+        
+        for (int i = 0; i < CraftAmount; i++)
+        {
+            GameManager.DM.AddCardToDeck(collapsedItem.attachedItemCard.cardId);
+        }
+
         collapsedItem.CalculateMaxCraftableAmount();
         CraftAmount = 0;
+
+        if (collapsedItem.attachedItemCard.cardCraftResources[3] > 0f)
+        {
+            collapsedItem.attachedItemCard.inventoryItem.ItemQuantity  -= collapsedItem.attachedItemCard.cardCraftResources[3];
+        }
     }
 }

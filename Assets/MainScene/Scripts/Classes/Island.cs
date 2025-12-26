@@ -473,7 +473,6 @@ public class Island : MonoBehaviour
                 islandBottom.material = previousMatBot;
             }
             glow.SetActive(false);
-            CheckWarningIcon();
         }
     }
 

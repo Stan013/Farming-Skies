@@ -94,10 +94,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 break;
         }
 
+        hoverIsland?.SetCollisions("Reset");
+        hoverIsland?.CheckWarningIcon();
         previousIsland = null;
         hoverIsland = null;
         Destroy(dragInstance);
-        hoverIsland?.SetCollisions("Reset");
     }
 
     private void UpdateDragInstanceTransform()
@@ -228,14 +229,22 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             return;
         }
 
-        hoverIsland.hoverMatSetup = false;
-        var dragCard = GameManager.HM.dragCard;
-
         if (!hoverIsland.validPotentialMat)
         {
             CancelDrag();
             return;
         }
+
+        hoverIsland.hoverMatSetup = false;
+        var dragCard = GameManager.HM.dragCard;
+        int nutrientIndex = dragCard.nutrientIndex;
+
+        if (nutrientIndex > 0)
+        {
+            hoverIsland.nutrientsAvailable[nutrientIndex - 1] += dragCard.nutrientAddition;
+            hoverIsland.UpdateNutrients();
+        }
+
 
 
         dragCard.dragSucces = true;

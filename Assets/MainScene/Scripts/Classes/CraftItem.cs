@@ -176,7 +176,12 @@ public class CraftItem : MonoBehaviour
         }
         GameManager.UM.Water -= attachedItemCard.cardCraftResources[1];
         GameManager.UM.Fertiliser -= attachedItemCard.cardCraftResources[2];
-        GameManager.DM.AddCardToDeck(attachedItemCard.cardId);
+        
+        for (int i = 0; i < craftAmount; i++)
+        {
+            GameManager.DM.AddCardToDeck(attachedItemCard.cardId);
+        }
+
         ResetCraftAmount();
     }
 

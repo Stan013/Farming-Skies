@@ -39,11 +39,8 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     public TMP_Text farmLevelText;
 
     [Header("Farm Stat variables")]
-    public float farmValue;
-    public float oldFarmValue;
-    public float farmValueChange;
-    public TMP_Text farmValueText;
-    public TMP_Text farmValueChangeText;
+    public TMP_Text islandValueText;
+    public TMP_Text islandValueChangeText;
     public TMP_Text plantValueText;
     public TMP_Text plantValueChangeText;
     public TMP_Text structureValueText;
@@ -65,6 +62,13 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     public GameObject expenseProductionContentArea;
     public float expenseProductionTotal;
     public TMP_Text expenseProductionTotalText;
+
+    public void UpdateChangeFarmValue()
+    {
+        islandValueChangeText.text = "(+" + GameManager.ISM.islandValueChange.ToString() + " ₴)";
+        plantValueChangeText.text = "(+" + GameManager.PM.plantValueChange.ToString() + " ₴)";
+        structureValueChangeText.text = "(+" + GameManager.PM.structureValueChange.ToString() + " ₴)";
+    }
 
     public void AddExpenseIsland(Island island)
     {
@@ -92,7 +96,6 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
         farmLevelBar.value = GameManager.LM.FarmLevel;
         farmLevelBarText.text = GameManager.LM.FarmLevel + " / " + GameManager.LM.farmLevelMax;
         farmLevelText.text = "Level " + GameManager.LM.FarmLevel.ToString();
-        SetFarmStatistics();
         switch (tab)
         {
             case "Statistics":
@@ -106,21 +109,20 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
 
                 break;
         }
+        UpdateChangeFarmValue();
     }
 
-    public void UpdateFarmValue()
+    public void SetFarmStats()
     {
-        farmValue = GameManager.ISM.IslandValue + GameManager.PM.PlantValue + GameManager.PM.StructureValue;
-    }
-
-    public void SetFarmStatistics()
-    {
-        farmValueText.text = farmValue.ToString() + " ₴";
-        farmValueChangeText.text = "(+" + farmValueChange.ToString() + " ₴)";
-        plantValueText.text = GameManager.PM.PlantValue.ToString() + " ₴";
-        plantValueChangeText.text = "(+" + GameManager.PM.plantValueChange.ToString() + " ₴)";
-        structureValueText.text = GameManager.PM.StructureValue.ToString() + " ₴";
-        structureValueChangeText.text = "(+" + GameManager.PM.structureValueChange.ToString() + " ₴)";
+        GameManager.ISM.islandValue = GameManager.ISM.islandValueChange;
+        GameManager.ISM.islandValueChange = 0;
+        islandValueText.text = GameManager.ISM.islandValue.ToString() + " ₴";
+        GameManager.PM.plantValue = GameManager.PM.plantValueChange;
+        GameManager.PM.plantValueChange = 0;
+        plantValueText.text = GameManager.PM.plantValue.ToString() + " ₴";
+        GameManager.PM.structureValue = GameManager.PM.structureValueChange;
+        GameManager.PM.structureValueChange = 0;
+        structureValueText.text = GameManager.PM.structureValue.ToString() + " ₴";
     }
 
     public void LoadData(GameData data)

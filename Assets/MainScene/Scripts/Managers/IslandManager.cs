@@ -19,18 +19,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public Island starterIsland;
     public string islandManageTab;
     public Button closeButton;
-    private int _islandValue;
-
-    public int IslandValue
-    {
-        get => _islandValue;
-        set
-        {
-            _islandValue = value;
-            GameManager.EM.UpdateFarmValue();
-        }
-    }
-    public int oldIslandValue;
+    public int islandValue;
     public int islandValueChange;
 
     [Header("Island management variables")]
@@ -105,7 +94,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     }
 
     public Island GetPotentialIsland()
-
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, ~0, QueryTriggerInteraction.Collide);
@@ -132,7 +120,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         reconstructedIsland.currentState = Island.IslandState.Sowed;
         boughtIslands.Add(reconstructedIsland);
         GameManager.LM.FarmLevel += 1;
-        IslandValue += reconstructedIsland.islandExpenseCost;
+        islandValueChange += reconstructedIsland.islandExpenseCost;
         GameManager.EM.AddExpenseIsland(reconstructedIsland);
         SetAvailableIslands(reconstructedIsland.islandID);
     }
@@ -235,7 +223,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
             }
         }
         GameManager.ISM.SetupIslandCollisions(true);
-        IslandValue = data.islandValue;
+        islandValueChange = data.islandValue;
     }
 
     public void SaveData(ref GameData data)
@@ -245,6 +233,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         {
             data.islandsMap.Add(island.SaveIslandData());
         }
-        data.islandValue = IslandValue;
+        data.islandValue = islandValueChange;
     }
 }

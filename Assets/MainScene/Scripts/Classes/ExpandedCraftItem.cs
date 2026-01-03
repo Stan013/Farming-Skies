@@ -188,12 +188,11 @@ public class ExpandedCraftItem : MonoBehaviour
     private void CraftCard()
     {
         holdCoroutine = null;
-        GameManager.UM.Balance -= collapsedItem.attachedItemCard.cardCraftResources[0];
-        GameManager.UM.Water -= collapsedItem.attachedItemCard.cardCraftResources[1];
-        GameManager.UM.Fertiliser -= collapsedItem.attachedItemCard.cardCraftResources[2];
-        
         for (int i = 0; i < CraftAmount; i++)
         {
+            GameManager.UM.Balance -= collapsedItem.attachedItemCard.cardCraftResources[0];
+            GameManager.UM.Water -= collapsedItem.attachedItemCard.cardCraftResources[1];
+            GameManager.UM.Fertiliser -= collapsedItem.attachedItemCard.cardCraftResources[2];
             GameManager.DM.AddCardToDeck(collapsedItem.attachedItemCard.cardId);
         }
 

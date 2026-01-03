@@ -223,7 +223,7 @@ public class Island : MonoBehaviour
                 GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
                 UpdateNutrientsRequired(usedPlant);
                 usedPlant.UpdatePredictedYield();
-                GameManager.PM.PlantValue += usedPlant.attachedInventoryItem.totalPredictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
+                GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
             case "Medium crops":
                 usedMediumPlots.Add(usedPlot);
@@ -233,7 +233,7 @@ public class Island : MonoBehaviour
                 GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
                 UpdateNutrientsRequired(usedPlant);
                 usedPlant.UpdatePredictedYield();
-                GameManager.PM.PlantValue += usedPlant.attachedInventoryItem.totalPredictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
+                GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
             case "Large crops":
                 usedLargePlots.Add(usedPlot);
@@ -243,7 +243,7 @@ public class Island : MonoBehaviour
                 GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
                 UpdateNutrientsRequired(usedPlant);
                 usedPlant.UpdatePredictedYield();
-                GameManager.PM.PlantValue += usedPlant.attachedInventoryItem.totalPredictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
+                GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
             case "Structure":
                 buildablesOnIsland.Add(usedPlant);
@@ -297,13 +297,12 @@ public class Island : MonoBehaviour
 
     public void UpdateNutrients()
     {
-        GameManager.PM.PlantValue = 0;
         foreach (Plant plant in smallPlantsOnIsland.Concat(mediumPlantsOnIsland).Concat(largePlantsOnIsland))
         {
             plant.attachedInventoryItem.totalBaseYield = 0;
             plant.attachedInventoryItem.totalPredictedYield = 0;
             plant.UpdatePredictedYield();
-            GameManager.PM.PlantValue += plant.attachedInventoryItem.totalPredictedYield * plant.attachedInventoryItem.attachedItemCard.itemPrice;
+            GameManager.PM.plantValueChange += plant.attachedInventoryItem.totalPredictedYield * plant.attachedInventoryItem.attachedItemCard.itemPrice;
         }
     }
 

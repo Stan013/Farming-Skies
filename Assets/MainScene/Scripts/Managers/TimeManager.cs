@@ -32,7 +32,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.HM.ClearCardsInHand();
         GameManager.MM.MarketUpdate();
         GameManager.PM.Harvest();
-        GameManager.UM.FarmEvaluation();
+        GameManager.EM.SetFarmStats();
 
         if(!GameManager.DBM.skipDay)
         {

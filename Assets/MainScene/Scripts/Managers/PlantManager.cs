@@ -8,30 +8,9 @@ public class PlantManager : MonoBehaviour, IDataPersistence
 {
     [Header("Drop variables")]
     public float dropChance;
-    private float _plantValue;
-    public float PlantValue
-    {
-        get => _plantValue;
-        set
-        {
-            _plantValue = value;
-            GameManager.EM.UpdateFarmValue();
-        }
-    }
-    public float oldPlantValue;
+    public float plantValue;
     public float plantValueChange;
-
-    private float _structureValue;
-    public float StructureValue
-    {
-        get => _structureValue;
-        set
-        {
-            _structureValue = value;
-            GameManager.EM.UpdateFarmValue();
-        }
-    }
-    public float oldStructureValue;
+    public float structureValue;
     public float structureValueChange;
 
     public void Harvest()
@@ -115,13 +94,13 @@ public class PlantManager : MonoBehaviour, IDataPersistence
     
     public void LoadData(GameData data)
     {
-        PlantValue = data.plantValue;
-        StructureValue = data.buildableValue;
+        plantValueChange = data.plantValue;
+        structureValueChange = data.buildableValue;
     }
 
     public void SaveData(ref GameData data)
     {
-        data.plantValue = PlantValue;
-        data.buildableValue = StructureValue;
+        data.plantValue = plantValueChange;
+        data.buildableValue = structureValueChange;
     }
 }

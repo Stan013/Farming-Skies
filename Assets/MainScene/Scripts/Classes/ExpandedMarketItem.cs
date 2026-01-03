@@ -129,6 +129,11 @@ public class ExpandedMarketItem : MonoBehaviour
         TransactionAmount = Mathf.Min(maxAmount, TransactionAmount + 1);
     }
 
+    public void SetMin()
+    {
+        TransactionAmount = 0;
+    }
+
     public void SetMax()
     {
         int maxAmount;
@@ -196,7 +201,7 @@ public class ExpandedMarketItem : MonoBehaviour
         {
             if (holdCoroutine == null)
             {
-                holdCoroutine = StartCoroutine(HandleCraftHold());
+                holdCoroutine = StartCoroutine(HandleTransactionHold());
             }
             transactionInputBackground.sprite = ongoingTransaction;
         }
@@ -212,7 +217,7 @@ public class ExpandedMarketItem : MonoBehaviour
         UpdateTransactionAmount();
     }
 
-    private IEnumerator HandleCraftHold()
+    private IEnumerator HandleTransactionHold()
     {
         holdTime = 0f;
         while (holdTime < holdThreshold)

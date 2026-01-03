@@ -302,7 +302,6 @@ public class Island : MonoBehaviour
             plant.attachedInventoryItem.totalBaseYield = 0;
             plant.attachedInventoryItem.totalPredictedYield = 0;
             plant.UpdatePredictedYield();
-            GameManager.PM.plantValueChange += plant.attachedInventoryItem.totalPredictedYield * plant.attachedInventoryItem.attachedItemCard.itemPrice;
         }
     }
 

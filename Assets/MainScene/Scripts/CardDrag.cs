@@ -286,7 +286,6 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         GameManager.HM.dragCard.dragSucces = true;
         GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
         hoverIsland.UpdateNutrients();
-
     }
 
     private void AlignDragInstanceToPlot(GameObject hoverPlot)

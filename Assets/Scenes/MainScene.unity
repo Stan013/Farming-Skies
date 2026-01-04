@@ -5447,8 +5447,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardDescription
-      value: "A buildable that when placed down will generate 5 fertiliser every
-        week. Cost 100 \u20B4 to maintain."
+      value: "A structure that when placed down will generate 5 fertiliser every
+        week. Cost 50 \u20B4 to maintain."
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -5460,7 +5460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: 'cardCraftResources.Array.data[0]'
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: 'cardCraftResources.Array.data[1]'
@@ -64786,8 +64786,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardDescription
-      value: "A buildable that when placed down will generate 5 water every week.
-        Cost 100 \u20B4 to maintain."
+      value: "A structure that when placed down will generate 5 water every week.
+        Cost 50 \u20B4 to maintain."
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: cardAddedToMarket
@@ -64799,7 +64799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: 'cardCraftResources.Array.data[0]'
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3563171074324339300, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
       propertyPath: 'cardCraftResources.Array.data[1]'

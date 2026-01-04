@@ -63,7 +63,7 @@ public class WindowManager : MonoBehaviour
             }
             else
             {
-                openWindow.SetActive(false);
+                openWindow?.SetActive(false);
                 window.SetActive(true);
                 openWindow = window;
             }
@@ -120,21 +120,6 @@ public class WindowManager : MonoBehaviour
         {
             GameManager.HM.HideCardsInHand(false);
             settingsWindow.SetActive(true);
-            inMenu = true;
-        }
-    }
-
-    public void OpenSelectionWindow()
-    {
-        if (selectionWindow.activeSelf)
-        {
-            selectionWindow.SetActive(false);
-            inMenu = false;
-        }
-        else
-        {
-            GameManager.SM.SetupSelection();
-            selectionWindow.SetActive(true);
             inMenu = true;
         }
     }

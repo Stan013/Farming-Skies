@@ -64,7 +64,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
             }
 
             weekDayText.text = weekDays[currentDayOfWeek];
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
         }
         Weeks++;
         GameManager.WM.advanceWindow.SetActive(false);

@@ -92,9 +92,13 @@ public class EventManager : MonoBehaviour, IDataPersistence
         switch (pastEvent.eventItemType)
         {
             case "NewCards":
-                GameManager.WM.OpenSelectionWindow();
+                GameManager.SM.SetupSelection();
+                GameManager.WM.OpenWindow(GameManager.WM.selectionWindow);
                 break;
             case "RefillNutrients":
+                GameManager.ISM.OpenIslandManagement("Available");
+                GameManager.WM.OpenWindow(GameManager.WM.manageWindow);
+                GameManager.EVM.SetupRefill();
                 break;
             case "PayExpenses":
                 break;
@@ -103,6 +107,11 @@ public class EventManager : MonoBehaviour, IDataPersistence
                 break;
         }
         Destroy(pastEvent);
+    }
+
+    public void SetupRefill()
+    {
+        
     }
 
     public void LoadData(GameData data)

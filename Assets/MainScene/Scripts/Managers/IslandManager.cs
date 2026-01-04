@@ -205,6 +205,34 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void UpdateIslandColor()
+    {        
+        foreach (Island island in GameManager.ISM.boughtIslands)
+        {
+            int totalNutrients = 0;
+            for (int i = 1; i < island.nutrientsAvailable.Count; i++)
+            {
+                totalNutrients += island.nutrientsAvailable[i];
+            }
+
+            Color topMin = Color.white;
+            Color topMax = new Color(175f/255f, 1f, 175f/255f);
+
+            Color botMin = Color.white;
+            Color botMax = new Color(175f/255f, 175f/255f, 1f);
+
+            float factor = totalNutrients / (100f * (island.nutrientsAvailable.Count - 1));
+
+            island.potentialTopColor = Color.Lerp(topMin, topMax, factor);
+            island.potentialBotColor = Color.Lerp(botMin, botMax, factor);
+
+            island.islandTop.material.color = island.potentialTopColor;
+            island.islandBottom.material.color = island.potentialBotColor;
+
+            island.UpdateIslandMaterial(true);
+        }
+    }
+
     public Island FindIslandByID(string islandID)
     {
         return allIslands.Find(island => island.islandID == islandID);

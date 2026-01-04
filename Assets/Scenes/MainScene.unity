@@ -94431,6 +94431,7 @@ MonoBehaviour:
   starterIsland: {fileID: 1816149699}
   islandManageTab: 
   closeButton: {fileID: 292997372}
+  islandValue: 0
   islandValueChange: 0
   islandCamera: {fileID: 87670081}
   centerIsland: {fileID: 0}
@@ -95964,8 +95965,6 @@ MonoBehaviour:
   farmLevelBar: {fileID: 109390012}
   farmLevelBarText: {fileID: 1337809729}
   farmLevelText: {fileID: 257798285}
-  islandValue: 0
-  islandValueChange: 0
   islandValueText: {fileID: 1220224918}
   islandValueChangeText: {fileID: 746472626}
   plantValueText: {fileID: 98500570}

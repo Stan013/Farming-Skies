@@ -60,8 +60,8 @@ public class Island : MonoBehaviour
     public Material previousMatBot;
     public Material potentialMatTop;
     public Material potentialMatBot;
-    private Color previousTopColor;
-    private Color previousBotColor;
+    public Color previousTopColor;
+    public Color previousBotColor;
     public Color potentialTopColor;
     public Color potentialBotColor;
 
@@ -412,12 +412,17 @@ public class Island : MonoBehaviour
                 totalNutrients += (i == nutrientIndex ? addedNutrient : nutrientsAvailable[i]);
             }
 
-            float factor = totalNutrients / (100f * (nutrientsAvailable.Count - 1));
-            Color targetTop = new Color(175f / 255f, 1f, 175f / 255f);
-            Color targetBot = new Color(1f, 1f, 0f);
+            Color topMin = Color.white;
+            Color topMax = new Color(175f/255f, 1f, 175f/255f);
 
-            potentialTopColor = Color.Lerp(previousTopColor, targetTop, factor);
-            potentialBotColor = Color.Lerp(previousBotColor, targetBot, factor);
+            Color botMin = Color.white;
+            Color botMax = new Color(175f/255f, 175f/255f, 1f);
+
+            float factor = totalNutrients / (100f * (nutrientsAvailable.Count - 1));
+
+            potentialTopColor = Color.Lerp(topMin, topMax, factor);
+            potentialBotColor = Color.Lerp(botMin, botMax, factor);
+
             islandTop.material.color = potentialTopColor;
             islandBottom.material.color = potentialBotColor;
         }

@@ -165,20 +165,19 @@ public class CraftItem : MonoBehaviour
     private void QuickCraft()
     {
         holdCoroutine = null;
-
-        if (attachedItemCard.cardType != "Structure" && attachedItemCard.cardType != "Utilities")
-        {
-            attachedItemCard.inventoryItem.ItemQuantity -= attachedItemCard.cardCraftResources[3];
-        }
-        else
-        {
-            GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
-        }
-        GameManager.UM.Water -= attachedItemCard.cardCraftResources[1];
-        GameManager.UM.Fertiliser -= attachedItemCard.cardCraftResources[2];
-        
         for (int i = 0; i < craftAmount; i++)
         {
+            if (attachedItemCard.cardType != "Structure" && attachedItemCard.cardType != "Utilities")
+            {
+                attachedItemCard.inventoryItem.ItemQuantity -= attachedItemCard.cardCraftResources[3];
+            }
+            else
+            {
+                GameManager.UM.Balance -= attachedItemCard.cardCraftResources[0];
+            }
+            
+            GameManager.UM.Water -= attachedItemCard.cardCraftResources[1];
+            GameManager.UM.Fertiliser -= attachedItemCard.cardCraftResources[2];
             GameManager.DM.AddCardToDeck(attachedItemCard.cardId);
         }
 

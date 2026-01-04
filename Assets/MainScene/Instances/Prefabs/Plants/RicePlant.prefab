@@ -110,7 +110,7 @@ MonoBehaviour:
   baseYield: 18
   yield: 0
   predictedYield: 0
-  nutrientsUsages: 01000000020000000100000001000000
+  nutrientsUsages: 01000000320000000100000001000000
   structureTax: 0
   plantData:
     plantID: 

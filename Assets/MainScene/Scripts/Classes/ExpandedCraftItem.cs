@@ -190,7 +190,15 @@ public class ExpandedCraftItem : MonoBehaviour
         holdCoroutine = null;
         for (int i = 0; i < CraftAmount; i++)
         {
-            GameManager.UM.Balance -= collapsedItem.attachedItemCard.cardCraftResources[0];
+            if (collapsedItem.attachedItemCard.cardType != "Structure" && collapsedItem.attachedItemCard.cardType != "Utilities")
+            {
+                collapsedItem.attachedItemCard.inventoryItem.ItemQuantity -= collapsedItem.attachedItemCard.cardCraftResources[3];
+            }
+            else
+            {
+                GameManager.UM.Balance -= collapsedItem.attachedItemCard.cardCraftResources[0];
+            }
+
             GameManager.UM.Water -= collapsedItem.attachedItemCard.cardCraftResources[1];
             GameManager.UM.Fertiliser -= collapsedItem.attachedItemCard.cardCraftResources[2];
             GameManager.DM.AddCardToDeck(collapsedItem.attachedItemCard.cardId);
@@ -198,10 +206,5 @@ public class ExpandedCraftItem : MonoBehaviour
 
         collapsedItem.CalculateMaxCraftableAmount();
         CraftAmount = 0;
-
-        if (collapsedItem.attachedItemCard.cardCraftResources[3] > 0f)
-        {
-            collapsedItem.attachedItemCard.inventoryItem.ItemQuantity  -= collapsedItem.attachedItemCard.cardCraftResources[3];
-        }
     }
 }

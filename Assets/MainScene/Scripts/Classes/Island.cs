@@ -489,6 +489,36 @@ public class Island : MonoBehaviour
         CheckWarningIcon();
     }
 
+    public IEnumerator RefillNutrients(int amount, float duration = 1.5f)
+    {
+        int startNitrogen = nutrientsAvailable[1];
+        int startPhosphorus = nutrientsAvailable[2];
+        int startPotassium = nutrientsAvailable[3];
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            nutrientsAvailable[1] = Mathf.RoundToInt(Mathf.Lerp(startNitrogen, startNitrogen + amount, t));
+            nutrientsAvailable[2] = Mathf.RoundToInt(Mathf.Lerp(startPhosphorus, startPhosphorus + amount, t));
+            nutrientsAvailable[3] = Mathf.RoundToInt(Mathf.Lerp(startPotassium, startPotassium + amount, t));
+            
+            SetIslandColor(1, 0, true);
+            GameManager.ISM.OpenIslandManagement("Available");
+            
+            yield return null;
+        }
+
+        nutrientsAvailable[1] = startNitrogen + amount;
+        nutrientsAvailable[2] = startPhosphorus + amount;
+        nutrientsAvailable[3] = startPotassium + amount;
+        SetIslandColor(1, 0, true);
+        GameManager.ISM.OpenIslandManagement("Available");
+    }
+
     public void CheckWarningIcon()
     {
         if (nutrientsRequired[1] > nutrientsAvailable[1] || nutrientsRequired[2] > nutrientsAvailable[2] || nutrientsRequired[3] > nutrientsAvailable[3])

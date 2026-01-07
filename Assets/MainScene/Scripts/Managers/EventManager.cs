@@ -17,6 +17,12 @@ public class EventManager : MonoBehaviour, IDataPersistence
     public Button closeButton;
     public int eventCount;
 
+    IEnumerator Delay(System.Action action)
+    {
+        yield return new WaitForSeconds(0.3f);
+        action?.Invoke();
+    }
+
     public void SetupEvents(int lastEvent)
     {
         if(lastEvent != 0)
@@ -35,10 +41,11 @@ public class EventManager : MonoBehaviour, IDataPersistence
                     switch (eventCount)
                     {
                         case 1:
-                            eventItem.SetupEventItem("NewCards", i);
+                            eventItem.SetupEventItem("RefillNutrients", i);
+                            //eventItem.SetupEventItem("NewCards", i);
                             break;
                         case 2:
-                            eventItem.SetupEventItem("RefillNutrients", i);
+                            //eventItem.SetupEventItem("RefillNutrients", i);
                             break;
                         case 3:
                             eventItem.SetupEventItem("PayExpenses", i);
@@ -92,13 +99,19 @@ public class EventManager : MonoBehaviour, IDataPersistence
         switch (pastEvent.eventItemType)
         {
             case "NewCards":
-                GameManager.SM.SetupSelection();
-                GameManager.WM.OpenWindow(GameManager.WM.selectionWindow);
+                StartCoroutine(Delay(() =>
+                {
+                    GameManager.SM.SetupSelection();
+                    GameManager.WM.OpenWindow(GameManager.WM.selectionWindow);
+                }));
                 break;
             case "RefillNutrients":
-                GameManager.ISM.OpenIslandManagement("Available");
-                GameManager.WM.OpenWindow(GameManager.WM.manageWindow);
-                GameManager.EVM.SetupRefill();
+                StartCoroutine(Delay(() =>
+                {
+                    GameManager.WM.OpenWindow(GameManager.WM.manageWindow);
+                    GameManager.ISM.OpenIslandManagement("Available");
+                    StartCoroutine(GameManager.RM.RefillEvent());
+                }));
                 break;
             case "PayExpenses":
                 break;
@@ -107,11 +120,6 @@ public class EventManager : MonoBehaviour, IDataPersistence
                 break;
         }
         Destroy(pastEvent);
-    }
-
-    public void SetupRefill()
-    {
-        
     }
 
     public void LoadData(GameData data)

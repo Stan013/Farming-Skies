@@ -44,9 +44,9 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         }
         else
         {
-            GameManager.EVM.CheckEvent();
             Weeks++;
             GameManager.WM.advanceWindow.SetActive(false);
+            GameManager.EVM.CheckEvent();
         }
     }
 

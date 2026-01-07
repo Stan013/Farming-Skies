@@ -132,9 +132,11 @@ MonoBehaviour:
   yield: 0
   predictedYield: 0
   nutrientsUsages: 
-  structureTax: 100
+  structureTax: 25
   plantData:
     plantID: 
     islandID: 
     plotID: 
     plantSize: 
+  driedOut: 0
+  plantAge: 0

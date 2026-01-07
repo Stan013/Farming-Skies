@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static EventManager EVM { get; private set; }
     public static QuestManager QM { get; private set; }
     public static SelectionManager SM { get; private set; }
+    public static RefillManager RM { get; private set; }
 
     [Header("Save/Load")]
     public static DataPersistenceManager DPM { get; private set; }
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         EVM = GetComponent<EventManager>();
         SM = GetComponent<SelectionManager>();
         DPM = GetComponent<DataPersistenceManager>();
+        RM = GetComponent<RefillManager>();
     }
 
     private void StartGame(string gameAction)

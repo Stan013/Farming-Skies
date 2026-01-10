@@ -1431,7 +1431,7 @@ GameObject:
   - component: {fileID: 27256464}
   - component: {fileID: 27256463}
   m_Layer: 0
-  m_Name: ExpenseProductionImage
+  m_Name: ExpenseFarmsImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8074,7 +8074,7 @@ GameObject:
   - component: {fileID: 194056670}
   - component: {fileID: 194056671}
   m_Layer: 0
-  m_Name: ExpenseIslandScroll
+  m_Name: ExpenseFarmsScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10461,7 +10461,7 @@ GameObject:
   - component: {fileID: 255910569}
   - component: {fileID: 255910568}
   m_Layer: 0
-  m_Name: ExpenseBuildableTotalText
+  m_Name: ExpenseStructuresTotalText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15076,7 +15076,7 @@ GameObject:
   - component: {fileID: 388256055}
   - component: {fileID: 388256056}
   m_Layer: 0
-  m_Name: ExpenseIslandScroll
+  m_Name: ExpenseIslandsScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19439,7 +19439,7 @@ GameObject:
   - component: {fileID: 494395917}
   - component: {fileID: 494395916}
   m_Layer: 0
-  m_Name: ExpenseIslandTotalAmount
+  m_Name: ExpenseIslandsTotalAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22884,7 +22884,7 @@ GameObject:
   - component: {fileID: 575531949}
   - component: {fileID: 575531948}
   m_Layer: 0
-  m_Name: ExpenseIslandImage
+  m_Name: ExpenseIslandsImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28477,7 +28477,7 @@ GameObject:
   - component: {fileID: 718138262}
   - component: {fileID: 718138261}
   m_Layer: 0
-  m_Name: ExpenseStructureViewport
+  m_Name: ExpenseStructuresViewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33168,7 +33168,7 @@ GameObject:
   - component: {fileID: 839772753}
   - component: {fileID: 839772752}
   m_Layer: 0
-  m_Name: ExpenseIslandText
+  m_Name: ExpenseIslandsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34311,7 +34311,7 @@ GameObject:
   - component: {fileID: 877212030}
   - component: {fileID: 877212029}
   m_Layer: 0
-  m_Name: ExpenseBuildableTotalAmount
+  m_Name: ExpenseStructuresTotalAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37253,7 +37253,7 @@ GameObject:
   - component: {fileID: 931450565}
   - component: {fileID: 931450564}
   m_Layer: 0
-  m_Name: ExpenseIslandViewport
+  m_Name: ExpenseIslandsViewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39010,7 +39010,7 @@ GameObject:
   - component: {fileID: 968940388}
   - component: {fileID: 968940389}
   m_Layer: 0
-  m_Name: ExpenseIslandContent
+  m_Name: ExpenseFarmsContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40695,7 +40695,7 @@ GameObject:
   - component: {fileID: 1039055565}
   - component: {fileID: 1039055564}
   m_Layer: 0
-  m_Name: ExpenseIslandViewport
+  m_Name: ExpenseFarmsViewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43146,7 +43146,7 @@ GameObject:
   - component: {fileID: 1103088078}
   - component: {fileID: 1103088077}
   m_Layer: 0
-  m_Name: ExpenseProduction
+  m_Name: ExpenseFarms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45297,7 +45297,7 @@ GameObject:
   - component: {fileID: 1146089382}
   - component: {fileID: 1146089381}
   m_Layer: 0
-  m_Name: ExpenseProductionTotalAmount
+  m_Name: ExpenseFarmsTotalAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47325,7 +47325,7 @@ GameObject:
   - component: {fileID: 1203195824}
   - component: {fileID: 1203195823}
   m_Layer: 0
-  m_Name: ExpenseProductionTotalBackground
+  m_Name: ExpenseFarmsTotalBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48654,7 +48654,7 @@ GameObject:
   - component: {fileID: 1237698852}
   - component: {fileID: 1237698851}
   m_Layer: 0
-  m_Name: ExpenseStructureImage
+  m_Name: ExpenseStructuresImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49174,7 +49174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1244416423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49249,7 +49249,7 @@ GameObject:
   - component: {fileID: 1247898544}
   - component: {fileID: 1247898543}
   m_Layer: 0
-  m_Name: ExpenseBuildablesText
+  m_Name: ExpenseStructuresText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49294,7 +49294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Buildables:'
+  m_text: 'Structures:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
@@ -49523,7 +49523,7 @@ GameObject:
   - component: {fileID: 1261517339}
   - component: {fileID: 1261517338}
   m_Layer: 0
-  m_Name: ExpenseProductionText
+  m_Name: ExpenseFarmsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59467,7 +59467,7 @@ GameObject:
   - component: {fileID: 1438007964}
   - component: {fileID: 1438007965}
   m_Layer: 0
-  m_Name: ExpenseStructureScroll
+  m_Name: ExpenseStructuresScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65636,7 +65636,7 @@ GameObject:
   - component: {fileID: 1614807947}
   - component: {fileID: 1614807946}
   m_Layer: 0
-  m_Name: ExpenseStructureTotalBackground
+  m_Name: ExpenseStructuresTotalBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65713,7 +65713,7 @@ GameObject:
   - component: {fileID: 1615387193}
   - component: {fileID: 1615387192}
   m_Layer: 0
-  m_Name: ExpenseIslandTotalText
+  m_Name: ExpenseIslandsTotalText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67128,7 +67128,7 @@ GameObject:
   - component: {fileID: 1632753628}
   - component: {fileID: 1632753627}
   m_Layer: 0
-  m_Name: ExpenseProductionTotalText
+  m_Name: ExpenseFarmsTotalText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71543,7 +71543,7 @@ GameObject:
   - component: {fileID: 1754616142}
   - component: {fileID: 1754616141}
   m_Layer: 0
-  m_Name: ExpenseIslandTotalBackground
+  m_Name: ExpenseIslandsTotalBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79079,7 +79079,7 @@ GameObject:
   - component: {fileID: 1919018681}
   - component: {fileID: 1919018682}
   m_Layer: 0
-  m_Name: ExpenseStructureContent
+  m_Name: ExpenseStructuresContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

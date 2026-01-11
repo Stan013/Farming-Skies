@@ -77,6 +77,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private Coroutine balanceRoutine;
     private Coroutine waterRoutine;
     private Coroutine fertiliserRoutine;
+    private Coroutine powerRoutine;
     public IEnumerator AnimateFloat(float from, float to, System.Action<float> onUpdate)
     {
         float t = 0f;

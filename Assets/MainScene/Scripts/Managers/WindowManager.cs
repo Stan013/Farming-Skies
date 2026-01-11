@@ -20,6 +20,7 @@ public class WindowManager : MonoBehaviour
     public GameObject marketWindow;
     public GameObject expenseWindow;
     public GameObject eventWindow;
+    public GameObject taxWindow;
 
     private GameObject openWindow;
 

@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public GameObject resourceUI;
     public GameObject timeUI;
     public GameObject selectionUI;
+    public GameObject taxUI;
 
     [Header("Game variables")]
     private float _balance;
@@ -123,6 +124,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public void SetupUI()
     {
         selectionUI.SetActive(true);
+        taxUI.SetActive(true);
         GameManager.INM.closeButton.interactable = true;
         GameManager.MM.closeButton.interactable = true;
         GameManager.CRM.closeButton.interactable = true;

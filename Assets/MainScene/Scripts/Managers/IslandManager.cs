@@ -144,7 +144,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         {
             string islandID = $"({coord.x},{coord.y})";
             Island island = FindIslandByID(islandID);
-            island.islandAvailable = true;
             if (!availableIslands.Contains(island))
             {
                 availableIslands.Add(island);

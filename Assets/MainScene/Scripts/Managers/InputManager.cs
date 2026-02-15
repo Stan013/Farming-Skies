@@ -54,11 +54,11 @@ public class InputManager : MonoBehaviour, IDataPersistence
             }
 
             smoothMoveDirection = Vector3.Lerp(smoothMoveDirection, moveDirection.normalized, Time.deltaTime * moveSpeed);
-            rb.velocity = smoothMoveDirection * moveSpeed;
+            rb.linearVelocity = smoothMoveDirection * moveSpeed;
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             smoothMoveDirection = Vector3.zero; 
         }
     }

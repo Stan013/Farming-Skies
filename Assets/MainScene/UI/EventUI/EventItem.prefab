@@ -178,6 +178,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -276,9 +277,6 @@ MonoBehaviour:
   eventIcon: {fileID: 3172611637536789254}
   eventText: {fileID: 1123184478363042794}
   eventItemType: Default
-  eventItemBackground: {fileID: 4269425234912422496}
-  defaultBackground: {fileID: 21300000, guid: 6a1c3e848888b2c43be5267d8b2bdea7, type: 3}
-  eventBackground: {fileID: 21300000, guid: e6637d92c33606548a7d700cbd034e1e, type: 3}
   defaultIcon: {fileID: 21300000, guid: e6b4a79668630b848b3c8f8e3ffa500e, type: 3}
   newCardIcon: {fileID: 21300000, guid: 85197fd77fb314943a47ffef3aadea0e, type: 3}
   nutrientRefillIcon: {fileID: 21300000, guid: 7633ab18d5626984286a5c0f88e1c7e0, type: 3}
@@ -386,6 +384,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -560,7 +559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e6637d92c33606548a7d700cbd034e1e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a1c3e848888b2c43be5267d8b2bdea7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

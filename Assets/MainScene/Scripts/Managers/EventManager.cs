@@ -28,7 +28,7 @@ public class EventManager : MonoBehaviour, IDataPersistence
         if(lastEvent != 0)
         {
             eventCount = lastEvent - 1;
-        }
+        } 
 
         for(int i = 1; i <= 52; i++)
         {

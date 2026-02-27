@@ -41,8 +41,8 @@ public class EventManager : MonoBehaviour, IDataPersistence
                     switch (eventCount)
                     {
                         case 1:
-                            eventItem.SetupEventItem("PayExpenses", i);
-                            //eventItem.SetupEventItem("NewCards", i);
+                            // eventItem.SetupEventItem("PayExpenses", i);
+                            eventItem.SetupEventItem("NewCards", i);
                             break;
                         case 2:
                             eventItem.SetupEventItem("RefillNutrients", i);

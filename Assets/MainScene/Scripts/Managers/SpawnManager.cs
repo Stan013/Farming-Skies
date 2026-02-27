@@ -9,6 +9,10 @@ public class SpawnManager : MonoBehaviour
    public float startBalance = 100f;
    public int startWater = 50;
    public int startFertiliser = 50;
+   public int startExpense = 250; // Permit
+
+   public GameObject handSlots;
+   public GameObject gameUI;
 
 
     public void Spawn()
@@ -27,6 +31,8 @@ public class SpawnManager : MonoBehaviour
             GameManager.QM.questActive = false;
             GameManager.UM.SetupUI();
             GameManager.IPM.nextWeekEnabled = true;
+            handSlots.SetActive(true);
+            gameUI.SetActive(true);
         }
     }
 }

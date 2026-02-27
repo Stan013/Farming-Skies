@@ -151,16 +151,6 @@ public class MarketManager : MonoBehaviour, IDataPersistence
 
         item.attachedItemCard.itemSupply = newSupply;
         item.itemSupplies.Insert(0, newSupply);
-
-        Debug.Log(
-            $"[MARKET UPDATE] {item.attachedItemCard.cardId}\n" +
-            $"Demand roll: {demandRoll} → {newDemand}\n" +
-            $"Supply roll: {supplyRoll} → {newSupply}\n" +
-            $"Total price change: {totalPriceChangePercentage:F2}%\n" +
-            $"Price history (new → old): {string.Join(", ", item.itemPrices)}\n" +
-            $"Demand history (new → old): {string.Join(", ", item.itemDemands)}\n" +
-            $"Supply history (new → old): {string.Join(", ", item.itemSupplies)}"
-        );
     }
 
     public MarketItem FindMarketItemByID(string id)

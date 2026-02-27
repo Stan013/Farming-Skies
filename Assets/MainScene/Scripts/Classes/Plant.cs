@@ -30,7 +30,7 @@ public class Plant : MonoBehaviour
         plantDrop.transform.localScale = new Vector3(plantDrop.transform.localScale.x, plantDrop.transform.localScale.y, plantDrop.transform.localScale.z);
         plantDrop.transform.localPosition = new Vector3(plot.position.x, 5f, plot.position.z);
         plantDrop.transform.localRotation = Quaternion.identity;
-        plantDrop.AddDropToInventory(attachedInventoryItem, this);   
+        plantDrop.AddDropToInventory(attachedInventoryItem);   
     }
 
     public void UpdatePredictedYield()

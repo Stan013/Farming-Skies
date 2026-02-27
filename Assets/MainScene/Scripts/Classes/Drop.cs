@@ -6,10 +6,10 @@ using UnityEngine;
 public class Drop : MonoBehaviour
 {
     public string dropType;
-    private int moveSpeed = 10;
+    private int moveSpeed = 15;
     private int rotationSpeed = 500;
 
-    public void AddDropToInventory(InventoryItem attachedInventoryItem, Plant attachedPlant)
+    public void AddDropToInventory(InventoryItem attachedInventoryItem)
     {
         switch (dropType)
         {
@@ -29,11 +29,6 @@ public class Drop : MonoBehaviour
                 attachedInventoryItem.ItemQuantity += 3;
                 break;
         }
-        MoveDrop();
-    }
-
-    public void MoveDrop()
-    {
         StartCoroutine(MoveDropCoroutine());
     }
 

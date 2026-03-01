@@ -29,6 +29,16 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
             _expense = value;
         }
     }
+    
+    public int farmingPermit;
+    public bool farmingUnlocked;
+    public int buildingPermit;
+    public bool buildingUnlocked;
+    public int animalPermit;
+    public bool animalUnlocked;
+    public int productionPermit;
+    public bool productionUnlocked;
+
 
     [Header("UI animation")]
     private Coroutine expenseRoutine;

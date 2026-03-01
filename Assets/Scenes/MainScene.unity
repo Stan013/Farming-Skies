@@ -12296,7 +12296,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 292997370}
   m_OnClick:
     m_PersistentCalls:
@@ -18167,7 +18167,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 477309419}
   m_OnClick:
     m_PersistentCalls:
@@ -20078,7 +20078,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 528516480}
   m_OnClick:
     m_PersistentCalls:
@@ -33202,7 +33202,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 877823933}
   m_OnClick:
     m_PersistentCalls:
@@ -57962,7 +57962,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1440702512}
   m_OnClick:
     m_PersistentCalls:
@@ -79224,7 +79224,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1956677986}
   m_OnClick:
     m_PersistentCalls:
@@ -94593,7 +94593,6 @@ MonoBehaviour:
   startBalance: 150
   startWater: 50
   startFertiliser: 50
-  startExpense: 250
   handSlots: {fileID: 302588990226712807}
   gameUI: {fileID: 23434303}
 --- !u!114 &8413217862094962421
@@ -94627,6 +94626,14 @@ MonoBehaviour:
   statsTab: 
   closeButton: {fileID: 1956677988}
   expenseText: {fileID: 4241359295382735745}
+  farmingPermit: 100
+  farmingUnlocked: 0
+  buildingPermit: 100
+  buildingUnlocked: 0
+  animalPermit: 100
+  animalUnlocked: 0
+  productionPermit: 100
+  productionUnlocked: 0
   expenseItemTemplate: {fileID: 1420848322}
   expenseIslands: []
   expenseIslandsContentArea: {fileID: 791095298}

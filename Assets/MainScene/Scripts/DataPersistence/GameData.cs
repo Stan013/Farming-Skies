@@ -117,14 +117,13 @@ public class GameData
     // Event Manager Data
     public int lastEvent;
 
-    public GameData(float startBalance, int startWater, int startFertiliser, int startExpense)
+    public GameData(float startBalance, int startWater, int startFertiliser)
     {
         questCount = 0;
         farmLevel = 0;
         balance = startBalance;
         water = startWater;
         fertiliser = startFertiliser;
-        expense = startExpense;
         weeks = 0;
     }
 }

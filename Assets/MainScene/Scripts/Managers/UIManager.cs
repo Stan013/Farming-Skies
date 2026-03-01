@@ -125,12 +125,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     {
         selectionUI.SetActive(true);
         taxUI.SetActive(true);
-        GameManager.INM.closeButton.interactable = true;
-        GameManager.MM.closeButton.interactable = true;
-        GameManager.CRM.closeButton.interactable = true;
-        GameManager.ISM.closeButton.interactable = true;
-        GameManager.EM.closeButton.interactable = true;
-        GameManager.EVM.closeButton.interactable = true;
         foreach (Transform child in selectionUI.transform)
         {
             child.GetComponent<Button>().interactable = true;

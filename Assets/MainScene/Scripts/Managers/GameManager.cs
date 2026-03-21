@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static QuestManager QM { get; private set; }
     public static SelectionManager SM { get; private set; }
     public static RefillManager RM { get; private set; }
+    public static TaxManager TAM { get; private set; }
 
     [Header("Save/Load")]
     public static DataPersistenceManager DPM { get; private set; }
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         SM = GetComponent<SelectionManager>();
         DPM = GetComponent<DataPersistenceManager>();
         RM = GetComponent<RefillManager>();
+        TAM = GetComponent<TaxManager>();
     }
 
     private void StartGame(string gameAction)

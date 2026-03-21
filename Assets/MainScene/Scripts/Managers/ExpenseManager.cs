@@ -43,14 +43,6 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     [Header("UI animation")]
     private Coroutine expenseRoutine;
 
-    // [Header("Farm Stat variables")]
-    // public TMP_Text islandValueText;
-    // public TMP_Text islandValueChangeText;
-    // public TMP_Text plantValueText;
-    // public TMP_Text plantValueChangeText;
-    // public TMP_Text structureValueText;
-    // public TMP_Text structureValueChangeText;
-
     [Header("Expense tab variables")]
     public ExpenseItem expenseItemTemplate;
     public List<ExpenseItem> expenseIslands;
@@ -72,6 +64,11 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     public GameObject expenseProductionContentArea;
     public float expenseProductionTotal;
     public TMP_Text expenseProductionTotalText;
+
+    public List<ExpenseItem> expenseSales;
+    public GameObject expenseSalesContentArea;
+    public float expenseSalesTotal;
+    public TMP_Text expenseSalesTotalText;
 
     // public void UpdateChangeFarmValue()
     // {

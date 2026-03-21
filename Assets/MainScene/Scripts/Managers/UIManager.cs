@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     private float _balance;
     private int _water;
     private int _fertiliser;
+    private int _power;
     public float Balance
     {
         get => _balance;
@@ -54,7 +55,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
             _water = value;
         }
     }
-    public int Fertiliser
+    public int Fertiliser 
     {
         get => _fertiliser;
         set
@@ -70,6 +71,24 @@ public class UIManager : MonoBehaviour, IDataPersistence
             ));
 
             _fertiliser = value;
+        }
+    }
+    public int Power
+    {
+        get => _power;
+        set
+        {
+            if (_power == value) return;
+
+            if (powerRoutine != null)
+                StopCoroutine(powerRoutine);
+
+            powerRoutine = StartCoroutine(AnimateInt(
+                _power, value,
+                v => powerText.text = FormatNumber(v, false) + " L"
+            ));
+
+            _power = value;
         }
     }
 
@@ -112,6 +131,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
     public TMP_Text balanceText;
     public TMP_Text waterText;
     public TMP_Text fertiliserText;
+    public TMP_Text powerText;
 
     [Header("Island builder")]
     public GameObject islandBuilder;

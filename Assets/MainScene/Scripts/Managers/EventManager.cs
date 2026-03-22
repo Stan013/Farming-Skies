@@ -35,7 +35,12 @@ public class EventManager : MonoBehaviour, IDataPersistence
             if(i >= GameManager.TM.Weeks)
             {
                 EventItem eventItem = Instantiate(eventItemTemplate, Vector3.zero, Quaternion.identity, eventContentArea.transform);
-                if (i % 4 == 0 && i != 0)
+                if (i == 52)
+                {
+                    eventItem.SetupEventItem("InflationCalculation", i);
+                    upcomingEvents.Add(eventItem);
+                }
+                else if (i % 4 == 0)
                 {
                     eventCount++;
                     switch (eventCount)

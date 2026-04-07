@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class TaxCategory : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int permitCost;
 
-    // Update is called once per frame
-    void Update()
+    public void UnlockPermit(string permit)
     {
-        
+        switch (permit)
+        {
+            case "Farming":
+                GameManager.QM.farmingUnlocked = true;
+                break;
+            case "Building":
+                GameManager.QM.buildingUnlocked = true;
+                break;
+            case "Crafting":
+                GameManager.QM.craftingUnlocked = true;
+                break;
+            case "Trading":
+                GameManager.QM.tradingUnlocked = true;
+                break;
+        }
     }
 }

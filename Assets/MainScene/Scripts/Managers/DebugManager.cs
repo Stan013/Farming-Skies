@@ -28,7 +28,7 @@ public class DebugManager : MonoBehaviour
         {
             UpDayCounter();
         }
-        if (Input.GetKeyUp(KeyCode.Keypad1))
+        if (Input.GetKeyUp(KeyCode.Keypad0))
         {
             if(cardIdInput.gameObject.activeSelf)
             {
@@ -48,6 +48,15 @@ public class DebugManager : MonoBehaviour
                 cropIdInput.gameObject.SetActive(true);
             }
         }
+        if(Input.GetKeyUp(KeyCode.Keypad1))
+        {
+            GenerateNewTax();
+        }
+    }
+
+    public void GenerateNewTax()
+    {
+        GameManager.TAM.GenerateInflation();
     }
 
     public void AddMoney()

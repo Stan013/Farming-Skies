@@ -35,19 +35,36 @@ public class LevelManager : MonoBehaviour, IDataPersistence
             farmLevelMin = 0;
             farmLevelMax = 1;
         }
-        else if(_farmLevel >= 1)
+        else if(_farmLevel > 1)
         {
             farmLevelIcon.sprite = farmLevel1;
-            farmLevelMin = 0;
-            farmLevelMax = 9;
+            farmLevelMin = 1;
+            farmLevelMax = 5;
         }
-        else if (_farmLevel >= 9)
+        else if (_farmLevel > 5)
         { 
             farmLevelIcon.sprite = farmLevel2;
-            farmLevelMin = 9;
+            farmLevelMin = 5;
             farmLevelMax = 25;
         }
+        else if (_farmLevel > 25)
+        { 
+            farmLevelIcon.sprite = farmLevel3;
+            farmLevelMin = 25;
+            farmLevelMax = 50;
+        }
+        else if (_farmLevel > 50)
+        { 
+            farmLevelIcon.sprite = farmLevel4;
+            farmLevelMin = 50;
+            farmLevelMax = 100;
+        }
         farmLevelText.text = "Level " + _farmLevel.ToString();
+
+        if(_farmLevel == farmLevelMax)
+        {
+            GameManager.TAM.GenerateInflation();
+        }
     }
 
     public void LoadData(GameData data)

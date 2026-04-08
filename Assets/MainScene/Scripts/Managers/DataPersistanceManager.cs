@@ -47,6 +47,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.MM.SetupMarket();
         GameManager.EVM.SetupEvents(0);
         GameManager.SPM.Spawn();
+        GameManager.TAM.GenerateInflation();
     }
     
     public void ClearChildren(Transform parent)

@@ -10,8 +10,8 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     public string statsTab;
     public Button closeButton;
     public TMP_Text expenseText;
-    private int _expense;
-    public int Expense
+    private float _expense;
+    public float Expense
     {
         get => _expense;
         set
@@ -21,7 +21,7 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
             if (expenseRoutine != null)
                 StopCoroutine(expenseRoutine);
 
-            expenseRoutine = StartCoroutine(GameManager.UM.AnimateInt(
+            expenseRoutine = StartCoroutine(GameManager.UM.AnimateFloat(
                 _expense, value,
                 v => expenseText.text = GameManager.UM.FormatNumber(v, true) + " ₴"
             ));
@@ -47,27 +47,27 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
     public ExpenseItem expenseItemTemplate;
     public List<ExpenseItem> expenseIslands;
     public GameObject expenseIslandsContentArea;
-    public float expenseIslandsTotal;
+    public int expenseIslandsTotal;
     public TMP_Text expenseIslandsTotalText;
 
     public List<ExpenseItem> expenseStructures;
     public GameObject expenseStructuresContentArea;
-    public float expenseStructuresTotal;
+    public int expenseStructuresTotal;
     public TMP_Text expenseStructuresTotalText;
 
     public List<ExpenseItem> expenseAnimals;
     public GameObject expenseAnimalsContentArea;
-    public float expenseAnimalsTotal;
+    public int expenseAnimalsTotal;
     public TMP_Text expenseAnimalsTotalText;
 
     public List<ExpenseItem> expenseProduction;
     public GameObject expenseProductionContentArea;
-    public float expenseProductionTotal;
+    public int expenseProductionTotal;
     public TMP_Text expenseProductionTotalText;
 
     public List<ExpenseItem> expenseSales;
     public GameObject expenseSalesContentArea;
-    public float expenseSalesTotal;
+    public int expenseSalesTotal;
     public TMP_Text expenseSalesTotalText;
 
     // public void UpdateChangeFarmValue()

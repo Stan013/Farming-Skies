@@ -19,9 +19,9 @@ public class ExpenseItem : MonoBehaviour
     {
         attachedIsland = island;
         GameManager.EM.expenseIslandsTotal += attachedIsland.islandExpenseCost;
-        GameManager.EM.Expense += attachedIsland.islandExpenseCost;
         expenseItemIcon.sprite = islandIcon;
         expenseItemCostText.text = "+ " + attachedIsland.islandExpenseCost.ToString() + " ₴";
+        GameManager.TAM.CalculateTaxes();
     }
 
     public void SetupBuildableExpense(Plant buildable)

@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 TM.RotateSky(3f);
                 IPM.KeyboardInput();
                 IPM.MouseInput();
-                QM.QuestCheck();
 
                 DBM.DebugInput(); // Debug mode
             }

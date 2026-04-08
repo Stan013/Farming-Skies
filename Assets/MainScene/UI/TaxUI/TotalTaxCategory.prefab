@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710623048810605261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -143, y: 83}
-  m_SizeDelta: {x: 125, y: 85}
+  m_AnchoredPosition: {x: -0, y: 78}
+  m_SizeDelta: {x: 410, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6810571405444846148
 CanvasRenderer:
@@ -110,8 +110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: 76}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: 50, y: 76}
+  m_SizeDelta: {x: 270, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6973047470164328207
 CanvasRenderer:
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Land Tax:'
+  m_text: Islands
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
@@ -169,12 +169,12 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 32
-  m_fontSizeBase: 36
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 16
+  m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -239,7 +239,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892698747643460933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -247,8 +247,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 75}
+  m_AnchoredPosition: {x: -140, y: -0}
+  m_SizeDelta: {x: 80, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5745515766540175297
 CanvasRenderer:
@@ -299,7 +299,6 @@ GameObject:
   - component: {fileID: 8935500176222127090}
   - component: {fileID: 1812775259814451976}
   - component: {fileID: 8943222574327013230}
-  - component: {fileID: 1491754547526102234}
   m_Layer: 0
   m_Name: TotalTaxCategory
   m_TagString: Untagged
@@ -369,19 +368,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1491754547526102234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3826191602188885438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e34b2e9c3acf264a802a8e51d8216dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  permitCost: 0
 --- !u!1 &5061527386793839448
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Land value:'
+  m_text: 'Total Value: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
   m_sharedMaterial: {fileID: 1886822041043301996, guid: 2f534032acb534d42bac6498adfe8a3a, type: 2}
@@ -829,7 +815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: -45}
+  m_AnchoredPosition: {x: -80, y: -42.5}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7463027438920994875

@@ -17,12 +17,6 @@ public class TaxManager : MonoBehaviour
     private float totalProductionTax;
     private float totalSalesTax;
 
-    [Header("License cost variables")]
-    [SerializeField] private int farmingLicense;
-    [SerializeField] private int structureLicense;
-    [SerializeField] private int animalLicense;
-    [SerializeField] private int productionLicense;
-
     [Header("Inflation variables")]
     [SerializeField] private TMP_Text landInflationText; 
     public float landInflation;

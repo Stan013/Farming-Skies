@@ -145,10 +145,6 @@ public class UIManager : MonoBehaviour, IDataPersistence
     {
         selectionUI.SetActive(true);
         taxUI.SetActive(true);
-        foreach (Transform child in selectionUI.transform)
-        {
-            child.GetComponent<Button>().interactable = true;
-        }
     }
 
     public void UpdateUI()

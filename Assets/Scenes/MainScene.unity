@@ -26255,7 +26255,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: f8cfd602356ff2a43a9bca0d72be3c47, type: 3}
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -29696,9 +29696,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5485579259259434747, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
-    - {fileID: 639138604516858679, guid: 7310b5be9a2b87341a8a7aff031ddd68, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -43047,6 +43045,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5691262030052156081, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5723019560010807363, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: gm
       value: 
@@ -43190,6 +43192,10 @@ PrefabInstance:
     - target: {fileID: 7608551860495902932, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7701377534939352897, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7864433109907222308, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
       propertyPath: m_Enabled
@@ -45175,6 +45181,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8738415454507991663, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
   m_PrefabInstance: {fileID: 1143867622}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1143867624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+  m_PrefabInstance: {fileID: 1143867622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1151705547
 GameObject:
   m_ObjectHideFlags: 0
@@ -52754,10 +52771,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e3d7fe28288973346b153750c78808af, type: 3}
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -53033,7 +53046,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -63058,6 +63071,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8738415454507991663, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
   m_PrefabInstance: {fileID: 1573796522}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1573796524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
+  m_PrefabInstance: {fileID: 1573796522}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1576698197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68637,7 +68661,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7f4182cd80451834cb13d42c0f9dcf4e, type: 3}
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7542623371800915781, guid: 9d975b95afde97e44a8ade5eea3a7cdf, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -83093,6 +83117,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 142297e701753b5429c07103bd2bad7c, type: 3}
+--- !u!114 &2016232366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3615054318089828499, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+  m_PrefabInstance: {fileID: 1816987262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2024437860
 GameObject:
   m_ObjectHideFlags: 0
@@ -92596,7 +92631,7 @@ MonoBehaviour:
   balanceText: {fileID: 112664081}
   waterText: {fileID: 216290505}
   fertiliserText: {fileID: 1914429244}
-  powerText: {fileID: 0}
+  powerText: {fileID: 2016232366}
   islandBuilder: {fileID: 6216085517797816359}
   buildCostText: {fileID: 2150299982182787186}
   expenseCostText: {fileID: 1617302317208246472}
@@ -96892,9 +96927,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7622f2f4364aa44ba746bc22722cce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startBalance: 150
+  startBalance: 250
   startWater: 50
   startFertiliser: 50
+  startPower: 50
   handSlots: {fileID: 302588990226712807}
   gameUI: {fileID: 23434303}
 --- !u!114 &8413217862094962421
@@ -96928,14 +96964,6 @@ MonoBehaviour:
   statsTab: 
   closeButton: {fileID: 1956677988}
   expenseText: {fileID: 4241359295382735745}
-  farmingPermit: 100
-  farmingUnlocked: 0
-  buildingPermit: 100
-  buildingUnlocked: 0
-  animalPermit: 100
-  animalUnlocked: 0
-  productionPermit: 100
-  productionUnlocked: 0
   expenseItemTemplate: {fileID: 1420848322}
   expenseIslands: []
   expenseIslandsContentArea: {fileID: 791095298}
@@ -97071,6 +97099,10 @@ MonoBehaviour:
   buildingPermitText: {fileID: 818049246}
   craftingPermitText: {fileID: 519659507}
   tradingPermitText: {fileID: 2082506098}
+  craftingButton: {fileID: 1143867624}
+  marketButton: {fileID: 1573796524}
+  farmingAllowed: 0
+  buildingAllowed: 0
 --- !u!1 &8438808356335388789
 GameObject:
   m_ObjectHideFlags: 0

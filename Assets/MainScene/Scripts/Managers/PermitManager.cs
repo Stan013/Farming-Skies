@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 
 public class PermitManager : MonoBehaviour
 {
-    [Header("License cost variables")]
+    [Header("Permit cost variables")]
     [SerializeField] private int farmingPermitCost;
     [SerializeField] private int buildingPermitCost;
     [SerializeField] private int craftingPermitCost;
@@ -36,6 +36,14 @@ public class PermitManager : MonoBehaviour
     [SerializeField] private TMP_Text craftingPermitText;
     [SerializeField] private TMP_Text tradingPermitText;
 
+    [Header("UI unlock buttons")]
+    [SerializeField] private Button craftingButton;
+    [SerializeField] private Button marketButton;
+
+    [Header("Action unlock variables")]
+    public bool farmingAllowed;
+    public bool buildingAllowed;
+
     public void AcquirePermit(string permitType)
     {
         switch (permitType)
@@ -46,7 +54,8 @@ public class PermitManager : MonoBehaviour
                     GameManager.UM.Balance -= farmingPermitCost;
                     farmingPermitUnlock.SetActive(false);
                     farmingPermitAcquired.SetActive(true);
-                    farmingPermitIcon.sprite = farmingPermitAcquiredIcon;   
+                    farmingPermitIcon.sprite = farmingPermitAcquiredIcon;
+                    farmingAllowed = true;   
                 }
                 break;
             case "Building":
@@ -56,6 +65,7 @@ public class PermitManager : MonoBehaviour
                     buildingPermitUnlock.SetActive(false);
                     buildingPermitAcquired.SetActive(true);
                     buildingPermitIcon.sprite = buildingPermitAcquiredIcon;   
+                    buildingAllowed = true;
                 }
                 break;
             case "Crafting":
@@ -65,6 +75,7 @@ public class PermitManager : MonoBehaviour
                     craftingPermitUnlock.SetActive(false);
                     craftingPermitAcquired.SetActive(true);
                     craftingPermitIcon.sprite = craftingPermitAcquiredIcon;   
+                    craftingButton.interactable = true;
                 }
                 break;
             case "Trading":
@@ -74,6 +85,7 @@ public class PermitManager : MonoBehaviour
                     tradingPermitUnlock.SetActive(false);
                     tradingPermitAcquired.SetActive(true);
                     tradingPermitIcon.sprite = tradingPermitAcquiredIcon;   
+                    marketButton.interactable = true;
                 }
                 break;
         }

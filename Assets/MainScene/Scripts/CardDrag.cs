@@ -18,8 +18,11 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Island previousIsland;
     public GameObject hoverPlot;
     public GameObject previousHoverPlot;
+
+    [Header("Plant indicators")]
     public Sprite plotIndicatorGreen;
     public Sprite plotIndicatorOrange;
+    public Sprite plotIndicatorRed;
 
     [Header("Collision variables")]
     private bool collisionOn = false;
@@ -167,33 +170,51 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
-        hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorOrange;
-        AlignDragInstanceToPlot(hoverPlot);
-        previousHoverPlot = hoverPlot;
+        if(GameManager.PEM.buildingAllowed)
+        {
+            hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+            hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorOrange;
+            AlignDragInstanceToPlot(hoverPlot);
+            previousHoverPlot = hoverPlot;
+        }
+        else
+        {
+            hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+            hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorRed;
+            previousHoverPlot = hoverPlot;
+        }
     }
 
     private void HandleCropHover(Island hoverIsland)
     {
-        if (hoverIsland == null || CheckPotentialPlot(hoverIsland) == null)
-        {
-            if (previousHoverPlot != null)
+            if (hoverIsland == null || CheckPotentialPlot(hoverIsland) == null)
+            {
+                if (previousHoverPlot != null)
+                {
+                    previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+                    previousHoverPlot = null;
+                }
+                return;
+            }
+
+            if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
             {
                 previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-                previousHoverPlot = null;
             }
-            return;
-        }
 
-        if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
-        {
-            previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
-        hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
-        AlignDragInstanceToPlot(hoverPlot);
-        previousHoverPlot = hoverPlot;
+            if(GameManager.PEM.farmingAllowed)
+            {
+                hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
+                AlignDragInstanceToPlot(hoverPlot);
+                previousHoverPlot = hoverPlot;
+            }
+            else
+            {
+                hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorRed;
+                previousHoverPlot = hoverPlot;
+            }
     }
 
     private void HandleFertiliserDrop(Island hoverIsland)
@@ -255,7 +276,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void HandleStructureDrop(Island hoverIsland)
     {
-        if (hoverIsland == null || hoverPlot == null)
+        if (hoverIsland == null || hoverPlot == null || GameManager.PEM.buildingAllowed != true)
         {
             CancelDrag();
             return;
@@ -272,7 +293,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void HandleCropDrop(Island hoverIsland)
     {
-        if (hoverIsland == null || hoverPlot == null)
+        if (hoverIsland == null || hoverPlot == null || GameManager.PEM.farmingAllowed != true)
         {
             CancelDrag();
             return;

@@ -89,6 +89,7 @@ public class Island : MonoBehaviour
     {
         Transparent,
         Highlighted,
+        Denied,
         Sowed,
         Cultivated,
         Watered,
@@ -435,7 +436,7 @@ public class Island : MonoBehaviour
 
     public void UpdateIslandMaterial(bool validDrag)
     {
-        if(currentState == IslandState.Highlighted || currentState == IslandState.Transparent)
+        if(currentState == IslandState.Highlighted || currentState == IslandState.Transparent || currentState == IslandState.Denied)
         {
             Material newTop = new Material(topMat);
             Material newBottom = new Material(bottomMat);
@@ -453,13 +454,11 @@ public class Island : MonoBehaviour
             islandTop.material = topMat;
             islandBottom.material = bottomMat;
 
+            glow.SetActive(false);
+            
             if(currentState == IslandState.Highlighted)
             {
                 glow.SetActive(true);
-            }
-            else
-            {
-                glow.SetActive(false);
             }
 
         }
@@ -530,6 +529,15 @@ public class Island : MonoBehaviour
             warningIcon.SetActive(false);
         }
     }
+
+    public IEnumerator ShowNotAllowedRoutine(GameObject notAllowedIndicator)
+    {
+        notAllowedIndicator.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        notAllowedIndicator.SetActive(false);
+    }
 
     public void LoadIslandData(IslandData data)
     {

@@ -97100,7 +97100,9 @@ MonoBehaviour:
   craftingPermitText: {fileID: 519659507}
   tradingPermitText: {fileID: 2082506098}
   craftingButton: {fileID: 1143867624}
+  craftingButtonSprite: {fileID: 21300000, guid: 58a6316b1899bd246b9ff9b9d5b2ad49, type: 3}
   marketButton: {fileID: 1573796524}
+  marketButtonSprite: {fileID: 21300000, guid: 3a3e6c01827e79445afbf0671ca4db57, type: 3}
   farmingAllowed: 0
   buildingAllowed: 0
 --- !u!1 &8438808356335388789

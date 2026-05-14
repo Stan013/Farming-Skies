@@ -324,6 +324,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void CancelDrag()
     {
+        hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
         previousIsland = null;
         hoverIsland = null;
         GameManager.HM.dragCard.dragSucces = false;

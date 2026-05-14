@@ -38,7 +38,9 @@ public class PermitManager : MonoBehaviour
 
     [Header("UI unlock buttons")]
     [SerializeField] private Button craftingButton;
+    [SerializeField] private Sprite craftingButtonSprite;
     [SerializeField] private Button marketButton;
+    [SerializeField] private Sprite marketButtonSprite;
 
     [Header("Action unlock variables")]
     public bool farmingAllowed;
@@ -71,11 +73,13 @@ public class PermitManager : MonoBehaviour
             case "Crafting":
                 if(GameManager.UM.Balance >= craftingPermitCost)
                 {
+                    craftingButton.gameObject.SetActive(true);
                     GameManager.UM.Balance -= craftingPermitCost;
                     craftingPermitUnlock.SetActive(false);
                     craftingPermitAcquired.SetActive(true);
                     craftingPermitIcon.sprite = craftingPermitAcquiredIcon;   
                     craftingButton.interactable = true;
+                    craftingButton.GetComponent<Image>().sprite = craftingButtonSprite;
                 }
                 break;
             case "Trading":
@@ -86,6 +90,7 @@ public class PermitManager : MonoBehaviour
                     tradingPermitAcquired.SetActive(true);
                     tradingPermitIcon.sprite = tradingPermitAcquiredIcon;   
                     marketButton.interactable = true;
+                    marketButton.GetComponent<Image>().sprite = marketButtonSprite;
                 }
                 break;
         }

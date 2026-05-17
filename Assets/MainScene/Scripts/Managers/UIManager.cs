@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
 
             powerRoutine = StartCoroutine(AnimateInt(
                 _power, value,
-                v => powerText.text = FormatNumber(v, false) + " L"
+                v => powerText.text = FormatNumber(v, false) + " W"
             ));
 
             _power = value;
@@ -152,6 +152,7 @@ public class UIManager : MonoBehaviour, IDataPersistence
         balanceText.text = FormatNumber(_balance, true) + " L";
         waterText.text = FormatNumber(_water, false) + " L";
         fertiliserText.text = FormatNumber(_fertiliser, false) + " ₴";
+        powerText.text = FormatNumber(_power, false) + " W";
     }
 
     public string FormatNumber(float num, bool isMoney)

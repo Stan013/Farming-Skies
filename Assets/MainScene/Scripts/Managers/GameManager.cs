@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static RefillManager RM { get; private set; }
     public static TaxManager TAM { get; private set; }
     public static PermitManager PEM { get; private set; }
+    public static LoanManager LOM { get; private set;}
 
     [Header("Save/Load")]
     public static DataPersistenceManager DPM { get; private set; }

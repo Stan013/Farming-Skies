@@ -4,18 +4,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour, IDataPersistence
+public class FarmManager : MonoBehaviour, IDataPersistence
 {
-    public TMP_Text farmLevelText;
+    [Header("Farm level variables")]
     public Image farmLevelIcon;
-    public int farmLevelMax;
-    public int farmLevelMin;
-
     public Sprite farmLevel1;
     public Sprite farmLevel2;
     public Sprite farmLevel3;
     public Sprite farmLevel4;
-
+    public Sprite farmLevel5;
+    public Sprite farmLevel6;
+    public Sprite farmLevel7;
+    public Sprite farmLevel8;
+    public Sprite farmLevel9;
+    public Sprite farmLevel10;
     private int _farmLevel;
     public int FarmLevel
     {
@@ -26,6 +28,20 @@ public class LevelManager : MonoBehaviour, IDataPersistence
             SetFarmLevel();
         }
     }
+
+    [Header("Farm reputation variables")]
+    public TMP_Text farmReputationText;
+    private int _farmReputation;
+    public int FarmReputation
+    {
+        get => _farmReputation;
+        set
+        {
+            _farmReputation = value;
+            CalculateFarmReputation();
+        }
+    }
+
 
     public void SetFarmLevel()
     {
@@ -65,6 +81,11 @@ public class LevelManager : MonoBehaviour, IDataPersistence
         {
             GameManager.TAM.GenerateInflation();
         }
+    }
+
+    public void CalculateFarmReputation()
+    {
+        _farmReputation = _farmLevel;
     }
 
     public void LoadData(GameData data)

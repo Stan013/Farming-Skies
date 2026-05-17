@@ -20,14 +20,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
     public static PlantManager PM { get; private set; }
     public static CraftManager CRM { get; private set; }
     public static ExpenseManager EM { get; private set; }
-    public static LevelManager LM { get; private set; }
+    public static FarmManager FM { get; private set; }
     public static EventManager EVM { get; private set; }
     public static QuestManager QM { get; private set; }
     public static SelectionManager SM { get; private set; }
     public static RefillManager RM { get; private set; }
     public static TaxManager TAM { get; private set; }
     public static PermitManager PEM { get; private set; }
-    public static LoanManager LOM { get; private set;}
+    public static LoanManager LM { get; private set;}
 
     [Header("Save/Load")]
     public static DataPersistenceManager DPM { get; private set; }
@@ -57,13 +57,14 @@ public class GameManager : MonoBehaviour, IDataPersistence
         CRM = GetComponent<CraftManager>();
         MM = GetComponent<MarketManager>();
         EM = GetComponent<ExpenseManager>();
-        LM = GetComponent<LevelManager>();
+        FM = GetComponent<FarmManager>();
         EVM = GetComponent<EventManager>();
         SM = GetComponent<SelectionManager>();
         DPM = GetComponent<DataPersistenceManager>();
         RM = GetComponent<RefillManager>();
         TAM = GetComponent<TaxManager>();
         PEM = GetComponent<PermitManager>();
+        LM = GetComponent<LoanManager>();
     }
 
     private void StartGame(string gameAction)

@@ -34,7 +34,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void InitializeGame()
     {
-        GameManager.LM.FarmLevel = gameData.farmLevel;
+        GameManager.FM.FarmLevel = gameData.farmLevel;
         GameManager.UM.Balance = gameData.balance;
         GameManager.UM.Water = gameData.water;
         GameManager.UM.Fertiliser = gameData.fertiliser;

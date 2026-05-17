@@ -119,7 +119,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
         reconstructedIsland.islandBought = true;
         reconstructedIsland.currentState = Island.IslandState.Sowed;
         boughtIslands.Add(reconstructedIsland);
-        GameManager.LM.FarmLevel += 1;
+        GameManager.FM.FarmLevel += 1;
         islandValueChange += reconstructedIsland.islandExpenseCost;
         GameManager.EM.AddExpenseIsland(reconstructedIsland);
         SetAvailableIslands(reconstructedIsland.islandID);

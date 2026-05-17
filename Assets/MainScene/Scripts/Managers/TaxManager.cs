@@ -69,7 +69,7 @@ public class TaxManager : MonoBehaviour
 
     public void GenerateInflation()
     {
-        switch(GameManager.LM.FarmLevel)
+        switch(GameManager.FM.FarmLevel)
         {
             case 1:
                 landInflation = Mathf.Round(Random.Range(0f, 2f) * 10f) / 10f;

@@ -36063,6 +36063,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695432030}
     m_Modifications:
+    - target: {fileID: 2636178913681974228, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+      propertyPath: m_text
+      value: Farm 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Name
       value: LoanOption3
@@ -61143,6 +61147,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695432030}
     m_Modifications:
+    - target: {fileID: 2636178913681974228, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+      propertyPath: m_text
+      value: Farm 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Name
       value: LoanOption2
@@ -64883,6 +64891,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695432030}
     m_Modifications:
+    - target: {fileID: 2636178913681974228, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+      propertyPath: m_text
+      value: Farm 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Name
       value: LoanOption1
@@ -99418,7 +99430,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab86b560ae99d024c8ef799d7fc5b840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  loanOptionAmount: 3
+  farmNames:
+  - Yangtze Snaps
+  - Ganges Paddies
+  - Puglia Leaves
+  farmIcons:
+  - {fileID: 21300000, guid: c06579d0b9865bd4699edc2ce0b13ae9, type: 3}
+  - {fileID: 21300000, guid: 6596c4273b09c2547aadd6c56450e1b6, type: 3}
+  - {fileID: 21300000, guid: c3fcdb6cbb41f8347bf64c16a51589e3, type: 3}
 --- !u!1 &8438808356335388789
 GameObject:
   m_ObjectHideFlags: 0

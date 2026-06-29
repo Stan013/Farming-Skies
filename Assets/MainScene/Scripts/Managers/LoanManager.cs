@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LoanManager : MonoBehaviour
 {
-    public int loanOptionAmount;
+    [Header("Loan variables")]
     
     public void GenerateLoanOptions()
     {

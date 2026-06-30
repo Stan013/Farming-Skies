@@ -149,8 +149,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -913,8 +913,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1097,7 +1097,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6719715769326695398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5707828620797533781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,11 +1205,11 @@ MonoBehaviour:
   loanName: {fileID: 2636178913681974228}
   loanType: 
   loanTerm: 0
-  loanTermText: {fileID: 251043631708571572}
+  loanTermText: {fileID: 4451614558925245645}
   loanAmount: 0
-  loanAmountText: {fileID: 1381769934708795287}
+  loanAmountText: {fileID: 1105183561417177823}
   loanInterest: 0
-  loanInterestText: {fileID: 7291628976286634612}
+  loanInterestText: {fileID: 5379097811348843885}
 --- !u!1 &5844589873504039880
 GameObject:
   m_ObjectHideFlags: 0

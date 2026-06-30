@@ -8509,6 +8509,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8413217862094962419}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WindowManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1956450233}
+    - target: {fileID: 8826557561966880351, guid: 54b8c3b99db35314999388d06b0f107c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36165,11 +36217,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 918957410}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &918957412 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+--- !u!114 &918957413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 918957410}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be89650a1ffc99a46aac4ea28049dd3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoanOption
 --- !u!1 &918972628
 GameObject:
   m_ObjectHideFlags: 0
@@ -61258,11 +61316,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 1475390150}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1475390152 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+--- !u!114 &1475390153 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 1475390150}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be89650a1ffc99a46aac4ea28049dd3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoanOption
 --- !u!1001 &1475783779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65011,11 +65075,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 1593505165}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1593505167 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+--- !u!114 &1593505168 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 1593505165}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be89650a1ffc99a46aac4ea28049dd3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoanOption
 --- !u!1 &1593687034
 GameObject:
   m_ObjectHideFlags: 0
@@ -99466,10 +99536,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6596c4273b09c2547aadd6c56450e1b6, type: 3}
   - {fileID: 21300000, guid: c3fcdb6cbb41f8347bf64c16a51589e3, type: 3}
   farmIndex: 0
-  loanOptions:
-  - {fileID: 1593505167}
-  - {fileID: 1475390152}
-  - {fileID: 918957412}
+  loanOptionShort: {fileID: 1593505168}
+  loanOptionMid: {fileID: 1475390153}
+  loanOptionLong: {fileID: 918957413}
   loanReputation: 0
   interestPlan: Bronze
 --- !u!1 &8438808356335388789

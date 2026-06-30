@@ -121,7 +121,7 @@ public class GameData
     public GameData(float startBalance, int startWater, int startFertiliser, int startPower)
     {
         questCount = 0;
-        farmLevel = 0;
+        farmLevel = 1;
         balance = startBalance;
         water = startWater;
         fertiliser = startFertiliser;

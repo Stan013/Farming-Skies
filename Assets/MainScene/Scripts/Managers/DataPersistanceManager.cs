@@ -41,6 +41,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.UM.Power = gameData.power;
         GameManager.EM.Expense = gameData.expense;
         GameManager.TM.Weeks = gameData.weeks;
+        GameManager.FM.FarmLevel = gameData.farmLevel;
         GameManager.HM.SetHandSlots();
         GameManager.ISM.SetupIslands();
         GameManager.CM.SetupCards();
@@ -49,6 +50,7 @@ public class DataPersistenceManager : MonoBehaviour
         GameManager.EVM.SetupEvents(0);
         GameManager.SPM.Spawn();
         GameManager.TAM.GenerateInflation();
+        GameManager.LM.GenerateLoanOptions();
     }
     
     public void ClearChildren(Transform parent)

@@ -30,14 +30,14 @@ public class FarmManager : MonoBehaviour, IDataPersistence
     }
 
     [Header("Farm reputation variables")]
-    public TMP_Text farmReputationText;
-    private int _farmReputation;
-    public int FarmReputation
+    public TMP_Text farmFameText;
+    private int _farmFame;
+    public int FarmFame
     {
-        get => _farmReputation;
+        get => _farmFame;
         set
         {
-            _farmReputation = value;
+            _farmFame = value;
             CalculateFarmReputation();
         }
     }
@@ -85,7 +85,7 @@ public class FarmManager : MonoBehaviour, IDataPersistence
 
     public void CalculateFarmReputation()
     {
-        _farmReputation = _farmLevel;
+        _farmFame = _farmLevel;
     }
 
     public void LoadData(GameData data)

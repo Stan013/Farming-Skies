@@ -36063,13 +36063,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695432030}
     m_Modifications:
+    - target: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+      propertyPath: loanType
+      value: LongTerm
+      objectReference: {fileID: 0}
     - target: {fileID: 2636178913681974228, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_text
       value: Farm 3
       objectReference: {fileID: 0}
     - target: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Name
-      value: LoanOption3
+      value: LoanOptionLong
       objectReference: {fileID: 0}
     - target: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Pivot.x
@@ -36159,6 +36163,11 @@ PrefabInstance:
 --- !u!224 &918957411 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+  m_PrefabInstance: {fileID: 918957410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &918957412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 918957410}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &918972628
@@ -39096,7 +39105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.x
@@ -39104,7 +39113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39136,11 +39145,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1185
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -61147,13 +61156,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695432030}
     m_Modifications:
+    - target: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+      propertyPath: loanType
+      value: MidTerm
+      objectReference: {fileID: 0}
     - target: {fileID: 2636178913681974228, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_text
       value: Farm 2
       objectReference: {fileID: 0}
     - target: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Name
-      value: LoanOption2
+      value: LoanOptionMid
       objectReference: {fileID: 0}
     - target: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Pivot.x
@@ -61243,6 +61256,11 @@ PrefabInstance:
 --- !u!224 &1475390151 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+  m_PrefabInstance: {fileID: 1475390150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1475390152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 1475390150}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1475783779
@@ -62571,7 +62589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.x
@@ -62579,7 +62597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62611,11 +62629,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 515
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -64891,13 +64909,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1695432030}
     m_Modifications:
+    - target: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+      propertyPath: loanType
+      value: ShortTerm
+      objectReference: {fileID: 0}
     - target: {fileID: 2636178913681974228, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_text
       value: Farm 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Name
-      value: LoanOption1
+      value: LoanOptionShort
       objectReference: {fileID: 0}
     - target: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_Pivot.x
@@ -64987,6 +65009,11 @@ PrefabInstance:
 --- !u!224 &1593505166 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+  m_PrefabInstance: {fileID: 1593505165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1593505167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5707828620797533781, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 1593505165}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1593687034
@@ -76676,7 +76703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.x
@@ -76684,7 +76711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalPosition.x
@@ -76716,11 +76743,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -80257,7 +80284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.x
@@ -80265,7 +80292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalPosition.x
@@ -80297,11 +80324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6368478612714571159, guid: 21e49104f1f6f004c92f6d93d1dd6350, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -82673,7 +82700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1956450234
 RectTransform:
   m_ObjectHideFlags: 0
@@ -99438,6 +99465,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c06579d0b9865bd4699edc2ce0b13ae9, type: 3}
   - {fileID: 21300000, guid: 6596c4273b09c2547aadd6c56450e1b6, type: 3}
   - {fileID: 21300000, guid: c3fcdb6cbb41f8347bf64c16a51589e3, type: 3}
+  farmIndex: 0
+  loanOptions:
+  - {fileID: 1593505167}
+  - {fileID: 1475390152}
+  - {fileID: 918957412}
+  loanReputation: 0
+  interestPlan: Bronze
 --- !u!1 &8438808356335388789
 GameObject:
   m_ObjectHideFlags: 0

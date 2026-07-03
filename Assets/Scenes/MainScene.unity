@@ -99414,7 +99414,7 @@ MonoBehaviour:
   farmLevel8: {fileID: 0}
   farmLevel9: {fileID: 0}
   farmLevel10: {fileID: 0}
-  farmReputationText: {fileID: 0}
+  farmFameText: {fileID: 0}
 --- !u!114 &8413217862094962424
 MonoBehaviour:
   m_ObjectHideFlags: 0

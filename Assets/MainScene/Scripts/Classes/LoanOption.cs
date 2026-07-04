@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class LoanOption : MonoBehaviour
     [Header("Lending farm variables")]
     [SerializeField] private Image loanIcon;
     [SerializeField] private TMP_Text  loanName;
+    [SerializeField] private Image loanCompany;
+    
 
     [Header("Loan variables")]
     public string loanType;
@@ -16,6 +19,12 @@ public class LoanOption : MonoBehaviour
     [SerializeField] private TMP_Text loanAmountText;
     public float loanInterest;
     [SerializeField] private TMP_Text loanInterestText;
+
+    [Header("Accepted loan variables")]
+    [SerializeField] private Sprite loanCompanyBackground;
+    [SerializeField] private Sprite loanCompanyBackgroundAccepted;
+    [SerializeField] private GameObject loanDetails;
+    [SerializeField] private GameObject loanAgreement;
 
     public void GenerateLoanOption(int loanIndex)
     {
@@ -53,11 +62,10 @@ public class LoanOption : MonoBehaviour
 
     public void AcceptLoan()
     {
-        
-    }
+        loanDetails.SetActive(false);
+        loanAgreement.SetActive(false);
+        loanCompany.sprite = loanCompanyBackgroundAccepted;
+        GameManager.UM.Balance += loanAmount;
 
-    public void ChangeLoan()
-    {
-        
     }
 }

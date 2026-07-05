@@ -60213,7 +60213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1479755617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -72223,7 +72223,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: loanType
-      value: ShortTerm
+      value: MidTerm
       objectReference: {fileID: 0}
     - target: {fileID: 2636178913681974228, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
       propertyPath: m_text
@@ -72347,6 +72347,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479459979500380004, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
   m_PrefabInstance: {fileID: 1793258836}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1793258838 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2172354950374172393, guid: 61633d745bbf8d844b711d20330d40e5, type: 3}
+  m_PrefabInstance: {fileID: 1793258836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be89650a1ffc99a46aac4ea28049dd3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoanOption
 --- !u!1 &1795239717
 GameObject:
   m_ObjectHideFlags: 0
@@ -97804,7 +97815,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c3fcdb6cbb41f8347bf64c16a51589e3, type: 3}
   farmIndex: 0
   loanOptionShort: {fileID: 1593505168}
-  loanOptionMid: {fileID: 0}
+  loanOptionMid: {fileID: 1793258838}
   loanOptionLong: {fileID: 918957413}
   loanReputation: 0
   interestPlan: Bronze

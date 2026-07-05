@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         DBM = GetComponent<DebugManager>();
         SPM = GetComponent<SpawnManager>();
         WM = GetComponent<WindowManager>();

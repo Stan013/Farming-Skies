@@ -9,7 +9,9 @@ public class LoanOption : MonoBehaviour
     [Header("Lending farm variables")]
     [SerializeField] private Image loanIcon;
     [SerializeField] private TMP_Text  loanName;
-    [SerializeField] private Image loanCompany;
+    [SerializeField] private GameObject loanCompany;
+    [SerializeField] private Image loanCompanyIcon;
+    [SerializeField] private GameObject loanUnavailable;
     
 
     [Header("Loan variables")]
@@ -58,6 +60,11 @@ public class LoanOption : MonoBehaviour
     {
         loanName.text = GameManager.LM.farmNames[loanIndex];
         loanIcon.sprite = GameManager.LM.farmIcons[loanIndex];
+        loanUnavailable.SetActive(false);
+        loanCompany.SetActive(true);
+        loanDetails.SetActive(true);
+        loanAgreement.SetActive(true);
+        loanCompanyIcon.sprite = loanCompanyBackground;
 
         if (loanType == "ShortTerm")
         {
@@ -94,7 +101,7 @@ public class LoanOption : MonoBehaviour
         loanAgreement.SetActive(false);
         loanLeftDetails.SetActive(true);
         loanRepayExtra.SetActive(true);
-        loanCompany.sprite = loanCompanyBackgroundAccepted;
+        loanCompanyIcon.sprite = loanCompanyBackgroundAccepted;
         GameManager.UM.Balance += loanAmount;
                 
         weeksLeftPast = 0;
@@ -178,7 +185,7 @@ public class LoanOption : MonoBehaviour
 
     public void RepayLoanExtra()
     {
-        int amountToRepay = Mathf.Min(repayAmount, loanAmountLeft, (int)GameManager.UM.Balance);
+        int amountToRepay = Mathf.Min(repayAmount, totalLoanLeft, (int)GameManager.UM.Balance);
         if (amountToRepay <= 0) return;
 
         GameManager.UM.Balance -= amountToRepay;
@@ -193,9 +200,11 @@ public class LoanOption : MonoBehaviour
 
         ResetRepayExtra();
 
-        if (loanAmountLeft <= 0)
+        if (totalLoanLeft <= 0)
         {
-            // loan fully paid off — hook your "close/remove loan" logic here
+            loanLeftDetails.SetActive(false);
+            loanRepayExtra.SetActive(false);
+            loanUnavailable.SetActive(true);
         }
     }
 

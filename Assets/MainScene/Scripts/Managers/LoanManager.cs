@@ -33,7 +33,10 @@ public class LoanManager : MonoBehaviour
 
         for (int i = 0; i < 3 && i < availableIndices.Count; i++)
         {
-            loanOptions[i].GenerateLoanOption(availableIndices[i]);
+            if(!loanOptions[i].loanActive)
+            {
+                loanOptions[i].GenerateLoanOption(availableIndices[i]);   
+            }
         }
     }
 }

@@ -82,11 +82,11 @@ public class GameData
     public int farmLevel;
 
     // UI Manager Data
-    public int expense;
     public float balance;
     public int water;
     public int fertiliser;
     public int power;
+    public float expense;
 
     // Time Manager Data
     public int weeks;
@@ -118,7 +118,7 @@ public class GameData
     // Event Manager Data
     public int lastEvent;
 
-    public GameData(float startBalance, int startWater, int startFertiliser, int startPower)
+    public GameData(float startBalance, int startWater, int startFertiliser, int startPower, float startExpense)
     {
         questCount = 0;
         farmLevel = 1;
@@ -126,6 +126,7 @@ public class GameData
         water = startWater;
         fertiliser = startFertiliser;
         power = startPower;
+        expense = startExpense;
         weeks = 0;
     }
 }

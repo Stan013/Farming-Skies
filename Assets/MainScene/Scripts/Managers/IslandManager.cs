@@ -9,6 +9,8 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 {
     [Header("GameManager objects")]
     public Transform availableIslandsParent;
+    [SerializeField] private Button nutrientButton;
+    [SerializeField] private Sprite nutrientButtonSprite;
 
     [Header("Island lists")]
     public List<Island> allIslands;
@@ -116,6 +118,12 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     public void AddIslandToBought(Island reconstructedIsland)
     {
+        if(boughtIslands.Count == 0)
+        {
+            nutrientButton.interactable = true;
+            nutrientButton.GetComponent<Image>().sprite = nutrientButtonSprite;
+        }
+
         reconstructedIsland.islandBought = true;
         reconstructedIsland.currentState = Island.IslandState.Sowed;
         boughtIslands.Add(reconstructedIsland);

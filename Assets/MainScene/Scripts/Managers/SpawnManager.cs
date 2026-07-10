@@ -5,11 +5,12 @@ using UnityEngine.Playables;
 public class SpawnManager : MonoBehaviour
 {
 
-   [Header("Start settings")]
-   public float startBalance;
-   public int startWater;
-   public int startFertiliser;
+    [Header("Start settings")]
+    public float startBalance;
+    public int startWater;
+    public int startFertiliser;
     public int startPower;
+    public float startExpense;
 
    public GameObject handSlots;
    public GameObject gameUI;

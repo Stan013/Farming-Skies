@@ -28,7 +28,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void NewGame()
     {
-        gameData = new GameData(GameManager.SPM.startBalance, GameManager.SPM.startWater, GameManager.SPM.startFertiliser, GameManager.SPM.startPower);
+        gameData = new GameData(GameManager.SPM.startBalance, GameManager.SPM.startWater, GameManager.SPM.startFertiliser, GameManager.SPM.startPower, GameManager.SPM.startExpense);
         InitializeGame();
     }
 
@@ -74,7 +74,7 @@ public class DataPersistenceManager : MonoBehaviour
         if (gameData == null)
         {
             Debug.LogWarning("Save not found, creating new data.");
-            gameData = new GameData(GameManager.SPM.startBalance, GameManager.SPM.startWater, GameManager.SPM.startFertiliser, GameManager.SPM.startPower);
+            gameData = new GameData(GameManager.SPM.startBalance, GameManager.SPM.startWater, GameManager.SPM.startFertiliser, GameManager.SPM.startPower, GameManager.SPM.startExpense);
         }
 
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)

@@ -221,7 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1706247043366651250}
-  - component: {fileID: 1548189191005105183}
+  - component: {fileID: 7235387693404492817}
   m_Layer: 0
   m_Name: PermitCategory
   m_TagString: Untagged
@@ -254,14 +254,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1548189191005105183
-CanvasRenderer:
+--- !u!114 &7235387693404492817
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3841240533418770700}
-  m_CullTransparentMesh: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0612a5f1bebc550449156b48c5151a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Permit
+  permitCost: 100
+  permitUnlock: {fileID: 5004790220027174781}
+  permitAcquired: {fileID: 7453918272061573022}
+  permitIcon: {fileID: 5809810208656475930}
+  permitAcquiredIcon: {fileID: 0}
+  permitText: {fileID: 657542798838180104}
+  permitType: 
+  permitLevel: 0
+  permitMaxLevel: 1
 --- !u!1 &4753022753215107065
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,12 +535,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: PermitManager, Assembly-CSharp
+        m_MethodName: AcquirePermit
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 7235387693404492817}
+          m_ObjectArgumentAssemblyTypeName: Permit, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -706,7 +719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: -75}
+  m_AnchoredPosition: {x: -62, y: -175}
   m_SizeDelta: {x: 275, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7545723457199803390
@@ -865,8 +878,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
-  m_fontColor: {r: 0.44313726, g: 0.44313726, b: 0.44313726, a: 1}
+    rgba: 4281742388
+  m_fontColor: {r: 0.20392157, g: 0.20392157, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

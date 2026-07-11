@@ -1,41 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Unity.VisualScripting;
 
 public class PermitManager : MonoBehaviour
 {
-    [Header("Permit cost variables")]
-    [SerializeField] private int farmingPermitCost;
-    [SerializeField] private int buildingPermitCost;
-    [SerializeField] private int craftingPermitCost;
-    [SerializeField] private int tradingPermitCost;
-
-    [SerializeField] private GameObject farmingPermitUnlock;
-    [SerializeField] private GameObject buildingPermitUnlock;
-    [SerializeField] private GameObject craftingPermitUnlock;
-    [SerializeField] private GameObject tradingPermitUnlock;
-
-    [SerializeField] private GameObject farmingPermitAcquired;
-    [SerializeField] private GameObject buildingPermitAcquired;
-    [SerializeField] private GameObject craftingPermitAcquired;
-    [SerializeField] private GameObject tradingPermitAcquired;
-
-    [SerializeField] private Image farmingPermitIcon;
-    [SerializeField] private Image buildingPermitIcon;
-    [SerializeField] private Image craftingPermitIcon;
-    [SerializeField] private Image tradingPermitIcon;
-
-    [SerializeField] private Sprite farmingPermitAcquiredIcon;
-    [SerializeField] private Sprite buildingPermitAcquiredIcon;
-    [SerializeField] private Sprite craftingPermitAcquiredIcon;
-    [SerializeField] private Sprite tradingPermitAcquiredIcon;
-
-    [SerializeField] private TMP_Text farmingPermitText;
-    [SerializeField] private TMP_Text buildingPermitText;
-    [SerializeField] private TMP_Text craftingPermitText;
-    [SerializeField] private TMP_Text tradingPermitText;
-
     [Header("UI unlock buttons")]
     [SerializeField] private Button craftingButton;
     [SerializeField] private Sprite craftingButtonSprite;
@@ -46,53 +13,39 @@ public class PermitManager : MonoBehaviour
     public bool farmingAllowed;
     public bool buildingAllowed;
 
-    public void AcquirePermit(string permitType)
+    public void AcquirePermit(Permit permit)
     {
-        switch (permitType)
+        if(GameManager.UM.Balance >= permit.permitCost)
         {
-            case "Farming":
-                if(GameManager.UM.Balance >= farmingPermitCost)
+            if(permit.permitLevel + 1 < permit.permitMaxLevel)
+            {
+                permit.PermitUpgrade();
+            }
+            else
+            {
+                permit.PermitFullyUpgraded();
+            }
+
+            if(permit.permitLevel == 0)
+            {
+                switch (permit.permitType)
                 {
-                    GameManager.UM.Balance -= farmingPermitCost;
-                    farmingPermitUnlock.SetActive(false);
-                    farmingPermitAcquired.SetActive(true);
-                    farmingPermitIcon.sprite = farmingPermitAcquiredIcon;
-                    farmingAllowed = true;   
-                }
-                break;
-            case "Building":
-                if(GameManager.UM.Balance >= buildingPermitCost)
-                {
-                    GameManager.UM.Balance -= buildingPermitCost;
-                    buildingPermitUnlock.SetActive(false);
-                    buildingPermitAcquired.SetActive(true);
-                    buildingPermitIcon.sprite = buildingPermitAcquiredIcon;   
-                    buildingAllowed = true;
-                }
-                break;
-            case "Crafting":
-                if(GameManager.UM.Balance >= craftingPermitCost)
-                {
-                    craftingButton.gameObject.SetActive(true);
-                    GameManager.UM.Balance -= craftingPermitCost;
-                    craftingPermitUnlock.SetActive(false);
-                    craftingPermitAcquired.SetActive(true);
-                    craftingPermitIcon.sprite = craftingPermitAcquiredIcon;   
-                    craftingButton.interactable = true;
-                    craftingButton.GetComponent<Image>().sprite = craftingButtonSprite;
-                }
-                break;
-            case "Trading":
-                if(GameManager.UM.Balance >= tradingPermitCost)
-                {
-                    GameManager.UM.Balance -= tradingPermitCost;
-                    tradingPermitUnlock.SetActive(false);
-                    tradingPermitAcquired.SetActive(true);
-                    tradingPermitIcon.sprite = tradingPermitAcquiredIcon;   
-                    marketButton.interactable = true;
-                    marketButton.GetComponent<Image>().sprite = marketButtonSprite;
-                }
-                break;
+                    case "Farming":
+                        farmingAllowed = true;   
+                        break;
+                    case "Building":
+                            buildingAllowed = true;
+                        break;
+                    case "Crafting":
+                            craftingButton.interactable = true;
+                            craftingButton.GetComponent<Image>().sprite = craftingButtonSprite;
+                        break;
+                    case "Trading":
+                            marketButton.interactable = true;
+                            marketButton.GetComponent<Image>().sprite = marketButtonSprite;
+                        break;
+                }   
+            }
         }
     }
 }

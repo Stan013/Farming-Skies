@@ -7,36 +7,36 @@ using UnityEngine.UI;
 
 public class ExpandedMarketItem : MonoBehaviour
 {
+    [Header("Item variables")]
     public MarketItem collapsedItem;
     public InventoryItem attachedInventoryItem;
     public Image expandedImage;
     public TMP_Text expandedName;
     public TMP_Text expandedQuantity;
 
+    [Header("Transaction UI variables")]
     public Button transactionButton;
     public TMP_Text transactionText;
     public Image transactionButtonBackground;
     public Sprite sellTransaction;
     public Sprite buyTransaction;
     public string marketTransaction;
-
     public Image transactionInputBackground;
     public Sprite validTransaction;
     public Sprite ongoingTransaction;
     public Sprite invalidTransaction;
     public bool canTransaction;
-
     public Button minButton;
     public Button minusButton;
     public TMP_InputField transactionAmountInput;
     public Button plusButton;
     public Button maxButton;
-
     public Image balanceChangeBackground;
     public Sprite balanceAddition;
     public Sprite balanceDeduction;
     public TMP_Text balanceChangeText;
 
+    [Header("Transaction variables")]
     public int TransactionAmount
     {
         get => _transactionAmount;
@@ -53,12 +53,14 @@ public class ExpandedMarketItem : MonoBehaviour
     public int _transactionAmount;
     public float balanceChange;
 
-    public TMP_Text highestPriceText;
-    public TMP_Text averagePriceText;
-    public TMP_Text lowestPriceText;
+    [Header("Price information variables")]
     public TMP_Text expandedPrice;
     public Image expandedPriceIcon;
-
+    public Sprite lowPriceIcon;
+    public Sprite averagePriceIcon;
+    public Sprite highPriceIcon;
+    public Image priceCategoryIcon;
+    public TMP_Text priceCategoryText;
     public Sprite upIcon;
     public Sprite sameIcon;
     public Sprite downIcon;
@@ -73,13 +75,11 @@ public class ExpandedMarketItem : MonoBehaviour
         attachedInventoryItem = GameManager.INM.FindInventoryItemByID(item.attachedItemCard.cardId);
         expandedImage.sprite = collapsedItem.attachedItemCard.cardSprite;
         expandedName.text = collapsedItem.attachedItemCard.itemName;
-        expandedQuantity.text = attachedInventoryItem.ItemQuantity.ToString();
-        highestPriceText.text = collapsedItem.itemPrices.Max().ToString("F2") + " ₴";
-        averagePriceText.text = collapsedItem.itemPrices.Average().ToString("F2") + " ₴";
-        lowestPriceText.text = collapsedItem.itemPrices.Min().ToString("F2") + " ₴";
+        expandedQuantity.text = "x" + attachedInventoryItem.ItemQuantity.ToString();
         expandedPrice.text = collapsedItem.attachedItemCard.itemPrice.ToString("F2") + " ₴";
         collapsedItem.maxBuyAmount = Mathf.FloorToInt(GameManager.UM.Balance / collapsedItem.attachedItemCard.itemPrice);
         SetPriceIcons();
+        SetPriceCategory();
         TransactionAmount = 0;
     }
 
@@ -266,6 +266,40 @@ public class ExpandedMarketItem : MonoBehaviour
             expandedPriceIcon.sprite = sameIcon;
     }
 
+    public void SetPriceCategory()
+    {
+        if (collapsedItem.itemPrices.Count == 0)
+        {
+            priceCategoryIcon.sprite = averagePriceIcon;
+            priceCategoryText.text = "Average";
+            return;
+        }
+
+        float current = collapsedItem.attachedItemCard.itemPrice;
+        float lowest = collapsedItem.itemPrices.Min();
+        float highest = collapsedItem.itemPrices.Max();
+        float average = collapsedItem.itemPrices.Average();
+
+        float diffLow = Mathf.Abs(current - lowest);
+        float diffAvg = Mathf.Abs(current - average);
+        float diffHigh = Mathf.Abs(current - highest);
+
+        if (diffLow <= diffAvg && diffLow <= diffHigh)
+        {
+            priceCategoryIcon.sprite = lowPriceIcon;
+            priceCategoryText.text = "Low";
+        }
+        else if (diffHigh <= diffAvg && diffHigh <= diffLow)
+        {
+            priceCategoryIcon.sprite = highPriceIcon;
+            priceCategoryText.text = "High";
+        }
+        else
+        {
+            priceCategoryIcon.sprite = averagePriceIcon;
+            priceCategoryText.text = "Average";
+        }
+    }
 
     public static string FormatNumber(float num)
     {

@@ -174,7 +174,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 case "Available":
                     nutrientText.text = "Available Nutrients: ";
                     islandInformation.SetActive(true);
-                    plotInformation.SetActive(false);
                     islandName.text = "Island " + centerIsland.islandID + ":";
                     waterNeed.text = centerIsland.nutrientsAvailable[0].ToString();
                     nitrogenNeed.text = centerIsland.nutrientsAvailable[1].ToString();
@@ -184,7 +183,6 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 case "Required":
                     nutrientText.text = "Required Nutrients: ";
                     islandInformation.SetActive(true);
-                    plotInformation.SetActive(false);
                     islandName.text = "Island " + centerIsland.islandID + ":";
                     waterNeed.text = centerIsland.nutrientsRequired[0].ToString();
                     nitrogenNeed.text = centerIsland.nutrientsRequired[1].ToString();

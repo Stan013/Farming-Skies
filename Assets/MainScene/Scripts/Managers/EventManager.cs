@@ -40,7 +40,7 @@ public class EventManager : MonoBehaviour, IDataPersistence
                     eventItem.SetupEventItem("InflationCalculation", i);
                     upcomingEvents.Add(eventItem);
                 }
-                else if (i % 4 == 0)
+                else if (i % 3 == 0)
                 {
                     eventCount++;
                     switch (eventCount)
@@ -53,6 +53,9 @@ public class EventManager : MonoBehaviour, IDataPersistence
                             eventItem.SetupEventItem("RefillNutrients", i);
                             break;
                         case 3:
+                            eventItem.SetupEventItem("NewLoans", i);
+                            break;
+                        case 4:
                             eventItem.SetupEventItem("PayExpenses", i);
                             eventCount = 0;
                             break;
@@ -116,6 +119,13 @@ public class EventManager : MonoBehaviour, IDataPersistence
                     GameManager.WM.OpenWindow(GameManager.WM.manageWindow);
                     GameManager.ISM.OpenIslandManagement("Available");
                     StartCoroutine(GameManager.RM.RefillEvent());
+                }));
+                break;
+            case "NewLoans":
+                StartCoroutine(Delay(() =>
+                {
+                    GameManager.LM.GenerateLoanOptions();
+                    GameManager.WM.OpenWindow(GameManager.WM.bankWindow);
                 }));
                 break;
             case "PayExpenses":

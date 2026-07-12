@@ -33,7 +33,6 @@ public class TimeManager : MonoBehaviour, IDataPersistence
         GameManager.MM.MarketUpdate();
         GameManager.PM.Harvest();
         GameManager.ISM.UpdateIslandColor();
-        GameManager.LM.GenerateLoanOptions();
         //GameManager.EM.SetFarmStats();
 
         if(!GameManager.DBM.skipDay)

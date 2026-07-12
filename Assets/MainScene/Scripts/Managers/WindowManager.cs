@@ -21,6 +21,7 @@ public class WindowManager : MonoBehaviour
     public GameObject expenseWindow;
     public GameObject eventWindow;
     public GameObject taxWindow;
+    public GameObject bankWindow;
 
     private GameObject openWindow;
 

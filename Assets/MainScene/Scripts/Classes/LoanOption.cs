@@ -70,7 +70,7 @@ public class LoanOption : MonoBehaviour
 
         if (loanType == "ShortTerm")
         {
-            loanTerm = Random.Range(2,4);
+            loanTerm = Random.Range(2,5);
             loanInterest = Random.Range(90,121) / 10f;
             loanAmount = Random.Range(250 * GameManager.FM.FarmLevel, 500 * GameManager.FM.FarmLevel + 1);
             loanTermText.text = loanTerm + " events";
@@ -79,7 +79,7 @@ public class LoanOption : MonoBehaviour
         }
         else if (loanType == "MidTerm")
         {
-            loanTerm = Random.Range(4,6);
+            loanTerm = Random.Range(4,7);
             loanInterest = Random.Range(60,91) / 10f;
             loanAmount = Random.Range(250 * GameManager.FM.FarmLevel, 500 * GameManager.FM.FarmLevel + 1);
             loanTermText.text = loanTerm + " events";
@@ -88,7 +88,7 @@ public class LoanOption : MonoBehaviour
         }
         else
         {
-            loanTerm = Random.Range(6,8);
+            loanTerm = Random.Range(6,9);
             loanInterest = Random.Range(30,61) / 10f;
             loanAmount = Random.Range(250 * GameManager.FM.FarmLevel, 500 * GameManager.FM.FarmLevel + 1);
             loanTermText.text = loanTerm + " events";

@@ -18,11 +18,13 @@ public class Plant : MonoBehaviour
     public int predictedYield;
     public List<int> nutrientsUsages;
     public int structureTax;
-    private System.Random random = new System.Random();
     public PlantData plantData;
 
     public int driedOut;
     public int plantAge;
+
+    public float dropSuccess;
+    public float dropFail;
 
     public void GiveDrop(Transform plot)
     {
@@ -31,7 +33,7 @@ public class Plant : MonoBehaviour
         plantDrop.transform.localPosition = new Vector3(plot.position.x, 5f, plot.position.z);
         plantDrop.transform.localRotation = Quaternion.identity;
         plantDrop.AddDropToInventory(attachedInventoryItem);   
-    }
+    } 
 
     public void UpdatePredictedYield()
     {
@@ -63,7 +65,7 @@ public class Plant : MonoBehaviour
             {
                 if (attachedIsland.nutrientsAvailable[i] >= nutrientsUsages[i])
                 {
-                    if (random.NextDouble() <= GameManager.PM.dropChance)
+                    if (GameManager.PM.DropChance(dropSuccess, dropFail))
                     {
                         yield += baseYield / 6;
                     }
@@ -71,7 +73,7 @@ public class Plant : MonoBehaviour
                 }
                 else
                 {
-                    if (random.NextDouble() <= GameManager.PM.dropChance)
+                    if (GameManager.PM.DropChance(dropSuccess, dropFail))
                     {
                         yield -= baseYield / 6;
                     }

@@ -7,11 +7,24 @@ using UnityEngine.UI;
 public class PlantManager : MonoBehaviour, IDataPersistence
 {
     [Header("Drop variables")]
-    public float dropChance;
     public float plantValue;
     public float plantValueChange;
     public float structureValue;
     public float structureValueChange;
+
+    public bool DropChance(float dropSuccess, float dropFail)
+    {
+        float dropChance = dropSuccess + dropFail;
+        if (dropChance <= 0f)
+        {
+            return false;
+        }
+
+        float normalizedSuccessThreshold = dropSuccess / dropChance;
+        float roll = UnityEngine.Random.value; // 0.0 to 1.0 inclusive
+
+        return roll <= normalizedSuccessThreshold;
+    }
 
     public void Harvest()
     {

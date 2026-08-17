@@ -52,6 +52,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
         card.cardNameText.SetText(card.cardName);
         CardDrag cardDrag = card.GetComponent<CardDrag>();
         Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();
+        Structure dragStructure = cardDrag.dragModel.GetComponent<Structure>();
 
         if (card.cardType == "Small crops" || card.cardType == "Medium crops" || card.cardType == "Large crops")
         {
@@ -66,7 +67,7 @@ public class CardManager : MonoBehaviour, IDataPersistence
         {
             card.structureSetup.SetActive(true);
             card.structureDescription.SetText(card.cardDescription);
-            card.resourceAdditionText.SetText("+ " + dragPlant.structureTax + " ₴");
+            card.resourceAdditionText.SetText("+ " + dragStructure.structureTax + " ₴");
         }
         else 
         {

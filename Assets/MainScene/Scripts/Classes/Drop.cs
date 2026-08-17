@@ -13,7 +13,7 @@ public class Drop : MonoBehaviour
     {
         switch (dropType)
         {
-            case "Buildable":
+            case "Structure":
                 if (name == "WaterDrop")
                 {
                     GameManager.UM.Water += 1;

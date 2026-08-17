@@ -9,11 +9,9 @@ public class ExpenseItem : MonoBehaviour
     public Image expenseItemIcon;
     public TMP_Text expenseItemCostText;
     public Island attachedIsland;
-    public Plant attachedBuildable;
+    public Structure attachedStructure;
 
     public Sprite islandIcon;
-    public Sprite waterBarrelIcon;
-    public Sprite compostBinIcon;
 
     public void SetupIslandExpense(Island island)
     {
@@ -24,19 +22,12 @@ public class ExpenseItem : MonoBehaviour
         GameManager.TAM.CalculateTaxes();
     }
 
-    public void SetupBuildableExpense(Plant buildable)
+    public void SetupStructureExpense(Structure structure)
     {
-        attachedBuildable = buildable;
-        GameManager.EM.expenseStructuresTotal += attachedBuildable.structureTax;
-        GameManager.EM.Expense += attachedBuildable.structureTax;
-        if (buildable.name.Contains("Water Barrel"))
-        {
-            expenseItemIcon.sprite = waterBarrelIcon;
-        }
-        else
-        {
-            expenseItemIcon.sprite = compostBinIcon;
-        }
-        expenseItemCostText.text = "+ " + buildable.structureTax.ToString() + " ₴";
+        attachedStructure = structure;
+        GameManager.EM.expenseStructuresTotal += attachedStructure.structureTax;
+        GameManager.EM.Expense += attachedStructure.structureTax;
+        expenseItemIcon.sprite = attachedStructure.structureIcon;
+        expenseItemCostText.text = "+ " + structure.structureTax.ToString() + " ₴";
     }
 }

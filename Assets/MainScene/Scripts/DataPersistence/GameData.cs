@@ -39,6 +39,23 @@ public class PlantData
 }
 
 [System.Serializable]
+public class StructureData
+{
+    public string structureID;
+    public string islandID;
+    public string plotID;
+    public string structureSize;
+
+    public StructureData(string structureIDData, string islandIDData, string plotIDData, string structureSizeData)
+    {
+        structureID = structureIDData;
+        islandID = islandIDData;
+        plotID = plotIDData;
+        structureSize = structureSizeData;
+    }
+}
+
+[System.Serializable]
 public class IslandData
 {
     public bool islandAvailable;

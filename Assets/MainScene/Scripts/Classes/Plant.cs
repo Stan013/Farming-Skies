@@ -17,7 +17,6 @@ public class Plant : MonoBehaviour
     public int yield;
     public int predictedYield;
     public List<int> nutrientsUsages;
-    public int structureTax;
     public PlantData plantData;
 
     public int driedOut;

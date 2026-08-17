@@ -78,7 +78,7 @@ public class Island : MonoBehaviour
     public List<Plant> smallPlantsOnIsland = new List<Plant>();
     public List<Plant> mediumPlantsOnIsland = new List<Plant>();
     public List<Plant> largePlantsOnIsland = new List<Plant>();
-    public List<Plant> buildablesOnIsland = new List<Plant>();
+    public List<Plant> structuresOnIsland = new List<Plant>();
 
     [Header("Nutrient variables")]
     public GameObject warningIcon;
@@ -209,14 +209,14 @@ public class Island : MonoBehaviour
         material.renderQueue = -1;
     }
 
-    public void MakeUsedPlot(GameObject usedPlot, Card usedCard, Plant usedPlant)
+    public void MakeUsedPlot(GameObject usedPlot, Card usedCard, Plant usedPlant, Structure usedStructure)
     {
-        itemsOnIsland.Add(usedPlant);
         usedPlant.attachedCard = usedCard;
         usedPlant.attachedIsland = this;
         switch (usedCard.cardType)
         {
             case "Small crops":
+                itemsOnIsland.Add(usedPlant);
                 smallPlantsOnIsland.Add(usedPlant);
                 usedSmallPlots.Add(usedPlot);
                 SetCollisions("Medium crops");
@@ -227,6 +227,7 @@ public class Island : MonoBehaviour
                 GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
             case "Medium crops":
+                itemsOnIsland.Add(usedPlant);
                 usedMediumPlots.Add(usedPlot);
                 mediumPlantsOnIsland.Add(usedPlant);
                 SetCollisions("Small crops");
@@ -237,6 +238,7 @@ public class Island : MonoBehaviour
                 GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
             case "Large crops":
+                itemsOnIsland.Add(usedPlant);
                 usedLargePlots.Add(usedPlot);
                 largePlantsOnIsland.Add(usedPlant);
                 SetCollisions("Small crops");
@@ -247,8 +249,9 @@ public class Island : MonoBehaviour
                 GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
             case "Structure":
-                buildablesOnIsland.Add(usedPlant);
-                GameManager.EM.AddExpenseBuildables(usedPlant);
+                itemsOnIsland.Add(usedStructure);
+                structuresOnIsland.Add(usedPlant);
+                GameManager.EM.AddExpenseStructure(usedPlant);
                 SetCollisions("Small crops");
                 SetCollisions("Large crops");
                 break;

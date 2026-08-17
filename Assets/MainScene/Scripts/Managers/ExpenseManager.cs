@@ -76,10 +76,10 @@ public class ExpenseManager : MonoBehaviour, IDataPersistence
         expenseIslands.Add(expenseIsland);
     }
 
-    public void AddExpenseBuildables(Plant plant)
+    public void AddExpenseStructure(Structure structure)
     {
         ExpenseItem expenseStructure = Instantiate(expenseItemTemplate, Vector3.zero, Quaternion.identity, expenseStructuresContentArea.transform);
-        expenseStructure.SetupBuildableExpense(plant);
+        expenseStructure.SetupStructureExpense(structure);
         expenseStructure.transform.localPosition = new Vector3(expenseStructure.transform.localPosition.x, expenseStructure.transform.localPosition.y, 0);
         expenseStructure.transform.localRotation = Quaternion.identity;
         expenseStructures.Add(expenseStructure);

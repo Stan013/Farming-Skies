@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2163361012981140112}
   - component: {fileID: -1899781645364398760}
   m_Layer: 0
-  m_Name: ChivePlant
+  m_Name: SpringOnionPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

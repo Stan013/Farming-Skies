@@ -74,11 +74,11 @@ public class Island : MonoBehaviour
     public List<GameObject> usedLargePlots;
 
     [Header("Objects on island lists")]
-    public List<Plant> itemsOnIsland = new List<Plant>();
+    public List<MonoBehaviour> itemsOnIsland = new List<MonoBehaviour>();
     public List<Plant> smallPlantsOnIsland = new List<Plant>();
     public List<Plant> mediumPlantsOnIsland = new List<Plant>();
     public List<Plant> largePlantsOnIsland = new List<Plant>();
-    public List<Plant> structuresOnIsland = new List<Plant>();
+    public List<Structure> structuresOnIsland = new List<Structure>();
 
     [Header("Nutrient variables")]
     public GameObject warningIcon;
@@ -250,8 +250,8 @@ public class Island : MonoBehaviour
                 break;
             case "Structure":
                 itemsOnIsland.Add(usedStructure);
-                structuresOnIsland.Add(usedPlant);
-                GameManager.EM.AddExpenseStructure(usedPlant);
+                structuresOnIsland.Add(usedStructure);
+                GameManager.EM.AddExpenseStructure(usedStructure);
                 SetCollisions("Small crops");
                 SetCollisions("Large crops");
                 break;

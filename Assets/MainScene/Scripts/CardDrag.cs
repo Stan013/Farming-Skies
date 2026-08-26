@@ -283,10 +283,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
 
         hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-        GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
-        plant.transform.localPosition = new Vector3(0, -0.25f, 0);
-        plant.transform.localRotation = Quaternion.identity;
-        hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant.GetComponent<Plant>());
+        GameObject placeable = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
+        placeable.transform.localPosition = new Vector3(0, -0.25f, 0);
+        placeable.transform.localRotation = Quaternion.identity;
+        hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, placeable.GetComponent<Plant>(), placeable.GetComponent<Structure>());
         GameManager.HM.dragCard.dragSucces = true;
         GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
     }
@@ -300,10 +300,10 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
 
         hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-        GameObject plant = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
-        plant.transform.localPosition = new Vector3(0, -0.25f, 0);
-        plant.transform.localRotation = Quaternion.identity;
-        hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, plant.GetComponent<Plant>());
+        GameObject placeable = Instantiate(dragInstance, Vector3.zero, Quaternion.identity, hoverPlot.transform);
+        placeable.transform.localPosition = new Vector3(0, -0.25f, 0);
+        placeable.transform.localRotation = Quaternion.identity;
+        hoverIsland.MakeUsedPlot(hoverPlot, GameManager.HM.dragCard, placeable.GetComponent<Plant>(), placeable.GetComponent<Structure>());
         GameManager.HM.dragCard.dragSucces = true;
         GameManager.HM.dragCard.SetCardState(Card.CardState.Hidden);
         hoverIsland.UpdateNutrients();

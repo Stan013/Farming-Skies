@@ -358,7 +358,7 @@ MonoBehaviour:
   cardPickButton: {fileID: 8022029349146204646}
   cardAnimation: {fileID: 6720073896161107888}
   cardClip: {fileID: 0}
-  cardCraftResources: 19000000190000001900000032000000
+  cardCraftResources: 00000000050000000500000032000000
   cardDropsRequired: 0
   cardCraftIndex: 0
   cardCraftIcon: {fileID: 0}
@@ -373,6 +373,7 @@ MonoBehaviour:
   itemSupply: 0
   cardType: 
   plantGroup: 
+  plantTier: 0
   plantSizeText: {fileID: 8861860043992965257}
   resourceAdditionText: {fileID: 896910817002751495}
   resourceIcon: {fileID: 4177096965536020157}

@@ -87,7 +87,7 @@ public class PlantManager : MonoBehaviour, IDataPersistence
             GameObject plant = Instantiate(GameManager.CM.FindCardByID(plantsMap[i].plantID).GetComponent<CardDrag>().dragModel, Vector3.zero, Quaternion.identity, plot.transform);
             plant.transform.localPosition = new Vector3(0, -0.25f, 0);
             plant.transform.localRotation = Quaternion.identity;
-            island.MakeUsedPlot(plot, GameManager.CM.FindCardByID(plantsMap[i].plantID), plant.GetComponent<Plant>());
+            island.MakeUsedPlot(plot, GameManager.CM.FindCardByID(plantsMap[i].plantID), plant.GetComponent<Plant>(), plant.GetComponent<Structure>());
         }
     }
 

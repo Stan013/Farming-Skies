@@ -61,6 +61,8 @@ public class Card : MonoBehaviour
     [Header("Associated plant variables")]
     public string cardType;
     public string plantGroup;
+    public int plantTier;
+    public string placeableSize;
     public TMP_Text plantSizeText;
     public TMP_Text resourceAdditionText;
     public Image resourceIcon;

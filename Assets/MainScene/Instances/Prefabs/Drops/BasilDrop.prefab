@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3691311535485861270
+--- !u!1 &3341069314863629872
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4456544212556121081}
-  - component: {fileID: 1801783701194159361}
-  - component: {fileID: 2629389404778175494}
-  - component: {fileID: -3315355698080879949}
+  - component: {fileID: 6854328753408491612}
+  - component: {fileID: 4094635154665592790}
+  - component: {fileID: 3615801864986653850}
+  - component: {fileID: 3228501728031938207}
   m_Layer: 0
-  m_Name: ChiveDrop
+  m_Name: BasilDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4456544212556121081
+--- !u!4 &6854328753408491612
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691311535485861270}
+  m_GameObject: {fileID: 3341069314863629872}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.025, y: 0.025, z: 0.025}
+  m_LocalScale: {x: 0.03, y: 0.0375, z: 0.03}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1801783701194159361
+--- !u!33 &4094635154665592790
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691311535485861270}
-  m_Mesh: {fileID: -7923923411364990900, guid: 7a239f6064c600449b8168079df9fbb5, type: 3}
---- !u!23 &2629389404778175494
+  m_GameObject: {fileID: 3341069314863629872}
+  m_Mesh: {fileID: 3826123491359084963, guid: 80f1d57ecdb410a4da3bb93c4b45c3c3, type: 3}
+--- !u!23 &3615801864986653850
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691311535485861270}
+  m_GameObject: {fileID: 3341069314863629872}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,13 +61,16 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 70641cc4a4f415f438bd1c6047cf8ba8, type: 2}
-  - {fileID: 2100000, guid: 70641cc4a4f415f438bd1c6047cf8ba8, type: 2}
-  - {fileID: 2100000, guid: 70641cc4a4f415f438bd1c6047cf8ba8, type: 2}
-  - {fileID: 2100000, guid: 70641cc4a4f415f438bd1c6047cf8ba8, type: 2}
+  - {fileID: 2100000, guid: 3e7148691dbc4844980f8c2c5dbc68ad, type: 2}
+  - {fileID: 2100000, guid: 3e7148691dbc4844980f8c2c5dbc68ad, type: 2}
+  - {fileID: 2100000, guid: 3e7148691dbc4844980f8c2c5dbc68ad, type: 2}
+  - {fileID: 2100000, guid: 3e7148691dbc4844980f8c2c5dbc68ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,22 +88,22 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-3315355698080879949
+--- !u!114 &3228501728031938207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691311535485861270}
+  m_GameObject: {fileID: 3341069314863629872}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a4334627a857684da9c6e76163bd5ed, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Drop
   dropType: Plant
-  dropAmount: 0
-  plantCardID: CardChivePlant

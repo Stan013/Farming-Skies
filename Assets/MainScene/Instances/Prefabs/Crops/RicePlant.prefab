@@ -115,8 +115,7 @@ MonoBehaviour:
   baseYield: 18
   yield: 0
   predictedYield: 0
-  nutrientsUsages: 01000000020000000100000001000000
-  structureTax: 0
+  nutrientsUsages: 01000000020000000300000001000000
   plantData:
     plantID: 
     islandID: 
@@ -124,8 +123,8 @@ MonoBehaviour:
     plantSize: 
   driedOut: 0
   plantAge: 0
-  dropSuccess: 90
-  dropFail: 10
+  dropSuccess: 75
+  dropFail: 25
 --- !u!65 &3980613064867296773
 BoxCollider:
   m_ObjectHideFlags: 0

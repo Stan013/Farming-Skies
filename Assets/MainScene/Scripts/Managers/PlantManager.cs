@@ -21,7 +21,7 @@ public class PlantManager : MonoBehaviour, IDataPersistence
         }
 
         float normalizedSuccessThreshold = dropSuccess / dropChance;
-        float roll = UnityEngine.Random.value; // 0.0 to 1.0 inclusive
+        float roll = UnityEngine.Random.value;
 
         return roll <= normalizedSuccessThreshold;
     }
@@ -30,7 +30,7 @@ public class PlantManager : MonoBehaviour, IDataPersistence
     {
         foreach (Island island in GameManager.ISM.boughtIslands)
         {
-            foreach (Plant plant in island.smallPlantsOnIsland.Concat(island.mediumPlantsOnIsland).Concat(island.largePlantsOnIsland))
+            foreach (Plant plant in island.plantsOnIsland)
             {
                 if (plant.nutrientsUsages[0] <= island.nutrientsAvailable[0])
                 {
@@ -65,18 +65,7 @@ public class PlantManager : MonoBehaviour, IDataPersistence
 
     public GameObject FindPlotOnIslandByID(Island island, string plotID, string plantSize)
     {
-        switch (plantSize)
-        {
-            case "Small crops":
-                return island.availableSmallPlots.Find(plot => plot.name == plotID);
-            case "Medium crops":
-                return island.availableMediumPlots.Find(plot => plot.name == plotID);
-            case "Large crops":
-                return island.availableLargePlots.Find(plot => plot.name == plotID);
-            case "Structure":
-                return island.availableMediumPlots.Find(plot => plot.name == plotID);
-        }
-        return null;
+        return island.availablePlots.Find(plot => plot.name == plotID);
     }
 
     public void SetPlantData(Island island, List<PlantData> plantsMap)

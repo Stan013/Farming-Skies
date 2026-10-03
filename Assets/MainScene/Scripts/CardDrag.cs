@@ -49,7 +49,8 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         hoverIsland = GameManager.ISM.GetPotentialBoughtIsland();
         UpdateDragInstanceTransform();
         HandleIslandCollisions(hoverIsland);
-
+        
+        if(hoverIsland?.islandBought == false) return;
         switch (GameManager.HM.dragCard.cardType)
         {
             case "Utilities":
@@ -97,7 +98,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 break;
         }
 
-        hoverIsland?.SetCollisions("Reset");
+        hoverIsland?.SetCollisions("Utilities", "Reset");
         hoverIsland?.CheckWarningIcon();
         previousIsland = null;
         hoverIsland = null;
@@ -117,7 +118,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (!collisionOn && hoverIsland != null)
         {
             GameManager.ISM.SetupIslandCollisions(true);
-            hoverIsland.SetCollisions(GameManager.HM.dragCard.cardType);
+            hoverIsland.SetCollisions(GameManager.HM.dragCard.cardType, GameManager.HM.dragCard.placeableSize);
             collisionOn = true;
         }
     }
@@ -155,7 +156,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void HandleStructureHover(Island hoverIsland)
     {
-        if (hoverIsland == null || CheckPotentialPlot(hoverIsland) == null)
+        if (hoverIsland == null || CheckPotentialPlot() == null)
         {
             if (previousHoverPlot != null)
             {
@@ -187,34 +188,36 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void HandleCropHover(Island hoverIsland)
     {
-            if (hoverIsland == null || CheckPotentialPlot(hoverIsland) == null)
-            {
-                if (previousHoverPlot != null)
-                {
-                    previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
-                    previousHoverPlot = null;
-                }
-                return;
-            }
-
-            if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
+        if (hoverIsland == null || CheckPotentialPlot() == null)
+        {
+            if (previousHoverPlot != null)
             {
                 previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+                previousHoverPlot = null;
             }
+            return;
+        }
 
-            if(GameManager.PEM.farmingAllowed)
-            {
-                hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
-                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
-                AlignDragInstanceToPlot(hoverPlot);
-                previousHoverPlot = hoverPlot;
-            }
-            else
-            {
-                hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
-                hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorRed;
-                previousHoverPlot = hoverPlot;
-            }
+        if (hoverPlot != previousHoverPlot && previousHoverPlot != null)
+        {
+            previousHoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        if(GameManager.PEM.farmingAllowed)
+        {
+            hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+            hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
+            AlignDragInstanceToPlot(hoverPlot);
+            previousHoverPlot = hoverPlot;
+        }
+        else
+        {
+            print(hoverPlot.transform.GetChild(0));
+            print(hoverPlot.transform.GetChild(0).gameObject);
+            hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
+            hoverPlot.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorRed;
+            previousHoverPlot = hoverPlot;
+        }
     }
 
     private void HandleFertiliserDrop(Island hoverIsland)
@@ -324,14 +327,18 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private void CancelDrag()
     {
-        hoverPlot?.transform.GetChild(0).gameObject.SetActive(false);
+        if (hoverPlot != null)
+        {
+            hoverPlot.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        
         previousIsland = null;
         hoverIsland = null;
         GameManager.HM.dragCard.dragSucces = false;
         GameManager.HM.dragCard.SetCardState(Card.CardState.InHand);
     }
 
-    private GameObject CheckPotentialPlot(Island hoverIsland)
+    private GameObject CheckPotentialPlot()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, ~0, QueryTriggerInteraction.Collide);
@@ -343,9 +350,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 GameObject plot = hit.collider.gameObject;
                 hoverIsland = plot.transform.parent.parent.GetComponent<Island>();
 
-                if (hoverIsland.usedSmallPlots.Contains(plot) ||
-                    hoverIsland.usedMediumPlots.Contains(plot) ||
-                    hoverIsland.usedLargePlots.Contains(plot))
+                if (hoverIsland.usedPlots.Contains(plot))
                 {
                     hoverPlot = null;
                     return null;

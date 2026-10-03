@@ -66,18 +66,12 @@ public class Island : MonoBehaviour
     public Color potentialBotColor;
 
     [Header("Plots lists")]
-    public List<GameObject> availableSmallPlots;
-    public List<GameObject> availableMediumPlots;
-    public List<GameObject> availableLargePlots;
-    public List<GameObject> usedSmallPlots;
-    public List<GameObject> usedMediumPlots;
-    public List<GameObject> usedLargePlots;
+    public List<GameObject> availablePlots;
+    public List<GameObject> usedPlots;
 
     [Header("Objects on island lists")]
     public List<MonoBehaviour> itemsOnIsland = new List<MonoBehaviour>();
-    public List<Plant> smallPlantsOnIsland = new List<Plant>();
-    public List<Plant> mediumPlantsOnIsland = new List<Plant>();
-    public List<Plant> largePlantsOnIsland = new List<Plant>();
+    public List<Plant> plantsOnIsland = new List<Plant>();
     public List<Structure> structuresOnIsland = new List<Structure>();
 
     [Header("Nutrient variables")]
@@ -104,76 +98,30 @@ public class Island : MonoBehaviour
         wateredMatTop.color = Color.white;
     }
 
-    public void SetCollisions(string cardType)
+    public void SetCollisions(string cardType, string placeableSize)
     {
-        switch (cardType)
+        switch(cardType)
         {
-            case "Small crops":
-                foreach (Island island in GameManager.ISM.boughtIslands)
+            case "Utilities":
+                foreach (GameObject plot in availablePlots)
                 {
-                    if (island.currentState == Island.IslandState.Watered)
-                    {
-                        foreach (GameObject plot in island.availableSmallPlots)
-                        {
-                            plot.GetComponent<BoxCollider>().enabled = true;
-                        }
-                    }
+                    plot.GetComponent<BoxCollider>().enabled = false;
                 }
-                break;
-            case "Medium crops":
-                foreach (Island island in GameManager.ISM.boughtIslands)
-                {
-                    if (island.currentState == Island.IslandState.Watered)
-                    {
-                        foreach (GameObject plot in island.availableMediumPlots)
-                        {
-                            plot.GetComponent<BoxCollider>().enabled = true;
-                        }
-                    }
-                }
-                break;
-            case "Large crops":
-                foreach (Island island in GameManager.ISM.boughtIslands)
-                {
-                    if (island.currentState == Island.IslandState.Watered)
-                    {
-                        foreach (GameObject plot in island.availableLargePlots)
-                        {
-                            plot.GetComponent<BoxCollider>().enabled = true;
-                        }
-                    }
-                }
-                break;
-            case "Structure":
-                foreach (Island island in GameManager.ISM.boughtIslands)
-                {
-                    if (island.currentState == Island.IslandState.Paved)
-                    {
-                        foreach (GameObject plot in island.availableMediumPlots)
-                        {
-                            plot.GetComponent<BoxCollider>().enabled = true;
-                        }
-                    }
-                }
-                break;
+                GetComponent<BoxCollider>().enabled = true;
+            break;
             default:
-                foreach (Island island in GameManager.ISM.boughtIslands)
+                if (cardType == "Structure" && currentState == IslandState.Paved || cardType == "Crop" && currentState == IslandState.Watered)
                 {
-                    island.GetComponent<BoxCollider>().enabled = true;
-                    foreach (GameObject plot in island.availableSmallPlots)
+                    foreach (GameObject plot in availablePlots)
                     {
-                        plot.GetComponent<BoxCollider>().enabled = false;
-                    }
-                    foreach (GameObject plot in island.availableMediumPlots)
-                    {
-                        plot.GetComponent<BoxCollider>().enabled = false;
-                    }
-                    foreach (GameObject plot in island.availableLargePlots)
-                    {
-                        plot.GetComponent<BoxCollider>().enabled = false;
+                        string name = plot.name;
+                        bool match = name.Contains(placeableSize) && 
+                                    (placeableSize != "S" || !name.Contains("XS")) && 
+                                    (placeableSize != "L" || !name.Contains("XL"));
+                        plot.GetComponent<BoxCollider>().enabled = match;
                     }
                 }
-                break;
+            break;
         }
     }
 
@@ -211,51 +159,25 @@ public class Island : MonoBehaviour
 
     public void MakeUsedPlot(GameObject usedPlot, Card usedCard, Plant usedPlant, Structure usedStructure)
     {
-        usedPlant.attachedCard = usedCard;
-        usedPlant.attachedIsland = this;
         switch (usedCard.cardType)
         {
-            case "Small crops":
-                itemsOnIsland.Add(usedPlant);
-                smallPlantsOnIsland.Add(usedPlant);
-                usedSmallPlots.Add(usedPlot);
-                SetCollisions("Medium crops");
-                SetCollisions("Large crops");
-                GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
-                UpdateNutrientsRequired(usedPlant);
-                usedPlant.UpdatePredictedYield();
-                GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
-                break;
-            case "Medium crops":
-                itemsOnIsland.Add(usedPlant);
-                usedMediumPlots.Add(usedPlot);
-                mediumPlantsOnIsland.Add(usedPlant);
-                SetCollisions("Small crops");
-                SetCollisions("Large crops");
-                GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
-                UpdateNutrientsRequired(usedPlant);
-                usedPlant.UpdatePredictedYield();
-                GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
-                break;
-            case "Large crops":
-                itemsOnIsland.Add(usedPlant);
-                usedLargePlots.Add(usedPlot);
-                largePlantsOnIsland.Add(usedPlant);
-                SetCollisions("Small crops");
-                SetCollisions("Medium crops");
-                GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
-                UpdateNutrientsRequired(usedPlant);
-                usedPlant.UpdatePredictedYield();
-                GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
-                break;
             case "Structure":
                 itemsOnIsland.Add(usedStructure);
                 structuresOnIsland.Add(usedStructure);
                 GameManager.EM.AddExpenseStructure(usedStructure);
-                SetCollisions("Small crops");
-                SetCollisions("Large crops");
+                break;
+            case "Crops":
+                usedPlant.attachedCard = usedCard;
+                usedPlant.attachedIsland = this;
+                itemsOnIsland.Add(usedPlant);
+                plantsOnIsland.Add(usedPlant);
+                GameManager.INM.UnlockInventoryItem(usedCard, usedPlant);
+                UpdateNutrientsRequired(usedPlant);
+                usedPlant.UpdatePredictedYield();
+                GameManager.PM.plantValueChange += usedPlant.predictedYield * usedPlant.attachedInventoryItem.attachedItemCard.itemPrice;
                 break;
         }
+
         CheckOverlappingPlots(usedPlot.GetComponent<BoxCollider>());
         usedPlot.GetComponent<BoxCollider>().enabled = false;
     }
@@ -269,25 +191,12 @@ public class Island : MonoBehaviour
         {
             if (collider != boxCollider && collider.GetComponent<Plant>() == null)
             {
-                if(collider.gameObject.name.Contains("PlotSmall"))
-                {
-                    usedSmallPlots.Add(collider.gameObject);
-                    availableSmallPlots.Remove(collider.gameObject);
-                }
-                if (collider.gameObject.name.Contains("PlotMedium"))
-                {
-                    usedMediumPlots.Add(collider.gameObject);
-                    availableMediumPlots.Remove(collider.gameObject);
-                }
-                if (collider.gameObject.name.Contains("PlotLarge"))
-                {
-                    usedLargePlots.Add(collider.gameObject);
-                    availableLargePlots.Remove(collider.gameObject);
-                }
+                usedPlots.Add(collider.gameObject);
+                availablePlots.Remove(collider.gameObject);
                 collider.enabled = false;
             }
         }
-        SetCollisions("Reset");
+        SetCollisions("Utilities", "Reset");
     }
     
     public void UpdateNutrientsRequired(Plant plant)
@@ -301,7 +210,7 @@ public class Island : MonoBehaviour
 
     public void UpdateNutrients()
     {
-        foreach (Plant plant in smallPlantsOnIsland.Concat(mediumPlantsOnIsland).Concat(largePlantsOnIsland))
+        foreach (Plant plant in plantsOnIsland)
         {
             plant.attachedInventoryItem.totalBaseYield = 0;
             plant.attachedInventoryItem.totalPredictedYield = 0;

@@ -39,7 +39,10 @@ public class HoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        objButton.transform.localPosition = new Vector3(objButton.transform.localPosition.x - 200, objButton.transform.localPosition.y, objButton.transform.localPosition.z);
-        EventSystem.current.SetSelectedGameObject(null);
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            objButton.transform.localPosition = new Vector3(objButton.transform.localPosition.x - 200, objButton.transform.localPosition.y, objButton.transform.localPosition.z);
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 }

@@ -54,14 +54,14 @@ public class CardManager : MonoBehaviour, IDataPersistence
         Plant dragPlant = cardDrag.dragModel.GetComponent<Plant>();
         Structure dragStructure = cardDrag.dragModel.GetComponent<Structure>();
 
-        if (card.cardType == "Small crops" || card.cardType == "Medium crops" || card.cardType == "Large crops")
+        if (card.cardType == "Crop")
         {
             card.cropSetup.SetActive(true);
             card.waterText.SetText(dragPlant.nutrientsUsages[0].ToString() + " L");
             card.nitrogenText.SetText(dragPlant.nutrientsUsages[1].ToString() + " L");
             card.phosphorusText.SetText(dragPlant.nutrientsUsages[2].ToString() + " L");
             card.potassiumText.SetText(dragPlant.nutrientsUsages[3].ToString() + " L");
-            card.plantSizeText.SetText(card.cardType.Replace(" crops", ""));
+            card.plantSizeText.SetText(card.placeableSize);
         }
         else if (card.cardType == "Structure")
         {

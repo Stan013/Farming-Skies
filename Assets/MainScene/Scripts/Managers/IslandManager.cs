@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class IslandManager : MonoBehaviour, IDataPersistence
 {
@@ -16,6 +17,7 @@ public class IslandManager : MonoBehaviour, IDataPersistence
     public List<Island> allIslands;
     public List<Island> availableIslands;
     public List<Island> boughtIslands;
+    [SerializeField] private List<string> plotCategories;
 
     [Header("General island variables")]
     public Island starterIsland;
@@ -37,12 +39,16 @@ public class IslandManager : MonoBehaviour, IDataPersistence
 
     [Header("Plot management variables")]
     public GameObject plotInformation;
-    public TMP_Text smallPlotsAvailable;
-    public TMP_Text mediumPlotsAvailable;
-    public TMP_Text largePlotsAvailable;
-    public TMP_Text smallPlants;
-    public TMP_Text mediumPlants;
-    public TMP_Text largePlants;
+    public TMP_Text xsPlotsAvailable;
+    public TMP_Text sPlotsAvailable;
+    public TMP_Text mPlotsAvailable;
+    public TMP_Text lPlotsAvailable;
+    public TMP_Text xlPlotsAvailable;
+    public TMP_Text xsPlants;
+    public TMP_Text sPlants;
+    public TMP_Text mPlants;
+    public TMP_Text lPlants;
+    public TMP_Text xlPlants;
 
     [Header("Expense variables")]
     public ExpenseItem expenseItem;
@@ -65,6 +71,19 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                 childIsland.previousState = Island.IslandState.Transparent;
                 childIsland.topMat = childIsland.islandTop.GetComponent<Renderer>().material;
                 childIsland.bottomMat = childIsland.islandBottom.GetComponent<Renderer>().material;
+
+                
+                foreach (string categoryName in plotCategories)
+                {
+                    Transform categoryTransform = childIsland.transform.Find("Plot" + categoryName);
+                    if (categoryTransform != null)
+                    {
+                        foreach (Transform plotChild in categoryTransform)
+                        {
+                            childIsland.availablePlots.Add(plotChild.gameObject);
+                        }
+                    }
+                }
             }
         }
         SetupIslandCollisions(false);
@@ -193,12 +212,17 @@ public class IslandManager : MonoBehaviour, IDataPersistence
                     islandInformation.SetActive(false);
                     plotInformation.SetActive(true);
                     islandName.text = "Island " + centerIsland.islandID + ":";
-                    smallPlotsAvailable.text = centerIsland.availableSmallPlots.Count.ToString();
-                    mediumPlotsAvailable.text = centerIsland.availableMediumPlots.Count.ToString();
-                    largePlotsAvailable.text = centerIsland.availableLargePlots.Count.ToString();
-                    smallPlants.text = centerIsland.smallPlantsOnIsland.Count.ToString();
-                    mediumPlants.text = centerIsland.mediumPlantsOnIsland.Count.ToString();
-                    largePlants.text = centerIsland.largePlantsOnIsland.Count.ToString();
+                    xsPlotsAvailable.text = centerIsland.availablePlots.Count(p => p.name.Contains("XS")).ToString();
+                    sPlotsAvailable.text = centerIsland.availablePlots.Count(p => p.name.Contains("S") && !p.name.Contains("XS")).ToString();
+                    mPlotsAvailable.text = centerIsland.availablePlots.Count(p => p.name.Contains("M")).ToString();
+                    lPlotsAvailable.text = centerIsland.availablePlots.Count(p => p.name.Contains("L") && !p.name.Contains("XL")).ToString();
+                    xlPlotsAvailable.text = centerIsland.availablePlots.Count(p => p.name.Contains("XL")).ToString();
+
+                    xsPlants.text = centerIsland.itemsOnIsland.OfType<Plant>().Count(pl => pl.attachedCard.placeableSize == "Extra Small").ToString();
+                    sPlants.text = centerIsland.itemsOnIsland.OfType<Plant>().Count(pl => pl.attachedCard.placeableSize == "Small").ToString();
+                    mPlants.text = centerIsland.itemsOnIsland.OfType<Plant>().Count(pl => pl.attachedCard.placeableSize == "Medium").ToString();
+                    lPlants.text = centerIsland.itemsOnIsland.OfType<Plant>().Count(pl => pl.attachedCard.placeableSize == "Large").ToString();
+                    xlPlants.text = centerIsland.itemsOnIsland.OfType<Plant>().Count(pl => pl.attachedCard.placeableSize == "Extra Large").ToString();
                     break;
             }
         }

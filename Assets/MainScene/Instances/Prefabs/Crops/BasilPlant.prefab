@@ -114,7 +114,7 @@ MonoBehaviour:
   baseYield: 24
   yield: 0
   predictedYield: 0
-  nutrientsUsages: 01000000010000000200000001000000
+  nutrientsUsages: 01000000010000000200000001000000010000000200000002000000
   plantData:
     plantID: 
     islandID: 

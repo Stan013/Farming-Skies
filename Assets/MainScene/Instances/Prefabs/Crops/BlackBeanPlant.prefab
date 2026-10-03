@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.04, y: 0.05, z: 0.04}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.0325, y: 0.040625, z: 0.0325}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62,6 +62,9 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -86,9 +89,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1892583188581683069
 MonoBehaviour:
@@ -102,11 +107,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dcb929937df8724e80a38e3453e52f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drop: {fileID: -238629367752472901, guid: b0f7389fba3b9c84f9a297b9956600b7, type: 3}
-  plantScale: 0.0075
-  plantCardID: 
-  yield: 18
-  nutrientsUsages: 04000000010000000100000001000000
+  drop: {fileID: 9207936254164518518, guid: e0e82e5a86589154baa279093691d083, type: 3}
+  dropAmount: 0
+  attachedIsland: {fileID: 0}
+  attachedCard: {fileID: 0}
+  attachedInventoryItem: {fileID: 0}
+  baseYield: 24
+  yield: 0
+  predictedYield: 0
+  nutrientsUsages: 04000000010000000200000001000000020000000100000002000000
+  plantData:
+    plantID: 
+    islandID: 
+    plotID: 
+    plantSize: 
+  driedOut: 0
+  plantAge: 0
+  dropSuccess: 75
+  dropFail: 25
 --- !u!65 &-7829314660317699417
 BoxCollider:
   m_ObjectHideFlags: 0

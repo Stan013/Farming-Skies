@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5578052328707808565}
   - component: {fileID: 884333533659255934}
   - component: {fileID: 6673216487404288857}
+  - component: {fileID: 2049142970476862739}
+  - component: {fileID: 8305589715883883125}
   m_Layer: 0
   m_Name: Bucket
   m_TagString: Untagged
@@ -94,3 +96,50 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2049142970476862739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477865937501119850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4842fd0e862bc9544a385b645f6d556e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Structure
+  drop: {fileID: -3785765372306276902, guid: 123e34f766fbfa245a7ee9fa951f0a37, type: 3}
+  dropAmount: 5
+  attachedIsland: {fileID: 0}
+  attachedCard: {fileID: 0}
+  attachedInventoryItem: {fileID: 0}
+  structureIcon: {fileID: 0}
+  structureData:
+    structureID: 
+    islandID: 
+    plotID: 
+    structureSize: 
+  structureAge: 0
+  structureLifespan: 52
+  structureTax: 5
+--- !u!65 &8305589715883883125
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477865937501119850}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 21.154701, y: 27.327587, z: 23.65471}
+  m_Center: {x: 0, y: 12.663794, z: 0}

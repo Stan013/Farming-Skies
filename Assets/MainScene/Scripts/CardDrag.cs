@@ -206,14 +206,12 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if(GameManager.PEM.farmingAllowed)
         {
             hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
-            hoverPlot.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
+            hoverPlot.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorGreen;
             AlignDragInstanceToPlot(hoverPlot);
             previousHoverPlot = hoverPlot;
         }
         else
         {
-            print(hoverPlot.transform.GetChild(0));
-            print(hoverPlot.transform.GetChild(0).gameObject);
             hoverPlot.transform.GetChild(0).gameObject.SetActive(true);
             hoverPlot.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = plotIndicatorRed;
             previousHoverPlot = hoverPlot;

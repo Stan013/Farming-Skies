@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     {
         GameManager.WM.inMenu = false;
         GameManager.IPM.cam.transform.position = new Vector3(0f, 10f, 0f);
-        GameManager.IPM.cam.transform.rotation = Quaternion.Euler(45f, 0f, 0f);
+        GameManager.IPM.cam.transform.rotation = Quaternion.Euler(55f, 0f, 0f);
         GameManager.UM.resourceUI.SetActive(true);
 
         if (!GameManager.DBM.skipTutorial)

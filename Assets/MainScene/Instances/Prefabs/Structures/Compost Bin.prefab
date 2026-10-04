@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4796444469590911691}
   - component: {fileID: 7947731432225258166}
   - component: {fileID: 3641546025376474744}
+  - component: {fileID: 7605927884285791351}
   - component: {fileID: 7147725280568796570}
-  - component: {fileID: 6217798391985328798}
   m_Layer: 0
   m_Name: Compost Bin
   m_TagString: Untagged
@@ -62,6 +62,9 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -86,10 +89,38 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7605927884285791351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7648176738084924244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4842fd0e862bc9544a385b645f6d556e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Structure
+  drop: {fileID: -7836911327366282304, guid: 15e08b8afabdd8440a3e48f501f04d9a, type: 3}
+  dropAmount: 5
+  attachedIsland: {fileID: 0}
+  attachedCard: {fileID: 0}
+  attachedInventoryItem: {fileID: 0}
+  structureIcon: {fileID: 0}
+  structureData:
+    structureID: 
+    islandID: 
+    plotID: 
+    structureSize: 
+  structureAge: 0
+  structureLifespan: 52
+  structureTax: 10
 --- !u!65 &7147725280568796570
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,32 +142,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 28, y: 24.600004, z: 28}
   m_Center: {x: 0, y: 11.300001, z: 0}
---- !u!114 &6217798391985328798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7648176738084924244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dcb929937df8724e80a38e3453e52f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drop: {fileID: 0}
-  dropAmount: 0
-  attachedIsland: {fileID: 0}
-  attachedCard: {fileID: 0}
-  attachedInventoryItem: {fileID: 0}
-  baseYield: 0
-  yield: 0
-  predictedYield: 0
-  nutrientsUsages: 
-  structureTax: 25
-  plantData:
-    plantID: 
-    islandID: 
-    plotID: 
-    plantSize: 
-  driedOut: 0
-  plantAge: 0
